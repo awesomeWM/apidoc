@@ -142,7 +142,7 @@
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g08b78f5-2015-07-25T16:06:14+0000</li>
+        <li><strong>Release</strong>: master-g0af7ce3-2015-07-25T19:36:32+0000</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -190,23 +190,23 @@
 	<td class="summary">Focus the previous client in history.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#visible">visible (screen)</a></td>
+	<td class="name" ><a href="#visible">visible ([screen[, stacked=false]])</a></td>
 	<td class="summary">Get visible clients from a screen.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#tiled">tiled (screen)</a></td>
+	<td class="name" ><a href="#tiled">tiled (screen[, stacked=false])</a></td>
 	<td class="summary">Get visible and tiled clients</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#next">next (i[, c])</a></td>
+	<td class="name" ><a href="#next">next (i[, c[, stacked=false]])</a></td>
 	<td class="summary">Get a client by its relative index to another client.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#client.focus.bydirection">client.focus.bydirection (dir[, c])</a></td>
+	<td class="name" ><a href="#client.focus.bydirection">client.focus.bydirection (dir[, c[, stacked=false]])</a></td>
 	<td class="summary">Focus a client by the given direction.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#client.focus.global_bydirection">client.focus.global_bydirection (dir[, c])</a></td>
+	<td class="name" ><a href="#client.focus.global_bydirection">client.focus.global_bydirection (dir[, c[, stacked=false]])</a></td>
 	<td class="summary">Focus a client by the given direction.</td>
 	</tr>
 	<tr>
@@ -214,8 +214,8 @@
 	<td class="summary">Focus a client by its relative index.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#client.swap.bydirection">client.swap.bydirection (dir[, c])</a></td>
-	<td class="summary">Swap a client with another client in the given direction</td>
+	<td class="name" ><a href="#client.swap.bydirection">client.swap.bydirection (dir[, c=focused[, stacked=false]])</a></td>
+	<td class="summary">Swap a client with another client in the given direction.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#client.swap.global_bydirection">client.swap.global_bydirection (dir[, c])</a></td>
@@ -226,7 +226,7 @@
 	<td class="summary">Swap a client by its relative index.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#cycle">cycle (clockwise[, screen])</a></td>
+	<td class="name" ><a href="#cycle">cycle (clockwise[, screen[, stacked=false]])</a></td>
 	<td class="summary">Cycle clients.</td>
 	</tr>
 	<tr>
@@ -591,7 +591,7 @@
 </dd>
     <dt>
     <a name = "visible"></a>
-    <strong>visible (screen)</strong>
+    <strong>visible ([screen[, stacked=false]])</strong>
     </dt>
     <dd>
     Get visible clients from a screen.
@@ -600,13 +600,21 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">screen</span>
+            <span class="types"><span class="type">integer</span></span>
          The screen number, or nil for all screens.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order?
+         (<em>default</em> false)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         A table with all visible clients.
     </ol>
 
@@ -616,7 +624,7 @@
 </dd>
     <dt>
     <a name = "tiled"></a>
-    <strong>tiled (screen)</strong>
+    <strong>tiled (screen[, stacked=false])</strong>
     </dt>
     <dd>
     Get visible and tiled clients
@@ -625,13 +633,20 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">screen</span>
+            <span class="types"><span class="type">integer</span></span>
          The screen number, or nil for all screens.
+        </li>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order?
+         (<em>default</em> false)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         A table with all visible and tiled clients.
     </ol>
 
@@ -641,7 +656,7 @@
 </dd>
     <dt>
     <a name = "next"></a>
-    <strong>next (i[, c])</strong>
+    <strong>next (i[, c[, stacked=false]])</strong>
     </dt>
     <dd>
     Get a client by its relative index to another client.
@@ -658,6 +673,11 @@
             <span class="types"><a class="type" href="../classes/client.html#client.client">client.client</a></span>
          The client.
          (<em>optional</em>)
+        </li>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order?
+         (<em>default</em> false)
         </li>
     </ul>
 
@@ -680,7 +700,7 @@
 </dd>
     <dt>
     <a name = "client.focus.bydirection"></a>
-    <strong>client.focus.bydirection (dir[, c])</strong>
+    <strong>client.focus.bydirection (dir[, c[, stacked=false]])</strong>
     </dt>
     <dd>
     Focus a client by the given direction.
@@ -698,6 +718,11 @@
          The client.
          (<em>optional</em>)
         </li>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order?
+         (<em>default</em> false)
+        </li>
     </ul>
 
 
@@ -707,7 +732,7 @@
 </dd>
     <dt>
     <a name = "client.focus.global_bydirection"></a>
-    <strong>client.focus.global_bydirection (dir[, c])</strong>
+    <strong>client.focus.global_bydirection (dir[, c[, stacked=false]])</strong>
     </dt>
     <dd>
     Focus a client by the given direction.  Moves across screens.
@@ -722,6 +747,11 @@
             <span class="types"><a class="type" href="../classes/client.html#client.client">client.client</a></span>
          The client.
          (<em>optional</em>)
+        </li>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order?
+         (<em>default</em> false)
         </li>
     </ul>
 
@@ -757,21 +787,27 @@
 </dd>
     <dt>
     <a name = "client.swap.bydirection"></a>
-    <strong>client.swap.bydirection (dir[, c])</strong>
+    <strong>client.swap.bydirection (dir[, c=focused[, stacked=false]])</strong>
     </dt>
     <dd>
-    Swap a client with another client in the given direction
+    Swap a client with another client in the given direction.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">dir</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
         </li>
         <li><span class="parameter">c</span>
             <span class="types"><a class="type" href="../classes/client.html#client.client">client.client</a></span>
          The client.
-         (<em>optional</em>)
+         (<em>default</em> focused)
+        </li>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order?
+         (<em>default</em> false)
         </li>
     </ul>
 
@@ -832,7 +868,7 @@
 </dd>
     <dt>
     <a name = "cycle"></a>
-    <strong>cycle (clockwise[, screen])</strong>
+    <strong>cycle (clockwise[, screen[, stacked=false]])</strong>
     </dt>
     <dd>
     Cycle clients.
@@ -846,6 +882,11 @@
         <li><span class="parameter">screen</span>
          The screen where to cycle clients.
          (<em>optional</em>)
+        </li>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order?
+         (<em>default</em> false)
         </li>
     </ul>
 
@@ -1582,7 +1623,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2015-07-25 16:07:16 </i>
+<i style="float:right;">Last updated 2015-07-25 19:37:29 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
