@@ -54,15 +54,17 @@
   <li><a href="../classes/drawable.html">drawable</a></li>
   <li><a href="../classes/drawin.html">drawin</a></li>
   <li><a href="../classes/gears.cache.html">gears.cache</a></li>
+  <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
   <li><a href="../classes/gears.object.html">gears.object</a></li>
   <li><a href="../classes/key.html">key</a></li>
+  <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
+  <li><strong>menubar.index_theme</strong></li>
   <li><a href="../classes/screen.html">screen</a></li>
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/tag.html">tag</a></li>
   <li><a href="../classes/wibox.html">wibox</a></li>
   <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
   <li><a href="../classes/wibox.layout.align.html">wibox.layout.align</a></li>
-  <li><a href="../classes/wibox.layout.base.html">wibox.layout.base</a></li>
   <li><a href="../classes/wibox.layout.constraint.html">wibox.layout.constraint</a></li>
   <li><a href="../classes/wibox.layout.fixed.html">wibox.layout.fixed</a></li>
   <li><a href="../classes/wibox.layout.flex.html">wibox.layout.flex</a></li>
@@ -70,7 +72,6 @@
   <li><a href="../classes/wibox.layout.mirror.html">wibox.layout.mirror</a></li>
   <li><a href="../classes/wibox.layout.rotate.html">wibox.layout.rotate</a></li>
   <li><a href="../classes/wibox.widget.background.html">wibox.widget.background</a></li>
-  <li><strong>wibox.widget.base</strong></li>
   <li><a href="../classes/wibox.widget.imagebox.html">wibox.widget.imagebox</a></li>
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
@@ -108,6 +109,7 @@
   <li><a href="../libraries/gears.timer.html">gears.timer</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
+  <li><a href="../libraries/lib.awful.spawn.html">lib.awful.spawn</a></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
   <li><a href="../libraries/menubar.menu_gen.html">menubar.menu_gen</a></li>
   <li><a href="../libraries/menubar.utils.html">menubar.utils</a></li>
@@ -124,6 +126,8 @@
   <li><a href="../libraries/objects.window.html">objects.window</a></li>
   <li><a href="../libraries/root.html">root</a></li>
   <li><a href="../libraries/selection.html">selection</a></li>
+  <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
+  <li><a href="../libraries/wibox.widget.base.html">wibox.widget.base</a></li>
 </ul>
 <h2>Documentation</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
@@ -136,40 +140,35 @@
 
 <div id="content">
 
-<h1>Class <code>wibox.widget.base</code></h1>
-<p>
-</p>
+<h1>Class <code>menubar.index_theme</code></h1>
+<p>Class module for parsing an index.theme file</p>
 <p>
 </p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2010 Uli Schlachter</li>
-        <li><strong>Release</strong>: master-g4aa6c33-2015-07-29T23:07:39+0000</li>
-        <li><strong>Author</strong>: Uli Schlachter</li>
+        <li><strong>Copyright</strong>: 2015 Kazunobu Kuriyama</li>
+        <li><strong>Release</strong>: master-g6902e4b</li>
+        <li><strong>Author</strong>: Kazunobu Kuriyama</li>
     </ul>
 
 
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.widget.base:buttons">wibox.widget.base:buttons (_buttons)</a></td>
-	<td class="summary">Set/get a widget&rsquo;s buttons</td>
+	<td class="name" ><a href="#menubar.index_theme:new">menubar.index_theme:new (icon_theme_name, base_directories)</a></td>
+	<td class="summary">Class constructor of <a href="../classes/menubar.index_theme.html">index_theme</a></td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.base:handle_button">wibox.widget.base:handle_button (event, widget, x, y, button, modifiers, geometry)</a></td>
-	<td class="summary">Handle a button event on a widget.</td>
+	<td class="name" ><a href="#menubar.index_theme:get_subdirectories">menubar.index_theme:get_subdirectories (self)</a></td>
+	<td class="summary">Table of the values of the <code>Directories</code> key</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.base:make_widget">wibox.widget.base:make_widget (proxy[, widget_name])</a></td>
-	<td class="summary">Create a new widget.</td>
+	<td class="name" ><a href="#menubar.index_theme:get_inherits">menubar.index_theme:get_inherits (self)</a></td>
+	<td class="summary">Table of the values of the <code>Inherits</code> key</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.base:empty_widget">wibox.widget.base:empty_widget ()</a></td>
-	<td class="summary">Generate an empty widget which takes no space and displays nothing</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.base:check_widget">wibox.widget.base:check_widget (widget)</a></td>
-	<td class="summary">Do some sanity checking on widget.</td>
+	<td class="name" ><a href="#menubar.index_theme:get_per_directory_keys">menubar.index_theme:get_per_directory_keys (subdirectory)</a></td>
+	<td class="summary">Query (part of) per-directory keys of a given subdirectory name.</td>
 	</tr>
 </table>
 
@@ -181,133 +180,136 @@
 
     <dl class="function">
     <dt>
-    <a name = "wibox.widget.base:buttons"></a>
-    <strong>wibox.widget.base:buttons (_buttons)</strong>
+    <a name = "menubar.index_theme:new"></a>
+    <strong>menubar.index_theme:new (icon_theme_name, base_directories)</strong>
     </dt>
     <dd>
-    Set/get a widget&rsquo;s buttons
+    Class constructor of <a href="../classes/menubar.index_theme.html">index_theme</a>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">_buttons</span>
-
-
+        <li><span class="parameter">icon_theme_name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Internal name of icon theme
+        </li>
+        <li><span class="parameter">base_directories</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Paths used for lookup
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        An instance of the class <a href="../classes/menubar.index_theme.html">index_theme</a>
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "wibox.widget.base:handle_button"></a>
-    <strong>wibox.widget.base:handle_button (event, widget, x, y, button, modifiers, geometry)</strong>
+    <a name = "menubar.index_theme:get_subdirectories"></a>
+    <strong>menubar.index_theme:get_subdirectories (self)</strong>
     </dt>
     <dd>
-    Handle a button event on a widget.  This is used internally.
+    Table of the values of the <code>Directories</code> key
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">event</span>
-
-
-        </li>
-        <li><span class="parameter">widget</span>
-
-
-        </li>
-        <li><span class="parameter">x</span>
-
-
-        </li>
-        <li><span class="parameter">y</span>
-
-
-        </li>
-        <li><span class="parameter">button</span>
-
-
-        </li>
-        <li><span class="parameter">modifiers</span>
-
-
-        </li>
-        <li><span class="parameter">geometry</span>
+        <li><span class="parameter">self</span>
 
 
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        Values of the <code>Directories</code> key
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "wibox.widget.base:make_widget"></a>
-    <strong>wibox.widget.base:make_widget (proxy[, widget_name])</strong>
+    <a name = "menubar.index_theme:get_inherits"></a>
+    <strong>menubar.index_theme:get_inherits (self)</strong>
     </dt>
     <dd>
-    Create a new widget.  All widgets have to be generated via this function so
- that the needed signals are added and mouse input handling is set up.
+    Table of the values of the <code>Inherits</code> key
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">proxy</span>
-        <p> If this is set, the returned widget will be a proxy for this</p>
+        <li><span class="parameter">self</span>
 
-<pre><code>          widget. It will be equivalent to this widget.
-</code></pre>
 
-        </li>
-        <li><span class="parameter">widget_name</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Name of the widget.  If not set, it will be
-   set automatically via <a href="../classes/gears.object.html#gears.object:modulename">gears.object.modulename</a>.
-         (<em>optional</em>)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        Values of the <code>Inherits</code> key
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "wibox.widget.base:empty_widget"></a>
-    <strong>wibox.widget.base:empty_widget ()</strong>
+    <a name = "menubar.index_theme:get_per_directory_keys"></a>
+    <strong>menubar.index_theme:get_per_directory_keys (subdirectory)</strong>
     </dt>
     <dd>
-    Generate an empty widget which takes no space and displays nothing
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.base:check_widget"></a>
-    <strong>wibox.widget.base:check_widget (widget)</strong>
-    </dt>
-    <dd>
-    Do some sanity checking on widget.  This function raises a lua error if
- widget is not a valid widget.
+    Query (part of) per-directory keys of a given subdirectory name.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">widget</span>
-
-
+        <li><span class="parameter">subdirectory</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Icon theme&rsquo;s subdirectory
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        Value of the <code>Type</code> key
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        Value of the <code>Size</code> key
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        VAlue of the <code>MinSize</code> key
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        Value of the <code>MaxSize</code> key
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        Value of the <code>Threshold</code> key
+    </ol>
 
 
 
@@ -320,7 +322,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2015-07-29 23:08:32 </i>
+<i style="float:right;">Last updated 2015-10-10 21:13:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

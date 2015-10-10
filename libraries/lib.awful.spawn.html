@@ -52,7 +52,7 @@
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
-  <li><strong>awful.screen</strong></li>
+  <li><a href="../libraries/awful.screen.html">awful.screen</a></li>
   <li><a href="../libraries/awful.tag.html">awful.tag</a></li>
   <li><a href="../libraries/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../libraries/awful.tooltip.html">awful.tooltip</a></li>
@@ -68,7 +68,7 @@
   <li><a href="../libraries/gears.timer.html">gears.timer</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
-  <li><a href="../libraries/lib.awful.spawn.html">lib.awful.spawn</a></li>
+  <li><strong>lib.awful.spawn</strong></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
   <li><a href="../libraries/menubar.menu_gen.html">menubar.menu_gen</a></li>
   <li><a href="../libraries/menubar.utils.html">menubar.utils</a></li>
@@ -140,46 +140,40 @@
 
 <div id="content">
 
-<h1>Module <code>awful.screen</code></h1>
-<p>Screen module for awful</p>
+<h1>Module <code>lib.awful.spawn</code></h1>
+<p>
+</p>
 <p>
 </p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2008 Julien Danjou</li>
+        <li><strong>Copyright</strong>: 2008 Julien Danjou,2014 Emmanuel Lepage Vallee</li>
         <li><strong>Release</strong>: master-g6902e4b</li>
-        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
+        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;,Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
     </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#getbycoord">getbycoord (x, y[, default])</a></td>
-	<td class="summary">Return Xinerama screen number corresponding to the given (pixel) coordinates.</td>
+	<td class="name" ><a href="#spawn">spawn (cmd, sn_rules, callback)</a></td>
+	<td class="summary">Spawn a program.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#focus">focus (_screen)</a></td>
-	<td class="summary">Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen</td>
+	<td class="name" ><a href="#with_shell">with_shell (cmd)</a></td>
+	<td class="summary">Spawn a program using the shell.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#focus_bydirection">focus_bydirection (dir, _screen)</a></td>
-	<td class="summary">Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen</td>
+	<td class="name" ><a href="#with_line_callback">with_line_callback (cmd[, stdout_callback[, stderr_callback[, done_callback]]])</a></td>
+	<td class="summary">Spawn a program and asynchronously and capture its output line by line.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#focus_relative">focus_relative (i)</a></td>
-	<td class="summary">Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen</td>
+	<td class="name" ><a href="#read_lines">read_lines (input_stream, line_callback[, done_callback[, close=false]])</a></td>
+	<td class="summary">Read lines from a Gio input stream</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#padding">padding (_screen, padding)</a></td>
-	<td class="summary">Get or set the screen padding.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#focused">focused ()</a></td>
-	<td class="summary">Get the focused screen.</td>
+	<td class="name" ><a href="#pread">pread (cmd)</a></td>
+	<td class="summary">Read a program output and returns its output as a string.</td>
 	</tr>
 </table>
 
@@ -191,47 +185,154 @@
 
     <dl class="function">
     <dt>
-    <a name = "getbycoord"></a>
-    <strong>getbycoord (x, y[, default])</strong>
+    <a name = "spawn"></a>
+    <strong>spawn (cmd, sn_rules, callback)</strong>
     </dt>
     <dd>
-    Return Xinerama screen number corresponding to the given (pixel) coordinates.
- The number returned can be used as an index into the global
- <a href="../classes/screen.html#">screen</a> table/object.
+    Spawn a program.
+ See awful.rules.execute for more details
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">x</span>
-         The x coordinate
+        <li><span class="parameter">cmd</span>
+         The command.
         </li>
-        <li><span class="parameter">y</span>
-         The y coordinate
+        <li><span class="parameter">sn_rules</span>
+         a property table, false to disable startup-notification.
         </li>
-        <li><span class="parameter">default</span>
-         The default return value. If unspecified, 1 is returned.
+        <li><span class="parameter">callback</span>
+         A callback function (if the client support startup notifications)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        The forked PID or an error message</li>
+        <li>
+        The startup notification UID, if the spawn was successful</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "with_shell"></a>
+    <strong>with_shell (cmd)</strong>
+    </dt>
+    <dd>
+    Spawn a program using the shell.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cmd</span>
+         The command.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "with_line_callback"></a>
+    <strong>with_line_callback (cmd[, stdout_callback[, stderr_callback[, done_callback]]])</strong>
+    </dt>
+    <dd>
+    Spawn a program and asynchronously and capture its output line by line.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cmd</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The command.
+        </li>
+        <li><span class="parameter">stdout_callback</span>
+            <span class="types"><span class="type">function</span></span>
+        <p> Function that is called with each line of</p>
+
+<pre><code>          output on stdout, e.g. &lt;code&gt;stdout\_callback(line)&lt;/code&gt;.
+</code></pre>
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">stderr_callback</span>
+            <span class="types"><span class="type">function</span></span>
+        <p> Function that is called with each line of</p>
+
+<pre><code>          output on stderr, e.g. &lt;code&gt;stderr\_callback(line)&lt;/code&gt;.
+</code></pre>
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">done_callback</span>
+            <span class="types"><span class="type">function</span></span>
+        <p> Function to call when no more output is</p>
+
+<pre><code>          produced.
+</code></pre>
+
          (<em>optional</em>)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Integer</span></span>
+        the PID of the forked process.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        Error message.
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "focus"></a>
-    <strong>focus (_screen)</strong>
+    <a name = "read_lines"></a>
+    <strong>read_lines (input_stream, line_callback[, done_callback[, close=false]])</strong>
     </dt>
     <dd>
-    Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen
+    Read lines from a Gio input stream
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">_screen</span>
-         Screen number (defaults / falls back to mouse.screen).
+        <li><span class="parameter">input_stream</span>
+            <span class="types"><span class="type">Gio.InputStream</span></span>
+         The input stream to read from.
+        </li>
+        <li><span class="parameter">line_callback</span>
+            <span class="types"><span class="type">function</span></span>
+        <p> Function that is called with each line</p>
+
+<pre><code>     read, e.g. &lt;code&gt;line\_callback(line\_from\_stream)&lt;/code&gt;.
+</code></pre>
+
+        </li>
+        <li><span class="parameter">done_callback</span>
+            <span class="types"><span class="type">function</span></span>
+        <p> Function that is called when the</p>
+
+<pre><code>          operation finishes (e.g. due to end of file).
+</code></pre>
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">close</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Should the stream be closed after end-of-file?
+         (<em>default</em> false)
         </li>
     </ul>
 
@@ -241,91 +342,24 @@
 
 </dd>
     <dt>
-    <a name = "focus_bydirection"></a>
-    <strong>focus_bydirection (dir, _screen)</strong>
+    <a name = "pread"></a>
+    <strong>pread (cmd)</strong>
     </dt>
     <dd>
-    Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen
+    Read a program output and returns its output as a string.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">dir</span>
-         The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
-        </li>
-        <li><span class="parameter">_screen</span>
-         Screen number.
+        <li><span class="parameter">cmd</span>
+         The command to run.
         </li>
     </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "focus_relative"></a>
-    <strong>focus_relative (i)</strong>
-    </dt>
-    <dd>
-    Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">i</span>
-         Value to add to the current focused screen index. 1 will focus next
- screen, -1 would focus the previous one.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "padding"></a>
-    <strong>padding (_screen, padding)</strong>
-    </dt>
-    <dd>
-    Get or set the screen padding.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">_screen</span>
-         The screen object to change the padding on
-        </li>
-        <li><span class="parameter">padding</span>
-         The padding, an table with &lsquo;top&rsquo;, &lsquo;left&rsquo;, &lsquo;right&rsquo; and/or
- &lsquo;bottom&rsquo;. Can be nil if you only want to retrieve padding
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "focused"></a>
-    <strong>focused ()</strong>
-    </dt>
-    <dd>
-    Get the focused screen.
- This can be replaced in a user&rsquo;s config.
-
-
 
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><span class="type">integer</span></span>
-
-
+        A string with the program output, or the error if one occured.
     </ol>
 
 

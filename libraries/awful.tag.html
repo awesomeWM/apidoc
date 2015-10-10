@@ -68,6 +68,7 @@
   <li><a href="../libraries/gears.timer.html">gears.timer</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
+  <li><a href="../libraries/lib.awful.spawn.html">lib.awful.spawn</a></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
   <li><a href="../libraries/menubar.menu_gen.html">menubar.menu_gen</a></li>
   <li><a href="../libraries/menubar.utils.html">menubar.utils</a></li>
@@ -84,6 +85,8 @@
   <li><a href="../libraries/objects.window.html">objects.window</a></li>
   <li><a href="../libraries/root.html">root</a></li>
   <li><a href="../libraries/selection.html">selection</a></li>
+  <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
+  <li><a href="../libraries/wibox.widget.base.html">wibox.widget.base</a></li>
 </ul>
 <h2>Classes</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
@@ -103,15 +106,17 @@
   <li><a href="../classes/drawable.html">drawable</a></li>
   <li><a href="../classes/drawin.html">drawin</a></li>
   <li><a href="../classes/gears.cache.html">gears.cache</a></li>
+  <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
   <li><a href="../classes/gears.object.html">gears.object</a></li>
   <li><a href="../classes/key.html">key</a></li>
+  <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
+  <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
   <li><a href="../classes/screen.html">screen</a></li>
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/tag.html">tag</a></li>
   <li><a href="../classes/wibox.html">wibox</a></li>
   <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
   <li><a href="../classes/wibox.layout.align.html">wibox.layout.align</a></li>
-  <li><a href="../classes/wibox.layout.base.html">wibox.layout.base</a></li>
   <li><a href="../classes/wibox.layout.constraint.html">wibox.layout.constraint</a></li>
   <li><a href="../classes/wibox.layout.fixed.html">wibox.layout.fixed</a></li>
   <li><a href="../classes/wibox.layout.flex.html">wibox.layout.flex</a></li>
@@ -119,7 +124,6 @@
   <li><a href="../classes/wibox.layout.mirror.html">wibox.layout.mirror</a></li>
   <li><a href="../classes/wibox.layout.rotate.html">wibox.layout.rotate</a></li>
   <li><a href="../classes/wibox.widget.background.html">wibox.widget.background</a></li>
-  <li><a href="../classes/wibox.widget.base.html">wibox.widget.base</a></li>
   <li><a href="../classes/wibox.widget.imagebox.html">wibox.widget.imagebox</a></li>
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
@@ -143,7 +147,7 @@
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g4aa6c33-2015-07-29T23:07:39+0000</li>
+        <li><strong>Release</strong>: master-g6902e4b</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -191,7 +195,7 @@
 	<td class="summary">Set a tag&rsquo;s screen</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#getscreen">getscreen (t)</a></td>
+	<td class="name" ><a href="#getscreen">getscreen ([t])</a></td>
 	<td class="summary">Get a tag&rsquo;s screen</td>
 	</tr>
 	<tr>
@@ -227,6 +231,19 @@
 	<td class="summary">Get the spacing between clients</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#setmfpol">setmfpol (policy[, t=tag.selected()])</a></td>
+	<td class="summary">Set size fill policy for the master client(s)</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#togglemfpol">togglemfpol (t)</a></td>
+	<td class="summary">Toggle size fill policy for the master client(s)
+ between &ldquo;expand&rdquo; and &ldquo;mwfact&rdquo;</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#getmfpol">getmfpol ([t=tag.selected()])</a></td>
+	<td class="summary">Get size fill policy for the master client(s)</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#setnmaster">setnmaster (nmaster[, t])</a></td>
 	<td class="summary">Set the number of master windows.</td>
 	</tr>
@@ -235,7 +252,7 @@
 	<td class="summary">Get the number of master windows.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#incnmaster">incnmaster (add, t)</a></td>
+	<td class="name" ><a href="#incnmaster">incnmaster (add[, t[, sensible=false]])</a></td>
 	<td class="summary">Increase the number of master windows.</td>
 	</tr>
 	<tr>
@@ -255,7 +272,7 @@
 	<td class="summary">Get number of column windows.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#incncol">incncol (add, t)</a></td>
+	<td class="name" ><a href="#incncol">incncol (add[, t[, sensible=false]])</a></td>
 	<td class="summary">Increase number of column windows.</td>
 	</tr>
 	<tr>
@@ -576,7 +593,7 @@
 </dd>
     <dt>
     <a name = "getscreen"></a>
-    <strong>getscreen (t)</strong>
+    <strong>getscreen ([t])</strong>
     </dt>
     <dd>
     Get a tag&rsquo;s screen
@@ -586,6 +603,7 @@
     <ul>
         <li><span class="parameter">t</span>
          tag object
+         (<em>optional</em>)
         </li>
     </ul>
 
@@ -778,6 +796,86 @@
 
 </dd>
     <dt>
+    <a name = "setmfpol"></a>
+    <strong>setmfpol (policy[, t=tag.selected()])</strong>
+    </dt>
+    <dd>
+    Set size fill policy for the master client(s)
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">policy</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Can be set to
+ &ldquo;expand&rdquo; (fill all the available workarea) or
+ &ldquo;mwfact&rdquo; (fill only an area inside the master width factor)
+        </li>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="../classes/tag.html#">tag</a></span>
+         The tag to modify
+         (<em>default</em> tag.selected())
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "togglemfpol"></a>
+    <strong>togglemfpol (t)</strong>
+    </dt>
+    <dd>
+    Toggle size fill policy for the master client(s)
+ between &ldquo;expand&rdquo; and &ldquo;mwfact&rdquo;
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="../classes/tag.html#">tag</a></span>
+         The tag to modify, if null tag.selected() is used.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getmfpol"></a>
+    <strong>getmfpol ([t=tag.selected()])</strong>
+    </dt>
+    <dd>
+    Get size fill policy for the master client(s)
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="../classes/tag.html#">tag</a></span>
+         The tag
+         (<em>default</em> tag.selected())
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Possible values are
+ &ldquo;expand&rdquo; (fill all the available workarea, default one) or
+ &ldquo;mwfact&rdquo; (fill only an area inside the master width factor)
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "setnmaster"></a>
     <strong>setnmaster (nmaster[, t])</strong>
     </dt>
@@ -824,7 +922,7 @@
 </dd>
     <dt>
     <a name = "incnmaster"></a>
-    <strong>incnmaster (add, t)</strong>
+    <strong>incnmaster (add[, t[, sensible=false]])</strong>
     </dt>
     <dd>
     Increase the number of master windows.
@@ -837,6 +935,13 @@
         </li>
         <li><span class="parameter">t</span>
          The tag to modify, if null tag.selected() is used.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">sensible</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Limit nmaster based on the number of
+   visible tiled windows?
+         (<em>default</em> false)
         </li>
     </ul>
 
@@ -934,7 +1039,7 @@
 </dd>
     <dt>
     <a name = "incncol"></a>
-    <strong>incncol (add, t)</strong>
+    <strong>incncol (add[, t[, sensible=false]])</strong>
     </dt>
     <dd>
     Increase number of column windows.
@@ -947,6 +1052,13 @@
         </li>
         <li><span class="parameter">t</span>
          The tag to modify, if null tag.selected() is used.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">sensible</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Limit ncol based on the number of visible
+ tiled windows?
+         (<em>default</em> false)
         </li>
     </ul>
 
@@ -1172,7 +1284,7 @@
          The tag.
         </li>
         <li><span class="parameter">prop</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The property name.
         </li>
     </ul>
@@ -1263,7 +1375,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2015-07-29 23:08:32 </i>
+<i style="float:right;">Last updated 2015-10-10 21:13:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
