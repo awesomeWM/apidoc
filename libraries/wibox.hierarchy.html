@@ -47,7 +47,7 @@
   <li><a href="../libraries/awful.keygrabber.html">awful.keygrabber</a></li>
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
   <li><a href="../libraries/awful.menu.html">awful.menu</a></li>
-  <li><strong>awful.mouse</strong></li>
+  <li><a href="../libraries/awful.mouse.html">awful.mouse</a></li>
   <li><a href="../libraries/awful.mouse.finder.html">awful.mouse.finder</a></li>
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
@@ -85,7 +85,7 @@
   <li><a href="../libraries/objects.window.html">objects.window</a></li>
   <li><a href="../libraries/root.html">root</a></li>
   <li><a href="../libraries/selection.html">selection</a></li>
-  <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
+  <li><strong>wibox.hierarchy</strong></li>
   <li><a href="../libraries/wibox.widget.base.html">wibox.widget.base</a></li>
 </ul>
 <h2>Classes</h2>
@@ -140,51 +140,70 @@
 
 <div id="content">
 
-<h1>Module <code>awful.mouse</code></h1>
-<p>Mouse module for awful</p>
-<p>
-</p>
+<h1>Module <code>wibox.hierarchy</code></h1>
+<p>Management of widget hierarchies.</p>
+<p> Each widget hierarchy object has a widget
+ for which it saves e.g. size and transformation in its parent. Also, each
+ widget has a number of children.</p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2008 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g4aa6c33-2015-07-29T23:07:39+0000</li>
-        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
+        <li><strong>Copyright</strong>: 2015 Uli Schlachter</li>
+        <li><strong>Release</strong>: master-g6902e4b</li>
+        <li><strong>Author</strong>: Uli Schlachter</li>
     </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#client_under_pointer">client_under_pointer ()</a></td>
-	<td class="summary">Get the client object under the pointer.</td>
+	<td class="name" ><a href="#new">new (context, widget, width, height, redraw_callback, layout_callback, callback_arg)</a></td>
+	<td class="summary">Create a new widget hierarchy that has no parent.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#drawin_under_pointer">drawin_under_pointer ()</a></td>
-	<td class="summary">Get the drawin object under the pointer.</td>
+	<td class="name" ><a href="#update">update (context, widget, width, height[, region])</a></td>
+	<td class="summary">Update a widget hierarchy with some new state.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#mouse.client.snap">mouse.client.snap (c, snap, x, y, fixed_x, fixed_y)</a></td>
-	<td class="summary">Snap a client to the closest client or screen edge.</td>
+	<td class="name" ><a href="#get_widget">get_widget ()</a></td>
+	<td class="summary">Get the widget that this hierarchy manages.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#mouse.client.move">mouse.client.move (c, snap, finished_cb)</a></td>
-	<td class="summary">Move a client.</td>
+	<td class="name" ><a href="#get_matrix_to_parent">get_matrix_to_parent ()</a></td>
+	<td class="summary">Get a matrix that transforms to the parent&rsquo;s coordinate space from this
+ hierarchy&rsquo;s coordinate system.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#mouse.client.dragtotag.border">mouse.client.dragtotag.border (c)</a></td>
-	<td class="summary">Move a client to a tag by dragging it onto the left / right side of the screen</td>
+	<td class="name" ><a href="#get_matrix_to_device">get_matrix_to_device ()</a></td>
+	<td class="summary">Get a matrix that transforms to the base of this hierarchy&rsquo;s coordinate
+ system (aka the coordinate system of the device that this
+ hierarchy is applied upon) from this hierarchy&rsquo;s coordinate system.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#mouse.wibox.move">mouse.wibox.move (w)</a></td>
-	<td class="summary">Move the wibox under the cursor</td>
+	<td class="name" ><a href="#get_matrix_from_parent">get_matrix_from_parent ()</a></td>
+	<td class="summary">Get a matrix that transforms from the parent&rsquo;s coordinate space into this
+ hierarchy&rsquo;s coordinate system.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#mouse.client.corner">mouse.client.corner (c, corner)</a></td>
-	<td class="summary">Get a client corner coordinates.</td>
+	<td class="name" ><a href="#get_matrix_from_device">get_matrix_from_device ()</a></td>
+	<td class="summary">Get a matrix that transforms from the base of this hierarchy&rsquo;s coordinate
+ system (aka the coordinate system of the device that this
+ hierarchy is applied upon) into this hierarchy&rsquo;s coordinate system.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#mouse.client.resize">mouse.client.resize (c, corner)</a></td>
-	<td class="summary">Resize a client.</td>
+	<td class="name" ><a href="#get_draw_extents">get_draw_extents ()</a></td>
+	<td class="summary">Get the extents that this hierarchy possibly draws to (in the current coordinate space).</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#get_size">get_size ()</a></td>
+	<td class="summary">Get the size that this hierarchy logically covers (in the current coordinate space).</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#get_children">get_children ()</a></td>
+	<td class="summary">Get a list of all children.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#draw">draw (context, cr)</a></td>
+	<td class="summary">Draw a hierarchy to some cairo context.</td>
 	</tr>
 </table>
 
@@ -196,172 +215,50 @@
 
     <dl class="function">
     <dt>
-    <a name = "client_under_pointer"></a>
-    <strong>client_under_pointer ()</strong>
+    <a name = "new"></a>
+    <strong>new (context, widget, width, height, redraw_callback, layout_callback, callback_arg)</strong>
     </dt>
     <dd>
-    Get the client object under the pointer.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The client object under the pointer, if one can be found.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "drawin_under_pointer"></a>
-    <strong>drawin_under_pointer ()</strong>
-    </dt>
-    <dd>
-    Get the drawin object under the pointer.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The drawin object under the pointer, if one can be found.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "mouse.client.snap"></a>
-    <strong>mouse.client.snap (c, snap, x, y, fixed_x, fixed_y)</strong>
-    </dt>
-    <dd>
-    Snap a client to the closest client or screen edge.
+    Create a new widget hierarchy that has no parent.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">c</span>
-         The client to snap.
+        <li><span class="parameter">context</span>
+         The context in which we are laid out.
         </li>
-        <li><span class="parameter">snap</span>
-         The pixel to snap clients.
+        <li><span class="parameter">widget</span>
+         The widget that is at the base of the hierarchy.
         </li>
-        <li><span class="parameter">x</span>
-         The client x coordinate.
+        <li><span class="parameter">width</span>
+         The available width for this hierarchy.
         </li>
-        <li><span class="parameter">y</span>
-         The client y coordinate.
+        <li><span class="parameter">height</span>
+         The available height for this hierarchy.
         </li>
-        <li><span class="parameter">fixed_x</span>
-         True if the client isn&rsquo;t allowed to move in the x direction.
-        </li>
-        <li><span class="parameter">fixed_y</span>
-         True if the client isn&rsquo;t allowed to move in the y direction.
-        </li>
-    </ul>
+        <li><span class="parameter">redraw_callback</span>
+        <p> Callback that is called with the corresponding widget</p>
 
-
-
-
-
-</dd>
-    <dt>
-    <a name = "mouse.client.move"></a>
-    <strong>mouse.client.move (c, snap, finished_cb)</strong>
-    </dt>
-    <dd>
-    Move a client.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">c</span>
-         The client to move, or the focused one if nil.
-        </li>
-        <li><span class="parameter">snap</span>
-         The pixel to snap clients.
-        </li>
-        <li><span class="parameter">finished_cb</span>
-        <p> An optional callback function, that will be called</p>
-
-<pre><code>             when moving the client has been finished. The client
-             that has been moved will be passed to that function.
+<pre><code>    hierarchy on widget::redraw_needed on some widget.
 </code></pre>
 
         </li>
-    </ul>
+        <li><span class="parameter">layout_callback</span>
+        <p> Callback that is called with the corresponding widget</p>
 
+<pre><code>    hierarchy on widget::layout_changed on some widget.
+</code></pre>
 
-
-
-
-</dd>
-    <dt>
-    <a name = "mouse.client.dragtotag.border"></a>
-    <strong>mouse.client.dragtotag.border (c)</strong>
-    </dt>
-    <dd>
-    Move a client to a tag by dragging it onto the left / right side of the screen
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">c</span>
-         The client to move
         </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "mouse.wibox.move"></a>
-    <strong>mouse.wibox.move (w)</strong>
-    </dt>
-    <dd>
-    Move the wibox under the cursor
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">w</span>
-         The wibox to move, or none to use that under the pointer
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "mouse.client.corner"></a>
-    <strong>mouse.client.corner (c, corner)</strong>
-    </dt>
-    <dd>
-    Get a client corner coordinates.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">c</span>
-         The client to get corner from, focused one by default.
-        </li>
-        <li><span class="parameter">corner</span>
-         The corner to use: auto, top_left, top_right, bottom_left,
- bottom_right. Default is auto, and auto find the nearest corner.
+        <li><span class="parameter">callback_arg</span>
+         A second argument that is given to the above callbacks.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        Actual used corner and x and y coordinates.
+        A new widget hierarchy
     </ol>
 
 
@@ -369,20 +266,219 @@
 
 </dd>
     <dt>
-    <a name = "mouse.client.resize"></a>
-    <strong>mouse.client.resize (c, corner)</strong>
+    <a name = "update"></a>
+    <strong>update (context, widget, width, height[, region])</strong>
     </dt>
     <dd>
-    Resize a client.
+    Update a widget hierarchy with some new state.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">c</span>
-         The client to resize, or the focused one by default.
+        <li><span class="parameter">context</span>
+         The context in which we are laid out.
         </li>
-        <li><span class="parameter">corner</span>
-         The corner to grab on resize. Auto detected by default.
+        <li><span class="parameter">widget</span>
+         The widget that is at the base of the hierarchy.
+        </li>
+        <li><span class="parameter">width</span>
+         The available width for this hierarchy.
+        </li>
+        <li><span class="parameter">height</span>
+         The available height for this hierarchy.
+        </li>
+        <li><span class="parameter">region</span>
+         A region to use for accumulating changed parts
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        <p>A cairo region describing the changed parts (either the <code>region</code></p>
+
+<pre><code>     argument or a new, internally created region).
+</code></pre>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_widget"></a>
+    <strong>get_widget ()</strong>
+    </dt>
+    <dd>
+    Get the widget that this hierarchy manages.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_matrix_to_parent"></a>
+    <strong>get_matrix_to_parent ()</strong>
+    </dt>
+    <dd>
+    Get a matrix that transforms to the parent&rsquo;s coordinate space from this
+ hierarchy&rsquo;s coordinate system.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A matrix describing the transformation.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_matrix_to_device"></a>
+    <strong>get_matrix_to_device ()</strong>
+    </dt>
+    <dd>
+    Get a matrix that transforms to the base of this hierarchy&rsquo;s coordinate
+ system (aka the coordinate system of the device that this
+ hierarchy is applied upon) from this hierarchy&rsquo;s coordinate system.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A matrix describing the transformation.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_matrix_from_parent"></a>
+    <strong>get_matrix_from_parent ()</strong>
+    </dt>
+    <dd>
+    Get a matrix that transforms from the parent&rsquo;s coordinate space into this
+ hierarchy&rsquo;s coordinate system.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A matrix describing the transformation.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_matrix_from_device"></a>
+    <strong>get_matrix_from_device ()</strong>
+    </dt>
+    <dd>
+    Get a matrix that transforms from the base of this hierarchy&rsquo;s coordinate
+ system (aka the coordinate system of the device that this
+ hierarchy is applied upon) into this hierarchy&rsquo;s coordinate system.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A matrix describing the transformation.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_draw_extents"></a>
+    <strong>get_draw_extents ()</strong>
+    </dt>
+    <dd>
+    Get the extents that this hierarchy possibly draws to (in the current coordinate space).
+ This includes the size of this element plus the size of all children
+ (after applying the corresponding transformation).
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        x, y, width, height
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_size"></a>
+    <strong>get_size ()</strong>
+    </dt>
+    <dd>
+    Get the size that this hierarchy logically covers (in the current coordinate space).
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        width, height
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_children"></a>
+    <strong>get_children ()</strong>
+    </dt>
+    <dd>
+    Get a list of all children.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        List of all children hierarchies.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "draw"></a>
+    <strong>draw (context, cr)</strong>
+    </dt>
+    <dd>
+    Draw a hierarchy to some cairo context.
+ This function draws the widgets in this widget hierarchy to the given cairo
+ context. The context&rsquo;s clip is used to skip parts that aren&rsquo;t visible.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">context</span>
+         The context in which widgets are drawn.
+        </li>
+        <li><span class="parameter">cr</span>
+         The cairo context that is used for drawing.
         </li>
     </ul>
 
@@ -398,7 +494,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2015-07-29 23:08:32 </i>
+<i style="float:right;">Last updated 2015-10-10 21:13:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

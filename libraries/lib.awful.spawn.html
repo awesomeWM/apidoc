@@ -33,7 +33,6 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
-<li><a href="#Tables">Tables</a></li>
 </ul>
 
 
@@ -69,11 +68,11 @@
   <li><a href="../libraries/gears.timer.html">gears.timer</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
-  <li><a href="../libraries/lib.awful.spawn.html">lib.awful.spawn</a></li>
+  <li><strong>lib.awful.spawn</strong></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
   <li><a href="../libraries/menubar.menu_gen.html">menubar.menu_gen</a></li>
   <li><a href="../libraries/menubar.utils.html">menubar.utils</a></li>
-  <li><strong>mouse</strong></li>
+  <li><a href="../libraries/mouse.html">mouse</a></li>
   <li><a href="../libraries/mousegrabber.html">mousegrabber</a></li>
   <li><a href="../libraries/naughty.html">naughty</a></li>
   <li><a href="../libraries/naughty.dbus.html">naughty.dbus</a></li>
@@ -141,38 +140,40 @@
 
 <div id="content">
 
-<h1>Module <code>mouse</code></h1>
-<p>awesome mouse API</p>
+<h1>Module <code>lib.awful.spawn</code></h1>
+<p>
+</p>
 <p>
 </p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2008-2009 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g4aa6c33-2015-07-29T23:07:39+0000</li>
-        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
+        <li><strong>Copyright</strong>: 2008 Julien Danjou,2014 Emmanuel Lepage Vallee</li>
+        <li><strong>Release</strong>: master-g6902e4b</li>
+        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;,Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
     </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#coords">coords (coords_table, silent)</a></td>
-	<td class="summary">Get or set the mouse coords.</td>
+	<td class="name" ><a href="#spawn">spawn (cmd, sn_rules, callback)</a></td>
+	<td class="summary">Spawn a program.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#object_under_pointer">object_under_pointer ()</a></td>
-	<td class="summary">Get the client or any object which is under the pointer.</td>
-	</tr>
-</table>
-<h2><a href="#Tables">Tables</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#mouse">mouse</a></td>
-	<td class="summary">Mouse library.</td>
+	<td class="name" ><a href="#with_shell">with_shell (cmd)</a></td>
+	<td class="summary">Spawn a program using the shell.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#coords_table">coords_table</a></td>
-	<td class="summary">A table with X and Y coordinates.</td>
+	<td class="name" ><a href="#with_line_callback">with_line_callback (cmd[, stdout_callback[, stderr_callback[, done_callback]]])</a></td>
+	<td class="summary">Spawn a program and asynchronously and capture its output line by line.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#read_lines">read_lines (input_stream, line_callback[, done_callback[, close=false]])</a></td>
+	<td class="summary">Read lines from a Gio input stream</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#pread">pread (cmd)</a></td>
+	<td class="summary">Read a program output and returns its output as a string.</td>
 	</tr>
 </table>
 
@@ -184,32 +185,33 @@
 
     <dl class="function">
     <dt>
-    <a name = "coords"></a>
-    <strong>coords (coords_table, silent)</strong>
+    <a name = "spawn"></a>
+    <strong>spawn (cmd, sn_rules, callback)</strong>
     </dt>
     <dd>
-    Get or set the mouse coords.
+    Spawn a program.
+ See awful.rules.execute for more details
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">coords_table</span>
-            <span class="types"><a class="type" href="../libraries/mouse.html#coords">coords_table</a></span>
-         None or a table with x and y keys as mouse
-  coordinates.
+        <li><span class="parameter">cmd</span>
+         The command.
         </li>
-        <li><span class="parameter">silent</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Disable mouse::enter or mouse::leave events that
-  could be triggered by the pointer when moving.
+        <li><span class="parameter">sn_rules</span>
+         a property table, false to disable startup-notification.
+        </li>
+        <li><span class="parameter">callback</span>
+         A callback function (if the client support startup notifications)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
-
-           <span class="types"><a class="type" href="../libraries/mouse.html#coords">coords_table</a></span>
-        A table with mouse coordinates.
+        <li>
+        The forked PID or an error message</li>
+        <li>
+        The startup notification UID, if the spawn was successful</li>
     </ol>
 
 
@@ -217,41 +219,17 @@
 
 </dd>
     <dt>
-    <a name = "object_under_pointer"></a>
-    <strong>object_under_pointer ()</strong>
+    <a name = "with_shell"></a>
+    <strong>with_shell (cmd)</strong>
     </dt>
     <dd>
-    Get the client or any object which is under the pointer.
+    Spawn a program using the shell.
 
 
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a> or <span class="type">nil</span></span>
-        A client or nil.
-    </ol>
-
-
-
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "mouse"></a>
-    <strong>mouse</strong>
-    </dt>
-    <dd>
-    Mouse library.
-
-
-    <h3>Fields:</h3>
+    <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">screen</span>
-         Mouse screen number.
+        <li><span class="parameter">cmd</span>
+         The command.
         </li>
     </ul>
 
@@ -261,30 +239,128 @@
 
 </dd>
     <dt>
-    <a name = "coords_table"></a>
-    <strong>coords_table</strong>
+    <a name = "with_line_callback"></a>
+    <strong>with_line_callback (cmd[, stdout_callback[, stderr_callback[, done_callback]]])</strong>
     </dt>
     <dd>
-    A table with X and Y coordinates.
+    Spawn a program and asynchronously and capture its output line by line.
 
 
-    <h3>Fields:</h3>
+    <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">x</span>
-         X coordinate.
+        <li><span class="parameter">cmd</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The command.
         </li>
-        <li><span class="parameter">y</span>
-         Y coordinate.
-        </li>
-        <li><span class="parameter">buttons</span>
-        <p> Table containing the status of buttons, e.g. field [1] is true</p>
+        <li><span class="parameter">stdout_callback</span>
+            <span class="types"><span class="type">function</span></span>
+        <p> Function that is called with each line of</p>
 
-<pre><code>    when button 1 is pressed.
+<pre><code>          output on stdout, e.g. &lt;code&gt;stdout\_callback(line)&lt;/code&gt;.
+</code></pre>
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">stderr_callback</span>
+            <span class="types"><span class="type">function</span></span>
+        <p> Function that is called with each line of</p>
+
+<pre><code>          output on stderr, e.g. &lt;code&gt;stderr\_callback(line)&lt;/code&gt;.
+</code></pre>
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">done_callback</span>
+            <span class="types"><span class="type">function</span></span>
+        <p> Function to call when no more output is</p>
+
+<pre><code>          produced.
+</code></pre>
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Integer</span></span>
+        the PID of the forked process.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        Error message.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "read_lines"></a>
+    <strong>read_lines (input_stream, line_callback[, done_callback[, close=false]])</strong>
+    </dt>
+    <dd>
+    Read lines from a Gio input stream
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input_stream</span>
+            <span class="types"><span class="type">Gio.InputStream</span></span>
+         The input stream to read from.
+        </li>
+        <li><span class="parameter">line_callback</span>
+            <span class="types"><span class="type">function</span></span>
+        <p> Function that is called with each line</p>
+
+<pre><code>     read, e.g. &lt;code&gt;line\_callback(line\_from\_stream)&lt;/code&gt;.
 </code></pre>
 
         </li>
+        <li><span class="parameter">done_callback</span>
+            <span class="types"><span class="type">function</span></span>
+        <p> Function that is called when the</p>
+
+<pre><code>          operation finishes (e.g. due to end of file).
+</code></pre>
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">close</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Should the stream be closed after end-of-file?
+         (<em>default</em> false)
+        </li>
     </ul>
 
+
+
+
+
+</dd>
+    <dt>
+    <a name = "pread"></a>
+    <strong>pread (cmd)</strong>
+    </dt>
+    <dd>
+    Read a program output and returns its output as a string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cmd</span>
+         The command to run.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A string with the program output, or the error if one occured.
+    </ol>
 
 
 
@@ -297,7 +373,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2015-07-29 23:08:32 </i>
+<i style="float:right;">Last updated 2015-10-10 21:13:09 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
