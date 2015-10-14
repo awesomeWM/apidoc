@@ -53,6 +53,7 @@
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
   <li><a href="../libraries/awful.screen.html">awful.screen</a></li>
+  <li><strong>awful.spawn</strong></li>
   <li><a href="../libraries/awful.tag.html">awful.tag</a></li>
   <li><a href="../libraries/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../libraries/awful.tooltip.html">awful.tooltip</a></li>
@@ -68,7 +69,6 @@
   <li><a href="../libraries/gears.timer.html">gears.timer</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
-  <li><strong>lib.awful.spawn</strong></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
   <li><a href="../libraries/menubar.menu_gen.html">menubar.menu_gen</a></li>
   <li><a href="../libraries/menubar.utils.html">menubar.utils</a></li>
@@ -140,7 +140,7 @@
 
 <div id="content">
 
-<h1>Module <code>lib.awful.spawn</code></h1>
+<h1>Module <code>awful.spawn</code></h1>
 <p>
 </p>
 <p>
@@ -148,7 +148,7 @@
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008 Julien Danjou,2014 Emmanuel Lepage Vallee</li>
-        <li><strong>Release</strong>: master-gfbfa6b8</li>
+        <li><strong>Release</strong>: master-ge3253db</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;,Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
     </ul>
 
@@ -156,8 +156,8 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#spawn">spawn (cmd, sn_rules, callback)</a></td>
-	<td class="summary">Spawn a program.</td>
+	<td class="name" ><a href="#spawn">spawn (cmd[, sn_rules=true[, callback]])</a></td>
+	<td class="summary">Spawn a program, and optionally apply properties and/or run a callback.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#with_shell">with_shell (cmd)</a></td>
@@ -173,7 +173,7 @@
 	</tr>
 	<tr>
 	<td class="name" ><a href="#pread">pread (cmd)</a></td>
-	<td class="summary">Read a program output and returns its output as a string.</td>
+	<td class="summary">Read a program output and return its output as a string.</td>
 	</tr>
 </table>
 
@@ -186,32 +186,51 @@
     <dl class="function">
     <dt>
     <a name = "spawn"></a>
-    <strong>spawn (cmd, sn_rules, callback)</strong>
+    <strong>spawn (cmd[, sn_rules=true[, callback]])</strong>
     </dt>
     <dd>
-    Spawn a program.
- See awful.rules.execute for more details
+    Spawn a program, and optionally apply properties and/or run a callback. </p>
+
+<p> Applying properties or running a callback requires the program/client to
+ support startup notifications.</p>
+
+<p> See <a href="../libraries/awful.rules.html#execute">awful.rules.execute</a> for more details about the format of <code>sn_rules</code>.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The command.
         </li>
         <li><span class="parameter">sn_rules</span>
-         a property table, false to disable startup-notification.
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">boolean</span></span>
+         A table of properties to be applied
+   after startup; <code>false</code> to disable startup notifications.
+         (<em>default</em> true)
         </li>
         <li><span class="parameter">callback</span>
-         A callback function (if the client support startup notifications)
+            <span class="types"><span class="type">function</span></span>
+         A callback function to be run after startup.
+         (<em>optional</em>)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
         <li>
-        The forked PID or an error message</li>
+           <span class="types"><span class="type">integer</span></span>
+        The forked PID.</li>
         <li>
-        The startup notification UID, if the spawn was successful</li>
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        The startup notification ID, if <code>sn</code> is not false, or a
+   <code>callback</code> is provided.</li>
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        Error message.
     </ol>
 
 
@@ -254,29 +273,20 @@
         </li>
         <li><span class="parameter">stdout_callback</span>
             <span class="types"><span class="type">function</span></span>
-        <p> Function that is called with each line of</p>
-
-<pre><code>          output on stdout, e.g. &lt;code&gt;stdout\_callback(line)&lt;/code&gt;.
-</code></pre>
-
+         Function that is called with each line of
+   output on stdout, e.g. <code>stdout_callback(line)</code>.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">stderr_callback</span>
             <span class="types"><span class="type">function</span></span>
-        <p> Function that is called with each line of</p>
-
-<pre><code>          output on stderr, e.g. &lt;code&gt;stderr\_callback(line)&lt;/code&gt;.
-</code></pre>
-
+         Function that is called with each line of
+   output on stderr, e.g. <code>stderr_callback(line)</code>.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">done_callback</span>
             <span class="types"><span class="type">function</span></span>
-        <p> Function to call when no more output is</p>
-
-<pre><code>          produced.
-</code></pre>
-
+         Function to call when no more output is
+   produced.
          (<em>optional</em>)
         </li>
     </ul>
@@ -314,19 +324,13 @@
         </li>
         <li><span class="parameter">line_callback</span>
             <span class="types"><span class="type">function</span></span>
-        <p> Function that is called with each line</p>
-
-<pre><code>     read, e.g. &lt;code&gt;line\_callback(line\_from\_stream)&lt;/code&gt;.
-</code></pre>
-
+         Function that is called with each line
+   read, e.g. <code>line_callback(line_from_stream)</code>.
         </li>
         <li><span class="parameter">done_callback</span>
             <span class="types"><span class="type">function</span></span>
-        <p> Function that is called when the</p>
-
-<pre><code>          operation finishes (e.g. due to end of file).
-</code></pre>
-
+         Function that is called when the
+   operation finishes (e.g. due to end of file).
          (<em>optional</em>)
         </li>
         <li><span class="parameter">close</span>
@@ -346,12 +350,13 @@
     <strong>pread (cmd)</strong>
     </dt>
     <dd>
-    Read a program output and returns its output as a string.
+    Read a program output and return its output as a string.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The command to run.
         </li>
     </ul>
@@ -359,7 +364,9 @@
     <h3>Returns:</h3>
     <ol>
 
-        A string with the program output, or the error if one occured.
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        A string with the program output, or the error if one
+   occured.
     </ol>
 
 
@@ -373,7 +380,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2015-10-13 20:27:47 </i>
+<i style="float:right;">Last updated 2015-10-14 14:32:31 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
