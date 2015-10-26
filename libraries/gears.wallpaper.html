@@ -156,6 +156,10 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
+	<td class="name" ><a href="#prepare_context">prepare_context (s)</a></td>
+	<td class="summary">Prepare the needed state for setting a wallpaper.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#set">set (pattern)</a></td>
 	<td class="summary">Set the current wallpaper.</td>
 	</tr>
@@ -184,6 +188,36 @@
     <h2 class="section-header "><a name="Functions"></a>Functions</h2>
 
     <dl class="function">
+    <dt>
+    <a name = "prepare_context"></a>
+    <strong>prepare_context (s)</strong>
+    </dt>
+    <dd>
+    Prepare the needed state for setting a wallpaper.
+ This function returns a cairo context through which a wallpaper can be drawn.
+ The context is only valid for a short time and should not be saved in a
+ global variable.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">s</span>
+         The screen to set the wallpaper on or nil for all screens
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        The available geometry (table with entries width and height)</li>
+        <li>
+        A cairo context that the wallpaper should be drawn to</li>
+    </ol>
+
+
+
+
+</dd>
     <dt>
     <a name = "set"></a>
     <strong>set (pattern)</strong>
