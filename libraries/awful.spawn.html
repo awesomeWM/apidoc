@@ -141,10 +141,11 @@
 <div id="content">
 
 <h1>Module <code>awful.spawn</code></h1>
-<p>
-</p>
-<p>
-</p>
+<p>Spawning of programs.</p>
+<p> This module provides methods to start programs and supports startup
+ notifications, which allows for callbacks and applying properties to the
+ program after it has been launched.  This requires currently that the
+ applicaton supports them.</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008 Julien Danjou,2014 Emmanuel Lepage Vallee</li>
@@ -222,9 +223,9 @@
            <span class="types"><span class="type">integer</span></span>
         The forked PID.</li>
         <li>
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-        The startup notification ID, if <code>sn</code> is not false, or a
-   <code>callback</code> is provided.</li>
+           <span class="types">optional <a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        The startup notification ID, if <code>sn</code> is not false, or
+   a <code>callback</code> is provided.</li>
     </ol>
      <h3>Or</h3>
     <ol>
@@ -243,11 +244,13 @@
     </dt>
     <dd>
     Spawn a program using the shell.
+ This calls <code>cmd</code> with <code>$SHELL -c</code> (via <code>awful.util.shell</code>).
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The command.
         </li>
     </ul>
