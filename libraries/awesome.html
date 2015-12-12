@@ -264,7 +264,7 @@
 	<td class="summary">Emit a global signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#spawn">spawn (cmd[, use_sn=true[, stdin=false[, stdout=false[, stderr=false]]]])</a></td>
+	<td class="name" ><a href="#spawn">spawn (cmd[, use_sn=true[, stdin=false[, stdout=false[, stderr=false[, exit_callback=nil]]]]])</a></td>
 	<td class="summary">Spawn a program.</td>
 	</tr>
 	<tr>
@@ -705,7 +705,7 @@
 </dd>
     <dt>
     <a name = "spawn"></a>
-    <strong>spawn (cmd[, use_sn=true[, stdin=false[, stdout=false[, stderr=false]]]])</strong>
+    <strong>spawn (cmd[, use_sn=true[, stdin=false[, stdout=false[, stderr=false[, exit_callback=nil]]]]])</strong>
     </dt>
     <dd>
     Spawn a program.
@@ -737,6 +737,13 @@
             <span class="types"><span class="type">boolean</span></span>
          Return a fd for stderr?
          (<em>default</em> false)
+        </li>
+        <li><span class="parameter">exit_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         Function to call on process exit. The
+ function arguments will be type of exit (&ldquo;exit&rdquo; or &ldquo;signal&rdquo;) and the exit
+ code / the signal number causing process termination.
+         (<em>default</em> nil)
         </li>
     </ul>
 
