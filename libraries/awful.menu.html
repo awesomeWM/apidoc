@@ -190,8 +190,8 @@
 	<td class="summary">Delete menu entry at given position</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#clients">clients (args, item_args)</a></td>
-	<td class="summary">Build a popup menu with running clients and shows it.</td>
+	<td class="name" ><a href="#clients">clients ([args[, item_args[, filter]]])</a></td>
+	<td class="summary">Build a popup menu with running clients and show it.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#entry">entry (parent, args)</a></td>
@@ -360,20 +360,31 @@
 </dd>
     <dt>
     <a name = "clients"></a>
-    <strong>clients (args, item_args)</strong>
+    <strong>clients ([args[, item_args[, filter]]])</strong>
     </dt>
     <dd>
-    Build a popup menu with running clients and shows it.
+    Build a popup menu with running clients and show it.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
-         Menu table, see new() function for more informations
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Menu table, see <code>new()</code> for more information.
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">item_args</span>
-         Table that will be merged into each item, see new() for more
-   informations.
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Table that will be merged into each item, see
+   <code>new()</code> for more information.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">filter</span>
+            <span class="types"><span class="type">func</span></span>
+         A function taking a client as an argument and
+   returning <code>true</code> or <code>false</code> to indicate whether the client should be
+   included in the menu.
+         (<em>optional</em>)
         </li>
     </ul>
 
