@@ -33,6 +33,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
 </ul>
 
 
@@ -152,13 +153,33 @@
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2010 Uli Schlachter</li>
-        <li><strong>Release</strong>: master-g69da6ee</li>
+        <li><strong>Release</strong>: master-g9819877</li>
         <li><strong>Author</strong>: Uli Schlachter</li>
     </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
+	<tr>
+	<td class="name" ><a href="#base.widget:buttons">base.widget:buttons (_buttons)</a></td>
+	<td class="summary">Set/get a widget&rsquo;s buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#base.widget:set_visible">base.widget:set_visible (b)</a></td>
+	<td class="summary">Set a widget&rsquo;s visible property</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#base.widget:set_opacity">base.widget:set_opacity (o)</a></td>
+	<td class="summary">Set a widget&rsquo;s opacity</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#base.widget:set_width">base.widget:set_width (s)</a></td>
+	<td class="summary">Set the widget&rsquo;s width</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#base.widget:set_height">base.widget:set_height (s)</a></td>
+	<td class="summary">Set the widget&rsquo;s height</td>
+	</tr>
 	<tr>
 	<td class="name" ><a href="#rect_to_device_geometry">rect_to_device_geometry (cr, x, y, width, height)</a></td>
 	<td class="summary">Figure out the geometry in device coordinate space.</td>
@@ -170,10 +191,6 @@
 	<tr>
 	<td class="name" ><a href="#layout_widget">layout_widget (parent, context, widget, width, height)</a></td>
 	<td class="summary">Lay out a widget for the given available width and height.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#buttons">buttons (_buttons)</a></td>
-	<td class="summary">Set/get a widget&rsquo;s buttons.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#place_widget_via_matrix">place_widget_via_matrix (widget, mat, width, height)</a></td>
@@ -196,6 +213,13 @@
 	<td class="summary">Do some sanity checking on widget.</td>
 	</tr>
 </table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#widget">widget</a></td>
+	<td class="summary">Functions available on all widgets</td>
+	</tr>
+</table>
 
 <br/>
 <br/>
@@ -204,6 +228,115 @@
     <h2 class="section-header "><a name="Functions"></a>Functions</h2>
 
     <dl class="function">
+    <dt>
+    <a name = "base.widget:buttons"></a>
+    <strong>base.widget:buttons (_buttons)</strong>
+    </dt>
+    <dd>
+    Set/get a widget&rsquo;s buttons.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">_buttons</span>
+         The table of buttons that should bind to the widget.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "base.widget:set_visible"></a>
+    <strong>base.widget:set_visible (b)</strong>
+    </dt>
+    <dd>
+    Set a widget&rsquo;s visible property
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">b</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Wether the widget is visible at all
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "base.widget:set_opacity"></a>
+    <strong>base.widget:set_opacity (o)</strong>
+    </dt>
+    <dd>
+    Set a widget&rsquo;s opacity
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">o</span>
+            <span class="types"><span class="type">number</span></span>
+         The opacity to use (a number from 0 to 1). 0 is fully
+ transparent while 1 is fully opaque.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "base.widget:set_width"></a>
+    <strong>base.widget:set_width (s)</strong>
+    </dt>
+    <dd>
+    Set the widget&rsquo;s width
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">s</span>
+            <span class="types"><span class="type">number</span> or <span class="type">nil</span></span>
+         The width that the widget has. <code>nil</code> means to apply the
+ default mechanism of calling the <code>:fit</code> method. A number overrides the result
+ from <code>:fit</code>.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "base.widget:set_height"></a>
+    <strong>base.widget:set_height (s)</strong>
+    </dt>
+    <dd>
+    Set the widget&rsquo;s height
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">s</span>
+            <span class="types"><span class="type">number</span> or <span class="type">nil</span></span>
+         The height that the widget has. <code>nil</code> means to apply the
+ default mechanism of calling the <code>:fit</code> method. A number overrides the result
+ from <code>:fit</code>.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
     <dt>
     <a name = "rect_to_device_geometry"></a>
     <strong>rect_to_device_geometry (cr, x, y, width, height)</strong>
@@ -316,28 +449,6 @@
 
         The result from the widget&rsquo;s <code>:layout</code> callback.
     </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "buttons"></a>
-    <strong>buttons (_buttons)</strong>
-    </dt>
-    <dd>
-    Set/get a widget&rsquo;s buttons.
- This function is available on widgets created by <a href="../libraries/wibox.widget.base.html#make_widget">make_widget</a>.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">_buttons</span>
-
-
-        </li>
-    </ul>
-
 
 
 
@@ -608,13 +719,31 @@ widget:after_draw_children(wibox, cr, width, height)
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "widget"></a>
+    <strong>widget</strong>
+    </dt>
+    <dd>
+    Functions available on all widgets
+
+
+
+
+
+
+
+</dd>
+</dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2015-12-12 18:12:40 </i>
+<i style="float:right;">Last updated 2015-12-12 18:15:51 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
