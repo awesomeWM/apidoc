@@ -30,6 +30,10 @@
   <li><a href="../index.html">Index</a></li>
 </ul>
 
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
 
 
 <h2>Libraries</h2>
@@ -64,7 +68,7 @@
   <li><a href="../libraries/dbus.html">dbus</a></li>
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
   <li><a href="../libraries/gears.debug.html">gears.debug</a></li>
-  <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
+  <li><strong>gears.shape</strong></li>
   <li><a href="../libraries/gears.sort.html">gears.sort</a></li>
   <li><a href="../libraries/gears.surface.html">gears.surface</a></li>
   <li><a href="../libraries/gears.timer.html">gears.timer</a></li>
@@ -83,7 +87,7 @@
   <li><a href="../libraries/objects.drawin.html">objects.drawin</a></li>
   <li><a href="../libraries/objects.key.html">objects.key</a></li>
   <li><a href="../libraries/objects.screen.html">objects.screen</a></li>
-  <li><strong>objects.window</strong></li>
+  <li><a href="../libraries/objects.window.html">objects.window</a></li>
   <li><a href="../libraries/root.html">root</a></li>
   <li><a href="../libraries/selection.html">selection</a></li>
   <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
@@ -142,17 +146,105 @@
 
 <div id="content">
 
-<h1>Module <code>objects.window</code></h1>
-<p>Windows type</p>
-<p>
-</p>
+<h1>Module <code>gears.shape</code></h1>
+<p>Module dedicated to gather common shape painters.</p>
+<p> It add the concept of &ldquo;shape&rdquo; to Awesome. A shape can be applied to a
+ background, a margin, a mask or a drawable shape bounding.</p>
+
+<p> The functions exposed by this module always take a context as first
+ parameter followed by the widget and height and additional parameters.</p>
+
+<p> The functions provided by this module only create a path in the content.
+ to actually draw the content, use cr:fill(), cr:mask(), cr:slip() or
+ cr:stroke()</p>
+
+<p> In many case, it is necessary to apply the shape using a transformation
+ such as a rotation. The preferred way to do this is to wrap the function
+ in another function calling <code>cr:rotate()</code> (or any other transformation
+ matrix)</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2011-2016 Emmanuel Lepage Vallee</li>
+        <li><strong>Release</strong>: master-g72d3065</li>
+        <li><strong>Author</strong>: Emmanuel Lepage Vallee</li>
+    </ul>
 
 
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#module.rounded_rect">module.rounded_rect (cr, width, height, radius)</a></td>
+	<td class="summary">Add a rounded rectangle to the current path</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.rounded_bar">module.rounded_bar (cr, width, height)</a></td>
+	<td class="summary">Add a rectangle delimited by 2 180 degree arcs to the path</td>
+	</tr>
+</table>
 
 <br/>
 <br/>
 
 
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "module.rounded_rect"></a>
+    <strong>module.rounded_rect (cr, width, height, radius)</strong>
+    </dt>
+    <dd>
+    Add a rounded rectangle to the current path
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo content
+        </li>
+        <li><span class="parameter">width</span>
+         The rectangle width
+        </li>
+        <li><span class="parameter">height</span>
+         The rectangle height
+        </li>
+        <li><span class="parameter">radius</span>
+         the corner radius
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "module.rounded_bar"></a>
+    <strong>module.rounded_bar (cr, width, height)</strong>
+    </dt>
+    <dd>
+    Add a rectangle delimited by 2 180 degree arcs to the path
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo content
+        </li>
+        <li><span class="parameter">width</span>
+         The rectangle width
+        </li>
+        <li><span class="parameter">height</span>
+         The rectangle height
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
 
 
 </div> <!-- id="content" -->
