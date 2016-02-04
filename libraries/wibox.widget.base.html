@@ -183,6 +183,22 @@
 	<td class="summary">Set the widget&rsquo;s height</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#base.widget:get_children">base.widget:get_children ()</a></td>
+	<td class="summary">Get all direct children widgets
+ This method should be re-implemented by the relevant widgets</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#base.widget:get_all_children">base.widget:get_all_children ()</a></td>
+	<td class="summary">Get all direct and indirect children widgets
+ This will scan all containers recursively to find widgets
+ Warning: This method it prone to stack overflow id the widget, or any of its
+ children, contain (directly or indirectly) itself.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#base.widget:index">base.widget:index (widget[, recursive[, ...]])</a></td>
+	<td class="summary">Get a widex index</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#rect_to_device_geometry">rect_to_device_geometry (cr, x, y, width, height)</a></td>
 	<td class="summary">Figure out the geometry in device coordinate space.</td>
 	</tr>
@@ -334,6 +350,87 @@
         </li>
     </ul>
 
+
+
+
+
+</dd>
+    <dt>
+    <a name = "base.widget:get_children"></a>
+    <strong>base.widget:get_children ()</strong>
+    </dt>
+    <dd>
+    Get all direct children widgets
+ This method should be re-implemented by the relevant widgets
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The children
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "base.widget:get_all_children"></a>
+    <strong>base.widget:get_all_children ()</strong>
+    </dt>
+    <dd>
+    Get all direct and indirect children widgets
+ This will scan all containers recursively to find widgets
+ Warning: This method it prone to stack overflow id the widget, or any of its
+ children, contain (directly or indirectly) itself.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The children
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "base.widget:index"></a>
+    <strong>base.widget:index (widget[, recursive[, ...]])</strong>
+    </dt>
+    <dd>
+    Get a widex index
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">widget</span>
+         The widget to look for
+        </li>
+        <li><span class="parameter">recursive</span>
+         Also check sub-widgets
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">...</span>
+         Aditional widgets to add at the end of the &ldquo;path&rdquo;
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        The index</li>
+        <li>
+        The parent layout</li>
+        <li>
+        The path between &ldquo;self&rdquo; and &ldquo;widget&rdquo;</li>
+    </ol>
 
 
 
