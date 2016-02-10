@@ -141,6 +141,8 @@
   <li><a href="../documentation/00-authors.md.html">Authors</a></li>
   <li><a href="../documentation/01-readme.md.html">Readme</a></li>
   <li><a href="../documentation/02-contributing.md.html">Contributing</a></li>
+  <li><a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a></li>
+  <li><a href="../documentation/04-new-widgets.md.html">Creating new widget</a></li>
 </ul>
 
 </div>
@@ -188,6 +190,12 @@
  This method should be re-implemented by the relevant widgets</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#base.widget:set_children">base.widget:set_children (children)</a></td>
+	<td class="summary">Replace the layout children
+ The default implementation does nothing, this must be re-implemented by
+ all layout and container widgets.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#base.widget:get_all_children">base.widget:get_all_children ()</a></td>
 	<td class="summary">Get all direct and indirect children widgets
  This will scan all containers recursively to find widgets
@@ -219,8 +227,13 @@
 	<td class="summary">Create widget placement information.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#base.widget:setup">base.widget:setup (args)</a></td>
+	<td class="summary">Set a declarative widget hierarchy description.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#make_widget">make_widget (proxy[, widget_name])</a></td>
-	<td class="summary">Create a new widget.</td>
+	<td class="summary">Create an empty widget skeleton
+ See <a href="../documentation/04-new-widget.md.html">Creating new widgets</a></td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#empty_widget">empty_widget ()</a></td>
@@ -371,6 +384,29 @@
            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The children
     </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "base.widget:set_children"></a>
+    <strong>base.widget:set_children (children)</strong>
+    </dt>
+    <dd>
+    Replace the layout children
+ The default implementation does nothing, this must be re-implemented by
+ all layout and container widgets.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">children</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table composed of valid widgets
+        </li>
+    </ul>
+
 
 
 
@@ -633,141 +669,46 @@
 
 </dd>
     <dt>
+    <a name = "base.widget:setup"></a>
+    <strong>base.widget:setup (args)</strong>
+    </dt>
+    <dd>
+    Set a declarative widget hierarchy description.
+ See <a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">args</span>
+         An array containing the widgets disposition
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "make_widget"></a>
     <strong>make_widget (proxy[, widget_name])</strong>
     </dt>
     <dd>
-    <p>Create a new widget.  All widgets have to be generated via this function so that
-the needed signals are added and mouse input handling is set up.</p>
-
-<p>The returned widget will have a :buttons member function that can be used to
-register a set of mouse button events with the widget.</p>
-
-<p>To implement your own widget, you can implement some member functions on a
-freshly-created widget. Note that all of these functions should be deterministic
-in the sense that they will show the same behavior if they are repeatedly called
-with the same arguments (same width and height). If your widget is updated and
-needs to change, suitable signals have to be emitted. This will be explained
-later.</p>
-
-<p>The first callback is :fit. This function is called to select the size of your
-widget. The arguments to this function is the available space and it should
-return its desired size. Note that this function only provides a hint which is
-not necessarily followed. The widget must also be able to draw itself at
-different sizes than the one requested.</p>
-
-<pre><code>function widget:fit(context, width, height)
-  -- Find the maximum square available
-  local m = math.min(width, height)
-  return m, m
-end
-</code></pre>
-
-<p>The next callback is :draw. As the name suggests, this function is called to
-draw the widget. The arguments to this widget are the context that the widget is
-drawn in, the cairo context on which it should be drawn and the widget&rsquo;s size.
-The cairo context is set up in such a way that the widget as its top-left corner
-at (0, 0) and its bottom-right corner at (width, height). In other words, no
-special transformation needs to be done. Note that during this callback a
-suitable clip will already be applied to the cairo context so that this callback
-will not be able to draw outside of the area that was registered for the widget
-by the layout that placed this widget. You should not call <code>cr:reset_clip()</code>, as
-redraws will not be handled correctly in this case.</p>
-
-<pre><code>function widget:draw(context, cr, width, height)
-  cr:move_to(0, 0)
-  cr:line_to(width, height)
-  cr:move_to(0, height)
-  cr:line_to(width, 0)
-  cr:stroke()
-end
-</code></pre>
-
-<p>There are two signals configured for a widget. When the result that :fit would
-return changes, the <code>widget::layout_changed</code> signal has to be emitted. If this
-actually causes layout changes, the affected areas will be redrawn. The other
-signal is <code>widget::redraw_needed</code>. This signal signals that :draw has to be
-called to redraw the widget, but it is safe to assume that :fit does still
-return the same values as before. If in doubt, you can emit both signals to be
-safe.</p>
-
-<p>If your widget only needs to draw something to the screen, the above is all that
-is needed. The following callbacks can be used when implementing layouts which
-place other widgets on the screen.</p>
-
-<p>The :layout callback is used to figure out which other widgets should be drawn
-relative to this widget. Note that it is allowed to place widgets outside of the
-extents of your own widget, for example at a negative position or at twice the
-size of this widget. Use this mechanism if your widget needs to draw outside of
-its own extents. If the result of this callback changes,
-<code>widget::layout_changed</code> has to be emitted. You can use <a href="../libraries/wibox.widget.base.html#fit_widget">fit_widget</a> to call
-the <code>:fit</code> callback of other widgets. Never call <code>:fit</code> directly!  For example,
-if you want to place another widget <code>child</code> inside of your widget, you can do it
-like this:</p>
-
-<pre><code>-- For readability
-local base = wibox.widget.base
-function widget:layout(width, height)
-  local result = {}
-  table.insert(result, base.place_widget_at(child, width/2, 0, width/2, height)
-  return result
-end
-</code></pre>
-
-<p>Finally, if you want to influence how children are drawn, there are four
-callbacks available that all get similar arguments:</p>
-
-<pre><code>function widget:before_draw_children(context, cr, width, height)
-function widget:after_draw_children(context, cr, width, height)
-function widget:before_draw_child(context, index, child, cr, width, height)
-function widget:after_draw_child(context, index, child, cr, width, height)
-</code></pre>
-
-<p>All of these are called with the same arguments as the :draw() method. Please
-note that a larger clip will be active during these callbacks that also contains
-the area of all children. These callbacks can be used to influence the way in
-which children are drawn, but they should not cause the drawing to cover a
-different area. As an example, these functions can be used to draw children
-translucently:</p>
-
-<pre><code>function widget:before_draw_children(context, cr, width, height)
-  cr:push_group()
-end
-function widget:after_draw_children(context, cr, width, height)
-  cr:pop_group_to_source()
-  cr:paint_with_alpha(0.5)
-end
-</code></pre>
-
-<p>In pseudo-code, the call sequence for the drawing callbacks during a redraw
-looks like this:</p>
-
-<pre><code>widget:draw(context, cr, width, height)
-widget:before_draw_children(context, cr, width, height)
-for child do
-    widget:before_draw_child(context, cr, child_index, child, width, height)
-    cr:save()
-    -- Draw child and all of its children recursively, taking into account the
-    -- position and size given to base.place_widget_at() in :layout().
-    cr:restore()
-    widget:after_draw_child(context, cr, child_index, child, width, height)
-end
-widget:after_draw_children(context, cr, width, height)
-</code></pre>
-
+    Create an empty widget skeleton
+ See <a href="../documentation/04-new-widget.md.html">Creating new widgets</a>
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">proxy</span>
          If this is set, the returned widget will be a proxy for this
-  widget. It will be equivalent to this widget. This means it
-  looks the same on the screen.
+   widget. It will be equivalent to this widget. This means it
+   looks the same on the screen.
         </li>
         <li><span class="parameter">widget_name</span>
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          Name of the widget.  If not set, it will be
-  set automatically via <a href="../classes/gears.object.html#gears.object:modulename">gears.object.modulename</a>.
+   set automatically via <a href="../classes/gears.object.html#gears.object:modulename">gears.object.modulename</a>.
          (<em>optional</em>)
         </li>
     </ul>
