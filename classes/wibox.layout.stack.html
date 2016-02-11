@@ -67,13 +67,13 @@
   <li><a href="../classes/wibox.layout.align.html">wibox.layout.align</a></li>
   <li><a href="../classes/wibox.layout.constraint.html">wibox.layout.constraint</a></li>
   <li><a href="../classes/wibox.layout.fixed.html">wibox.layout.fixed</a></li>
-  <li><strong>wibox.layout.flex</strong></li>
+  <li><a href="../classes/wibox.layout.flex.html">wibox.layout.flex</a></li>
   <li><a href="../classes/wibox.layout.margin.html">wibox.layout.margin</a></li>
   <li><a href="../classes/wibox.layout.mirror.html">wibox.layout.mirror</a></li>
   <li><a href="../classes/wibox.layout.ratio.html">wibox.layout.ratio</a></li>
   <li><a href="../classes/wibox.layout.rotate.html">wibox.layout.rotate</a></li>
   <li><a href="../classes/wibox.layout.scroll.html">wibox.layout.scroll</a></li>
-  <li><a href="../classes/wibox.layout.stack.html">wibox.layout.stack</a></li>
+  <li><strong>wibox.layout.stack</strong></li>
   <li><a href="../classes/wibox.widget.background.html">wibox.widget.background</a></li>
   <li><a href="../classes/wibox.widget.imagebox.html">wibox.widget.imagebox</a></li>
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
@@ -150,96 +150,94 @@
 
 <div id="content">
 
-<h1>Class <code>wibox.layout.flex</code></h1>
-<p>
-</p>
-<p>
-</p>
+<h1>Class <code>wibox.layout.stack</code></h1>
+<p>A stacked layout.</p>
+<p> This layout display widgets on top of each other. It can be used to overlay
+ a <a href="../classes/wibox.widget.textbox.html#">wibox.widget.textbox</a> on top of a <a href="../classes/awful.widget.progressbar.html#">awful.widget.progressbar</a> or manage
+ &ldquo;pages&rdquo; where only one is visible at any given moment.</p>
+
+<p> The indices are going from 1 (the bottom of the stack) up to the top of
+ the stack. The order can be changed either using <code>:swap</code> or <code>:raise</code>.</p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2010 Uli Schlachter</li>
+        <li><strong>Copyright</strong>: 2016 Emmanuel Lepage Vallee</li>
         <li><strong>Release</strong>: master-g4a45db9</li>
-        <li><strong>Author</strong>: Uli Schlachter</li>
+        <li><strong>Author</strong>: Emmanuel Lepage Vallee</li>
     </ul>
 
 
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:layout">wibox.layout.flex:layout (layout, context, width, height)</a></td>
-	<td class="summary">Layout a fixed layout.</td>
+	<td class="name" ><a href="#wibox.layout.stack:get_children">wibox.layout.stack:get_children (layout)</a></td>
+	<td class="summary">Get all direct children widgets</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:get_children">wibox.layout.flex:get_children (layout[, recursive])</a></td>
-	<td class="summary">Get all children of this layout</td>
+	<td class="name" ><a href="#wibox.layout.stack:add">wibox.layout.stack:add (layout, ...)</a></td>
+	<td class="summary">Add some widgets to the given stack layout</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:set_children">wibox.layout.flex:set_children (children)</a></td>
-	<td class="summary">Replace the layout children</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:add">wibox.layout.flex:add (layout, ...)</a></td>
-	<td class="summary">Add some widgets to the given fixed layout</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:set">wibox.layout.flex:set (index, widget2)</a></td>
+	<td class="name" ><a href="#wibox.layout.stack:set">wibox.layout.stack:set (index, widget2)</a></td>
 	<td class="summary">Set a widget at a specific index, replace the current one</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:remove">wibox.layout.flex:remove (The)</a></td>
+	<td class="name" ><a href="#wibox.layout.stack:remove">wibox.layout.stack:remove (The)</a></td>
 	<td class="summary">Remove a widget from the layout</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:remove_widgets">wibox.layout.flex:remove_widgets (widget)</a></td>
+	<td class="name" ><a href="#wibox.layout.stack:reset">wibox.layout.stack:reset (layout)</a></td>
+	<td class="summary">Reset a stack layout.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.stack:replace_widget">wibox.layout.stack:replace_widget (widget, widget2[, recursive=false])</a></td>
+	<td class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code></td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.stack:swap">wibox.layout.stack:swap (index1, index2)</a></td>
+	<td class="summary">Swap 2 widgets in a layout</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.stack:swap_widgets">wibox.layout.stack:swap_widgets (widget1, widget2[, recursive=false])</a></td>
+	<td class="summary">Swap 2 widgets in a layout
+ If widget1 is present multiple time, only the first instance is swapped</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.stack:insert">wibox.layout.stack:insert (index, widget)</a></td>
+	<td class="summary">Insert a new widget in the layout at position <code>index</code></td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.stack:remove_widgets">wibox.layout.stack:remove_widgets (widget)</a></td>
 	<td class="summary">Remove one or more widgets from the layout
  The last parameter can be a boolean, forcing a recursive seach of the
  widget(s) to remove.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:fit">wibox.layout.flex:fit (layout, context, orig_width, orig_height)</a></td>
-	<td class="summary">Fit the fixed layout into the given space</td>
+	<td class="name" ><a href="#wibox.layout.stack:set_spacing">wibox.layout.stack:set_spacing (spacing)</a></td>
+	<td class="summary">Add spacing between each layout widgets</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:reset">wibox.layout.flex:reset (layout)</a></td>
-	<td class="summary">Reset a fixed layout.</td>
+	<td class="name" ><a href="#wibox.layout.stack:layout">wibox.layout.stack:layout (context, width, height)</a></td>
+	<td class="summary">Layout a stack layout.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:replace_widget">wibox.layout.flex:replace_widget (widget, widget2[, recursive=false])</a></td>
-	<td class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code></td>
+	<td class="name" ><a href="#wibox.layout.stack:fit">wibox.layout.stack:fit (context, orig_width, orig_height)</a></td>
+	<td class="summary">Fit the stack layout into the given space</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:swap">wibox.layout.flex:swap (index1, index2)</a></td>
-	<td class="summary">Swap 2 widgets in a layout</td>
+	<td class="name" ><a href="#wibox.layout.stack:get_display_top_only">wibox.layout.stack:get_display_top_only ()</a></td>
+	<td class="summary">Get if only the first stack widget is drawn</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:swap_widgets">wibox.layout.flex:swap_widgets (widget1, widget2[, recursive=false])</a></td>
-	<td class="summary">Swap 2 widgets in a layout
- If widget1 is present multiple time, only the first instance is swapped</td>
+	<td class="name" ><a href="#wibox.layout.stack:set_display_top_only">wibox.layout.stack:set_display_top_only (top_only)</a></td>
+	<td class="summary">Only draw the first widget of the stack, ignore others</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:insert">wibox.layout.flex:insert (index, widget)</a></td>
-	<td class="summary">Insert a new widget in the layout at position <code>index</code></td>
+	<td class="name" ><a href="#wibox.layout.stack:raise">wibox.layout.stack:raise (index)</a></td>
+	<td class="summary">Raise a widget at <code>index</code> to the top of the stack</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:layout">wibox.layout.flex:layout (context, width, height)</a></td>
-	<td class="summary">Layout a flex layout.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:fit">wibox.layout.flex:fit (context, orig_width, orig_height)</a></td>
-	<td class="summary">Fit the flex layout into the given space.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:set_max_widget_size">wibox.layout.flex:set_max_widget_size (val)</a></td>
-	<td class="summary">Set the maximum size the widgets in this layout will take (that is,
- maximum width for horizontal and maximum height for vertical).</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:horizontal">wibox.layout.flex:horizontal (...)</a></td>
-	<td class="summary">Returns a new horizontal flex layout.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.flex:vertical">wibox.layout.flex:vertical (...)</a></td>
-	<td class="summary">Returns a new vertical flex layout.</td>
+	<td class="name" ><a href="#wibox.layout.stack:raise_widget">wibox.layout.stack:raise_widget (widget[, recursive=false])</a></td>
+	<td class="summary">Raise the first instance of <code>widget</code></td>
 	</tr>
 </table>
 
@@ -251,50 +249,17 @@
 
     <dl class="function">
     <dt>
-    <a name = "wibox.layout.flex:layout"></a>
-    <strong>wibox.layout.flex:layout (layout, context, width, height)</strong>
+    <a name = "wibox.layout.stack:get_children"></a>
+    <strong>wibox.layout.stack:get_children (layout)</strong>
     </dt>
     <dd>
-    Layout a fixed layout.  Each widget gets just the space it asks for.
+    Get all direct children widgets
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">layout</span>
          The layout you are modifying.
-        </li>
-        <li><span class="parameter">context</span>
-         The context in which we are drawn.
-        </li>
-        <li><span class="parameter">width</span>
-         The available width.
-        </li>
-        <li><span class="parameter">height</span>
-         The available height.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.flex:get_children"></a>
-    <strong>wibox.layout.flex:get_children (layout[, recursive])</strong>
-    </dt>
-    <dd>
-    Get all children of this layout
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">layout</span>
-         The layout you are modifying.
-        </li>
-        <li><span class="parameter">recursive</span>
-         Also add all widgets of childrens
-         (<em>optional</em>)
         </li>
     </ul>
 
@@ -309,32 +274,11 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:set_children"></a>
-    <strong>wibox.layout.flex:set_children (children)</strong>
+    <a name = "wibox.layout.stack:add"></a>
+    <strong>wibox.layout.stack:add (layout, ...)</strong>
     </dt>
     <dd>
-    Replace the layout children
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A table composed of valid widgets
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.flex:add"></a>
-    <strong>wibox.layout.flex:add (layout, ...)</strong>
-    </dt>
-    <dd>
-    Add some widgets to the given fixed layout
+    Add some widgets to the given stack layout
 
 
     <h3>Parameters:</h3>
@@ -354,8 +298,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:set"></a>
-    <strong>wibox.layout.flex:set (index, widget2)</strong>
+    <a name = "wibox.layout.stack:set"></a>
+    <strong>wibox.layout.stack:set (index, widget2)</strong>
     </dt>
     <dd>
     Set a widget at a specific index, replace the current one
@@ -384,8 +328,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:remove"></a>
-    <strong>wibox.layout.flex:remove (The)</strong>
+    <a name = "wibox.layout.stack:remove"></a>
+    <strong>wibox.layout.stack:remove (The)</strong>
     </dt>
     <dd>
     Remove a widget from the layout
@@ -411,68 +355,11 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:remove_widgets"></a>
-    <strong>wibox.layout.flex:remove_widgets (widget)</strong>
+    <a name = "wibox.layout.stack:reset"></a>
+    <strong>wibox.layout.stack:reset (layout)</strong>
     </dt>
     <dd>
-    Remove one or more widgets from the layout
- The last parameter can be a boolean, forcing a recursive seach of the
- widget(s) to remove.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">widget</span>
-         &hellip; Widgets that should be removed (must at least be one)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.flex:fit"></a>
-    <strong>wibox.layout.flex:fit (layout, context, orig_width, orig_height)</strong>
-    </dt>
-    <dd>
-    Fit the fixed layout into the given space
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">layout</span>
-         The layout you are modifying.
-        </li>
-        <li><span class="parameter">context</span>
-         The context in which we are fit.
-        </li>
-        <li><span class="parameter">orig_width</span>
-         The available width.
-        </li>
-        <li><span class="parameter">orig_height</span>
-         The available height.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.flex:reset"></a>
-    <strong>wibox.layout.flex:reset (layout)</strong>
-    </dt>
-    <dd>
-    Reset a fixed layout.  This removes all widgets from the layout.
+    Reset a stack layout.  This removes all widgets from the layout.
 
 
     <h3>Parameters:</h3>
@@ -488,8 +375,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:replace_widget"></a>
-    <strong>wibox.layout.flex:replace_widget (widget, widget2[, recursive=false])</strong>
+    <a name = "wibox.layout.stack:replace_widget"></a>
+    <strong>wibox.layout.stack:replace_widget (widget, widget2[, recursive=false])</strong>
     </dt>
     <dd>
     Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>
@@ -522,8 +409,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:swap"></a>
-    <strong>wibox.layout.flex:swap (index1, index2)</strong>
+    <a name = "wibox.layout.stack:swap"></a>
+    <strong>wibox.layout.stack:swap (index1, index2)</strong>
     </dt>
     <dd>
     Swap 2 widgets in a layout
@@ -553,8 +440,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:swap_widgets"></a>
-    <strong>wibox.layout.flex:swap_widgets (widget1, widget2[, recursive=false])</strong>
+    <a name = "wibox.layout.stack:swap_widgets"></a>
+    <strong>wibox.layout.stack:swap_widgets (widget1, widget2[, recursive=false])</strong>
     </dt>
     <dd>
     Swap 2 widgets in a layout
@@ -588,8 +475,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:insert"></a>
-    <strong>wibox.layout.flex:insert (index, widget)</strong>
+    <a name = "wibox.layout.stack:insert"></a>
+    <strong>wibox.layout.stack:insert (index, widget)</strong>
     </dt>
     <dd>
     Insert a new widget in the layout at position <code>index</code>
@@ -618,11 +505,59 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:layout"></a>
-    <strong>wibox.layout.flex:layout (context, width, height)</strong>
+    <a name = "wibox.layout.stack:remove_widgets"></a>
+    <strong>wibox.layout.stack:remove_widgets (widget)</strong>
     </dt>
     <dd>
-    Layout a flex layout.  Each widget gets an equal share of the available space.
+    Remove one or more widgets from the layout
+ The last parameter can be a boolean, forcing a recursive seach of the
+ widget(s) to remove.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">widget</span>
+         &hellip; Widgets that should be removed (must at least be one)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.stack:set_spacing"></a>
+    <strong>wibox.layout.stack:set_spacing (spacing)</strong>
+    </dt>
+    <dd>
+    Add spacing between each layout widgets
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">spacing</span>
+         Spacing between widgets.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.stack:layout"></a>
+    <strong>wibox.layout.stack:layout (context, width, height)</strong>
+    </dt>
+    <dd>
+    Layout a stack layout.  Each widget get drawn on top of each other
 
 
     <h3>Parameters:</h3>
@@ -644,11 +579,11 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:fit"></a>
-    <strong>wibox.layout.flex:fit (context, orig_width, orig_height)</strong>
+    <a name = "wibox.layout.stack:fit"></a>
+    <strong>wibox.layout.stack:fit (context, orig_width, orig_height)</strong>
     </dt>
     <dd>
-    Fit the flex layout into the given space.
+    Fit the stack layout into the given space
 
 
     <h3>Parameters:</h3>
@@ -670,18 +605,37 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:set_max_widget_size"></a>
-    <strong>wibox.layout.flex:set_max_widget_size (val)</strong>
+    <a name = "wibox.layout.stack:get_display_top_only"></a>
+    <strong>wibox.layout.stack:get_display_top_only ()</strong>
     </dt>
     <dd>
-    Set the maximum size the widgets in this layout will take (that is,
- maximum width for horizontal and maximum height for vertical).
+    Get if only the first stack widget is drawn
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        If the only the first stack widget is drawn
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.stack:set_display_top_only"></a>
+    <strong>wibox.layout.stack:set_display_top_only (top_only)</strong>
+    </dt>
+    <dd>
+    Only draw the first widget of the stack, ignore others
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">val</span>
-         The maximum size of the widget.
+        <li><span class="parameter">top_only</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Only draw the top stack widget
         </li>
     </ul>
 
@@ -691,19 +645,18 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:horizontal"></a>
-    <strong>wibox.layout.flex:horizontal (...)</strong>
+    <a name = "wibox.layout.stack:raise"></a>
+    <strong>wibox.layout.stack:raise (index)</strong>
     </dt>
     <dd>
-    Returns a new horizontal flex layout.  A flex layout shares the available space
- equally among all widgets. Widgets can be added via :add(widget).
+    Raise a widget at <code>index</code> to the top of the stack
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">...</span>
-            <span class="types"><span class="type">widget</span></span>
-         Widgets that should be added to the layout.
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">number</span></span>
+         the widget index to raise
         </li>
     </ul>
 
@@ -713,19 +666,23 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.flex:vertical"></a>
-    <strong>wibox.layout.flex:vertical (...)</strong>
+    <a name = "wibox.layout.stack:raise_widget"></a>
+    <strong>wibox.layout.stack:raise_widget (widget[, recursive=false])</strong>
     </dt>
     <dd>
-    Returns a new vertical flex layout.  A flex layout shares the available space
- equally among all widgets. Widgets can be added via :add(widget).
+    Raise the first instance of <code>widget</code>
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">...</span>
-            <span class="types"><span class="type">widget</span></span>
-         Widgets that should be added to the layout.
+        <li><span class="parameter">widget</span>
+         The widget to raise
+        </li>
+        <li><span class="parameter">recursive</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Also look deeper in the hierarchy to
+   find the widget
+         (<em>default</em> false)
         </li>
     </ul>
 
