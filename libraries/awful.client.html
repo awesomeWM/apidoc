@@ -196,7 +196,7 @@
 	<td class="summary">Update client focus history.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#client.focus.history.get">client.focus.history.get (screen, idx, filter)</a></td>
+	<td class="name" ><a href="#client.focus.history.get">client.focus.history.get (s, idx, filter)</a></td>
 	<td class="summary">Get the latest focused client for a screen in history.</td>
 	</tr>
 	<tr>
@@ -204,15 +204,15 @@
 	<td class="summary">Focus the previous client in history.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#visible">visible ([screen[, stacked=false]])</a></td>
+	<td class="name" ><a href="#visible">visible ([s[, stacked=false]])</a></td>
 	<td class="summary">Get visible clients from a screen.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#tiled">tiled (screen[, stacked=false])</a></td>
+	<td class="name" ><a href="#tiled">tiled (s[, stacked=false])</a></td>
 	<td class="summary">Get visible and tiled clients</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#next">next (i[, c[, stacked=false]])</a></td>
+	<td class="name" ><a href="#next">next (i[, sel[, stacked=false]])</a></td>
 	<td class="summary">Get a client by its relative index to another client.</td>
 	</tr>
 	<tr>
@@ -232,7 +232,7 @@
 	<td class="summary">Swap a client with another client in the given direction.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#client.swap.global_bydirection">client.swap.global_bydirection (dir[, c])</a></td>
+	<td class="name" ><a href="#client.swap.global_bydirection">client.swap.global_bydirection (dir[, sel])</a></td>
 	<td class="summary">Swap a client with another client in the given direction.</td>
 	</tr>
 	<tr>
@@ -345,7 +345,7 @@
 	<td class="summary">Set a client property.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#client.property.persist">client.property.persist (prop, type)</a></td>
+	<td class="name" ><a href="#client.property.persist">client.property.persist (prop, kind)</a></td>
 	<td class="summary">Set a client property to be persistent across restarts (via X properties).</td>
 	</tr>
 	<tr>
@@ -558,7 +558,7 @@
 </dd>
     <dt>
     <a name = "client.focus.history.get"></a>
-    <strong>client.focus.history.get (screen, idx, filter)</strong>
+    <strong>client.focus.history.get (s, idx, filter)</strong>
     </dt>
     <dd>
     Get the latest focused client for a screen in history.
@@ -566,7 +566,7 @@
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">screen</span>
+        <li><span class="parameter">s</span>
             <span class="types"><span class="type">int</span></span>
          The screen number to look for.
         </li>
@@ -610,7 +610,7 @@
 </dd>
     <dt>
     <a name = "visible"></a>
-    <strong>visible ([screen[, stacked=false]])</strong>
+    <strong>visible ([s[, stacked=false]])</strong>
     </dt>
     <dd>
     Get visible clients from a screen.
@@ -618,7 +618,7 @@
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">screen</span>
+        <li><span class="parameter">s</span>
             <span class="types"><span class="type">integer</span></span>
          The screen number, or nil for all screens.
          (<em>optional</em>)
@@ -643,7 +643,7 @@
 </dd>
     <dt>
     <a name = "tiled"></a>
-    <strong>tiled (screen[, stacked=false])</strong>
+    <strong>tiled (s[, stacked=false])</strong>
     </dt>
     <dd>
     Get visible and tiled clients
@@ -651,7 +651,7 @@
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">screen</span>
+        <li><span class="parameter">s</span>
             <span class="types"><span class="type">integer</span></span>
          The screen number, or nil for all screens.
         </li>
@@ -675,7 +675,7 @@
 </dd>
     <dt>
     <a name = "next"></a>
-    <strong>next (i[, c[, stacked=false]])</strong>
+    <strong>next (i[, sel[, stacked=false]])</strong>
     </dt>
     <dd>
     Get a client by its relative index to another client.
@@ -688,7 +688,7 @@
             <span class="types"><span class="type">int</span></span>
          The index.  Use 1 to get the next, -1 to get the previous.
         </li>
-        <li><span class="parameter">c</span>
+        <li><span class="parameter">sel</span>
             <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
          The client.
          (<em>optional</em>)
@@ -837,7 +837,7 @@
 </dd>
     <dt>
     <a name = "client.swap.global_bydirection"></a>
-    <strong>client.swap.global_bydirection (dir[, c])</strong>
+    <strong>client.swap.global_bydirection (dir[, sel])</strong>
     </dt>
     <dd>
     Swap a client with another client in the given direction.  Swaps across screens.
@@ -848,7 +848,7 @@
         <li><span class="parameter">dir</span>
          The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
         </li>
-        <li><span class="parameter">c</span>
+        <li><span class="parameter">sel</span>
             <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
          The client.
          (<em>optional</em>)
@@ -1536,7 +1536,7 @@
 </dd>
     <dt>
     <a name = "client.property.persist"></a>
-    <strong>client.property.persist (prop, type)</strong>
+    <strong>client.property.persist (prop, kind)</strong>
     </dt>
     <dd>
     Set a client property to be persistent across restarts (via X properties).
@@ -1547,7 +1547,7 @@
         <li><span class="parameter">prop</span>
          The property name.
         </li>
-        <li><span class="parameter">type</span>
+        <li><span class="parameter">kind</span>
          The type (used for register_xproperty).
    One of &ldquo;string&rdquo;, &ldquo;number&rdquo; or &ldquo;boolean&rdquo;.
         </li>
