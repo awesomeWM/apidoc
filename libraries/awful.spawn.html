@@ -52,7 +52,6 @@
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
   <li><a href="../libraries/awful.menu.html">awful.menu</a></li>
   <li><a href="../libraries/awful.mouse.html">awful.mouse</a></li>
-  <li><a href="../libraries/awful.mouse.finder.html">awful.mouse.finder</a></li>
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
@@ -176,6 +175,10 @@
 	<tr>
 	<td class="name" ><a href="#with_line_callback">with_line_callback (cmd, callbacks)</a></td>
 	<td class="summary">Spawn a program and asynchronously and capture its output line by line.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#easy_async">easy_async (cmd, callback)</a></td>
+	<td class="summary">Asynchronously spawn a program and capture its output.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#read_lines">read_lines (input_stream, line_callback[, done_callback[, close=false]])</a></td>
@@ -330,6 +333,66 @@
     </ol>
 
 
+
+
+</dd>
+    <dt>
+    <a name = "easy_async"></a>
+    <strong>easy_async (cmd, callback)</strong>
+    </dt>
+    <dd>
+    Asynchronously spawn a program and capture its output.
+ (wraps <a href="../libraries/awful.spawn.html#with_line_callback">spawn.with_line_callback</a>).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cmd</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The command.
+        </li>
+        <li><span class="parameter">callback</span> Function with the following arguments
+        <ul>
+        <li><span class="parameter">stdout</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Output on stdout.
+        </li>
+        <li><span class="parameter">stderr</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Output on stderr.
+        </li>
+        <li><span class="parameter">exitreason</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Exit Reason.
+ The reason can be &ldquo;exit&rdquo; or &ldquo;signal&rdquo;.
+        </li>
+        <li><span class="parameter">exitcode</span>
+            <span class="types"><span class="type">integer</span></span>
+         Exit code.
+ For &ldquo;exit&rdquo; reason it&rsquo;s the exit code.
+ For &ldquo;signal&rdquo; reason — the signal causing process termination.
+        </li>
+        </li></ul>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Integer</span></span>
+        the PID of the forked process.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        Error message.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.spawn.html#with_line_callback">spawn.with_line_callback</a>
+    </ul>
 
 
 </dd>
