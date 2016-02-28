@@ -49,7 +49,7 @@
   <li><a href="../classes/awful.widget.taglist.html">awful.widget.taglist</a></li>
   <li><a href="../classes/awful.widget.tasklist.html">awful.widget.tasklist</a></li>
   <li><a href="../classes/awful.widget.textclock.html">awful.widget.textclock</a></li>
-  <li><a href="../classes/awful.widget.watch.html">awful.widget.watch</a></li>
+  <li><strong>awful.widget.watch</strong></li>
   <li><a href="../classes/button.html">button</a></li>
   <li><a href="../classes/client.html">client</a></li>
   <li><a href="../classes/drawable.html">drawable</a></li>
@@ -76,7 +76,7 @@
   <li><a href="../classes/wibox.layout.scroll.html">wibox.layout.scroll</a></li>
   <li><a href="../classes/wibox.layout.stack.html">wibox.layout.stack</a></li>
   <li><a href="../classes/wibox.widget.background.html">wibox.widget.background</a></li>
-  <li><strong>wibox.widget.imagebox</strong></li>
+  <li><a href="../classes/wibox.widget.imagebox.html">wibox.widget.imagebox</a></li>
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../classes/xproperties.html">xproperties</a></li>
@@ -149,42 +149,48 @@
 
 <div id="content">
 
-<h1>Class <code>wibox.widget.imagebox</code></h1>
-<p>
-</p>
-<p>
-</p>
+<h1>Class <code>awful.widget.watch</code></h1>
+<p>Watch widget.</p>
+<p> Here is an example of simple temperature widget which will update each 15
+ seconds implemented in two different ways.
+ The first, simpler one, will just display the return command output
+ (so output is stripped by shell commands).
+ In the other example <code>sensors</code> returns to the widget its full output
+ and it&rsquo;s trimmed in the widget callback function:</p>
+
+<pre>
+<span class="number">211</span>             mytextclock,
+<span class="number">212</span>             wibox.widget.textbox(<span class="string">'  |  '</span>),
+<span class="number">213</span>             <span class="comment">-- one way to do that:
+</span><span class="number">214</span>             awful.widget.watch(<span class="string">'bash -c "sensors | grep temp1"'</span>, <span class="number">15</span>),
+<span class="number">215</span>             <span class="comment">-- another way:
+</span><span class="number">216</span>             awful.widget.watch(<span class="string">'sensors'</span>, <span class="number">15</span>, <span class="keyword">function</span>(widget, stdout)
+<span class="number">217</span>               <span class="keyword">for</span> line <span class="keyword">in</span> stdout:gmatch(<span class="string">"[^\r\n]+"</span>) <span class="keyword">do</span>
+<span class="number">218</span>                 <span class="keyword">if</span> line:match(<span class="string">"temp1"</span>) <span class="keyword">then</span>
+<span class="number">219</span>                   widget:set_text(line)
+<span class="number">220</span>                   <span class="keyword">return</span>
+<span class="number">221</span>                 <span class="keyword">end</span>
+<span class="number">222</span>               <span class="keyword">end</span>
+<span class="number">223</span>             <span class="keyword">end</span>),
+<span class="number">224</span>             mylayoutbox[s],
+</pre>
+
+
+<p> <img src="../images/awful_widget_watch.png" alt="Example screenshot" /></p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2010 Uli Schlachter</li>
+        <li><strong>Copyright</strong>: 2015, 2016 Benjamin Petrenko, Yauheni Kirylau</li>
         <li><strong>Release</strong>: master-gf9d1569</li>
-        <li><strong>Author</strong>: Uli Schlachter</li>
+        <li><strong>Author</strong>: Benjamin Petrenko,Yauheni Kirylau</li>
     </ul>
 
 
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.widget.imagebox:draw">wibox.widget.imagebox:draw (_, cr, width, height)</a></td>
-	<td class="summary">Draw an imagebox with the given cairo context in the given geometry.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.imagebox:fit">wibox.widget.imagebox:fit (_, width, height)</a></td>
-	<td class="summary">Fit the imagebox into the given geometry</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.imagebox:set_image">wibox.widget.imagebox:set_image (image)</a></td>
-	<td class="summary">Set an imagebox' image</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.imagebox:set_clip_shape">wibox.widget.imagebox:set_clip_shape (clip_shape)</a></td>
-	<td class="summary">Set a clip shape for this imagebox
- A clip shape define an area where the content is displayed and one where it
- is trimmed.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.imagebox:set_resize">wibox.widget.imagebox:set_resize (allowed)</a></td>
-	<td class="summary">Should the image be resized to fit into the available space?</td>
+	<td class="name" ><a href="#awful.widget.watch:new">awful.widget.watch:new (command[, timeout=5][, callback], base_widget)</a></td>
+	<td class="summary">Create a textbox that shows the output of a command
+ and updates it at a given time interval.</td>
 	</tr>
 </table>
 
@@ -196,133 +202,70 @@
 
     <dl class="function">
     <dt>
-    <a name = "wibox.widget.imagebox:draw"></a>
-    <strong>wibox.widget.imagebox:draw (_, cr, width, height)</strong>
+    <a name = "awful.widget.watch:new"></a>
+    <strong>awful.widget.watch:new (command[, timeout=5][, callback], base_widget)</strong>
     </dt>
     <dd>
-    Draw an imagebox with the given cairo context in the given geometry.
+    Create a textbox that shows the output of a command
+ and updates it at a given time interval.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">_</span>
-
-
+        <li><span class="parameter">command</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The command.
         </li>
-        <li><span class="parameter">cr</span>
-
-
+        <li><span class="parameter">timeout</span>
+            <span class="types"><span class="type">integer</span></span>
+         The time interval at which the textbox
+ will be updated.
+         (<em>default</em> 5)
         </li>
-        <li><span class="parameter">width</span>
+        <li><span class="parameter">callback</span><p> The function that will be called after
+ the command output will be received. it is shown in the textbox.
+ Defaults to:</p>
 
+<pre><code> function(widget, stdout, stderr, exitreason, exitcode)
+     widget:set_text(stdout)
+ end
+</code></pre>
 
+        <ul>
+        <li><span class="parameter">widget</span>
+         Base widget instance.
         </li>
-        <li><span class="parameter">height</span>
-
-
+        <li><span class="parameter">stdout</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Output on stdout.
         </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.imagebox:fit"></a>
-    <strong>wibox.widget.imagebox:fit (_, width, height)</strong>
-    </dt>
-    <dd>
-    Fit the imagebox into the given geometry
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">_</span>
-
-
+        <li><span class="parameter">stderr</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Output on stderr.
         </li>
-        <li><span class="parameter">width</span>
-
-
+        <li><span class="parameter">exitreason</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Exit Reason.
+ The reason can be &ldquo;exit&rdquo; or &ldquo;signal&rdquo;.
         </li>
-        <li><span class="parameter">height</span>
-
-
+        <li><span class="parameter">exitcode</span>
+            <span class="types"><span class="type">integer</span></span>
+         Exit code.
+ For &ldquo;exit&rdquo; reason it&rsquo;s the exit code.
+ For &ldquo;signal&rdquo; reason — the signal causing process termination.
         </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.imagebox:set_image"></a>
-    <strong>wibox.widget.imagebox:set_image (image)</strong>
-    </dt>
-    <dd>
-    Set an imagebox' image
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">image</span>
-         Either a string or a cairo image surface. A string is
-   interpreted as the path to a png image file.
+        </li></ul>
+        <li><span class="parameter">base_widget</span>
+         Base widget.
+         (<em>default</em> wibox.widget.textbox())
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        true on success, false if the image cannot be used
+        The widget used by this watch
     </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.imagebox:set_clip_shape"></a>
-    <strong>wibox.widget.imagebox:set_clip_shape (clip_shape)</strong>
-    </dt>
-    <dd>
-    Set a clip shape for this imagebox
- A clip shape define an area where the content is displayed and one where it
- is trimmed. </p>
-
-<p> Any other parameters will be passed to the clip shape function
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">clip_shape</span>
-         A <code>gears_shape</code> compatible shape function
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.imagebox:set_resize"></a>
-    <strong>wibox.widget.imagebox:set_resize (allowed)</strong>
-    </dt>
-    <dd>
-    Should the image be resized to fit into the available space?
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">allowed</span>
-         If false, the image will be clipped, else it will be resized
-   to fit into the available space.
-        </li>
-    </ul>
-
 
 
 
