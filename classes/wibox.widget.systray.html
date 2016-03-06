@@ -70,7 +70,7 @@
   <li><a href="../classes/wibox.layout.fixed.html">wibox.layout.fixed</a></li>
   <li><a href="../classes/wibox.layout.flex.html">wibox.layout.flex</a></li>
   <li><a href="../classes/wibox.layout.margin.html">wibox.layout.margin</a></li>
-  <li><strong>wibox.layout.mirror</strong></li>
+  <li><a href="../classes/wibox.layout.mirror.html">wibox.layout.mirror</a></li>
   <li><a href="../classes/wibox.layout.ratio.html">wibox.layout.ratio</a></li>
   <li><a href="../classes/wibox.layout.rotate.html">wibox.layout.rotate</a></li>
   <li><a href="../classes/wibox.layout.scroll.html">wibox.layout.scroll</a></li>
@@ -78,7 +78,7 @@
   <li><a href="../classes/wibox.widget.background.html">wibox.widget.background</a></li>
   <li><a href="../classes/wibox.widget.imagebox.html">wibox.widget.imagebox</a></li>
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
-  <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
+  <li><strong>wibox.widget.systray</strong></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../classes/xproperties.html">xproperties</a></li>
 </ul>
@@ -151,53 +151,36 @@
 
 <div id="content">
 
-<h1>Class <code>wibox.layout.mirror</code></h1>
+<h1>Class <code>wibox.widget.systray</code></h1>
 <p>
 </p>
 <p>
 </p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2012 dodo</li>
+        <li><strong>Copyright</strong>: 2010 Uli Schlachter</li>
         <li><strong>Release</strong>: master-gd1e2cfa</li>
-        <li><strong>Author</strong>: dodo</li>
+        <li><strong>Author</strong>: Uli Schlachter</li>
     </ul>
 
 
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.layout.mirror:layout">wibox.layout.mirror:layout (_, width, height)</a></td>
-	<td class="summary">Layout this layout</td>
+	<td class="name" ><a href="#wibox.widget.systray:set_base_size">wibox.widget.systray:set_base_size (size)</a></td>
+	<td class="summary">Set the size of a single icon.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.mirror:fit">wibox.layout.mirror:fit (context, ...)</a></td>
-	<td class="summary">Fit this layout into the given area</td>
+	<td class="name" ><a href="#wibox.widget.systray:set_horizontal">wibox.widget.systray:set_horizontal (horiz)</a></td>
+	<td class="summary">Decide between horizontal or vertical display.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.mirror:set_widget">wibox.layout.mirror:set_widget (widget)</a></td>
-	<td class="summary">Set the widget that this layout mirrors.</td>
+	<td class="name" ><a href="#wibox.widget.systray:set_reverse">wibox.widget.systray:set_reverse (rev)</a></td>
+	<td class="summary">Should the systray icons be displayed in reverse order?</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.mirror:get_children">wibox.layout.mirror:get_children ()</a></td>
-	<td class="summary">Get the number of children element</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.mirror:set_children">wibox.layout.mirror:set_children (children)</a></td>
-	<td class="summary">Replace the layout children
- This layout only accept one children, all others will be ignored</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.mirror:reset">wibox.layout.mirror:reset ()</a></td>
-	<td class="summary">Reset this layout.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.mirror:set_reflection">wibox.layout.mirror:set_reflection (reflection)</a></td>
-	<td class="summary">Set the reflection of this mirror layout.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.mirror:get_reflection">wibox.layout.mirror:get_reflection ()</a></td>
-	<td class="summary">Get the reflection of this mirror layout.</td>
+	<td class="name" ><a href="#wibox.widget.systray:set_screen">wibox.widget.systray:set_screen (s)</a></td>
+	<td class="summary">Set the screen that the systray should be displayed on.</td>
 	</tr>
 </table>
 
@@ -209,26 +192,20 @@
 
     <dl class="function">
     <dt>
-    <a name = "wibox.layout.mirror:layout"></a>
-    <strong>wibox.layout.mirror:layout (_, width, height)</strong>
+    <a name = "wibox.widget.systray:set_base_size"></a>
+    <strong>wibox.widget.systray:set_base_size (size)</strong>
     </dt>
     <dd>
-    Layout this layout
+    Set the size of a single icon.
+ If this is set to nil, then the size is picked dynamically based on the
+ available space. Otherwise, any single icon has a size of <code>size</code>x<code>size</code>.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">_</span>
-
-
-        </li>
-        <li><span class="parameter">width</span>
-
-
-        </li>
-        <li><span class="parameter">height</span>
-
-
+        <li><span class="parameter">size</span>
+            <span class="types"><span class="type">integer</span> or <span class="type">nil</span></span>
+         The base size
         </li>
     </ul>
 
@@ -238,22 +215,18 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.mirror:fit"></a>
-    <strong>wibox.layout.mirror:fit (context, ...)</strong>
+    <a name = "wibox.widget.systray:set_horizontal"></a>
+    <strong>wibox.widget.systray:set_horizontal (horiz)</strong>
     </dt>
     <dd>
-    Fit this layout into the given area
+    Decide between horizontal or vertical display.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">context</span>
-
-
-        </li>
-        <li><span class="parameter">...</span>
-
-
+        <li><span class="parameter">horiz</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use horizontal mode?
         </li>
     </ul>
 
@@ -263,17 +236,18 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.mirror:set_widget"></a>
-    <strong>wibox.layout.mirror:set_widget (widget)</strong>
+    <a name = "wibox.widget.systray:set_reverse"></a>
+    <strong>wibox.widget.systray:set_reverse (rev)</strong>
     </dt>
     <dd>
-    Set the widget that this layout mirrors.
+    Should the systray icons be displayed in reverse order?
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">widget</span>
-         The widget to mirror
+        <li><span class="parameter">rev</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Display in reverse order
         </li>
     </ul>
 
@@ -283,95 +257,24 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.mirror:get_children"></a>
-    <strong>wibox.layout.mirror:get_children ()</strong>
+    <a name = "wibox.widget.systray:set_screen"></a>
+    <strong>wibox.widget.systray:set_screen (s)</strong>
     </dt>
     <dd>
-    Get the number of children element
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        The children
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.mirror:set_children"></a>
-    <strong>wibox.layout.mirror:set_children (children)</strong>
-    </dt>
-    <dd>
-    Replace the layout children
- This layout only accept one children, all others will be ignored
+    Set the screen that the systray should be displayed on.
+ This can either be a screen, in which case the systray will be displayed on
+ exactly that screen, or the string <code>&quot;primary&quot;</code>, in which case it will be
+ visible on the primary screen. The default value is &ldquo;primary&rdquo;.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A table composed of valid widgets
+        <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a> or <span class="type">"primary"</span></span>
+         The screen to display on.
         </li>
     </ul>
 
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.mirror:reset"></a>
-    <strong>wibox.layout.mirror:reset ()</strong>
-    </dt>
-    <dd>
-    Reset this layout.  The widget will be removed and the axes reset.
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.mirror:set_reflection"></a>
-    <strong>wibox.layout.mirror:set_reflection (reflection)</strong>
-    </dt>
-    <dd>
-    Set the reflection of this mirror layout.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">reflection</span>
-         a table which contains new values for horizontal and/or vertical (booleans)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.mirror:get_reflection"></a>
-    <strong>wibox.layout.mirror:get_reflection ()</strong>
-    </dt>
-    <dd>
-    Get the reflection of this mirror layout.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        a table of booleans with the keys &ldquo;horizontal&rdquo;, &ldquo;vertical&rdquo;.
-    </ol>
 
 
 
