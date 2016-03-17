@@ -160,8 +160,8 @@
  parameter followed by the widget and height and additional parameters.</p>
 
 <p> The functions provided by this module only create a path in the content.
- to actually draw the content, use cr:fill(), cr:mask(), cr:slip() or
- cr:stroke()</p>
+ to actually draw the content, use <code>cr:fill()</code>, <code>cr:mask()</code>, <code>cr:clip()</code> or
+ <code>cr:stroke()</code></p>
 
 <p> In many case, it is necessary to apply the shape using a transformation
  such as a rotation. The preferred way to do this is to wrap the function
@@ -170,7 +170,7 @@
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2011-2016 Emmanuel Lepage Vallee</li>
-        <li><strong>Release</strong>: master-g491f17f</li>
+        <li><strong>Release</strong>: master-g1fff8cc</li>
         <li><strong>Author</strong>: Emmanuel Lepage Vallee</li>
     </ul>
 
@@ -183,31 +183,64 @@
 	</tr>
 	<tr>
 	<td class="name" ><a href="#module.rounded_bar">module.rounded_bar (cr, width, height)</a></td>
-	<td class="summary">Add a rectangle delimited by 2 180 degree arcs to the path</td>
+	<td class="summary">Add a rectangle delimited by 2 180 degree arcs to the path.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.partially_rounded_rect">module.partially_rounded_rect (cr, width, height, tl, tr, br, bl, rad)</a></td>
+	<td class="summary">A rounded rect with only some of the corners rounded.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#module.infobubble">module.infobubble (cr, width, height[, corner_radius=5[, arrow_size=10[, arrow_position=width/2 - arrow_size/2]]])</a></td>
-	<td class="summary">A rounded rectangle with a triangle at the top</td>
+	<td class="summary">A rounded rectangle with a triangle at the top.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#module.rectangular_tag">module.rectangular_tag (cr, width, height)</a></td>
-	<td class="summary">A rectangle terminated by an arrow</td>
+	<td class="name" ><a href="#module.rectangular_tag">module.rectangular_tag (cr, width, height[, arrow_length=height/2])</a></td>
+	<td class="summary">A rectangle terminated by an arrow.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#module.arrow">module.arrow (cr, width, height[, head_width=head_width[, shaft_width=width /2[, shaft_length=height/2]]])</a></td>
-	<td class="summary">A simple arrow shape</td>
+	<td class="summary">A simple arrow shape.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#module.hexagon">module.hexagon (cr, width, height)</a></td>
-	<td class="summary">A squeezed hexagon filling the rectangle</td>
+	<td class="summary">A squeezed hexagon filling the rectangle.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#module.powerline">module.powerline (cr, width, height[, arrow_depth=height/2])</a></td>
-	<td class="summary">Double arrow popularized by the vim-powerline module</td>
+	<td class="summary">Double arrow popularized by the vim-powerline module.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#module.isosceles_triangle">module.isosceles_triangle (cr, width, height)</a></td>
-	<td class="summary">An isosceles triangle</td>
+	<td class="summary">An isosceles triangle.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.cross">module.cross (cr, width, height[, thickness=width/3])</a></td>
+	<td class="summary">A cross (<strong>+</strong>) symbol.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.octogon">module.octogon (cr, width, height, corner_radius)</a></td>
+	<td class="summary">A similar shape to the <a href="../libraries/gears.shape.html#module.rounded_rect">rounded_rect</a>, but with sharp corners.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.circle">module.circle (cr, width, height)</a></td>
+	<td class="summary">A circle shape.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.rectangle">module.rectangle (cr, width, height)</a></td>
+	<td class="summary">A simple rectangle.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.parallelogram">module.parallelogram (cr, width, height[, base_width=width/3])</a></td>
+	<td class="summary">A diagonal parallelogram with the bottom left corner at x=0 and top right
+ at x=width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.losange">module.losange (cr, width, height)</a></td>
+	<td class="summary">A losange.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.radial_progress">module.radial_progress (cr, w, h, percent, hide_left)</a></td>
+	<td class="summary">A partial rounded bar.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#module.transform">module.transform (shape)</a></td>
@@ -228,7 +261,9 @@
     </dt>
     <dd>
     Add a rounded rectangle to the current path.
- Note: If the radius is bigger than either half side, it will be reduced.
+ Note: If the radius is bigger than either half side, it will be reduced.</p>
+
+<p> <img src="../images/shape_rounded_rect.svg" alt="Shape example" />
 
 
     <h3>Parameters:</h3>
@@ -237,12 +272,15 @@
          A cairo content
         </li>
         <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
          The rectangle width
         </li>
         <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
          The rectangle height
         </li>
         <li><span class="parameter">radius</span>
+            <span class="types"><span class="type">number</span></span>
          the corner radius
         </li>
     </ul>
@@ -250,6 +288,15 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.rounded_rect(cr, <span class="number">70</span>, <span class="number">70</span>, <span class="number">10</span>)
+
+shape.rounded_rect(cr,<span class="number">20</span>,<span class="number">70</span>, <span class="number">5</span>)
+
+shape.transform(shape.rounded_rect) : translate(<span class="number">0</span>,<span class="number">25</span>) (cr,<span class="number">70</span>,<span class="number">20</span>, <span class="number">5</span>)</pre>
+    </ul>
 
 </dd>
     <dt>
@@ -257,7 +304,9 @@
     <strong>module.rounded_bar (cr, width, height)</strong>
     </dt>
     <dd>
-    Add a rectangle delimited by 2 180 degree arcs to the path
+    Add a rectangle delimited by 2 180 degree arcs to the path. </p>
+
+<p> <img src="../images/shape_rounded_bar.svg" alt="Shape example" />
 
 
     <h3>Parameters:</h3>
@@ -276,14 +325,25 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.rounded_bar(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.rounded_bar(cr, <span class="number">20</span>, <span class="number">70</span>)
+
+shape.rounded_bar(cr, <span class="number">70</span>, <span class="number">20</span>)</pre>
+    </ul>
 
 </dd>
     <dt>
-    <a name = "module.infobubble"></a>
-    <strong>module.infobubble (cr, width, height[, corner_radius=5[, arrow_size=10[, arrow_position=width/2 - arrow_size/2]]])</strong>
+    <a name = "module.partially_rounded_rect"></a>
+    <strong>module.partially_rounded_rect (cr, width, height, tl, tr, br, bl, rad)</strong>
     </dt>
     <dd>
-    A rounded rectangle with a triangle at the top
+    A rounded rect with only some of the corners rounded. </p>
+
+<p> <img src="../images/shape_partially_rounded_rect.svg" alt="Shape example" />
 
 
     <h3>Parameters:</h3>
@@ -293,7 +353,66 @@
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The shape with
+         The shape width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+        </li>
+        <li><span class="parameter">tl</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If the top left corner is rounded
+        </li>
+        <li><span class="parameter">tr</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If the top right corner is rounded
+        </li>
+        <li><span class="parameter">br</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If the bottom right corner is rounded
+        </li>
+        <li><span class="parameter">bl</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If the bottom left corner is rounded
+        </li>
+        <li><span class="parameter">rad</span>
+            <span class="types"><span class="type">number</span></span>
+         The corner radius
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.partially_rounded_rect(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.partially_rounded_rect(cr, <span class="number">70</span>, <span class="number">70</span>, <span class="keyword">true</span>)
+
+shape.partially_rounded_rect(cr, <span class="number">70</span>, <span class="number">70</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="number">30</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "module.infobubble"></a>
+    <strong>module.infobubble (cr, width, height[, corner_radius=5[, arrow_size=10[, arrow_position=width/2 - arrow_size/2]]])</strong>
+    </dt>
+    <dd>
+    A rounded rectangle with a triangle at the top. </p>
+
+<p> <img src="../images/shape_infobubble.svg" alt="Shape example" />
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo context
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape width
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
@@ -319,14 +438,27 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.infobubble(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.transform(shape.infobubble) : translate(<span class="number">0</span>, <span class="number">20</span>)
+   : rotate_at(<span class="number">35</span>,<span class="number">35</span>,<span class="global">math</span>.pi) (cr,<span class="number">70</span>,<span class="number">20</span>,<span class="number">10</span>, <span class="number">5</span>, <span class="number">35</span> - <span class="number">5</span>)
+
+shape.transform(shape.infobubble)
+   : rotate_at(<span class="number">35</span>,<span class="number">35</span>,<span class="number">3</span>*<span class="global">math</span>.pi/<span class="number">2</span>) (cr,<span class="number">70</span>,<span class="number">70</span>, <span class="keyword">nil</span>, <span class="keyword">nil</span>, <span class="number">40</span>)</pre>
+    </ul>
 
 </dd>
     <dt>
     <a name = "module.rectangular_tag"></a>
-    <strong>module.rectangular_tag (cr, width, height)</strong>
+    <strong>module.rectangular_tag (cr, width, height[, arrow_length=height/2])</strong>
     </dt>
     <dd>
-    A rectangle terminated by an arrow
+    A rectangle terminated by an arrow. </p>
+
+<p> <img src="../images/shape_rectangular_tag.svg" alt="Shape example" />
 
 
     <h3>Parameters:</h3>
@@ -336,17 +468,31 @@
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The shape with
+         The shape width
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
          The shape height
+        </li>
+        <li><span class="parameter">arrow_length</span>
+            <span class="types"><span class="type">number</span></span>
+         The length of the arrow part
+         (<em>default</em> height/2)
         </li>
     </ul>
 
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.rectangular_tag(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.transform(shape.rectangular_tag) : translate(<span class="number">0</span>, <span class="number">30</span>) (cr, <span class="number">70</span>, <span class="number">10</span>,  <span class="number">10</span>)
+
+shape.transform(shape.rectangular_tag) : translate(<span class="number">0</span>, <span class="number">30</span>) (cr, <span class="number">70</span>, <span class="number">10</span>, -<span class="number">10</span>)</pre>
+    </ul>
 
 </dd>
     <dt>
@@ -354,7 +500,9 @@
     <strong>module.arrow (cr, width, height[, head_width=head_width[, shaft_width=width /2[, shaft_length=height/2]]])</strong>
     </dt>
     <dd>
-    A simple arrow shape
+    A simple arrow shape. </p>
+
+<p> <img src="../images/shape_arrow.svg" alt="Shape example" />
 
 
     <h3>Parameters:</h3>
@@ -364,7 +512,7 @@
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The shape with
+         The shape width
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
@@ -390,6 +538,15 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.arrow(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.arrow(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">60</span>)
+
+shape.transform(shape.arrow) : rotate_at(<span class="number">35</span>,<span class="number">35</span>,<span class="global">math</span>.pi/<span class="number">2</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
+    </ul>
 
 </dd>
     <dt>
@@ -397,7 +554,9 @@
     <strong>module.hexagon (cr, width, height)</strong>
     </dt>
     <dd>
-    A squeezed hexagon filling the rectangle
+    A squeezed hexagon filling the rectangle. </p>
+
+<p> <img src="../images/shape_hexagon.svg" alt="Shape example" />
 
 
     <h3>Parameters:</h3>
@@ -407,7 +566,7 @@
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The shape with
+         The shape width
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
@@ -418,6 +577,15 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.hexagon(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.transform(shape.hexagon) : translate(<span class="number">0</span>,<span class="number">15</span>)(cr,<span class="number">70</span>,<span class="number">20</span>)
+
+shape.transform(shape.hexagon) : rotate_at(<span class="number">35</span>,<span class="number">35</span>,<span class="global">math</span>.pi/<span class="number">2</span>)(cr,<span class="number">70</span>,<span class="number">40</span>)</pre>
+    </ul>
 
 </dd>
     <dt>
@@ -425,7 +593,9 @@
     <strong>module.powerline (cr, width, height[, arrow_depth=height/2])</strong>
     </dt>
     <dd>
-    Double arrow popularized by the vim-powerline module
+    Double arrow popularized by the vim-powerline module. </p>
+
+<p> <img src="../images/shape_powerline.svg" alt="Shape example" />
 
 
     <h3>Parameters:</h3>
@@ -435,7 +605,7 @@
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The shape with
+         The shape width
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
@@ -451,6 +621,15 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.powerline(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.transform(shape.powerline) : translate(<span class="number">0</span>, <span class="number">25</span>) (cr,<span class="number">70</span>,<span class="number">20</span>)
+
+shape.transform(shape.powerline) : translate(<span class="number">0</span>, <span class="number">25</span>) (cr,<span class="number">70</span>,<span class="number">20</span>, -<span class="number">20</span>)</pre>
+    </ul>
 
 </dd>
     <dt>
@@ -458,7 +637,9 @@
     <strong>module.isosceles_triangle (cr, width, height)</strong>
     </dt>
     <dd>
-    An isosceles triangle
+    An isosceles triangle. </p>
+
+<p> <img src="../images/shape_isosceles_triangle.svg" alt="Shape example" />
 
 
     <h3>Parameters:</h3>
@@ -468,7 +649,7 @@
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The shape with
+         The shape width
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
@@ -479,6 +660,316 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.isosceles_triangle(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.isosceles_triangle(cr,<span class="number">20</span>,<span class="number">70</span>)
+
+shape.transform(shape.isosceles_triangle) : rotate_at(<span class="number">35</span>, <span class="number">35</span>, <span class="global">math</span>.pi/<span class="number">2</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "module.cross"></a>
+    <strong>module.cross (cr, width, height[, thickness=width/3])</strong>
+    </dt>
+    <dd>
+    A cross (<strong>+</strong>) symbol. </p>
+
+<p> <img src="../images/shape_cross.svg" alt="Shape example" />
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo context
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+        </li>
+        <li><span class="parameter">thickness</span>
+            <span class="types"><span class="type">number</span></span>
+         The cross section thickness
+         (<em>default</em> width/3)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.cross(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.cross(cr,<span class="number">20</span>,<span class="number">70</span>)
+
+shape.transform(shape.cross) : scale(<span class="number">0.5</span>, <span class="number">1</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "module.octogon"></a>
+    <strong>module.octogon (cr, width, height, corner_radius)</strong>
+    </dt>
+    <dd>
+    A similar shape to the <a href="../libraries/gears.shape.html#module.rounded_rect">rounded_rect</a>, but with sharp corners. </p>
+
+<p> <img src="../images/shape_octogon.svg" alt="Shape example" />
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo context
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+        </li>
+        <li><span class="parameter">corner_radius</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.octogon(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.octogon(cr,<span class="number">70</span>,<span class="number">70</span>,<span class="number">70</span>/<span class="number">2.5</span>)
+
+shape.transform(shape.octogon) : translate(<span class="number">0</span>, <span class="number">25</span>) (cr,<span class="number">70</span>,<span class="number">20</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "module.circle"></a>
+    <strong>module.circle (cr, width, height)</strong>
+    </dt>
+    <dd>
+    A circle shape. </p>
+
+<p> <img src="../images/shape_circle.svg" alt="Shape example" />
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo context
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.circle(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.circle(cr,<span class="number">20</span>,<span class="number">70</span>)
+
+shape.transform(shape.circle) : scale(<span class="number">0.5</span>, <span class="number">1</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "module.rectangle"></a>
+    <strong>module.rectangle (cr, width, height)</strong>
+    </dt>
+    <dd>
+    A simple rectangle. </p>
+
+<p> <img src="../images/shape_rectangle.svg" alt="Shape example" />
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo context
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.rectangle(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.rectangle(cr,<span class="number">20</span>,<span class="number">70</span>)
+
+shape.transform(shape.rectangle) : scale(<span class="number">0.5</span>, <span class="number">1</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "module.parallelogram"></a>
+    <strong>module.parallelogram (cr, width, height[, base_width=width/3])</strong>
+    </dt>
+    <dd>
+    A diagonal parallelogram with the bottom left corner at x=0 and top right
+ at x=width. </p>
+
+<p> <img src="../images/shape_parallelogram.svg" alt="Shape example" />
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo context
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+        </li>
+        <li><span class="parameter">base_width</span>
+            <span class="types"><span class="type">number</span></span>
+         The parallelogram base width
+         (<em>default</em> width/3)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.parallelogram(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.parallelogram(cr,<span class="number">70</span>,<span class="number">20</span>)
+
+shape.transform(shape.parallelogram) : scale(<span class="number">0.5</span>, <span class="number">1</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "module.losange"></a>
+    <strong>module.losange (cr, width, height)</strong>
+    </dt>
+    <dd>
+    A losange. </p>
+
+<p> <img src="../images/shape_losange.svg" alt="Shape example" />
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo context
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.losange(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.losange(cr,<span class="number">20</span>,<span class="number">70</span>)
+
+shape.transform(shape.losange) : scale(<span class="number">0.5</span>, <span class="number">1</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "module.radial_progress"></a>
+    <strong>module.radial_progress (cr, w, h, percent, hide_left)</strong>
+    </dt>
+    <dd>
+    A partial rounded bar.  How much of the rounded bar is visible depends on
+ the given percentage value.</p>
+
+<p> Note that this shape is not closed and thus filling it doesn&rsquo;t make much
+ sense.</p>
+
+<p> <img src="../images/shape_radial_progress.svg" alt="Shape example" />
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo context
+        </li>
+        <li><span class="parameter">w</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape width
+        </li>
+        <li><span class="parameter">h</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+        </li>
+        <li><span class="parameter">percent</span>
+            <span class="types"><span class="type">number</span></span>
+         The progressbar percent
+        </li>
+        <li><span class="parameter">hide_left</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Do not draw the left side of the shape
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.radial_progress(cr, <span class="number">70</span>, <span class="number">20</span>, .<span class="number">3</span>)
+
+shape.radial_progress(cr, <span class="number">70</span>, <span class="number">20</span>, .<span class="number">6</span>)
+
+shape.radial_progress(cr, <span class="number">70</span>, <span class="number">20</span>, .<span class="number">9</span>)</pre>
+    </ul>
 
 </dd>
     <dt>
@@ -519,7 +1010,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-03-16 02:12:20 </i>
+<i style="float:right;">Last updated 2016-03-17 02:19:40 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
