@@ -33,7 +33,6 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
-<li><a href="#Fields">Fields</a></li>
 </ul>
 
 
@@ -50,7 +49,7 @@
   <li><a href="../libraries/awful.hotkeys_popup.widget.html">awful.hotkeys_popup.widget</a></li>
   <li><a href="../libraries/awful.key.html">awful.key</a></li>
   <li><a href="../libraries/awful.keygrabber.html">awful.keygrabber</a></li>
-  <li><strong>awful.layout</strong></li>
+  <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
   <li><a href="../libraries/awful.menu.html">awful.menu</a></li>
   <li><a href="../libraries/awful.mouse.html">awful.mouse</a></li>
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
@@ -68,7 +67,7 @@
   <li><a href="../libraries/dbus.html">dbus</a></li>
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
   <li><a href="../libraries/gears.debug.html">gears.debug</a></li>
-  <li><a href="../libraries/gears.object.properties.html">gears.object.properties</a></li>
+  <li><strong>gears.object.properties</strong></li>
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
   <li><a href="../libraries/gears.surface.html">gears.surface</a></li>
@@ -153,53 +152,39 @@
 
 <div id="content">
 
-<h1>Module <code>awful.layout</code></h1>
-<p>Layout module for awful</p>
+<h1>Module <code>gears.object.properties</code></h1>
+<p>An helper module to map userdata <strong>index and </strong>newindex entries to
+ lua classes.</p>
 <p>
 </p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2008 Julien Danjou</li>
+        <li><strong>Copyright</strong>: 2016 Emmanuel Lepage-Vallee</li>
         <li><strong>Release</strong>: master-g0953db5</li>
-        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
+        <li><strong>Author</strong>: Emmanuel Lepage-Vallee &lt;elv1313@gmail.com&gt;</li>
     </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#get">get (screen)</a></td>
-	<td class="summary">Get the current layout.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#inc">inc (i, s[, layouts])</a></td>
-	<td class="summary">Change the layout of the current tag.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#set">set (_layout, t)</a></td>
-	<td class="summary">Set the layout function of the current tag.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#parameters">parameters ([t[, screen]])</a></td>
-	<td class="summary">Get the layout parameters used for the screen</p>
+	<td class="name" ><a href="#object.capi_index_fallback">object.capi_index_fallback (class[, args={}])</a></td>
+	<td class="summary"><p>Add the missing properties handler to a CAPI object such as client/tag/screen
+ Valid args:</p>
 
-<p> This should give the same result as &ldquo;arrange&rdquo;, but without the &ldquo;geometries&rdquo;
- parameter, as this is computed during arranging.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#arrange">arrange (screen)</a></td>
-	<td class="summary">Arrange a screen using its current layout.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#getname">getname (_layout)</a></td>
-	<td class="summary">Get the current layout name.</td>
-	</tr>
-</table>
-<h2><a href="#Fields">Fields</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#suit">suit</a></td>
-	<td class="summary">Default predefined layouts</td>
+<ul>
+<li><strong>getter</strong>: A smart getter (handle property getter itself)</li>
+<li><strong>getter_fallback</strong>: A dumb getter method (don&rsquo;t handle individual property getter)</li>
+<li><strong>getter_class</strong>: A module with individual property getter/setter</li>
+<li><strong>getter_prefix</strong>: A special getter prefix (like &ldquo;get&rdquo; or &ldquo;get_&rdquo; (default))</li>
+<li><strong>setter</strong>: A smart setter (handle property setter itself)</li>
+<li><strong>setter_fallback</strong>: A dumb setter method (don&rsquo;t handle individual property setter)</li>
+<li><strong>setter_class</strong>: A module with individual property getter/setter</li>
+<li><strong>setter_prefix</strong>: A special setter prefix (like &ldquo;set&rdquo; or &ldquo;set_&rdquo; (default))</li>
+<li><strong>auto_emit</strong>: Emit &ldquo;property::___&rdquo; automatically (default: false).</li>
+</ul>
+
+</td>
 	</tr>
 </table>
 
@@ -211,177 +196,40 @@
 
     <dl class="function">
     <dt>
-    <a name = "get"></a>
-    <strong>get (screen)</strong>
+    <a name = "object.capi_index_fallback"></a>
+    <strong>object.capi_index_fallback (class[, args={}])</strong>
     </dt>
     <dd>
-    Get the current layout.
+    <p>Add the missing properties handler to a CAPI object such as client/tag/screen
+ Valid args:</p>
+
+<ul>
+<li><strong>getter</strong>: A smart getter (handle property getter itself)</li>
+<li><strong>getter_fallback</strong>: A dumb getter method (don&rsquo;t handle individual property getter)</li>
+<li><strong>getter_class</strong>: A module with individual property getter/setter</li>
+<li><strong>getter_prefix</strong>: A special getter prefix (like &ldquo;get&rdquo; or &ldquo;get_&rdquo; (default))</li>
+<li><strong>setter</strong>: A smart setter (handle property setter itself)</li>
+<li><strong>setter_fallback</strong>: A dumb setter method (don&rsquo;t handle individual property setter)</li>
+<li><strong>setter_class</strong>: A module with individual property getter/setter</li>
+<li><strong>setter_prefix</strong>: A special setter prefix (like &ldquo;set&rdquo; or &ldquo;set_&rdquo; (default))</li>
+<li><strong>auto_emit</strong>: Emit &ldquo;property::___&rdquo; automatically (default: false).  This is
+  ignored when setter_fallback is set or a setter is found</li>
+</ul>
+
+
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">screen</span>
-         The screen.
+        <li><span class="parameter">class</span>
+         A standard luaobject derived object
+        </li>
+        <li><span class="parameter">args</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A set of accessors configuration parameters
+         (<em>default</em> {})
         </li>
     </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The layout function.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "inc"></a>
-    <strong>inc (i, s[, layouts])</strong>
-    </dt>
-    <dd>
-    Change the layout of the current tag.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">i</span>
-         Relative index.
-        </li>
-        <li><span class="parameter">s</span>
-         The screen.
-        </li>
-        <li><span class="parameter">layouts</span>
-         A table of layouts.
-         (<em>optional</em>)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "set"></a>
-    <strong>set (_layout, t)</strong>
-    </dt>
-    <dd>
-    Set the layout function of the current tag.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">_layout</span>
-         Layout name.
-        </li>
-        <li><span class="parameter">t</span>
-         The tag to modify, if null tag.selected() is used.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "parameters"></a>
-    <strong>parameters ([t[, screen]])</strong>
-    </dt>
-    <dd>
-    Get the layout parameters used for the screen</p>
-
-<p> This should give the same result as &ldquo;arrange&rdquo;, but without the &ldquo;geometries&rdquo;
- parameter, as this is computed during arranging. </p>
-
-<p> If <code>t</code> is given, <a href="../classes/screen.html#">screen</a> is ignored, if none are given, the mouse screen is
- used.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">t</span>
-            <span class="types"><a class="type" href="../classes/tag.html#">tag</a></span>
-         The tag to query
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">screen</span>
-         The screen
-         (<em>optional</em>)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A table with the workarea (x, y, width, height), the screen
-   geometry (x, y, width, height), the clients, the screen and sometime, a
-   &ldquo;geometries&rdquo; table with client as keys and geometry as value
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "arrange"></a>
-    <strong>arrange (screen)</strong>
-    </dt>
-    <dd>
-    Arrange a screen using its current layout.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">screen</span>
-         The screen to arrange.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "getname"></a>
-    <strong>getname (_layout)</strong>
-    </dt>
-    <dd>
-    Get the current layout name.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">_layout</span>
-         The layout.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The layout name.
-    </ol>
-
-
-
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "suit"></a>
-    <strong>suit</strong>
-    </dt>
-    <dd>
-    Default predefined layouts
-
-
 
 
 
