@@ -191,7 +191,7 @@
 	<td class="summary">Get or set the screen padding.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#focused">focused ([args={}])</a></td>
+	<td class="name" ><a href="#focused">focused ([args])</a></td>
 	<td class="summary">Get the focused screen.</td>
 	</tr>
 	<tr>
@@ -333,18 +333,10 @@
 </dd>
     <dt>
     <a name = "focused"></a>
-    <strong>focused ([args={}])</strong>
+    <strong>focused ([args])</strong>
     </dt>
     <dd>
     Get the focused screen. </p>
-
-<p> Valid arguments are:</p>
-
-<ul>
-<li><strong>client</strong>: Use the client screen instead of the mouse screen.</li>
-<li><strong>mouse</strong>: Use the mouse screen (default).</li>
-</ul>
-
 
 <p> It is possible to set <code>awful.screen.default_focused_args</code> to override the
  default settings.
@@ -353,17 +345,23 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
+
+        <ul>
+        <li><span class="parameter">client</span>
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Some arguments.
-         (<em>default</em> {})
+         Use the client screen instead of the
+   mouse screen.
+         (<em>default</em> false)
         </li>
+        </li></ul>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
-        The focused screen object
+           <span class="types">optional <a class="type" href="../classes/screen.html#">screen</a></span>
+        The focused screen object, or <code>nil</code> in case no screen is
+   present currently.
     </ol>
 
 
