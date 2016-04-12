@@ -41,7 +41,6 @@
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../libraries/awesome.html">awesome</a></li>
   <li><a href="../libraries/awful.client.html">awful.client</a></li>
-  <li><a href="../libraries/awful.client.shape.html">awful.client.shape</a></li>
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
   <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
@@ -233,7 +232,6 @@
     Show a menu.
 
 
-    <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span> The arguments
         <ul>
@@ -270,7 +268,6 @@
     Toggle menu visibility.
 
 
-    <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span> The arguments
         <ul>
@@ -323,7 +320,6 @@
  args.* params needed for the menu entry constructor.
 
 
-    <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span> The item params
         <ul>
@@ -354,7 +350,6 @@
     Delete menu entry at given position
 
 
-    <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">num</span>
          The position in the table of the menu entry to be deleted; can be also the menu entry itself
@@ -374,7 +369,6 @@
     Build a popup menu with running clients and show it.
 
 
-    <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
@@ -414,7 +408,6 @@
     Default awful.menu.entry constructor
 
 
-    <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">parent</span>
          The parent menu (TODO: This is apparently unused)
@@ -442,7 +435,6 @@
     Create a menu popup.
 
 
-    <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
         <p> Table containing the menu informations.</p>
@@ -479,7 +471,7 @@
        terms[i] =
          {c.name,
           <span class="keyword">function</span>()
-            awful.tag.viewonly(c.first_tag)
+            c.first_tag:view_only()
             client.focus = c
           <span class="keyword">end</span>,
           c.icon

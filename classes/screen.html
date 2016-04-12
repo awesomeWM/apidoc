@@ -32,8 +32,11 @@
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Signals">Signals</a></li>
-<li><a href="#Tables">Tables</a></li>
+<li><a href="#Deprecated_functions">Deprecated functions</a></li>
+<li><a href="#Fields">Fields</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
 
@@ -89,7 +92,6 @@
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../libraries/awesome.html">awesome</a></li>
   <li><a href="../libraries/awful.client.html">awful.client</a></li>
-  <li><a href="../libraries/awful.client.shape.html">awful.client.shape</a></li>
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
   <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
@@ -157,6 +159,30 @@
 
 <h1>Class <code>screen</code></h1>
 <p>awesome screen API</p>
+
+<p> Screen objects can be added and removed over time.</p>
+<p> To get a callback for all
+ current and future screens, use <a href="../classes/screen.html#awful.screen.connect_for_each_screen">awful.screen.connect_for_each_screen</a>:</p>
+
+<pre>
+awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
+    <span class="comment">-- do something
+</span><span class="keyword">end</span>)
+</pre>
+
+
+<p> It is also possible loop over all current screens using:</p>
+
+<pre>
+<span class="keyword">for</span> s, screen <span class="keyword">do</span>
+    <span class="comment">-- do something
+</span><span class="keyword">end</span>
+</pre>
+
+
+<p> Most basic Awesome objects also have a screen property, see <a href="../libraries/mouse.html#screen">mouse.screen</a>
+ <a href="../classes/client.html#client.screen">client.screen</a>, <code>wibox.screen</code> and <a href="../classes/tag.html#tag.screen">tag.screen</a>.</p>
+
 <p> Furthermore to the classes described here, one can also use signals as
  described in <a href="../classes/signals.html#">signals</a>.</p>
     <h3>Info:</h3>
@@ -167,28 +193,129 @@
     </ul>
 
 
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awful.screen.getbycoord">awful.screen.getbycoord (x, y)</a></td>
+	<td class="summary">Return screen number corresponding to the given (pixel) coordinates.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.screen.focus">awful.screen.focus (_screen)</a></td>
+	<td class="summary">Give the focus to a screen, and move pointer to last known position on this
+ screen, or keep position relative to the current focused screen</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.screen.focus_bydirection">awful.screen.focus_bydirection (dir, _screen)</a></td>
+	<td class="summary">Give the focus to a screen, and move pointer to last known position on this
+ screen, or keep position relative to the current focused screen</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.screen.focus_relative">awful.screen.focus_relative (i)</a></td>
+	<td class="summary">Give the focus to a screen, and move pointer to last known position on this
+ screen, or keep position relative to the current focused screen</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.screen.focused">awful.screen.focused ([args])</a></td>
+	<td class="summary">Get the focused screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.screen.connect_for_each_screen">awful.screen.connect_for_each_screen (func)</a></td>
+	<td class="summary">Call a function for each existing and created-in-the-future screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.screen.disconnect_for_each_screen">awful.screen.disconnect_for_each_screen (func)</a></td>
+	<td class="summary">Undo the effect of connect_for_each_screen.</td>
+	</tr>
+</table>
+<h2><a href="#Object_properties">Object properties</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#screen.geometry">screen.geometry</a></td>
+	<td class="summary">The screen coordinates.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.index">screen.index</a></td>
+	<td class="summary">The screen number.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.outputs">screen.outputs</a></td>
+	<td class="summary">If RANDR information is available, a list of outputs
+   for this screen and their size in mm.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.workarea">screen.workarea</a></td>
+	<td class="summary">The screen workarea.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.padding">screen.padding</a></td>
+	<td class="summary">The screen padding.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.clients">screen.clients</a></td>
+	<td class="summary">Get the list of the screen visible clients.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.hidden_clients">screen.hidden_clients</a></td>
+	<td class="summary">Get the list of the clients assigned to the screen but not currently
+ visible.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.all_clients">screen.all_clients</a></td>
+	<td class="summary">Get all clients assigned to the screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.tiled_clients">screen.tiled_clients</a></td>
+	<td class="summary">Get the list of the screen tiled clients.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.tags">screen.tags</a></td>
+	<td class="summary">A list of all tags on the screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.selected_tags">screen.selected_tags</a></td>
+	<td class="summary">A list of all selected tags on the screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen.selected_tag">screen.selected_tag</a></td>
+	<td class="summary">The first selected tag.</td>
+	</tr>
+</table>
 <h2><a href="#Signals">Signals</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#property::workarea">property::workarea</a></td>
+	<td class="name" ><a href="#.primary_changed">.primary_changed</a></td>
 	<td class="summary">
 </td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#screen.primary_changed">screen.primary_changed</a></td>
-	<td class="summary">
-</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#screen.added">screen.added</a></td>
+	<td class="name" ><a href="#.added">.added</a></td>
 	<td class="summary">This signal is emitted when a new screen is added to the current setup.</td>
 	</tr>
+	<tr>
+	<td class="name" ><a href="#tag::history::update">tag::history::update</a></td>
+	<td class="summary">When the tag history changed.</td>
+	</tr>
 </table>
-<h2><a href="#Tables">Tables</a></h2>
+<h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#screen.screen">screen.screen</a></td>
-	<td class="summary">Screen is a table where indexes are screen numbers.</td>
+	<td class="name" ><a href="#awful.screen.getdistance_sq">awful.screen.getdistance_sq</a></td>
+	<td class="summary">Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.screen.padding">awful.screen.padding</a></td>
+	<td class="summary">Get or set the screen padding.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#screen.primary">screen.primary</a></td>
+	<td class="summary">The primary screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.screen.default_focused_args">awful.screen.default_focused_args</a></td>
+	<td class="summary">The defaults arguments for <a href="../classes/screen.html#awful.screen.focused">awful.screen.focused</a></td>
 	</tr>
 </table>
 <h2><a href="#Methods">Methods</a></h2>
@@ -198,14 +325,6 @@
 	<td class="summary">Get the number of instances.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#screen:set_index_miss_handler">screen:set_index_miss_handler (cb)</a></td>
-	<td class="summary">Set a __index metamethod for all screen instances.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#screen:set_newindex_miss_handler">screen:set_newindex_miss_handler (cb)</a></td>
-	<td class="summary">Set a __newindex metamethod for all screen instances.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#screen:screen">screen:screen ()</a></td>
 	<td class="summary">Iterate over screens.</td>
 	</tr>
@@ -213,18 +332,611 @@
 	<td class="name" ><a href="#screen:count">screen:count ()</a></td>
 	<td class="summary">Get the number of screens.</td>
 	</tr>
+	<tr>
+	<td class="name" ><a href="#screen:get_square_distance">screen:get_square_distance (x, y)</a></td>
+	<td class="summary">Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen:get_bounding_geometry">screen:get_bounding_geometry ([args={}])</a></td>
+	<td class="summary">Get a placement bounding geometry.</td>
+	</tr>
 </table>
 
 <br/>
 <br/>
 
 
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awful.screen.getbycoord"></a>
+    <strong>awful.screen.getbycoord (x, y)</strong>
+    </dt>
+    <dd>
+    Return screen number corresponding to the given (pixel) coordinates.
+ The number returned can be used as an index into the global
+ <a href="../classes/screen.html#">screen</a> table/object.
+
+
+    <ul>
+        <li><span class="parameter">x</span>
+         The x coordinate
+        </li>
+        <li><span class="parameter">y</span>
+         The y coordinate
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.screen.focus"></a>
+    <strong>awful.screen.focus (_screen)</strong>
+    </dt>
+    <dd>
+    Give the focus to a screen, and move pointer to last known position on this
+ screen, or keep position relative to the current focused screen
+
+
+    <ul>
+        <li><span class="parameter">_screen</span>
+         Screen number (defaults / falls back to mouse.screen).
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.screen.focus_bydirection"></a>
+    <strong>awful.screen.focus_bydirection (dir, _screen)</strong>
+    </dt>
+    <dd>
+    Give the focus to a screen, and move pointer to last known position on this
+ screen, or keep position relative to the current focused screen
+
+
+    <ul>
+        <li><span class="parameter">dir</span>
+         The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
+        </li>
+        <li><span class="parameter">_screen</span>
+         Screen.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.screen.focus_relative"></a>
+    <strong>awful.screen.focus_relative (i)</strong>
+    </dt>
+    <dd>
+    Give the focus to a screen, and move pointer to last known position on this
+ screen, or keep position relative to the current focused screen
+
+
+    <ul>
+        <li><span class="parameter">i</span>
+         Value to add to the current focused screen index. 1 will focus next
+ screen, -1 would focus the previous one.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.screen.focused"></a>
+    <strong>awful.screen.focused ([args])</strong>
+    </dt>
+    <dd>
+    Get the focused screen. </p>
+
+<p> It is possible to set <a href="../classes/screen.html#awful.screen.default_focused_args">awful.screen.default_focused_args</a> to override the
+ default settings.
+
+
+    <ul>
+        <li><span class="parameter">args</span>
+
+        <ul>
+        <li><span class="parameter">client</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use the client screen instead of the
+   mouse screen.
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">mouse</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use the mouse screen
+         (<em>default</em> true)
+        </li>
+        </li></ul>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types">optional <a class="type" href="../classes/screen.html#">screen</a></span>
+        The focused screen object, or <code>nil</code> in case no screen is
+   present currently.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.screen.connect_for_each_screen"></a>
+    <strong>awful.screen.connect_for_each_screen (func)</strong>
+    </dt>
+    <dd>
+    Call a function for each existing and created-in-the-future screen.
+
+
+    <ul>
+        <li><span class="parameter">func</span> The function to call.
+        <ul>
+        <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+         The screen
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.screen.disconnect_for_each_screen"></a>
+    <strong>awful.screen.disconnect_for_each_screen (func)</strong>
+    </dt>
+    <dd>
+    Undo the effect of connect_for_each_screen.
+
+
+    <ul>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The function that should no longer be called.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Object_properties"></a>Object properties</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "screen.geometry"></a>
+    <strong>screen.geometry</strong>
+    </dt>
+    <dd>
+    The screen coordinates. </p>
+
+<p> <strong>Immutable:</strong> true
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">integer</span></span>
+         The horizontal position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">integer</span></span>
+         The vertical position
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">integer</span></span>
+         The width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">integer</span></span>
+         The height
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "screen.index"></a>
+    <strong>screen.index</strong>
+    </dt>
+    <dd>
+    The screen number. </p>
+
+<p> An integer greater than 1 and smaller than <code>screen.count()</code>. Please note that
+ the screen order isn&rsquo;t always mirroring the screen logical position.</p>
+
+<p> <strong>Immutable:</strong> true
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">integer</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "screen.outputs"></a>
+    <strong>screen.outputs</strong>
+    </dt>
+    <dd>
+    If RANDR information is available, a list of outputs
+   for this screen and their size in mm. </p>
+
+<p> Please note that the table content may vary.</p>
+
+<p> <strong>Signal:</strong></p>
+
+<ul>
+<li><em>property::outputs</em></li>
+</ul>
+
+
+<p> <strong>Immutable:</strong> true
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+        <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with the screen name as key (like <code>eDP1</code> on a laptop)
+        </li>
+        <li><span class="parameter">name.mm_width</span>
+            <span class="types"><span class="type">integer</span></span>
+         The screen physical width
+        </li>
+        <li><span class="parameter">name.mm_height</span>
+            <span class="types"><span class="type">integer</span></span>
+         The screen physical height
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "screen.workarea"></a>
+    <strong>screen.workarea</strong>
+    </dt>
+    <dd>
+    <p>The screen workarea. </p>
+
+<p> The workarea is a subsection of the screen where clients can be placed. It
+ usually excludes the toolbars (see <a href="../libraries/awful.wibox.html#">awful.wibox</a>) and dockable clients
+ (see <a href="../classes/client.html#client.dockable">client.dockable</a>) like WindowMaker DockAPP.</p>
+
+<p> It can be modified be altering the <a href="../classes/wibox.html#">wibox</a> or <a href="../classes/client.html#">client</a> struts.</p>
+
+<p> <strong>Signal:</strong></p>
+
+<ul>
+<li><em>property::workarea</em></li>
+</ul>
+
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">integer</span></span>
+         The horizontal position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">integer</span></span>
+         The vertical position
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">integer</span></span>
+         The width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">integer</span></span>
+         The height
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../classes/client.html#client:struts">client.struts</a></li>
+         <li><a href="../classes/drawin.html#drawin:struts">drawin.struts</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "screen.padding"></a>
+    <strong>screen.padding</strong>
+    </dt>
+    <dd>
+    <p>The screen padding.
+ Add a &ldquo;buffer&rdquo; section on each side of the screen where the tiled client
+ wont be.</p>
+
+<p> <strong>Signal:</strong></p>
+
+<ul>
+<li><em>property::padding</em></li>
+</ul>
+
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">integer</span></span>
+         The horizontal position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">integer</span></span>
+         The vertical position
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">integer</span></span>
+         The width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">integer</span></span>
+         The height
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "screen.clients"></a>
+    <strong>screen.clients</strong>
+    </dt>
+    <dd>
+    Get the list of the screen visible clients. </p>
+
+<p> Minimized and unmanaged clients are not included in this list as they are
+ technically not on the screen.</p>
+
+<p> The clients on tags currently not visible are not part of this list.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+         The clients list, ordered top to bottom
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
+         <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
+         <li><a href="../classes/client.html#awful.client.focus.history.get">client.get</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "screen.hidden_clients"></a>
+    <strong>screen.hidden_clients</strong>
+    </dt>
+    <dd>
+    Get the list of the clients assigned to the screen but not currently
+ visible. </p>
+
+<p> This include minimized clients and clients on hidden tags.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+         The clients list, ordered top to bottom
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../classes/screen.html#screen.clients">clients</a></li>
+         <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
+         <li><a href="../classes/client.html#awful.client.focus.history.get">client.get</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "screen.all_clients"></a>
+    <strong>screen.all_clients</strong>
+    </dt>
+    <dd>
+    Get all clients assigned to the screen.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+         The clients list, ordered top to bottom
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../classes/screen.html#screen.clients">clients</a></li>
+         <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
+         <li><a href="../classes/client.html#awful.client.focus.history.get">client.get</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "screen.tiled_clients"></a>
+    <strong>screen.tiled_clients</strong>
+    </dt>
+    <dd>
+    <p>Get the list of the screen tiled clients. </p>
+
+<p> Same as s.clients, but excluding:</p>
+
+<ul>
+<li>fullscreen clients</li>
+<li>maximized clients</li>
+<li>floating clients</li>
+</ul>
+
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+         The clients list, ordered top to bottom
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "screen.tags"></a>
+    <strong>screen.tags</strong>
+    </dt>
+    <dd>
+    A list of all tags on the screen. </p>
+
+<p> This property is read only, use <a href="../classes/tag.html#tag.screen">tag.screen</a>, <code>awful.tag.add</code>, <code>awful.tag.new</code>
+ or <code>t:delete()</code> to alter this list.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "screen.selected_tags"></a>
+    <strong>screen.selected_tags</strong>
+    </dt>
+    <dd>
+    A list of all selected tags on the screen.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../classes/tag.html#tag.selected">tag.selected</a></li>
+         <li><a href="../classes/client.html#client:to_selected_tags">client.to_selected_tags</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "screen.selected_tag"></a>
+    <strong>screen.selected_tag</strong>
+    </dt>
+    <dd>
+    The first selected tag.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../classes/tag.html#tag.selected">tag.selected</a></li>
+         <li><a href="../classes/screen.html#screen.selected_tags">selected_tags</a></li>
+    </ul>
+
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Signals"></a>Signals</h2>
 
     <dl class="function">
     <dt>
-    <a name = "property::workarea"></a>
-    <strong>property::workarea</strong>
+    <a name = ".primary_changed"></a>
+    <strong>.primary_changed</strong>
     </dt>
     <dd>
 
@@ -238,23 +950,8 @@
 
 </dd>
     <dt>
-    <a name = "screen.primary_changed"></a>
-    <strong>screen.primary_changed</strong>
-    </dt>
-    <dd>
-
-
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "screen.added"></a>
-    <strong>screen.added</strong>
+    <a name = ".added"></a>
+    <strong>.added</strong>
     </dt>
     <dd>
     This signal is emitted when a new screen is added to the current setup.
@@ -266,42 +963,117 @@
 
 
 </dd>
+    <dt>
+    <a name = "tag::history::update"></a>
+    <strong>tag::history::update</strong>
+    </dt>
+    <dd>
+    When the tag history changed.
+
+
+
+
+
+
+
+</dd>
 </dl>
-    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+    <h2 class="section-header "><a name="Deprecated_functions"></a>Deprecated functions</h2>
 
     <dl class="function">
     <dt>
-    <a name = "screen.screen"></a>
-    <strong>screen.screen</strong>
+    <a name = "awful.screen.getdistance_sq"></a>
+    <strong>awful.screen.getdistance_sq</strong>
     </dt>
     <dd>
-    Screen is a table where indexes are screen numbers.  You can use <code>screen[1]</code>
- to get access to the first screen, etc. Alternatively, if RANDR information
- is available, you can use output names for finding screen objects.
- The primary screen can be accessed as <code>screen.primary</code>.
- Each screen has a set of properties.
+    Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point
 
 
-    <h3>Fields:</h3>
+    <h3>param:</h3>
     <ul>
-        <li><span class="parameter">geometry</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The screen coordinates. Immutable.
+        <li><span class="parameter">s</span>
+         Screen
         </li>
-        <li><span class="parameter">workarea</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The screen workarea.
+        <li><span class="parameter">x</span>
+         X coordinate of point
         </li>
-        <li><span class="parameter">index</span>
-            <span class="types"><span class="type">int</span></span>
-         The screen number.
-        </li>
-        <li><span class="parameter">outputs</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         If RANDR information is available, a list of outputs
-   for this screen and their size in mm.
+        <li><span class="parameter">y</span>
+         Y coordinate of point
         </li>
     </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/screen.html#screen:get_square_distance">screen.get_square_distance</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.screen.padding"></a>
+    <strong>awful.screen.padding</strong>
+    </dt>
+    <dd>
+    Get or set the screen padding.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">_screen</span>
+         The screen object to change the padding on
+        </li>
+        <li><span class="parameter">padding</span>
+         The padding, a table with &lsquo;top&rsquo;, &lsquo;left&rsquo;, &lsquo;right&rsquo; and/or
+ &lsquo;bottom&rsquo; or a number value to apply set the same padding on all sides. Can be
+  nil if you only want to retrieve padding
+         (<em>default</em> nil)
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/screen.html#screen.padding">padding</a>
+    </ul>
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "screen.primary"></a>
+    <strong>screen.primary</strong>
+    </dt>
+    <dd>
+    The primary screen.
+
+
+    <ul>
+        <li><span class="parameter">primary</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.screen.default_focused_args"></a>
+    <strong>awful.screen.default_focused_args</strong>
+    </dt>
+    <dd>
+    The defaults arguments for <a href="../classes/screen.html#awful.screen.focused">awful.screen.focused</a>
+
+
 
 
 
@@ -326,48 +1098,6 @@
 
         The number of screen objects alive.
     </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "screen:set_index_miss_handler"></a>
-    <strong>screen:set_index_miss_handler (cb)</strong>
-    </dt>
-    <dd>
-    Set a __index metamethod for all screen instances.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cb</span>
-            <span class="types"><span class="type">function</span></span>
-         The meta-method
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "screen:set_newindex_miss_handler"></a>
-    <strong>screen:set_newindex_miss_handler (cb)</strong>
-    </dt>
-    <dd>
-    Set a __newindex metamethod for all screen instances.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cb</span>
-            <span class="types"><span class="type">function</span></span>
-         The meta-method
-        </li>
-    </ul>
-
 
 
 
@@ -411,6 +1141,89 @@
 
 
 
+
+</dd>
+    <dt>
+    <a name = "screen:get_square_distance"></a>
+    <strong>screen:get_square_distance (x, y)</strong>
+    </dt>
+    <dd>
+    Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point
+
+
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         X coordinate of point
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         Y coordinate of point
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        The squared distance of the screen to the provided point
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "screen:get_bounding_geometry"></a>
+    <strong>screen:get_bounding_geometry ([args={}])</strong>
+    </dt>
+    <dd>
+    <p>Get a placement bounding geometry.
+ This method compute different variants of the &ldquo;usable&rdquo; screen geometry.</p>
+
+<p> Valid arguments are:</p>
+
+<ul>
+<li><strong>honor_padding</strong>: Honor the screen padding.</li>
+<li><strong>honor_workarea</strong>: Honor the screen workarea</li>
+<li><strong>margins</strong>: Apply some margins on the output. This can wither be a number
+ or a table with <em>left</em>, <em>right</em>, <em>top</em> and <em>bottom</em> keys.</li>
+<li><strong>tag</strong>: Use the tag screen instead of <code>s</code></li>
+<li><strong>parent</strong>: A parent drawable to use a base geometry</li>
+<li><strong>bounding_rect</strong>: A bounding rectangle. This parameter is incompatible with
+ <code>honor_workarea</code>.</li>
+</ul>
+
+
+
+
+    <ul>
+        <li><span class="parameter">args</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The arguments
+         (<em>default</em> {})
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A table with <em>x</em>, <em>y</em>, <em>width</em> and <em>height</em>.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> geo = screen:get_bounding_geometry {
+     honor_padding  = <span class="keyword">true</span>,
+     honor_workarea = <span class="keyword">true</span>,
+     margins        = {
+          left = <span class="number">20</span>,
+     },
+ }</pre>
+    </ul>
 
 </dd>
 </dl>
