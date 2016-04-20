@@ -192,6 +192,10 @@
 	<td class="summary">Apply awful.rules.rules to a client.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#rules.high_priority_properties.new_tag">rules.high_priority_properties.new_tag (c, value)</a></td>
+	<td class="summary">Create a new tag based on a rule.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#execute">execute (c, props[, callbacks])</a></td>
 	<td class="summary">Apply properties and callbacks to a client.</td>
 	</tr>
@@ -201,6 +205,14 @@
 	<tr>
 	<td class="name" ><a href="#rules">rules</a></td>
 	<td class="summary">This is the global rules table.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#extra_properties">extra_properties</a></td>
+	<td class="summary">Extra rules properties.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#high_priority_properties">high_priority_properties</a></td>
+	<td class="summary">Extra high priority properties.</td>
 	</tr>
 </table>
 
@@ -386,6 +398,36 @@
 
 </dd>
     <dt>
+    <a name = "rules.high_priority_properties.new_tag"></a>
+    <strong>rules.high_priority_properties.new_tag (c, value)</strong>
+    </dt>
+    <dd>
+    Create a new tag based on a rule.
+
+
+    <ul>
+        <li><span class="parameter">c</span>
+            <span class="types"><a class="type" href="../classes/client.html#">client</a></span>
+         The client
+        </li>
+        <li><span class="parameter">value</span>
+            <span class="types"><span class="type">boolean</span>, <span class="type">function</span> or <a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The value.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/tag.html#">tag</a></span>
+        The new tag
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "execute"></a>
     <strong>execute (c, props[, callbacks])</strong>
     </dt>
@@ -515,6 +557,73 @@ syntax:</p>
   properties = { floating = true }
 }
 </code></pre>
+
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "extra_properties"></a>
+    <strong>extra_properties</strong>
+    </dt>
+    <dd>
+    <p>Extra rules properties. </p>
+
+<p> These properties are used in the rules only and are not sent to the client
+ afterward.</p>
+
+<p> To add a new properties, just do:</p>
+
+<pre><code>function awful.rules.extra_properties.my_new_property(c, value, props)
+    -- do something
+end
+</code></pre>
+
+<p> By default, the table has the following functions:</p>
+
+<ul>
+<li>geometry</li>
+<li>switchtotag</li>
+</ul>
+
+
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "high_priority_properties"></a>
+    <strong>high_priority_properties</strong>
+    </dt>
+    <dd>
+    <p>Extra high priority properties. </p>
+
+<p> Some properties, such as anything related to tags, geometry or focus, will
+ cause a race condition if set in the main property section. This is why
+ they have a section for them.</p>
+
+<p> To add a new properties, just do:</p>
+
+<pre><code>function awful.rules.high_priority_properties.my_new_property(c, value, props)
+    -- do something
+end
+</code></pre>
+
+<p> By default, the table has the following functions:</p>
+
+<ul>
+<li>tag</li>
+<li>new_tag</li>
+</ul>
+
 
 
 

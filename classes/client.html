@@ -541,17 +541,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 	<td class="summary">When a client should get activated (focused and/or raised).</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#request::fullscreen">request::fullscreen</a></td>
-	<td class="summary">
-</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#request::maximized_horizontal">request::maximized_horizontal</a></td>
-	<td class="summary">
-</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#request::maximized_vertical">request::maximized_vertical</a></td>
+	<td class="name" ><a href="#request::geometry">request::geometry</a></td>
 	<td class="summary">
 </td>
 	</tr>
@@ -595,6 +585,10 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 	<tr>
 	<td class="name" ><a href="#property::floating_geometry">property::floating_geometry</a></td>
 	<td class="summary">The last geometry when client was floating.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#request::titlebars">request::titlebars</a></td>
+	<td class="summary">Emited when a client need to get a titlebar.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#.marked">.marked</a></td>
@@ -2865,44 +2859,32 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 </dd>
     <dt>
-    <a name = "request::fullscreen"></a>
-    <strong>request::fullscreen</strong>
+    <a name = "request::geometry"></a>
+    <strong>request::geometry</strong>
     </dt>
     <dd>
 
 
 
 
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "request::maximized_horizontal"></a>
-    <strong>request::maximized_horizontal</strong>
-    </dt>
-    <dd>
-
-
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "request::maximized_vertical"></a>
-    <strong>request::maximized_vertical</strong>
-    </dt>
-    <dd>
-
-
-
-
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+            <span class="types"><a class="type" href="../classes/client.html#">client</a></span>
+         The client
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Why and what to resize. This is used for the
+ handlers to know if they are capable of applying the new geometry.
+        </li>
+        <li><span class="parameter">Additional</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         arguments. Each context handler may
+ interpret this differently.
+         (<em>default</em> {})
+        </li>
+    </ul>
 
 
 
@@ -3048,6 +3030,33 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     The last geometry when client was floating.
 
 
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request::titlebars"></a>
+    <strong>request::titlebars</strong>
+    </dt>
+    <dd>
+    Emited when a client need to get a titlebar.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">content</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The context (like &ldquo;rules&rdquo;)
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">hints</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Some hints.
+         (<em>default</em> nil)
+        </li>
+    </ul>
 
 
 
@@ -3737,7 +3746,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#awful.client.is_transient_for">client.is_transient_for</a>
+         <a href="../classes/client.html#client:is_transient_for">client.is_transient_for</a>
     </ul>
 
 
