@@ -165,15 +165,39 @@
 </ul>
 
 
+<p> <h3>Compositing</h3></p>
+
 <p> It is possible to compose placement function using the <code>+</code> or <code>*</code> operator:</p>
 
+<p><img src="../images/AUTOGEN_awful_placement_compose.svg" alt="Usage example" /></p>
+
 <pre>
-<span class="keyword">local</span> f = (awful.placement.right + awful.placement.left)
+<span class="comment">-- 'right' will be replaced by 'left'
+</span><span class="keyword">local</span> f = (awful.placement.right + awful.placement.left)
 f(client.focus)
 </pre>
 
 
-<p> ### Common arguments</p>
+<p><img src="../images/AUTOGEN_awful_placement_compose2.svg" alt="Usage example" /></p>
+
+<pre>
+<span class="comment">-- Simulate Windows 7 'edge snap' (also called aero snap) feature
+</span><span class="keyword">local</span> axis = <span class="string">'vertically'</span>
+
+<span class="keyword">local</span> f = awful.placement.scale
+  + awful.placement.left
+  + (axis <span class="keyword">and</span> awful.placement[<span class="string">'maximize_'</span>..axis] <span class="keyword">or</span> <span class="keyword">nil</span>)
+
+<span class="keyword">local</span> geo = f(client.focus, {honor_workarea=<span class="keyword">true</span>, to_percent = <span class="number">0.5</span>})
+</pre>
+
+
+<p> <h3>Common arguments</h3></p>
+
+<p> <strong>pretend</strong> (<em>boolean</em>):</p>
+
+<p> Do not apply the new geometry. This is useful if only the return values is
+ necessary.</p>
 
 <p> <strong>honor_workarea</strong> (<em>boolean</em>):</p>
 
@@ -201,6 +225,10 @@ f(client.focus)
 
 <p> <strong>attach</strong> (<em>boolean</em>):</p>
 
+<p> <strong>offset</strong> (<em>table or number</em>):</p>
+
+<p> The offset(s) to apply to the new geometry.</p>
+
 <p> <strong>store_geometry</strong> (<em>boolean</em>):</p>
 
 <p> Keep a single history of each type of placement. It can be restored using
@@ -215,7 +243,7 @@ f(client.focus)
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008 Julien Danjou, Emmanuel Lepage Vallee 2016</li>
-        <li><strong>Release</strong>: master-gcf4324f</li>
+        <li><strong>Release</strong>: master-gdbd0931</li>
         <li><strong>Author</strong>: Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;,Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -236,12 +264,16 @@ f(client.focus)
 	<td class="summary">Place the client where there&rsquo;s place available with minimum overlap.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#under_mouse">under_mouse (c)</a></td>
+	<td class="name" ><a href="#under_mouse">under_mouse (d[, args={}])</a></td>
 	<td class="summary">Place the client under the mouse.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#next_to_mouse">next_to_mouse ([c=focused[, offset=apply_dpi(5)]])</a></td>
 	<td class="summary">Place the client next to the mouse.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#resize_to_mouse">resize_to_mouse (d[, args={}])</a></td>
+	<td class="summary">Resize the drawable to the cursor.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#align">align (d[, args={}])</a></td>
@@ -316,6 +348,10 @@ f(client.focus)
 	<td class="summary">Maximize a drawable horizontally, vertically or both.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#scale">scale ([d=client.focus[, args={}]])</a></td>
+	<td class="summary">Scale the drawable by either a relative or absolute percent.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#maximize_vertically">maximize_vertically (d[, args={}])</a></td>
 	<td class="summary">Vetically maximize the drawable in the parent area.</td>
 	</tr>
@@ -355,7 +391,7 @@ f(client.focus)
 
 <p><strong>Usage example output</strong>:</p>
 
-<pre><code>Closest corner: bottom_right
+<pre><code>Closest corner: top_left
 </code></pre>
 
 
@@ -376,9 +412,12 @@ f(client.focus)
 
     <h3>Returns:</h3>
     <ol>
-
+        <li>
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry</li>
+        <li>
            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-        The corner name
+        The corner name</li>
     </ol>
 
 
@@ -391,7 +430,7 @@ f(client.focus)
 
  <span class="comment">-- It is possible to emulate the mouse API to get the closest corner of
 </span> <span class="comment">-- random area
-</span><span class="keyword">local</span> corner = awful.placement.closest_corner(
+</span><span class="keyword">local</span> _, corner = awful.placement.closest_corner(
     {coords=<span class="keyword">function</span>() <span class="keyword">return</span> {x = <span class="number">100</span>, y=<span class="number">100</span>} <span class="keyword">end</span>},
     {include_sides = <span class="keyword">true</span>, bounding_rect = {x=<span class="number">0</span>, y=<span class="number">0</span>, width=<span class="number">200</span>, height=<span class="number">200</span>}}
 )
@@ -459,6 +498,12 @@ After:  x=10, y=10, width=100, height=100
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -472,7 +517,7 @@ awful.placement.no_overlap(client.focus)
 </dd>
     <dt>
     <a name = "under_mouse"></a>
-    <strong>under_mouse (c)</strong>
+    <strong>under_mouse (d[, args={}])</strong>
     </dt>
     <dd>
     Place the client under the mouse. </p>
@@ -481,15 +526,22 @@ awful.placement.no_overlap(client.focus)
 
 
     <ul>
-        <li><span class="parameter">c</span>
-         The client.
+        <li><span class="parameter">d</span>
+            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
+         A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
+        </li>
+        <li><span class="parameter">args</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Other arguments
+         (<em>default</em> {})
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        The new client geometry.
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
     </ol>
 
 
@@ -529,7 +581,8 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-        The new client geometry.
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
     </ol>
 
 
@@ -538,6 +591,47 @@ awful.placement.no_overlap(client.focus)
     <ul>
         <pre class="example">awful.placement.next_to_mouse(client.focus)</pre>
     </ul>
+
+</dd>
+    <dt>
+    <a name = "resize_to_mouse"></a>
+    <strong>resize_to_mouse (d[, args={}])</strong>
+    </dt>
+    <dd>
+    Resize the drawable to the cursor. </p>
+
+<p> Valid args:</p>
+
+<ul>
+<li><em>axis</em>: The axis (vertical or horizontal). If none is
+ specified, then the drawable will be resized on both axis.</li>
+</ul>
+
+
+<p><img src="../images/AUTOGEN_awful_placement_resize_to_mouse.svg" alt="Usage example" />
+
+
+    <ul>
+        <li><span class="parameter">d</span>
+            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
+         A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
+        </li>
+        <li><span class="parameter">args</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Other arguments
+         (<em>default</em> {})
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
+
+
+
 
 </dd>
     <dt>
@@ -579,6 +673,12 @@ awful.placement.no_overlap(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -606,6 +706,12 @@ awful.placement.no_overlap(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -637,6 +743,12 @@ awful.placement.no_overlap(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -668,6 +780,12 @@ awful.placement.no_overlap(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -699,6 +817,12 @@ awful.placement.no_overlap(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -730,6 +854,12 @@ awful.placement.no_overlap(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -761,6 +891,12 @@ awful.placement.no_overlap(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -792,6 +928,12 @@ awful.placement.no_overlap(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -825,6 +967,12 @@ awful.placement.top(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -856,6 +1004,12 @@ awful.placement.top(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -920,6 +1074,12 @@ awful.placement.center_vertical(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -959,6 +1119,12 @@ a table with multiple directions.</li>
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -992,6 +1158,12 @@ a table with multiple directions.</li>
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -1023,6 +1195,12 @@ a table with multiple directions.</li>
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -1060,6 +1238,12 @@ a table with multiple directions.</li>
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -1093,6 +1277,12 @@ placement.stretch_up(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -1132,6 +1322,52 @@ placement.stretch_up(client.focus)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "scale"></a>
+    <strong>scale ([d=client.focus[, args={}]])</strong>
+    </dt>
+    <dd>
+    Scale the drawable by either a relative or absolute percent. </p>
+
+<p> Valid args:</p>
+
+<p> <strong>to_percent</strong> : A number between 0 and 1. It represent a percent related to
+  the parent geometry.
+ <strong>by_percent</strong> : A number between 0 and 1. It represent a percent related to
+  the current size.
+ <strong>direction</strong>: Nothing or &ldquo;left&rdquo;, &ldquo;right&rdquo;, &ldquo;up&rdquo;, &ldquo;down&rdquo;.
+
+
+    <ul>
+        <li><span class="parameter">d</span>
+            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
+         A drawable (like <a href="../classes/client.html#">client</a> or <a href="../classes/wibox.html#">wibox</a>)
+         (<em>default</em> client.focus)
+        </li>
+        <li><span class="parameter">args</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The arguments
+         (<em>default</em> {})
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
 
 
 
@@ -1238,7 +1474,7 @@ placement.stretch_up(client.focus)
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-04-30 13:56:51 </i>
+<i style="float:right;">Last updated 2016-05-01 03:32:59 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

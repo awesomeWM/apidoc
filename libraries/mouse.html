@@ -33,8 +33,13 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
-<li><a href="#Tables">Tables</a></li>
+<li><a href="#Object_properties">Object properties</a></li>
+<li><a href="#Request_handlers">Request handlers</a></li>
+<li><a href="#Theme_variables">Theme variables</a></li>
+<li><a href="#Deprecated_functions">Deprecated functions</a></li>
 <li><a href="#Fields">Fields</a></li>
+<li><a href="#lib_awful_mouse_resize_Functions">lib.awful.mouse.resize Functions</a></li>
+<li><a href="#lib_awful_mouse_snap_Functions">lib.awful.mouse.snap Functions</a></li>
 </ul>
 
 
@@ -155,12 +160,53 @@
 <div id="content">
 
 <h1>Module <code>mouse</code></h1>
-<p>awesome mouse API</p>
+<p>awesome mouse API.</p>
+<p> The mouse buttons are represented as index. The common ones are:</p>
+
+<p> <img src="../images/mouse.svg" alt="Client geometry" /></p>
+
+<p> It is possible to be notified of mouse events by connecting to various
+ <a href="../classes/client.html#">client</a>, <code>widget</code>s and <a href="../classes/wibox.html#">wibox</a> signals:</p>
+
+<ul>
+<li><code>mouse::enter</code></li>
+<li><code>mouse::leave</code></li>
+<li><code>mouse::press</code></li>
+<li><code>mouse::release</code></li>
+<li><code>mouse::move</code></li>
+</ul>
+
+
+<p> It is also possible to add generic mouse button callbacks for <a href="../classes/client.html#">client</a>s,
+ <code>wiboxe</code>s and the <a href="../libraries/root.html#">root</a> window. Those are set in the default <code>rc.lua</code> as such:</p>
+
+<p> <strong>root</strong>:</p>
+
+<pre>
+root.buttons(awful.util.<span class="global">table</span>.join(
+    awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span> () mymainmenu:toggle() <span class="keyword">end</span>),
+    awful.button({ }, <span class="number">4</span>, awful.tag.viewnext),
+    awful.button({ }, <span class="number">5</span>, awful.tag.viewprev)
+))
+</pre>
+
+
+<p> <strong>client</strong>:</p>
+
+<pre>
+clientbuttons = awful.util.<span class="global">table</span>.join(
+    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c) client.focus = c; c:raise() <span class="keyword">end</span>),
+    awful.button({ modkey }, <span class="number">1</span>, awful.mouse.client.move),
+    awful.button({ modkey }, <span class="number">3</span>, awful.mouse.client.resize)
+)
+</pre>
+
+
 <p> See also <a href="../libraries/mousegrabber.html#">mousegrabber</a></p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008-2009 Julien Danjou</li>
-        <li><strong>Release</strong>: master-gcf4324f</li>
+        <li><strong>Release</strong>: master-gdbd0931</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -168,30 +214,134 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#coords">coords (coords_table, silent)</a></td>
-	<td class="summary">Get or set the mouse coords.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#object_under_pointer">object_under_pointer ()</a></td>
 	<td class="summary">Get the client or any object which is under the pointer.</td>
 	</tr>
-</table>
-<h2><a href="#Tables">Tables</a></h2>
-<table class="function_list">
 	<tr>
-	<td class="name" ><a href="#mouse">mouse</a></td>
-	<td class="summary">Mouse library.</td>
+	<td class="name" ><a href="#awful.mouse.client.move">awful.mouse.client.move (c, snap, finished_cb)</a></td>
+	<td class="summary">Move a client.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#coords_table">coords_table</a></td>
-	<td class="summary">A table with X and Y coordinates.</td>
+	<td class="name" ><a href="#awful.mouse.wibox.move">awful.mouse.wibox.move (w)</a></td>
+	<td class="summary">Move the wibox under the cursor.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.mouse.client.resize">awful.mouse.client.resize (c, corner[, args={}])</a></td>
+	<td class="summary">Resize a client.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#coords">coords ([coords_table=nil[, silent=nil]])</a></td>
+	<td class="summary">Get or set the mouse coords.</td>
+	</tr>
+</table>
+<h2><a href="#Object_properties">Object properties</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#screen">screen</a></td>
+	<td class="summary">The <a href="../classes/screen.html#">screen</a> under the cursor</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#current_client">current_client</a></td>
+	<td class="summary">Get the client currently under the mouse cursor.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#current_wibox">current_wibox</a></td>
+	<td class="summary">Get the wibox currently under the mouse cursor.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#is_left_mouse_button_pressed">is_left_mouse_button_pressed</a></td>
+	<td class="summary">True if the left mouse button is pressed.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#is_right_mouse_button_pressed">is_right_mouse_button_pressed</a></td>
+	<td class="summary">True if the right mouse button is pressed.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#is_middle_mouse_button_pressed">is_middle_mouse_button_pressed</a></td>
+	<td class="summary">True if the middle mouse button is pressed.</td>
+	</tr>
+</table>
+<h2><a href="#Request_handlers">Request handlers</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awful.mouse.resize_handler">awful.mouse.resize_handler</a></td>
+	<td class="summary">Default handler for <code>request::geometry</code> signals with <a href="../libraries/mouse.html#awful.mouse.client.resize">mouse.resize</a> context.</td>
+	</tr>
+</table>
+<h2><a href="#Theme_variables">Theme variables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#beautiful.snap_bg">beautiful.snap_bg</a></td>
+	<td class="summary">The snap outline background color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.snap_border_width">beautiful.snap_border_width</a></td>
+	<td class="summary">The snap outline width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.snap_shape">beautiful.snap_shape</a></td>
+	<td class="summary">The snap outline shape.</td>
+	</tr>
+</table>
+<h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awful.mouse.client_under_pointer">awful.mouse.client_under_pointer</a></td>
+	<td class="summary">Get the client object under the pointer.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.mouse.client.dragtotag.border">awful.mouse.client.dragtotag.border</a></td>
+	<td class="summary">Move a client to a tag by dragging it onto the left / right side of the screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.mouse.client.corner">awful.mouse.client.corner</a></td>
+	<td class="summary">Get a client corner coordinates.</td>
 	</tr>
 </table>
 <h2><a href="#Fields">Fields</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#screen">screen</a></td>
-	<td class="summary">The <a href="../classes/screen.html#">screen</a> under the cursor</td>
+	<td class="name" ><a href="#awful.mouse.snap.default_distance">awful.mouse.snap.default_distance</a></td>
+	<td class="summary">The default snap distance.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.mouse.snap.edge_enabled">awful.mouse.snap.edge_enabled</a></td>
+	<td class="summary">Enable screen edges snapping.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.mouse.snap.client_enabled">awful.mouse.snap.client_enabled</a></td>
+	<td class="summary">Enable client to client snapping.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.mouse.drag_to_tag.enabled">awful.mouse.drag_to_tag.enabled</a></td>
+	<td class="summary">Enable changing tag when a client is dragged to the edge of the screen.</td>
+	</tr>
+</table>
+<h2><a href="#lib_awful_mouse_resize_Functions">lib.awful.mouse.resize Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awful.mouse.resize.set_mode">awful.mouse.resize.set_mode (m)</a></td>
+	<td class="summary">Set the resize mode.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.mouse.resize.add_enter_callback">awful.mouse.resize.add_enter_callback (cb, context)</a></td>
+	<td class="summary">Add a initialization callback.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.mouse.resize.add_move_callback">awful.mouse.resize.add_move_callback (cb, context)</a></td>
+	<td class="summary">Add a &ldquo;move&rdquo; callback.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.mouse.resize.add_leave_callback">awful.mouse.resize.add_leave_callback (cb, context)</a></td>
+	<td class="summary">Add a &ldquo;leave&rdquo; callback
+ This callback is executed just before the <a href="../libraries/mousegrabber.html#">mousegrabber</a> stop</td>
+	</tr>
+</table>
+<h2><a href="#lib_awful_mouse_snap_Functions">lib.awful.mouse.snap Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awful.mouse.snap">awful.mouse.snap (c, snap, x, y, fixed_x, fixed_y)</a></td>
+	<td class="summary">Snap a client to the closest client or screen edge.</td>
 	</tr>
 </table>
 
@@ -202,38 +352,6 @@
     <h2 class="section-header "><a name="Functions"></a>Functions</h2>
 
     <dl class="function">
-    <dt>
-    <a name = "coords"></a>
-    <strong>coords (coords_table, silent)</strong>
-    </dt>
-    <dd>
-    Get or set the mouse coords.
-
-
-    <ul>
-        <li><span class="parameter">coords_table</span>
-            <span class="types"><a class="type" href="../libraries/mouse.html#coords">coords_table</a></span>
-         None or a table with x and y keys as mouse
-  coordinates.
-        </li>
-        <li><span class="parameter">silent</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Disable mouse::enter or mouse::leave events that
-  could be triggered by the pointer when moving.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="../libraries/mouse.html#coords">coords_table</a></span>
-        A table with mouse coordinates.
-    </ol>
-
-
-
-
-</dd>
     <dt>
     <a name = "object_under_pointer"></a>
     <strong>object_under_pointer ()</strong>
@@ -254,18 +372,25 @@
 
 
 </dd>
-</dl>
-    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
-
-    <dl class="function">
     <dt>
-    <a name = "mouse"></a>
-    <strong>mouse</strong>
+    <a name = "awful.mouse.client.move"></a>
+    <strong>awful.mouse.client.move (c, snap, finished_cb)</strong>
     </dt>
     <dd>
-    Mouse library.
+    Move a client.
 
 
+    <ul>
+        <li><span class="parameter">c</span>
+         The client to move, or the focused one if nil.
+        </li>
+        <li><span class="parameter">snap</span>
+         The pixel to snap clients.
+        </li>
+        <li><span class="parameter">finished_cb</span>
+         Deprecated, do not use
+        </li>
+    </ul>
 
 
 
@@ -273,27 +398,421 @@
 
 </dd>
     <dt>
-    <a name = "coords_table"></a>
-    <strong>coords_table</strong>
+    <a name = "awful.mouse.wibox.move"></a>
+    <strong>awful.mouse.wibox.move (w)</strong>
     </dt>
     <dd>
-    A table with X and Y coordinates.
+    Move the wibox under the cursor.
 
 
-    <h3>Fields:</h3>
     <ul>
-        <li><span class="parameter">x</span>
-         X coordinate.
+        <li><span class="parameter">w</span>
+         The wibox to move, or none to use that under the pointer
         </li>
-        <li><span class="parameter">y</span>
-         Y coordinate.
-        </li>
-        <li><span class="parameter">buttons</span>
-        <p> Table containing the status of buttons, e.g. field [1] is true</p>
+    </ul>
 
-<pre><code>    when button 1 is pressed.
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.client.resize"></a>
+    <strong>awful.mouse.client.resize (c, corner[, args={}])</strong>
+    </dt>
+    <dd>
+    Resize a client.
+
+
+    <ul>
+        <li><span class="parameter">c</span>
+         The client to resize, or the focused one by default.
+        </li>
+        <li><span class="parameter">corner</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The corner to grab on resize. Auto detected by default.
+        </li>
+        <li><span class="parameter">args</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A set of <a href="../libraries/awful.placement.html#">awful.placement</a> arguments
+         (<em>default</em> {})
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        The corner (or side) name
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "coords"></a>
+    <strong>coords ([coords_table=nil[, silent=nil]])</strong>
+    </dt>
+    <dd>
+    <p>Get or set the mouse coords. </p>
+
+<p><img src="../images/AUTOGEN_awful_mouse_coords.svg" alt="Usage example" /></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>235
 </code></pre>
 
+
+
+    <ul>
+        <li><span class="parameter">coords_table</span> None or a table with x and y keys as mouse
+  coordinates.
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">integer</span></span>
+         The mouse horizontal position
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">integer</span></span>
+         The mouse vertical position
+         (<em>default</em> nil)
+        </li>
+        </li></ul>
+        <li><span class="parameter">silent</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Disable mouse::enter or mouse::leave events that
+  could be triggered by the pointer when moving.
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">integer</span></span>
+        table.x The horizontal position</li>
+        <li>
+           <span class="types"><span class="type">integer</span></span>
+        table.y The vertical position</li>
+        <li>
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        table.buttons Table containing the status of buttons, e.g. field [1] is true
+  when button 1 is pressed.</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="comment">-- Get the position
+</span><span class="global">print</span>(mouse.coords().x)
+
+ <span class="comment">-- Change the position
+</span>mouse.coords {
+    x = <span class="number">185</span>,
+    y = <span class="number">10</span>
+}</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Object_properties"></a>Object properties</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "screen"></a>
+    <strong>screen</strong>
+    </dt>
+    <dd>
+    The <a href="../classes/screen.html#">screen</a> under the cursor
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">screen</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "current_client"></a>
+    <strong>current_client</strong>
+    </dt>
+    <dd>
+    Get the client currently under the mouse cursor.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">The</span>
+            <span class="types"><a class="type" href="../classes/client.html#">client</a> or <span class="type">nil</span></span>
+         client
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "current_wibox"></a>
+    <strong>current_wibox</strong>
+    </dt>
+    <dd>
+    Get the wibox currently under the mouse cursor.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">The</span>
+            <span class="types"><a class="type" href="../classes/wibox.html#">wibox</a> or <span class="type">nil</span></span>
+         wibox
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "is_left_mouse_button_pressed"></a>
+    <strong>is_left_mouse_button_pressed</strong>
+    </dt>
+    <dd>
+    True if the left mouse button is pressed.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "is_right_mouse_button_pressed"></a>
+    <strong>is_right_mouse_button_pressed</strong>
+    </dt>
+    <dd>
+    True if the right mouse button is pressed.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "is_middle_mouse_button_pressed"></a>
+    <strong>is_middle_mouse_button_pressed</strong>
+    </dt>
+    <dd>
+    True if the middle mouse button is pressed.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Request_handlers"></a>Request handlers</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awful.mouse.resize_handler"></a>
+    <strong>awful.mouse.resize_handler</strong>
+    </dt>
+    <dd>
+    Default handler for <code>request::geometry</code> signals with <a href="../libraries/mouse.html#awful.mouse.client.resize">mouse.resize</a> context.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+            <span class="types"><a class="type" href="../classes/client.html#">client</a></span>
+         The client
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The context
+        </li>
+        <li><span class="parameter">hints</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The hints to pass to the handler
+         (<em>default</em> {})
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Theme_variables"></a>Theme variables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "beautiful.snap_bg"></a>
+    <strong>beautiful.snap_bg</strong>
+    </dt>
+    <dd>
+    The snap outline background color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">color</span>, <a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a>, <span class="type">gradient</span> or <span class="type">pattern</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.snap_border_width"></a>
+    <strong>beautiful.snap_border_width</strong>
+    </dt>
+    <dd>
+    The snap outline width.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">integer</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.snap_shape"></a>
+    <strong>beautiful.snap_shape</strong>
+    </dt>
+    <dd>
+    The snap outline shape.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">function</span></span>
+         A <a href="../libraries/gears.shape.html#">gears.shape</a> compatible function
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Deprecated_functions"></a>Deprecated functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awful.mouse.client_under_pointer"></a>
+    <strong>awful.mouse.client_under_pointer</strong>
+    </dt>
+    <dd>
+    Get the client object under the pointer.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/mouse.html#current_client">current_client</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.client.dragtotag.border"></a>
+    <strong>awful.mouse.client.dragtotag.border</strong>
+    </dt>
+    <dd>
+    Move a client to a tag by dragging it onto the left / right side of the screen.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+         The client to move
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.client.corner"></a>
+    <strong>awful.mouse.client.corner</strong>
+    </dt>
+    <dd>
+    Get a client corner coordinates.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+            <span class="types"><a class="type" href="../classes/client.html#">client</a></span>
+         The client to get corner from, focused one by default.
+         (<em>default</em> client.focus)
+        </li>
+        <li><span class="parameter">corner</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The corner to use: auto, top_left, top_right, bottom_left,
+ bottom_right, left, right, top bottom. Default is auto, and auto find the
+ nearest corner.
         </li>
     </ul>
 
@@ -307,17 +826,212 @@
 
     <dl class="function">
     <dt>
-    <a name = "screen"></a>
-    <strong>screen</strong>
+    <a name = "awful.mouse.snap.default_distance"></a>
+    <strong>awful.mouse.snap.default_distance</strong>
     </dt>
     <dd>
-    The <a href="../classes/screen.html#">screen</a> under the cursor
+    The default snap distance.
 
 
     <ul>
-        <li><span class="parameter">screen</span>
+        <li><span class="parameter">default_distance</span>
+            <span class="types"><span class="type">integer</span></span>
 
 
+         (<em>default</em> 8)
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/mouse.html#awful.mouse.snap">awful.mouse.snap</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.snap.edge_enabled"></a>
+    <strong>awful.mouse.snap.edge_enabled</strong>
+    </dt>
+    <dd>
+    Enable screen edges snapping.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.snap.client_enabled"></a>
+    <strong>awful.mouse.snap.client_enabled</strong>
+    </dt>
+    <dd>
+    Enable client to client snapping.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.drag_to_tag.enabled"></a>
+    <strong>awful.mouse.drag_to_tag.enabled</strong>
+    </dt>
+    <dd>
+    Enable changing tag when a client is dragged to the edge of the screen.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="lib_awful_mouse_resize_Functions"></a>lib.awful.mouse.resize Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awful.mouse.resize.set_mode"></a>
+    <strong>awful.mouse.resize.set_mode (m)</strong>
+    </dt>
+    <dd>
+    Set the resize mode.
+ The available modes are:</p>
+
+<ul>
+<li><strong>live</strong>: Resize the layout everytime the mouse move</li>
+<li><strong>after</strong>: Resize the layout only when the mouse is released</li>
+</ul>
+
+
+<p> Some clients, such as XTerm, may lose information if resized too often.
+
+
+    <ul>
+        <li><span class="parameter">m</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The mode
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.resize.add_enter_callback"></a>
+    <strong>awful.mouse.resize.add_enter_callback (cb, context)</strong>
+    </dt>
+    <dd>
+    Add a initialization callback.
+ This callback will be executed before the mouse grabbing start
+
+
+    <ul>
+        <li><span class="parameter">cb</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback (or nil)
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The callback context
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.resize.add_move_callback"></a>
+    <strong>awful.mouse.resize.add_move_callback (cb, context)</strong>
+    </dt>
+    <dd>
+    Add a &ldquo;move&rdquo; callback.
+ This callback is executed in &ldquo;after&rdquo; mode (see <a href="../libraries/mouse.html#awful.mouse.resize.set_mode">set_mode</a>) instead of
+ applying the operation.
+
+
+    <ul>
+        <li><span class="parameter">cb</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback (or nil)
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The callback context
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.resize.add_leave_callback"></a>
+    <strong>awful.mouse.resize.add_leave_callback (cb, context)</strong>
+    </dt>
+    <dd>
+    Add a &ldquo;leave&rdquo; callback
+ This callback is executed just before the <a href="../libraries/mousegrabber.html#">mousegrabber</a> stop
+
+
+    <ul>
+        <li><span class="parameter">cb</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback (or nil)
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The callback context
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="lib_awful_mouse_snap_Functions"></a>lib.awful.mouse.snap Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awful.mouse.snap"></a>
+    <strong>awful.mouse.snap (c, snap, x, y, fixed_x, fixed_y)</strong>
+    </dt>
+    <dd>
+    Snap a client to the closest client or screen edge.
+
+
+    <ul>
+        <li><span class="parameter">c</span>
+         The client to snap.
+        </li>
+        <li><span class="parameter">snap</span>
+         The pixel to snap clients.
+        </li>
+        <li><span class="parameter">x</span>
+         The client x coordinate.
+        </li>
+        <li><span class="parameter">y</span>
+         The client y coordinate.
+        </li>
+        <li><span class="parameter">fixed_x</span>
+         True if the client isn&rsquo;t allowed to move in the x direction.
+        </li>
+        <li><span class="parameter">fixed_y</span>
+         True if the client isn&rsquo;t allowed to move in the y direction.
         </li>
     </ul>
 
@@ -333,7 +1047,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-04-30 13:56:51 </i>
+<i style="float:right;">Last updated 2016-05-01 03:32:59 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
