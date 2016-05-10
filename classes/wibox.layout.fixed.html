@@ -32,6 +32,7 @@
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Functions">Functions</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
 
@@ -165,11 +166,43 @@
     </ul>
 
 
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed.horizontal">wibox.layout.fixed.horizontal (...)</a></td>
+	<td class="summary">Returns a new horizontal fixed layout.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed.vertical">wibox.layout.fixed.vertical (...)</a></td>
+	<td class="summary">Returns a new vertical fixed layout.</td>
+	</tr>
+</table>
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:layout">wibox.layout.fixed:layout (context, width, height)</a></td>
-	<td class="summary">Layout a fixed layout.</td>
+	<td class="name" ><a href="#wibox.layout.fixed:set">wibox.layout.fixed:set (index, widget2)</a></td>
+	<td class="summary">Set a widget at a specific index, replace the current one</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:replace_widget">wibox.layout.fixed:replace_widget (widget, widget2[, recursive=false])</a></td>
+	<td class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code></td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:swap">wibox.layout.fixed:swap (index1, index2)</a></td>
+	<td class="summary">Swap 2 widgets in a layout</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:swap_widgets">wibox.layout.fixed:swap_widgets (widget1, widget2[, recursive=false])</a></td>
+	<td class="summary">Swap 2 widgets in a layout
+ If widget1 is present multiple time, only the first instance is swapped</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:get_children">wibox.layout.fixed:get_children (layout)</a></td>
+	<td class="summary">Get all children of this layout.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:reset">wibox.layout.fixed:reset (layout)</a></td>
+	<td class="summary">Reset a ratio layout.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:add">wibox.layout.fixed:add (...)</a></td>
@@ -198,41 +231,12 @@
 	<td class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code></td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:swap">wibox.layout.fixed:swap (index1, index2)</a></td>
-	<td class="summary">Swap 2 widgets in a layout</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:swap_widgets">wibox.layout.fixed:swap_widgets (widget1, widget2[, recursive=false])</a></td>
-	<td class="summary">Swap 2 widgets in a layout
- If widget1 is present multiple time, only the first instance is swapped</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:set">wibox.layout.fixed:set (index, widget2)</a></td>
-	<td class="summary">Set a widget at a specific index, replace the current one</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:insert">wibox.layout.fixed:insert (index, widget)</a></td>
 	<td class="summary">Insert a new widget in the layout at position <code>index</code></td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:fit">wibox.layout.fixed:fit (context, orig_width, orig_height)</a></td>
-	<td class="summary">Fit the fixed layout into the given space</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:reset">wibox.layout.fixed:reset ()</a></td>
-	<td class="summary">Reset a fixed layout.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:fill_space">wibox.layout.fixed:fill_space (val)</a></td>
 	<td class="summary">Set the layout&rsquo;s fill_space property.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:horizontal">wibox.layout.fixed:horizontal (...)</a></td>
-	<td class="summary">Returns a new horizontal fixed layout.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:vertical">wibox.layout.fixed:vertical (...)</a></td>
-	<td class="summary">Returns a new vertical fixed layout.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:set_spacing">wibox.layout.fixed:set_spacing (spacing)</a></td>
@@ -244,26 +248,218 @@
 <br/>
 
 
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "wibox.layout.fixed.horizontal"></a>
+    <strong>wibox.layout.fixed.horizontal (...)</strong>
+    </dt>
+    <dd>
+    Returns a new horizontal fixed layout.  Each widget will get as much space as it
+ asks for and each widget will be drawn next to its neighboring widget.
+ Widgets can be added via :add() or as arguments to this function.
+
+
+    <ul>
+        <li><span class="parameter">...</span>
+            <span class="types"><span class="type">widget</span></span>
+         Widgets that should be added to the layout.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed.vertical"></a>
+    <strong>wibox.layout.fixed.vertical (...)</strong>
+    </dt>
+    <dd>
+    Returns a new vertical fixed layout.  Each widget will get as much space as it
+ asks for and each widget will be drawn next to its neighboring widget.
+ Widgets can be added via :add() or as arguments to this function.
+
+
+    <ul>
+        <li><span class="parameter">...</span>
+            <span class="types"><span class="type">widget</span></span>
+         Widgets that should be added to the layout.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Methods"></a>Methods</h2>
 
     <dl class="function">
     <dt>
-    <a name = "wibox.layout.fixed:layout"></a>
-    <strong>wibox.layout.fixed:layout (context, width, height)</strong>
+    <a name = "wibox.layout.fixed:set"></a>
+    <strong>wibox.layout.fixed:set (index, widget2)</strong>
     </dt>
     <dd>
-    Layout a fixed layout.  Each widget gets just the space it asks for.
+    Set a widget at a specific index, replace the current one
 
 
     <ul>
-        <li><span class="parameter">context</span>
-         The context in which we are drawn.
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">number</span></span>
+         A widget or a widget index
         </li>
-        <li><span class="parameter">width</span>
-         The available width.
+        <li><span class="parameter">widget2</span>
+         The widget to take the place of the first one
         </li>
-        <li><span class="parameter">height</span>
-         The available height.
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed:replace_widget"></a>
+    <strong>wibox.layout.fixed:replace_widget (widget, widget2[, recursive=false])</strong>
+    </dt>
+    <dd>
+    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>
+
+
+    <ul>
+        <li><span class="parameter">widget</span>
+         The widget to replace
+        </li>
+        <li><span class="parameter">widget2</span>
+         The widget to replace <code>widget</code> with
+        </li>
+        <li><span class="parameter">recursive</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Digg in all compatible layouts to find the widget.
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed:swap"></a>
+    <strong>wibox.layout.fixed:swap (index1, index2)</strong>
+    </dt>
+    <dd>
+    Swap 2 widgets in a layout
+
+
+    <ul>
+        <li><span class="parameter">index1</span>
+            <span class="types"><span class="type">number</span></span>
+         The first widget index
+        </li>
+        <li><span class="parameter">index2</span>
+            <span class="types"><span class="type">number</span></span>
+         The second widget index
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed:swap_widgets"></a>
+    <strong>wibox.layout.fixed:swap_widgets (widget1, widget2[, recursive=false])</strong>
+    </dt>
+    <dd>
+    Swap 2 widgets in a layout
+ If widget1 is present multiple time, only the first instance is swapped
+
+
+    <ul>
+        <li><span class="parameter">widget1</span>
+         The first widget
+        </li>
+        <li><span class="parameter">widget2</span>
+         The second widget
+        </li>
+        <li><span class="parameter">recursive</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Digg in all compatible layouts to find the widget.
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed:get_children"></a>
+    <strong>wibox.layout.fixed:get_children (layout)</strong>
+    </dt>
+    <dd>
+    Get all children of this layout.
+
+
+    <ul>
+        <li><span class="parameter">layout</span>
+         The layout you are modifying.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a list of all widgets
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed:reset"></a>
+    <strong>wibox.layout.fixed:reset (layout)</strong>
+    </dt>
+    <dd>
+    Reset a ratio layout.  This removes all widgets from the layout.
+
+
+    <ul>
+        <li><span class="parameter">layout</span>
+         The layout you are modifying.
         </li>
     </ul>
 
@@ -418,99 +614,6 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.fixed:swap"></a>
-    <strong>wibox.layout.fixed:swap (index1, index2)</strong>
-    </dt>
-    <dd>
-    Swap 2 widgets in a layout
-
-
-    <ul>
-        <li><span class="parameter">index1</span>
-            <span class="types"><span class="type">number</span></span>
-         The first widget index
-        </li>
-        <li><span class="parameter">index2</span>
-            <span class="types"><span class="type">number</span></span>
-         The second widget index
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.fixed:swap_widgets"></a>
-    <strong>wibox.layout.fixed:swap_widgets (widget1, widget2[, recursive=false])</strong>
-    </dt>
-    <dd>
-    Swap 2 widgets in a layout
- If widget1 is present multiple time, only the first instance is swapped
-
-
-    <ul>
-        <li><span class="parameter">widget1</span>
-         The first widget
-        </li>
-        <li><span class="parameter">widget2</span>
-         The second widget
-        </li>
-        <li><span class="parameter">recursive</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Digg in all compatible layouts to find the widget.
-         (<em>default</em> false)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.fixed:set"></a>
-    <strong>wibox.layout.fixed:set (index, widget2)</strong>
-    </dt>
-    <dd>
-    Set a widget at a specific index, replace the current one
-
-
-    <ul>
-        <li><span class="parameter">index</span>
-            <span class="types"><span class="type">number</span></span>
-         A widget or a widget index
-        </li>
-        <li><span class="parameter">widget2</span>
-         The widget to take the place of the first one
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
-    </ol>
-
-
-
-
-</dd>
-    <dt>
     <a name = "wibox.layout.fixed:insert"></a>
     <strong>wibox.layout.fixed:insert (index, widget)</strong>
     </dt>
@@ -540,45 +643,6 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.fixed:fit"></a>
-    <strong>wibox.layout.fixed:fit (context, orig_width, orig_height)</strong>
-    </dt>
-    <dd>
-    Fit the fixed layout into the given space
-
-
-    <ul>
-        <li><span class="parameter">context</span>
-         The context in which we are fit.
-        </li>
-        <li><span class="parameter">orig_width</span>
-         The available width.
-        </li>
-        <li><span class="parameter">orig_height</span>
-         The available height.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.fixed:reset"></a>
-    <strong>wibox.layout.fixed:reset ()</strong>
-    </dt>
-    <dd>
-    Reset a fixed layout.  This removes all widgets from the layout.
-
-
-
-
-
-
-
-</dd>
-    <dt>
     <a name = "wibox.layout.fixed:fill_space"></a>
     <strong>wibox.layout.fixed:fill_space (val)</strong>
     </dt>
@@ -592,50 +656,6 @@
         <li><span class="parameter">val</span>
 
 
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.fixed:horizontal"></a>
-    <strong>wibox.layout.fixed:horizontal (...)</strong>
-    </dt>
-    <dd>
-    Returns a new horizontal fixed layout.  Each widget will get as much space as it
- asks for and each widget will be drawn next to its neighboring widget.
- Widgets can be added via :add() or as arguments to this function.
-
-
-    <ul>
-        <li><span class="parameter">...</span>
-            <span class="types"><span class="type">widget</span></span>
-         Widgets that should be added to the layout.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.fixed:vertical"></a>
-    <strong>wibox.layout.fixed:vertical (...)</strong>
-    </dt>
-    <dd>
-    Returns a new vertical fixed layout.  Each widget will get as much space as it
- asks for and each widget will be drawn next to its neighboring widget.
- Widgets can be added via :add() or as arguments to this function.
-
-
-    <ul>
-        <li><span class="parameter">...</span>
-            <span class="types"><span class="type">widget</span></span>
-         Widgets that should be added to the layout.
         </li>
     </ul>
 
