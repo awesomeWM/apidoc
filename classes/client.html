@@ -288,6 +288,18 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 	<td class="name" ><a href="#awful.client.run_or_raise">awful.client.run_or_raise (cmd, matcher, merge)</a></td>
 	<td class="summary">Switch to a client matching the given condition if running, else spawn it.</td>
 	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.client.focus.history.disable_tracking">awful.client.focus.history.disable_tracking ()</a></td>
+	<td class="summary">Disable history tracking.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.client.focus.history.enable_tracking">awful.client.focus.history.enable_tracking ()</a></td>
+	<td class="summary">Enable history tracking.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.client.focus.history.is_enabled">awful.client.focus.history.is_enabled ()</a></td>
+	<td class="summary">Is history tracking enabled?</td>
+	</tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
 <table class="function_list">
@@ -1210,6 +1222,78 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
      awful.client.run_or_raise(<span class="string">'urxvt'</span>, matcher)
  <span class="keyword">end</span>);</pre>
     </ul>
+
+</dd>
+    <dt>
+    <a name = "awful.client.focus.history.disable_tracking"></a>
+    <strong>awful.client.focus.history.disable_tracking ()</strong>
+    </dt>
+    <dd>
+    Disable history tracking. </p>
+
+<p> See <a href="../classes/client.html#awful.client.focus.history.enable_tracking">awful.client.focus.history.enable_tracking</a> to enable it again.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The internal value of <code>disabled_count</code> (calls to this
+   function without calling <a href="../classes/client.html#awful.client.focus.history.enable_tracking">awful.client.focus.history.enable_tracking</a>).
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.client.focus.history.enable_tracking"></a>
+    <strong>awful.client.focus.history.enable_tracking ()</strong>
+    </dt>
+    <dd>
+    Enable history tracking. </p>
+
+<p> This is the default, but can be disabled
+ through <a href="../classes/client.html#awful.client.focus.history.disable_tracking">awful.client.focus.history.disable_tracking</a>.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        True if history tracking has been enabled.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.client.focus.history.is_enabled"></a>
+    <strong>awful.client.focus.history.is_enabled ()</strong>
+    </dt>
+    <dd>
+    Is history tracking enabled?
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">true</span></span>
+        True is history tracking is enabled.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The number of times that tracking has been disabled.
+    </ol>
+
+
+
 
 </dd>
 </dl>
@@ -3746,7 +3830,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#awful.client.is_transient_for">client.is_transient_for</a>
+         <a href="../classes/client.html#client:is_transient_for">client.is_transient_for</a>
     </ul>
 
 
@@ -4297,7 +4381,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#request::geometry">geometry</a>
+         <a href="../classes/client.html#client:geometry">geometry</a>
     </ul>
 
 
