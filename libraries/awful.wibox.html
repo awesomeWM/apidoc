@@ -30,10 +30,6 @@
   <li><a href="../index.html">Index</a></li>
 </ul>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
-</ul>
 
 
 <h2>Libraries</h2>
@@ -66,6 +62,7 @@
   <li><a href="../libraries/dbus.html">dbus</a></li>
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
   <li><a href="../libraries/gears.debug.html">gears.debug</a></li>
+  <li><a href="../libraries/gears.geometry.html">gears.geometry</a></li>
   <li><a href="../libraries/gears.object.properties.html">gears.object.properties</a></li>
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
@@ -95,6 +92,7 @@
 <h2>Classes</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../classes/awful.button.html">awful.button</a></li>
+  <li><a href="../classes/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../classes/awful.widget.button.html">awful.widget.button</a></li>
   <li><a href="../classes/awful.widget.common.html">awful.widget.common</a></li>
   <li><a href="../classes/awful.widget.graph.html">awful.widget.graph</a></li>
@@ -112,7 +110,6 @@
   <li><a href="../classes/gears.cache.html">gears.cache</a></li>
   <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
   <li><a href="../classes/gears.object.html">gears.object</a></li>
-  <li><a href="../classes/gears.screen.html">gears.screen</a></li>
   <li><a href="../classes/key.html">key</a></li>
   <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
   <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
@@ -153,217 +150,29 @@
 <div id="content">
 
 <h1>Module <code>awful.wibox</code></h1>
-<p>Wibox module for awful.</p>
-<p> This module allows you to easily create wibox and attach them to the edge of
- a screen.</p>
+<p>This module is deprecated and has been renamed <a href="../classes/awful.wibar.html#">awful.wibar</a></p>
+<p>
+</p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2009 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g72725ef</li>
-        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
+        <li><strong>Copyright</strong>: 2016 Emmanuel Lepage Vallee</li>
+        <li><strong>Release</strong>: master-g32eeaa9</li>
+        <li><strong>Author</strong>: Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
     </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#awfulwibox.get_position">awfulwibox.get_position (wb)</a></td>
-	<td class="summary">Get a wibox position if it has been set, or return top.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#awfulwibox.set_position">awfulwibox.set_position (wb, position, screen)</a></td>
-	<td class="summary">Put a wibox on a screen at this position.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#awfulwibox.attach">awfulwibox.attach (wb, position, screen)</a></td>
-	<td class="summary">Attach a wibox to a screen.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#awfulwibox.align">awfulwibox.align (wb, align, screen)</a></td>
-	<td class="summary">Align a wibox.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#awfulwibox.stretch">awfulwibox.stretch (wb, screen)</a></td>
-	<td class="summary">Stretch a wibox so it takes all screen width or height.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#awfulwibox.new">awfulwibox.new (arg)</a></td>
-	<td class="summary">Create a new wibox and attach it to a screen edge.</td>
-	</tr>
-</table>
 
 <br/>
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "awfulwibox.get_position"></a>
-    <strong>awfulwibox.get_position (wb)</strong>
-    </dt>
-    <dd>
-    Get a wibox position if it has been set, or return top.
-
-
-    <ul>
-        <li><span class="parameter">wb</span>
-         The wibox
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The wibox position.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "awfulwibox.set_position"></a>
-    <strong>awfulwibox.set_position (wb, position, screen)</strong>
-    </dt>
-    <dd>
-    Put a wibox on a screen at this position.
-
-
-    <ul>
-        <li><span class="parameter">wb</span>
-         The wibox to attach.
-        </li>
-        <li><span class="parameter">position</span>
-         The position: top, bottom left or right.
-        </li>
-        <li><span class="parameter">screen</span>
-         If the wibox it not attached to a screen, specified on which
- screen the position should be set.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "awfulwibox.attach"></a>
-    <strong>awfulwibox.attach (wb, position, screen)</strong>
-    </dt>
-    <dd>
-    Attach a wibox to a screen.
- If a wibox is attached, it will be automatically be moved when other wiboxes
- will be attached.
-
-
-    <ul>
-        <li><span class="parameter">wb</span>
-         The wibox to attach.
-        </li>
-        <li><span class="parameter">position</span>
-         The position of the wibox: top, bottom, left or right.
-        </li>
-        <li><span class="parameter">screen</span>
-         The screen to attach to
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "awfulwibox.align"></a>
-    <strong>awfulwibox.align (wb, align, screen)</strong>
-    </dt>
-    <dd>
-    Align a wibox.
-
-
-    <ul>
-        <li><span class="parameter">wb</span>
-         The wibox.
-        </li>
-        <li><span class="parameter">align</span>
-         The alignment: left, right or center.
-        </li>
-        <li><span class="parameter">screen</span>
-         If the wibox is not attached to any screen, you can specify the
- screen where to align.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "awfulwibox.stretch"></a>
-    <strong>awfulwibox.stretch (wb, screen)</strong>
-    </dt>
-    <dd>
-    Stretch a wibox so it takes all screen width or height.
-
-
-    <ul>
-        <li><span class="parameter">wb</span>
-         The wibox.
-        </li>
-        <li><span class="parameter">screen</span>
-         The screen to stretch on, or the wibox screen.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "awfulwibox.new"></a>
-    <strong>awfulwibox.new (arg)</strong>
-    </dt>
-    <dd>
-    Create a new wibox and attach it to a screen edge.
-
-
-    <ul>
-        <li><span class="parameter">arg</span>
-         A table with standard arguments to wibox() creator.
- You can add also position key with value top, bottom, left or right.
- You can also use width or height in % and set align to center, right or left.
- You can also set the screen key with a screen number to attach the wibox.
- If not specified, 1 is assumed.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The wibox created.
-    </ol>
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../classes/wibox.html#">wibox</a>
-    </ul>
-
-
-</dd>
-</dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-05-16 16:58:22 </i>
+<i style="float:right;">Last updated 2016-05-16 18:18:07 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

@@ -50,6 +50,7 @@
 <h2>Classes</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../classes/awful.button.html">awful.button</a></li>
+  <li><a href="../classes/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../classes/awful.widget.button.html">awful.widget.button</a></li>
   <li><a href="../classes/awful.widget.common.html">awful.widget.common</a></li>
   <li><a href="../classes/awful.widget.graph.html">awful.widget.graph</a></li>
@@ -67,7 +68,6 @@
   <li><a href="../classes/gears.cache.html">gears.cache</a></li>
   <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
   <li><a href="../classes/gears.object.html">gears.object</a></li>
-  <li><a href="../classes/gears.screen.html">gears.screen</a></li>
   <li><a href="../classes/key.html">key</a></li>
   <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
   <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
@@ -123,6 +123,7 @@
   <li><a href="../libraries/dbus.html">dbus</a></li>
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
   <li><a href="../libraries/gears.debug.html">gears.debug</a></li>
+  <li><a href="../libraries/gears.geometry.html">gears.geometry</a></li>
   <li><a href="../libraries/gears.object.properties.html">gears.object.properties</a></li>
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
@@ -240,7 +241,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008-2009 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g72725ef</li>
+        <li><strong>Release</strong>: master-g32eeaa9</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -480,6 +481,22 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 	<td class="summary">The client floating state.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#client.x">client.x</a></td>
+	<td class="summary">The x coordinates.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#client.y">client.y</a></td>
+	<td class="summary">The y coordinates.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#client.width">client.width</a></td>
+	<td class="summary">The width of the wibox.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#client.height">client.height</a></td>
+	<td class="summary">The height of the wibox.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#client.dockable">client.dockable</a></td>
 	<td class="summary">If the client is dockable.</td>
 	</tr>
@@ -529,22 +546,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 </td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#property::width">property::width</a></td>
-	<td class="summary">
-</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#property::window">property::window</a></td>
-	<td class="summary">
-</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#property::x">property::x</a></td>
-	<td class="summary">
-</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#property::y">property::y</a></td>
 	<td class="summary">
 </td>
 	</tr>
@@ -2672,6 +2674,122 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 </dd>
     <dt>
+    <a name = "client.x"></a>
+    <strong>client.x</strong>
+    </dt>
+    <dd>
+    <p>The x coordinates. </p>
+
+<p> <strong>Signal:</strong></p>
+
+<ul>
+<li><em>property::x</em></li>
+</ul>
+
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">integer</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "client.y"></a>
+    <strong>client.y</strong>
+    </dt>
+    <dd>
+    <p>The y coordinates. </p>
+
+<p> <strong>Signal:</strong></p>
+
+<ul>
+<li><em>property::y</em></li>
+</ul>
+
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">integer</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "client.width"></a>
+    <strong>client.width</strong>
+    </dt>
+    <dd>
+    <p>The width of the wibox. </p>
+
+<p> <strong>Signal:</strong></p>
+
+<ul>
+<li><em>property::width</em></li>
+</ul>
+
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">width</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "client.height"></a>
+    <strong>client.height</strong>
+    </dt>
+    <dd>
+    <p>The height of the wibox. </p>
+
+<p> <strong>Signal:</strong></p>
+
+<ul>
+<li><em>property::height</em></li>
+</ul>
+
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">height</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "client.dockable"></a>
     <strong>client.dockable</strong>
     </dt>
@@ -2849,53 +2967,8 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 </dd>
     <dt>
-    <a name = "property::width"></a>
-    <strong>property::width</strong>
-    </dt>
-    <dd>
-
-
-
-
-
-
-
-
-
-</dd>
-    <dt>
     <a name = "property::window"></a>
     <strong>property::window</strong>
-    </dt>
-    <dd>
-
-
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "property::x"></a>
-    <strong>property::x</strong>
-    </dt>
-    <dd>
-
-
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "property::y"></a>
-    <strong>property::y</strong>
     </dt>
     <dd>
 
@@ -3798,7 +3871,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#client:get_transient_for_matching">client.get_transient_for_matching</a>
+         <a href="../classes/client.html#awful.client.get_transient_for_matching">client.get_transient_for_matching</a>
     </ul>
 
 
@@ -4378,7 +4451,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#request::geometry">geometry</a>
+         <a href="../classes/client.html#client:geometry">geometry</a>
     </ul>
 
 
@@ -4910,7 +4983,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-05-16 16:58:22 </i>
+<i style="float:right;">Last updated 2016-05-16 18:18:07 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
