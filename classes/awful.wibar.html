@@ -32,8 +32,10 @@
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Functions">Functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Theme_variables">Theme variables</a></li>
+<li><a href="#Deprecated_functions">Deprecated functions</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
 
@@ -41,7 +43,7 @@
 <h2>Classes</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../classes/awful.button.html">awful.button</a></li>
-  <li><a href="../classes/awful.wibar.html">awful.wibar</a></li>
+  <li><strong>awful.wibar</strong></li>
   <li><a href="../classes/awful.widget.button.html">awful.widget.button</a></li>
   <li><a href="../classes/awful.widget.common.html">awful.widget.common</a></li>
   <li><a href="../classes/awful.widget.graph.html">awful.widget.graph</a></li>
@@ -65,7 +67,7 @@
   <li><a href="../classes/screen.html">screen</a></li>
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/tag.html">tag</a></li>
-  <li><strong>wibox</strong></li>
+  <li><a href="../classes/wibox.html">wibox</a></li>
   <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
   <li><a href="../classes/wibox.layout.align.html">wibox.layout.align</a></li>
   <li><a href="../classes/wibox.layout.constraint.html">wibox.layout.constraint</a></li>
@@ -155,99 +157,125 @@
 
 <div id="content">
 
-<h1>Class <code>wibox</code></h1>
-<p>
-</p>
-<p>
-</p>
+<h1>Class <code>awful.wibar</code></h1>
+<p>Wibox module for awful.</p>
+<p> This module allows you to easily create wibox and attach them to the edge of
+ a screen.</p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2010 Uli Schlachter</li>
+        <li><strong>Copyright</strong>: 2016 Emmanuel Lepage Vallee</li>
         <li><strong>Release</strong>: master-g32eeaa9</li>
-        <li><strong>Author</strong>: Uli Schlachter</li>
+        <li><strong>Author</strong>: Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
     </ul>
 
 
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awfulwibar.new">awfulwibar.new (arg)</a></td>
+	<td class="summary">Create a new wibox and attach it to a screen edge.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.buttons">wibox.buttons (buttons_table)</a></td>
+	<td class="summary">Get or set mouse buttons bindings to a wibox.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.geometry">wibox.geometry (A)</a></td>
+	<td class="summary">Get or set wibox geometry.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.struts">wibox.struts (strut)</a></td>
+	<td class="summary">Get or set wibox struts.</td>
+	</tr>
+</table>
 <h2><a href="#Object_properties">Object properties</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.border_width">wibox.border_width</a></td>
+	<td class="name" ><a href="#awful.wibar.position">awful.wibar.position</a></td>
+	<td class="summary">The wibox position.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.wibar.stretch">awful.wibar.stretch</a></td>
+	<td class="summary">Stretch the wibar.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.wibar.border_width">awful.wibar.border_width</a></td>
 	<td class="summary">Border width.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.border_color">wibox.border_color</a></td>
+	<td class="name" ><a href="#awful.wibar.border_color">awful.wibar.border_color</a></td>
 	<td class="summary">Border color.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.ontop">wibox.ontop</a></td>
+	<td class="name" ><a href="#awful.wibar.ontop">awful.wibar.ontop</a></td>
 	<td class="summary">On top of other windows.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.cursor">wibox.cursor</a></td>
+	<td class="name" ><a href="#awful.wibar.cursor">awful.wibar.cursor</a></td>
 	<td class="summary">The mouse cursor.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.visible">wibox.visible</a></td>
+	<td class="name" ><a href="#awful.wibar.visible">awful.wibar.visible</a></td>
 	<td class="summary">Visibility.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.opacity">wibox.opacity</a></td>
+	<td class="name" ><a href="#awful.wibar.opacity">awful.wibar.opacity</a></td>
 	<td class="summary">The opacity of the wibox, between 0 and 1.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.type">wibox.type</a></td>
+	<td class="name" ><a href="#awful.wibar.type">awful.wibar.type</a></td>
 	<td class="summary">The window type (desktop, normal, dock, &hellip;).</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.x">wibox.x</a></td>
+	<td class="name" ><a href="#awful.wibar.x">awful.wibar.x</a></td>
 	<td class="summary">The x coordinates.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.y">wibox.y</a></td>
+	<td class="name" ><a href="#awful.wibar.y">awful.wibar.y</a></td>
 	<td class="summary">The y coordinates.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.width">wibox.width</a></td>
+	<td class="name" ><a href="#awful.wibar.width">awful.wibar.width</a></td>
 	<td class="summary">The width of the wibox.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.height">wibox.height</a></td>
+	<td class="name" ><a href="#awful.wibar.height">awful.wibar.height</a></td>
 	<td class="summary">The height of the wibox.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.screen">wibox.screen</a></td>
+	<td class="name" ><a href="#awful.wibar.screen">awful.wibar.screen</a></td>
 	<td class="summary">The wibox screen.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.drawable">wibox.drawable</a></td>
+	<td class="name" ><a href="#awful.wibar.drawable">awful.wibar.drawable</a></td>
 	<td class="summary">The wibox&rsquo;s <a href="../classes/drawable.html#">drawable</a>.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget">wibox.widget</a></td>
+	<td class="name" ><a href="#awful.wibar.widget">awful.wibar.widget</a></td>
 	<td class="summary">The widget that the <a href="../classes/wibox.html#">wibox</a> displays.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.window">wibox.window</a></td>
+	<td class="name" ><a href="#awful.wibar.window">awful.wibar.window</a></td>
 	<td class="summary">The X window id.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.shape_bounding">wibox.shape_bounding</a></td>
+	<td class="name" ><a href="#awful.wibar.shape_bounding">awful.wibar.shape_bounding</a></td>
 	<td class="summary">The wibox&rsquo;s bounding shape as a (native) cairo surface.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.shape_clip">wibox.shape_clip</a></td>
+	<td class="name" ><a href="#awful.wibar.shape_clip">awful.wibar.shape_clip</a></td>
 	<td class="summary">The wibox&rsquo;s clip shape as a (native) cairo surface.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.bg">wibox.bg</a></td>
+	<td class="name" ><a href="#awful.wibar.bg">awful.wibar.bg</a></td>
 	<td class="summary">The background of the wibox.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.bgimage">wibox.bgimage</a></td>
+	<td class="name" ><a href="#awful.wibar.bgimage">awful.wibar.bgimage</a></td>
 	<td class="summary">The background image of the drawable.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.fg">wibox.fg</a></td>
+	<td class="name" ><a href="#awful.wibar.fg">awful.wibar.fg</a></td>
 	<td class="summary">The foreground (text) of the wibox.</td>
 	</tr>
 </table>
@@ -262,31 +290,42 @@
 	<td class="summary">The default foreground (text) color.</td>
 	</tr>
 </table>
+<h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awful.wibar.get_position">awful.wibar.get_position</a></td>
+	<td class="summary">Get a wibox position if it has been set, or return top.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.wibar.set_position">awful.wibar.set_position</a></td>
+	<td class="summary">Put a wibox on a screen at this position.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.wibar.attach">awful.wibar.attach</a></td>
+	<td class="summary">Attach a wibox to a screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.wibar.align">awful.wibar.align</a></td>
+	<td class="summary">Align a wibox.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.wibox.stretch">awful.wibox.stretch</a></td>
+	<td class="summary">Stretch a wibox so it takes all screen width or height.</td>
+	</tr>
+</table>
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox:buttons">wibox:buttons (buttons_table)</a></td>
-	<td class="summary">Get or set mouse buttons bindings to a wibox.</td>
+	<td class="name" ><a href="#awful.wibar:remove">awful.wibar:remove ()</a></td>
+	<td class="summary">Remove a wibar.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox:geometry">wibox:geometry (A)</a></td>
-	<td class="summary">Get or set wibox geometry.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox:struts">wibox:struts (strut)</a></td>
-	<td class="summary">Get or set wibox struts.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox:setup">wibox:setup (args)</a></td>
+	<td class="name" ><a href="#awful.wibar:setup">awful.wibar:setup (args)</a></td>
 	<td class="summary">Set a declarative widget hierarchy description.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox:find_widgets">wibox:find_widgets (x, y)</a></td>
+	<td class="name" ><a href="#awful.wibar:find_widgets">awful.wibar:find_widgets (x, y)</a></td>
 	<td class="summary">Find a widget by a point.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox:draw">wibox:draw (wibox)</a></td>
-	<td class="summary">Redraw a wibox.</td>
 	</tr>
 </table>
 
@@ -294,12 +333,162 @@
 <br/>
 
 
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awfulwibar.new"></a>
+    <strong>awfulwibar.new (arg)</strong>
+    </dt>
+    <dd>
+    Create a new wibox and attach it to a screen edge.
+
+
+    <ul>
+        <li><span class="parameter">arg</span>
+         A table with standard arguments to wibox() creator.
+ You can add also position key with value top, bottom, left or right.
+ You can also use width or height in % and set align to center, right or left.
+ You can also set the screen key with a screen number to attach the wibox.
+ If not specified, 1 is assumed.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The wibox created.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.html#">wibox</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "wibox.buttons"></a>
+    <strong>wibox.buttons (buttons_table)</strong>
+    </dt>
+    <dd>
+    Get or set mouse buttons bindings to a wibox.
+
+
+    <ul>
+        <li><span class="parameter">buttons_table</span>
+         A table of buttons objects, or nothing.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.geometry"></a>
+    <strong>wibox.geometry (A)</strong>
+    </dt>
+    <dd>
+    Get or set wibox geometry.  That&rsquo;s the same as accessing or setting the x,
+ y, width or height properties of a wibox.
+
+
+    <ul>
+        <li><span class="parameter">A</span>
+         table with coordinates to modify.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A table with wibox coordinates and geometry.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.struts"></a>
+    <strong>wibox.struts (strut)</strong>
+    </dt>
+    <dd>
+    Get or set wibox struts.
+
+
+    <ul>
+        <li><span class="parameter">strut</span>
+         A table with new strut, or nothing
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The wibox strut in a table.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/client.html#client:struts">client.struts</a>
+    </ul>
+
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Object_properties"></a>Object properties</h2>
 
     <dl class="function">
     <dt>
-    <a name = "wibox.border_width"></a>
-    <strong>wibox.border_width</strong>
+    <a name = "awful.wibar.position"></a>
+    <strong>awful.wibar.position</strong>
+    </dt>
+    <dd>
+    The wibox position.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">string</span>
+         Either &ldquo;left&rdquo;, right", &ldquo;top&rdquo; or &ldquo;bottom&rdquo;
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.wibar.stretch"></a>
+    <strong>awful.wibar.stretch</strong>
+    </dt>
+    <dd>
+    Stretch the wibar.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
+
+
+         (<em>default</em> true)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.wibar.border_width"></a>
+    <strong>awful.wibar.border_width</strong>
     </dt>
     <dd>
     <p>Border width. </p>
@@ -327,8 +516,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.border_color"></a>
-    <strong>wibox.border_color</strong>
+    <a name = "awful.wibar.border_color"></a>
+    <strong>awful.wibar.border_color</strong>
     </dt>
     <dd>
     <p>Border color. </p>
@@ -373,8 +562,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.ontop"></a>
-    <strong>wibox.ontop</strong>
+    <a name = "awful.wibar.ontop"></a>
+    <strong>awful.wibar.ontop</strong>
     </dt>
     <dd>
     <p>On top of other windows. </p>
@@ -402,8 +591,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.cursor"></a>
-    <strong>wibox.cursor</strong>
+    <a name = "awful.wibar.cursor"></a>
+    <strong>awful.wibar.cursor</strong>
     </dt>
     <dd>
     <p>The mouse cursor. </p>
@@ -435,8 +624,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.visible"></a>
-    <strong>wibox.visible</strong>
+    <a name = "awful.wibar.visible"></a>
+    <strong>awful.wibar.visible</strong>
     </dt>
     <dd>
     <p>Visibility. </p>
@@ -464,8 +653,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.opacity"></a>
-    <strong>wibox.opacity</strong>
+    <a name = "awful.wibar.opacity"></a>
+    <strong>awful.wibar.opacity</strong>
     </dt>
     <dd>
     <p>The opacity of the wibox, between 0 and 1. </p>
@@ -493,8 +682,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.type"></a>
-    <strong>wibox.type</strong>
+    <a name = "awful.wibar.type"></a>
+    <strong>awful.wibar.type</strong>
     </dt>
     <dd>
     <p>The window type (desktop, normal, dock, &hellip;). </p>
@@ -526,8 +715,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.x"></a>
-    <strong>wibox.x</strong>
+    <a name = "awful.wibar.x"></a>
+    <strong>awful.wibar.x</strong>
     </dt>
     <dd>
     <p>The x coordinates. </p>
@@ -555,8 +744,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.y"></a>
-    <strong>wibox.y</strong>
+    <a name = "awful.wibar.y"></a>
+    <strong>awful.wibar.y</strong>
     </dt>
     <dd>
     <p>The y coordinates. </p>
@@ -584,8 +773,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.width"></a>
-    <strong>wibox.width</strong>
+    <a name = "awful.wibar.width"></a>
+    <strong>awful.wibar.width</strong>
     </dt>
     <dd>
     <p>The width of the wibox. </p>
@@ -613,8 +802,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.height"></a>
-    <strong>wibox.height</strong>
+    <a name = "awful.wibar.height"></a>
+    <strong>awful.wibar.height</strong>
     </dt>
     <dd>
     <p>The height of the wibox. </p>
@@ -642,8 +831,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.screen"></a>
-    <strong>wibox.screen</strong>
+    <a name = "awful.wibar.screen"></a>
+    <strong>awful.wibar.screen</strong>
     </dt>
     <dd>
     The wibox screen.
@@ -663,8 +852,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.drawable"></a>
-    <strong>wibox.drawable</strong>
+    <a name = "awful.wibar.drawable"></a>
+    <strong>awful.wibar.drawable</strong>
     </dt>
     <dd>
     <p>The wibox&rsquo;s <a href="../classes/drawable.html#">drawable</a>. </p>
@@ -693,8 +882,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.widget"></a>
-    <strong>wibox.widget</strong>
+    <a name = "awful.wibar.widget"></a>
+    <strong>awful.wibar.widget</strong>
     </dt>
     <dd>
     The widget that the <a href="../classes/wibox.html#">wibox</a> displays.
@@ -714,8 +903,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.window"></a>
-    <strong>wibox.window</strong>
+    <a name = "awful.wibar.window"></a>
+    <strong>awful.wibar.window</strong>
     </dt>
     <dd>
     <p>The X window id. </p>
@@ -747,8 +936,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.shape_bounding"></a>
-    <strong>wibox.shape_bounding</strong>
+    <a name = "awful.wibar.shape_bounding"></a>
+    <strong>awful.wibar.shape_bounding</strong>
     </dt>
     <dd>
     <p>The wibox&rsquo;s bounding shape as a (native) cairo surface. </p>
@@ -769,8 +958,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.shape_clip"></a>
-    <strong>wibox.shape_clip</strong>
+    <a name = "awful.wibar.shape_clip"></a>
+    <strong>awful.wibar.shape_clip</strong>
     </dt>
     <dd>
     <p>The wibox&rsquo;s clip shape as a (native) cairo surface. </p>
@@ -791,8 +980,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.bg"></a>
-    <strong>wibox.bg</strong>
+    <a name = "awful.wibar.bg"></a>
+    <strong>awful.wibar.bg</strong>
     </dt>
     <dd>
     The background of the wibox.
@@ -816,8 +1005,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.bgimage"></a>
-    <strong>wibox.bgimage</strong>
+    <a name = "awful.wibar.bgimage"></a>
+    <strong>awful.wibar.bgimage</strong>
     </dt>
     <dd>
     The background image of the drawable.
@@ -842,8 +1031,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox.fg"></a>
-    <strong>wibox.fg</strong>
+    <a name = "awful.wibar.fg"></a>
+    <strong>awful.wibar.fg</strong>
     </dt>
     <dd>
     The foreground (text) of the wibox.
@@ -883,7 +1072,7 @@ Green   Alpha
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/wibox.html#wibox.bg">bg</a>
+         <a href="../classes/awful.wibar.html#awful.wibar.bg">bg</a>
     </ul>
 
 
@@ -901,7 +1090,155 @@ Green   Alpha
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/wibox.html#wibox.fg">fg</a>
+         <a href="../classes/awful.wibar.html#awful.wibar.fg">fg</a>
+    </ul>
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Deprecated_functions"></a>Deprecated functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awful.wibar.get_position"></a>
+    <strong>awful.wibar.get_position</strong>
+    </dt>
+    <dd>
+    Get a wibox position if it has been set, or return top.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">wb</span>
+         The wibox
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.wibar.set_position"></a>
+    <strong>awful.wibar.set_position</strong>
+    </dt>
+    <dd>
+    Put a wibox on a screen at this position.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">wb</span>
+         The wibox to attach.
+        </li>
+        <li><span class="parameter">position</span>
+         The position: top, bottom left or right.
+        </li>
+        <li><span class="parameter">screen</span>
+         This argument is deprecated, use wb.screen directly.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.wibar.attach"></a>
+    <strong>awful.wibar.attach</strong>
+    </dt>
+    <dd>
+    Attach a wibox to a screen.
+ If a wibox is attached, it will be automatically be moved when other wiboxes
+ will be attached.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">wb</span>
+         The wibox to attach.
+        </li>
+        <li><span class="parameter">position</span>
+         The position of the wibox: top, bottom, left or right.
+        </li>
+        <li><span class="parameter">screen</span>
+         The screen to attach to
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.wibar.align"></a>
+    <strong>awful.wibar.align</strong>
+    </dt>
+    <dd>
+    <p>Align a wibox. </p>
+
+<p> Supported alignment are:</p>
+
+<ul>
+<li>top_left</li>
+<li>top_right</li>
+<li>bottom_left</li>
+<li>bottom_right</li>
+<li>left</li>
+<li>right</li>
+<li>top</li>
+<li>bottom</li>
+<li>centered</li>
+<li>center_vertical</li>
+<li>center_horizontal</li>
+</ul>
+
+
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">wb</span>
+         The wibox.
+        </li>
+        <li><span class="parameter">align</span>
+         The alignment
+        </li>
+        <li><span class="parameter">screen</span>
+         This argument is deprecated. It is not used. Use wb.screen
+  directly.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.placement.html#align">awful.placement.align</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.wibox.stretch"></a>
+    <strong>awful.wibox.stretch</strong>
+    </dt>
+    <dd>
+    Stretch a wibox so it takes all screen width or height. </p>
+
+<p> <strong>This function has been removed.</strong>
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.placement.html#">awful.placement</a></li>
+         <li><a href="../classes/awful.wibar.html#awful.wibox.stretch">stretch</a></li>
     </ul>
 
 
@@ -911,18 +1248,13 @@ Green   Alpha
 
     <dl class="function">
     <dt>
-    <a name = "wibox:buttons"></a>
-    <strong>wibox:buttons (buttons_table)</strong>
+    <a name = "awful.wibar:remove"></a>
+    <strong>awful.wibar:remove ()</strong>
     </dt>
     <dd>
-    Get or set mouse buttons bindings to a wibox.
+    Remove a wibar.
 
 
-    <ul>
-        <li><span class="parameter">buttons_table</span>
-         A table of buttons objects, or nothing.
-        </li>
-    </ul>
 
 
 
@@ -930,61 +1262,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox:geometry"></a>
-    <strong>wibox:geometry (A)</strong>
-    </dt>
-    <dd>
-    Get or set wibox geometry.  That&rsquo;s the same as accessing or setting the x,
- y, width or height properties of a wibox.
-
-
-    <ul>
-        <li><span class="parameter">A</span>
-         table with coordinates to modify.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        A table with wibox coordinates and geometry.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox:struts"></a>
-    <strong>wibox:struts (strut)</strong>
-    </dt>
-    <dd>
-    Get or set wibox struts.
-
-
-    <ul>
-        <li><span class="parameter">strut</span>
-         A table with new strut, or nothing
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The wibox strut in a table.
-    </ol>
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../classes/client.html#client:struts">client.struts</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "wibox:setup"></a>
-    <strong>wibox:setup (args)</strong>
+    <a name = "awful.wibar:setup"></a>
+    <strong>awful.wibar:setup (args)</strong>
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
@@ -1003,8 +1282,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "wibox:find_widgets"></a>
-    <strong>wibox:find_widgets (x, y)</strong>
+    <a name = "awful.wibar:find_widgets"></a>
+    <strong>awful.wibar:find_widgets (x, y)</strong>
     </dt>
     <dd>
     Find a widget by a point.
@@ -1030,27 +1309,6 @@ Green   Alpha
  container while the last is the topmost widget. The table contains <em>x</em>, <em>y</em>,
  <em>width</em>, <em>height</em> and <em>widget</em>.
     </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox:draw"></a>
-    <strong>wibox:draw (wibox)</strong>
-    </dt>
-    <dd>
-    Redraw a wibox.  You should never have to call this explicitely because it is
- automatically called when needed.
-
-
-    <ul>
-        <li><span class="parameter">wibox</span>
-
-
-        </li>
-    </ul>
-
 
 
 

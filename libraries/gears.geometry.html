@@ -66,11 +66,11 @@
   <li><a href="../libraries/dbus.html">dbus</a></li>
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
   <li><a href="../libraries/gears.debug.html">gears.debug</a></li>
-  <li><a href="../libraries/gears.geometry.html">gears.geometry</a></li>
+  <li><strong>gears.geometry</strong></li>
   <li><a href="../libraries/gears.object.properties.html">gears.object.properties</a></li>
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
-  <li><strong>gears.surface</strong></li>
+  <li><a href="../libraries/gears.surface.html">gears.surface</a></li>
   <li><a href="../libraries/gears.timer.html">gears.timer</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
@@ -153,61 +153,44 @@
 
 <div id="content">
 
-<h1>Module <code>gears.surface</code></h1>
-<p>
-</p>
-<p>
-</p>
+<h1>Module <code>gears.geometry</code></h1>
+<p>Helper functions used to compute geometries.</p>
+<p> When this module refer to a geometry table, this assume a table with at least
+ an <em>x</em>, <em>y</em>, <em>width</em> and <em>height</em> keys and numeric values.</p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2012 Uli Schlachter</li>
+        <li><strong>Copyright</strong>: 2008 Julien Danjou</li>
         <li><strong>Release</strong>: master-g32eeaa9</li>
-        <li><strong>Author</strong>: Uli Schlachter</li>
+        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#load_uncached_silently">load_uncached_silently (_surface, default)</a></td>
-	<td class="summary">Try to convert the argument into an lgi cairo surface.</td>
+	<td class="name" ><a href="#gears.geometry.rectangle.get_square_distance">gears.geometry.rectangle.get_square_distance (geom, x, y)</a></td>
+	<td class="summary">Get the square distance between a rectangle and a point.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#load_silently">load_silently (_surface, default)</a></td>
-	<td class="summary">Try to convert the argument into an lgi cairo surface.</td>
+	<td class="name" ><a href="#gears.geometry.rectangle.get_closest_by_coord">gears.geometry.rectangle.get_closest_by_coord (list, x, y)</a></td>
+	<td class="summary">Return the closest rectangle from <code>list</code> for a given point.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#load_uncached">load_uncached (_surface)</a></td>
-	<td class="summary">Try to convert the argument into an lgi cairo surface.</td>
+	<td class="name" ><a href="#gears.geometry.rectangle.get_by_coord">gears.geometry.rectangle.get_by_coord (list, x, y)</a></td>
+	<td class="summary">Return the rectangle containing the [x, y] point.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#load">load (_surface)</a></td>
-	<td class="summary">Try to convert the argument into an lgi cairo surface.</td>
+	<td class="name" ><a href="#gears.geometry.rectangle.get_in_direction">gears.geometry.rectangle.get_in_direction (dir, recttbl, cur)</a></td>
+	<td class="summary">Get the nearest rectangle in the given direction.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#get_size">get_size (surf)</a></td>
-	<td class="summary">Get the size of a cairo surface</td>
+	<td class="name" ><a href="#gears.geometry.rectangle.get_intersection">gears.geometry.rectangle.get_intersection (a, b)</a></td>
+	<td class="summary">Get the intersect area between a and b.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#duplicate_surface">duplicate_surface (s)</a></td>
-	<td class="summary">Create a copy of a cairo surface.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#load_from_shape">load_from_shape (width, height, shape[, shape_color=white[, bg_color=transparent]])</a></td>
-	<td class="summary">Create a surface from a <a href="../libraries/gears.shape.html#">gears.shape</a>
- Any additional parameters will be passed to the shape function</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#apply_shape_bounding">apply_shape_bounding (draw, shape[, Any])</a></td>
-	<td class="summary">Apply a shape to a client or a wibox.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#widget_to_svg">widget_to_svg (widget, path, width, height)</a></td>
-	<td class="summary">Create an SVG file with this widget content.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#widget_to_surface">widget_to_surface (widget, width, height[, format=cairo.Format.ARGB32])</a></td>
-	<td class="summary">Create a cairo surface with this widget content.</td>
+	<td class="name" ><a href="#gears.geometry.rectangle.area_remove">gears.geometry.rectangle.area_remove (areas, elem)</a></td>
+	<td class="summary">Remove an area from a list, splitting the space between several area that
+ can overlap.</td>
 	</tr>
 </table>
 
@@ -219,212 +202,48 @@
 
     <dl class="function">
     <dt>
-    <a name = "load_uncached_silently"></a>
-    <strong>load_uncached_silently (_surface, default)</strong>
+    <a name = "gears.geometry.rectangle.get_square_distance"></a>
+    <strong>gears.geometry.rectangle.get_square_distance (geom, x, y)</strong>
     </dt>
     <dd>
-    Try to convert the argument into an lgi cairo surface.
- This is usually needed for loading images by file name.
+    Get the square distance between a rectangle and a point.
 
 
     <ul>
-        <li><span class="parameter">_surface</span>
-         The surface to load or nil
+        <li><span class="parameter">geom</span> A rectangle
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The horizontal coordinate
         </li>
-        <li><span class="parameter">default</span>
-         The default value to return on error; when nil, then a surface
- in an error state is returned.
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The vertical coordinate
         </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-        The loaded surface, or the replacement default</li>
-        <li>
-        An error message, or nil on success</li>
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "load_silently"></a>
-    <strong>load_silently (_surface, default)</strong>
-    </dt>
-    <dd>
-    Try to convert the argument into an lgi cairo surface.
- This is usually needed for loading images by file name and uses a cache.
- In contrast to <code>load()</code>, errors are returned to the caller.
-
-
-    <ul>
-        <li><span class="parameter">_surface</span>
-         The surface to load or nil
-        </li>
-        <li><span class="parameter">default</span>
-         The default value to return on error; when nil, then a surface
- in an error state is returned.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-        The loaded surface, or the replacement default, or nil if called with
- nil.</li>
-        <li>
-        An error message, or nil on success</li>
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "load_uncached"></a>
-    <strong>load_uncached (_surface)</strong>
-    </dt>
-    <dd>
-    Try to convert the argument into an lgi cairo surface.
- This is usually needed for loading images by file name. Errors are handled
- via <a href="../libraries/gears.debug.html#print_error">gears.debug.print_error</a>.
-
-
-    <ul>
-        <li><span class="parameter">_surface</span>
-         The surface to load or nil
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The loaded surface, or nil
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "load"></a>
-    <strong>load (_surface)</strong>
-    </dt>
-    <dd>
-    Try to convert the argument into an lgi cairo surface.
- This is usually needed for loading images by file name. Errors are handled
- via <a href="../libraries/gears.debug.html#print_error">gears.debug.print_error</a>.
-
-
-    <ul>
-        <li><span class="parameter">_surface</span>
-         The surface to load or nil
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The loaded surface, or nil
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "get_size"></a>
-    <strong>get_size (surf)</strong>
-    </dt>
-    <dd>
-    Get the size of a cairo surface
-
-
-    <ul>
-        <li><span class="parameter">surf</span>
-         The surface you are interested in
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The surface&rsquo;s width and height
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "duplicate_surface"></a>
-    <strong>duplicate_surface (s)</strong>
-    </dt>
-    <dd>
-    Create a copy of a cairo surface.
- The surfaces returned by <a href="../libraries/gears.surface.html#load">surface.load</a> are cached and must not be
- modified to avoid unintended side-effects. This function allows to create
- a copy of a cairo surface. This copy can then be freely modified.
- The surface returned will be as compatible as possible to the input
- surface. For example, it will likely be of the same surface type as the
- input. The details are explained in the <code>create_similar</code> function on a cairo
- surface.
-
-
-    <ul>
-        <li><span class="parameter">s</span>
-         Source surface.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The surface&rsquo;s duplicate.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "load_from_shape"></a>
-    <strong>load_from_shape (width, height, shape[, shape_color=white[, bg_color=transparent]])</strong>
-    </dt>
-    <dd>
-    Create a surface from a <a href="../libraries/gears.shape.html#">gears.shape</a>
- Any additional parameters will be passed to the shape function
-
-
-    <ul>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The surface width
+         The rectangle width
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
-         The surface height
+         The rectangle height
         </li>
-        <li><span class="parameter">shape</span>
-         A <a href="../libraries/gears.shape.html#">gears.shape</a> compatible function
+        </li></ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         X coordinate of point
         </li>
-        <li><span class="parameter">shape_color</span>
-         The shape color or pattern
-         (<em>default</em> white)
-        </li>
-        <li><span class="parameter">bg_color</span>
-         The surface background color
-         (<em>default</em> transparent)
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         Y coordinate of point
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><span class="type">cairo.surface</span></span>
-        the new surface
+           <span class="types"><span class="type">number</span></span>
+        The squared distance of the rectangle to the provided point
     </ol>
 
 
@@ -432,70 +251,103 @@
 
 </dd>
     <dt>
-    <a name = "apply_shape_bounding"></a>
-    <strong>apply_shape_bounding (draw, shape[, Any])</strong>
+    <a name = "gears.geometry.rectangle.get_closest_by_coord"></a>
+    <strong>gears.geometry.rectangle.get_closest_by_coord (list, x, y)</strong>
     </dt>
     <dd>
-    Apply a shape to a client or a wibox. </p>
-
-<p>  If the wibox or client size change, this function need to be called
-   again.
+    Return the closest rectangle from <code>list</code> for a given point.
 
 
     <ul>
-        <li><span class="parameter">draw</span>
-         A wibox or a client
+        <li><span class="parameter">list</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A list of geometry tables.
         </li>
-        <li><span class="parameter">shape</span>
-         or gears.shape function or a custom function with a context,
-   width and height as parameter.
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The x coordinate
         </li>
-        <li><span class="parameter">Any</span>
-         additional parameters will be passed to the shape function
-         (<em>optional</em>)
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The y coordinate
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+        The key from the closest geometry.
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "widget_to_svg"></a>
-    <strong>widget_to_svg (widget, path, width, height)</strong>
+    <a name = "gears.geometry.rectangle.get_by_coord"></a>
+    <strong>gears.geometry.rectangle.get_by_coord (list, x, y)</strong>
     </dt>
     <dd>
-    Create an SVG file with this widget content.
- This is dynamic, so the SVG will be updated along with the widget content.
- because of this, the painting may happen hover multiple event loop cycles.
+    Return the rectangle containing the [x, y] point. </p>
+
+<p> Note that if multiple element from the geometry list contains the point, the
+ returned result is nondeterministic.
 
 
     <ul>
-        <li><span class="parameter">widget</span>
-            <span class="types"><span class="type">widget</span></span>
-         A widget
+        <li><span class="parameter">list</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A list of geometry tables.
         </li>
-        <li><span class="parameter">path</span>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The x coordinate
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The y coordinate
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The key from the closest geometry. In case no result is found, <em>nil</em>
+  is returned.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "gears.geometry.rectangle.get_in_direction"></a>
+    <strong>gears.geometry.rectangle.get_in_direction (dir, recttbl, cur)</strong>
+    </dt>
+    <dd>
+    Get the nearest rectangle in the given direction.  Every rectangle is specified as a table
+ with <em>x</em>, <em>y</em>, <em>width</em>, <em>height</em> keys, the same as client or screen geometries.
+
+
+    <ul>
+        <li><span class="parameter">dir</span>
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The output file path
+         The direction, can be either <em>up</em>, <em>down</em>, <em>left</em> or <em>right</em>.
         </li>
-        <li><span class="parameter">width</span>
-            <span class="types"><span class="type">number</span></span>
-         The surface width
+        <li><span class="parameter">recttbl</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table of rectangle specifications.
         </li>
-        <li><span class="parameter">height</span>
-            <span class="types"><span class="type">number</span></span>
-         The surface height
+        <li><span class="parameter">cur</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The current rectangle.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
-        <li>
-        The cairo surface</li>
-        <li>
-        The hierarchy</li>
+
+        The index for the rectangle in recttbl closer to cur in the given direction. nil if none found.
     </ol>
 
 
@@ -503,40 +355,104 @@
 
 </dd>
     <dt>
-    <a name = "widget_to_surface"></a>
-    <strong>widget_to_surface (widget, width, height[, format=cairo.Format.ARGB32])</strong>
+    <a name = "gears.geometry.rectangle.get_intersection"></a>
+    <strong>gears.geometry.rectangle.get_intersection (a, b)</strong>
     </dt>
     <dd>
-    Create a cairo surface with this widget content.
- This is dynamic, so the SVG will be updated along with the widget content.
- because of this, the painting may happen hover multiple event loop cycles.
+    Get the intersect area between a and b.
 
 
     <ul>
-        <li><span class="parameter">widget</span>
-            <span class="types"><span class="type">widget</span></span>
-         A widget
+        <li><span class="parameter">a</span> The area.
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The horizontal coordinate
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The vertical coordinate
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The surface width
+         The rectangle width
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
-         The surface height
+         The rectangle height
         </li>
-        <li><span class="parameter">format</span>
-         The surface format
-         (<em>default</em> cairo.Format.ARGB32)
+        </li></ul>
+        <li><span class="parameter">b</span> The other area.
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The horizontal coordinate
         </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The vertical coordinate
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The rectangle width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The rectangle height
+        </li>
+        </li></ul>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
-        <li>
-        The cairo surface</li>
-        <li>
-        The hierarchy</li>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The intersect area.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "gears.geometry.rectangle.area_remove"></a>
+    <strong>gears.geometry.rectangle.area_remove (areas, elem)</strong>
+    </dt>
+    <dd>
+    Remove an area from a list, splitting the space between several area that
+ can overlap.
+
+
+    <ul>
+        <li><span class="parameter">areas</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Table of areas.
+        </li>
+        <li><span class="parameter">elem</span> Area to remove.
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The horizontal coordinate
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The vertical coordinate
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The rectangle width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The rectangle height
+        </li>
+        </li></ul>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The new area list.
     </ol>
 
 
