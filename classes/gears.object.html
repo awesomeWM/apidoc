@@ -32,6 +32,7 @@
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Functions">Functions</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
 
@@ -154,10 +155,9 @@
 <div id="content">
 
 <h1>Class <code>gears.object</code></h1>
-<p>
-</p>
-<p>
-</p>
+<p>The object oriented programming base class used by various Awesome
+ widgets and components.</p>
+<p> It provide basic observer pattern, signaling and dynamic properties.</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2010 Uli Schlachter</li>
@@ -166,6 +166,13 @@
     </ul>
 
 
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#gears.object">gears.object ([args={}])</a></td>
+	<td class="summary">Returns a new object.</td>
+	</tr>
+</table>
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
@@ -174,7 +181,7 @@
 	</tr>
 	<tr>
 	<td class="name" ><a href="#gears.object:connect_signal">gears.object:connect_signal (name, func)</a></td>
-	<td class="summary">Connect to a signal</td>
+	<td class="summary">Connect to a signal.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#gears.object:weak_connect_signal">gears.object:weak_connect_signal (name, func)</a></td>
@@ -182,11 +189,11 @@
 	</tr>
 	<tr>
 	<td class="name" ><a href="#gears.object:disconnect_signal">gears.object:disconnect_signal (name, func)</a></td>
-	<td class="summary">Disonnect to a signal</td>
+	<td class="summary">Disonnect to a signal.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#gears.object:emit_signal">gears.object:emit_signal (name, ...)</a></td>
-	<td class="summary">Emit a signal</td>
+	<td class="summary">Emit a signal.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#gears.object:modulename">gears.object:modulename ([level=2])</a></td>
@@ -198,6 +205,118 @@
 <br/>
 
 
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "gears.object"></a>
+    <strong>gears.object ([args={}])</strong>
+    </dt>
+    <dd>
+    <p>Returns a new object.  You can call <code>:emit_signal()</code>, <code>:disconnect_signal()</code>,
+ <code>:connect_signal()</code> and <code>:add_signal()</code> on the resulting object.</p>
+
+<p> Note that <code>args.enable_auto_signals</code> is only supported when
+ <code>args.enable_properties</code> is true.</p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>In get foo  bar
+bar
+In set foo  42
+In get foo  42
+42
+In a mathod 1   2   3
+nil
+In the connection handler!  table: 0x21fcb50    a cow
+a cow
+</code></pre>
+
+
+
+    <ul>
+        <li><span class="parameter">args</span> The arguments
+        <ul>
+        <li><span class="parameter">enable_properties</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Automatically call getters and setters
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">enable_auto_signals</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Generate &ldquo;property::xxxx&rdquo; signals
+   when an unknown property is set.
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">class</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        </li></ul>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A new object
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="comment">-- Create a class for this object. It will be used as a backup source for
+</span> <span class="comment">-- methods and acessors. It is also possible to set them diretly on the
+</span> <span class="comment">-- object.
+</span><span class="keyword">local</span> class = {}
+
+<span class="keyword">function</span> class:get_foo()
+    <span class="global">print</span>(<span class="string">'In get foo'</span>, self._foo <span class="keyword">or</span> <span class="string">'bar'</span>)
+    <span class="keyword">return</span> self._foo <span class="keyword">or</span> <span class="string">'bar'</span>
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> class:set_foo(value)
+    <span class="global">print</span>(<span class="string">'In set foo'</span>, value)
+    <span class="comment">-- In case it is necessary to bypass the object property system, use
+</span>    <span class="comment">-- <a href="http://www.lua.org/manual/5.2/manual.html#pdf-rawset">rawset</a>
+</span>    <span class="global">rawset</span>(self, <span class="string">'_foo'</span>, value)
+    <span class="comment">-- When using custom accessors, the signals need to be handled manually
+</span>    self:emit_signal(<span class="string">'property::foo'</span>, value)
+<span class="keyword">end</span>
+<span class="keyword">function</span> class:method(a, b, c)
+    <span class="global">print</span>(<span class="string">'In a mathod'</span>, a, b, c)
+<span class="keyword">end</span>
+<span class="keyword">local</span> o = gears.object {
+    class               = class,
+    enable_properties   = <span class="keyword">true</span>,
+    enable_auto_signals = <span class="keyword">true</span>,
+}
+o:add_signal <span class="string">'property::foo'</span>
+<span class="global">print</span>(o.foo)
+
+o.foo = <span class="number">42</span>
+
+<span class="global">print</span>(o.foo)
+
+o:method(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)
+ <span class="comment">-- Random properties can also be added, the signal will be emited automatically.
+</span>o:add_signal <span class="string">'property::something'</span>
+o:connect_signal(<span class="string">'property::something'</span>, <span class="keyword">function</span>(obj, value)
+    <span class="global">print</span>(<span class="string">'In the connection handler!'</span>, obj, value)
+<span class="keyword">end</span>)
+<span class="global">print</span>(o.something)
+
+o.something = <span class="string">'a cow'</span>
+
+<span class="global">print</span>(o.something)</pre>
+    </ul>
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Methods"></a>Methods</h2>
 
     <dl class="function">
@@ -206,11 +325,19 @@
     <strong>gears.object:add_signal (name)</strong>
     </dt>
     <dd>
-    Add a signal to an object.  All signals must be added before they can be used.
+    <p>Add a signal to an object.  All signals must be added before they can be used.</p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>In slot table: 0x1c5ddb0    nil nil nil
+In slot table: 0x1c5ddb0    foo bar 42
+</code></pre>
+
 
 
     <ul>
         <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The name of the new signal.
         </li>
     </ul>
@@ -218,6 +345,35 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+<span class="keyword">local</span> o = gears.object{}
+
+ <span class="comment">-- Add a new signals to the object. This is used to catch typos
+</span>o:add_signal <span class="string">'my_signal'</span>
+
+ <span class="comment">-- Function can be attached to signals
+</span><span class="keyword">local</span> <span class="keyword">function</span> slot(obj, a, b, c)
+    <span class="global">print</span>(<span class="string">'In slot'</span>, obj, a, b, c)
+<span class="keyword">end</span>
+
+o:connect_signal(<span class="string">'my_signal'</span>, slot)
+
+ <span class="comment">-- Emit can be done without argument. In that case, the object will be
+</span> <span class="comment">-- implicitly added as an argument.
+</span>o:emit_signal <span class="string">'my_signal'</span>
+
+ <span class="comment">-- It is also possible to add as many random arguments are required.
+</span>o:emit_signal(<span class="string">'my_signal'</span>, <span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="number">42</span>)
+
+ <span class="comment">-- Finally, to allow the object to be garbage collected (the memory freed), it
+</span> <span class="comment">-- is necessary to disconnect the signal or use <a href="../classes/gears.object.html#gears.object:weak_connect_signal">weak_connect_signal</a>
+</span>o:disconnect_signal(<span class="string">'my_signal'</span>, slot)
+
+ <span class="comment">-- This time, the <code>slot</code> wont be called as it is no longer connected.
+</span>o:emit_signal <span class="string">'my_signal'</span></pre>
+    </ul>
 
 </dd>
     <dt>
@@ -225,20 +381,26 @@
     <strong>gears.object:connect_signal (name, func)</strong>
     </dt>
     <dd>
-    Connect to a signal
+    Connect to a signal.
 
 
     <ul>
         <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
          The callback to call when the signal is emitted
         </li>
     </ul>
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/gears.object.html#gears.object:add_signal">add_signal</a>
+    </ul>
 
 
 </dd>
@@ -253,9 +415,11 @@
 
     <ul>
         <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
          The callback to call when the signal is emitted
         </li>
     </ul>
@@ -270,20 +434,26 @@
     <strong>gears.object:disconnect_signal (name, func)</strong>
     </dt>
     <dd>
-    Disonnect to a signal
+    Disonnect to a signal.
 
 
     <ul>
         <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
          The callback that should be disconnected
         </li>
     </ul>
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/gears.object.html#gears.object:add_signal">add_signal</a>
+    </ul>
 
 
 </dd>
@@ -292,11 +462,12 @@
     <strong>gears.object:emit_signal (name, ...)</strong>
     </dt>
     <dd>
-    Emit a signal
+    Emit a signal.
 
 
     <ul>
         <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">...</span>
