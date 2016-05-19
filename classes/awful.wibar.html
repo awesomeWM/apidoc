@@ -172,20 +172,8 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#awfulwibar.new">awfulwibar.new (arg)</a></td>
+	<td class="name" ><a href="#awful.wibar">awful.wibar ([arg=nil])</a></td>
 	<td class="summary">Create a new wibox and attach it to a screen edge.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.buttons">wibox.buttons (buttons_table)</a></td>
-	<td class="summary">Get or set mouse buttons bindings to a wibox.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.geometry">wibox.geometry (A)</a></td>
-	<td class="summary">Get or set wibox geometry.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.struts">wibox.struts (strut)</a></td>
-	<td class="summary">Get or set wibox struts.</td>
 	</tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
@@ -320,6 +308,18 @@
 	<td class="summary">Remove a wibar.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#awful.wibar:buttons">awful.wibar:buttons (buttons_table)</a></td>
+	<td class="summary">Get or set mouse buttons bindings to a wibox.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.wibar:geometry">awful.wibar:geometry (A)</a></td>
+	<td class="summary">Get or set wibox geometry.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.wibar:struts">awful.wibar:struts (strut)</a></td>
+	<td class="summary">Get or set wibox struts.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#awful.wibar:setup">awful.wibar:setup (args)</a></td>
 	<td class="summary">Set a declarative widget hierarchy description.</td>
 	</tr>
@@ -337,105 +337,112 @@
 
     <dl class="function">
     <dt>
-    <a name = "awfulwibar.new"></a>
-    <strong>awfulwibar.new (arg)</strong>
+    <a name = "awful.wibar"></a>
+    <strong>awful.wibar ([arg=nil])</strong>
     </dt>
     <dd>
     Create a new wibox and attach it to a screen edge.
+ You can add also position key with value top, bottom, left or right.
+ You can also use width or height in % and set align to center, right or left.
+ You can also set the screen key with a screen number to attach the wibox.
+ If not specified, the primary screen is assumed.
 
 
     <ul>
         <li><span class="parameter">arg</span>
-         A table with standard arguments to wibox() creator.
- You can add also position key with value top, bottom, left or right.
- You can also use width or height in % and set align to center, right or left.
- You can also set the screen key with a screen number to attach the wibox.
- If not specified, 1 is assumed.
+
+        <ul>
+        <li><span class="parameter">position</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The position.
         </li>
+        <li><span class="parameter">stretch</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         If the wibar need to be stretched to fill the screen.
+        </li>
+        <li><span class="parameter">border_width</span>
+            <span class="types"><span class="type">integer</span></span>
+         Border width.
+        </li>
+        <li><span class="parameter">border_color</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Border color.
+        </li>
+        <li><span class="parameter">ontop</span>
+            <span class="types"><span class="type">boolean</span></span>
+         On top of other windows.
+        </li>
+        <li><span class="parameter">cursor</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The mouse cursor.
+        </li>
+        <li><span class="parameter">visible</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Visibility.
+        </li>
+        <li><span class="parameter">opacity</span>
+            <span class="types"><span class="type">number</span></span>
+         The opacity of the wibox, between 0 and 1.
+        </li>
+        <li><span class="parameter">type</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The window type (desktop, normal, dock, …).
+        </li>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">integer</span></span>
+         The x coordinates.
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">integer</span></span>
+         The y coordinates.
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">integer</span></span>
+         The width of the wibox.
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">integer</span></span>
+         The height of the wibox.
+        </li>
+        <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+         The wibox screen.
+        </li>
+        <li><span class="parameter">widget</span>
+            <span class="types"><a class="type" href="../classes/wibox.html#wibox.widget">wibox.widget</a></span>
+         The widget that the wibox displays.
+        </li>
+        <li><span class="parameter">shape_bounding</span>
+         The wibox’s bounding shape as a (native) cairo surface.
+        </li>
+        <li><span class="parameter">shape_clip</span>
+         The wibox’s clip shape as a (native) cairo surface.
+        </li>
+        <li><span class="parameter">bg</span>
+            <span class="types"><span class="type">color</span></span>
+         The background of the wibox.
+        </li>
+        <li><span class="parameter">bgimage</span>
+            <span class="types"><span class="type">surface</span></span>
+         The background image of the drawable.
+        </li>
+        <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
+         The foreground (text) of the wibox.
+        </li>
+        </li></ul>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        The wibox created.
+        The new wibar
     </ol>
 
 
     <h3>See also:</h3>
     <ul>
          <a href="../classes/wibox.html#">wibox</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "wibox.buttons"></a>
-    <strong>wibox.buttons (buttons_table)</strong>
-    </dt>
-    <dd>
-    Get or set mouse buttons bindings to a wibox.
-
-
-    <ul>
-        <li><span class="parameter">buttons_table</span>
-         A table of buttons objects, or nothing.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.geometry"></a>
-    <strong>wibox.geometry (A)</strong>
-    </dt>
-    <dd>
-    Get or set wibox geometry.  That&rsquo;s the same as accessing or setting the x,
- y, width or height properties of a wibox.
-
-
-    <ul>
-        <li><span class="parameter">A</span>
-         table with coordinates to modify.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        A table with wibox coordinates and geometry.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.struts"></a>
-    <strong>wibox.struts (strut)</strong>
-    </dt>
-    <dd>
-    Get or set wibox struts.
-
-
-    <ul>
-        <li><span class="parameter">strut</span>
-         A table with new strut, or nothing
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The wibox strut in a table.
-    </ol>
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../classes/client.html#client:struts">client.struts</a>
     </ul>
 
 
@@ -1150,9 +1157,10 @@ Green   Alpha
     <strong>awful.wibar.attach</strong>
     </dt>
     <dd>
-    Attach a wibox to a screen.
- If a wibox is attached, it will be automatically be moved when other wiboxes
- will be attached.
+    Attach a wibox to a screen. </p>
+
+<p> This function has been moved to the <a href="../libraries/awful.placement.html#">awful.placement</a> module. Calling this
+ no longer does anything.
 
 
     <h3>param:</h3>
@@ -1170,6 +1178,10 @@ Green   Alpha
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.placement.html#">awful.placement</a>
+    </ul>
 
 
 </dd>
@@ -1258,6 +1270,78 @@ Green   Alpha
 
 
 
+
+
+</dd>
+    <dt>
+    <a name = "awful.wibar:buttons"></a>
+    <strong>awful.wibar:buttons (buttons_table)</strong>
+    </dt>
+    <dd>
+    Get or set mouse buttons bindings to a wibox.
+
+
+    <ul>
+        <li><span class="parameter">buttons_table</span>
+         A table of buttons objects, or nothing.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.wibar:geometry"></a>
+    <strong>awful.wibar:geometry (A)</strong>
+    </dt>
+    <dd>
+    Get or set wibox geometry.  That&rsquo;s the same as accessing or setting the x,
+ y, width or height properties of a wibox.
+
+
+    <ul>
+        <li><span class="parameter">A</span>
+         table with coordinates to modify.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A table with wibox coordinates and geometry.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.wibar:struts"></a>
+    <strong>awful.wibar:struts (strut)</strong>
+    </dt>
+    <dd>
+    Get or set wibox struts.
+
+
+    <ul>
+        <li><span class="parameter">strut</span>
+         A table with new strut, or nothing
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The wibox strut in a table.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/client.html#client:struts">client.struts</a>
+    </ul>
 
 
 </dd>
