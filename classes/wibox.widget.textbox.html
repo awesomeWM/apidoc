@@ -32,6 +32,10 @@
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Object_properties">Object properties</a></li>
+<li><a href="#Signals">Signals</a></li>
+<li><a href="#Theme_variables">Theme variables</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
 
@@ -64,6 +68,12 @@
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/tag.html">tag</a></li>
   <li><a href="../classes/wibox.html">wibox</a></li>
+  <li><a href="../classes/wibox.container.background.html">wibox.container.background</a></li>
+  <li><a href="../classes/wibox.container.constraint.html">wibox.container.constraint</a></li>
+  <li><a href="../classes/wibox.container.margin.html">wibox.container.margin</a></li>
+  <li><a href="../classes/wibox.container.mirror.html">wibox.container.mirror</a></li>
+  <li><a href="../classes/wibox.container.rotate.html">wibox.container.rotate</a></li>
+  <li><a href="../classes/wibox.container.scroll.html">wibox.container.scroll</a></li>
   <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
   <li><a href="../classes/wibox.layout.align.html">wibox.layout.align</a></li>
   <li><a href="../classes/wibox.layout.constraint.html">wibox.layout.constraint</a></li>
@@ -76,10 +86,14 @@
   <li><a href="../classes/wibox.layout.scroll.html">wibox.layout.scroll</a></li>
   <li><a href="../classes/wibox.layout.stack.html">wibox.layout.stack</a></li>
   <li><a href="../classes/wibox.widget.background.html">wibox.widget.background</a></li>
+  <li><a href="../classes/wibox.widget.base.html">wibox.widget.base</a></li>
+  <li><a href="../classes/wibox.widget.graph.html">wibox.widget.graph</a></li>
   <li><a href="../classes/wibox.widget.imagebox.html">wibox.widget.imagebox</a></li>
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
+  <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><strong>wibox.widget.textbox</strong></li>
+  <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
   <li><a href="../classes/xproperties.html">xproperties</a></li>
 </ul>
 <h2>Libraries</h2>
@@ -137,7 +151,6 @@
   <li><a href="../libraries/root.html">root</a></li>
   <li><a href="../libraries/selection.html">selection</a></li>
   <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
-  <li><a href="../libraries/wibox.widget.base.html">wibox.widget.base</a></li>
 </ul>
 <h2>Documentation</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
@@ -156,26 +169,116 @@
 <h1>Class <code>wibox.widget.textbox</code></h1>
 <p>
 </p>
-<p>
-</p>
+<p><img src="../images/AUTOGEN_wibox_widget_defaults_textbox.svg" alt="Usage example" /></p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+wibox.widget{
+    markup = &apos;This &lt;i&gt;is&lt;/i&gt; a &lt;b&gt;textbox&lt;/b&gt;!!!&apos;,
+    align  = &apos;center&apos;,
+    valign = &apos;center&apos;,
+    widget = wibox.widget.textbox
+}</pre>
+    </ul>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2010, 2011 Uli Schlachter, dodo</li>
-        <li><strong>Release</strong>: master-g9f74416</li>
+        <li><strong>Release</strong>: master-gfc659b7</li>
         <li><strong>Author</strong>: Uli Schlachter,dodo</li>
     </ul>
 
 
-<h2><a href="#Methods">Methods</a></h2>
+<h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.widget.textbox:draw">wibox.widget.textbox:draw (context, cr, width, height)</a></td>
-	<td class="summary">Draw the given textbox on the given cairo context in the given geometry</td>
+	<td class="name" ><a href="#wibox.widget.textbox">wibox.widget.textbox ([text=""[, ignore_markup=false]])</a></td>
+	<td class="summary">Create a new textbox.</td>
+	</tr>
+</table>
+<h2><a href="#Object_properties">Object properties</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox.markup">wibox.widget.textbox.markup</a></td>
+	<td class="summary">Set the text of the textbox (with
+ <a href="https://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango markup</a>).</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.textbox:fit">wibox.widget.textbox:fit (context, width, height)</a></td>
-	<td class="summary">Fit the given textbox</td>
+	<td class="name" ><a href="#wibox.widget.textbox.text">wibox.widget.textbox.text</a></td>
+	<td class="summary">Set a textbox' text.</td>
 	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox.ellipsize">wibox.widget.textbox.ellipsize</a></td>
+	<td class="summary">Set a textbox' ellipsize mode.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox.wrap">wibox.widget.textbox.wrap</a></td>
+	<td class="summary">Set a textbox' wrap mode.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox.valign">wibox.widget.textbox.valign</a></td>
+	<td class="summary">The textbox' vertical alignment</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox.align">wibox.widget.textbox.align</a></td>
+	<td class="summary">Set a textbox' horizontal alignment.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox.font">wibox.widget.textbox.font</a></td>
+	<td class="summary">Set a textbox' font</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox.forced_height">wibox.widget.textbox.forced_height</a></td>
+	<td class="summary">Force a widget height.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox.forced_width">wibox.widget.textbox.forced_width</a></td>
+	<td class="summary">Force a widget width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox.opacity">wibox.widget.textbox.opacity</a></td>
+	<td class="summary">The widget opacity (transparency).</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox.visible">wibox.widget.textbox.visible</a></td>
+	<td class="summary">The widget visibility.</td>
+	</tr>
+</table>
+<h2><a href="#Signals">Signals</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#widget::layout_changed">widget::layout_changed</a></td>
+	<td class="summary">When the layout (size) change.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#widget::redraw_needed">widget::redraw_needed</a></td>
+	<td class="summary">When the widget content changed.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#button::press">button::press</a></td>
+	<td class="summary">When a mouse button is pressed over the widget.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#button::release">button::release</a></td>
+	<td class="summary">When a mouse button is released over the widget.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#mouse::enter">mouse::enter</a></td>
+	<td class="summary">When the mouse enter a widget.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#mouse::leave">mouse::leave</a></td>
+	<td class="summary">When the mouse leave a widget.</td>
+	</tr>
+</table>
+<h2><a href="#Theme_variables">Theme variables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#beautiful.font">beautiful.font</a></td>
+	<td class="summary">The textbox font.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
 	<tr>
 	<td class="name" ><a href="#wibox.widget.textbox:get_preferred_size">wibox.widget.textbox:get_preferred_size (s)</a></td>
 	<td class="summary">Get the preferred size of a textbox.</td>
@@ -198,33 +301,40 @@
  <a href="https://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango markup</a>).</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.textbox:set_markup">wibox.widget.textbox:set_markup (text)</a></td>
-	<td class="summary">Set the text of the textbox (with
- <a href="https://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango markup</a>).</td>
+	<td class="name" ><a href="#wibox.widget.textbox:index">wibox.widget.textbox:index (widget[, recursive[, ...]])</a></td>
+	<td class="summary">Get a widex index.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.textbox:set_text">wibox.widget.textbox:set_text (text)</a></td>
-	<td class="summary">Set a textbox' text.</td>
+	<td class="name" ><a href="#wibox.widget.textbox:get_all_children">wibox.widget.textbox:get_all_children ()</a></td>
+	<td class="summary">Get all direct and indirect children widgets.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.textbox:set_ellipsize">wibox.widget.textbox:set_ellipsize (mode)</a></td>
-	<td class="summary">Set a textbox' ellipsize mode.</td>
+	<td class="name" ><a href="#wibox.widget.textbox:setup">wibox.widget.textbox:setup (args)</a></td>
+	<td class="summary">Set a declarative widget hierarchy description.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.textbox:set_wrap">wibox.widget.textbox:set_wrap (mode)</a></td>
-	<td class="summary">Set a textbox' wrap mode.</td>
+	<td class="name" ><a href="#wibox.widget.textbox:buttons">wibox.widget.textbox:buttons (_buttons)</a></td>
+	<td class="summary">Set/get a widget&rsquo;s buttons.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.textbox:set_valign">wibox.widget.textbox:set_valign (mode)</a></td>
-	<td class="summary">Set a textbox' vertical alignment</td>
+	<td class="name" ><a href="#wibox.widget.textbox:disconnect_signal">wibox.widget.textbox:disconnect_signal (name, func)</a></td>
+	<td class="summary">Disonnect to a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.textbox:set_align">wibox.widget.textbox:set_align (mode)</a></td>
-	<td class="summary">Set a textbox' horizontal alignment</td>
+	<td class="name" ><a href="#wibox.widget.textbox:emit_signal">wibox.widget.textbox:emit_signal (name, ...)</a></td>
+	<td class="summary">Emit a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.textbox:set_font">wibox.widget.textbox:set_font (font)</a></td>
-	<td class="summary">Set a textbox' font</td>
+	<td class="name" ><a href="#wibox.widget.textbox:add_signal">wibox.widget.textbox:add_signal (name)</a></td>
+	<td class="summary">Add a signal to an object.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox:connect_signal">wibox.widget.textbox:connect_signal (name, func)</a></td>
+	<td class="summary">Connect to a signal.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.textbox:weak_connect_signal">wibox.widget.textbox:weak_connect_signal (name, func)</a></td>
+	<td class="summary">Connect to a signal weakly.</td>
 	</tr>
 </table>
 
@@ -232,33 +342,109 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    Methods
+    <dl class="function">
+    <dt>
+    <a name = "wibox.widget.textbox"></a>
+    <strong>wibox.widget.textbox ([text=""[, ignore_markup=false]])</strong>
+    </dt>
+    <dd>
+    Create a new textbox.
+
+
+    <ul>
+        <li><span class="parameter">text</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The textbox content
+         (<em>default</em> "")
+        </li>
+        <li><span class="parameter">ignore_markup</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Ignore the pango/HTML markup
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A new textbox widget
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Object_properties"></a>Object properties</h2>
 
     <dl class="function">
     <dt>
-    <a name = "wibox.widget.textbox:draw"></a>
-    <strong>wibox.widget.textbox:draw (context, cr, width, height)</strong>
+    <a name = "wibox.widget.textbox.markup"></a>
+    <strong>wibox.widget.textbox.markup</strong>
     </dt>
     <dd>
-    Draw the given textbox on the given cairo context in the given geometry
+    Set the text of the textbox (with
+ <a href="https://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango markup</a>).
 
 
+    <h3>Type:</h3>
     <ul>
-        <li><span class="parameter">context</span>
-
-
+        <li><span class="parameter">text</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The text to set. This can contain pango markup (e.g.
+   <code>&lt;b&gt;bold&lt;/b&gt;</code>). You can use <a href="../libraries/awful.util.html#escape">awful.util.escape</a> to escape
+   parts of it.
         </li>
-        <li><span class="parameter">cr</span>
+    </ul>
 
 
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.textbox.html#wibox.widget.textbox.text">text</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox.text"></a>
+    <strong>wibox.widget.textbox.text</strong>
+    </dt>
+    <dd>
+    Set a textbox' text.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+         The text to display. Pango markup is ignored and shown as-is.
         </li>
-        <li><span class="parameter">width</span>
+    </ul>
 
 
-        </li>
-        <li><span class="parameter">height</span>
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.textbox.html#wibox.widget.textbox.markup">markup</a>
+    </ul>
 
 
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox.ellipsize"></a>
+    <strong>wibox.widget.textbox.ellipsize</strong>
+    </dt>
+    <dd>
+    Set a textbox' ellipsize mode.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">mode</span>
+         Where should long lines be shortened? &ldquo;start&rdquo;, &ldquo;middle&rdquo; or &ldquo;end&rdquo;
         </li>
     </ul>
 
@@ -268,23 +454,160 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.textbox:fit"></a>
-    <strong>wibox.widget.textbox:fit (context, width, height)</strong>
+    <a name = "wibox.widget.textbox.wrap"></a>
+    <strong>wibox.widget.textbox.wrap</strong>
     </dt>
     <dd>
-    Fit the given textbox
+    Set a textbox' wrap mode.
 
 
+    <h3>Type:</h3>
     <ul>
-        <li><span class="parameter">context</span>
-
-
+        <li><span class="parameter">mode</span>
+         Where to wrap? After &ldquo;word&rdquo;, &ldquo;char&rdquo; or &ldquo;word_char&rdquo;
         </li>
-        <li><span class="parameter">width</span>
+    </ul>
 
 
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox.valign"></a>
+    <strong>wibox.widget.textbox.valign</strong>
+    </dt>
+    <dd>
+    The textbox' vertical alignment
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">mode</span>
+         Where should the textbox be drawn? &ldquo;top&rdquo;, &ldquo;center&rdquo; or &ldquo;bottom&rdquo;
         </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox.align"></a>
+    <strong>wibox.widget.textbox.align</strong>
+    </dt>
+    <dd>
+    Set a textbox' horizontal alignment.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">mode</span>
+         Where should the textbox be drawn? &ldquo;left&rdquo;, &ldquo;center&rdquo; or &ldquo;right&rdquo;
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox.font"></a>
+    <strong>wibox.widget.textbox.font</strong>
+    </dt>
+    <dd>
+    Set a textbox' font
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">font</span>
+         The font description as string
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox.forced_height"></a>
+    <strong>wibox.widget.textbox.forced_height</strong>
+    </dt>
+    <dd>
+    Force a widget height.
+
+
+    <h3>Type:</h3>
+    <ul>
         <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span> or <span class="type">nil</span></span>
+         The height (<code>nil</code> for automatic)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox.forced_width"></a>
+    <strong>wibox.widget.textbox.forced_width</strong>
+    </dt>
+    <dd>
+    Force a widget width.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span> or <span class="type">nil</span></span>
+         The width (<code>nil</code> for automatic)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox.opacity"></a>
+    <strong>wibox.widget.textbox.opacity</strong>
+    </dt>
+    <dd>
+    The widget opacity (transparency).
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">opacity</span>
+            <span class="types"><span class="type">number</span></span>
+         The opacity (between 0 and 1)
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox.visible"></a>
+    <strong>wibox.widget.textbox.visible</strong>
+    </dt>
+    <dd>
+    The widget visibility.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
 
 
         </li>
@@ -295,6 +618,301 @@
 
 
 </dd>
+</dl>
+    <h2 class="section-header "><a name="Signals"></a>Signals</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "widget::layout_changed"></a>
+    <strong>widget::layout_changed</strong>
+    </dt>
+    <dd>
+    When the layout (size) change.
+ This signal is emited when the previous results of <code>:layout()</code> and <code>:fit()</code>
+ are no longer valid.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.textbox.html#widget::redraw_needed">widget::redraw_needed</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "widget::redraw_needed"></a>
+    <strong>widget::redraw_needed</strong>
+    </dt>
+    <dd>
+    When the widget content changed.
+ Unless this signal is emitted, <code>:layout()</code> and <code>:fit()</code> must return the same
+ result when called with the same arguments. In case this isn&rsquo;t the case,
+ use <a href="../classes/wibox.widget.textbox.html#widget::layout_changed">widget::layout_changed</a>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "button::press"></a>
+    <strong>button::press</strong>
+    </dt>
+    <dd>
+    When a mouse button is pressed over the widget.
+ The position of the mouse press relative to the widget while geometry
+ contains the geometry of the widget relative to the wibox.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">widget</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The widget
+        </li>
+        <li><span class="parameter">lx</span>
+            <span class="types"><span class="type">number</span></span>
+         The relative horizontal position.
+        </li>
+        <li><span class="parameter">ly</span>
+            <span class="types"><span class="type">number</span></span>
+         The relative vertical position.
+        </li>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">number</span></span>
+         The button number.
+        </li>
+        <li><span class="parameter">mods</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The modifiers (mod4, mod1 (alt), Control, Shift)
+        </li>
+        <li><span class="parameter">geometry</span>
+
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The vertical position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The horizontal position
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The widget
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The height
+        </li>
+        <li><span class="parameter">drawable</span>
+            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
+         The <a href="../classes/drawable.html#">drawable</a>
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/mouse.html#">mouse</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "button::release"></a>
+    <strong>button::release</strong>
+    </dt>
+    <dd>
+    When a mouse button is released over the widget.
+ The position of the mouse press relative to the widget while geometry
+ contains the geometry of the widget relative to the wibox.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">widget</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The widget
+        </li>
+        <li><span class="parameter">lx</span>
+            <span class="types"><span class="type">number</span></span>
+         The relative horizontal position.
+        </li>
+        <li><span class="parameter">ly</span>
+            <span class="types"><span class="type">number</span></span>
+         The relative vertical position.
+        </li>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">number</span></span>
+         The button number.
+        </li>
+        <li><span class="parameter">mods</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The modifiers (mod4, mod1 (alt), Control, Shift)
+        </li>
+        <li><span class="parameter">geometry</span>
+
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The vertical position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The horizontal position
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The widget
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The height
+        </li>
+        <li><span class="parameter">drawable</span>
+            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
+         The <a href="../classes/drawable.html#">drawable</a>
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/mouse.html#">mouse</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "mouse::enter"></a>
+    <strong>mouse::enter</strong>
+    </dt>
+    <dd>
+    When the mouse enter a widget.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">widget</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The widget
+        </li>
+        <li><span class="parameter">geometry</span>
+
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The vertical position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The horizontal position
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The widget
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The height
+        </li>
+        <li><span class="parameter">drawable</span>
+            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
+         The <a href="../classes/drawable.html#">drawable</a>
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/mouse.html#">mouse</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "mouse::leave"></a>
+    <strong>mouse::leave</strong>
+    </dt>
+    <dd>
+    When the mouse leave a widget.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">widget</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The widget
+        </li>
+        <li><span class="parameter">geometry</span>
+
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The vertical position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The horizontal position
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The widget
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The height
+        </li>
+        <li><span class="parameter">drawable</span>
+            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
+         The <a href="../classes/drawable.html#">drawable</a>
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/mouse.html#">mouse</a>
+    </ul>
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Theme_variables"></a>Theme variables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "beautiful.font"></a>
+    <strong>beautiful.font</strong>
+    </dt>
+    <dd>
+    The textbox font.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
     <dt>
     <a name = "wibox.widget.textbox:get_preferred_size"></a>
     <strong>wibox.widget.textbox:get_preferred_size (s)</strong>
@@ -460,20 +1078,148 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.textbox:set_markup"></a>
-    <strong>wibox.widget.textbox:set_markup (text)</strong>
+    <a name = "wibox.widget.textbox:index"></a>
+    <strong>wibox.widget.textbox:index (widget[, recursive[, ...]])</strong>
     </dt>
     <dd>
-    Set the text of the textbox (with
- <a href="https://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango markup</a>).
+    Get a widex index.
 
 
     <ul>
-        <li><span class="parameter">text</span>
+        <li><span class="parameter">widget</span>
+         The widget to look for
+        </li>
+        <li><span class="parameter">recursive</span>
+         Also check sub-widgets
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">...</span>
+         Aditional widgets to add at the end of the "path"
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        The index</li>
+        <li>
+        The parent layout</li>
+        <li>
+        The path between "self" and "widget"</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox:get_all_children"></a>
+    <strong>wibox.widget.textbox:get_all_children ()</strong>
+    </dt>
+    <dd>
+    Get all direct and indirect children widgets.
+ This will scan all containers recursively to find widgets
+ Warning: This method it prone to stack overflow id the widget, or any of its
+ children, contain (directly or indirectly) itself.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The children
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox:setup"></a>
+    <strong>wibox.widget.textbox:setup (args)</strong>
+    </dt>
+    <dd>
+    Set a declarative widget hierarchy description.
+ See <a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a>
+
+
+    <ul>
+        <li><span class="parameter">args</span>
+         An array containing the widgets disposition
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox:buttons"></a>
+    <strong>wibox.widget.textbox:buttons (_buttons)</strong>
+    </dt>
+    <dd>
+    Set/get a widget&rsquo;s buttons.
+
+
+    <ul>
+        <li><span class="parameter">_buttons</span>
+         The table of buttons that should bind to the widget.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox:disconnect_signal"></a>
+    <strong>wibox.widget.textbox:disconnect_signal (name, func)</strong>
+    </dt>
+    <dd>
+    Disonnect to a signal.
+
+
+    <ul>
+        <li><span class="parameter">name</span>
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The text to set. This can contain pango markup (e.g.
-   <code>&lt;b&gt;bold&lt;/b&gt;</code>). You can use <a href="../libraries/awful.util.html#escape">awful.util.escape</a> to escape
-   parts of it.
+         The name of the signal
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback that should be disconnected
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.textbox.html#wibox.widget.textbox:add_signal">add_signal</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.textbox:emit_signal"></a>
+    <strong>wibox.widget.textbox:emit_signal (name, ...)</strong>
+    </dt>
+    <dd>
+    Emit a signal.
+
+
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal
+        </li>
+        <li><span class="parameter">...</span>
+         Extra arguments for the callback functions. Each connected
+   function receives the object as first argument and then any extra arguments
+   that are given to emit_signal()
         </li>
     </ul>
 
@@ -483,16 +1229,17 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.textbox:set_text"></a>
-    <strong>wibox.widget.textbox:set_text (text)</strong>
+    <a name = "wibox.widget.textbox:add_signal"></a>
+    <strong>wibox.widget.textbox:add_signal (name)</strong>
     </dt>
     <dd>
-    Set a textbox' text.
+    Add a signal to an object.  All signals must be added before they can be used.
 
 
     <ul>
-        <li><span class="parameter">text</span>
-         The text to display. Pango markup is ignored and shown as-is.
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the new signal.
         </li>
     </ul>
 
@@ -502,92 +1249,54 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.textbox:set_ellipsize"></a>
-    <strong>wibox.widget.textbox:set_ellipsize (mode)</strong>
+    <a name = "wibox.widget.textbox:connect_signal"></a>
+    <strong>wibox.widget.textbox:connect_signal (name, func)</strong>
     </dt>
     <dd>
-    Set a textbox' ellipsize mode.
+    Connect to a signal.
 
 
     <ul>
-        <li><span class="parameter">mode</span>
-         Where should long lines be shortened? &ldquo;start&rdquo;, &ldquo;middle&rdquo; or &ldquo;end&rdquo;
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted
         </li>
     </ul>
 
 
 
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.textbox:set_wrap"></a>
-    <strong>wibox.widget.textbox:set_wrap (mode)</strong>
-    </dt>
-    <dd>
-    Set a textbox' wrap mode.
-
-
+    <h3>See also:</h3>
     <ul>
-        <li><span class="parameter">mode</span>
-         Where to wrap? After &ldquo;word&rdquo;, &ldquo;char&rdquo; or &ldquo;word_char&rdquo;
-        </li>
+         <a href="../classes/wibox.widget.textbox.html#wibox.widget.textbox:add_signal">add_signal</a>
     </ul>
 
 
-
-
-
 </dd>
     <dt>
-    <a name = "wibox.widget.textbox:set_valign"></a>
-    <strong>wibox.widget.textbox:set_valign (mode)</strong>
+    <a name = "wibox.widget.textbox:weak_connect_signal"></a>
+    <strong>wibox.widget.textbox:weak_connect_signal (name, func)</strong>
     </dt>
     <dd>
-    Set a textbox' vertical alignment
+    Connect to a signal weakly.  This allows the callback function to be garbage
+ collected and automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
+ Only use this function if you really, really, really know what you
+ are doing.
 
 
     <ul>
-        <li><span class="parameter">mode</span>
-         Where should the textbox be drawn? &ldquo;top&rdquo;, &ldquo;center&rdquo; or &ldquo;bottom&rdquo;
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal
         </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.textbox:set_align"></a>
-    <strong>wibox.widget.textbox:set_align (mode)</strong>
-    </dt>
-    <dd>
-    Set a textbox' horizontal alignment
-
-
-    <ul>
-        <li><span class="parameter">mode</span>
-         Where should the textbox be drawn? &ldquo;left&rdquo;, &ldquo;center&rdquo; or &ldquo;right&rdquo;
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.textbox:set_font"></a>
-    <strong>wibox.widget.textbox:set_font (font)</strong>
-    </dt>
-    <dd>
-    Set a textbox' font
-
-
-    <ul>
-        <li><span class="parameter">font</span>
-         The font description as string
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted
         </li>
     </ul>
 
@@ -603,7 +1312,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-05-30 03:57:40 </i>
+<i style="float:right;">Last updated 2016-05-31 03:26:36 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
