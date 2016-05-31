@@ -92,7 +92,6 @@
   <li><a href="../libraries/root.html">root</a></li>
   <li><a href="../libraries/selection.html">selection</a></li>
   <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
-  <li><a href="../libraries/wibox.widget.base.html">wibox.widget.base</a></li>
 </ul>
 <h2>Classes</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
@@ -122,6 +121,12 @@
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/tag.html">tag</a></li>
   <li><a href="../classes/wibox.html">wibox</a></li>
+  <li><a href="../classes/wibox.container.background.html">wibox.container.background</a></li>
+  <li><a href="../classes/wibox.container.constraint.html">wibox.container.constraint</a></li>
+  <li><a href="../classes/wibox.container.margin.html">wibox.container.margin</a></li>
+  <li><a href="../classes/wibox.container.mirror.html">wibox.container.mirror</a></li>
+  <li><a href="../classes/wibox.container.rotate.html">wibox.container.rotate</a></li>
+  <li><a href="../classes/wibox.container.scroll.html">wibox.container.scroll</a></li>
   <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
   <li><a href="../classes/wibox.layout.align.html">wibox.layout.align</a></li>
   <li><a href="../classes/wibox.layout.constraint.html">wibox.layout.constraint</a></li>
@@ -134,10 +139,14 @@
   <li><a href="../classes/wibox.layout.scroll.html">wibox.layout.scroll</a></li>
   <li><a href="../classes/wibox.layout.stack.html">wibox.layout.stack</a></li>
   <li><a href="../classes/wibox.widget.background.html">wibox.widget.background</a></li>
+  <li><a href="../classes/wibox.widget.base.html">wibox.widget.base</a></li>
+  <li><a href="../classes/wibox.widget.graph.html">wibox.widget.graph</a></li>
   <li><a href="../classes/wibox.widget.imagebox.html">wibox.widget.imagebox</a></li>
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
+  <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
+  <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
   <li><a href="../classes/xproperties.html">xproperties</a></li>
 </ul>
 <h2>Documentation</h2>
@@ -171,6 +180,10 @@
 	<tr>
 	<td class="name" ><a href="#deprecate">deprecate ([see])</a></td>
 	<td class="summary">Display a deprecation notice, but only once per traceback.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#deprecate_class">deprecate_class (fallback, old_name, new_name)</a></td>
+	<td class="summary">Create a class proxy with deprecation messages.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#ensure_pango_color">ensure_pango_color (color, fallback)</a></td>
@@ -257,8 +270,8 @@
 	<td class="summary">Join all tables given as parameters.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#util.table.crush">util.table.crush (t, set)</a></td>
-	<td class="summary">Override elements in the first table by the one in the second</td>
+	<td class="name" ><a href="#util.table.crush">util.table.crush (t, set[, raw=false])</a></td>
+	<td class="summary">Override elements in the first table by the one in the second.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#util.table.from_sparse">util.table.from_sparse (t)</a></td>
@@ -322,7 +335,7 @@
 
 
     <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
+    Methods
     <dl class="function">
     <dt>
     <a name = "deprecate"></a>
@@ -339,6 +352,41 @@
         </li>
     </ul>
 
+
+
+
+
+</dd>
+    <dt>
+    <a name = "deprecate_class"></a>
+    <strong>deprecate_class (fallback, old_name, new_name)</strong>
+    </dt>
+    <dd>
+    Create a class proxy with deprecation messages.
+ This is useful when a class has moved somewhere else.
+
+
+    <ul>
+        <li><span class="parameter">fallback</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The new class
+        </li>
+        <li><span class="parameter">old_name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The old class name
+        </li>
+        <li><span class="parameter">new_name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The new class name
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A proxy class.
+    </ol>
 
 
 
@@ -851,10 +899,12 @@
 </dd>
     <dt>
     <a name = "util.table.crush"></a>
-    <strong>util.table.crush (t, set)</strong>
+    <strong>util.table.crush (t, set[, raw=false])</strong>
     </dt>
     <dd>
-    Override elements in the first table by the one in the second
+    Override elements in the first table by the one in the second. </p>
+
+<p> Note that this method doesn&rsquo;t copy entries found in <code>__index</code>.
 
 
     <ul>
@@ -865,6 +915,11 @@
         <li><span class="parameter">set</span>
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          the table used to override members of <code>t</code>
+        </li>
+        <li><span class="parameter">raw</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use rawset (avoid the metatable)
+         (<em>default</em> false)
         </li>
     </ul>
 
