@@ -32,10 +32,21 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
+<li><a href="#Using_LGI_in_Awesome">Using LGI in Awesome </a></li>
+<li><a href="#The_Cairo_API">The Cairo API </a></li>
 </ul>
 
 
+<h2>Documentation</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../documentation/00-authors.md.html">Authors</a></li>
+  <li><a href="../documentation/01-readme.md.html">Readme</a></li>
+  <li><a href="../documentation/02-contributing.md.html">Contributing</a></li>
+  <li><a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a></li>
+  <li><a href="../documentation/04-new-widgets.md.html">Creating new widget</a></li>
+  <li><strong>Using Cairo and LGI</strong></li>
+  <li><a href="../documentation/90-FAQ.md.html">FAQ</a></li>
+</ul>
 <h2>Libraries</h2>
 <ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="../libraries/awesome.html">awesome</a></li>
@@ -47,7 +58,7 @@
   <li><a href="../libraries/awful.hotkeys_popup.keys.vim.html">awful.hotkeys_popup.keys.vim</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.widget.html">awful.hotkeys_popup.widget</a></li>
   <li><a href="../libraries/awful.key.html">awful.key</a></li>
-  <li><strong>awful.keygrabber</strong></li>
+  <li><a href="../libraries/awful.keygrabber.html">awful.keygrabber</a></li>
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
   <li><a href="../libraries/awful.menu.html">awful.menu</a></li>
   <li><a href="../libraries/awful.mouse.html">awful.mouse</a></li>
@@ -149,134 +160,220 @@
   <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
   <li><a href="../classes/xproperties.html">xproperties</a></li>
 </ul>
-<h2>Documentation</h2>
-<ul class="$(kind=='Topics' and '' or 'nowrap'">
-  <li><a href="../documentation/00-authors.md.html">Authors</a></li>
-  <li><a href="../documentation/01-readme.md.html">Readme</a></li>
-  <li><a href="../documentation/02-contributing.md.html">Contributing</a></li>
-  <li><a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a></li>
-  <li><a href="../documentation/04-new-widgets.md.html">Creating new widget</a></li>
-  <li><a href="../documentation/16-using-cairo.md.html">Using Cairo and LGI</a></li>
-  <li><a href="../documentation/90-FAQ.md.html">FAQ</a></li>
-</ul>
 
 </div>
 
 <div id="content">
 
-<h1>Module <code>awful.keygrabber</code></h1>
-<p>Keygrabber Stack</p>
-<p>
-</p>
-    <h3>Info:</h3>
-    <ul>
-        <li><strong>Copyright</strong>: 2012 dodo</li>
-        <li><strong>Release</strong>: master-g0a3af71</li>
-        <li><strong>Author</strong>: dodo</li>
-    </ul>
+    <h1>Using Cairo and LGI</h1>
+
+<p>These days, Awesome interface is mostly based on a library called LGI. It allows
+to access C libraries such as GTK, GLib, Cairo, Pango, PangoCairo and RSVG using
+Lua code without having to write actual &ldquo;glue&rdquo; C code.</p>
+
+<p>This is done using the GObject-introspection framework. The main advantage is
+the time saved and large number of features exposed for free. The downside is
+the lack of proper Lua centric documentation and examples. Some examples can be
+found in <a href="https://github.com/pavouk/lgi/tree/master/docs">LGI&rsquo;s own documentation</a>,
+but this does not directly explain how to use a concrete API.
+Using other APIs requires some trial and error, and can be even impossible if
+the introspection data is missing or inaccurate.
+Using low-level APIs directly can easily cause crashes.
+It is the programmer&rsquo;s responsibility to properly check return and error
+values.</p>
+
+<p><a name="Using_LGI_in_Awesome"></a></p>
+
+<h2>Using LGI in Awesome</h2>
+
+<p>GObject and Gnome centric libraries tend to use the common C practice of
+emulating namespaces using underscores in function names.
+LGI exposes a proper namespace based API. For example, if the C function is:</p>
+
+<pre>
+cairo_image_surface_create()
+</pre>
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#stop">stop (g)</a></td>
-	<td class="summary">Stop grabbing the keyboard for the provided callback.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#run">run (g)</a></td>
-	<td class="summary">Grab keyboard input and read pressed keys, calling the least callback
- function from the stack at each keypress, until the stack is empty.</td>
-	</tr>
-</table>
+<p>Then the LGI equivalent is:</p>
 
-<br/>
-<br/>
+<pre>
+lgi.cairo.ImageSurface.create()
+</pre>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-    Methods
-    <dl class="function">
-    <dt>
-    <a name = "stop"></a>
-    <strong>stop (g)</strong>
-    </dt>
-    <dd>
-    Stop grabbing the keyboard for the provided callback.
- When no callback is given, the last grabber gets removed (last one added to
- the stack).
+<p>The same goes for enums:</p>
+
+<pre>
+CAIRO_FORMAT_ARGB32
+</pre>
 
 
-    <ul>
-        <li><span class="parameter">g</span>
-         The key grabber that must be removed.
-        </li>
-    </ul>
+<p>becomes:</p>
+
+<pre>
+lgi.cairo.Format.ARGB32
+</pre>
 
 
+<p>LGI is also object oriented while the C API is function based. When those
+functions take the &ldquo;class&rdquo; &ldquo;object&rdquo;, then this:</p>
+
+<pre>
+cairo_line_to(cr, x, y)
+</pre>
 
 
+<p>can be expressed as:</p>
 
-</dd>
-    <dt>
-    <a name = "run"></a>
-    <strong>run (g)</strong>
-    </dt>
-    <dd>
-    Grab keyboard input and read pressed keys, calling the least callback
- function from the stack at each keypress, until the stack is empty. </p>
+<pre>
+cr:line_to(x, y)
+</pre>
 
-<p> Calling run with the same callback again will bring the callback
- to the top of the stack.</p>
 
-<p> The callback function receives three arguments:</p>
+<p>It is however important to note some inconsistencies. For example, Cairo is
+called <code>lgi.cairo</code> while GLib is called <code>lgi.GLib</code>. Figuring this out will
+require some experimenting. The best way to do this without actually
+reloading Awesome is to open the <code>lua</code> command in a terminal and use <a href="http://www.lua.org/manual/5.2/manual.html#pdf-print">print</a>:</p>
+
+<pre>
+<span class="global">print</span>(<span class="string">"This will print a table address:"</span>, <span class="global">require</span>(<span class="string">"lgi"</span>).cairo)
+<span class="global">print</span>(<span class="string">"This will print an error:"</span>, <span class="global">require</span>(<span class="string">"lgi"</span>).Cairo)
+</pre>
+
+
+<p>It is recommended to avoid using <a href="http://www.lua.org/manual/5.2/manual.html#pdf-require">require</a> always when using a function, but
+include the libraries at the top of your <code>rc.lua</code> or Lua module instead:</p>
+
+<pre>
+<span class="keyword">local</span> cairo = <span class="global">require</span>(<span class="string">"lgi"</span>).cairo
+</pre>
+
+
+<p><a name="The_Cairo_API"></a></p>
+
+<h2>The Cairo API</h2>
+
+<p>Cairo is a 2D graphic library used by Awesome, Gnome and XFCE. It allows to
+e.g. paint paths on a <code>surface</code>.
+Awesome uses it internally and being able to call it directly is a powerful
+feature.</p>
+
+<p>The following concepts are necessary to be able to use Cairo:</p>
+
+<p><strong>Surface</strong>:</p>
+
+<p>A surface is the area where the painting will be done. There are multiple types
+of surfaces including:</p>
 
 <ul>
-<li>a table containing modifiers keys</li>
-<li>a string with the pressed key</li>
-<li>a string with either &ldquo;press&rdquo; or &ldquo;release&rdquo; to indicate the event type</li>
+<li>Color images with transparency (<code>ARGB32</code>) or without (<code>RGB24</code>)</li>
+<li>Monochrome image surfaces with transparency (<code>A8</code>) or without (<code>A1</code>)</li>
+<li>SVG vectorial surfaces</li>
+<li>Native (XCB) surfaces</li>
+<li>Framebuffers and other less interesting ones (from an Awesome&rsquo;s point of
+view)</li>
 </ul>
 
 
-<p> A callback can return <code>false</code> to pass the events to the next
- keygrabber in the stack.
+<p>For more details see <a href="https://cairographics.org/manual/cairo-Image-Surfaces.html">Surfaces</a>.</p>
+
+<p><strong>Sources</strong>:</p>
+
+<p>Sources are elements like colors, patterns or gradients. See <a href="../libraries/gears.color.html#">gears.color</a> for
+common sources.</p>
+
+<p>For more details see <a href="http://cairographics.org/manual/cairo-cairo-pattern-t.html">Pattern</a>.</p>
+
+<p><strong>Context and paths</strong>:</p>
+
+<p>A context is the proxy between the program and the surface, and holds a path.
+Paths are something like a line, circle or rectangle, which may or
+may not be closed (a shape).</p>
+
+<p>All drawing operations on a surface are done via a context.
+The current path is extended until it is used and reset (see next section).
+Until then nothing will be drawn to the surface.  For example:</p>
+
+<pre>
+cr:rectangle(<span class="number">0</span> , <span class="number">0</span> , <span class="number">10</span>, <span class="number">10</span>)
+cr:rectangle(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>)
+</pre>
 
 
-    <ul>
-        <li><span class="parameter">g</span>
-         The key grabber callback that will get the key events until it will be deleted or a new grabber is added.
-        </li>
-    </ul>
+<p>will not do anything until the operation is applied to the context.</p>
 
-    <h3>Returns:</h3>
-    <ol>
+<p>For more details, read:</p>
 
-        the given callback <code>g</code>.
-    </ol>
+<ul>
+<li><a href="http://cairographics.org/manual/cairo-Paths.html">Path</a></li>
+<li><a href="http://cairographics.org/manual/cairo-cairo-t.html">Context</a></li>
+<li><a href="http://cairographics.org/manual/cairo-Transformations.html">Transformation</a></li>
+</ul>
 
 
+<p>A context also holds a transformation matrix (see <a href="../classes/gears.matrix.html#">gears.matrix</a>), which is
+used when applying an operation.</p>
 
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">
- <span class="comment">-- The following function can be bound to a key, and be used to resize a
-</span> <span class="comment">-- client using the keyboard.
-</span>
- <span class="keyword">function</span> resize(c)
-   <span class="keyword">local</span> grabber = awful.keygrabber.run(<span class="keyword">function</span>(mod, key, event)
-     <span class="keyword">if</span> event == <span class="string">"release"</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
+<p><strong>Operations</strong>:</p>
 
-     <span class="keyword">if</span>     key == <span class="string">'Up'</span>    <span class="keyword">then</span> awful.client.moveresize(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">5</span>, c)
-     <span class="keyword">elseif</span> key == <span class="string">'Down'</span>  <span class="keyword">then</span> awful.client.moveresize(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, -<span class="number">5</span>, c)
-     <span class="keyword">elseif</span> key == <span class="string">'Right'</span> <span class="keyword">then</span> awful.client.moveresize(<span class="number">0</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, c)
-     <span class="keyword">elseif</span> key == <span class="string">'Left'</span>  <span class="keyword">then</span> awful.client.moveresize(<span class="number">0</span>, <span class="number">0</span>, -<span class="number">5</span>, <span class="number">0</span>, c)
-     <span class="keyword">else</span>   awful.keygrabber.stop(grabber)
-     <span class="keyword">end</span>
-   <span class="keyword">end</span>)
- <span class="keyword">end</span></pre>
-    </ul>
+<p>Multiple operations can be done with the paths. The most common are:</p>
 
-</dd>
-</dl>
+<ul>
+<li><em>fill</em>: Fill the path with the current source.</li>
+<li><em>stroke</em>: Paint the path outline with the current source.</li>
+<li><em>mask</em>: Use the current source as an alpha mask while painting with the
+current operator.</li>
+<li><em>clip</em>: Crop the surface&rsquo;s workarea so nothing outside of the clip will be
+affected by all following operations.</li>
+</ul>
+
+
+<p><strong>Operators</strong>:</p>
+
+<p><a href="http://cairographics.org/operators/">Operators</a> are modifiers used when
+applying operations.</p>
+
+<h3>Cairo in Awesome</h3>
+
+<p>All of Awesome&rsquo;s <a href="../classes/wibox.html#">wibox</a>es, <a href="../classes/awful.wibar.html#">awful.wibar</a>s, <a href="../libraries/gears.wallpaper.html#">gears.wallpaper</a>s and
+<a href="../libraries/awful.titlebar.html#">awful.titlebar</a>s contain a Cairo surfaces, which can be accessed through the
+<code>drawin</code> API.  This allows widgets to use the Cairo context directly.
+See the
+<a href="../documentation/03-declarative-layout.md.html">declarative layout system</a>
+and <a href="../documentation/04-new-widgets.md.html">new widgets</a> articles for more
+information and examples on how widgets work.</p>
+
+<p>It is also possible to create surfaces manually. See <a href="../libraries/gears.surface.html#">gears.surface</a> for
+some examples. Here is the most simple example you can get:</p>
+
+<pre>
+<span class="comment">-- Create a surface
+</span><span class="keyword">local</span> img = cairo.ImageSurface.create(cairo.Format.ARGB32, <span class="number">50</span>, <span class="number">50</span>)
+
+<span class="comment">-- Create a context
+</span><span class="keyword">local</span> cr  = cairo.Context(img)
+
+<span class="comment">-- Set a red source
+</span>cr:set_source(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>)
+<span class="comment">-- Alternative:
+</span>cr:set_source(gears.color(<span class="string">"#ff0000"</span>))
+
+<span class="comment">-- Add a 10px square path to the context at x=10, y=10
+</span>cr:rectangle(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>)
+
+<span class="comment">-- Actually draw the rectangle on img
+</span>cr:fill()
+</pre>
+
+
+<p>This can then be used as <code>bgimage</code> for a <a href="../classes/wibox.html#">wibox</a>, <a href="../classes/awful.wibar.html#">awful.wibar</a> or
+<a href="../classes/wibox.container.background.html#">wibox.container.background</a>:</p>
+
+<pre>
+mywibox[screen.primary].bgimage = img
+</pre>
+
 
 
 </div> <!-- id="content" -->
