@@ -184,7 +184,7 @@ wibox.widget {
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2010 Uli Schlachter</li>
-        <li><strong>Release</strong>: master-gc22b939</li>
+        <li><strong>Release</strong>: master-g76d0c45</li>
         <li><strong>Author</strong>: Uli Schlachter</li>
     </ul>
 
@@ -262,20 +262,19 @@ wibox.widget {
 <table class="function_list">
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:set">wibox.layout.fixed:set (index, widget2)</a></td>
-	<td class="summary">Set a widget at a specific index, replace the current one</td>
+	<td class="summary">Set a widget at a specific index, replace the current one.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:replace_widget">wibox.layout.fixed:replace_widget (widget, widget2[, recursive=false])</a></td>
-	<td class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code></td>
+	<td class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:swap">wibox.layout.fixed:swap (index1, index2)</a></td>
-	<td class="summary">Swap 2 widgets in a layout</td>
+	<td class="summary">Swap 2 widgets in a layout.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:swap_widgets">wibox.layout.fixed:swap_widgets (widget1, widget2[, recursive=false])</a></td>
-	<td class="summary">Swap 2 widgets in a layout
- If widget1 is present multiple time, only the first instance is swapped</td>
+	<td class="summary">Swap 2 widgets in a layout.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:reset">wibox.layout.fixed:reset (layout)</a></td>
@@ -301,7 +300,8 @@ wibox.widget {
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:insert">wibox.layout.fixed:insert (index, widget)</a></td>
-	<td class="summary">Insert a new widget in the layout at position <a href="../classes/wibox.layout.fixed.html#wibox.layout.fixed:index">index</a></td>
+	<td class="summary">Insert a new widget in the layout at position <a href="../classes/wibox.layout.fixed.html#wibox.layout.fixed:index">index</a>
+ <strong>Signal:</strong> widget::inserted The arguments are the widget and the index</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:index">wibox.layout.fixed:index (widget[, recursive[, ...]])</a></td>
@@ -318,6 +318,11 @@ wibox.widget {
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:buttons">wibox.layout.fixed:buttons (_buttons)</a></td>
 	<td class="summary">Set/get a widget&rsquo;s buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:emit_signal_recursive">wibox.layout.fixed:emit_signal_recursive (signal_name, ...)</a></td>
+	<td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:disconnect_signal">wibox.layout.fixed:disconnect_signal (name, func)</a></td>
@@ -848,7 +853,9 @@ wibox.widget {
     <strong>wibox.layout.fixed:set (index, widget2)</strong>
     </dt>
     <dd>
-    Set a widget at a specific index, replace the current one
+    Set a widget at a specific index, replace the current one.
+ <strong>Signal:</strong> widget::replaced The argument is the new widget and the old one
+ and the index.
 
 
     <ul>
@@ -877,7 +884,9 @@ wibox.widget {
     <strong>wibox.layout.fixed:replace_widget (widget, widget2[, recursive=false])</strong>
     </dt>
     <dd>
-    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>
+    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.
+ <strong>Signal:</strong> widget::replaced The argument is the new widget and the old one
+ and the index.
 
 
     <ul>
@@ -910,7 +919,8 @@ wibox.widget {
     <strong>wibox.layout.fixed:swap (index1, index2)</strong>
     </dt>
     <dd>
-    Swap 2 widgets in a layout
+    Swap 2 widgets in a layout.
+ <strong>Signal:</strong> widget::swapped The arguments are both widgets and both (new) indexes.
 
 
     <ul>
@@ -940,8 +950,10 @@ wibox.widget {
     <strong>wibox.layout.fixed:swap_widgets (widget1, widget2[, recursive=false])</strong>
     </dt>
     <dd>
-    Swap 2 widgets in a layout
+    Swap 2 widgets in a layout.
  If widget1 is present multiple time, only the first instance is swapped
+ <strong>Signal:</strong> widget::swapped The arguments are both widgets and both (new) indexes.
+ if the layouts not the same, then only <code>widget::replaced</code> will be emitted.
 
 
     <ul>
@@ -975,6 +987,7 @@ wibox.widget {
     </dt>
     <dd>
     Reset a ratio layout.  This removes all widgets from the layout.
+ <strong>Signal:</strong> widget::reset
 
 
     <ul>
@@ -1099,6 +1112,7 @@ wibox.widget {
     </dt>
     <dd>
     Insert a new widget in the layout at position <a href="../classes/wibox.layout.fixed.html#wibox.layout.fixed:index">index</a>
+ <strong>Signal:</strong> widget::inserted The arguments are the widget and the index
 
 
     <ul>
@@ -1221,6 +1235,32 @@ wibox.widget {
 
 </dd>
     <dt>
+    <a name = "wibox.layout.fixed:emit_signal_recursive"></a>
+    <strong>wibox.layout.fixed:emit_signal_recursive (signal_name, ...)</strong>
+    </dt>
+    <dd>
+    Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.  This is useful to track signals when there is a dynamic
+ set of containers and layouts wrapping the widget.
+
+
+    <ul>
+        <li><span class="parameter">signal_name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         Other arguments
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "wibox.layout.fixed:disconnect_signal"></a>
     <strong>wibox.layout.fixed:disconnect_signal (name, func)</strong>
     </dt>
@@ -1329,7 +1369,7 @@ wibox.widget {
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-08-20 17:12:48 </i>
+<i style="float:right;">Last updated 2016-08-20 20:05:54 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
