@@ -264,20 +264,19 @@ wibox.widget {
 <table class="function_list">
 	<tr>
 	<td class="name" ><a href="#wibox.layout.stack:set">wibox.layout.stack:set (index, widget2)</a></td>
-	<td class="summary">Set a widget at a specific index, replace the current one</td>
+	<td class="summary">Set a widget at a specific index, replace the current one.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.stack:replace_widget">wibox.layout.stack:replace_widget (widget, widget2[, recursive=false])</a></td>
-	<td class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code></td>
+	<td class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.stack:swap">wibox.layout.stack:swap (index1, index2)</a></td>
-	<td class="summary">Swap 2 widgets in a layout</td>
+	<td class="summary">Swap 2 widgets in a layout.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.stack:swap_widgets">wibox.layout.stack:swap_widgets (widget1, widget2[, recursive=false])</a></td>
-	<td class="summary">Swap 2 widgets in a layout
- If widget1 is present multiple time, only the first instance is swapped</td>
+	<td class="summary">Swap 2 widgets in a layout.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.stack:reset">wibox.layout.stack:reset (layout)</a></td>
@@ -324,6 +323,11 @@ wibox.widget {
 	<tr>
 	<td class="name" ><a href="#wibox.layout.stack:buttons">wibox.layout.stack:buttons (_buttons)</a></td>
 	<td class="summary">Set/get a widget&rsquo;s buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.stack:emit_signal_recursive">wibox.layout.stack:emit_signal_recursive (signal_name, ...)</a></td>
+	<td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.stack:disconnect_signal">wibox.layout.stack:disconnect_signal (name, func)</a></td>
@@ -828,7 +832,9 @@ wibox.widget {
     <strong>wibox.layout.stack:set (index, widget2)</strong>
     </dt>
     <dd>
-    Set a widget at a specific index, replace the current one
+    Set a widget at a specific index, replace the current one.
+ <strong>Signal:</strong> widget::replaced The argument is the new widget and the old one
+ and the index.
 
 
     <ul>
@@ -857,7 +863,9 @@ wibox.widget {
     <strong>wibox.layout.stack:replace_widget (widget, widget2[, recursive=false])</strong>
     </dt>
     <dd>
-    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>
+    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.
+ <strong>Signal:</strong> widget::replaced The argument is the new widget and the old one
+ and the index.
 
 
     <ul>
@@ -890,7 +898,8 @@ wibox.widget {
     <strong>wibox.layout.stack:swap (index1, index2)</strong>
     </dt>
     <dd>
-    Swap 2 widgets in a layout
+    Swap 2 widgets in a layout.
+ <strong>Signal:</strong> widget::swapped The arguments are both widgets and both (new) indexes.
 
 
     <ul>
@@ -920,8 +929,10 @@ wibox.widget {
     <strong>wibox.layout.stack:swap_widgets (widget1, widget2[, recursive=false])</strong>
     </dt>
     <dd>
-    Swap 2 widgets in a layout
+    Swap 2 widgets in a layout.
  If widget1 is present multiple time, only the first instance is swapped
+ <strong>Signal:</strong> widget::swapped The arguments are both widgets and both (new) indexes.
+ if the layouts not the same, then only <code>widget::replaced</code> will be emitted.
 
 
     <ul>
@@ -955,6 +966,7 @@ wibox.widget {
     </dt>
     <dd>
     Reset a ratio layout.  This removes all widgets from the layout.
+ <strong>Signal:</strong> widget::reset
 
 
     <ul>
@@ -1208,6 +1220,32 @@ wibox.widget {
     <ul>
         <li><span class="parameter">_buttons</span>
          The table of buttons that should bind to the widget.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.stack:emit_signal_recursive"></a>
+    <strong>wibox.layout.stack:emit_signal_recursive (signal_name, ...)</strong>
+    </dt>
+    <dd>
+    Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.  This is useful to track signals when there is a dynamic
+ set of containers and layouts wrapping the widget.
+
+
+    <ul>
+        <li><span class="parameter">signal_name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         Other arguments
         </li>
     </ul>
 

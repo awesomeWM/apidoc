@@ -281,6 +281,11 @@
 	<td class="summary">Get all direct and indirect children widgets.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#wibox.widget.base:emit_signal_recursive">wibox.widget.base:emit_signal_recursive (signal_name, ...)</a></td>
+	<td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#wibox.widget.base:index">wibox.widget.base:index (widget[, recursive[, ...]])</a></td>
 	<td class="summary">Get a widex index.</td>
 	</tr>
@@ -836,6 +841,39 @@
            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The children
     </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.base:emit_signal_recursive"></a>
+    <strong>wibox.widget.base:emit_signal_recursive (signal_name, ...)</strong>
+    </dt>
+    <dd>
+    Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.  This is useful to track signals when there is a dynamic
+ set of containers and layouts wrapping the widget.</p>
+
+<p> Note that this function has two flaws. First of all, the signal are only
+ forwarded once the widget tree has been built. This happens after all
+ currently scheduled functions have been executed. Therefor, it wont start
+ to work right away. In case the widget is present multiple time in a single
+ widget tree, this function will also forward the signal multiple time (one
+ per upward tree path).
+
+
+    <ul>
+        <li><span class="parameter">signal_name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         Other arguments
+        </li>
+    </ul>
+
 
 
 

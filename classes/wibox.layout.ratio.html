@@ -247,20 +247,19 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
 <table class="function_list">
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:set">wibox.layout.ratio:set (index, widget2)</a></td>
-	<td class="summary">Set a widget at a specific index, replace the current one</td>
+	<td class="summary">Set a widget at a specific index, replace the current one.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:replace_widget">wibox.layout.ratio:replace_widget (widget, widget2[, recursive=false])</a></td>
-	<td class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code></td>
+	<td class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:swap">wibox.layout.ratio:swap (index1, index2)</a></td>
-	<td class="summary">Swap 2 widgets in a layout</td>
+	<td class="summary">Swap 2 widgets in a layout.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:swap_widgets">wibox.layout.ratio:swap_widgets (widget1, widget2[, recursive=false])</a></td>
-	<td class="summary">Swap 2 widgets in a layout
- If widget1 is present multiple time, only the first instance is swapped</td>
+	<td class="summary">Swap 2 widgets in a layout.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:reset">wibox.layout.ratio:reset (layout)</a></td>
@@ -300,15 +299,18 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:add">wibox.layout.ratio:add (...)</a></td>
-	<td class="summary">Add some widgets to the given fixed layout</td>
+	<td class="summary">Add some widgets to the given fixed layout
+ <strong>Signal:</strong> widget::added The argument are the widgets</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:remove">wibox.layout.ratio:remove (index)</a></td>
-	<td class="summary">Remove a widget from the layout</td>
+	<td class="summary">Remove a widget from the layout
+ <strong>Signal:</strong> widget::removed The arguments are the widget and the index</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:insert">wibox.layout.ratio:insert (index, widget)</a></td>
-	<td class="summary">Insert a new widget in the layout at position <a href="../classes/wibox.layout.ratio.html#wibox.layout.ratio:index">index</a></td>
+	<td class="summary">Insert a new widget in the layout at position <a href="../classes/wibox.layout.ratio.html#wibox.layout.ratio:index">index</a>
+ <strong>Signal:</strong> widget::inserted The arguments are the widget and the index</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:horizontal">wibox.layout.ratio:horizontal (...)</a></td>
@@ -333,6 +335,11 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:buttons">wibox.layout.ratio:buttons (_buttons)</a></td>
 	<td class="summary">Set/get a widget&rsquo;s buttons.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.ratio:emit_signal_recursive">wibox.layout.ratio:emit_signal_recursive (signal_name, ...)</a></td>
+	<td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio:disconnect_signal">wibox.layout.ratio:disconnect_signal (name, func)</a></td>
@@ -778,7 +785,9 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
     <strong>wibox.layout.ratio:set (index, widget2)</strong>
     </dt>
     <dd>
-    Set a widget at a specific index, replace the current one
+    Set a widget at a specific index, replace the current one.
+ <strong>Signal:</strong> widget::replaced The argument is the new widget and the old one
+ and the index.
 
 
     <ul>
@@ -807,7 +816,9 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
     <strong>wibox.layout.ratio:replace_widget (widget, widget2[, recursive=false])</strong>
     </dt>
     <dd>
-    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>
+    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.
+ <strong>Signal:</strong> widget::replaced The argument is the new widget and the old one
+ and the index.
 
 
     <ul>
@@ -840,7 +851,8 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
     <strong>wibox.layout.ratio:swap (index1, index2)</strong>
     </dt>
     <dd>
-    Swap 2 widgets in a layout
+    Swap 2 widgets in a layout.
+ <strong>Signal:</strong> widget::swapped The arguments are both widgets and both (new) indexes.
 
 
     <ul>
@@ -870,8 +882,10 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
     <strong>wibox.layout.ratio:swap_widgets (widget1, widget2[, recursive=false])</strong>
     </dt>
     <dd>
-    Swap 2 widgets in a layout
+    Swap 2 widgets in a layout.
  If widget1 is present multiple time, only the first instance is swapped
+ <strong>Signal:</strong> widget::swapped The arguments are both widgets and both (new) indexes.
+ if the layouts not the same, then only <code>widget::replaced</code> will be emitted.
 
 
     <ul>
@@ -905,6 +919,7 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
     </dt>
     <dd>
     Reset a ratio layout.  This removes all widgets from the layout.
+ <strong>Signal:</strong> widget::reset
 
 
     <ul>
@@ -1115,6 +1130,7 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
     </dt>
     <dd>
     Add some widgets to the given fixed layout
+ <strong>Signal:</strong> widget::added The argument are the widgets
 
 
     <ul>
@@ -1135,6 +1151,7 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
     </dt>
     <dd>
     Remove a widget from the layout
+ <strong>Signal:</strong> widget::removed The arguments are the widget and the index
 
 
     <ul>
@@ -1161,6 +1178,7 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
     </dt>
     <dd>
     Insert a new widget in the layout at position <a href="../classes/wibox.layout.ratio.html#wibox.layout.ratio:index">index</a>
+ <strong>Signal:</strong> widget::inserted The arguments are the widget and the index
 
 
     <ul>
@@ -1310,6 +1328,32 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)</pre>
     <ul>
         <li><span class="parameter">_buttons</span>
          The table of buttons that should bind to the widget.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.ratio:emit_signal_recursive"></a>
+    <strong>wibox.layout.ratio:emit_signal_recursive (signal_name, ...)</strong>
+    </dt>
+    <dd>
+    Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.  This is useful to track signals when there is a dynamic
+ set of containers and layouts wrapping the widget.
+
+
+    <ul>
+        <li><span class="parameter">signal_name</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         Other arguments
         </li>
     </ul>
 
