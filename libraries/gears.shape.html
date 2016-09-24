@@ -121,10 +121,12 @@
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/tag.html">tag</a></li>
   <li><a href="../classes/wibox.html">wibox</a></li>
+  <li><a href="../classes/wibox.container.arcchart.html">wibox.container.arcchart</a></li>
   <li><a href="../classes/wibox.container.background.html">wibox.container.background</a></li>
   <li><a href="../classes/wibox.container.constraint.html">wibox.container.constraint</a></li>
   <li><a href="../classes/wibox.container.margin.html">wibox.container.margin</a></li>
   <li><a href="../classes/wibox.container.mirror.html">wibox.container.mirror</a></li>
+  <li><a href="../classes/wibox.container.radialprogressbar.html">wibox.container.radialprogressbar</a></li>
   <li><a href="../classes/wibox.container.rotate.html">wibox.container.rotate</a></li>
   <li><a href="../classes/wibox.container.scroll.html">wibox.container.scroll</a></li>
   <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
@@ -140,9 +142,11 @@
   <li><a href="../classes/wibox.layout.stack.html">wibox.layout.stack</a></li>
   <li><a href="../classes/wibox.widget.background.html">wibox.widget.background</a></li>
   <li><a href="../classes/wibox.widget.base.html">wibox.widget.base</a></li>
+  <li><a href="../classes/wibox.widget.checkbox.html">wibox.widget.checkbox</a></li>
   <li><a href="../classes/wibox.widget.graph.html">wibox.widget.graph</a></li>
   <li><a href="../classes/wibox.widget.imagebox.html">wibox.widget.imagebox</a></li>
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
+  <li><a href="../classes/wibox.widget.piechart.html">wibox.widget.piechart</a></li>
   <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
@@ -183,7 +187,7 @@
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2011-2016 Emmanuel Lepage Vallee</li>
-        <li><strong>Release</strong>: master-gc7f5a9a</li>
+        <li><strong>Release</strong>: master-gcf419fb</li>
         <li><strong>Author</strong>: Emmanuel Lepage Vallee</li>
     </ul>
 
@@ -235,7 +239,7 @@
 	<td class="summary">A similar shape to the <a href="../libraries/gears.shape.html#module.rounded_rect">rounded_rect</a>, but with sharp corners.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#module.circle">module.circle (cr, width, height)</a></td>
+	<td class="name" ><a href="#module.circle">module.circle (cr, width, height[, radius=math.min(width  height) / 2)])</a></td>
 	<td class="summary">A circle shape.</td>
 	</tr>
 	<tr>
@@ -250,6 +254,14 @@
 	<tr>
 	<td class="name" ><a href="#module.losange">module.losange (cr, width, height)</a></td>
 	<td class="summary">A losange.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.pie">module.pie (cr, width, height[, start_angle=0[, end_angle=math.pi/2[, radius=math.min(width height)/2]]])</a></td>
+	<td class="summary">A pie.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#module.arc">module.arc (cr, width, height[, thickness=math.min(width height)/2[, start_angle=0[, end_angle=math.pi/2[, start_rounded=false[, end_rounded=false]]]]])</a></td>
+	<td class="summary">A rounded arc.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#module.radial_progress">module.radial_progress (cr, w, h, percent, hide_left)</a></td>
@@ -763,7 +775,7 @@ shape.transform(shape.octogon) : translate(<span class="number">0</span>, <span 
 </dd>
     <dt>
     <a name = "module.circle"></a>
-    <strong>module.circle (cr, width, height)</strong>
+    <strong>module.circle (cr, width, height[, radius=math.min(width  height) / 2)])</strong>
     </dt>
     <dd>
     A circle shape. </p>
@@ -782,6 +794,11 @@ shape.transform(shape.octogon) : translate(<span class="number">0</span>, <span 
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
          The shape height
+        </li>
+        <li><span class="parameter">radius</span>
+            <span class="types"><span class="type">number</span></span>
+         The radius
+         (<em>default</em> math.min(width  height) / 2))
         </li>
     </ul>
 
@@ -920,6 +937,127 @@ shape.transform(shape.losange) : scale(<span class="number">0.5</span>, <span cl
 
 </dd>
     <dt>
+    <a name = "module.pie"></a>
+    <strong>module.pie (cr, width, height[, start_angle=0[, end_angle=math.pi/2[, radius=math.min(width height)/2]]])</strong>
+    </dt>
+    <dd>
+    A pie. </p>
+
+<p> The pie center is the center of the area.</p>
+
+<p><img src="../images/AUTOGEN_gears_shape_pie.svg" alt="Usage example" />
+
+
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo context
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+        </li>
+        <li><span class="parameter">start_angle</span>
+            <span class="types"><span class="type">number</span></span>
+         The start angle (in radian)
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">end_angle</span>
+            <span class="types"><span class="type">number</span></span>
+         The end angle (in radian)
+         (<em>default</em> math.pi/2)
+        </li>
+        <li><span class="parameter">radius</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+         (<em>default</em> math.min(width height)/2)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+shape.pie(cr, <span class="number">70</span>, <span class="number">70</span>)
+
+shape.pie(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="number">1.0471975511966</span>,   <span class="number">4.1887902047864</span>)
+
+shape.pie(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="global">math</span>.pi, <span class="number">10</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "module.arc"></a>
+    <strong>module.arc (cr, width, height[, thickness=math.min(width height)/2[, start_angle=0[, end_angle=math.pi/2[, start_rounded=false[, end_rounded=false]]]]])</strong>
+    </dt>
+    <dd>
+    A rounded arc. </p>
+
+<p> The pie center is the center of the area.</p>
+
+<p><img src="../images/AUTOGEN_gears_shape_arc.svg" alt="Usage example" />
+
+
+    <ul>
+        <li><span class="parameter">cr</span>
+         A cairo context
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The shape height
+        </li>
+        <li><span class="parameter">thickness</span>
+            <span class="types"><span class="type">number</span></span>
+         The arc thickness
+         (<em>default</em> math.min(width height)/2)
+        </li>
+        <li><span class="parameter">start_angle</span>
+            <span class="types"><span class="type">number</span></span>
+         The start angle (in radian)
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">end_angle</span>
+            <span class="types"><span class="type">number</span></span>
+         The end angle (in radian)
+         (<em>default</em> math.pi/2)
+        </li>
+        <li><span class="parameter">start_rounded</span>
+            <span class="types"><span class="type">boolean</span></span>
+         if the arc start rounded
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">end_rounded</span>
+            <span class="types"><span class="type">boolean</span></span>
+         if the arc end rounded
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+
+shape.arc(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="number">10</span>)
+
+shape.arc(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="number">10</span>, <span class="keyword">nil</span>, <span class="keyword">nil</span>, <span class="keyword">true</span>, <span class="keyword">true</span>)
+
+shape.arc(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="keyword">nil</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="global">math</span>.pi)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "module.radial_progress"></a>
     <strong>module.radial_progress (cr, w, h, percent, hide_left)</strong>
     </dt>
@@ -1006,7 +1144,7 @@ shape.radial_progress(cr, <span class="number">70</span>, <span class="number">2
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-09-24 11:39:16 </i>
+<i style="float:right;">Last updated 2016-09-24 19:05:26 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
