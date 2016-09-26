@@ -36,6 +36,7 @@
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Signals">Signals</a></li>
 <li><a href="#Theme_variables">Theme variables</a></li>
+<li><a href="#Deprecated_functions">Deprecated functions</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
 
@@ -176,20 +177,74 @@
 
 <h1>Class <code>wibox.widget.progressbar</code></h1>
 <p>A progressbar widget.</p>
+<p> To add text on top of the progressbar, a <a href="../classes/wibox.layout.stack.html#">wibox.layout.stack</a> can be used:</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_progressbar_text.svg" alt="Usage example" /></p>
+
+<pre>
+wibox.widget {
+    {
+        max_value     = <span class="number">1</span>,
+        value         = <span class="number">0.5</span>,
+        forced_height = <span class="number">20</span>,
+        forced_width  = <span class="number">100</span>,
+        paddings      = <span class="number">1</span>,
+        border_width  = <span class="number">1</span>,
+        border_color  = beautiful.border_color,
+        widget        = wibox.widget.progressbar,
+    },
+    {
+        text   = <span class="string">'50%'</span>,
+        widget = wibox.widget.textbox,
+    },
+    layout = wibox.layout.stack
+}
+</pre>
+
+
+<p> To display the progressbar vertically, use a <a href="../classes/wibox.container.rotate.html#">wibox.container.rotate</a> widget:</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_progressbar_vertical.svg" alt="Usage example" /></p>
+
+<pre>
+wibox.widget {
+    {
+        max_value     = <span class="number">1</span>,
+        value         = <span class="number">0.33</span>,
+        widget        = wibox.widget.progressbar,
+    },
+    forced_height = <span class="number">100</span>,
+    forced_width  = <span class="number">20</span>,
+    direction     = <span class="string">'east'</span>,
+    layout        = wibox.container.rotate,
+}
+</pre>
+
+
+<p> By default, this widget will take all the available size. To prevent this,
+ a <a href="../classes/wibox.container.constraint.html#">wibox.container.constraint</a> widget or the <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.forced_width">forced_width</a>/<a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.forced_height">forced_height</a>
+ properties have to be used.</p>
+
 <p><img src="../images/AUTOGEN_wibox_widget_defaults_progressbar.svg" alt="Usage example" /></p>
     <h3>Usage:</h3>
     <ul>
         <pre class="example">
 wibox.widget {
-    max_value = 1,
-    value     = 0.33,
-    widget    = wibox.widget.progressbar
-}</pre>
+    max_value     = 1,
+    value         = 0.33,
+    forced_height = 20,
+    forced_width  = 100,
+    shape         = gears.shape.rounded_bar,
+    border_width  = 2,
+    border_color  = beautiful.border_color,
+    widget        = wibox.widget.progressbar,
+}
+</pre>
     </ul>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2009 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g749980b</li>
+        <li><strong>Release</strong>: master-g7f74c78</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -203,6 +258,66 @@ wibox.widget {
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
 <table class="function_list">
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.border_color">wibox.widget.progressbar.border_color</a></td>
+	<td class="summary">The progressbar border color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.border_width">wibox.widget.progressbar.border_width</a></td>
+	<td class="summary">The progressbar border width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.bar_border_color">wibox.widget.progressbar.bar_border_color</a></td>
+	<td class="summary">The progressbar inner border color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.bar_border_width">wibox.widget.progressbar.bar_border_width</a></td>
+	<td class="summary">The progressbar inner border width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.color">wibox.widget.progressbar.color</a></td>
+	<td class="summary">The progressbar foreground color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.background_color">wibox.widget.progressbar.background_color</a></td>
+	<td class="summary">The progressbar background color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.bar_shape">wibox.widget.progressbar.bar_shape</a></td>
+	<td class="summary">The progressbar inner shape.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.shape">wibox.widget.progressbar.shape</a></td>
+	<td class="summary">The progressbar shape.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.clip">wibox.widget.progressbar.clip</a></td>
+	<td class="summary">Force the inner part (the bar) to fit in the background shape.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.ticks">wibox.widget.progressbar.ticks</a></td>
+	<td class="summary">The progressbar to draw ticks.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.ticks_gap">wibox.widget.progressbar.ticks_gap</a></td>
+	<td class="summary">The progressbar ticks gap.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.ticks_size">wibox.widget.progressbar.ticks_size</a></td>
+	<td class="summary">The progressbar ticks size.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.max_value">wibox.widget.progressbar.max_value</a></td>
+	<td class="summary">The maximum value the progressbar should handle.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.margins">wibox.widget.progressbar.margins</a></td>
+	<td class="summary">The progressbar margins.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.paddings">wibox.widget.progressbar.paddings</a></td>
+	<td class="summary">The progressbar padding.</td>
+	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.widget.progressbar.forced_height">wibox.widget.progressbar.forced_height</a></td>
 	<td class="summary">Force a widget height.</td>
@@ -258,55 +373,58 @@ wibox.widget {
 	<td class="summary">The progressbar foreground color.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#beautiful.progressbar_shape">beautiful.progressbar_shape</a></td>
+	<td class="summary">The progressbar shape.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#beautiful.progressbar_border_color">beautiful.progressbar_border_color</a></td>
 	<td class="summary">The progressbar border color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.progressbar_border_width">beautiful.progressbar_border_width</a></td>
+	<td class="summary">The progressbar outer border width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.progressbar_bar_shape">beautiful.progressbar_bar_shape</a></td>
+	<td class="summary">The progressbar inner shape.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.progressbar_bar_border_width">beautiful.progressbar_bar_border_width</a></td>
+	<td class="summary">The progressbar bar border width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.progressbar_bar_border_color">beautiful.progressbar_bar_border_color</a></td>
+	<td class="summary">The progressbar bar border color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.progressbar_margins">beautiful.progressbar_margins</a></td>
+	<td class="summary">The progressbar margins.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.progressbar_paddings">beautiful.progressbar_paddings</a></td>
+	<td class="summary">The progressbar padding.</td>
+	</tr>
+</table>
+<h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.set_vertical">wibox.widget.progressbar.set_vertical</a></td>
+	<td class="summary">Set the progressbar to draw vertically.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.set_height">wibox.widget.progressbar.set_height</a></td>
+	<td class="summary">Set the progressbar height.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.progressbar.set_width">wibox.widget.progressbar.set_width</a></td>
+	<td class="summary">Set the progressbar width.</td>
 	</tr>
 </table>
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.widget.progressbar:set_border_color">wibox.widget.progressbar:set_border_color (progressbar, color)</a></td>
-	<td class="summary">Set the progressbar border color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.progressbar:set_color">wibox.widget.progressbar:set_color (progressbar, color)</a></td>
-	<td class="summary">Set the progressbar foreground color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.progressbar:set_background_color">wibox.widget.progressbar:set_background_color (progressbar, color)</a></td>
-	<td class="summary">Set the progressbar background color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.progressbar:set_vertical">wibox.widget.progressbar:set_vertical (progressbar, vertical)</a></td>
-	<td class="summary">Set the progressbar to draw vertically.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.progressbar:set_ticks">wibox.widget.progressbar:set_ticks (progressbar, ticks)</a></td>
-	<td class="summary">Set the progressbar to draw ticks.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.progressbar:set_ticks_gap">wibox.widget.progressbar:set_ticks_gap (progressbar, value)</a></td>
-	<td class="summary">Set the progressbar ticks gap.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.progressbar:set_ticks_size">wibox.widget.progressbar:set_ticks_size (progressbar, value)</a></td>
-	<td class="summary">Set the progressbar ticks size.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.progressbar:set_max_value">wibox.widget.progressbar:set_max_value (progressbar, value)</a></td>
-	<td class="summary">Set the maximum value the progressbar should handle.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#wibox.widget.progressbar:set_value">wibox.widget.progressbar:set_value (value)</a></td>
 	<td class="summary">Set the progressbar value.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.progressbar:set_height">wibox.widget.progressbar:set_height (height)</a></td>
-	<td class="summary">Set the progressbar height.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.progressbar:set_width">wibox.widget.progressbar:set_width (width)</a></td>
-	<td class="summary">Set the progressbar width.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.widget.progressbar:index">wibox.widget.progressbar:index (widget[, recursive[, ...]])</a></td>
@@ -383,6 +501,442 @@ wibox.widget {
     <h2 class="section-header "><a name="Object_properties"></a>Object properties</h2>
 
     <dl class="function">
+    <dt>
+    <a name = "wibox.widget.progressbar.border_color"></a>
+    <strong>wibox.widget.progressbar.border_color</strong>
+    </dt>
+    <dd>
+    The progressbar border color.
+ If the value is nil, no border will be drawn.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">gears.color</span></span>
+         The border color to set.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.border_width"></a>
+    <strong>wibox.widget.progressbar.border_width</strong>
+    </dt>
+    <dd>
+    The progressbar border width.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.bar_border_color"></a>
+    <strong>wibox.widget.progressbar.bar_border_color</strong>
+    </dt>
+    <dd>
+    The progressbar inner border color.
+ If the value is nil, no border will be drawn.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">gears.color</span></span>
+         The border color to set.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.bar_border_width"></a>
+    <strong>wibox.widget.progressbar.bar_border_width</strong>
+    </dt>
+    <dd>
+    The progressbar inner border width.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.color"></a>
+    <strong>wibox.widget.progressbar.color</strong>
+    </dt>
+    <dd>
+    The progressbar foreground color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">gears.color</span></span>
+         The progressbar color.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.background_color"></a>
+    <strong>wibox.widget.progressbar.background_color</strong>
+    </dt>
+    <dd>
+    The progressbar background color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">gears.color</span></span>
+         The progressbar background color.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.bar_shape"></a>
+    <strong>wibox.widget.progressbar.bar_shape</strong>
+    </dt>
+    <dd>
+    The progressbar inner shape. </p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_progressbar_bar_shape.svg" alt="Usage example" />
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">gears.shape</span></span>
+
+
+         (<em>default</em> gears.shape.rectangle)
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.shape.html#">gears.shape</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+<span class="keyword">for</span> _, shape <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'rounded_bar'</span>, <span class="string">'octogon'</span>, <span class="string">'hexagon'</span>, <span class="string">'powerline'</span> } <span class="keyword">do</span>
+    l:add(wibox.widget {
+        value            = <span class="number">0.33</span>,
+        bar_shape        = gears.shape[shape],
+        bar_border_color = beautiful.border_color,
+        bar_border_width = <span class="number">1</span>,
+        border_width     = <span class="number">2</span>,
+        border_color     = beautiful.border_color,
+        paddings         = <span class="number">1</span>,
+        widget           = wibox.widget.progressbar,
+    })
+<span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.shape"></a>
+    <strong>wibox.widget.progressbar.shape</strong>
+    </dt>
+    <dd>
+    The progressbar shape. </p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_progressbar_shape.svg" alt="Usage example" />
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">gears.shape</span></span>
+
+
+         (<em>default</em> gears.shape.rectangle)
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.shape.html#">gears.shape</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+<span class="keyword">for</span> _, shape <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'rounded_bar'</span>, <span class="string">'octogon'</span>, <span class="string">'hexagon'</span>, <span class="string">'powerline'</span> } <span class="keyword">do</span>
+    l:add(wibox.widget {
+        value         = <span class="number">0.33</span>,
+        shape         = gears.shape[shape],
+        border_width  = <span class="number">2</span>,
+        border_color  = beautiful.border_color,
+        widget        = wibox.widget.progressbar,
+    })
+<span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.clip"></a>
+    <strong>wibox.widget.progressbar.clip</strong>
+    </dt>
+    <dd>
+    Force the inner part (the bar) to fit in the background shape. </p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_progressbar_clip.svg" alt="Usage example" />
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">clip</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+         (<em>default</em> true)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+wibox.widget {
+    value            = <span class="number">75</span>,
+    max_value        = <span class="number">100</span>,
+    border_width     = <span class="number">2</span>,
+    border_color     = beautiful.border_color,
+    color            = beautiful.border_color,
+    shape            = gears.shape.rounded_bar,
+    bar_shape        = gears.shape.rounded_bar,
+    clip             = <span class="keyword">false</span>,
+    forced_height    = <span class="number">30</span>,
+    forced_width     = <span class="number">100</span>,
+    paddings         = <span class="number">5</span>,
+    margins          = {
+        top    = <span class="number">12</span>,
+        bottom = <span class="number">12</span>,
+    },
+    widget = wibox.widget.progressbar,
+}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.ticks"></a>
+    <strong>wibox.widget.progressbar.ticks</strong>
+    </dt>
+    <dd>
+    The progressbar to draw ticks.  Default is false.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.ticks_gap"></a>
+    <strong>wibox.widget.progressbar.ticks_gap</strong>
+    </dt>
+    <dd>
+    The progressbar ticks gap.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.ticks_size"></a>
+    <strong>wibox.widget.progressbar.ticks_size</strong>
+    </dt>
+    <dd>
+    The progressbar ticks size.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.max_value"></a>
+    <strong>wibox.widget.progressbar.max_value</strong>
+    </dt>
+    <dd>
+    The maximum value the progressbar should handle.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.margins"></a>
+    <strong>wibox.widget.progressbar.margins</strong>
+    </dt>
+    <dd>
+    The progressbar margins.
+ Note that if the <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.clip">clip</a> is disabled, this allows the background to be smaller
+ than the bar.</p>
+
+<p> See the <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.clip">clip</a> example.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">margins</span> A table for each side or a number
+        <ul>
+        <li><span class="parameter">top</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">bottom</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">left</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">right</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.clip">clip</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.progressbar.paddings"></a>
+    <strong>wibox.widget.progressbar.paddings</strong>
+    </dt>
+    <dd>
+    The progressbar padding.
+ Note that if the <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.clip">clip</a> is disabled, this allows the bar to be taller
+ than the background.</p>
+
+<p> See the <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.clip">clip</a> example.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">padding</span> A table for each side or a number
+        <ul>
+        <li><span class="parameter">top</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">bottom</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">left</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">right</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.clip">clip</a>
+    </ul>
+
+
+</dd>
     <dt>
     <a name = "wibox.widget.progressbar.forced_height"></a>
     <strong>wibox.widget.progressbar.forced_height</strong>
@@ -806,6 +1360,24 @@ wibox.widget {
 
 </dd>
     <dt>
+    <a name = "beautiful.progressbar_shape"></a>
+    <strong>beautiful.progressbar_shape</strong>
+    </dt>
+    <dd>
+    The progressbar shape.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.shape.html#">gears.shape</a>
+    </ul>
+
+
+</dd>
+    <dt>
     <a name = "beautiful.progressbar_border_color"></a>
     <strong>beautiful.progressbar_border_color</strong>
     </dt>
@@ -819,91 +1391,185 @@ wibox.widget {
 
 
 </dd>
+    <dt>
+    <a name = "beautiful.progressbar_border_width"></a>
+    <strong>beautiful.progressbar_border_width</strong>
+    </dt>
+    <dd>
+    The progressbar outer border width.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.progressbar_bar_shape"></a>
+    <strong>beautiful.progressbar_bar_shape</strong>
+    </dt>
+    <dd>
+    The progressbar inner shape.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.shape.html#">gears.shape</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.progressbar_bar_border_width"></a>
+    <strong>beautiful.progressbar_bar_border_width</strong>
+    </dt>
+    <dd>
+    The progressbar bar border width.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.progressbar_bar_border_color"></a>
+    <strong>beautiful.progressbar_bar_border_color</strong>
+    </dt>
+    <dd>
+    The progressbar bar border color.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.progressbar_margins"></a>
+    <strong>beautiful.progressbar_margins</strong>
+    </dt>
+    <dd>
+    The progressbar margins.
+ Note that if the <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.clip">clip</a> is disabled, this allows the background to be smaller
+ than the bar.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">margins</span> A table for each side or a number
+        <ul>
+        <li><span class="parameter">top</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">bottom</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">left</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">right</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.clip">clip</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.progressbar_paddings"></a>
+    <strong>beautiful.progressbar_paddings</strong>
+    </dt>
+    <dd>
+    The progressbar padding.
+ Note that if the <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.clip">clip</a> is disabled, this allows the bar to be taller
+ than the background.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">padding</span> A table for each side or a number
+        <ul>
+        <li><span class="parameter">top</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">bottom</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">left</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">right</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+         (<em>default</em> 0)
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.clip">clip</a>
+    </ul>
+
+
+</dd>
 </dl>
-    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+    <h2 class="section-header "><a name="Deprecated_functions"></a>Deprecated functions</h2>
 
     <dl class="function">
     <dt>
-    <a name = "wibox.widget.progressbar:set_border_color"></a>
-    <strong>wibox.widget.progressbar:set_border_color (progressbar, color)</strong>
+    <a name = "wibox.widget.progressbar.set_vertical"></a>
+    <strong>wibox.widget.progressbar.set_vertical</strong>
     </dt>
     <dd>
-    Set the progressbar border color.
- If the value is nil, no border will be drawn.
+    Set the progressbar to draw vertically.
+ This doesn&rsquo;t do anything anymore, use a <a href="../classes/wibox.container.rotate.html#">wibox.container.rotate</a> widget.
 
 
+    <h3>param:</h3>
     <ul>
-        <li><span class="parameter">progressbar</span>
-         The progressbar.
-        </li>
-        <li><span class="parameter">color</span>
-         The border color to set.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.progressbar:set_color"></a>
-    <strong>wibox.widget.progressbar:set_color (progressbar, color)</strong>
-    </dt>
-    <dd>
-    Set the progressbar foreground color.
-
-
-    <ul>
-        <li><span class="parameter">progressbar</span>
-         The progressbar.
-        </li>
-        <li><span class="parameter">color</span>
-         The progressbar color.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.progressbar:set_background_color"></a>
-    <strong>wibox.widget.progressbar:set_background_color (progressbar, color)</strong>
-    </dt>
-    <dd>
-    Set the progressbar background color.
-
-
-    <ul>
-        <li><span class="parameter">progressbar</span>
-         The progressbar.
-        </li>
-        <li><span class="parameter">color</span>
-         The progressbar background color.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.progressbar:set_vertical"></a>
-    <strong>wibox.widget.progressbar:set_vertical (progressbar, vertical)</strong>
-    </dt>
-    <dd>
-    Set the progressbar to draw vertically.  Default is false.
-
-
-    <ul>
-        <li><span class="parameter">progressbar</span>
-         The progressbar.
-        </li>
         <li><span class="parameter">vertical</span>
-         A boolean value.
+            <span class="types"><span class="type">boolean</span></span>
+
+
         </li>
     </ul>
 
@@ -913,120 +1579,16 @@ wibox.widget {
 
 </dd>
     <dt>
-    <a name = "wibox.widget.progressbar:set_ticks"></a>
-    <strong>wibox.widget.progressbar:set_ticks (progressbar, ticks)</strong>
-    </dt>
-    <dd>
-    Set the progressbar to draw ticks.  Default is false.
-
-
-    <ul>
-        <li><span class="parameter">progressbar</span>
-         The progressbar.
-        </li>
-        <li><span class="parameter">ticks</span>
-         A boolean value.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.progressbar:set_ticks_gap"></a>
-    <strong>wibox.widget.progressbar:set_ticks_gap (progressbar, value)</strong>
-    </dt>
-    <dd>
-    Set the progressbar ticks gap.
-
-
-    <ul>
-        <li><span class="parameter">progressbar</span>
-         The progressbar.
-        </li>
-        <li><span class="parameter">value</span>
-         The value.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.progressbar:set_ticks_size"></a>
-    <strong>wibox.widget.progressbar:set_ticks_size (progressbar, value)</strong>
-    </dt>
-    <dd>
-    Set the progressbar ticks size.
-
-
-    <ul>
-        <li><span class="parameter">progressbar</span>
-         The progressbar.
-        </li>
-        <li><span class="parameter">value</span>
-         The value.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.progressbar:set_max_value"></a>
-    <strong>wibox.widget.progressbar:set_max_value (progressbar, value)</strong>
-    </dt>
-    <dd>
-    Set the maximum value the progressbar should handle.
-
-
-    <ul>
-        <li><span class="parameter">progressbar</span>
-         The progressbar.
-        </li>
-        <li><span class="parameter">value</span>
-         The value.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.progressbar:set_value"></a>
-    <strong>wibox.widget.progressbar:set_value (value)</strong>
-    </dt>
-    <dd>
-    Set the progressbar value.
-
-
-    <ul>
-        <li><span class="parameter">value</span>
-         The progress bar value between 0 and 1.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.progressbar:set_height"></a>
-    <strong>wibox.widget.progressbar:set_height (height)</strong>
+    <a name = "wibox.widget.progressbar.set_height"></a>
+    <strong>wibox.widget.progressbar.set_height</strong>
     </dt>
     <dd>
     Set the progressbar height.
+ This method is deprecated, it no longer do anything.
+ Use a <a href="../classes/wibox.container.constraint.html#">wibox.container.constraint</a> widget or <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.forced_height">forced_height</a>.
 
 
+    <h3>param:</h3>
     <ul>
         <li><span class="parameter">height</span>
          The height to set.
@@ -1039,16 +1601,42 @@ wibox.widget {
 
 </dd>
     <dt>
-    <a name = "wibox.widget.progressbar:set_width"></a>
-    <strong>wibox.widget.progressbar:set_width (width)</strong>
+    <a name = "wibox.widget.progressbar.set_width"></a>
+    <strong>wibox.widget.progressbar.set_width</strong>
     </dt>
     <dd>
     Set the progressbar width.
+ This method is deprecated, it no longer do anything.
+ Use a <a href="../classes/wibox.container.constraint.html#">wibox.container.constraint</a> widget or <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.forced_width">forced_width</a>.
 
 
+    <h3>param:</h3>
     <ul>
         <li><span class="parameter">width</span>
          The width to set.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "wibox.widget.progressbar:set_value"></a>
+    <strong>wibox.widget.progressbar:set_value (value)</strong>
+    </dt>
+    <dd>
+    Set the progressbar value.
+
+
+    <ul>
+        <li><span class="parameter">value</span>
+         The progress bar value between 0 and 1.
         </li>
     </ul>
 
@@ -1290,7 +1878,7 @@ wibox.widget {
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-09-26 05:13:07 </i>
+<i style="float:right;">Last updated 2016-09-26 19:43:49 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
