@@ -59,6 +59,7 @@
   <li><a href="../classes/gears.cache.html">gears.cache</a></li>
   <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
   <li><a href="../classes/gears.object.html">gears.object</a></li>
+  <li><a href="../classes/gears.timer.html">gears.timer</a></li>
   <li><a href="../classes/key.html">key</a></li>
   <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
   <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
@@ -132,7 +133,6 @@
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
   <li><a href="../libraries/gears.surface.html">gears.surface</a></li>
-  <li><a href="../libraries/gears.timer.html">gears.timer</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
@@ -161,6 +161,8 @@
   <li><a href="../documentation/02-contributing.md.html">Contributing</a></li>
   <li><a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a></li>
   <li><a href="../documentation/04-new-widgets.md.html">Creating new widget</a></li>
+  <li><a href="../documentation/05-awesomerc.md.html">Default configuration file documentation</a></li>
+  <li><a href="../documentation/06-appearance.md.html">Change Awesome appearance</a></li>
   <li><a href="../documentation/16-using-cairo.md.html">Using Cairo and LGI</a></li>
   <li><a href="../documentation/90-FAQ.md.html">FAQ</a></li>
 </ul>
@@ -199,7 +201,7 @@
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#awful.widget.taglist:new">awful.widget.taglist:new (screen, filter, buttons, style[, update_function[, base_widget]])</a></td>
+	<td class="name" ><a href="#awful.widget.taglist:new">awful.widget.taglist:new (screen, filter, buttons[, style={}[, update_function=nil[, base_widget=nil]]])</a></td>
 	<td class="summary">Create a new taglist widget.</td>
 	</tr>
 </table>
@@ -284,7 +286,7 @@
     <dl class="function">
     <dt>
     <a name = "awful.widget.taglist:new"></a>
-    <strong>awful.widget.taglist:new (screen, filter, buttons, style[, update_function[, base_widget]])</strong>
+    <strong>awful.widget.taglist:new (screen, filter, buttons[, style={}[, update_function=nil[, base_widget=nil]]])</strong>
     </dt>
     <dd>
     Create a new taglist widget.  The last two arguments (update_function
@@ -305,12 +307,107 @@
         <li><span class="parameter">buttons</span>
          A table with buttons binding to set.
         </li>
-        <li><span class="parameter">style</span>
-         The style overrides default theme.
+        <li><span class="parameter">style</span> The style overrides default theme.
+        <ul>
+        <li><span class="parameter">fg_focus</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
+         (<em>default</em> nil)
         </li>
+        <li><span class="parameter">bg_focus</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">fg_urgent</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">bg_urgent</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">bg_occupied</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">fg_occupied</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">bg_empty</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">fg_empty</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">taglist_squares_sel</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">taglist_squares_unsel</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">taglist_squares_sel_empty</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">taglist_squares_unsel_empty</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">taglist_squares_resize</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">taglist_disable_icon</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">font</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">spacing</span>
+            <span class="types"><span class="type">number</span></span>
+         The spacing between tags.
+         (<em>default</em> nil)
+        </li>
+        </li></ul>
         <li><span class="parameter">update_function</span>
          Function to create a tag widget on each
-   update. @see awful.widget.common.
+   update. See <a href="../classes/awful.widget.common.html#">awful.widget.common</a>.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">base_widget</span> Optional container widget for tag widgets. Default
