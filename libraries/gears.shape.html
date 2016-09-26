@@ -172,7 +172,7 @@
 
 <h1>Module <code>gears.shape</code></h1>
 <p>Module dedicated to gather common shape painters.</p>
-<p> It add the concept of &ldquo;shape&rdquo; to Awesome. A shape can be applied to a
+<p><p> It add the concept of &ldquo;shape&rdquo; to Awesome. A shape can be applied to a
  background, a margin, a mask or a drawable shape bounding.</p>
 
 <p> The functions exposed by this module always take a context as first
@@ -185,7 +185,34 @@
 <p> In many case, it is necessary to apply the shape using a transformation
  such as a rotation. The preferred way to do this is to wrap the function
  in another function calling <code>cr:rotate()</code> (or any other transformation
- matrix)</p>
+ matrix).</p>
+
+<p> To specialize a shape where the API doesn&rsquo;t allows extra arguments to be
+ passed, it is possible to wrap the shape function like:</p>
+
+<pre>
+<span class="keyword">local</span> new_shape = <span class="keyword">function</span>(cr, width, height)
+    gears.shape.rounded_rect(cr, width, height, <span class="number">2</span>)
+<span class="keyword">end</span>
+</pre>
+
+
+<p> Many elements can be shaped. This include:</p>
+
+<ul>
+<li><a href="../classes/client.html#">client</a>s (see <a href="../libraries/gears.surface.html#apply_shape_bounding">gears.surface.apply_shape_bounding</a>)</li>
+<li><a href="../classes/wibox.html#">wibox</a>es (see <code>wibox.shape</code>)</li>
+<li>All widgets (see <a href="../classes/wibox.container.background.html#">wibox.container.background</a>)</li>
+<li>The progressbar (see <a href="../classes/wibox.widget.progressbar.html#wibox.widget.progressbar.bar_shape">wibox.widget.progressbar.bar_shape</a>)</li>
+<li>The graph (see <a href="../classes/wibox.widget.graph.html#wibox.widget.graph.step_shape">wibox.widget.graph.step_shape</a>)</li>
+<li>The checkboxes (see <a href="../classes/wibox.widget.checkbox.html#wibox.widget.checkbox.check_shape">wibox.widget.checkbox.check_shape</a>)</li>
+<li>Images (see <a href="../classes/wibox.widget.imagebox.html#wibox.widget.imagebox.clip_shape">wibox.widget.imagebox.clip_shape</a>)</li>
+<li>The taglist tags (see <a href="../classes/awful.widget.taglist.html#">awful.widget.taglist</a>)</li>
+<li>The tasklist clients (see <a href="../classes/awful.widget.tasklist.html#">awful.widget.tasklist</a>)</li>
+<li>The tooltips (see <a href="../classes/awful.tooltip.html#">awful.tooltip</a>)</li>
+</ul>
+
+</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2011-2016 Emmanuel Lepage Vallee</li>
