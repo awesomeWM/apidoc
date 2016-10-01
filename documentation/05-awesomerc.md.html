@@ -424,20 +424,11 @@ mytextclock = <span class="backtick"><a href="../classes/wibox.widget.textclock.
 </pre>
 
 
-<p> Create a wibox for each screen and add it</p>
+<p> Create a wibox for each screen and add it
+ &nbsp;</p>
 
 <pre>
-mywibox = {}
-mypromptbox = {}
-mylayoutbox = {}
-mytaglist = {}
-</pre>
-
-
-<p> &nbsp;</p>
-
-<pre>
-mytaglist.buttons = <span class="backtick"><code>awful.util.table.join</code></span>(
+<span class="keyword">local</span> taglist_buttons = <span class="backtick"><code>awful.util.table.join</code></span>(
                     <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:view_only() <span class="keyword">end</span>),
                     <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
                                               <span class="keyword">if</span> client.focus <span class="keyword">then</span>
@@ -453,15 +444,13 @@ mytaglist.buttons = <span class="backtick"><code>awful.util.table.join</code></s
                     <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewnext</code></span>(t.screen) <span class="keyword">end</span>),
                     <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewprev</code></span>(t.screen) <span class="keyword">end</span>)
                 )
-
-mytasklist = {}
 </pre>
 
 
 <p> &nbsp;</p>
 
 <pre>
-mytasklist.buttons = <span class="backtick"><code>awful.util.table.join</code></span>(
+<span class="keyword">local</span> tasklist_buttons = <span class="backtick"><code>awful.util.table.join</code></span>(
                      <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
                                               <span class="keyword">if</span> c == client.focus <span class="keyword">then</span>
                                                   c.minimized = <span class="keyword">true</span>
@@ -522,20 +511,20 @@ screen.connect_signal(<span class="string">"property::geometry"</span>, set_wall
 </span>    <span class="backtick"><a href="../libraries/awful.tag.html#">awful.tag</a></span>({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, <span class="backtick"><code>awful.layout.layouts</code></span>[<span class="number">1</span>])
 
     <span class="comment">-- Create a promptbox for each screen
-</span>    mypromptbox[s] = <span class="backtick"><a href="../classes/awful.widget.prompt.html#">awful.widget.prompt</a></span>()
+</span>    s.mypromptbox = <span class="backtick"><a href="../classes/awful.widget.prompt.html#">awful.widget.prompt</a></span>()
     <span class="comment">-- Create an imagebox widget which will contains an icon indicating which layout we're using.
 </span>    <span class="comment">-- We need one layoutbox per screen.
-</span>    mylayoutbox[s] = <span class="backtick"><a href="../classes/awful.widget.layoutbox.html#">awful.widget.layoutbox</a></span>(s)
-    mylayoutbox[s]:buttons(<span class="backtick"><code>awful.util.table.join</code></span>(
+</span>    s.mylayoutbox = <span class="backtick"><a href="../classes/awful.widget.layoutbox.html#">awful.widget.layoutbox</a></span>(s)
+    s.mylayoutbox:buttons(<span class="backtick"><code>awful.util.table.join</code></span>(
                            <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#inc">awful.layout.inc</a></span>( <span class="number">1</span>) <span class="keyword">end</span>),
                            <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#inc">awful.layout.inc</a></span>(-<span class="number">1</span>) <span class="keyword">end</span>),
                            <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#inc">awful.layout.inc</a></span>( <span class="number">1</span>) <span class="keyword">end</span>),
                            <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#inc">awful.layout.inc</a></span>(-<span class="number">1</span>) <span class="keyword">end</span>)))
     <span class="comment">-- Create a taglist widget
-</span>    mytaglist[s] = <span class="backtick"><a href="../classes/awful.widget.taglist.html#">awful.widget.taglist</a></span>(s, <span class="backtick"><code>awful.widget.taglist.filter.all</code></span>, mytaglist.buttons)
+</span>    s.mytaglist = <span class="backtick"><a href="../classes/awful.widget.taglist.html#">awful.widget.taglist</a></span>(s, <span class="backtick"><code>awful.widget.taglist.filter.all</code></span>, taglist_buttons)
 
     <span class="comment">-- Create a tasklist widget
-</span>    mytasklist[s] = <span class="backtick"><a href="../classes/awful.widget.tasklist.html#">awful.widget.tasklist</a></span>(s, <span class="backtick"><code>awful.widget.tasklist.filter.currenttags</code></span>, mytasklist.buttons)
+</span>    s.mytasklist = <span class="backtick"><a href="../classes/awful.widget.tasklist.html#">awful.widget.tasklist</a></span>(s, <span class="backtick"><code>awful.widget.tasklist.filter.currenttags</code></span>, tasklist_buttons)
 </pre>
 
 
@@ -543,7 +532,7 @@ screen.connect_signal(<span class="string">"property::geometry"</span>, set_wall
 
 <pre>
 <span class="comment">-- Create the wibox
-</span>mywibox[s] = <span class="backtick"><a href="../classes/awful.wibar.html#">awful.wibar</a></span>({ position = <span class="string">"top"</span>, screen = s })
+</span>s.mywibox = <span class="backtick"><a href="../classes/awful.wibar.html#">awful.wibar</a></span>({ position = <span class="string">"top"</span>, screen = s })
 </pre>
 
 
@@ -551,21 +540,21 @@ screen.connect_signal(<span class="string">"property::geometry"</span>, set_wall
 
 <pre>
 <span class="comment">-- Add widgets to the wibox
-</span>mywibox[s]:setup {
+</span>s.mywibox:setup {
     layout = <span class="backtick"><a href="../classes/wibox.layout.align.html#wibox.layout.align:horizontal">wibox.layout.align.horizontal</a></span>,
     { <span class="comment">-- Left widgets
 </span>        layout = <span class="backtick"><a href="../classes/wibox.layout.fixed.html#wibox.layout.fixed.horizontal">wibox.layout.fixed.horizontal</a></span>,
         mylauncher,
-        mytaglist[s],
-        mypromptbox[s],
+        s.mytaglist,
+        s.mypromptbox,
     },
-    mytasklist[s], <span class="comment">-- Middle widget
+    s.mytasklist, <span class="comment">-- Middle widget
 </span>    { <span class="comment">-- Right widgets
 </span>        layout = <span class="backtick"><a href="../classes/wibox.layout.fixed.html#wibox.layout.fixed.horizontal">wibox.layout.fixed.horizontal</a></span>,
         mykeyboardlayout,
         <span class="backtick"><a href="../classes/wibox.widget.systray.html#">wibox.widget.systray</a></span>(),
         mytextclock,
-        mylayoutbox[s],
+        s.mylayoutbox,
     },
 }
 </pre>
@@ -675,13 +664,13 @@ globalkeys = <span class="backtick"><code>awful.util.table.join</code></span>(
               {description = <span class="string">"restore minimized"</span>, group = <span class="string">"client"</span>}),
 
     <span class="comment">-- Prompt
-</span>    <span class="backtick"><a href="../libraries/awful.key.html#">awful.key</a></span>({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () mypromptbox[<span class="backtick"><code>awful.screen.focused</code></span>()]:run() <span class="keyword">end</span>,
+</span>    <span class="backtick"><a href="../libraries/awful.key.html#">awful.key</a></span>({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox:run() <span class="keyword">end</span>,
               {description = <span class="string">"run prompt"</span>, group = <span class="string">"launcher"</span>}),
 
     <span class="backtick"><a href="../libraries/awful.key.html#">awful.key</a></span>({ modkey }, <span class="string">"x"</span>,
               <span class="keyword">function</span> ()
                   <span class="backtick"><a href="../libraries/awful.prompt.html#run">awful.prompt.run</a></span>({ prompt = <span class="string">"Run Lua code: "</span> },
-                  mypromptbox[<span class="backtick"><code>awful.screen.focused</code></span>()].widget,
+                  <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox.widget,
                   <span class="backtick"><a href="../libraries/awful.util.html#eval">awful.util.eval</a></span>, <span class="keyword">nil</span>,
                   <span class="backtick"><code>awful.util.get</code></span>_cache_dir() .. <span class="string">"/history_eval"</span>)
               <span class="keyword">end</span>,
@@ -973,7 +962,7 @@ client.connect_signal(<span class="string">"unfocus"</span>, <span class="keywor
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-09-30 08:22:59 </i>
+<i style="float:right;">Last updated 2016-10-01 10:05:56 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
