@@ -363,7 +363,7 @@ and usually provide some options.</p>
 <p>Code:</p>
 
 <pre>
-mywibox[s] : setup {
+s.mywibox : setup {
     s == <span class="number">1</span> <span class="keyword">and</span> my_first_widget, <span class="comment">-- Only display on screen 1
 </span>    my_second_widget,
     { <span class="comment">-- Add a background color/pattern for my_third_widget
@@ -394,7 +394,7 @@ declarative layout, or <code>nil</code>.</p>
 <p>Code:</p>
 
 <pre>
-mywibox[s] : setup {
+s.mywibox : setup {
     {
         <span class="comment">-- Force the textbox to always be 300 pixel long
 </span>        {
@@ -443,7 +443,7 @@ and <code>right</code> can be defined</p>
 <p>Code:</p>
 
 <pre>
-mywibox[s] : setup {
+s.mywibox : setup {
     my_textbox1, <span class="comment">-- Left
 </span>    <span class="keyword">nil</span>,         <span class="comment">-- Nothing in the middle
 </span>    my_textbox2, <span class="comment">-- Right
@@ -460,7 +460,7 @@ is a simple circle widget:</p>
 <p>Code:</p>
 
 <pre>
-mywibox[s] : setup {
+s.mywibox : setup {
     fit    = <span class="keyword">function</span>(self, context, width, height)
         <span class="keyword">return</span> height, height <span class="comment">-- A square taking the full height
 </span>    <span class="keyword">end</span>,
@@ -501,7 +501,7 @@ requires complex manipulations which would make the declaration unreadable.</p>
 tb:set_markup(<span class="string">"Hello world! "</span>)
 
 <span class="comment">-- Repeat "tb" 3 times
-</span>mywibox[s] : setup {
+</span>s.mywibox : setup {
     tb,
     tb,
     tb,
@@ -538,7 +538,7 @@ underscore characters and non-numeric first character)</p>
 <p>Code:</p>
 
 <pre>
-mywibox[s] : setup {
+s.mywibox : setup {
     {
         id     = <span class="string">"second"</span>,
         widget = wibox.widget.textbox
@@ -551,8 +551,8 @@ mywibox[s] : setup {
     layout = wibox.layout.fixed.horizontal,
 }
 
-mywibox[s].first.second:set_markup(<span class="string">"changed!"</span>)
-mywibox[s]:get_children_by_id(<span class="string">"third"</span>)[<span class="number">1</span>]:set_markup(<span class="string">"Also changed!"</span>)
+s.mywibox.first.second:set_markup(<span class="string">"changed!"</span>)
+s.mywibox:get_children_by_id(<span class="string">"third"</span>)[<span class="number">1</span>]:set_markup(<span class="string">"Also changed!"</span>)
 </pre>
 
 
@@ -575,7 +575,7 @@ catched by a lua <code>metatable</code> (operator overload).</p>
 </span>    vicious.register(w, f(args))
 <span class="keyword">end</span>
 
-mywibox[s] : setup {
+s.mywibox : setup {
     {
         vicious = {vicious.widgets.cpu, <span class="string">"CPU: $1%"</span>, <span class="number">3</span>},
         widget  = wibox.widget.textbox
@@ -615,7 +615,7 @@ example:</p>
 </span><span class="keyword">local</span> l = wibox.widget.align()
 
 <span class="comment">-- 3 circle
-</span>mywibox[s] : setup {
+</span>s.mywibox : setup {
     circle,
     circle,
     circle,
@@ -629,7 +629,7 @@ example:</p>
     <span class="global">table</span>.insert(three_circle, circle)
 <span class="keyword">end</span>
 
-mywibox[s] : setup (three_circle)
+s.mywibox : setup (three_circle)
 </pre>
 
 
