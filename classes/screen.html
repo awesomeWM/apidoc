@@ -206,7 +206,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008-2009 Julien Danjou</li>
-        <li><strong>Release</strong>: master-gc84b900</li>
+        <li><strong>Release</strong>: master-gd513e2c</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -214,27 +214,20 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#fake_remove.">fake_remove. ()</a></td>
-	<td class="summary">Remove a screen.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#awful.screen.getbycoord">awful.screen.getbycoord (x, y)</a></td>
-	<td class="summary">Return screen number corresponding to the given (pixel) coordinates.</td>
+	<td class="summary">Return the screen index corresponding to the given (pixel) coordinates.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#awful.screen.focus">awful.screen.focus (_screen)</a></td>
-	<td class="summary">Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen</td>
+	<td class="summary">Move the focus to a screen.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#awful.screen.focus_bydirection">awful.screen.focus_bydirection (dir, _screen)</a></td>
-	<td class="summary">Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen</td>
+	<td class="summary">Move the focus to a screen in a specific direction.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.screen.focus_relative">awful.screen.focus_relative (i)</a></td>
-	<td class="summary">Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen</td>
+	<td class="name" ><a href="#awful.screen.focus_relative">awful.screen.focus_relative (offset)</a></td>
+	<td class="summary">Move the focus to a screen relative to the current one,</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#awful.screen.focused">awful.screen.focused ([args])</a></td>
@@ -274,12 +267,11 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	</tr>
 	<tr>
 	<td class="name" ><a href="#screen.clients">screen.clients</a></td>
-	<td class="summary">Get the list of the screen visible clients.</td>
+	<td class="summary">Get the list of visible clients for the screen.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#screen.hidden_clients">screen.hidden_clients</a></td>
-	<td class="summary">Get the list of the clients assigned to the screen but not currently
- visible.</td>
+	<td class="summary">Get the list of clients assigned to the screen but not currently visible.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#screen.all_clients">screen.all_clients</a></td>
@@ -287,7 +279,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	</tr>
 	<tr>
 	<td class="name" ><a href="#screen.tiled_clients">screen.tiled_clients</a></td>
-	<td class="summary">Get the list of the screen tiled clients.</td>
+	<td class="summary">Get the list of tiled clients for the screen.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#screen.tags">screen.tags</a></td>
@@ -326,7 +318,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 <table class="function_list">
 	<tr>
 	<td class="name" ><a href="#awful.screen.getdistance_sq">awful.screen.getdistance_sq</a></td>
-	<td class="summary">Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point</td>
+	<td class="summary">Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#awful.screen.padding">awful.screen.padding</a></td>
@@ -341,7 +333,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	</tr>
 	<tr>
 	<td class="name" ><a href="#awful.screen.default_focused_args">awful.screen.default_focused_args</a></td>
-	<td class="summary">The defaults arguments for <a href="../classes/screen.html#awful.screen.focused">awful.screen.focused</a></td>
+	<td class="summary">The defaults arguments for <a href="../classes/screen.html#awful.screen.focused">awful.screen.focused</a>.</td>
 	</tr>
 </table>
 <h2><a href="#Methods">Methods</a></h2>
@@ -363,12 +355,16 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	<td class="summary">Add a fake screen.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#screen:fake_remove">screen:fake_remove ()</a></td>
+	<td class="summary">Remove a screen.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#screen:fake_resize">screen:fake_resize (x, y, width, height)</a></td>
 	<td class="summary">Fake-resize a screen</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#screen:get_square_distance">screen:get_square_distance (x, y)</a></td>
-	<td class="summary">Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point</td>
+	<td class="summary">Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#screen:preferred">screen:preferred (c)</a></td>
@@ -388,26 +384,13 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     Methods
     <dl class="function">
     <dt>
-    <a name = "fake_remove."></a>
-    <strong>fake_remove. ()</strong>
-    </dt>
-    <dd>
-    Remove a screen.
-
-
-
-
-
-
-
-</dd>
-    <dt>
     <a name = "awful.screen.getbycoord"></a>
     <strong>awful.screen.getbycoord (x, y)</strong>
     </dt>
     <dd>
-    Return screen number corresponding to the given (pixel) coordinates.
- The number returned can be used as an index into the global
+    Return the screen index corresponding to the given (pixel) coordinates. </p>
+
+<p> The number returned can be used as an index into the global
  <a href="../classes/screen.html#">screen</a> table/object.
 
 
@@ -438,12 +421,15 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>awful.screen.focus (_screen)</strong>
     </dt>
     <dd>
-    Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen
+    Move the focus to a screen. </p>
+
+<p> This moves the mouse pointer to the last known position on the new screen,
+ or keeps its position relative to the current focused screen.
 
 
     <ul>
         <li><span class="parameter">_screen</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
          Screen number (defaults / falls back to mouse.screen).
         </li>
     </ul>
@@ -458,8 +444,10 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>awful.screen.focus_bydirection (dir, _screen)</strong>
     </dt>
     <dd>
-    Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen
+    Move the focus to a screen in a specific direction. </p>
+
+<p> This moves the mouse pointer to the last known position on the new screen,
+ or keeps its position relative to the current focused screen.
 
 
     <ul>
@@ -478,17 +466,18 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 </dd>
     <dt>
     <a name = "awful.screen.focus_relative"></a>
-    <strong>awful.screen.focus_relative (i)</strong>
+    <strong>awful.screen.focus_relative (offset)</strong>
     </dt>
     <dd>
-    Give the focus to a screen, and move pointer to last known position on this
- screen, or keep position relative to the current focused screen
+    Move the focus to a screen relative to the current one,  This moves the mouse pointer to the last known position on the new screen,
+ or keeps its position relative to the current focused screen.
 
 
     <ul>
-        <li><span class="parameter">i</span>
-         Value to add to the current focused screen index. 1 will focus next
- screen, -1 would focus the previous one.
+        <li><span class="parameter">offset</span>
+            <span class="types"><span class="type">int</span></span>
+         Value to add to the current focused screen index. 1 to
+   focus the next one, -1 to focus the previous one.
         </li>
     </ul>
 
@@ -551,7 +540,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
         <ul>
         <li><span class="parameter">screen</span>
             <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
-         The screen
+         The screen.
         </li>
         </li></ul>
     </ul>
@@ -763,9 +752,9 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>screen.padding</strong>
     </dt>
     <dd>
-    <p>The screen padding.
- Add a &ldquo;buffer&rdquo; section on each side of the screen where the tiled client
- wont be.</p>
+    <p>The screen padding. </p>
+
+<p> This adds a &ldquo;buffer&rdquo; section on each side of the screen.</p>
 
 <p> <strong>Signal:</strong></p>
 
@@ -781,21 +770,21 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
         <li><span class="parameter">table</span>
 
         <ul>
-        <li><span class="parameter">x</span>
+        <li><span class="parameter">left</span>
             <span class="types"><span class="type">integer</span></span>
-         The horizontal position
+         The padding on the left.
         </li>
-        <li><span class="parameter">y</span>
+        <li><span class="parameter">right</span>
             <span class="types"><span class="type">integer</span></span>
-         The vertical position
+         The padding on the right.
         </li>
-        <li><span class="parameter">width</span>
+        <li><span class="parameter">top</span>
             <span class="types"><span class="type">integer</span></span>
-         The width
+         The padding on the top.
         </li>
-        <li><span class="parameter">height</span>
+        <li><span class="parameter">bottom</span>
             <span class="types"><span class="type">integer</span></span>
-         The height
+         The padding on the bottom.
         </li>
         </li></ul>
     </ul>
@@ -810,18 +799,18 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>screen.clients</strong>
     </dt>
     <dd>
-    Get the list of the screen visible clients. </p>
+    Get the list of visible clients for the screen. </p>
 
 <p> Minimized and unmanaged clients are not included in this list as they are
  technically not on the screen.</p>
 
-<p> The clients on tags currently not visible are not part of this list.
+<p> The clients on tags that are currently not visible are not part of this list.
 
 
     <h3>Type:</h3>
     <ul>
         <li><span class="parameter">table</span>
-         The clients list, ordered top to bottom
+         The clients list, ordered from top to bottom.
         </li>
     </ul>
 
@@ -831,7 +820,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
          <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
-         <li><a href="../classes/client.html#awful.urgent.get">client.get</a></li>
+         <li><a href="../classes/client.html#awful.client.focus.history.get">client.get</a></li>
     </ul>
 
 
@@ -841,16 +830,15 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>screen.hidden_clients</strong>
     </dt>
     <dd>
-    Get the list of the clients assigned to the screen but not currently
- visible. </p>
+    Get the list of clients assigned to the screen but not currently visible. </p>
 
-<p> This include minimized clients and clients on hidden tags.
+<p> This includes minimized clients and clients on hidden tags.
 
 
     <h3>Type:</h3>
     <ul>
         <li><span class="parameter">table</span>
-         The clients list, ordered top to bottom
+         The clients list, ordered from top to bottom.
         </li>
     </ul>
 
@@ -860,7 +848,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.clients">clients</a></li>
          <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
-         <li><a href="../classes/client.html#awful.urgent.get">client.get</a></li>
+         <li><a href="../classes/client.html#awful.client.focus.history.get">client.get</a></li>
     </ul>
 
 
@@ -876,7 +864,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <h3>Type:</h3>
     <ul>
         <li><span class="parameter">table</span>
-         The clients list, ordered top to bottom
+         The clients list, ordered from top to bottom.
         </li>
     </ul>
 
@@ -886,7 +874,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.clients">clients</a></li>
          <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
-         <li><a href="../classes/client.html#awful.urgent.get">client.get</a></li>
+         <li><a href="../classes/client.html#awful.client.focus.history.get">client.get</a></li>
     </ul>
 
 
@@ -896,9 +884,9 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>screen.tiled_clients</strong>
     </dt>
     <dd>
-    <p>Get the list of the screen tiled clients. </p>
+    <p>Get the list of tiled clients for the screen. </p>
 
-<p> Same as s.clients, but excluding:</p>
+<p> Same as <a href="../classes/screen.html#screen.clients">clients</a>, but excluding:</p>
 
 <ul>
 <li>fullscreen clients</li>
@@ -912,7 +900,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <h3>Type:</h3>
     <ul>
         <li><span class="parameter">table</span>
-         The clients list, ordered top to bottom
+         The clients list, ordered from top to bottom.
         </li>
     </ul>
 
@@ -928,8 +916,8 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <dd>
     A list of all tags on the screen. </p>
 
-<p> This property is read only, use <a href="../classes/tag.html#tag.screen">tag.screen</a>, <code>awful.tag.add</code>, <code>awful.tag.new</code>
- or <code>t:delete()</code> to alter this list.
+<p> This property is read only, use <a href="../classes/tag.html#tag.screen">tag.screen</a>, <code>awful.tag.add</code>,
+ <code>awful.tag.new</code> or <code>t:delete()</code> to alter this list.
 
 
     <h3>Type:</h3>
@@ -1067,7 +1055,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>awful.screen.getdistance_sq</strong>
     </dt>
     <dd>
-    Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point
+    Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point.
 
 
     <h3>param:</h3>
@@ -1117,7 +1105,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/screen.html#awful.screen.padding">padding</a>
+         <a href="../classes/screen.html#screen.padding">padding</a>
     </ul>
 
 
@@ -1152,7 +1140,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>awful.screen.default_focused_args</strong>
     </dt>
     <dd>
-    The defaults arguments for <a href="../classes/screen.html#awful.screen.focused">awful.screen.focused</a>
+    The defaults arguments for <a href="../classes/screen.html#awful.screen.focused">awful.screen.focused</a>.
 
 
 
@@ -1262,6 +1250,20 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
 </dd>
     <dt>
+    <a name = "screen:fake_remove"></a>
+    <strong>screen:fake_remove ()</strong>
+    </dt>
+    <dd>
+    Remove a screen.
+
+
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "screen:fake_resize"></a>
     <strong>screen:fake_resize (x, y, width, height)</strong>
     </dt>
@@ -1298,7 +1300,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>screen:get_square_distance (x, y)</strong>
     </dt>
     <dd>
-    Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point
+    Get the square distance between a <a href="../classes/screen.html#">screen</a> and a point.
 
 
     <ul>
@@ -1316,7 +1318,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ol>
 
            <span class="types"><span class="type">number</span></span>
-        The squared distance of the screen to the provided point
+        The squared distance of the screen to the provided point.
     </ol>
 
 
@@ -1328,8 +1330,9 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>screen:preferred (c)</strong>
     </dt>
     <dd>
-    Get the preferred screen in the context of a client.
- This is exactly the same as <a href="../classes/screen.html#awful.screen.focused">awful.screen.focused</a> except that it avoids
+    Get the preferred screen in the context of a client. </p>
+
+<p> This is exactly the same as <a href="../classes/screen.html#awful.screen.focused">awful.screen.focused</a> except that it avoids
  clients being moved when Awesome is restarted.
  This is used in the default <code>rc.lua</code> to ensure clients get assigned to the
  focused screen by default.
@@ -1358,31 +1361,48 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <strong>screen:get_bounding_geometry ([args={}])</strong>
     </dt>
     <dd>
-    <p>Get a placement bounding geometry.
- This method compute different variants of the &ldquo;usable&rdquo; screen geometry.</p>
+    Get a placement bounding geometry. </p>
 
-<p> Valid arguments are:</p>
-
-<ul>
-<li><strong>honor_padding</strong>: Honor the screen padding.</li>
-<li><strong>honor_workarea</strong>: Honor the screen workarea</li>
-<li><strong>margins</strong>: Apply some margins on the output. This can wither be a number
- or a table with <em>left</em>, <em>right</em>, <em>top</em> and <em>bottom</em> keys.</li>
-<li><strong>tag</strong>: Use the tag screen instead of <code>s</code></li>
-<li><strong>parent</strong>: A parent drawable to use a base geometry</li>
-<li><strong>bounding_rect</strong>: A bounding rectangle. This parameter is incompatible with
- <code>honor_workarea</code>.</li>
-</ul>
-
-
+<p> This method computes the different variants of the &ldquo;usable&rdquo; screen geometry.
 
 
     <ul>
-        <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The arguments
-         (<em>default</em> {})
+        <li><span class="parameter">args</span> The arguments
+        <ul>
+        <li><span class="parameter">honor_padding</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Wether to honor the screen&rsquo;s padding.
+         (<em>default</em> false)
         </li>
+        <li><span class="parameter">honor_workarea</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Wether to honor the screen&rsquo;s workarea.
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">margins</span>
+            <span class="types"><span class="type">int</span> or <a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Apply some margins on the output.
+   This can either be a number or a table with <em>left</em>, <em>right</em>, <em>top</em>
+   and <em>bottom</em> keys.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">tag</span>
+            <span class="types"><a class="type" href="../classes/tag.html#">tag</a></span>
+         Use this tag&rsquo;s screen.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">parent</span>
+            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
+         A parent drawable to use as base geometry.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">bounding_rect</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A bounding rectangle. This parameter is
+   incompatible with <code>honor_workarea</code>.
+         (<em>optional</em>)
+        </li>
+        </li></ul>
     </ul>
 
     <h3>Returns:</h3>
@@ -1413,7 +1433,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-10-02 14:06:54 </i>
+<i style="float:right;">Last updated 2016-10-02 14:11:42 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
