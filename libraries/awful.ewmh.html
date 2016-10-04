@@ -32,7 +32,9 @@
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Functions">Functions</a></li>
 <li><a href="#Request_handlers">Request handlers</a></li>
+<li><a href="#Tables">Tables</a></li>
 </ul>
 
 
@@ -182,6 +184,17 @@
     </ul>
 
 
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#add_activate_filter">add_activate_filter (f[, context])</a></td>
+	<td class="summary">Add an activate (focus stealing) filter function.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#remove_activate_filter">remove_activate_filter (f[, context])</a></td>
+	<td class="summary">Remove an activate (focus stealing) filter function.</td>
+	</tr>
+</table>
 <h2><a href="#Request_handlers">Request handlers</a></h2>
 <table class="function_list">
 	<tr>
@@ -197,11 +210,121 @@
 	<td class="summary">Move and resize the client.</td>
 	</tr>
 </table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#generic_activate_filters">generic_activate_filters</a></td>
+	<td class="summary">The list of all registered generic request::activate (focus stealing)
+ filters.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#contextual_activate_filters">contextual_activate_filters</a></td>
+	<td class="summary">The list of all registered contextual request::activate (focus stealing)
+ filters.</td>
+	</tr>
+</table>
 
 <br/>
 <br/>
 
 
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    Methods
+    <dl class="function">
+    <dt>
+    <a name = "add_activate_filter"></a>
+    <strong>add_activate_filter (f[, context])</strong>
+    </dt>
+    <dd>
+    <p>Add an activate (focus stealing) filter function. </p>
+
+<p> The callback takes the following parameters:</p>
+
+<ul>
+<li><strong>c</strong> (<em>client</em>) The client requesting the activation</li>
+<li><strong>context</strong> (<em>string</em>) The activation context.</li>
+<li><strong>hints</strong> (<em>table</em>) Some additional hints (depending on the context)</li>
+</ul>
+
+
+<p> If the callback returns <code>true</code>, the client will be activated unless the <code>force</code>
+ hint is set. If the callback returns <code>false</code>, the activation request is
+ cancelled. If the callback returns <code>nil</code>, the previous callback will be
+ executed. This will continue until either a callback handles the request or
+ when it runs out of callbacks. In that case, the request will be granted if
+ the client is visible.</p>
+
+<p> For example, to block Firefox from stealing the focus, use:</p>
+
+<pre><code>awful.ewmh.add_activate_filter(function(c, "ewmh")
+    if c.class == "Firefox" then return false end
+end)
+</code></pre>
+
+
+
+    <ul>
+        <li><span class="parameter">f</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The <code>request::activate</code> context
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.ewmh.html#generic_activate_filters">generic_activate_filters</a></li>
+         <li><a href="../libraries/awful.ewmh.html#contextual_activate_filters">contextual_activate_filters</a></li>
+         <li><a href="../libraries/awful.ewmh.html#remove_activate_filter">remove_activate_filter</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "remove_activate_filter"></a>
+    <strong>remove_activate_filter (f[, context])</strong>
+    </dt>
+    <dd>
+    Remove an activate (focus stealing) filter function.
+ This is an helper to avoid dealing with <a href="../libraries/awful.ewmh.html#add_activate_filter">ewmh.add_activate_filter</a> directly.
+
+
+    <ul>
+        <li><span class="parameter">f</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The <code>request::activate</code> context
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the callback existed
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.ewmh.html#generic_activate_filters">generic_activate_filters</a></li>
+         <li><a href="../libraries/awful.ewmh.html#contextual_activate_filters">contextual_activate_filters</a></li>
+         <li><a href="../libraries/awful.ewmh.html#add_activate_filter">add_activate_filter</a></li>
+    </ul>
+
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Request_handlers"></a>Request handlers</h2>
 
     <dl class="function">
@@ -304,6 +427,54 @@
 
 
 
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "generic_activate_filters"></a>
+    <strong>generic_activate_filters</strong>
+    </dt>
+    <dd>
+    The list of all registered generic request::activate (focus stealing)
+ filters.  If a filter is added to only one context, it will be in
+ <a href="../libraries/awful.ewmh.html#contextual_activate_filters">ewmh.contextual_activate_filters</a>[&ldquo;context_name&rdquo;].
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.ewmh.html#awful.ewmh.activate">ewmh.activate</a></li>
+         <li><a href="../libraries/awful.ewmh.html#add_activate_filter">ewmh.add_activate_filter</a></li>
+         <li><a href="../libraries/awful.ewmh.html#remove_activate_filter">ewmh.remove_activate_filter</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "contextual_activate_filters"></a>
+    <strong>contextual_activate_filters</strong>
+    </dt>
+    <dd>
+    The list of all registered contextual request::activate (focus stealing)
+ filters.  If a filter is added to only one context, it will be in
+ <a href="../libraries/awful.ewmh.html#generic_activate_filters">ewmh.generic_activate_filters</a>.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.ewmh.html#awful.ewmh.activate">ewmh.activate</a></li>
+         <li><a href="../libraries/awful.ewmh.html#add_activate_filter">ewmh.add_activate_filter</a></li>
+         <li><a href="../libraries/awful.ewmh.html#remove_activate_filter">ewmh.remove_activate_filter</a></li>
+    </ul>
 
 
 </dd>
