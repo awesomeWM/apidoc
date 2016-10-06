@@ -669,10 +669,12 @@ globalkeys = <span class="backtick"><code>awful.util.table.join</code></span>(
 
     <span class="backtick"><a href="../libraries/awful.key.html#">awful.key</a></span>({ modkey }, <span class="string">"x"</span>,
               <span class="keyword">function</span> ()
-                  <span class="backtick"><a href="../libraries/awful.prompt.html#run">awful.prompt.run</a></span>({ prompt = <span class="string">"Run Lua code: "</span> },
-                  <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox.widget,
-                  <span class="backtick"><a href="../libraries/awful.util.html#eval">awful.util.eval</a></span>, <span class="keyword">nil</span>,
-                  <span class="backtick"><code>awful.util.get</code></span>_cache_dir() .. <span class="string">"/history_eval"</span>)
+                  <span class="backtick"><a href="../libraries/awful.prompt.html#run">awful.prompt.run</a></span> {
+                    prompt       = <span class="string">"Run Lua code: "</span>,
+                    textbox      = <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox.widget,
+                    exe_callback = <span class="backtick"><a href="../libraries/awful.util.html#eval">awful.util.eval</a></span>,
+                    history_path = <span class="backtick"><code>awful.util.get</code></span>_cache_dir() .. <span class="string">"/history_eval"</span>
+                  }
               <span class="keyword">end</span>,
               {description = <span class="string">"lua execute prompt"</span>, group = <span class="string">"awesome"</span>}),
     <span class="comment">-- Menubar
