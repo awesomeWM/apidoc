@@ -177,7 +177,7 @@
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g01a9cb2</li>
+        <li><strong>Release</strong>: master-gc79e49b</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -185,7 +185,7 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#run">run (args[, textbox], exe_callback, completion_callback, history_path[, history_max[, done_callback[, changed_callback[, keypressed_callback]]]])</a></td>
+	<td class="name" ><a href="#run">run ([args={}[, textbox[, exe_callback[, completion_callback[, history_path[, history_max[, done_callback[, changed_callback[, keypressed_callback]]]]]]]]])</a></td>
 	<td class="summary">Run a prompt in a box.</td>
 	</tr>
 </table>
@@ -199,7 +199,7 @@
     <dl class="function">
     <dt>
     <a name = "run"></a>
-    <strong>run (args[, textbox], exe_callback, completion_callback, history_path[, history_max[, done_callback[, changed_callback[, keypressed_callback]]]])</strong>
+    <strong>run ([args={}[, textbox[, exe_callback[, completion_callback[, history_path[, history_max[, done_callback[, changed_callback[, keypressed_callback]]]]]]]]])</strong>
     </dt>
     <dd>
     <p>Run a prompt in a box. </p>
@@ -233,9 +233,105 @@ user editing.</li>
 
 
     <ul>
-        <li><span class="parameter">args</span> A table with optional arguments: <code>fg_cursor</code>, <code>bg_cursor</code>,
-   <code>ul_cursor</code>, <a href="../libraries/awful.prompt.html">prompt</a>, <code>text</code>, <code>selectall</code>, <code>font</code>, <code>autoexec</code>, <code>hooks</code>.
+        <li><span class="parameter">args</span> A table with optional arguments
         <ul>
+        <li><span class="parameter">fg_cursor</span>
+            <span class="types"><span class="type">gears.color</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">bg_cursor</span>
+            <span class="types"><span class="type">gears.color</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">ul_cursor</span>
+            <span class="types"><span class="type">gears.color</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">prompt</span>
+            <span class="types"><span class="type">widget</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">text</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">selectall</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">font</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">autoexec</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">textbox</span>
+            <span class="types"><span class="type">widget</span></span>
+         The textbox to use for the prompt.
+        </li>
+        <li><span class="parameter">exe_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to call with command as argument
+ when finished.
+        </li>
+        <li><span class="parameter">completion_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to call to get completion.
+        </li>
+        <li><span class="parameter">history_path</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         File path where the history should be
+ saved, set nil to disable history
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">history_max</span>
+            <span class="types"><span class="type">function</span></span>
+         Set the maximum entries in history
+ file, 50 by default
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">done_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to always call
+ without arguments, regardless of whether the prompt was cancelled.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">changed_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to call
+ with command as argument when a command was changed.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">keypressed_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to call
+   with mod table, key and command as arguments when a key was pressed.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">keyreleased_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to call
+   with mod table, key and command as arguments when a key was pressed.
+         (<em>optional</em>)
+        </li>
         <li><span class="parameter">hooks</span>
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         <p> The &ldquo;hooks&rdquo; argument uses a syntax similar to
@@ -266,38 +362,41 @@ user editing.</li>
         </li>
         </li></ul>
         <li><span class="parameter">textbox</span>
-         The textbox to use for the prompt.
+         The textbox to use for the prompt. [<strong>DEPRECATED</strong>]
         </li>
         <li><span class="parameter">exe_callback</span>
          The callback function to call with command as argument
- when finished.
+ when finished. [<strong>DEPRECATED</strong>]
         </li>
         <li><span class="parameter">completion_callback</span>
          The callback function to call to get completion.
+   [<strong>DEPRECATED</strong>]
         </li>
         <li><span class="parameter">history_path</span>
          File path where the history should be
- saved, set nil to disable history
+ saved, set nil to disable history [<strong>DEPRECATED</strong>]
          (<em>optional</em>)
         </li>
         <li><span class="parameter">history_max</span>
          Set the maximum entries in history
- file, 50 by default
+ file, 50 by default [<strong>DEPRECATED</strong>]
          (<em>optional</em>)
         </li>
         <li><span class="parameter">done_callback</span>
          The callback function to always call
  without arguments, regardless of whether the prompt was cancelled.
+  [<strong>DEPRECATED</strong>]
          (<em>optional</em>)
         </li>
         <li><span class="parameter">changed_callback</span>
          The callback function to call
- with command as argument when a command was changed.
+ with command as argument when a command was changed. [<strong>DEPRECATED</strong>]
          (<em>optional</em>)
         </li>
         <li><span class="parameter">keypressed_callback</span>
          The callback function to call
    with mod table, key and command as arguments when a key was pressed.
+   [<strong>DEPRECATED</strong>]
          (<em>optional</em>)
         </li>
     </ul>
@@ -314,7 +413,7 @@ user editing.</li>
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-10-06 19:05:06 </i>
+<i style="float:right;">Last updated 2016-10-06 19:22:01 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
