@@ -310,6 +310,14 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	<td class="summary">This signal is emitted when a screen is removed from the setup.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#.list">.list</a></td>
+	<td class="summary">This signal is emitted when the list of available screens changes.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#.swapped">.swapped</a></td>
+	<td class="summary">When 2 screens are swapped</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#tag::history::update">tag::history::update</a></td>
 	<td class="summary">When the tag history changed.</td>
 	</tr>
@@ -361,6 +369,10 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	<tr>
 	<td class="name" ><a href="#screen:fake_resize">screen:fake_resize (x, y, width, height)</a></td>
 	<td class="summary">Fake-resize a screen</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen:swap">screen:swap (s)</a></td>
+	<td class="summary">Swap a screen with another one in global screen list.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#screen:get_square_distance">screen:get_square_distance (x, y)</a></td>
@@ -820,7 +832,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
          <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.dockable.get">client.get</a></li>
+         <li><a href="../classes/client.html#awful.client.property.get">client.get</a></li>
     </ul>
 
 
@@ -848,7 +860,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.clients">clients</a></li>
          <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.dockable.get">client.get</a></li>
+         <li><a href="../classes/client.html#awful.client.property.get">client.get</a></li>
     </ul>
 
 
@@ -874,7 +886,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.clients">clients</a></li>
          <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.dockable.get">client.get</a></li>
+         <li><a href="../classes/client.html#awful.client.property.get">client.get</a></li>
     </ul>
 
 
@@ -953,7 +965,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#awful.tag.selected">tag.selected</a></li>
+         <li><a href="../classes/tag.html#tag.selected">tag.selected</a></li>
          <li><a href="../classes/client.html#client:to_selected_tags">client.to_selected_tags</a></li>
     </ul>
 
@@ -979,7 +991,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#awful.tag.selected">tag.selected</a></li>
+         <li><a href="../classes/tag.html#tag.selected">tag.selected</a></li>
          <li><a href="../classes/screen.html#screen.selected_tags">selected_tags</a></li>
     </ul>
 
@@ -1026,6 +1038,45 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     This signal is emitted when a screen is removed from the setup.
 
 
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = ".list"></a>
+    <strong>.list</strong>
+    </dt>
+    <dd>
+    This signal is emitted when the list of available screens changes.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = ".swapped"></a>
+    <strong>.swapped</strong>
+    </dt>
+    <dd>
+    When 2 screens are swapped
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+         The other screen
+        </li>
+        <li><span class="parameter">is_source</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If self is the source or the destination of the swap
+        </li>
+    </ul>
 
 
 
@@ -1296,6 +1347,26 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
 </dd>
     <dt>
+    <a name = "screen:swap"></a>
+    <strong>screen:swap (s)</strong>
+    </dt>
+    <dd>
+    Swap a screen with another one in global screen list.
+
+
+    <ul>
+        <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
+         A screen to swap with.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "screen:get_square_distance"></a>
     <strong>screen:get_square_distance (x, y)</strong>
     </dt>
@@ -1433,7 +1504,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-11-06 19:49:00 </i>
+<i style="float:right;">Last updated 2016-11-08 00:29:46 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
