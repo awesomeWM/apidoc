@@ -98,6 +98,7 @@
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
   <li><a href="../classes/wibox.widget.piechart.html">wibox.widget.piechart</a></li>
   <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
+  <li><a href="../classes/wibox.widget.slider.html">wibox.widget.slider</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
@@ -206,7 +207,6 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008-2009 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g3f36494-PR1143</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -310,6 +310,14 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	<td class="summary">This signal is emitted when a screen is removed from the setup.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#.list">.list</a></td>
+	<td class="summary">This signal is emitted when the list of available screens changes.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#.swapped">.swapped</a></td>
+	<td class="summary">When 2 screens are swapped</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#tag::history::update">tag::history::update</a></td>
 	<td class="summary">When the tag history changed.</td>
 	</tr>
@@ -361,6 +369,10 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	<tr>
 	<td class="name" ><a href="#screen:fake_resize">screen:fake_resize (x, y, width, height)</a></td>
 	<td class="summary">Fake-resize a screen</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen:swap">screen:swap (s)</a></td>
+	<td class="summary">Swap a screen with another one in global screen list.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#screen:get_square_distance">screen:get_square_distance (x, y)</a></td>
@@ -1033,6 +1045,45 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
 </dd>
     <dt>
+    <a name = ".list"></a>
+    <strong>.list</strong>
+    </dt>
+    <dd>
+    This signal is emitted when the list of available screens changes.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = ".swapped"></a>
+    <strong>.swapped</strong>
+    </dt>
+    <dd>
+    When 2 screens are swapped
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+         The other screen
+        </li>
+        <li><span class="parameter">is_source</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If self is the source or the destination of the swap
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "tag::history::update"></a>
     <strong>tag::history::update</strong>
     </dt>
@@ -1105,7 +1156,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/screen.html#awful.screen.padding">padding</a>
+         <a href="../classes/screen.html#screen.padding">padding</a>
     </ul>
 
 
@@ -1296,6 +1347,26 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
 </dd>
     <dt>
+    <a name = "screen:swap"></a>
+    <strong>screen:swap (s)</strong>
+    </dt>
+    <dd>
+    Swap a screen with another one in global screen list.
+
+
+    <ul>
+        <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
+         A screen to swap with.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "screen:get_square_distance"></a>
     <strong>screen:get_square_distance (x, y)</strong>
     </dt>
@@ -1371,12 +1442,12 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
         <ul>
         <li><span class="parameter">honor_padding</span>
             <span class="types"><span class="type">boolean</span></span>
-         Wether to honor the screen&rsquo;s padding.
+         Whether to honor the screen&rsquo;s padding.
          (<em>default</em> false)
         </li>
         <li><span class="parameter">honor_workarea</span>
             <span class="types"><span class="type">boolean</span></span>
-         Wether to honor the screen&rsquo;s workarea.
+         Whether to honor the screen&rsquo;s workarea.
          (<em>default</em> false)
         </li>
         <li><span class="parameter">margins</span>
@@ -1433,7 +1504,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-10-04 22:29:03 </i>
+<i style="float:right;">Last updated 2016-11-22 01:46:01 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

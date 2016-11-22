@@ -99,6 +99,7 @@
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
   <li><a href="../classes/wibox.widget.piechart.html">wibox.widget.piechart</a></li>
   <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
+  <li><a href="../classes/wibox.widget.slider.html">wibox.widget.slider</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
@@ -189,7 +190,6 @@
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008-2009 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g3f36494-PR1143</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -262,7 +262,7 @@
 	<td class="summary">Toggle selection of a tag</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.tag.attached_connect_signal">awful.tag.attached_connect_signal (screen)</a></td>
+	<td class="name" ><a href="#awful.tag.attached_connect_signal">awful.tag.attached_connect_signal (The[, Signal[, Callback]])</a></td>
 	<td class="summary">Add a signal to all attached tags and all tags that will be attached in the
  future.</td>
 	</tr>
@@ -578,7 +578,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#awful.tag.delete">tag.delete</a>
+         <a href="../classes/tag.html#tag:delete">tag.delete</a>
     </ul>
 
 
@@ -699,7 +699,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a>
+         <a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a>
     </ul>
 
 
@@ -750,7 +750,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -783,7 +783,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
+         <a href="../classes/tag.html#tag.master_count">master_count</a>
     </ul>
 
 
@@ -954,7 +954,7 @@
 </dd>
     <dt>
     <a name = "awful.tag.attached_connect_signal"></a>
-    <strong>awful.tag.attached_connect_signal (screen)</strong>
+    <strong>awful.tag.attached_connect_signal (The[, Signal[, Callback]])</strong>
     </dt>
     <dd>
     Add a signal to all attached tags and all tags that will be attached in the
@@ -962,8 +962,21 @@
 
 
     <ul>
-        <li><span class="parameter">screen</span>
-         The screen concerned, or all if nil.
+        <li><span class="parameter">The</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+         screen concerned, or all if nil.
+        </li>
+        <li><span class="parameter">Signal</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">Callback</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+         (<em>optional</em>)
         </li>
     </ul>
 
@@ -1159,9 +1172,9 @@
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#beautiful.master_count">master_count</a></li>
+         <li><a href="../classes/tag.html#tag.master_count">master_count</a></li>
          <li><a href="../classes/tag.html#tag.column_count">column_count</a></li>
-         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
+         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
     </ul>
 
@@ -1525,7 +1538,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#request::urgent">client.urgent</a>
+         <a href="../classes/client.html#client.urgent">client.urgent</a>
     </ul>
 
 
@@ -1543,7 +1556,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#request::urgent">client.urgent</a>
+         <a href="../classes/client.html#client.urgent">client.urgent</a>
     </ul>
 
 
@@ -1571,7 +1584,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
+         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
     </ul>
 
@@ -1646,7 +1659,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -1670,7 +1683,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
+         <a href="../classes/tag.html#tag.master_count">master_count</a>
     </ul>
 
 
@@ -1780,7 +1793,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#awful.tag.delete">tag.delete</a>
+         <a href="../classes/tag.html#tag:delete">tag.delete</a>
     </ul>
 
 
@@ -1932,8 +1945,8 @@
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
-         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
+         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
+         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
     </ul>
 
 
@@ -1958,8 +1971,8 @@
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
-         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
+         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
+         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
     </ul>
 
 
@@ -2130,7 +2143,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -2156,7 +2169,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -2185,7 +2198,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
+         <a href="../classes/tag.html#tag.master_count">master_count</a>
     </ul>
 
 
@@ -2210,7 +2223,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
+         <a href="../classes/tag.html#tag.master_count">master_count</a>
     </ul>
 
 
@@ -2706,7 +2719,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-10-04 22:29:03 </i>
+<i style="float:right;">Last updated 2016-11-22 01:46:01 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

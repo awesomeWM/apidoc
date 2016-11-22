@@ -96,6 +96,7 @@
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
   <li><strong>wibox.widget.piechart</strong></li>
   <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
+  <li><a href="../classes/wibox.widget.slider.html">wibox.widget.slider</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
@@ -200,7 +201,6 @@ wibox.widget {
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2012 Emmanuel Lepage Vallee</li>
-        <li><strong>Release</strong>: master-g3f36494-PR1143</li>
         <li><strong>Author</strong>: Emmanuel Lepage Valle</li>
     </ul>
 
@@ -554,8 +554,9 @@ wibox.widget {
     </dt>
     <dd>
     When the layout (size) change.
- This signal is emited when the previous results of <code>:layout()</code> and <code>:fit()</code>
- are no longer valid.
+ This signal is emitted when the previous results of <code>:layout()</code> and <code>:fit()</code>
+ are no longer valid.  Unless this signal is emitted, <code>:layout()</code> and <code>:fit()</code>
+ must return the same result when called with the same arguments.
 
 
 
@@ -574,14 +575,18 @@ wibox.widget {
     </dt>
     <dd>
     When the widget content changed.
- Unless this signal is emitted, <code>:layout()</code> and <code>:fit()</code> must return the same
- result when called with the same arguments. In case this isn&rsquo;t the case,
- use <a href="../classes/wibox.widget.piechart.html#widget::layout_changed">widget::layout_changed</a>.
+ This signal is emitted when the content of the widget changes. The widget will
+ be redrawn, it is not re-layouted. Put differently, it is assumed that
+ <code>:layout()</code> and <code>:fit()</code> would still return the same results as before.
 
 
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.piechart.html#widget::layout_changed">widget::layout_changed</a>
+    </ul>
 
 
 </dd>
@@ -591,23 +596,19 @@ wibox.widget {
     </dt>
     <dd>
     When a mouse button is pressed over the widget.
- The position of the mouse press relative to the widget while geometry
- contains the geometry of the widget relative to the wibox.
 
 
     <h3>Arguments:</h3>
     <ul>
-        <li><span class="parameter">widget</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The widget
-        </li>
         <li><span class="parameter">lx</span>
             <span class="types"><span class="type">number</span></span>
-         The relative horizontal position.
+         The horizontal position relative to the (0,0) position in
+ the widget.
         </li>
         <li><span class="parameter">ly</span>
             <span class="types"><span class="type">number</span></span>
-         The relative vertical position.
+         The vertical position relative to the (0,0) position in the
+ widget.
         </li>
         <li><span class="parameter">button</span>
             <span class="types"><span class="type">number</span></span>
@@ -617,36 +618,52 @@ wibox.widget {
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
-        <li><span class="parameter">geometry</span>
-
+        <li><span class="parameter">find_widgets_result</span> The entry from the result of
+ <a href="../classes/wibox.drawable.html#wibox.drawable:find_widgets">wibox.drawable:find_widgets</a> for the position that the mouse hit.
         <ul>
+        <li><span class="parameter">drawable</span>
+            <span class="types"><a class="type" href="../classes/wibox.drawable.html#">wibox.drawable</a></span>
+         The drawable containing
+ the widget.
+        </li>
+        <li><span class="parameter">widget</span>
+            <span class="types"><span class="type">widget</span></span>
+         The widget being displayed.
+        </li>
+        <li><span class="parameter">hierarchy</span>
+            <span class="types"><span class="type">wibox.hierarchy</span></span>
+         The hierarchy
+ managing the widget&rsquo;s geometry.
+        </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
-         The vertical position
+         An approximation of the X position that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">y</span>
             <span class="types"><span class="type">number</span></span>
-         The horizontal position
+         An approximation of the Y position that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The widget
+         An approximation of the width that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
-         The height
+         An approximation of the height that
+ the widget is visible at on the surface.
         </li>
-        <li><span class="parameter">drawable</span>
-            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
-         The <a href="../classes/drawable.html#">drawable</a>
+        <li><span class="parameter">widget_width</span>
+            <span class="types"><span class="type">number</span></span>
+         The exact width of the widget
+ in its local coordinate system.
         </li>
-        <li><span class="parameter">matrix_to_parent</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The relative <a href="../classes/gears.matrix.html#">gears.matrix</a>
-        </li>
-        <li><span class="parameter">matrix_to_device</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The absolute <a href="../classes/gears.matrix.html#">gears.matrix</a>
+        <li><span class="parameter">widget_height</span>
+            <span class="types"><span class="type">number</span></span>
+         The exact height of the widget
+ in its local coordinate system.
         </li>
         </li></ul>
     </ul>
@@ -666,23 +683,19 @@ wibox.widget {
     </dt>
     <dd>
     When a mouse button is released over the widget.
- The position of the mouse press relative to the widget while geometry
- contains the geometry of the widget relative to the wibox.
 
 
     <h3>Arguments:</h3>
     <ul>
-        <li><span class="parameter">widget</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The widget
-        </li>
         <li><span class="parameter">lx</span>
             <span class="types"><span class="type">number</span></span>
-         The relative horizontal position.
+         The horizontal position relative to the (0,0) position in
+ the widget.
         </li>
         <li><span class="parameter">ly</span>
             <span class="types"><span class="type">number</span></span>
-         The relative vertical position.
+         The vertical position relative to the (0,0) position in the
+ widget.
         </li>
         <li><span class="parameter">button</span>
             <span class="types"><span class="type">number</span></span>
@@ -692,36 +705,52 @@ wibox.widget {
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
-        <li><span class="parameter">geometry</span>
-
+        <li><span class="parameter">find_widgets_result</span> The entry from the result of
+ <a href="../classes/wibox.drawable.html#wibox.drawable:find_widgets">wibox.drawable:find_widgets</a> for the position that the mouse hit.
         <ul>
+        <li><span class="parameter">drawable</span>
+            <span class="types"><a class="type" href="../classes/wibox.drawable.html#">wibox.drawable</a></span>
+         The drawable containing
+ the widget.
+        </li>
+        <li><span class="parameter">widget</span>
+            <span class="types"><span class="type">widget</span></span>
+         The widget being displayed.
+        </li>
+        <li><span class="parameter">hierarchy</span>
+            <span class="types"><span class="type">wibox.hierarchy</span></span>
+         The hierarchy
+ managing the widget&rsquo;s geometry.
+        </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
-         The vertical position
+         An approximation of the X position that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">y</span>
             <span class="types"><span class="type">number</span></span>
-         The horizontal position
+         An approximation of the Y position that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The widget
+         An approximation of the width that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
-         The height
+         An approximation of the height that
+ the widget is visible at on the surface.
         </li>
-        <li><span class="parameter">drawable</span>
-            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
-         The <a href="../classes/drawable.html#">drawable</a>
+        <li><span class="parameter">widget_width</span>
+            <span class="types"><span class="type">number</span></span>
+         The exact width of the widget
+ in its local coordinate system.
         </li>
-        <li><span class="parameter">matrix_to_parent</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The relative <a href="../classes/gears.matrix.html#">gears.matrix</a>
-        </li>
-        <li><span class="parameter">matrix_to_device</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The absolute <a href="../classes/gears.matrix.html#">gears.matrix</a>
+        <li><span class="parameter">widget_height</span>
+            <span class="types"><span class="type">number</span></span>
+         The exact height of the widget
+ in its local coordinate system.
         </li>
         </li></ul>
     </ul>
@@ -745,40 +774,52 @@ wibox.widget {
 
     <h3>Arguments:</h3>
     <ul>
-        <li><span class="parameter">widget</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The widget
-        </li>
-        <li><span class="parameter">geometry</span>
-
+        <li><span class="parameter">find_widgets_result</span> The entry from the result of
+ <a href="../classes/wibox.drawable.html#wibox.drawable:find_widgets">wibox.drawable:find_widgets</a> for the position that the mouse hit.
         <ul>
+        <li><span class="parameter">drawable</span>
+            <span class="types"><a class="type" href="../classes/wibox.drawable.html#">wibox.drawable</a></span>
+         The drawable containing
+ the widget.
+        </li>
+        <li><span class="parameter">widget</span>
+            <span class="types"><span class="type">widget</span></span>
+         The widget being displayed.
+        </li>
+        <li><span class="parameter">hierarchy</span>
+            <span class="types"><span class="type">wibox.hierarchy</span></span>
+         The hierarchy
+ managing the widget&rsquo;s geometry.
+        </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
-         The vertical position
+         An approximation of the X position that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">y</span>
             <span class="types"><span class="type">number</span></span>
-         The horizontal position
+         An approximation of the Y position that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The widget
+         An approximation of the width that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
-         The height
+         An approximation of the height that
+ the widget is visible at on the surface.
         </li>
-        <li><span class="parameter">drawable</span>
-            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
-         The <a href="../classes/drawable.html#">drawable</a>
+        <li><span class="parameter">widget_width</span>
+            <span class="types"><span class="type">number</span></span>
+         The exact width of the widget
+ in its local coordinate system.
         </li>
-        <li><span class="parameter">matrix_to_parent</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The relative <a href="../classes/gears.matrix.html#">gears.matrix</a>
-        </li>
-        <li><span class="parameter">matrix_to_device</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The absolute <a href="../classes/gears.matrix.html#">gears.matrix</a>
+        <li><span class="parameter">widget_height</span>
+            <span class="types"><span class="type">number</span></span>
+         The exact height of the widget
+ in its local coordinate system.
         </li>
         </li></ul>
     </ul>
@@ -802,40 +843,52 @@ wibox.widget {
 
     <h3>Arguments:</h3>
     <ul>
-        <li><span class="parameter">widget</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The widget
-        </li>
-        <li><span class="parameter">geometry</span>
-
+        <li><span class="parameter">find_widgets_result</span> The entry from the result of
+ <a href="../classes/wibox.drawable.html#wibox.drawable:find_widgets">wibox.drawable:find_widgets</a> for the position that the mouse hit.
         <ul>
+        <li><span class="parameter">drawable</span>
+            <span class="types"><a class="type" href="../classes/wibox.drawable.html#">wibox.drawable</a></span>
+         The drawable containing
+ the widget.
+        </li>
+        <li><span class="parameter">widget</span>
+            <span class="types"><span class="type">widget</span></span>
+         The widget being displayed.
+        </li>
+        <li><span class="parameter">hierarchy</span>
+            <span class="types"><span class="type">wibox.hierarchy</span></span>
+         The hierarchy
+ managing the widget&rsquo;s geometry.
+        </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
-         The vertical position
+         An approximation of the X position that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">y</span>
             <span class="types"><span class="type">number</span></span>
-         The horizontal position
+         An approximation of the Y position that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">number</span></span>
-         The widget
+         An approximation of the width that
+ the widget is visible at on the surface.
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
-         The height
+         An approximation of the height that
+ the widget is visible at on the surface.
         </li>
-        <li><span class="parameter">drawable</span>
-            <span class="types"><a class="type" href="../classes/drawable.html#">drawable</a></span>
-         The <a href="../classes/drawable.html#">drawable</a>
+        <li><span class="parameter">widget_width</span>
+            <span class="types"><span class="type">number</span></span>
+         The exact width of the widget
+ in its local coordinate system.
         </li>
-        <li><span class="parameter">matrix_to_parent</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The relative <a href="../classes/gears.matrix.html#">gears.matrix</a>
-        </li>
-        <li><span class="parameter">matrix_to_device</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The absolute <a href="../classes/gears.matrix.html#">gears.matrix</a>
+        <li><span class="parameter">widget_height</span>
+            <span class="types"><span class="type">number</span></span>
+         The exact height of the widget
+ in its local coordinate system.
         </li>
         </li></ul>
     </ul>
@@ -1166,7 +1219,7 @@ wibox.widget {
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-10-04 22:29:03 </i>
+<i style="float:right;">Last updated 2016-11-22 01:46:01 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

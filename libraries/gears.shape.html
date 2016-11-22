@@ -148,6 +148,7 @@
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
   <li><a href="../classes/wibox.widget.piechart.html">wibox.widget.piechart</a></li>
   <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
+  <li><a href="../classes/wibox.widget.slider.html">wibox.widget.slider</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
@@ -216,7 +217,6 @@
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2011-2016 Emmanuel Lepage Vallee</li>
-        <li><strong>Release</strong>: master-g3f36494-PR1143</li>
         <li><strong>Author</strong>: Emmanuel Lepage Vallee</li>
     </ul>
 
@@ -345,9 +345,7 @@
     <ul>
         <pre class="example">
 shape.rounded_rect(cr, <span class="number">70</span>, <span class="number">70</span>, <span class="number">10</span>)
-
 shape.rounded_rect(cr,<span class="number">20</span>,<span class="number">70</span>, <span class="number">5</span>)
-
 shape.transform(shape.rounded_rect) : translate(<span class="number">0</span>,<span class="number">25</span>) (cr,<span class="number">70</span>,<span class="number">20</span>, <span class="number">5</span>)</pre>
     </ul>
 
@@ -381,9 +379,7 @@ shape.transform(shape.rounded_rect) : translate(<span class="number">0</span>,<s
     <ul>
         <pre class="example">
 shape.rounded_bar(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.rounded_bar(cr, <span class="number">20</span>, <span class="number">70</span>)
-
 shape.rounded_bar(cr, <span class="number">70</span>, <span class="number">20</span>)</pre>
     </ul>
 
@@ -439,9 +435,7 @@ shape.rounded_bar(cr, <span class="number">70</span>, <span class="number">20</s
     <ul>
         <pre class="example">
 shape.partially_rounded_rect(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.partially_rounded_rect(cr, <span class="number">70</span>, <span class="number">70</span>, <span class="keyword">true</span>)
-
 shape.partially_rounded_rect(cr, <span class="number">70</span>, <span class="number">70</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="number">30</span>)</pre>
     </ul>
 
@@ -492,10 +486,8 @@ shape.partially_rounded_rect(cr, <span class="number">70</span>, <span class="nu
     <ul>
         <pre class="example">
 shape.infobubble(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.transform(shape.infobubble) : translate(<span class="number">0</span>, <span class="number">20</span>)
    : rotate_at(<span class="number">35</span>,<span class="number">35</span>,<span class="global">math</span>.pi) (cr,<span class="number">70</span>,<span class="number">20</span>,<span class="number">10</span>, <span class="number">5</span>, <span class="number">35</span> - <span class="number">5</span>)
-
 shape.transform(shape.infobubble)
    : rotate_at(<span class="number">35</span>,<span class="number">35</span>,<span class="number">3</span>*<span class="global">math</span>.pi/<span class="number">2</span>) (cr,<span class="number">70</span>,<span class="number">70</span>, <span class="keyword">nil</span>, <span class="keyword">nil</span>, <span class="number">40</span>)</pre>
     </ul>
@@ -537,9 +529,7 @@ shape.transform(shape.infobubble)
     <ul>
         <pre class="example">
 shape.rectangular_tag(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.transform(shape.rectangular_tag) : translate(<span class="number">0</span>, <span class="number">30</span>) (cr, <span class="number">70</span>, <span class="number">10</span>,  <span class="number">10</span>)
-
 shape.transform(shape.rectangular_tag) : translate(<span class="number">0</span>, <span class="number">30</span>) (cr, <span class="number">70</span>, <span class="number">10</span>, -<span class="number">10</span>)</pre>
     </ul>
 
@@ -590,9 +580,7 @@ shape.transform(shape.rectangular_tag) : translate(<span class="number">0</span>
     <ul>
         <pre class="example">
 shape.arrow(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.arrow(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">60</span>)
-
 shape.transform(shape.arrow) : rotate_at(<span class="number">35</span>,<span class="number">35</span>,<span class="global">math</span>.pi/<span class="number">2</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
     </ul>
 
@@ -628,9 +616,7 @@ shape.transform(shape.arrow) : rotate_at(<span class="number">35</span>,<span cl
     <ul>
         <pre class="example">
 shape.hexagon(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.transform(shape.hexagon) : translate(<span class="number">0</span>,<span class="number">15</span>)(cr,<span class="number">70</span>,<span class="number">20</span>)
-
 shape.transform(shape.hexagon) : rotate_at(<span class="number">35</span>,<span class="number">35</span>,<span class="global">math</span>.pi/<span class="number">2</span>)(cr,<span class="number">70</span>,<span class="number">40</span>)</pre>
     </ul>
 
@@ -671,9 +657,7 @@ shape.transform(shape.hexagon) : rotate_at(<span class="number">35</span>,<span 
     <ul>
         <pre class="example">
 shape.powerline(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.transform(shape.powerline) : translate(<span class="number">0</span>, <span class="number">25</span>) (cr,<span class="number">70</span>,<span class="number">20</span>)
-
 shape.transform(shape.powerline) : translate(<span class="number">0</span>, <span class="number">25</span>) (cr,<span class="number">70</span>,<span class="number">20</span>, -<span class="number">20</span>)</pre>
     </ul>
 
@@ -709,9 +693,7 @@ shape.transform(shape.powerline) : translate(<span class="number">0</span>, <spa
     <ul>
         <pre class="example">
 shape.isosceles_triangle(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.isosceles_triangle(cr,<span class="number">20</span>,<span class="number">70</span>)
-
 shape.transform(shape.isosceles_triangle) : rotate_at(<span class="number">35</span>, <span class="number">35</span>, <span class="global">math</span>.pi/<span class="number">2</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
     </ul>
 
@@ -752,9 +734,7 @@ shape.transform(shape.isosceles_triangle) : rotate_at(<span class="number">35</s
     <ul>
         <pre class="example">
 shape.cross(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.cross(cr,<span class="number">20</span>,<span class="number">70</span>)
-
 shape.transform(shape.cross) : scale(<span class="number">0.5</span>, <span class="number">1</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
     </ul>
 
@@ -795,9 +775,7 @@ shape.transform(shape.cross) : scale(<span class="number">0.5</span>, <span clas
     <ul>
         <pre class="example">
 shape.octogon(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.octogon(cr,<span class="number">70</span>,<span class="number">70</span>,<span class="number">70</span>/<span class="number">2.5</span>)
-
 shape.transform(shape.octogon) : translate(<span class="number">0</span>, <span class="number">25</span>) (cr,<span class="number">70</span>,<span class="number">20</span>)</pre>
     </ul>
 
@@ -838,9 +816,7 @@ shape.transform(shape.octogon) : translate(<span class="number">0</span>, <span 
     <ul>
         <pre class="example">
 shape.circle(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.circle(cr,<span class="number">20</span>,<span class="number">70</span>)
-
 shape.transform(shape.circle) : scale(<span class="number">0.5</span>, <span class="number">1</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
     </ul>
 
@@ -876,9 +852,7 @@ shape.transform(shape.circle) : scale(<span class="number">0.5</span>, <span cla
     <ul>
         <pre class="example">
 shape.rectangle(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.rectangle(cr,<span class="number">20</span>,<span class="number">70</span>)
-
 shape.transform(shape.rectangle) : scale(<span class="number">0.5</span>, <span class="number">1</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
     </ul>
 
@@ -920,9 +894,7 @@ shape.transform(shape.rectangle) : scale(<span class="number">0.5</span>, <span 
     <ul>
         <pre class="example">
 shape.parallelogram(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.parallelogram(cr,<span class="number">70</span>,<span class="number">20</span>)
-
 shape.transform(shape.parallelogram) : scale(<span class="number">0.5</span>, <span class="number">1</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
     </ul>
 
@@ -958,9 +930,7 @@ shape.transform(shape.parallelogram) : scale(<span class="number">0.5</span>, <s
     <ul>
         <pre class="example">
 shape.losange(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.losange(cr,<span class="number">20</span>,<span class="number">70</span>)
-
 shape.transform(shape.losange) : scale(<span class="number">0.5</span>, <span class="number">1</span>)(cr,<span class="number">70</span>,<span class="number">70</span>)</pre>
     </ul>
 
@@ -1013,9 +983,7 @@ shape.transform(shape.losange) : scale(<span class="number">0.5</span>, <span cl
     <ul>
         <pre class="example">
 shape.pie(cr, <span class="number">70</span>, <span class="number">70</span>)
-
 shape.pie(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="number">1.0471975511966</span>,   <span class="number">4.1887902047864</span>)
-
 shape.pie(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="global">math</span>.pi, <span class="number">10</span>)</pre>
     </ul>
 
@@ -1077,11 +1045,8 @@ shape.pie(cr,<span class="number">70</span>,<span class="number">70</span>, <spa
     <h3>Usage:</h3>
     <ul>
         <pre class="example">
-
 shape.arc(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="number">10</span>)
-
 shape.arc(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="number">10</span>, <span class="keyword">nil</span>, <span class="keyword">nil</span>, <span class="keyword">true</span>, <span class="keyword">true</span>)
-
 shape.arc(cr,<span class="number">70</span>,<span class="number">70</span>, <span class="keyword">nil</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="global">math</span>.pi)</pre>
     </ul>
 
@@ -1129,9 +1094,7 @@ shape.arc(cr,<span class="number">70</span>,<span class="number">70</span>, <spa
     <ul>
         <pre class="example">
 shape.radial_progress(cr, <span class="number">70</span>, <span class="number">20</span>, .<span class="number">3</span>)
-
 shape.radial_progress(cr, <span class="number">70</span>, <span class="number">20</span>, .<span class="number">6</span>)
-
 shape.radial_progress(cr, <span class="number">70</span>, <span class="number">20</span>, .<span class="number">9</span>)</pre>
     </ul>
 
@@ -1173,7 +1136,7 @@ shape.radial_progress(cr, <span class="number">70</span>, <span class="number">2
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-10-04 22:29:03 </i>
+<i style="float:right;">Last updated 2016-11-22 01:46:01 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

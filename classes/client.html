@@ -104,6 +104,7 @@
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
   <li><a href="../classes/wibox.widget.piechart.html">wibox.widget.piechart</a></li>
   <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
+  <li><a href="../classes/wibox.widget.slider.html">wibox.widget.slider</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
@@ -183,21 +184,25 @@
 
 <h1>Class <code>client</code></h1>
 <p>A process window.</p>
-<p> Clients are the name used by Awesome (and X11) to refer to a window. An
- application can have multiple clients (like for dialogs) or none at all
- (like command line applications). Clients are usually grouped by classes. A
- class is the name used by X11 to help window manager distinguish between
- window and write rules for them. See the <code>xprop</code> command line application. A
- client also have a <a href="../classes/client.html#client.type">type</a> and <a href="../classes/client.html#client.size_hints">size_hints</a> used to define its behavior.</p>
+<p> Clients are the name used by Awesome (and X11) to refer to a window.</p>
+
+<p> A program can have multiple clients (e.g. for dialogs) or none at all (e.g.
+ command line applications).
+ Clients are usually grouped by classes.
+ A class is the name used by X11 to help the window manager distinguish
+ between windows and write rules for them.  A client&rsquo;s behavior is also
+ defined by its <a href="../classes/client.html#client.type">type</a> and <a href="../classes/client.html#client.size_hints">size_hints</a> properties.
+ See the <code>xprop</code> command line application to query properties for a client.</p>
 
 <p> <img src="../images/client_geo.svg" alt="Client geometry" /></p>
 
-<p> The client <code>:geometry()</code> return a table with <em>x</em>, <em>y</em>, <em>width</em> and <em>height</em>.
- The area returned <strong>exclude the border width</strong>. All clients also have a
- <a href="../classes/client.html#client.shape_bounding">shape_bounding</a> and <a href="../classes/client.html#client.shape_clip">shape_clip</a> used to &ldquo;crop&rdquo; the client content. Finally,
- each clients can have titlebars (see <a href="../libraries/awful.titlebar.html#">awful.titlebar</a>).</p>
+<p> The client&rsquo;s <code>:geometry()</code> function returns a table with <em>x</em>, <em>y</em>, <em>width</em>
+ and <em>height</em>.  The area returned <strong>excludes the border width</strong>.
+ All clients also have a <a href="../classes/client.html#client.shape_bounding">shape_bounding</a> and <a href="../classes/client.html#client.shape_clip">shape_clip</a> used to &ldquo;crop&rdquo; the
+ client&rsquo;s content.
+ Finally, each clients can have titlebars (see <a href="../libraries/awful.titlebar.html#">awful.titlebar</a>).</p>
 
-<p> Furthermore to the classes described here, one can also use signals as
+<p> Additionally to the classes described here, one can also use signals as
  described in <a href="../classes/signals.html#">signals</a> and X properties as described in <a href="../classes/xproperties.html#">xproperties</a>.</p>
 
 <p> Some signal names are starting with a dot. These dots are artefacts from
@@ -205,18 +210,18 @@
  removing the starting dot.</p>
 
 <p> Accessing client objects can be done in multiple ways depending on the
- context. To get the current focused client, use:</p>
+ context.
+ To get the currently focused client:</p>
 
 <pre>
 <span class="keyword">local</span> c = client.focus
-
 <span class="keyword">if</span> c <span class="keyword">then</span>
     <span class="comment">-- do something
 </span><span class="keyword">end</span>
 </pre>
 
 
-<p> To get a list of all clients, use <a href="../classes/client.html#client:get">client:get</a></p>
+<p> To get a list of all clients, use <a href="../classes/client.html#client:get">client:get</a>:</p>
 
 <pre>
 <span class="keyword">for</span> _, c <span class="keyword">in</span> <span class="global">ipairs</span>(client.get()) <span class="keyword">do</span>
@@ -225,7 +230,7 @@
 </pre>
 
 
-<p> To get a callback when a new client is added, use the <a href="../classes/client.html#.manage">manage</a> signal:</p>
+<p> To execute a callback when a new client is added, use the <a href="../classes/client.html#.manage">manage</a> signal:</p>
 
 <pre>
 client.connect_signal(<span class="string">"manage"</span>, <span class="keyword">function</span>(c)
@@ -234,7 +239,7 @@ client.connect_signal(<span class="string">"manage"</span>, <span class="keyword
 </pre>
 
 
-<p> To be notified a property changed in a client, use:</p>
+<p> To be notified when a property of a client changed:</p>
 
 <pre>
 client.connect_signal(<span class="string">"property::name"</span>, <span class="keyword">function</span>(c)
@@ -243,8 +248,7 @@ client.connect_signal(<span class="string">"property::name"</span>, <span class=
 </pre>
 
 
-<p> To be notified when a property change for a specific client (assuming it is
- stored in the variable <code>c</code>), use:</p>
+<p> To be notified when a property of a specific client <code>c</code> changed:</p>
 
 <pre>
 c:connect_signal(<span class="string">"property::name"</span>, <span class="keyword">function</span>()
@@ -253,12 +257,11 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 </pre>
 
 
-<p> To get all the clients for a screen, use either <a href="../classes/screen.html#screen.clients">screen.clients</a> or
- <a href="../classes/screen.html#screen.tiled_clients">screen.tiled_clients</a></p>
+<p> To get all the clients for a screen use either <a href="../classes/screen.html#screen.clients">screen.clients</a> or
+ <a href="../classes/screen.html#screen.tiled_clients">screen.tiled_clients</a>.</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008-2009 Julien Danjou</li>
-        <li><strong>Release</strong>: master-g3f36494-PR1143</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -761,7 +764,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 	</tr>
 	<tr>
 	<td class="name" ><a href="#awful.client.incwfact">awful.client.incwfact</a></td>
-	<td class="summary">Increment a client&rsquo;s window factor</td>
+	<td class="summary">Change window factor of a client.</td>
 	</tr>
 </table>
 <h2><a href="#Tables">Tables</a></h2>
@@ -3075,12 +3078,12 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
         <li><span class="parameter">context</span>
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          Why and what to resize. This is used for the
- handlers to know if they are capable of applying the new geometry.
+   handlers to know if they are capable of applying the new geometry.
         </li>
         <li><span class="parameter">Additional</span>
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          arguments. Each context handler may
- interpret this differently.
+   interpret this differently.
          (<em>default</em> {})
         </li>
     </ul>
@@ -3945,7 +3948,7 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#client:is_transient_for">client.is_transient_for</a>
+         <a href="../classes/client.html#awful.client.is_transient_for">client.is_transient_for</a>
     </ul>
 
 
@@ -4068,13 +4071,16 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
     <strong>awful.client.incwfact</strong>
     </dt>
     <dd>
-    Increment a client&rsquo;s window factor
+    Change window factor of a client.
 
 
     <h3>param:</h3>
     <ul>
         <li><span class="parameter">add</span>
-         amount to increase the client&rsquo;s window
+            <span class="types"><span class="type">number</span></span>
+         Amount to increase/decrease the client&rsquo;s window factor.
+   Should be between <code>-current_window_factor</code> and something close to
+   infinite.  The normalisation then ensures that the sum of all factors is 1.
         </li>
         <li><span class="parameter">c</span>
             <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
@@ -5036,7 +5042,7 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-10-04 22:29:03 </i>
+<i style="float:right;">Last updated 2016-11-22 01:46:01 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
