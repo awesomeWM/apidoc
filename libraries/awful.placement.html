@@ -148,6 +148,7 @@
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
   <li><a href="../classes/wibox.widget.piechart.html">wibox.widget.piechart</a></li>
   <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
+  <li><a href="../classes/wibox.widget.slider.html">wibox.widget.slider</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
@@ -201,11 +202,9 @@ f(client.focus)
 <pre>
 <span class="comment">-- Simulate Windows 7 'edge snap' (also called aero snap) feature
 </span><span class="keyword">local</span> axis = <span class="string">'vertically'</span>
-
 <span class="keyword">local</span> f = awful.placement.scale
   + awful.placement.left
   + (axis <span class="keyword">and</span> awful.placement[<span class="string">'maximize_'</span>..axis] <span class="keyword">or</span> <span class="keyword">nil</span>)
-
 <span class="keyword">local</span> geo = f(client.focus, {honor_workarea=<span class="keyword">true</span>, to_percent = <span class="number">0.5</span>})
 </pre>
 
@@ -223,7 +222,7 @@ f(client.focus)
 
 <p> <strong>honor_padding</strong> (<em>boolean</em>):</p>
 
-<p>  Take the screen padding into account (see <a href="../classes/screen.html#awful.screen.padding">screen.padding</a>)</p>
+<p>  Take the screen padding into account (see <a href="../classes/screen.html#screen.padding">screen.padding</a>)</p>
 
 <p> <strong>tag</strong> (<em>tag</em>):</p>
 
@@ -453,7 +452,6 @@ f(client.focus)
         <pre class="example">
  <span class="comment">-- Move the mouse to the closest corner of the focused client
 </span>awful.placement.closest_corner(mouse, {include_sides=<span class="keyword">true</span>, parent=c})
-
  <span class="comment">-- It is possible to emulate the mouse API to get the closest corner of
 </span> <span class="comment">-- random area
 </span><span class="keyword">local</span> _, corner = awful.placement.closest_corner(

@@ -168,6 +168,7 @@
   <li><a href="../classes/wibox.widget.keyboardlayout.html">wibox.widget.keyboardlayout</a></li>
   <li><a href="../classes/wibox.widget.piechart.html">wibox.widget.piechart</a></li>
   <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
+  <li><a href="../classes/wibox.widget.slider.html">wibox.widget.slider</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
@@ -385,7 +386,7 @@ myawesomemenu = {
    { <span class="string">"manual"</span>, terminal .. <span class="string">" -e man awesome"</span> },
    { <span class="string">"edit config"</span>, editor_cmd .. <span class="string">" "</span> .. awesome.conffile },
    { <span class="string">"restart"</span>, awesome.restart },
-   { <span class="string">"quit"</span>, awesome.quit }
+   { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.quit() <span class="keyword">end</span>}
 }
 
 mymainmenu = <span class="backtick"><a href="../libraries/awful.menu.html#">awful.menu</a></span>({ items = { { <span class="string">"awesome"</span>, myawesomemenu, <span class="backtick"><code>beautiful.awesome</code></span>_icon },
@@ -669,10 +670,12 @@ globalkeys = <span class="backtick"><code>awful.util.table.join</code></span>(
 
     <span class="backtick"><a href="../libraries/awful.key.html#">awful.key</a></span>({ modkey }, <span class="string">"x"</span>,
               <span class="keyword">function</span> ()
-                  <span class="backtick"><a href="../libraries/awful.prompt.html#run">awful.prompt.run</a></span>({ prompt = <span class="string">"Run Lua code: "</span> },
-                  <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox.widget,
-                  <span class="backtick"><a href="../libraries/awful.util.html#eval">awful.util.eval</a></span>, <span class="keyword">nil</span>,
-                  <span class="backtick"><code>awful.util.get</code></span>_cache_dir() .. <span class="string">"/history_eval"</span>)
+                  <span class="backtick"><a href="../libraries/awful.prompt.html#run">awful.prompt.run</a></span> {
+                    prompt       = <span class="string">"Run Lua code: "</span>,
+                    textbox      = <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox.widget,
+                    exe_callback = <span class="backtick"><a href="../libraries/awful.util.html#eval">awful.util.eval</a></span>,
+                    history_path = <span class="backtick"><code>awful.util.get</code></span>_cache_dir() .. <span class="string">"/history_eval"</span>
+                  }
               <span class="keyword">end</span>,
               {description = <span class="string">"lua execute prompt"</span>, group = <span class="string">"awesome"</span>}),
     <span class="comment">-- Menubar
@@ -737,7 +740,7 @@ clientkeys = <span class="backtick"><code>awful.util.table.join</code></span>(
                         <span class="keyword">end</span>
                   <span class="keyword">end</span>,
                   {description = <span class="string">"view tag #"</span>..i, group = <span class="string">"tag"</span>}),
-        <span class="comment">-- Toggle tag.
+        <span class="comment">-- Toggle tag display.
 </span>        <span class="backtick"><a href="../libraries/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"#"</span> .. i + <span class="number">9</span>,
                   <span class="keyword">function</span> ()
                       <span class="keyword">local</span> screen = <span class="backtick"><code>awful.screen.focused</code></span>()
@@ -937,7 +940,7 @@ client.connect_signal(<span class="string">"request::titlebars"</span>, <span cl
 </pre>
 
 
-<p> Enable sloppy focus</p>
+<p> Enable sloppy focus, so that focus follows mouse.</p>
 
 <pre>
 client.connect_signal(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>(c)
