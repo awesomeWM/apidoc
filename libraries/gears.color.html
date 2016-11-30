@@ -188,6 +188,10 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
+	<td class="name" ><a href="#gears.color">gears.color (col)</a></td>
+	<td class="summary">Create a pattern from a given string.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#parse_color">parse_color (col)</a></td>
 	<td class="summary">Parse a HTML-color.</td>
 	</tr>
@@ -213,7 +217,7 @@
 	</tr>
 	<tr>
 	<td class="name" ><a href="#create_pattern">create_pattern (col)</a></td>
-	<td class="summary">Create a pattern from a given string.</td>
+	<td class="summary">Create a pattern from a given string, same as <a href="../libraries/gears.color.html#">gears.color</a>.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#create_opaque_pattern">create_opaque_pattern (col)</a></td>
@@ -247,13 +251,64 @@
     Methods
     <dl class="function">
     <dt>
+    <a name = "gears.color"></a>
+    <strong>gears.color (col)</strong>
+    </dt>
+    <dd>
+    Create a pattern from a given string.
+ This function can create solid, linear, radial and png patterns. In general,
+ patterns are specified as strings formatted as &ldquo;type:arguments&rdquo;. &ldquo;arguments&rdquo;
+ is specific to the pattern being used. For example, one can use
+ &ldquo;radial:50,50,10:55,55,30:0,#ff0000:0.5,#00ff00:1,#0000ff&rdquo;.
+ Alternatively, patterns can be specified via tables. In this case, the
+ table&rsquo;s &lsquo;type&rsquo; member specifies the type. For example:
+ {
+   type = &ldquo;radial&rdquo;,
+   from = { 50, 50, 10 },
+   to = { 55, 55, 30 },
+   stops = { { 0, &ldquo;#ff0000&rdquo; }, { 0.5, &ldquo;#00ff00&rdquo; }, { 1, &ldquo;#0000ff&rdquo; } }
+ }
+ Any argument that cannot be understood is passed to <a href="../libraries/gears.color.html#create_solid_pattern">create_solid_pattern</a>.</p>
+
+<p> Please note that you MUST NOT modify the returned pattern, for example by
+ calling :set_matrix() on it, because this function uses a cache and your
+ changes could thus have unintended side effects. Use <a href="../libraries/gears.color.html#create_pattern_uncached">create_pattern_uncached</a>
+ if you need to modify the returned pattern.
+
+
+    <ul>
+        <li><span class="parameter">col</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The string describing the pattern.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a cairo pattern object
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/gears.color.html#create_pattern_uncached">create_pattern_uncached</a></li>
+         <li><a href="../libraries/gears.color.html#create_solid_pattern">create_solid_pattern</a></li>
+         <li><a href="../libraries/gears.color.html#create_png_pattern">create_png_pattern</a></li>
+         <li><a href="../libraries/gears.color.html#create_linear_pattern">create_linear_pattern</a></li>
+         <li><a href="../libraries/gears.color.html#create_radial_pattern">create_radial_pattern</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
     <a name = "parse_color"></a>
     <strong>parse_color (col)</strong>
     </dt>
     <dd>
     Parse a HTML-color.
  This function can parse colors like <code>#rrggbb</code> and <code>#rrggbbaa</code> and also <code>red</code>.
- Thanks to #lua for this. :)
+ Max 4 chars per channel.
 
 
     <ul>
@@ -265,7 +320,9 @@
     <h3>Returns:</h3>
     <ol>
 
-        4 values which each are in the range [0, 1].
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        4 values representing color in RGBA format (each of them in
+ [0, 1] range) or nil if input is incorrect.
     </ol>
 
 
@@ -434,43 +491,21 @@
     <strong>create_pattern (col)</strong>
     </dt>
     <dd>
-    Create a pattern from a given string.
- This function can create solid, linear, radial and png patterns. In general,
- patterns are specified as strings formatted as"type:arguments". &ldquo;arguments&rdquo;
- is specific to the pattern used. For example, one can use
- &ldquo;radial:50,50,10:55,55,30:0,#ff0000:0.5,#00ff00:1,#0000ff&rdquo;
- Alternatively, patterns can be specified via tables. In this case, the
- table&rsquo;s &lsquo;type&rsquo; member specifies the type. For example:
- { type = &ldquo;radial&rdquo;, from = { 50, 50, 10 }, to = { 55, 55, 30 },
-   stops = { { 0, &ldquo;#ff0000&rdquo; }, { 0.5, &ldquo;#00ff00&rdquo; }, { 1, &ldquo;#0000ff&rdquo; } } }
- Any argument that cannot be understood is passed to <a href="../libraries/gears.color.html#create_solid_pattern">create_solid_pattern</a>.</p>
-
-<p> Please note that you MUST NOT modify the returned pattern, for example by
- calling :set_matrix() on it, because this function uses a cache and your
- changes could thus have unintended side effects. Use <a href="../libraries/gears.color.html#create_pattern_uncached">create_pattern_uncached</a>
- if you need to modify the returned pattern.
+    Create a pattern from a given string, same as <a href="../libraries/gears.color.html#">gears.color</a>.
 
 
     <ul>
         <li><span class="parameter">col</span>
-         The string describing the pattern.
+
+
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-
-        a cairo pattern object
-    </ol>
 
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../libraries/gears.color.html#create_pattern_uncached">create_pattern_uncached</a></li>
-         <li><a href="../libraries/gears.color.html#create_solid_pattern">create_solid_pattern</a></li>
-         <li><a href="../libraries/gears.color.html#create_png_pattern">create_png_pattern</a></li>
-         <li><a href="../libraries/gears.color.html#create_linear_pattern">create_linear_pattern</a></li>
-         <li><a href="../libraries/gears.color.html#create_radial_pattern">create_radial_pattern</a></li>
+         <a href="../libraries/gears.color.html#">gears.color</a>
     </ul>
 
 
@@ -590,7 +625,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-11-27 14:37:39 </i>
+<i style="float:right;">Last updated 2016-11-30 13:26:53 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
