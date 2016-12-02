@@ -241,7 +241,7 @@ In get foo  42
 42
 In a mathod 1   2   3
 nil
-In the connection handler!  table: 0x11dd550    a cow
+In the connection handler!  a cow
 a cow
 </code></pre>
 
@@ -312,7 +312,8 @@ o.foo = <span class="number">42</span>
 o:method(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)
  <span class="comment">-- Random properties can also be added, the signal will be emitted automatically.
 </span>o:connect_signal(<span class="string">'property::something'</span>, <span class="keyword">function</span>(obj, value)
-    <span class="global">print</span>(<span class="string">'In the connection handler!'</span>, obj, value)
+    <span class="global">assert</span>(obj == o)
+    <span class="global">print</span>(<span class="string">'In the connection handler!'</span>, value)
 <span class="keyword">end</span>)
 <span class="global">print</span>(o.something)
 o.something = <span class="string">'a cow'</span>
