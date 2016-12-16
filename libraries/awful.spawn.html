@@ -178,6 +178,173 @@
  notifications, which allows for callbacks and applying properties to the
  program after it has been launched.  This requires currently that the
  applicaton supports them.</p>
+
+<p> <strong>Rules of thumb when a shell is needed</strong>:</p>
+
+<ul>
+<li>A shell is required when the commands contain <code>&amp;&amp;</code>, <code>;</code>, <code>||</code>, <code>&amp;</code> or
+any other unix shell language syntax</li>
+<li>When shell variables are defined as part of the command</li>
+<li>When the command is a shell alias</li>
+</ul>
+
+
+<p> Note that a shell is <strong>not</strong> a terminal emulator. A terminal emulator is
+ something like XTerm, Gnome-terminal or Konsole. A shell is something like
+ <code>bash</code>, <code>zsh</code>, <code>busybox sh</code> or <code>Debian ash</code>.</p>
+
+<p> If you wish to open a process in a terminal window, check that your terminal
+ emulator supports the common <code>-e</code> option. If it does, then something like
+ this should work:</p>
+
+<pre>
+awful.spawn(terminal..<span class="string">" -e my_command"</span>)
+</pre>
+
+
+<p> Note that some terminals, such as rxvt-unicode (urxvt) support full commands
+ using quotes, while other terminal emulators require to use quoting.</p>
+
+<p> <strong>Understanding clients versus PID versus commands versus class</strong>:</p>
+
+<p> A <em>process</em> has a <em>PID</em> (process identifier). It can have 0, 1 or many
+ <em>window</em>s.</p>
+
+<p> A <em>command</em> if what is used to start <em>process</em>(es). It has no direct relation
+ with <em>process</em>, <em>client</em> or <em>window</em>. When a command is executed, it will
+ usually start a <em>process</em> which keeps running until it exits. This however is
+ not always the case as some applications use scripts as command and others
+ use various single-instance mechanisms (usually client/server) and merge
+ with an existing process.</p>
+
+<p> A <em>client</em> corresponds to a <em>window</em>. It is owned by a process. It can have
+ both a parent and one or many children. A <em>client</em> has a <em>class</em>, an
+ <em>instance</em>, a <em>role</em>, and a <em>type</em>. See <a href="../classes/client.html#client.class">client.class</a>, <a href="../classes/client.html#client.instance">client.instance</a>,
+ <a href="../classes/client.html#client.role">client.role</a> and <a href="../classes/client.html#client.type">client.type</a> for more information about these properties.</p>
+
+<p> <strong>The startup notification protocol</strong>:</p>
+
+<p> The startup notification protocol is an optional specification implemented
+ by X11 applications to bridge the chain of knowledge between the moment a
+ program is launched to the moment its window (client) is shown. It can be
+ found <a href="https://www.freedesktop.org/wiki/Specifications/startup-notification-spec/">on the FreeDesktop.org website</a>.</p>
+
+<p> Awesome has support for the various events that are part of the protocol, but
+ the most useful is the identifier, usually identified by its <code>SNID</code> acronym in
+ the documentation. It isn&rsquo;t usually necessary to even know it exists, as it
+ is all done automatically. However, if more control is required, the
+ identifier can be specified by an environment variable called
+ <code>DESKTOP_STARTUP_ID</code>. For example, let us consider execution of the following
+ command:</p>
+
+<pre>
+DESKTOP_STARTUP_ID=<span class="string">"something_TIME$(date '+%s')"</span> my_command
+</pre>
+
+
+<p> This should (if the program correctly implements the protocol) result in
+ <code>c.startup_id</code> to at least match <code>something</code>.
+ This identifier can then be used in <a href="../libraries/awful.rules.html#">awful.rules</a> to configure the client.</p>
+
+<p> Awesome can automatically set the <code>DESKTOP_STARTUP_ID</code> variable. This is used
+ by <a href="../libraries/awful.spawn.html#">awful.spawn</a> to specify additional rules for the startup. For example:</p>
+
+<pre>
+awful.spawn(<span class="string">"urxvt -e maxima -name CALCULATOR"</span>, {
+    floating  = <span class="keyword">true</span>,
+    tag       = mouse.screen.selected_tag,
+    placement = awful.placement.bottom_right,
+})
+</pre>
+
+
+<p> This can also be used from the command line:</p>
+
+<pre>
+awesome-client <span class="string">'awful=require("awful");
+  awful.spawn("urxvt -e maxima -name CALCULATOR", {
+    floating  = true,
+    tag       = mouse.screen.selected_tag,
+    placement = awful.placement.bottom_right,
+  })'</span>
+</pre>
+
+
+<p> <strong>Getting a command&rsquo;s output</strong>:</p>
+
+<p> First, do <strong>not</strong> use <a href="http://www.lua.org/manual/5.2/manual.html#pdf-io.popen">io.popen</a> <strong>ever</strong>. It is synchronous. Synchronous
+ functions <strong>block everything</strong> until they are done. All visual applications
+ lock (as Awesome no longer responds), you will probably lose some keyboard
+ and mouse events and will have higher latency when playing games. This is
+ also true when reading files synchronously, but this is another topic.</p>
+
+<p> Awesome provides a few ways to get output from commands. One is to use the
+ <code>Gio</code> libraries directly. This is usually very complicated, but gives a lot
+ of control on the command execution.</p>
+
+<p> This modules provides <a href="../libraries/awful.spawn.html#with_line_callback">with_line_callback</a> and <a href="../libraries/awful.spawn.html#easy_async">easy_async</a> for convenience.
+ First, lets add this bash command to <code>rc.lua</code>:</p>
+
+<pre>
+<span class="keyword">local</span> noisy = <span class="string">[[bash -c '
+  for I in $(seq 1 5); do
+    date
+    echo err &gt;&amp;2
+    sleep 2
+  done
+']]</span>
+</pre>
+
+
+<p> It prints a bunch of junk on the standard output (<em>stdout</em>) and error
+ (<em>stderr</em>) streams. This command would block Awesome for 10 seconds if it
+ were executed synchronously, but will not block it at all using the
+ asynchronous functions.</p>
+
+<p> <a href="../libraries/awful.spawn.html#with_line_callback">with_line_callback</a> will execute the callbacks every time a new line is
+ printed by the command:</p>
+
+<pre>
+awful.spawn.with_line_callback(noisy, {
+    stdout = <span class="keyword">function</span>(line)
+        naughty.notify { text = <span class="string">"LINE:"</span>..line }
+    <span class="keyword">end</span>,
+    stderr = <span class="keyword">function</span>(line)
+        naughty.notify { text = <span class="string">"ERR:"</span>..line}
+    <span class="keyword">end</span>,
+})
+</pre>
+
+
+<p> If only the full output is needed, then <a href="../libraries/awful.spawn.html#easy_async">easy_async</a> is the right choice:</p>
+
+<pre>
+awful.spawn.easy_async(noisy, <span class="keyword">function</span>(stdout, stderr, reason, exit_code)
+    naughty.notify { text = stdout }
+<span class="keyword">end</span>)
+</pre>
+
+
+<p> <strong>Default applications</strong>:</p>
+
+<p> If the intent is to open a file/document, then it is recommended to use the
+ following standard command. The default application will be selected
+ according to the <a href="https://specifications.freedesktop.org/shared-mime-info-spec/shared-mime-info-spec-latest.html">Shared MIME-info Database</a>
+ specification. The <code>xdg-utils</code> package provided by most distributions
+ includes the <code>xdg-open</code> command:</p>
+
+<pre>
+awful.spawn({<span class="string">"xdg-open"</span>, <span class="string">"/path/to/file"</span>})
+</pre>
+
+
+<p> Awesome <strong>does not</strong> manage, modify or otherwise influence the database
+ for default applications. For information about how to do this, consult the
+ <a href="https://wiki.archlinux.org/index.php/default_applications">ARCH Linux Wiki</a>.</p>
+
+<p> If you wish to change how the default applications behave, then consult the
+ <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html">Desktop Entry</a>
+ specification.</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008 Julien Danjou,2014 Emmanuel Lepage Vallee</li>
@@ -274,7 +441,7 @@
     </dt>
     <dd>
     Spawn a program using the shell.
- This calls <code>cmd</code> with <code>$SHELL -c</code> (via <code>awful.util.shell</code>).
+ This calls <code>cmd</code> with <code>$SHELL -c</code> (via <a href="../libraries/awful.util.html#shell">awful.util.shell</a>).
 
 
     <ul>
@@ -456,7 +623,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-12-15 19:09:31 </i>
+<i style="float:right;">Last updated 2016-12-16 18:13:11 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
