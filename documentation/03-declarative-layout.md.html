@@ -175,8 +175,8 @@
 
     <h1>The declarative layout system</h1>
 
-<p>This system provide an alternative to the system used in Awesome 3.5 and is
-inspired by the one once used by Awesome 3.2-3.4 and Qt QML system.</p>
+<p>The declarative layout system provides an alternative to the imperative system.
+It is inspired by the one used by Awesome 3.2-3.4 and the Qt QML style.</p>
 
 <p><a name="The_default_widgets"></a></p>
 
@@ -184,7 +184,7 @@ inspired by the one once used by Awesome 3.2-3.4 and Qt QML system.</p>
 
 <h3>Widgets</h3>
 
-<p>Awesome provide 2 collections of widgets:</p>
+<p>Awesome provides 2 collections of widgets:</p>
 
 <ul>
 <li><a href="../classes/wibox.html#wibox.widget">wibox.widget</a>: Generic widgets, containers and layouts</li>
@@ -250,8 +250,8 @@ inspired by the one once used by Awesome 3.2-3.4 and Qt QML system.</p>
 
 <h3>Containers</h3>
 
-<p>Containers are widget wrapping another widget. It can be used to add decorations
-or to modify the content of the child widget.</p>
+<p>A container is a widget that wraps another widget. It can be used to add
+decorations or to modify the content of the child widget.</p>
 
 <table class='widget_list' border=1>
  <tr style='font-weight: bold;'>
@@ -311,8 +311,8 @@ or to modify the content of the child widget.</p>
 
 <h3>Layouts</h3>
 
-<p>Layouts are collection of children widgets. They place them according to rules
-and usually provide some options.</p>
+<p>Layouts are collections of children widgets. They are placed according to
+configurable rules.</p>
 
 <table class='widget_list' border=1>
  <tr style='font-weight: bold;'>
@@ -386,8 +386,8 @@ s.mywibox : setup {
 
 
 <p>In this example <code>s == 1</code> is an inline expression. In the default <code>rc.lua</code>,
-there is an <code>s</code> variable represent to define the current screen. Any lua
-logic expression can be used as long as it return a valid widget, or a
+there is an <code>s</code> variable represent to define the current screen. Any Lua
+logic expression can be used as long as it returns a valid widget or a
 declarative layout, or <code>nil</code>.</p>
 
 <h3>Define widgets inline and place them</h3>
@@ -443,11 +443,11 @@ s.mywibox : setup {
 <p>Result:
 <img src="../images/widgetlayout1.png" alt="Example2 screenshot" /></p>
 
-<h3>Use an <a href="../classes/wibox.layout.align.html#">wibox.layout.align</a> layout</h3>
+<h3>Use a <a href="../classes/wibox.layout.align.html#">wibox.layout.align</a> layout</h3>
 
 <p>The <a href="../classes/wibox.layout.align.html#">wibox.layout.align</a> is a little different. While most layouts will
-ignore any <code>nil</code> lines, the <code>align</code> layout rely on them so <code>left</code>, <code>middle</code>
-and <code>right</code> can be defined</p>
+ignore any <code>nil</code> lines, the <code>align</code> layout relies on them so <code>left</code>, <code>middle</code>
+and <code>right</code> can be defined.</p>
 
 <p>Code:</p>
 
@@ -486,7 +486,7 @@ s.mywibox : setup {
 <p>Result:
 <img src="../images/widgetlayout2.png" alt="Example4 screenshot" /></p>
 
-<p>For more information about how to draw widgets, refer to the <code>Cairo</code> api:</p>
+<p>For more information about how to draw widgets, refer to the <code>Cairo</code> API:</p>
 
 <ul>
 <li><a href="http://cairographics.org/manual/cairo-Paths.html">Path</a></li>
@@ -522,27 +522,27 @@ tb:set_markup(<span class="string">"Hello world! "</span>)
 <h3>Accessing widgets</h3>
 
 <p>For each widget or container, it is possible to add an <code>identifier</code> attribute
-so the widget can be accessed later.</p>
+so that it can be accessed later.</p>
 
-<p>Widgets defined using <code>setup</code> can be access by 3 means:</p>
+<p>Widgets defined using <code>setup</code> can be accessed using these methods:</p>
 
 <ul>
-<li>Avoid the issue by using externally created widgets</li>
-<li>Use <code>my_wibox.my_first_widget.my_second_widget</code> style access</li>
-<li>Use JavaScript like <code>my_wibox:get_children_by_id(&quot;my_second_widget&quot;)[1]</code></li>
+<li>Avoiding the issue by using externally created widgets</li>
+<li>Using <code>my_wibox.my_first_widget.my_second_widget</code> style access</li>
+<li>Using JavaScript like <code>my_wibox:get_children_by_id(&quot;my_second_widget&quot;)[1]</code></li>
 </ul>
 
 
-<p>The first method mixes the imperative and declarative syntax, but makes the code
+<p>The first method mixes the imperative and declarative syntax, and makes the code
 less readable. The second is a little verbose and only works if every node in
-the chain have a valid identifier. The last one doesn&rsquo;t require long paths,
+the chain has a valid identifier. The last one doesn&rsquo;t require long paths,
 but it is not easy to get a specific instance if multiple widgets have the
 same identifier.</p>
 
-<p>WARNING: The widget identifier must not use reseved name. This include all
+<p>WARNING: The widget identifier must not use a reserved name. This includes all
 method names, existing widget attributes, <code>layout</code> and <code>widget</code>. Names should
-also respect the lua variable name policies (case sensitive, alphanumeric and
-underscore characters and non-numeric first character)</p>
+also respect the Lua variable conventions (case-sensitive, alphanumeric,
+underscore characters and non-numeric first character).</p>
 
 <p>Code:</p>
 
@@ -569,10 +569,10 @@ s.mywibox:get_children_by_id(<span class="string">"third"</span>)[<span class="n
 
 <p>This system is very flexible. Each section attribute (the entries with string
 keys) is directly linked to the layout or widget API. When setting the
-imaginary <code>myproperty</code>, it will first check if <code>set_myproperty</code> exist. If it
+imaginary <code>myproperty</code>, it will first check if <code>set_myproperty</code> exists. If it
 doesn&rsquo;t, it will check if there is a <code>myproperty</code> method. Finally, it will
 just set the <code>mywidget.myproperty</code> directly in case it is used later or
-catched by a lua <code>metatable</code> (operator overload).</p>
+caught by a Lua <code>metatable</code> (operator overload).</p>
 
 <p>Code:</p>
 
@@ -647,7 +647,7 @@ s.mywibox : setup (three_circle)
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-12-16 18:13:11 </i>
+<i style="float:right;">Last updated 2016-12-16 21:52:33 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
