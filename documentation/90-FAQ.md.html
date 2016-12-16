@@ -650,6 +650,27 @@ multi-screen support to existing configs, see how
 <code>awful.screen.connect_for_each_screen</code> is used in the new <code>rc.lua</code> or rebuild
 your config on a newer revision of <code>rc.lua</code>.</p>
 
+<h3>Can I have a client or the system tray on multiple screens at once?</h3>
+
+<p>No. This is an X11 limitation and there is no sane way to work around it.</p>
+
+<h3>Can a client be tagged on different screens at once?</h3>
+
+<p>While it is not impossible to partially implement support for this, many
+Awesome components frequently query the client&rsquo;s screen.
+Since a client can only be in one screen at once, this will cause side effects.
+So by default Awesome avoids, but does not prevent, having clients in multiple
+tags that are not on the same screen.</p>
+
+<h3>Can a tag be on multiple screens?</h3>
+
+<p>No. See the previous two questions. However, it is possible to swap tags across
+screens using <code>t:swap(t2)</code> (assuming <code>t</code> and <code>t2</code> are valid <a href="../classes/tag.html#">tag</a> objects).</p>
+
+<p>This can be used to emulate a tag being on multiple screens. Note that this will
+break support for multi-tagged clients. For this reason it isn&rsquo;t implemented by
+default.</p>
+
 <p><a name="Development"></a></p>
 
 <h2>Development</h2>
