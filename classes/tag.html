@@ -185,6 +185,190 @@
  described in <a href="../classes/signals.html#">signals</a>.</p>
 <p> <img src="../images/tag_props.svg" alt="Client geometry" /></p>
 
+<p> <strong>Creating tags</strong>:</p>
+
+<p> The default config initializes tags like this:</p>
+
+<pre>
+awful.tag(
+  { <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> },
+  s,
+  awful.layout.layouts[<span class="number">1</span>]
+)
+</pre>
+
+
+<p> If you wish to have tags with different properties, then <a href="../classes/tag.html#awful.tag.add">awful.tag.add</a> is
+ a better choice:</p>
+
+<pre>
+awful.tag.add(<span class="string">"First tag"</span>, {
+    icon               = <span class="string">"/path/to/icon1.png"</span>,
+    layout             = awful.layout.suit.tile,
+    master_fill_policy = <span class="string">"master_width_factor"</span>,
+    gap_single_client  = <span class="keyword">true</span>,
+    gap                = <span class="number">15</span>,
+    screen             = s,
+}
+
+awful.tag.add(<span class="string">"Second tag"</span>, {
+    icon = <span class="string">"/path/to/icon2.png"</span>,
+    layout = awful.layout.suit.max,
+    screen = s,
+}
+</pre>
+
+
+<p> <strong>Accessing tags</strong>:</p>
+
+<p> To access the &ldquo;current tags&rdquo;, use</p>
+
+<pre>
+<span class="keyword">local</span> tags = awful.screen.focused().selected_tags
+</pre>
+
+
+<p> See: <code>awful.screen.focused</code></p>
+
+<p> See: <a href="../classes/screen.html#screen.selected_tags">screen.selected_tags</a></p>
+
+<p> To ignore the corner case where multiple tags are selected:</p>
+
+<pre>
+<span class="keyword">local</span> t = awful.screen.focused().selected_tag
+</pre>
+
+
+<p> See: <a href="../classes/screen.html#screen.selected_tag">screen.selected_tag</a></p>
+
+<p> To get all tags for the focused screen:</p>
+
+<pre>
+<span class="keyword">local</span> tags = awful.screen.focused().tags
+</pre>
+
+
+<p> See: <a href="../classes/screen.html#screen.tags">screen.tags</a></p>
+
+<p> To get all tags:</p>
+
+<pre>
+<span class="keyword">local</span> tags = root.tags()
+</pre>
+
+
+<p> To get the current tag of the focused client:</p>
+
+<pre>
+<span class="keyword">local</span> t = client.focus <span class="keyword">and</span> client.focus.first_tag <span class="keyword">or</span> <span class="keyword">nil</span>
+</pre>
+
+
+<p> See: <a href="../classes/client.html#client.focus">client.focus</a>
+ See: <a href="../classes/client.html#client.first_tag">client.first_tag</a></p>
+
+<p> To get a tag from its name:</p>
+
+<pre>
+<span class="keyword">local</span> t = awful.tag.find_by_name(awful.screen.focused(), <span class="string">"name"</span>)
+</pre>
+
+
+<p> <strong>Common shortcuts</strong>:</p>
+
+<p> Here is a few useful shortcuts not part of the default <code>rc.lua</code>. Add these
+ functions above <code>&mdash; {{{ Key bindings</code>:</p>
+
+<p> Delete the current tag</p>
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> delete_tag()
+    <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+    <span class="keyword">if</span> <span class="keyword">not</span> t <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
+    t:delete()
+<span class="keyword">end</span>
+</pre>
+
+
+<p> Create a new tag at the end of the list</p>
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> add_tag()
+    awful.tag.add(<span class="string">"NewTag"</span>,{screen= awful.screen.focused() }):view_only()
+<span class="keyword">end</span>
+</pre>
+
+
+<p> Rename the current tag</p>
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> rename_tag()
+    awful.prompt.run {
+        prompt       = <span class="string">"New tag name: "</span>,
+        textbox      = awful.screen.focused().mypromptbox.widget,
+        exe_callback = <span class="keyword">function</span>(new_name)
+            <span class="keyword">if</span> <span class="keyword">not</span> new_name <span class="keyword">or</span> #new_name == <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
+
+            <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+            <span class="keyword">if</span> t <span class="keyword">then</span>
+                t.name = new_name
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    }
+<span class="keyword">end</span>
+</pre>
+
+
+<p> Move the focused client to a new tag</p>
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> move_to_new_tag()
+    <span class="keyword">local</span> c = client.focus
+    <span class="keyword">if</span> <span class="keyword">not</span> c <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
+
+    <span class="keyword">local</span> t = awful.tag.add(c.class,{screen= c.screen })
+    c:tags({t})
+    t:view_only()
+<span class="keyword">end</span>
+</pre>
+
+
+<p> Copy the current tag at the end of the list</p>
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> copy_tag()
+    <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+    <span class="keyword">if</span> <span class="keyword">not</span> t <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
+
+    <span class="keyword">local</span> clients = t:clients()
+    <span class="keyword">local</span> t2 = awful.tag.add(t.name, awful.tag.getdata(t))
+    t2:clients(clients)
+    t2:view_only()
+<span class="keyword">end</span>
+</pre>
+
+
+<p> And, in the <code>globalkeys</code> table:</p>
+
+<pre>
+awful.key({ modkey,           }, <span class="string">"a"</span>, add_tag,
+          {description = <span class="string">"add a tag"</span>, group = <span class="string">"tag"</span>}),
+awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"a"</span>, delete_tag,
+          {description = <span class="string">"delete the current tag"</span>, group = <span class="string">"tag"</span>}),
+awful.key({ modkey, <span class="string">"Control"</span>   }, <span class="string">"a"</span>, move_to_new_tag,
+          {description = <span class="string">"add a tag with the focused client"</span>, group = <span class="string">"tag"</span>}),
+awful.key({ modkey, <span class="string">"Mod1"</span>   }, <span class="string">"a"</span>, copy_tag,
+          {description = <span class="string">"create a copy of the current tag"</span>, group = <span class="string">"tag"</span>}),
+awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"r"</span>, rename_tag,
+          {description = <span class="string">"rename the current tag"</span>, group = <span class="string">"tag"</span>}),
+</pre>
+
+
+<p> See the
+ <a href="../documentation/05-awesomerc.md.html#global_keybindings">
+   global keybindings
+ </a> for more information about the keybindings.</p>
+
 <p> Some signal names are starting with a dot. These dots are artefacts from
  the documentation generation, you get the real signal name by
  removing the starting dot.</p>
@@ -367,7 +551,7 @@
 	</tr>
 	<tr>
 	<td class="name" ><a href="#beautiful.master_fill_policy">beautiful.master_fill_policy</a></td>
-	<td class="summary">The default fill policy</td>
+	<td class="summary">The default fill policy.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#beautiful.master_count">beautiful.master_count</a></td>
@@ -579,7 +763,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#awful.tag.delete">tag.delete</a>
+         <a href="../classes/tag.html#tag:delete">tag.delete</a>
     </ul>
 
 
@@ -700,7 +884,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a>
+         <a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a>
     </ul>
 
 
@@ -784,7 +968,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.master_count">master_count</a>
+         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
     </ul>
 
 
@@ -1173,7 +1357,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#tag.master_count">master_count</a></li>
+         <li><a href="../classes/tag.html#beautiful.master_count">master_count</a></li>
          <li><a href="../classes/tag.html#beautiful.column_count">column_count</a></li>
          <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
@@ -1316,7 +1500,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.gap_single_client">gap_single_client</a>
+         <a href="../classes/tag.html#beautiful.gap_single_client">gap_single_client</a>
     </ul>
 
 
@@ -1355,6 +1539,15 @@
     </dt>
     <dd>
     <p>Set size fill policy for the master client(s). </p>
+
+<p> <strong> Possible values</strong>:</p>
+
+<ul>
+<li><em>expand</em>: Take all the space</li>
+<li><em>master_width_factor</em>: Only take the ratio defined by the
+<a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
+</ul>
+
 
 <p> <strong>Signal:</strong></p>
 
@@ -1585,7 +1778,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
+         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
     </ul>
 
@@ -1611,7 +1804,7 @@
     <h3>See also:</h3>
     <ul>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
-         <li><a href="../classes/tag.html#tag.gap_single_client">gap_single_client</a></li>
+         <li><a href="../classes/tag.html#beautiful.gap_single_client">gap_single_client</a></li>
     </ul>
 
 
@@ -1636,7 +1829,7 @@
     <h3>See also:</h3>
     <ul>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
-         <li><a href="../classes/tag.html#tag.gap_single_client">gap_single_client</a></li>
+         <li><a href="../classes/tag.html#beautiful.gap_single_client">gap_single_client</a></li>
     </ul>
 
 
@@ -1646,7 +1839,17 @@
     <strong>beautiful.master_fill_policy</strong>
     </dt>
     <dd>
-    The default fill policy
+    <p>The default fill policy. </p>
+
+<p> <strong> Possible values</strong>:</p>
+
+<ul>
+<li><em>expand</em>: Take all the space</li>
+<li><em>master_width_factor</em>: Only take the ratio defined by the
+<a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
+</ul>
+
+
 
 
     <h3>Type:</h3>
@@ -1684,7 +1887,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.master_count">master_count</a>
+         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
     </ul>
 
 
@@ -1794,7 +1997,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#awful.tag.delete">tag.delete</a>
+         <a href="../classes/tag.html#tag:delete">tag.delete</a>
     </ul>
 
 
@@ -1947,7 +2150,7 @@
     <h3>See also:</h3>
     <ul>
          <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
-         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
+         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
     </ul>
 
 
@@ -1972,7 +2175,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
+         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
          <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
     </ul>
 
@@ -2199,7 +2402,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.master_count">master_count</a>
+         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
     </ul>
 
 
@@ -2224,7 +2427,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.master_count">master_count</a>
+         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
     </ul>
 
 
@@ -2719,7 +2922,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-12-21 01:17:38 </i>
+<i style="float:right;">Last updated 2016-12-21 16:59:19 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
