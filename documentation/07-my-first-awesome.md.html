@@ -32,8 +32,14 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Using_LGI_in_Awesome">Using LGI in Awesome </a></li>
-<li><a href="#The_Cairo_API">The Cairo API </a></li>
+<li><a href="#Explore_awesome">Explore awesome </a></li>
+<li><a href="#Change_the_theme">Change the theme </a></li>
+<li><a href="#Personalize_your_layouts">Personalize your layouts </a></li>
+<li><a href="#Personalize_your_tags">Personalize your tags </a></li>
+<li><a href="#Some_global_settings">Some global settings </a></li>
+<li><a href="#Wrapping_up">Wrapping up </a></li>
+<li><a href="#Add_widgets">Add widgets </a></li>
+<li><a href="#Further_reading">Further reading </a></li>
 </ul>
 
 
@@ -46,8 +52,8 @@
   <li><a href="../documentation/04-new-widgets.md.html">Creating new widget</a></li>
   <li><a href="../documentation/05-awesomerc.md.html">Default configuration file documentation</a></li>
   <li><a href="../documentation/06-appearance.md.html">Change Awesome appearance</a></li>
-  <li><a href="../documentation/07-my-first-awesome.md.html">My first awesome</a></li>
-  <li><strong>Using Cairo and LGI</strong></li>
+  <li><strong>My first awesome</strong></li>
+  <li><a href="../documentation/16-using-cairo.md.html">Using Cairo and LGI</a></li>
   <li><a href="../documentation/17-porting-tips.md.html">Porting tips</a></li>
   <li><a href="../documentation/89-NEWS.md.html">NEWS</a></li>
   <li><a href="../documentation/90-FAQ.md.html">FAQ</a></li>
@@ -175,215 +181,225 @@
 
 <div id="content">
 
-    <h1>Using Cairo and LGI</h1>
+    <h1>My first awesome</h1>
 
-<p>These days, Awesome&rsquo;s interface is mostly based on a library called LGI. It provides
-access to C libraries such as GTK, GLib, Cairo, Pango, PangoCairo and RSVG using
-Lua code without having to write actual &ldquo;glue&rdquo; C code.</p>
+<p>This little tutorial is for people who never used a tiling window manager before
+and don&rsquo;t have fancy hacking skills. We will explore the awesome world of
+awesome step by step and finally come up with a working desktop, providing some
+basic knowledge on how to configure awesome in the process. We will start with
+the default <code>rc.lua</code> that comes with awesome, play around a little and try to
+make it more beautiful and useful with widgets. For this tutorial you don&rsquo;t need
+any programming skills besides using a text editor.</p>
 
-<p>This is done using the GObject-introspection framework. The main advantage is
-the time saved and large number of features exposed for free. The downside is
-the lack of proper Lua centric documentation and examples. Some examples can be
-found in <a href="https://github.com/pavouk/lgi/tree/master/docs">LGI&rsquo;s own documentation</a>,
-but this does not directly explain how to use a concrete API.
-Using other APIs requires some trial and error, and can be even impossible if
-the introspection data is missing or inaccurate.
-Using low-level APIs directly can easily cause crashes.
-It is the programmer&rsquo;s responsibility to properly check return and error
-values.</p>
+<p><a name="Explore_awesome"></a></p>
 
-<p><a name="Using_LGI_in_Awesome"></a></p>
+<h2>Explore awesome</h2>
 
-<h2>Using LGI in Awesome</h2>
+<p>I will assume that you properly installed awesome through your distribution&rsquo;s
+package manager or compiled it from source. You should now add <code>exec awesome</code> to
+your <code>~/.xinitrc</code>. As already mentioned, awesome provides a default config file
+which will be our starting point. You will usually find this <code>rc.lua</code> file in
+<code>/etc/xdg/awesome/</code>. Copy it to <code>~/.config/awesome/</code>, and then start X (for
+example by running <code>startx</code>).</p>
 
-<p>GObject and Gnome centric libraries tend to use the common C practice of
-emulating namespaces using underscores in function names.
-LGI exposes a proper namespace based API. For example, if the C function is:</p>
+<p>Move your mouse to the upper left corner and click on the awesome logo. A little
+menu opens. Browse through the menu, then click the logo again to close it. Next
+to the awesome menu you see numbers 1-9. These are your tags (or desktops if you
+want). You can click on these to change them but nothing will happen because we
+have not opened any programs. On the top right you see the time/date and a
+symbol showing the current layout. You can also click on the symbol to change
+the active layout.</p>
+
+<p>One of awesome&rsquo;s big advantages over other tiling window managers is its good
+mouse support. Awesome can act as a full floating window manager (almost like
+openbox) if you want. For this basic tutorial we will mainly focus on keyboard
+control, so let&rsquo;s learn some key bindings now.</p>
+
+<p>Let&rsquo;s open a terminal: press <em>Mod4+Enter</em>. Mod4 is your &ldquo;Windows key&rdquo;, the key
+between Ctrl and Alt. You can change the modkey if you want, but we'll get to
+that later. An <code>xterm</code> window will pop up. You can of course use your favourite
+terminal if you like. Again, more on that later. Now press <em>Mod4+Shift+c</em> to
+close the terminal. This is the command which lets you close any application.
+Awesome has an elegant way to launch programs: press <em>Mod4+r</em>. Now you will
+see a <strong>Run:</strong> prompt in the status bar. Start anything you like, it also
+features Tab-completion!</p>
+
+<p>Open more applications to see the tiling features.
+You can now press <em>Mod4+Space</em> to cycle through all the possible tiling (and
+floating) layouts. Note that the icon in the upper right changes.</p>
+
+<p>Also try <em>Mod4+h</em>, <em>Mod4+l</em>, <em>Mod4+Shift+h</em> and <em>Mod4+Shift+l</em> to resize
+windows. You can also resize with <em>Mod4+Button3</em> (right click). <em>Mod4+f</em> will
+make your current window fullscreen.</p>
+
+<p>With <em>Mod4+Number</em> (1-9) you can browse through your tags. With
+<em>Mod4+Shift+Number</em> (1-9) you can send a window to a specific tag. <em>Mod4+Left</em>
+and <em>Mod4+Right</em> moves to the next tag in the specified direction.</p>
+
+<p>Use <em>Mod4+k</em> and <em>Mod4+j</em> to change your focused client &ndash; moving your mouse will
+also do that.</p>
+
+<p><em>Mod4+Shift+q</em> quits awesome, but don&rsquo;t do that now.</p>
+
+<p>For an overview of all key bindings, press <em>Mod4+s</em>. Pressing any key closes
+this overview again.</p>
+
+<p>If you are a Vim user, try this: Press <em>Mod4+r</em> for the run prompt, enter
+<code>gvim</code> and press <em>Enter</em> to start it. Now press <em>Mod4+s</em>  again. The key binding
+overview now also provides a cheat sheet for controlling Vim.</p>
+
+<p><a name="Change_the_theme"></a></p>
+
+<h2>Change the theme</h2>
+
+<p>Awesome has four themes you can choose from: <em>default</em>, <em>sky</em>, <em>xresources</em>, and
+<em>zenburn</em>.</p>
+
+<p>To change the theme, open your rc.lua and edit this line near the beginning of
+the file:</p>
 
 <pre>
-cairo_image_surface_create()
+beautiful.init(awful.util.getdir(<span class="string">"config"</span>) .. <span class="string">"/themes/default/theme.lua"</span>)
 </pre>
 
 
-<p>Then the LGI equivalent is:</p>
+<p>For this tutorial we will stick with the default theme.</p>
+
+<p>Now we will customize the theme. Copy
+<code>/usr/share/awesome/themes/default/theme.lua</code> to <code>~/.config/awesome/</code> and change
+the above line in your theme like this (remember to replace <code>USER</code> with your
+user name):</p>
 
 <pre>
-lgi.cairo.ImageSurface.create()
+beautiful.init(<span class="string">"/home/USER/.config/awesome/theme.lua"</span>)
 </pre>
 
 
-<p>The same goes for enums:</p>
+<h3>Change the background image</h3>
+
+<p>Your desktop background image is handled in your theme file. To change it, edit
+this line in your theme file:</p>
 
 <pre>
-CAIRO_FORMAT_ARGB32
+theme.wallpaper = <span class="string">"/usr/share/awesome/themes/default/background.png"</span>
 </pre>
 
 
-<p>becomes:</p>
+<p><a name="Personalize_your_layouts"></a></p>
+
+<h2>Personalize your layouts</h2>
+
+<p>To optimize our workflow, we now want to give names to our tags and set the
+specific tiling or floating mode for each of them.
+Open your <code>rc.lua</code> and find the layouts section. It should look like this:</p>
 
 <pre>
-lgi.cairo.Format.ARGB32
+awful.layout.layouts = {
+    awful.layout.suit.floating,
+    awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
+    awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.max,
+    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier,
+    awful.layout.suit.corner.nw,
+    <span class="comment">-- awful.layout.suit.corner.ne,
+</span>    <span class="comment">-- awful.layout.suit.corner.sw,
+</span>    <span class="comment">-- awful.layout.suit.corner.se,
+</span>}
 </pre>
 
 
-<p>LGI is also object oriented while the C API is function based. When those
-functions take the &ldquo;class&rdquo; &ldquo;object&rdquo;, then this:</p>
+<p>These are all possible tiling and floating layouts awesome has. If you don&rsquo;t
+find all of them useful, you can comment some of them out by adding &ldquo;&mdash;&rdquo;
+to the beginning of the line. Awesome already comes with three layouts which are
+not used in the default config, as you can see above.</p>
+
+<p><a name="Personalize_your_tags"></a></p>
+
+<h2>Personalize your tags</h2>
+
+<p>Next, we want to name our tags. This is the default tag creation with numbers
+from 1 to 9:</p>
 
 <pre>
-cairo_line_to(cr, x, y)
+<span class="comment">-- Each screen has its own tag table.
+</span>awful.tag({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, awful.layout.layouts[<span class="number">1</span>])
 </pre>
 
 
-<p>can be expressed as:</p>
+<p>Now we want to change the tag names and assign a specific layout to each of
+them. By default, each tag has a floating layout (the first entry in the
+<code>layouts</code> table). To change this, we define a specific layout for each tag.</p>
+
+<p>Replace the above with this code:</p>
 
 <pre>
-cr:line_to(x, y)
+<span class="comment">-- Each screen has its own tag table.
+</span><span class="keyword">local</span> names = { <span class="string">"main"</span>, <span class="string">"www"</span>, <span class="string">"skype"</span>, <span class="string">"gimp"</span>, <span class="string">"office"</span>, <span class="string">"im"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }
+<span class="keyword">local</span> l = awful.layout.suit  <span class="comment">-- Just to save some typing: use an alias.
+</span><span class="keyword">local</span> layouts = { l.floating, l.tile, l.floating, l.fair, l.max,
+    l.floating, l.tile.left, l.floating, l.floating }
+awful.tag(names, s, layouts)
 </pre>
 
 
-<p>It is however important to note some inconsistencies. For example, Cairo is
-called <code>lgi.cairo</code> while GLib is called <code>lgi.GLib</code>. Figuring this out will
-require some experimenting. The best way to do this without actually
-reloading Awesome is to open the <code>lua</code> command in a terminal and use <a href="http://www.lua.org/manual/5.2/manual.html#pdf-print">print</a>:</p>
+<p>We use <code>layouts</code> to set the layout for each tag. Edit this as you like.</p>
+
+<p><a name="Some_global_settings"></a></p>
+
+<h2>Some global settings</h2>
+
+<p>While we are at it, we can also change the default terminal, editor and assign
+the modkey to a different key:</p>
 
 <pre>
-<span class="global">print</span>(<span class="string">"This will print a table address:"</span>, <span class="global">require</span>(<span class="string">"lgi"</span>).cairo)
-<span class="global">print</span>(<span class="string">"This will print an error:"</span>, <span class="global">require</span>(<span class="string">"lgi"</span>).Cairo)
+terminal = <span class="string">"xterm"</span>
+editor = <span class="global">os</span>.getenv(<span class="string">"EDITOR"</span>) <span class="keyword">or</span> <span class="string">"nano"</span>
+[…]
+modkey = <span class="string">"Mod4"</span>
 </pre>
 
 
-<p>It is recommended to avoid using <a href="http://www.lua.org/manual/5.2/manual.html#pdf-require">require</a> always when using a function, but
-include the libraries at the top of your <code>rc.lua</code> or Lua module instead:</p>
+<p>Change these settings to your liking. They are pretty self-explanatory and
+well-documented in the comments.</p>
+
+<p><a name="Wrapping_up"></a></p>
+
+<h2>Wrapping up</h2>
+
+<p>Save your <code>rc.lua</code> and restart awesome (<em>Mod4+Ctrl+r</em>). Now the modifications
+done above should be applied.</p>
+
+<p>Note that any mistakes in your <code>rc.lua</code> can cause problems. You can save
+yourself some trouble by using <code>Xephyr</code> to test your changes.</p>
+
+<p>Open a terminal and run the following command:</p>
 
 <pre>
-<span class="keyword">local</span> cairo = <span class="global">require</span>(<span class="string">"lgi"</span>).cairo
+Xephyr :<span class="number">5</span> &amp; sleep <span class="number">1</span> ; DISPLAY=:<span class="number">5</span> awesome
 </pre>
 
 
-<p><a name="The_Cairo_API"></a></p>
+<p>A new window will appear and a new awesome instance runs inside of it.</p>
 
-<h2>The Cairo API</h2>
+<p><a name="Add_widgets"></a></p>
 
-<p>Cairo is a 2D graphic library used by Awesome, Gnome and XFCE. It allows to
-e.g. paint paths on a <code>surface</code>.
-Awesome uses it internally and being able to call it directly is a powerful
-feature.</p>
+<h2>Add widgets</h2>
 
-<p>The following concepts are necessary to be able to use Cairo:</p>
+<p>TODO: Write this section.</p>
 
-<p><strong>Surface</strong>:</p>
+<p><a name="Further_reading"></a></p>
 
-<p>A surface is the area where the painting will be done. There are multiple types
-of surfaces including:</p>
+<h2>Further reading</h2>
 
-<ul>
-<li>Color images with transparency (<code>ARGB32</code>) or without (<code>RGB24</code>)</li>
-<li>Monochrome image surfaces with transparency (<code>A8</code>) or without (<code>A1</code>)</li>
-<li>SVG vectorial surfaces</li>
-<li>Native (XCB) surfaces</li>
-<li>Framebuffers and other less interesting ones (from an Awesome&rsquo;s point of
-view)</li>
-</ul>
-
-
-<p>For more details see <a href="https://cairographics.org/manual/cairo-Image-Surfaces.html">Surfaces</a>.</p>
-
-<p><strong>Sources</strong>:</p>
-
-<p>Sources are elements like colors, patterns or gradients. See <a href="../libraries/gears.color.html#">gears.color</a> for
-common sources.</p>
-
-<p>For more details see <a href="http://cairographics.org/manual/cairo-cairo-pattern-t.html">Pattern</a>.</p>
-
-<p><strong>Context and paths</strong>:</p>
-
-<p>A context is the proxy between the program and the surface, and holds a path.
-Paths are something like a line, circle or rectangle, which may or
-may not be closed (a shape).</p>
-
-<p>All drawing operations on a surface are done via a context.
-The current path is extended until it is used and reset (see next section).
-Until then nothing will be drawn to the surface.  For example:</p>
-
-<pre>
-cr:rectangle(<span class="number">0</span> , <span class="number">0</span> , <span class="number">10</span>, <span class="number">10</span>)
-cr:rectangle(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>)
-</pre>
-
-
-<p>will not do anything until the operation is applied to the context.</p>
-
-<p>For more details, read:</p>
-
-<ul>
-<li><a href="http://cairographics.org/manual/cairo-Paths.html">Path</a></li>
-<li><a href="http://cairographics.org/manual/cairo-cairo-t.html">Context</a></li>
-<li><a href="http://cairographics.org/manual/cairo-Transformations.html">Transformation</a></li>
-</ul>
-
-
-<p>A context also holds a transformation matrix (see <a href="../classes/gears.matrix.html#">gears.matrix</a>), which is
-used when applying an operation.</p>
-
-<p><strong>Operations</strong>:</p>
-
-<p>Multiple operations can be done with the paths. The most common are:</p>
-
-<ul>
-<li><em>fill</em>: Fill the path with the current source.</li>
-<li><em>stroke</em>: Paint the path outline with the current source.</li>
-<li><em>mask</em>: Use the current source as an alpha mask while painting with the
-current operator.</li>
-<li><em>clip</em>: Crop the surface&rsquo;s workarea so nothing outside of the clip will be
-affected by all following operations.</li>
-</ul>
-
-
-<p><strong>Operators</strong>:</p>
-
-<p><a href="http://cairographics.org/operators/">Operators</a> are modifiers used when
-applying operations.</p>
-
-<h3>Cairo in Awesome</h3>
-
-<p>All of Awesome&rsquo;s <a href="../classes/wibox.html#">wibox</a>es, <a href="../classes/awful.wibar.html#">awful.wibar</a>s, <a href="../libraries/gears.wallpaper.html#">gears.wallpaper</a>s and
-<a href="../libraries/awful.titlebar.html#">awful.titlebar</a>s contain Cairo surfaces, which can be accessed through the
-<code>drawin</code> API.  This allows widgets to use the Cairo context directly.
-See the
-<a href="../documentation/03-declarative-layout.md.html">declarative layout system</a>
-and <a href="../documentation/04-new-widgets.md.html">new widgets</a> articles for more
-information and examples on how widgets work.</p>
-
-<p>It is also possible to create surfaces manually. See <a href="../libraries/gears.surface.html#">gears.surface</a> for
-some examples. Here is the most simple example you can get:</p>
-
-<pre>
-<span class="comment">-- Create a surface
-</span><span class="keyword">local</span> img = cairo.ImageSurface.create(cairo.Format.ARGB32, <span class="number">50</span>, <span class="number">50</span>)
-
-<span class="comment">-- Create a context
-</span><span class="keyword">local</span> cr  = cairo.Context(img)
-
-<span class="comment">-- Set a red source
-</span>cr:set_source(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>)
-<span class="comment">-- Alternative:
-</span>cr:set_source(gears.color(<span class="string">"#ff0000"</span>))
-
-<span class="comment">-- Add a 10px square path to the context at x=10, y=10
-</span>cr:rectangle(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>)
-
-<span class="comment">-- Actually draw the rectangle on img
-</span>cr:fill()
-</pre>
-
-
-<p>This can then be used as <code>bgimage</code> for a <a href="../classes/wibox.html#">wibox</a>, <a href="../classes/awful.wibar.html#">awful.wibar</a> or
-<a href="../classes/wibox.container.background.html#">wibox.container.background</a>:</p>
-
-<pre>
-screen.primary.mywibox.bgimage = img
-</pre>
-
+<p>To learn more about the individual parts of the default configuration file,
+please look at <a href="../documentation/05-awesomerc.md.html#">05-awesomerc.md</a>.</p>
 
 
 </div> <!-- id="content" -->
