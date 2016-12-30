@@ -37,7 +37,7 @@
 
 
 <h2>Libraries</h2>
-<ul class="$(kind=='Topics' and '' or 'nowrap'">
+<ul class="nowrap">
   <li><a href="../libraries/awesome.html">awesome</a></li>
   <li><a href="../libraries/awful.client.html">awful.client</a></li>
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
@@ -92,7 +92,7 @@
   <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
 </ul>
 <h2>Classes</h2>
-<ul class="$(kind=='Topics' and '' or 'nowrap'">
+<ul class="nowrap">
   <li><a href="../classes/awful.button.html">awful.button</a></li>
   <li><a href="../classes/awful.tooltip.html">awful.tooltip</a></li>
   <li><a href="../classes/awful.wibar.html">awful.wibar</a></li>
@@ -155,7 +155,7 @@
   <li><a href="../classes/xproperties.html">xproperties</a></li>
 </ul>
 <h2>Documentation</h2>
-<ul class="$(kind=='Topics' and '' or 'nowrap'">
+<ul class="nowrap">
   <li><a href="../documentation/00-authors.md.html">Authors</a></li>
   <li><a href="../documentation/01-readme.md.html">Readme</a></li>
   <li><a href="../documentation/02-contributing.md.html">Contributing</a></li>
@@ -219,7 +219,7 @@ local geo = f(client.focus, {honor_workarea=true, to_percent = 0.5})</p>
 
 <p> <strong>honor_padding</strong> (<em>boolean</em>):</p>
 
-<p>  Take the screen padding into account (see <a href="../classes/screen.html#screen.padding">screen.padding</a>)</p>
+<p>  Take the screen padding into account (see <a href="../classes/screen.html#awful.screen.padding">screen.padding</a>)</p>
 
 <p> <strong>tag</strong> (<em>tag</em>):</p>
 
@@ -426,7 +426,7 @@ local geo = f(client.focus, {honor_workarea=true, to_percent = 0.5})</p>
          (<em>default</em> client.focus)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The arguments
          (<em>default</em> {})
         </li>
@@ -435,10 +435,10 @@ local geo = f(client.focus, {honor_workarea=true, to_percent = 0.5})</p>
     <h3>Returns:</h3>
     <ol>
         <li>
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry</li>
         <li>
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
         The corner name</li>
     </ol>
 
@@ -446,16 +446,15 @@ local geo = f(client.focus, {honor_workarea=true, to_percent = 0.5})</p>
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">
- Move the mouse to the closest corner of the focused client
-awful.placement.closest_corner(mouse, {include_sides=<span class="keyword">true</span>, parent=c})
- It is possible to emulate the mouse API to get the closest corner of
- random area
-<span class="keyword">local</span> _, corner = awful.placement.closest_corner(
-    {coords=<span class="keyword">function</span>() <span class="keyword">return</span> {x = <span class="number">100</span>, y=<span class="number">100</span>} <span class="keyword">end</span>},
-    {include_sides = <span class="keyword">true</span>, bounding_rect = {x=<span class="number">0</span>, y=<span class="number">0</span>, width=<span class="number">200</span>, height=<span class="number">200</span>}}
-)
-<span class="global">print</span>(<span class="string">'Closest corner:'</span>, corner)</pre>
+        <pre class="example">Move the mouse to the closest corner of the focused client
+wful.placement.closest_corner(mouse, {include_sides=<span class="keyword">true</span>, parent=c})
+It is possible to emulate the mouse API to get the closest corner of
+random area
+ocal _, corner = awful.placement.closest_corner(
+   {coords=<span class="keyword">function</span>() <span class="keyword">return</span> {x = <span class="number">100</span>, y=<span class="number">100</span>} <span class="keyword">end</span>},
+   {include_sides = <span class="keyword">true</span>, bounding_rect = {x=<span class="number">0</span>, y=<span class="number">0</span>, width=<span class="number">200</span>, height=<span class="number">200</span>}}
+
+rint(<span class="string">'Closest corner:'</span>, corner)</pre>
     </ul>
 
 </dd>
@@ -491,7 +490,7 @@ After:  x=10, y=10, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new client geometry.
     </ol>
 
@@ -499,7 +498,7 @@ After:  x=10, y=10, width=100, height=100
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">awful.placement.no_offscreen(c)--, {honor_workarea=<span class="keyword">true</span>, margins=<span class="number">40</span>})</pre>
+        <pre class="example">awful.placement.no_offscreen(c)<span class="comment">--, {honor_workarea=true, margins=40})</span></pre>
     </ul>
 
 </dd>
@@ -522,7 +521,7 @@ After:  x=10, y=10, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -530,8 +529,7 @@ After:  x=10, y=10, width=100, height=100
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">
-awful.placement.no_overlap(client.focus)
+        <pre class="example">awful.placement.no_overlap(client.focus)
 <span class="keyword">local</span> x,y = screen[<span class="number">4</span>].geometry.x, screen[<span class="number">4</span>].geometry.y</pre>
     </ul>
 
@@ -552,7 +550,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -561,7 +559,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -592,7 +590,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -601,7 +599,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -637,7 +635,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -646,7 +644,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -687,7 +685,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -696,7 +694,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -720,7 +718,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -729,7 +727,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -757,7 +755,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -766,7 +764,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -794,7 +792,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -803,7 +801,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -831,7 +829,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -840,7 +838,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -868,7 +866,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -877,7 +875,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -905,7 +903,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -914,7 +912,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -942,7 +940,7 @@ awful.placement.no_overlap(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -951,7 +949,7 @@ awful.placement.no_overlap(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -959,8 +957,7 @@ awful.placement.no_overlap(client.focus)
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">
-awful.placement.top(client.focus)
+        <pre class="example">awful.placement.top(client.focus)
 <span class="global">assert</span>(c.x == screen[<span class="number">1</span>].geometry.width/<span class="number">2</span>-<span class="number">40</span>/<span class="number">2</span>-c.border_width)</pre>
     </ul>
 
@@ -981,7 +978,7 @@ awful.placement.top(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -990,7 +987,7 @@ awful.placement.top(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -1018,7 +1015,7 @@ awful.placement.top(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -1027,7 +1024,7 @@ awful.placement.top(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -1055,7 +1052,7 @@ awful.placement.top(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -1086,7 +1083,7 @@ awful.placement.top(client.focus)
          A drawable (like <a href="../classes/client.html#">client</a>, <a href="../libraries/mouse.html#">mouse</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -1095,7 +1092,7 @@ awful.placement.top(client.focus)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -1131,7 +1128,7 @@ a table with multiple directions.</li>
          (<em>default</em> client.focus)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The arguments
          (<em>default</em> {})
         </li>
@@ -1140,7 +1137,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -1164,7 +1161,7 @@ a table with multiple directions.</li>
          A drawable (like <a href="../classes/client.html#">client</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -1173,7 +1170,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -1201,7 +1198,7 @@ a table with multiple directions.</li>
          A drawable (like <a href="../classes/client.html#">client</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -1210,7 +1207,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -1238,7 +1235,7 @@ a table with multiple directions.</li>
          A drawable (like <a href="../classes/client.html#">client</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -1247,7 +1244,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -1275,7 +1272,7 @@ a table with multiple directions.</li>
          A drawable (like <a href="../classes/client.html#">client</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -1284,7 +1281,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -1320,7 +1317,7 @@ a table with multiple directions.</li>
          (<em>default</em> client.focus)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The arguments
          (<em>default</em> {})
         </li>
@@ -1329,7 +1326,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -1353,7 +1350,7 @@ a table with multiple directions.</li>
          A drawable (like <a href="../classes/client.html#">client</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -1384,7 +1381,7 @@ a table with multiple directions.</li>
          A drawable (like <a href="../classes/client.html#">client</a> or <a href="../classes/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Other arguments')
          (<em>default</em> {})
         </li>
@@ -1422,7 +1419,7 @@ a table with multiple directions.</li>
          (<em>default</em> client.focus)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The arguments
          (<em>default</em> {})
         </li>
@@ -1431,7 +1428,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry
     </ol>
 
@@ -1464,15 +1461,15 @@ a table with multiple directions.</li>
 
         <ul>
         <li><span class="parameter">mode</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The mode
         </li>
         <li><span class="parameter">preferred_positions</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The preferred positions (in order)
         </li>
         <li><span class="parameter">geometry</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          A geometry inside the other drawable
         </li>
         </li></ul>
@@ -1481,13 +1478,13 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
         <li>
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The new geometry</li>
         <li>
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
         The choosen position</li>
         <li>
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
         The choosen direction</li>
     </ol>
 
@@ -1510,7 +1507,7 @@ a table with multiple directions.</li>
          (<em>default</em> client.focus)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The arguments
          (<em>default</em> {})
         </li>
@@ -1533,8 +1530,8 @@ a table with multiple directions.</li>
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-12-30 13:32:28 </i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2016-12-30 23:55:37 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

@@ -38,7 +38,7 @@
 
 
 <h2>Classes</h2>
-<ul class="$(kind=='Topics' and '' or 'nowrap'">
+<ul class="nowrap">
   <li><a href="../classes/awful.button.html">awful.button</a></li>
   <li><a href="../classes/awful.tooltip.html">awful.tooltip</a></li>
   <li><a href="../classes/awful.wibar.html">awful.wibar</a></li>
@@ -101,7 +101,7 @@
   <li><a href="../classes/xproperties.html">xproperties</a></li>
 </ul>
 <h2>Libraries</h2>
-<ul class="$(kind=='Topics' and '' or 'nowrap'">
+<ul class="nowrap">
   <li><a href="../libraries/awesome.html">awesome</a></li>
   <li><a href="../libraries/awful.client.html">awful.client</a></li>
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
@@ -156,7 +156,7 @@
   <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
 </ul>
 <h2>Documentation</h2>
-<ul class="$(kind=='Topics' and '' or 'nowrap'">
+<ul class="nowrap">
   <li><a href="../documentation/00-authors.md.html">Authors</a></li>
   <li><a href="../documentation/01-readme.md.html">Readme</a></li>
   <li><a href="../documentation/02-contributing.md.html">Contributing</a></li>
@@ -265,7 +265,7 @@ a cow
          (<em>default</em> false)
         </li>
         <li><span class="parameter">class</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
 
 
          (<em>default</em> nil)
@@ -276,7 +276,7 @@ a cow
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         A new object
     </ol>
 
@@ -284,43 +284,42 @@ a cow
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">
- Create a class <span class="keyword">for</span> this object. It will be used as a backup source <span class="keyword">for</span>
- methods <span class="keyword">and</span> accessors. It is also possible to set them directly on the
- object.
-<span class="keyword">local</span> class = {}
-<span class="keyword">function</span> class:get_foo()
-    <span class="global">print</span>(<span class="string">'In get foo'</span>, self._foo <span class="keyword">or</span> <span class="string">'bar'</span>)
-    <span class="keyword">return</span> self._foo <span class="keyword">or</span> <span class="string">'bar'</span>
-<span class="keyword">end</span>
-<span class="keyword">function</span> class:set_foo(value)
-    <span class="global">print</span>(<span class="string">'In set foo'</span>, value)
-    <span class="comment">-- In case it is necessary to bypass the object property system, use
-</span>    <span class="comment">-- <a href="http://www.lua.org/manual/5.2/manual.html#pdf-rawset">rawset</a>
-</span>    <span class="global">rawset</span>(self, <span class="string">'_foo'</span>, value)
-    <span class="comment">-- When using custom accessors, the signals need to be handled manually
-</span>    self:emit_signal(<span class="string">'property::foo'</span>, value)
-<span class="keyword">end</span>
-<span class="keyword">function</span> class:method(a, b, c)
-    <span class="global">print</span>(<span class="string">'In a mathod'</span>, a, b, c)
-<span class="keyword">end</span>
-<span class="keyword">local</span> o = gears.object {
-    class               = class,
-    enable_properties   = <span class="keyword">true</span>,
-    enable_auto_signals = <span class="keyword">true</span>,
-}
-<span class="global">print</span>(o.foo)
-o.foo = <span class="number">42</span>
-<span class="global">print</span>(o.foo)
-o:method(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)
- Random properties can also be added, the signal will be emitted automatically.
-o:connect_signal(<span class="string">'property::something'</span>, <span class="keyword">function</span>(obj, value)
-    <span class="global">assert</span>(obj == o)
-    <span class="global">print</span>(<span class="string">'In the connection handler!'</span>, value)
-<span class="keyword">end</span>)
-<span class="global">print</span>(o.something)
-o.something = <span class="string">'a cow'</span>
-<span class="global">print</span>(o.something)</pre>
+        <pre class="example">Create a class <span class="keyword">for</span> this object. It will be used as a backup source <span class="keyword">for</span>
+methods <span class="keyword">and</span> accessors. It is also possible to set them directly on the
+object.
+ocal class = {}
+unction class:get_foo()
+   <span class="global">print</span>(<span class="string">'In get foo'</span>, self._foo <span class="keyword">or</span> <span class="string">'bar'</span>)
+   <span class="keyword">return</span> self._foo <span class="keyword">or</span> <span class="string">'bar'</span>
+nd
+unction class:set_foo(value)
+   <span class="global">print</span>(<span class="string">'In set foo'</span>, value)
+   <span class="comment">-- In case it is necessary to bypass the object property system, use
+</span>   <span class="comment">-- <a href="https://www.lua.org/manual/5.2/manual.html#pdf-rawset">rawset</a>
+</span>   <span class="global">rawset</span>(self, <span class="string">'_foo'</span>, value)
+   <span class="comment">-- When using custom accessors, the signals need to be handled manually
+</span>   self:emit_signal(<span class="string">'property::foo'</span>, value)
+nd
+unction class:method(a, b, c)
+   <span class="global">print</span>(<span class="string">'In a mathod'</span>, a, b, c)
+nd
+ocal o = gears.object {
+   class               = class,
+   enable_properties   = <span class="keyword">true</span>,
+   enable_auto_signals = <span class="keyword">true</span>,
+
+rint(o.foo)
+.foo = <span class="number">42</span>
+rint(o.foo)
+:method(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)
+Random properties can also be added, the signal will be emitted automatically.
+:connect_signal(<span class="string">'property::something'</span>, <span class="keyword">function</span>(obj, value)
+   <span class="global">assert</span>(obj == o)
+   <span class="global">print</span>(<span class="string">'In the connection handler!'</span>, value)
+nd)
+rint(o.something)
+.something = <span class="string">'a cow'</span>
+rint(o.something)</pre>
     </ul>
 
 </dd>
@@ -338,7 +337,7 @@ o.something = <span class="string">'a cow'</span>
 
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">func</span>
@@ -363,7 +362,7 @@ o.something = <span class="string">'a cow'</span>
 
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">func</span>
@@ -387,7 +386,7 @@ o.something = <span class="string">'a cow'</span>
 
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">func</span>
@@ -411,7 +410,7 @@ o.something = <span class="string">'a cow'</span>
 
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">...</span>
@@ -446,7 +445,7 @@ o.something = <span class="string">'a cow'</span>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
         The module name, e.g. &ldquo;wibox.container.background&rdquo;.
     </ol>
 
@@ -454,12 +453,11 @@ o.something = <span class="string">'a cow'</span>
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">
-  <span class="keyword">local</span> mt = {}
-  mt.__tostring = <span class="keyword">function</span>(o)
-      <span class="keyword">return</span> <span class="global">require</span>(<span class="string">"gears.object"</span>).modulename(<span class="number">2</span>)
-  <span class="keyword">end</span>
-  <span class="keyword">return</span> <span class="global">setmetatable</span>(ret, mt)</pre>
+        <pre class="example"><span class="keyword">local</span> mt = {}
+mt.__tostring = <span class="keyword">function</span>(o)
+    <span class="keyword">return</span> <span class="global">require</span>(<span class="string">"gears.object"</span>).modulename(<span class="number">2</span>)
+<span class="keyword">end</span>
+<span class="keyword">return</span> <span class="global">setmetatable</span>(ret, mt)</pre>
     </ul>
 
 </dd>
@@ -469,8 +467,8 @@ o.something = <span class="string">'a cow'</span>
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-12-30 13:32:28 </i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2016-12-30 23:55:37 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
