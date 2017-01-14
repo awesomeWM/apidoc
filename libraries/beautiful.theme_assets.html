@@ -30,6 +30,10 @@
   <li><a href="../index.html">Index</a></li>
 </ul>
 
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
 
 
 <h2>Libraries</h2>
@@ -39,7 +43,7 @@
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
   <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
-  <li><strong>awful.hotkeys_popup.keys</strong></li>
+  <li><a href="../libraries/awful.hotkeys_popup.keys.html">awful.hotkeys_popup.keys</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.keys.vim.html">awful.hotkeys_popup.keys.vim</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.widget.html">awful.hotkeys_popup.widget</a></li>
   <li><a href="../libraries/awful.key.html">awful.key</a></li>
@@ -57,7 +61,7 @@
   <li><a href="../libraries/awful.util.html">awful.util</a></li>
   <li><a href="../libraries/awful.wibox.html">awful.wibox</a></li>
   <li><a href="../libraries/beautiful.html">beautiful</a></li>
-  <li><a href="../libraries/beautiful.theme_assets.html">beautiful.theme_assets</a></li>
+  <li><strong>beautiful.theme_assets</strong></li>
   <li><a href="../libraries/beautiful.xresources.html">beautiful.xresources</a></li>
   <li><a href="../libraries/dbus.html">dbus</a></li>
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
@@ -171,22 +175,353 @@
 
 <div id="content">
 
-<h1>Module <code>awful.hotkeys_popup.keys</code></h1>
-<p>Additional hotkeys for awful.hotkeys_widget</p>
+<h1>Module <code>beautiful.theme_assets</code></h1>
+<p>Generate vector assets using current colors.</p>
 <p>
 </p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2014-2015 Yauheni Kirylau</li>
-        <li><strong>Author</strong>: Yauheni Kirylau &lt;yawghen@gmail.com&gt;</li>
+        <li><strong>Copyright</strong>: 2015 Yauhen Kirylau</li>
+        <li><strong>Author</strong>: Yauhen Kirylau &lt;yawghen@gmail.com&gt;</li>
+    </ul>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#taglist_squares_sel">taglist_squares_sel (size, fg)</a></td>
+	<td class="summary">Generate selected taglist square.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#taglist_squares_unsel">taglist_squares_unsel (size, fg)</a></td>
+	<td class="summary">Generate unselected taglist square.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#gen_awesome_name">gen_awesome_name (cr, height, bg, fg, alt_fg)</a></td>
+	<td class="summary">Put Awesome WM name onto cairo surface.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#gen_logo">gen_logo (cr, width, height, bg, fg)</a></td>
+	<td class="summary">Put Awesome WM logo onto cairo surface.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awesome_icon">awesome_icon (size, bg, fg)</a></td>
+	<td class="summary">Generate Awesome WM logo.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wallpaper">wallpaper (bg, fg, alt_fg, s)</a></td>
+	<td class="summary">Generate Awesome WM wallpaper.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#recolor_titlebar_normal">recolor_titlebar_normal (theme, color)</a></td>
+	<td class="summary">Recolor unfocused titlebar icons.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#recolor_titlebar_focus">recolor_titlebar_focus (theme, color)</a></td>
+	<td class="summary">Recolor focused titlebar icons.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#recolor_layout">recolor_layout (theme, color)</a></td>
+	<td class="summary">Recolor layout icons.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    Methods
+    <dl class="function">
+    <dt>
+    <a name = "taglist_squares_sel"></a>
+    <strong>taglist_squares_sel (size, fg)</strong>
+    </dt>
+    <dd>
+    Generate selected taglist square.
+
+
+    <ul>
+        <li><span class="parameter">size</span>
+            <span class="types"><span class="type">number</span></span>
+         Size.
+        </li>
+        <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Background color.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Image with the square.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "taglist_squares_unsel"></a>
+    <strong>taglist_squares_unsel (size, fg)</strong>
+    </dt>
+    <dd>
+    Generate unselected taglist square.
+
+
+    <ul>
+        <li><span class="parameter">size</span>
+            <span class="types"><span class="type">number</span></span>
+         Size.
+        </li>
+        <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Background color.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Image with the square.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "gen_awesome_name"></a>
+    <strong>gen_awesome_name (cr, height, bg, fg, alt_fg)</strong>
+    </dt>
+    <dd>
+    Put Awesome WM name onto cairo surface.
+
+
+    <ul>
+        <li><span class="parameter">cr</span>
+         Cairo surface.
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         Height.
+        </li>
+        <li><span class="parameter">bg</span>
+            <span class="types"><span class="type">color</span></span>
+         Background color.
+        </li>
+        <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Main foreground color.
+        </li>
+        <li><span class="parameter">alt_fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Accent foreground color.
+        </li>
     </ul>
 
 
 
-<br/>
-<br/>
 
 
+</dd>
+    <dt>
+    <a name = "gen_logo"></a>
+    <strong>gen_logo (cr, width, height, bg, fg)</strong>
+    </dt>
+    <dd>
+    Put Awesome WM logo onto cairo surface.
+
+
+    <ul>
+        <li><span class="parameter">cr</span>
+         Cairo surface.
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         Width.
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         Height.
+        </li>
+        <li><span class="parameter">bg</span>
+            <span class="types"><span class="type">color</span></span>
+         Background color.
+        </li>
+        <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Foreground color.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awesome_icon"></a>
+    <strong>awesome_icon (size, bg, fg)</strong>
+    </dt>
+    <dd>
+    Generate Awesome WM logo.
+
+
+    <ul>
+        <li><span class="parameter">size</span>
+            <span class="types"><span class="type">number</span></span>
+         Size.
+        </li>
+        <li><span class="parameter">bg</span>
+            <span class="types"><span class="type">color</span></span>
+         Background color.
+        </li>
+        <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Background color.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Image with the logo.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wallpaper"></a>
+    <strong>wallpaper (bg, fg, alt_fg, s)</strong>
+    </dt>
+    <dd>
+    Generate Awesome WM wallpaper.
+
+
+    <ul>
+        <li><span class="parameter">bg</span>
+            <span class="types"><span class="type">color</span></span>
+         Background color.
+        </li>
+        <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Main foreground color.
+        </li>
+        <li><span class="parameter">alt_fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Accent foreground color.
+        </li>
+        <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+         Screen (to get wallpaper size).
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Wallpaper image.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "recolor_titlebar_normal"></a>
+    <strong>recolor_titlebar_normal (theme, color)</strong>
+    </dt>
+    <dd>
+    Recolor unfocused titlebar icons.
+
+
+    <ul>
+        <li><span class="parameter">theme</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Beautiful theme table
+        </li>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">color</span></span>
+         Icons' color.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        Beautiful theme table with the images recolored.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "recolor_titlebar_focus"></a>
+    <strong>recolor_titlebar_focus (theme, color)</strong>
+    </dt>
+    <dd>
+    Recolor focused titlebar icons.
+
+
+    <ul>
+        <li><span class="parameter">theme</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Beautiful theme table
+        </li>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">color</span></span>
+         Icons' color.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        Beautiful theme table with the images recolored.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "recolor_layout"></a>
+    <strong>recolor_layout (theme, color)</strong>
+    </dt>
+    <dd>
+    Recolor layout icons.
+
+
+    <ul>
+        <li><span class="parameter">theme</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Beautiful theme table
+        </li>
+        <li><span class="parameter">color</span>
+            <span class="types"><span class="type">color</span></span>
+         Icons' color.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        Beautiful theme table with the images recolored.
+    </ol>
+
+
+
+
+</dd>
+</dl>
 
 
 </div> <!-- id="content" -->
