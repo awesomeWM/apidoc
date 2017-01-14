@@ -76,6 +76,7 @@
   <li><a href="../libraries/awful.util.html">awful.util</a></li>
   <li><a href="../libraries/awful.wibox.html">awful.wibox</a></li>
   <li><a href="../libraries/beautiful.html">beautiful</a></li>
+  <li><a href="../libraries/beautiful.theme_assets.html">beautiful.theme_assets</a></li>
   <li><a href="../libraries/beautiful.xresources.html">beautiful.xresources</a></li>
   <li><a href="../libraries/dbus.html">dbus</a></li>
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
@@ -316,7 +317,7 @@ they are still supported, but will be removed in the next release.</p>
 +                    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:<span class="backtick"><code>view_only</code></span>() <span class="keyword">end</span>),
 -                    awful.button({ modkey }, <span class="number">1</span>, <span class="backtick"><code>awful.client.movetotag</code></span>),
 +                    awful.button({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
-+                                              <span class="keyword">if</span> <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> <span class="keyword">then</span>
++                                              <span class="keyword">if</span> <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> <span class="keyword">then</span>
 +                                                  <span class="backtick"><code>client.focus:move_to_tag</code></span>(t)
 +                                              <span class="keyword">end</span>
 +                                          <span class="keyword">end</span>),
@@ -336,7 +337,7 @@ they are still supported, but will be removed in the next release.</p>
 -mytasklist.buttons = awful.util.<span class="global">table</span>.join(
 +<span class="keyword">local</span> tasklist_buttons = awful.util.<span class="global">table</span>.join(
                       awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> <span class="keyword">then</span>
+                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> <span class="keyword">then</span>
                                                    c.minimized = <span class="keyword">true</span>
                                                    <span class="comment">-- Without this, the following
 </span>                                                   <span class="comment">-- :isvisible() makes no sense
