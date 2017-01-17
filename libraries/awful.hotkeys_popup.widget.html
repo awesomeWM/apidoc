@@ -190,19 +190,23 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#show_help">show_help ([c[, s]])</a></td>
+	<td class="name" ><a href="#new">new ()</a></td>
+	<td class="summary">Create an instance of widget with hotkeys help.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#widget_instance.show_help">widget_instance.show_help ([c[, s]])</a></td>
 	<td class="summary">Show popup with hotkeys help.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#add_hotkeys">add_hotkeys (hotkeys)</a></td>
+	<td class="name" ><a href="#widget_instance.add_hotkeys">widget_instance.add_hotkeys (hotkeys)</a></td>
 	<td class="summary">Add hotkey descriptions for third-party applications.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#widget_module.show_help">widget_module.show_help ([c[, s]])</a></td>
+	<td class="name" ><a href="#show_help">show_help ([c[, s]])</a></td>
 	<td class="summary">Show popup with hotkeys help (default widget instance will be used).</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#widget_module.add_hotkeys">widget_module.add_hotkeys (hotkeys)</a></td>
+	<td class="name" ><a href="#add_hotkeys">add_hotkeys (hotkeys)</a></td>
 	<td class="summary">Add hotkey descriptions for third-party applications
  (default widget instance will be used).</td>
 	</tr>
@@ -210,11 +214,11 @@
 <h2><a href="#Fields">Fields</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#widget_module.hide_without_description">widget_module.hide_without_description</a></td>
+	<td class="name" ><a href="#hide_without_description">hide_without_description</a></td>
 	<td class="summary">Don&rsquo;t show hotkeys without descriptions.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#widget_module.merge_duplicates">widget_module.merge_duplicates</a></td>
+	<td class="name" ><a href="#merge_duplicates">merge_duplicates</a></td>
 	<td class="summary">Merge hotkey records into one if they have the same modifiers and
  description.</td>
 	</tr>
@@ -228,11 +232,77 @@
     Methods
     <dl class="function">
     <dt>
+    <a name = "new"></a>
+    <strong>new ()</strong>
+    </dt>
+    <dd>
+    Create an instance of widget with hotkeys help.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        widget instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "widget_instance.show_help"></a>
+    <strong>widget_instance.show_help ([c[, s]])</strong>
+    </dt>
+    <dd>
+    Show popup with hotkeys help.
+
+
+    <ul>
+        <li><span class="parameter">c</span>
+            <span class="types"><a class="type" href="../classes/client.html#">client</a></span>
+         Client.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+         Screen.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "widget_instance.add_hotkeys"></a>
+    <strong>widget_instance.add_hotkeys (hotkeys)</strong>
+    </dt>
+    <dd>
+    Add hotkey descriptions for third-party applications.
+
+
+    <ul>
+        <li><span class="parameter">hotkeys</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Table with bindings,
+ see <code>awful.hotkeys_popup.key.vim</code> as an example.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "show_help"></a>
     <strong>show_help ([c[, s]])</strong>
     </dt>
     <dd>
-    Show popup with hotkeys help.
+    Show popup with hotkeys help (default widget instance will be used).
 
 
     <ul>
@@ -258,53 +328,6 @@
     <strong>add_hotkeys (hotkeys)</strong>
     </dt>
     <dd>
-    Add hotkey descriptions for third-party applications.
-
-
-    <ul>
-        <li><span class="parameter">hotkeys</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Table with bindings,
- see <code>awful.hotkeys_popup.key.vim</code> as an example.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "widget_module.show_help"></a>
-    <strong>widget_module.show_help ([c[, s]])</strong>
-    </dt>
-    <dd>
-    Show popup with hotkeys help (default widget instance will be used).
-
-
-    <ul>
-        <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#">client</a></span>
-         Client.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">s</span>
-            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
-         Screen.
-         (<em>optional</em>)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "widget_module.add_hotkeys"></a>
-    <strong>widget_module.add_hotkeys (hotkeys)</strong>
-    </dt>
-    <dd>
     Add hotkey descriptions for third-party applications
  (default widget instance will be used).
 
@@ -327,8 +350,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "widget_module.hide_without_description"></a>
-    <strong>widget_module.hide_without_description</strong>
+    <a name = "hide_without_description"></a>
+    <strong>hide_without_description</strong>
     </dt>
     <dd>
     Don&rsquo;t show hotkeys without descriptions.
@@ -341,8 +364,8 @@
 
 </dd>
     <dt>
-    <a name = "widget_module.merge_duplicates"></a>
-    <strong>widget_module.merge_duplicates</strong>
+    <a name = "merge_duplicates"></a>
+    <strong>merge_duplicates</strong>
     </dt>
     <dd>
     Merge hotkey records into one if they have the same modifiers and
