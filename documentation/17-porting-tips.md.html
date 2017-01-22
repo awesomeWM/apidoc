@@ -47,7 +47,7 @@
   <li><a href="../documentation/06-appearance.md.html">Change Awesome appearance</a></li>
   <li><a href="../documentation/07-my-first-awesome.md.html">My first awesome</a></li>
   <li><a href="../documentation/16-using-cairo.md.html">Using Cairo and LGI</a></li>
-  <li><strong>Porting tips</strong></li>
+  <li><strong>Tips for upgrading your configuration</strong></li>
   <li><a href="../documentation/89-NEWS.md.html">NEWS</a></li>
   <li><a href="../documentation/90-FAQ.md.html">FAQ</a></li>
 </ul>
@@ -175,9 +175,10 @@
 
 <div id="content">
 
-    <h1>Porting tips</h1>
+    <h1>Tips for upgrading your configuration</h1>
 
-<p><a name="From_3_5_to_4_0"></a></p>
+<p><a name="v4"></a>
+<a name="From_3_5_to_4_0"></a></p>
 
 <h2>From 3.5 to 4.0</h2>
 
@@ -187,7 +188,7 @@ you might have added to your <code>rc.lua</code>.
 This avoids most of the possible errors due to missing important changes.</p>
 
 <p>If you still wish to ignore this advice, first read the
-<a href="./89-NEWS.md.html">NEWS</a> section about the breaking changes. This
+<a href="89-NEWS.md.html#v4">NEWS</a> section about the breaking changes. This
 document assumes you did.</p>
 
 <p>Be warned, even if it looks like it&rsquo;s working after changing some lines, <strong>it wont
@@ -317,7 +318,7 @@ they are still supported, but will be removed in the next release.</p>
 +                    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:<span class="backtick"><code>view_only</code></span>() <span class="keyword">end</span>),
 -                    awful.button({ modkey }, <span class="number">1</span>, <span class="backtick"><code>awful.client.movetotag</code></span>),
 +                    awful.button({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
-+                                              <span class="keyword">if</span> <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> <span class="keyword">then</span>
++                                              <span class="keyword">if</span> <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> <span class="keyword">then</span>
 +                                                  <span class="backtick"><code>client.focus:move_to_tag</code></span>(t)
 +                                              <span class="keyword">end</span>
 +                                          <span class="keyword">end</span>),
@@ -337,7 +338,7 @@ they are still supported, but will be removed in the next release.</p>
 -mytasklist.buttons = awful.util.<span class="global">table</span>.join(
 +<span class="keyword">local</span> tasklist_buttons = awful.util.<span class="global">table</span>.join(
                       awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> <span class="keyword">then</span>
+                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> <span class="keyword">then</span>
                                                    c.minimized = <span class="keyword">true</span>
                                                    <span class="comment">-- Without this, the following
 </span>                                                   <span class="comment">-- :isvisible() makes no sense
