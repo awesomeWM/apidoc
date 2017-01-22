@@ -183,6 +183,50 @@
 <p>Timer objects and functions.</p>
 <p>
 </p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">-- Create a widget and update its content using the output of a shell
+-- command every 10 seconds:
+local mybatterybar = wibox.widget {
+    {
+        min_value    = 0,
+        max_value    = 100,
+        value        = 0,
+        paddings     = 1,
+        border_width = 1,
+        forced_width = 50,
+        border_color = &quot;#0000ff&quot;,
+        id           = &quot;mypb&quot;,
+        widget       = wibox.widget.progressbar,
+    },
+    {
+        id           = &quot;mytb&quot;,
+        text         = &quot;100%&quot;,
+        widget       = wibox.widget.textbox,
+    },
+    layout      = wibox.layout.stack,
+    set_battery = function(self, val)
+        self.mytb.text  = tonumber(val)..&quot;%&quot;
+        self.mypb.value = tonumber(val)
+    end,
+}
+
+gears.timer {
+    timeout   = 10,
+    autostart = true,
+    callback  = function()
+        -- You should read it from `/sys/class/power_supply/` (on Linux)
+        -- instead of spawning a shell. This is only an example.
+        awful.spawn.easy_async(
+            {&quot;sh&quot;, &quot;-c&quot;, &quot;acpi | sed -n &apos;s/^.*, \([0-9]*\)%/\1/p&apos;&quot;},
+            function(out)
+                mybatterybar.battery = out
+            end
+        )
+    end
+}
+</pre>
+    </ul>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2014 Uli Schlachter</li>
@@ -279,6 +323,22 @@
         <li><span class="parameter">timeout</span>
             <span class="types"><span class="type">number</span></span>
          Timeout in seconds (e.g. 1.5).
+        </li>
+        <li><span class="parameter">autostart</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Automatically start the timer.
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">function</span></span>
+         Callback function to connect to the
+  &ldquo;timeout&rdquo; signal.
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">single_shot</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Run only once then stop.
+         (<em>default</em> false)
         </li>
         </li></ul>
     </ul>
