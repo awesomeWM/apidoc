@@ -317,7 +317,7 @@ they are still supported, but will be removed in the next release.</p>
 +                    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:<span class="backtick"><code>view_only</code></span>() <span class="keyword">end</span>),
 -                    awful.button({ modkey }, <span class="number">1</span>, <span class="backtick"><code>awful.client.movetotag</code></span>),
 +                    awful.button({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
-+                                              <span class="keyword">if</span> <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> <span class="keyword">then</span>
++                                              <span class="keyword">if</span> <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> <span class="keyword">then</span>
 +                                                  <span class="backtick"><code>client.focus:move_to_tag</code></span>(t)
 +                                              <span class="keyword">end</span>
 +                                          <span class="keyword">end</span>),
@@ -337,7 +337,7 @@ they are still supported, but will be removed in the next release.</p>
 -mytasklist.buttons = awful.util.<span class="global">table</span>.join(
 +<span class="keyword">local</span> tasklist_buttons = awful.util.<span class="global">table</span>.join(
                       awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> <span class="keyword">then</span>
+                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> <span class="keyword">then</span>
                                                    c.minimized = <span class="keyword">true</span>
                                                    <span class="comment">-- Without this, the following
 </span>                                                   <span class="comment">-- :isvisible() makes no sense
@@ -435,9 +435,9 @@ previously removed are replaced by custom screens attributes.</p>
 <p>Another dynamic screen related changes.</p>
 
 <pre>
-<span class="comment">-- Prompt
-</span>    awful.key({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () mypromptbox[mouse.screen]:run() <span class="keyword">end</span>),
-    awful.key({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox:run() <span class="keyword">end</span>),
+⠀<span class="comment">-- Prompt
+</span>-    awful.key({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () mypromptbox[mouse.screen]:run() <span class="keyword">end</span>),
++    awful.key({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox:run() <span class="keyword">end</span>),
 </pre>
 
 
@@ -445,20 +445,20 @@ previously removed are replaced by custom screens attributes.</p>
 optional arguments.</p>
 
 <pre>
-awful.key({ modkey }, <span class="string">"x"</span>,
-          <span class="keyword">function</span> ()
-              <span class="backtick"><a href="../libraries/awful.prompt.html#run">awful.prompt.run</a></span>({ prompt = <span class="string">"Run Lua code: "</span> },
-              mypromptbox[mouse.screen].widget,
-              <span class="backtick"><a href="../libraries/awful.util.html#eval">awful.util.eval</a></span>, <span class="keyword">nil</span>,
-              <span class="backtick"><a href="../libraries/awful.util.html#getdir">awful.util.getdir</a></span>(<span class="string">"cache"</span>) .. <span class="string">"/history_eval"</span>)
-          <span class="keyword">end</span>),
-              awful.prompt.run {
-                prompt       = <span class="string">"Run Lua code: "</span>,
-                textbox      = <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox.widget,
-                exe_callback = <span class="backtick"><a href="../libraries/awful.util.html#eval">awful.util.eval</a></span>,
-                history_path = <span class="backtick"><a href="../libraries/awful.util.html#get_cache_dir">awful.util.get_cache_dir</a></span>() .. <span class="string">"/history_eval"</span>
-              }
-          <span class="keyword">end</span>),
+⠀    awful.key({ modkey }, <span class="string">"x"</span>,
+               <span class="keyword">function</span> ()
+-                  <span class="backtick"><a href="../libraries/awful.prompt.html#run">awful.prompt.run</a></span>({ prompt = <span class="string">"Run Lua code: "</span> },
+-                  mypromptbox[mouse.screen].widget,
+-                  <span class="backtick"><a href="../libraries/awful.util.html#eval">awful.util.eval</a></span>, <span class="keyword">nil</span>,
+-                  <span class="backtick"><a href="../libraries/awful.util.html#getdir">awful.util.getdir</a></span>(<span class="string">"cache"</span>) .. <span class="string">"/history_eval"</span>)
+-              <span class="keyword">end</span>),
++                  awful.prompt.run {
++                    prompt       = <span class="string">"Run Lua code: "</span>,
++                    textbox      = <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox.widget,
++                    exe_callback = <span class="backtick"><a href="../libraries/awful.util.html#eval">awful.util.eval</a></span>,
++                    history_path = <span class="backtick"><a href="../libraries/awful.util.html#get_cache_dir">awful.util.get_cache_dir</a></span>() .. <span class="string">"/history_eval"</span>
++                  }
++              <span class="keyword">end</span>),
 </pre>
 
 
