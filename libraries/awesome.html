@@ -252,59 +252,51 @@
 <table class="function_list">
 	<tr>
 	<td class="name" ><a href="#debug::error">debug::error</a></td>
-	<td class="summary">A call into the lua code aborted with an error</td>
+	<td class="summary">A call into the Lua code aborted with an error.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#debug::deprecation">debug::deprecation</a></td>
-	<td class="summary">A deprecated lua function was called</td>
+	<td class="summary">A deprecated Lua function was called.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#debug::index::miss">debug::index::miss</a></td>
-	<td class="summary">An invalid key was read from an object, for example <code>c.foo</code></td>
+	<td class="summary">An invalid key was read from an object.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#debug::newindex::miss">debug::newindex::miss</a></td>
-	<td class="summary">An invalid key was written to an object, for example <code>c.foo = &quot;bar&quot;</code></td>
+	<td class="summary">An invalid key was written to an object.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#systray::update">systray::update</a></td>
-	<td class="summary">
-</td>
+	<td class="summary">The systray should be updated.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wallpaper_changed">wallpaper_changed</a></td>
-	<td class="summary">
-</td>
+	<td class="summary">The wallpaper has just been changed.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#xkb::map_changed">xkb::map_changed</a></td>
-	<td class="summary">
-</td>
+	<td class="summary">Keyboard map has changed.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#xkb::group_changed">xkb::group_changed</a></td>
-	<td class="summary">
-</td>
+	<td class="name" ><a href="#xkb::group_changed.">xkb::group_changed.</a></td>
+	<td class="summary">Keyboard group has changed.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#refresh">refresh</a></td>
-	<td class="summary">
-</td>
+	<td class="summary">Refresh.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#startup">startup</a></td>
-	<td class="summary">
-</td>
+	<td class="summary">Awesome is about to enter the event loop.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#exit">exit</a></td>
-	<td class="summary">
-</td>
+	<td class="summary">Awesome is exiting / about to restart.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#screen::change">screen::change</a></td>
-	<td class="summary">
-</td>
+	<td class="summary">The output status of a screen has changed.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#spawn::canceled">spawn::canceled</a></td>
@@ -742,9 +734,19 @@
     <strong>debug::error</strong>
     </dt>
     <dd>
-    A call into the lua code aborted with an error
+    A call into the Lua code aborted with an error. </p>
+
+<p> This signal is used in the example configuration, <a href="../documentation/05-awesomerc.md.html#">05-awesomerc.md</a>,
+ to let a notification box pop up.
 
 
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">err</span>
+         Table with the error object, can be converted to a string with
+ <code>tostring(err)</code>.
+        </li>
+    </ul>
 
 
 
@@ -756,9 +758,16 @@
     <strong>debug::deprecation</strong>
     </dt>
     <dd>
-    A deprecated lua function was called
+    A deprecated Lua function was called.
 
 
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">hint</span>
+         String with a hint on what to use instead of the
+ deprecated functionality.
+        </li>
+    </ul>
 
 
 
@@ -770,9 +779,20 @@
     <strong>debug::index::miss</strong>
     </dt>
     <dd>
-    An invalid key was read from an object, for example <code>c.foo</code>
+    An invalid key was read from an object. </p>
+
+<p> This can happen if <code>foo</code> in an <code>c.foo</code> access does not exist.
 
 
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">unknown1</span>
+         Class?
+        </li>
+        <li><span class="parameter">unknown2</span>
+         Key?
+        </li>
+    </ul>
 
 
 
@@ -784,9 +804,23 @@
     <strong>debug::newindex::miss</strong>
     </dt>
     <dd>
-    An invalid key was written to an object, for example <code>c.foo = &quot;bar&quot;</code>
+    An invalid key was written to an object. </p>
+
+<p> This can happen if <code>foo</code> in an <code>c.foo = &quot;bar&quot;</code> assignment doesn&rsquo;t exist.
 
 
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">unknown1</span>
+         Class?
+        </li>
+        <li><span class="parameter">unknown2</span>
+         Key?
+        </li>
+        <li><span class="parameter">unknown3</span>
+         Value?
+        </li>
+    </ul>
 
 
 
@@ -798,8 +832,9 @@
     <strong>systray::update</strong>
     </dt>
     <dd>
+    The systray should be updated. </p>
 
-
+<p> This signal is used in <a href="../classes/wibox.widget.systray.html#">wibox.widget.systray</a>.
 
 
 
@@ -813,8 +848,10 @@
     <strong>wallpaper_changed</strong>
     </dt>
     <dd>
+    The wallpaper has just been changed.  This signal is used for</p>
 
-
+<p> pseudo-transparency in <a href="../classes/wibox.drawable.html#">wibox.drawable</a> if no composite manager is
+ running.
 
 
 
@@ -828,8 +865,10 @@
     <strong>xkb::map_changed</strong>
     </dt>
     <dd>
+    Keyboard map has changed. </p>
 
-
+<p> This signal is sent after the new keymap has been loaded. It is used in
+ <a href="../classes/awful.widget.keyboardlayout.html#">awful.widget.keyboardlayout</a> to redraw the layout.
 
 
 
@@ -839,14 +878,21 @@
 
 </dd>
     <dt>
-    <a name = "xkb::group_changed"></a>
-    <strong>xkb::group_changed</strong>
+    <a name = "xkb::group_changed."></a>
+    <strong>xkb::group_changed.</strong>
     </dt>
     <dd>
+    Keyboard group has changed. </p>
+
+<p> It&rsquo;s used in <a href="../classes/awful.widget.keyboardlayout.html#">awful.widget.keyboardlayout</a> to redraw the layout.
 
 
-
-
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">group</span>
+         Integer containing the changed group
+        </li>
+    </ul>
 
 
 
@@ -858,8 +904,10 @@
     <strong>refresh</strong>
     </dt>
     <dd>
+    Refresh. </p>
 
-
+<p> This signal is emitted as a kind of idle signal in the event loop.
+ One example usage is in <a href="../classes/gears.timer.html#">gears.timer</a> to executed delayed calls.
 
 
 
@@ -873,8 +921,9 @@
     <strong>startup</strong>
     </dt>
     <dd>
+    Awesome is about to enter the event loop. </p>
 
-
+<p> This means all initialization has been done.
 
 
 
@@ -888,10 +937,19 @@
     <strong>exit</strong>
     </dt>
     <dd>
+    Awesome is exiting / about to restart. </p>
+
+<p> This signal is emitted in the <code>atexit</code> handler as well when awesome
+ restarts.
 
 
-
-
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">reason_restart</span>
+         Boolean value is true if the signal was sent
+ because of a restart.
+        </li>
+    </ul>
 
 
 
@@ -903,10 +961,20 @@
     <strong>screen::change</strong>
     </dt>
     <dd>
+    The output status of a screen has changed.
 
 
-
-
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">output</span>
+         String containing which output has changed.
+        </li>
+        <li><span class="parameter">connection_state</span>
+         String containing the connection status of
+ the output: It will be either &ldquo;Connected&rdquo;, &ldquo;Disconnected&rdquo; or
+ &ldquo;Unknown&rdquo;.
+        </li>
+    </ul>
 
 
 
