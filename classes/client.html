@@ -528,6 +528,10 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 	<td class="name" ><a href="#client.dockable">client.dockable</a></td>
 	<td class="summary">If the client is dockable.</td>
 	</tr>
+	<tr>
+	<td class="name" ><a href="#client.shape">client.shape</a></td>
+	<td class="summary">Set the client shape.</td>
+	</tr>
 </table>
 <h2><a href="#Signals">Signals</a></h2>
 <table class="function_list">
@@ -926,20 +930,20 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 <h2><a href="#lib_awful_client_shape_Functions">lib.awful.client.shape Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#awful.shape.get_transformed">awful.shape.get_transformed (c, shape_name)</a></td>
+	<td class="name" ><a href="#awful.client.shape.get_transformed">awful.client.shape.get_transformed (c, shape_name)</a></td>
 	<td class="summary">Get one of a client&rsquo;s shapes and transform it to include window decorations.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.shape.update.bounding">awful.shape.update.bounding (c)</a></td>
+	<td class="name" ><a href="#awful.client.shape.update.all">awful.client.shape.update.all (c)</a></td>
+	<td class="summary">Update all of a client&rsquo;s shapes from the shapes the client set itself.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.client.shape.update.bounding">awful.client.shape.update.bounding (c)</a></td>
 	<td class="summary">Update a client&rsquo;s bounding shape from the shape the client set itself.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.shape.update.clip">awful.shape.update.clip (c)</a></td>
+	<td class="name" ><a href="#awful.client.shape.update.clip">awful.client.shape.update.clip (c)</a></td>
 	<td class="summary">Update a client&rsquo;s clip shape from the shape the client set itself.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#awful.shape.update.all">awful.shape.update.all (c)</a></td>
-	<td class="summary">Update all of a client&rsquo;s shapes from the shapes the client set itself.</td>
 	</tr>
 </table>
 <h2><a href="#lib_awful_client_urgent_Functions">lib.awful.client.urgent Functions</a></h2>
@@ -2888,6 +2892,31 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 </dd>
+    <dt>
+    <a name = "client.shape"></a>
+    <strong>client.shape</strong>
+    </dt>
+    <dd>
+    Set the client shape.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">A</span>
+            <span class="types"><span class="type">gears.shape</span></span>
+         gears.shape compatible function.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.shape.html#">gears.shape</a>
+    </ul>
+
+
+</dd>
 </dl>
     <h2 class="section-header "><a name="Signals"></a>Signals</h2>
 
@@ -4006,7 +4035,7 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#awful.client.get_transient_for_matching">client.get_transient_for_matching</a>
+         <a href="../classes/client.html#client:get_transient_for_matching">client.get_transient_for_matching</a>
     </ul>
 
 
@@ -4950,8 +4979,8 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
 
     <dl class="function">
     <dt>
-    <a name = "awful.shape.get_transformed"></a>
-    <strong>awful.shape.get_transformed (c, shape_name)</strong>
+    <a name = "awful.client.shape.get_transformed"></a>
+    <strong>awful.client.shape.get_transformed (c, shape_name)</strong>
     </dt>
     <dd>
     Get one of a client&rsquo;s shapes and transform it to include window decorations.
@@ -4974,8 +5003,28 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
 
 </dd>
     <dt>
-    <a name = "awful.shape.update.bounding"></a>
-    <strong>awful.shape.update.bounding (c)</strong>
+    <a name = "awful.client.shape.update.all"></a>
+    <strong>awful.client.shape.update.all (c)</strong>
+    </dt>
+    <dd>
+    Update all of a client&rsquo;s shapes from the shapes the client set itself.
+
+
+    <ul>
+        <li><span class="parameter">c</span>
+            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
+         The client to act on
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.client.shape.update.bounding"></a>
+    <strong>awful.client.shape.update.bounding (c)</strong>
     </dt>
     <dd>
     Update a client&rsquo;s bounding shape from the shape the client set itself.
@@ -4994,31 +5043,11 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
 
 </dd>
     <dt>
-    <a name = "awful.shape.update.clip"></a>
-    <strong>awful.shape.update.clip (c)</strong>
+    <a name = "awful.client.shape.update.clip"></a>
+    <strong>awful.client.shape.update.clip (c)</strong>
     </dt>
     <dd>
     Update a client&rsquo;s clip shape from the shape the client set itself.
-
-
-    <ul>
-        <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
-         The client to act on
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "awful.shape.update.all"></a>
-    <strong>awful.shape.update.all (c)</strong>
-    </dt>
-    <dd>
-    Update all of a client&rsquo;s shapes from the shapes the client set itself.
 
 
     <ul>
