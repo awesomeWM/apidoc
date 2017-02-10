@@ -33,6 +33,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
+<li><a href="#Theme_variables">Theme variables</a></li>
 <li><a href="#Fields">Fields</a></li>
 </ul>
 
@@ -190,15 +191,15 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#new">new ()</a></td>
+	<td class="name" ><a href="#new">new ([args])</a></td>
 	<td class="summary">Create an instance of widget with hotkeys help.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#widget_instance.show_help">widget_instance.show_help ([c[, s]])</a></td>
+	<td class="name" ><a href="#widget_instance:show_help">widget_instance:show_help ([c[, s]])</a></td>
 	<td class="summary">Show popup with hotkeys help.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#widget_instance.add_hotkeys">widget_instance.add_hotkeys (hotkeys)</a></td>
+	<td class="name" ><a href="#widget_instance:add_hotkeys">widget_instance:add_hotkeys (hotkeys)</a></td>
 	<td class="summary">Add hotkey descriptions for third-party applications.</td>
 	</tr>
 	<tr>
@@ -209,6 +210,53 @@
 	<td class="name" ><a href="#add_hotkeys">add_hotkeys (hotkeys)</a></td>
 	<td class="summary">Add hotkey descriptions for third-party applications
  (default widget instance will be used).</td>
+	</tr>
+</table>
+<h2><a href="#Theme_variables">Theme variables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_bg">beautiful.hotkeys_bg</a></td>
+	<td class="summary">Hotkeys widget background color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_fg">beautiful.hotkeys_fg</a></td>
+	<td class="summary">Hotkeys widget foreground color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_border_width">beautiful.hotkeys_border_width</a></td>
+	<td class="summary">Hotkeys widget border width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_border_color">beautiful.hotkeys_border_color</a></td>
+	<td class="summary">Hotkeys widget border color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_shape">beautiful.hotkeys_shape</a></td>
+	<td class="summary">Hotkeys widget shape.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_modifiers_fg">beautiful.hotkeys_modifiers_fg</a></td>
+	<td class="summary">Foreground color used for hotkey modifiers (Ctrl, Alt, Super, etc).</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_label_bg">beautiful.hotkeys_label_bg</a></td>
+	<td class="summary">Background color used for miscellaneous labels of hotkeys widget.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_label_fg">beautiful.hotkeys_label_fg</a></td>
+	<td class="summary">Foreground color used for hotkey groups and other labels.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_font">beautiful.hotkeys_font</a></td>
+	<td class="summary">Main hotkeys widget font.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_description_font">beautiful.hotkeys_description_font</a></td>
+	<td class="summary">Font used for hotkeys' descriptions.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.hotkeys_group_margin">beautiful.hotkeys_group_margin</a></td>
+	<td class="summary">Margin between hotkeys groups.</td>
 	</tr>
 </table>
 <h2><a href="#Fields">Fields</a></h2>
@@ -233,17 +281,110 @@
     <dl class="function">
     <dt>
     <a name = "new"></a>
-    <strong>new ()</strong>
+    <strong>new ([args])</strong>
     </dt>
     <dd>
     Create an instance of widget with hotkeys help.
 
 
+    <ul>
+        <li><span class="parameter">args</span> Configuration options for the widget.
+        <ul>
+        <li><span class="parameter">hide_without_description</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Don&rsquo;t show hotkeys without descriptions.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">merge_duplicates</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Merge hotkey records into one if
+ they have the same modifiers and description.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">int</span></span>
+         Widget width.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">int</span></span>
+         Widget height.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">bg</span>
+            <span class="types"><span class="type">color</span></span>
+         Widget background color.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Widget foreground color.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">border_width</span>
+            <span class="types"><span class="type">int</span></span>
+         Border width.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">border_color</span>
+            <span class="types"><span class="type">color</span></span>
+         Border color.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">gears.shape</span></span>
+         Widget shape.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">font</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">lgi.Pango.FontDescription</span></span>
+         Main widget font.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">description_font</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">lgi.Pango.FontDescription</span></span>
+         Font used for hotkeys' descriptions.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">modifiers_fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Foreground color used for hotkey
+ modifiers (Ctrl, Alt, Super, etc).
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">label_bg</span>
+            <span class="types"><span class="type">color</span></span>
+         Background color used for miscellaneous labels.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">label_fg</span>
+            <span class="types"><span class="type">color</span></span>
+         Foreground color used for group and other
+ labels.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">group_margin</span>
+            <span class="types"><span class="type">int</span></span>
+         Margin between hotkeys groups.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">labels</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Labels used for displaying human-readable keynames.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">group_rules</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Rules for showing 3rd-party hotkeys. @see <a href="../libraries/awful.hotkeys_popup.keys.vim.html#">awful.hotkeys_popup.keys.vim</a>.
+         (<em>optional</em>)
+        </li>
+        </li></ul>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        widget instance.
+        Widget instance.
     </ol>
 
 
@@ -251,8 +392,8 @@
 
 </dd>
     <dt>
-    <a name = "widget_instance.show_help"></a>
-    <strong>widget_instance.show_help ([c[, s]])</strong>
+    <a name = "widget_instance:show_help"></a>
+    <strong>widget_instance:show_help ([c[, s]])</strong>
     </dt>
     <dd>
     Show popup with hotkeys help.
@@ -277,8 +418,8 @@
 
 </dd>
     <dt>
-    <a name = "widget_instance.add_hotkeys"></a>
-    <strong>widget_instance.add_hotkeys (hotkeys)</strong>
+    <a name = "widget_instance:add_hotkeys"></a>
+    <strong>widget_instance:add_hotkeys (hotkeys)</strong>
     </dt>
     <dd>
     Add hotkey descriptions for third-party applications.
@@ -346,6 +487,257 @@
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Theme_variables"></a>Theme variables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "beautiful.hotkeys_bg"></a>
+    <strong>beautiful.hotkeys_bg</strong>
+    </dt>
+    <dd>
+    Hotkeys widget background color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_bg</span>
+            <span class="types"><span class="type">color</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.hotkeys_fg"></a>
+    <strong>beautiful.hotkeys_fg</strong>
+    </dt>
+    <dd>
+    Hotkeys widget foreground color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_fg</span>
+            <span class="types"><span class="type">color</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.hotkeys_border_width"></a>
+    <strong>beautiful.hotkeys_border_width</strong>
+    </dt>
+    <dd>
+    Hotkeys widget border width.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_border_width</span>
+            <span class="types"><span class="type">int</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.hotkeys_border_color"></a>
+    <strong>beautiful.hotkeys_border_color</strong>
+    </dt>
+    <dd>
+    Hotkeys widget border color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_border_color</span>
+            <span class="types"><span class="type">color</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.hotkeys_shape"></a>
+    <strong>beautiful.hotkeys_shape</strong>
+    </dt>
+    <dd>
+    Hotkeys widget shape.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_shape</span>
+            <span class="types"><span class="type">gears.shape</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.shape.html#">gears.shape</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.hotkeys_modifiers_fg"></a>
+    <strong>beautiful.hotkeys_modifiers_fg</strong>
+    </dt>
+    <dd>
+    Foreground color used for hotkey modifiers (Ctrl, Alt, Super, etc).
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_modifiers_fg</span>
+            <span class="types"><span class="type">color</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.hotkeys_label_bg"></a>
+    <strong>beautiful.hotkeys_label_bg</strong>
+    </dt>
+    <dd>
+    Background color used for miscellaneous labels of hotkeys widget.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_label_bg</span>
+            <span class="types"><span class="type">color</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.hotkeys_label_fg"></a>
+    <strong>beautiful.hotkeys_label_fg</strong>
+    </dt>
+    <dd>
+    Foreground color used for hotkey groups and other labels.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_label_fg</span>
+            <span class="types"><span class="type">color</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.hotkeys_font"></a>
+    <strong>beautiful.hotkeys_font</strong>
+    </dt>
+    <dd>
+    Main hotkeys widget font.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_font</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">lgi.Pango.FontDescription</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.hotkeys_description_font"></a>
+    <strong>beautiful.hotkeys_description_font</strong>
+    </dt>
+    <dd>
+    Font used for hotkeys' descriptions.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_description_font</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">lgi.Pango.FontDescription</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.hotkeys_group_margin"></a>
+    <strong>beautiful.hotkeys_group_margin</strong>
+    </dt>
+    <dd>
+    Margin between hotkeys groups.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hotkeys_group_margin</span>
+            <span class="types"><span class="type">int</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Fields"></a>Fields</h2>
 
     <dl class="function">
@@ -385,7 +777,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-02-08 21:36:38 </i>
+<i style="float:right;">Last updated 2017-02-10 18:53:37 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
