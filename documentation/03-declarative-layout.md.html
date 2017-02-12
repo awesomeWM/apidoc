@@ -401,6 +401,40 @@ there is an <code>s</code> variable represent to define the current screen. Any 
 logic expression can be used as long as it returns a valid widget or a
 declarative layout, or <code>nil</code>.</p>
 
+<h3>Composite widgets</h3>
+
+<p><img src="../images/AUTOGEN_wibox_widget_progressbar_encapsulation.svg" alt="Usage example" /></p>
+
+<pre>
+<span class="comment">-- The progressbars will be on top of each other
+</span> <span class="keyword">local</span> mycpubar1 = wibox.widget {
+    { value  = <span class="number">0.2</span>, color = grad1,
+        widget = wibox.widget.progressbar },
+    { value  = <span class="number">0.4</span>, color = grad2,
+        widget = wibox.widget.progressbar },
+    { value  = <span class="number">0.6</span>, color = grad3,
+        widget = wibox.widget.progressbar },
+    layout = wibox.layout.flex.vertical,
+ }
+<span class="comment">-- Now, add a rotate container, the height will become the width.
+</span><span class="comment">-- It act as if the <a href="../classes/wibox.layout.flex.html#wibox.layout.flex.vertical">wibox.layout.flex.vertical</a> was
+</span><span class="comment">-- <a href="../classes/wibox.layout.flex.html#wibox.layout.flex.horizontal">wibox.layout.flex.horizontal</a>
+</span> <span class="keyword">local</span> mycpubar2 = wibox.widget {
+    {
+        { value  = <span class="number">0.2</span>, color = grad1,
+            widget = wibox.widget.progressbar },
+        { value  = <span class="number">0.4</span>, color = grad2,
+            widget = wibox.widget.progressbar },
+        { value  = <span class="number">0.6</span>, color = grad3,
+            widget = wibox.widget.progressbar },
+        layout = wibox.layout.flex.vertical,
+    },
+    direction = <span class="string">'east'</span>,
+    widget    = wibox.container.rotate
+ }
+</pre>
+
+
 <h3>Define widgets inline and place them</h3>
 
 <ul>
