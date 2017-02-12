@@ -143,6 +143,7 @@
   <li><a href="../classes/wibox.container.constraint.html">wibox.container.constraint</a></li>
   <li><a href="../classes/wibox.container.margin.html">wibox.container.margin</a></li>
   <li><a href="../classes/wibox.container.mirror.html">wibox.container.mirror</a></li>
+  <li><a href="../classes/wibox.container.place.html">wibox.container.place</a></li>
   <li><a href="../classes/wibox.container.radialprogressbar.html">wibox.container.radialprogressbar</a></li>
   <li><a href="../classes/wibox.container.rotate.html">wibox.container.rotate</a></li>
   <li><a href="../classes/wibox.container.scroll.html">wibox.container.scroll</a></li>
@@ -334,7 +335,7 @@ they are still supported, but will be removed in the next release.</p>
 +                    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:<span class="backtick"><code>view_only</code></span>() <span class="keyword">end</span>),
 -                    awful.button({ modkey }, <span class="number">1</span>, <span class="backtick"><code>awful.client.movetotag</code></span>),
 +                    awful.button({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
-+                                              <span class="keyword">if</span> <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> <span class="keyword">then</span>
++                                              <span class="keyword">if</span> <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> <span class="keyword">then</span>
 +                                                  <span class="backtick"><code>client.focus:move_to_tag</code></span>(t)
 +                                              <span class="keyword">end</span>
 +                                          <span class="keyword">end</span>),
@@ -354,7 +355,7 @@ they are still supported, but will be removed in the next release.</p>
 -mytasklist.buttons = awful.util.<span class="global">table</span>.join(
 +<span class="keyword">local</span> tasklist_buttons = awful.util.<span class="global">table</span>.join(
                       awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> <span class="keyword">then</span>
+                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> <span class="keyword">then</span>
                                                    c.minimized = <span class="keyword">true</span>
                                                <span class="keyword">else</span>
                                                    <span class="comment">-- Without this, the following
@@ -367,7 +368,7 @@ they are still supported, but will be removed in the next release.</p>
                                                    <span class="keyword">end</span>
                                                    <span class="comment">-- This will also un-minimize
 </span>                                                   <span class="comment">-- the client, if needed
-</span>                                                   <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> = c
+</span>                                                   <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> = c
                                                    c:raise()
                                                <span class="keyword">end</span>
                                            <span class="keyword">end</span>),
@@ -578,7 +579,7 @@ now access tags by name.</p>
 
 
 <p>If you need to get the current client object in global context, currently you can use
-<a href="../classes/client.html#client.focus">client.focus</a> for it. E.g., to mark/unmark the client:</p>
+<a href="../classes/client.html#.focus">client.focus</a> for it. E.g., to mark/unmark the client:</p>
 
 <pre>
 -    awful.client.mark()
