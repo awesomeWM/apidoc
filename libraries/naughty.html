@@ -33,6 +33,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
+<li><a href="#Theme_variables">Theme variables</a></li>
 <li><a href="#Tables">Tables</a></li>
 </ul>
 
@@ -225,6 +226,49 @@
 	<tr>
 	<td class="name" ><a href="#notify">notify (args)</a></td>
 	<td class="summary">Create a notification.</td>
+	</tr>
+</table>
+<h2><a href="#Theme_variables">Theme variables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#beautiful.notification_font">beautiful.notification_font</a></td>
+	<td class="summary">Notifications font.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.notification_bg">beautiful.notification_bg</a></td>
+	<td class="summary">Notifications background color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.notification_fg">beautiful.notification_fg</a></td>
+	<td class="summary">Notifications foreground color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.notification_border_width">beautiful.notification_border_width</a></td>
+	<td class="summary">Notifications border width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.notification_border_color">beautiful.notification_border_color</a></td>
+	<td class="summary">Notifications border color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.notification_shape">beautiful.notification_shape</a></td>
+	<td class="summary">Notifications shape.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.notification_opacity">beautiful.notification_opacity</a></td>
+	<td class="summary">Notifications opacity.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.notification_margin">beautiful.notification_margin</a></td>
+	<td class="summary">Notifications margin.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.notification_width">beautiful.notification_width</a></td>
+	<td class="summary">Notifications width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.notification_height">beautiful.notification_height</a></td>
+	<td class="summary">Notifications height.</td>
 	</tr>
 </table>
 <h2><a href="#Tables">Tables</a></h2>
@@ -475,17 +519,17 @@
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">int</span></span>
          Popup height.
-         (<em>default</em> auto)
+         (<em>default</em> `beautiful.notification_height` or auto)
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">int</span></span>
          Popup width.
-         (<em>default</em> auto)
+         (<em>default</em> `beautiful.notification_width` or auto)
         </li>
         <li><span class="parameter">font</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          Notification font.
-         (<em>default</em> beautiful.font or awesome.font)
+         (<em>default</em> `beautiful.notification_font` or `beautiful.font` or `awesome.font`)
         </li>
         <li><span class="parameter">icon</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
@@ -500,22 +544,37 @@
         <li><span class="parameter">fg</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          Foreground color.
-         (<em>default</em> `beautiful.fg_focus` or `'#ffffff'`)
+         (<em>default</em> `beautiful.notification_fg` or `beautiful.fg_focus` or `'#ffffff'`)
         </li>
         <li><span class="parameter">bg</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          Background color.
-         (<em>default</em> `beautiful.bg_focus` or `'#535d6c'`)
+         (<em>default</em> `beautiful.notification_fg` or `beautiful.bg_focus` or `'#535d6c'`)
         </li>
         <li><span class="parameter">border_width</span>
             <span class="types"><span class="type">int</span></span>
          Border width.
-         (<em>default</em> 1)
+         (<em>default</em> `beautiful.notification_border_width` or 1)
         </li>
         <li><span class="parameter">border_color</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          Border color.
-         (<em>default</em> `beautiful.border_focus` or `'#535d6c'`)
+         (<em>default</em> `beautiful.notification_border_color` or `beautiful.border_focus` or `'#535d6c'`)
+        </li>
+        <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">gears.shape</span></span>
+         Widget shape.
+         (<em>default</em> `beautiful.notification_shape`)
+        </li>
+        <li><span class="parameter">opacity</span>
+            <span class="types"><span class="type">gears.opacity</span></span>
+         Widget opacity.
+         (<em>default</em> `beautiful.notification_opacity`)
+        </li>
+        <li><span class="parameter">margin</span>
+            <span class="types"><span class="type">gears.margin</span></span>
+         Widget margin.
+         (<em>default</em> `beautiful.notification_margin`)
         </li>
         <li><span class="parameter">run</span>
             <span class="types"><span class="type">func</span></span>
@@ -573,6 +632,236 @@
     <ul>
         <pre class="example">naughty.notify({ title = <span class="string">"Achtung!"</span>, text = <span class="string">"You're idling"</span>, timeout = <span class="number">0</span> })</pre>
     </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Theme_variables"></a>Theme variables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "beautiful.notification_font"></a>
+    <strong>beautiful.notification_font</strong>
+    </dt>
+    <dd>
+    Notifications font.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">notification_font</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">lgi.Pango.FontDescription</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.notification_bg"></a>
+    <strong>beautiful.notification_bg</strong>
+    </dt>
+    <dd>
+    Notifications background color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">notification_bg</span>
+            <span class="types"><span class="type">color</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.notification_fg"></a>
+    <strong>beautiful.notification_fg</strong>
+    </dt>
+    <dd>
+    Notifications foreground color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">notification_fg</span>
+            <span class="types"><span class="type">color</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.notification_border_width"></a>
+    <strong>beautiful.notification_border_width</strong>
+    </dt>
+    <dd>
+    Notifications border width.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">notification_border_width</span>
+            <span class="types"><span class="type">int</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.notification_border_color"></a>
+    <strong>beautiful.notification_border_color</strong>
+    </dt>
+    <dd>
+    Notifications border color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">notification_border_color</span>
+            <span class="types"><span class="type">color</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.notification_shape"></a>
+    <strong>beautiful.notification_shape</strong>
+    </dt>
+    <dd>
+    Notifications shape.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">notification_shape</span>
+            <span class="types"><span class="type">gears.shape</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.shape.html#">gears.shape</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.notification_opacity"></a>
+    <strong>beautiful.notification_opacity</strong>
+    </dt>
+    <dd>
+    Notifications opacity.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">notification_opacity</span>
+            <span class="types"><span class="type">int</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.notification_margin"></a>
+    <strong>beautiful.notification_margin</strong>
+    </dt>
+    <dd>
+    Notifications margin.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">notification_margin</span>
+            <span class="types"><span class="type">int</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.notification_width"></a>
+    <strong>beautiful.notification_width</strong>
+    </dt>
+    <dd>
+    Notifications width.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">notification_width</span>
+            <span class="types"><span class="type">int</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.notification_height"></a>
+    <strong>beautiful.notification_height</strong>
+    </dt>
+    <dd>
+    Notifications height.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">notification_height</span>
+            <span class="types"><span class="type">int</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+
 
 </dd>
 </dl>
