@@ -35,7 +35,6 @@
 <li><a href="#Functions">Functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Signals">Signals</a></li>
-<li><a href="#Tables">Tables</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
 
@@ -76,10 +75,10 @@
   <li><a href="../classes/wibox.container.constraint.html">wibox.container.constraint</a></li>
   <li><a href="../classes/wibox.container.margin.html">wibox.container.margin</a></li>
   <li><a href="../classes/wibox.container.mirror.html">wibox.container.mirror</a></li>
-  <li><a href="../classes/wibox.container.place.html">wibox.container.place</a></li>
+  <li><strong>wibox.container.place</strong></li>
   <li><a href="../classes/wibox.container.radialprogressbar.html">wibox.container.radialprogressbar</a></li>
   <li><a href="../classes/wibox.container.rotate.html">wibox.container.rotate</a></li>
-  <li><strong>wibox.container.scroll</strong></li>
+  <li><a href="../classes/wibox.container.scroll.html">wibox.container.scroll</a></li>
   <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
   <li><a href="../classes/wibox.layout.align.html">wibox.layout.align</a></li>
   <li><a href="../classes/wibox.layout.constraint.html">wibox.layout.constraint</a></li>
@@ -180,66 +179,68 @@
 
 <div id="content">
 
-<h1>Class <code>wibox.container.scroll</code></h1>
-<p>
-</p>
-<p>
-</p>
+<h1>Class <code>wibox.container.place</code></h1>
+<p>A container used to place smaller widgets into larger space.</p>
+<p><img src="../images/AUTOGEN_wibox_container_defaults_place.svg" alt="Usage example" /></p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2015 Uli Schlachter</li>
-        <li><strong>Author</strong>: Uli Schlachter (based on ideas from Saleur Geoffrey)</li>
+        <li><strong>Copyright</strong>: 2016 Emmanuel Lepage Vallee</li>
+        <li><strong>Release</strong>: master-g6d00d34</li>
+        <li><strong>Author</strong>: Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
     </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#scroll.step_functions.linear_increase">scroll.step_functions.linear_increase (elapsed, size, _, speed, extra_space)</a></td>
-	<td class="summary">A step function that scrolls the widget in an increasing direction with
- constant speed.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#scroll.step_functions.linear_decrease">scroll.step_functions.linear_decrease (elapsed, size, _, speed, extra_space)</a></td>
-	<td class="summary">A step function that scrolls the widget in an decreasing direction with
- constant speed.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#scroll.step_functions.linear_back_and_forth">scroll.step_functions.linear_back_and_forth (elapsed, size, visible_size, speed)</a></td>
-	<td class="summary">A step function that scrolls the widget to its end and back to its
- beginning, then back to its end, etc.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#scroll.step_functions.nonlinear_back_and_forth">scroll.step_functions.nonlinear_back_and_forth (elapsed, size, visible_size, speed)</a></td>
-	<td class="summary">A step function that scrolls the widget to its end and back to its
- beginning, then back to its end, etc.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#scroll.step_functions.waiting_nonlinear_back_and_forth">scroll.step_functions.waiting_nonlinear_back_and_forth (elapsed, size, visible_size, speed)</a></td>
-	<td class="summary">A step function that scrolls the widget to its end and back to its
- beginning, then back to its end, etc.</td>
+	<td class="name" ><a href="#wibox.container.place">wibox.container.place ([widget[, halign="center"[, valign="center"]]])</a></td>
+	<td class="summary">Returns a new place container.</td>
 	</tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll.widget">wibox.container.scroll.widget</a></td>
-	<td class="summary">The widget to be scrolled.</td>
+	<td class="name" ><a href="#wibox.container.place.widget">wibox.container.place.widget</a></td>
+	<td class="summary">The widget to be placed.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll.forced_height">wibox.container.scroll.forced_height</a></td>
+	<td class="name" ><a href="#wibox.container.place.valign">wibox.container.place.valign</a></td>
+	<td class="summary">The vertical alignment.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.container.place.halign">wibox.container.place.halign</a></td>
+	<td class="summary">The horizontal alignment.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.container.place.fill_vertical">wibox.container.place.fill_vertical</a></td>
+	<td class="summary">Fill the vertical space.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.container.place.fill_horizontal">wibox.container.place.fill_horizontal</a></td>
+	<td class="summary">Fill the horizontal space.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.container.place.content_fill_vertical">wibox.container.place.content_fill_vertical</a></td>
+	<td class="summary">Stretch the contained widget so it takes all the vertical space.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.container.place.content_fill_horizontal">wibox.container.place.content_fill_horizontal</a></td>
+	<td class="summary">Stretch the contained widget so it takes all the horizontal space.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.container.place.forced_height">wibox.container.place.forced_height</a></td>
 	<td class="summary">Force a widget height.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll.forced_width">wibox.container.scroll.forced_width</a></td>
+	<td class="name" ><a href="#wibox.container.place.forced_width">wibox.container.place.forced_width</a></td>
 	<td class="summary">Force a widget width.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll.opacity">wibox.container.scroll.opacity</a></td>
+	<td class="name" ><a href="#wibox.container.place.opacity">wibox.container.place.opacity</a></td>
 	<td class="summary">The widget opacity (transparency).</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll.visible">wibox.container.scroll.visible</a></td>
+	<td class="name" ><a href="#wibox.container.place.visible">wibox.container.place.visible</a></td>
 	<td class="summary">The widget visibility.</td>
 	</tr>
 </table>
@@ -270,113 +271,56 @@
 	<td class="summary">When the mouse leave a widget.</td>
 	</tr>
 </table>
-<h2><a href="#Tables">Tables</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll.step_functions">wibox.container.scroll.step_functions</a></td>
-	<td class="summary">A selection of step functions</td>
-	</tr>
-</table>
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:pause">wibox.container.scroll:pause ()</a></td>
-	<td class="summary">Pause the scrolling animation.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:continue">wibox.container.scroll:continue ()</a></td>
-	<td class="summary">Continue the scrolling animation.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:reset_scrolling">wibox.container.scroll:reset_scrolling ()</a></td>
-	<td class="summary">Reset the scrolling state to its initial condition.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:set_direction">wibox.container.scroll:set_direction (dir)</a></td>
-	<td class="summary">Set the direction in which this widget scroll.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:get_children">wibox.container.scroll:get_children ()</a></td>
+	<td class="name" ><a href="#wibox.container.place:get_children">wibox.container.place:get_children ()</a></td>
 	<td class="summary">Get the number of children element</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:set_children">wibox.container.scroll:set_children (children)</a></td>
+	<td class="name" ><a href="#wibox.container.place:set_children">wibox.container.place:set_children (children)</a></td>
 	<td class="summary">Replace the layout children
  This layout only accept one children, all others will be ignored</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:set_expand">wibox.container.scroll:set_expand (expand)</a></td>
-	<td class="summary">Specify the expand mode that is used for extra space.</td>
+	<td class="name" ><a href="#wibox.container.place:reset">wibox.container.place:reset ()</a></td>
+	<td class="summary">Reset this layout.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:set_fps">wibox.container.scroll:set_fps (fps)</a></td>
-	<td class="summary">Set the number of frames per second that this widget should draw.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:set_extra_space">wibox.container.scroll:set_extra_space (extra_space)</a></td>
-	<td class="summary">Set the amount of extra space that should be included in the scrolling.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:set_speed">wibox.container.scroll:set_speed (speed)</a></td>
-	<td class="summary">Set the speed of the scrolling animation.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:set_max_size">wibox.container.scroll:set_max_size (max_size)</a></td>
-	<td class="summary">Set the maximum size of this widget in the direction set by
- <a href="../classes/wibox.container.scroll.html#wibox.container.scroll:set_direction">set_direction</a>.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:set_step_function">wibox.container.scroll:set_step_function (step_function)</a></td>
-	<td class="summary">Set the step function that determines the exact behaviour of the scrolling
- animation.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:set_space_for_scrolling">wibox.container.scroll:set_space_for_scrolling (space_for_scrolling)</a></td>
-	<td class="summary">Set an upper limit for the space for scrolling.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:horizontal">wibox.container.scroll:horizontal ([widget[, fps=20[, speed=10[, extra_space=0[, expand=false[, max_size[, step_function=step_functions.linear_increase[, space_for_scrolling=2^1024]]]]]]]])</a></td>
-	<td class="summary">Get a new horizontal scrolling container.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:vertical">wibox.container.scroll:vertical ([widget[, fps=20[, speed=10[, extra_space=0[, expand=false[, max_size[, step_function=step_functions.linear_increase[, space_for_scrolling=2^1024]]]]]]]])</a></td>
-	<td class="summary">Get a new vertical scrolling container.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:index">wibox.container.scroll:index (widget[, recursive[, ...]])</a></td>
+	<td class="name" ><a href="#wibox.container.place:index">wibox.container.place:index (widget[, recursive[, ...]])</a></td>
 	<td class="summary">Get a widex index.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:get_all_children">wibox.container.scroll:get_all_children ()</a></td>
+	<td class="name" ><a href="#wibox.container.place:get_all_children">wibox.container.place:get_all_children ()</a></td>
 	<td class="summary">Get all direct and indirect children widgets.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:setup">wibox.container.scroll:setup (args)</a></td>
+	<td class="name" ><a href="#wibox.container.place:setup">wibox.container.place:setup (args)</a></td>
 	<td class="summary">Set a declarative widget hierarchy description.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:buttons">wibox.container.scroll:buttons (_buttons)</a></td>
+	<td class="name" ><a href="#wibox.container.place:buttons">wibox.container.place:buttons (_buttons)</a></td>
 	<td class="summary">Set/get a widget&rsquo;s buttons.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:emit_signal_recursive">wibox.container.scroll:emit_signal_recursive (signal_name, ...)</a></td>
+	<td class="name" ><a href="#wibox.container.place:emit_signal_recursive">wibox.container.place:emit_signal_recursive (signal_name, ...)</a></td>
 	<td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
  forward the signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:disconnect_signal">wibox.container.scroll:disconnect_signal (name, func)</a></td>
+	<td class="name" ><a href="#wibox.container.place:disconnect_signal">wibox.container.place:disconnect_signal (name, func)</a></td>
 	<td class="summary">Disconnect to a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:emit_signal">wibox.container.scroll:emit_signal (name, ...)</a></td>
+	<td class="name" ><a href="#wibox.container.place:emit_signal">wibox.container.place:emit_signal (name, ...)</a></td>
 	<td class="summary">Emit a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:connect_signal">wibox.container.scroll:connect_signal (name, func)</a></td>
+	<td class="name" ><a href="#wibox.container.place:connect_signal">wibox.container.place:connect_signal (name, func)</a></td>
 	<td class="summary">Connect to a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.container.scroll:weak_connect_signal">wibox.container.scroll:weak_connect_signal (name, func)</a></td>
+	<td class="name" ><a href="#wibox.container.place:weak_connect_signal">wibox.container.place:weak_connect_signal (name, func)</a></td>
 	<td class="summary">Connect to a signal weakly.</td>
 	</tr>
 </table>
@@ -389,175 +333,36 @@
     Methods
     <dl class="function">
     <dt>
-    <a name = "scroll.step_functions.linear_increase"></a>
-    <strong>scroll.step_functions.linear_increase (elapsed, size, _, speed, extra_space)</strong>
+    <a name = "wibox.container.place"></a>
+    <strong>wibox.container.place ([widget[, halign="center"[, valign="center"]]])</strong>
     </dt>
     <dd>
-    A step function that scrolls the widget in an increasing direction with
- constant speed.
+    Returns a new place container.
 
 
     <ul>
-        <li><span class="parameter">elapsed</span>
-
-
+        <li><span class="parameter">widget</span>
+         The widget to display.
+         (<em>optional</em>)
         </li>
-        <li><span class="parameter">size</span>
-
-
+        <li><span class="parameter">halign</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The horizontal alignment
+         (<em>default</em> "center")
         </li>
-        <li><span class="parameter">_</span>
-
-
-        </li>
-        <li><span class="parameter">speed</span>
-
-
-        </li>
-        <li><span class="parameter">extra_space</span>
-
-
+        <li><span class="parameter">valign</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The vertical alignment
+         (<em>default</em> "center")
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
 
-
-
-
-</dd>
-    <dt>
-    <a name = "scroll.step_functions.linear_decrease"></a>
-    <strong>scroll.step_functions.linear_decrease (elapsed, size, _, speed, extra_space)</strong>
-    </dt>
-    <dd>
-    A step function that scrolls the widget in an decreasing direction with
- constant speed.
-
-
-    <ul>
-        <li><span class="parameter">elapsed</span>
-
-
-        </li>
-        <li><span class="parameter">size</span>
-
-
-        </li>
-        <li><span class="parameter">_</span>
-
-
-        </li>
-        <li><span class="parameter">speed</span>
-
-
-        </li>
-        <li><span class="parameter">extra_space</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "scroll.step_functions.linear_back_and_forth"></a>
-    <strong>scroll.step_functions.linear_back_and_forth (elapsed, size, visible_size, speed)</strong>
-    </dt>
-    <dd>
-    A step function that scrolls the widget to its end and back to its
- beginning, then back to its end, etc.  The speed is constant.
-
-
-    <ul>
-        <li><span class="parameter">elapsed</span>
-
-
-        </li>
-        <li><span class="parameter">size</span>
-
-
-        </li>
-        <li><span class="parameter">visible_size</span>
-
-
-        </li>
-        <li><span class="parameter">speed</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "scroll.step_functions.nonlinear_back_and_forth"></a>
-    <strong>scroll.step_functions.nonlinear_back_and_forth (elapsed, size, visible_size, speed)</strong>
-    </dt>
-    <dd>
-    A step function that scrolls the widget to its end and back to its
- beginning, then back to its end, etc.  The speed is null at the ends and
- maximal in the middle.
-
-
-    <ul>
-        <li><span class="parameter">elapsed</span>
-
-
-        </li>
-        <li><span class="parameter">size</span>
-
-
-        </li>
-        <li><span class="parameter">visible_size</span>
-
-
-        </li>
-        <li><span class="parameter">speed</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "scroll.step_functions.waiting_nonlinear_back_and_forth"></a>
-    <strong>scroll.step_functions.waiting_nonlinear_back_and_forth (elapsed, size, visible_size, speed)</strong>
-    </dt>
-    <dd>
-    A step function that scrolls the widget to its end and back to its
- beginning, then back to its end, etc.  The speed is null at the ends and
- maximal in the middle. At both ends the widget stands still for a moment.
-
-
-    <ul>
-        <li><span class="parameter">elapsed</span>
-
-
-        </li>
-        <li><span class="parameter">size</span>
-
-
-        </li>
-        <li><span class="parameter">visible_size</span>
-
-
-        </li>
-        <li><span class="parameter">speed</span>
-
-
-        </li>
-    </ul>
-
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A new place container.
+    </ol>
 
 
 
@@ -568,17 +373,17 @@
 
     <dl class="function">
     <dt>
-    <a name = "wibox.container.scroll.widget"></a>
-    <strong>wibox.container.scroll.widget</strong>
+    <a name = "wibox.container.place.widget"></a>
+    <strong>wibox.container.place.widget</strong>
     </dt>
     <dd>
-    The widget to be scrolled.
+    The widget to be placed.
 
 
     <h3>Type:</h3>
     <ul>
         <li><span class="parameter">widget</span>
-            <span class="types"><a class="type" href="../classes/wibox.container.scroll.html#wibox.container.scroll.widget">widget</a></span>
+            <span class="types"><a class="type" href="../classes/wibox.container.place.html#wibox.container.place.widget">widget</a></span>
          The widget
         </li>
     </ul>
@@ -589,8 +394,160 @@
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll.forced_height"></a>
-    <strong>wibox.container.scroll.forced_height</strong>
+    <a name = "wibox.container.place.valign"></a>
+    <strong>wibox.container.place.valign</strong>
+    </dt>
+    <dd>
+    <p>The vertical alignment. </p>
+
+<p> Possible values are:</p>
+
+<ul>
+<li><em>top</em></li>
+<li><em>center</em> (default)</li>
+<li><em>bottom</em></li>
+</ul>
+
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">string</span>
+
+
+         (<em>default</em> "center")
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.container.place.halign"></a>
+    <strong>wibox.container.place.halign</strong>
+    </dt>
+    <dd>
+    <p>The horizontal alignment. </p>
+
+<p> Possible values are:</p>
+
+<ul>
+<li><em>left</em></li>
+<li><em>center</em> (default)</li>
+<li><em>right</em></li>
+</ul>
+
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">string</span>
+
+
+         (<em>default</em> "center")
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.container.place.fill_vertical"></a>
+    <strong>wibox.container.place.fill_vertical</strong>
+    </dt>
+    <dd>
+    Fill the vertical space.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
+
+
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.container.place.fill_horizontal"></a>
+    <strong>wibox.container.place.fill_horizontal</strong>
+    </dt>
+    <dd>
+    Fill the horizontal space.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
+
+
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.container.place.content_fill_vertical"></a>
+    <strong>wibox.container.place.content_fill_vertical</strong>
+    </dt>
+    <dd>
+    Stretch the contained widget so it takes all the vertical space.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
+
+
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.container.place.content_fill_horizontal"></a>
+    <strong>wibox.container.place.content_fill_horizontal</strong>
+    </dt>
+    <dd>
+    Stretch the contained widget so it takes all the horizontal space.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
+
+
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.container.place.forced_height"></a>
+    <strong>wibox.container.place.forced_height</strong>
     </dt>
     <dd>
     Force a widget height.
@@ -610,8 +567,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll.forced_width"></a>
-    <strong>wibox.container.scroll.forced_width</strong>
+    <a name = "wibox.container.place.forced_width"></a>
+    <strong>wibox.container.place.forced_width</strong>
     </dt>
     <dd>
     Force a widget width.
@@ -631,8 +588,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll.opacity"></a>
-    <strong>wibox.container.scroll.opacity</strong>
+    <a name = "wibox.container.place.opacity"></a>
+    <strong>wibox.container.place.opacity</strong>
     </dt>
     <dd>
     The widget opacity (transparency).
@@ -653,8 +610,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll.visible"></a>
-    <strong>wibox.container.scroll.visible</strong>
+    <a name = "wibox.container.place.visible"></a>
+    <strong>wibox.container.place.visible</strong>
     </dt>
     <dd>
     The widget visibility.
@@ -693,7 +650,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/wibox.container.scroll.html#widget::redraw_needed">widget::redraw_needed</a>
+         <a href="../classes/wibox.container.place.html#widget::redraw_needed">widget::redraw_needed</a>
     </ul>
 
 
@@ -714,7 +671,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/wibox.container.scroll.html#widget::layout_changed">widget::layout_changed</a>
+         <a href="../classes/wibox.container.place.html#widget::layout_changed">widget::layout_changed</a>
     </ul>
 
 
@@ -756,7 +713,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><a class="type" href="../classes/wibox.container.scroll.html#wibox.container.scroll.widget">widget</a></span>
+            <span class="types"><a class="type" href="../classes/wibox.container.place.html#wibox.container.place.widget">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -843,7 +800,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><a class="type" href="../classes/wibox.container.scroll.html#wibox.container.scroll.widget">widget</a></span>
+            <span class="types"><a class="type" href="../classes/wibox.container.place.html#wibox.container.place.widget">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -912,7 +869,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><a class="type" href="../classes/wibox.container.scroll.html#wibox.container.scroll.widget">widget</a></span>
+            <span class="types"><a class="type" href="../classes/wibox.container.place.html#wibox.container.place.widget">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -981,7 +938,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><a class="type" href="../classes/wibox.container.scroll.html#wibox.container.scroll.widget">widget</a></span>
+            <span class="types"><a class="type" href="../classes/wibox.container.place.html#wibox.container.place.widget">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -1032,106 +989,12 @@
 
 </dd>
 </dl>
-    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "wibox.container.scroll.step_functions"></a>
-    <strong>wibox.container.scroll.step_functions</strong>
-    </dt>
-    <dd>
-    A selection of step functions
-
-
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../classes/wibox.container.scroll.html#wibox.container.scroll:set_step_function">set_step_function</a>
-    </ul>
-
-
-</dd>
-</dl>
     <h2 class="section-header "><a name="Methods"></a>Methods</h2>
 
     <dl class="function">
     <dt>
-    <a name = "wibox.container.scroll:pause"></a>
-    <strong>wibox.container.scroll:pause ()</strong>
-    </dt>
-    <dd>
-    Pause the scrolling animation.
-
-
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../classes/wibox.container.scroll.html#wibox.container.scroll:continue">continue</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:continue"></a>
-    <strong>wibox.container.scroll:continue ()</strong>
-    </dt>
-    <dd>
-    Continue the scrolling animation.
-
-
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../classes/wibox.container.scroll.html#wibox.container.scroll:pause">pause</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:reset_scrolling"></a>
-    <strong>wibox.container.scroll:reset_scrolling ()</strong>
-    </dt>
-    <dd>
-    Reset the scrolling state to its initial condition.
- For must scroll step functions, the effect of this function should be to
- display the widget without any scrolling applied.
- This function does not undo the effect of <a href="../classes/wibox.container.scroll.html#wibox.container.scroll:pause">pause</a>.
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:set_direction"></a>
-    <strong>wibox.container.scroll:set_direction (dir)</strong>
-    </dt>
-    <dd>
-    Set the direction in which this widget scroll.
-
-
-    <ul>
-        <li><span class="parameter">dir</span>
-         Either &ldquo;h&rdquo; for horizontal scrolling or &ldquo;v&rdquo; for vertical scrolling
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:get_children"></a>
-    <strong>wibox.container.scroll:get_children ()</strong>
+    <a name = "wibox.container.place:get_children"></a>
+    <strong>wibox.container.place:get_children ()</strong>
     </dt>
     <dd>
     Get the number of children element
@@ -1150,8 +1013,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:set_children"></a>
-    <strong>wibox.container.scroll:set_children (children)</strong>
+    <a name = "wibox.container.place:set_children"></a>
+    <strong>wibox.container.place:set_children (children)</strong>
     </dt>
     <dd>
     Replace the layout children
@@ -1171,44 +1034,13 @@
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:set_expand"></a>
-    <strong>wibox.container.scroll:set_expand (expand)</strong>
+    <a name = "wibox.container.place:reset"></a>
+    <strong>wibox.container.place:reset ()</strong>
     </dt>
     <dd>
-    Specify the expand mode that is used for extra space.
+    Reset this layout.  The widget will be removed and the rotation reset.
 
 
-    <ul>
-        <li><span class="parameter">expand</span>
-            <span class="types"><span class="type">boolean</span></span>
-         If true, the widget is expanded to include the extra
- space. If false, the extra space is simply left empty.
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../classes/wibox.container.scroll.html#wibox.container.scroll:set_extra_space">set_extra_space</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:set_fps"></a>
-    <strong>wibox.container.scroll:set_fps (fps)</strong>
-    </dt>
-    <dd>
-    Set the number of frames per second that this widget should draw.
-
-
-    <ul>
-        <li><span class="parameter">fps</span>
-            <span class="types"><span class="type">number</span></span>
-         The number of frames per second
-        </li>
-    </ul>
 
 
 
@@ -1216,240 +1048,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:set_extra_space"></a>
-    <strong>wibox.container.scroll:set_extra_space (extra_space)</strong>
-    </dt>
-    <dd>
-    Set the amount of extra space that should be included in the scrolling.  This
- extra space will likely be left empty between repetitions of the widgets.
-
-
-    <ul>
-        <li><span class="parameter">extra_space</span>
-            <span class="types"><span class="type">number</span></span>
-         The amount of extra space
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../classes/wibox.container.scroll.html#wibox.container.scroll:set_expand">set_expand</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:set_speed"></a>
-    <strong>wibox.container.scroll:set_speed (speed)</strong>
-    </dt>
-    <dd>
-    Set the speed of the scrolling animation.  The exact meaning depends on the
- step function that is used, but for the simplest step functions, this will be
- in pixels per second.
-
-
-    <ul>
-        <li><span class="parameter">speed</span>
-            <span class="types"><span class="type">number</span></span>
-         The speed for the animation
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:set_max_size"></a>
-    <strong>wibox.container.scroll:set_max_size (max_size)</strong>
-    </dt>
-    <dd>
-    Set the maximum size of this widget in the direction set by
- <a href="../classes/wibox.container.scroll.html#wibox.container.scroll:set_direction">set_direction</a>.  If the child widget is smaller than this size, no scrolling
- is done. If the child widget is larger, then only this size will be visible
- and the rest is made visible via scrolling.
-
-
-    <ul>
-        <li><span class="parameter">max_size</span>
-            <span class="types"><span class="type">number</span></span>
-         The maximum size of this widget or nil for unlimited.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:set_step_function"></a>
-    <strong>wibox.container.scroll:set_step_function (step_function)</strong>
-    </dt>
-    <dd>
-    Set the step function that determines the exact behaviour of the scrolling
- animation.
- The step function is called with five arguments:</p>
-
-<ul>
-<li>The time in seconds since the state of the animation</li>
-<li>The size of the child widget</li>
-<li>The size of the visible part of the widget</li>
-<li>The speed of the animation. This should have a linear effect on this
-function&rsquo;s behaviour.</li>
-<li>The extra space configured by <a href="../classes/wibox.container.scroll.html#wibox.container.scroll:set_extra_space">set_extra_space</a>. This was not yet added to
-the size of the child widget, but should likely be added to it in most
-cases.</li>
-</ul>
-
-
-<p> The step function should return a single number. This number is the offset at
- which the widget is drawn and should be between 0 and <code>size+extra_space</code>.
-
-
-    <ul>
-        <li><span class="parameter">step_function</span>
-            <span class="types"><span class="type">function</span></span>
-         A step function.
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../classes/wibox.container.scroll.html#wibox.container.scroll.step_functions">step_functions</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:set_space_for_scrolling"></a>
-    <strong>wibox.container.scroll:set_space_for_scrolling (space_for_scrolling)</strong>
-    </dt>
-    <dd>
-    Set an upper limit for the space for scrolling.
- This restricts the child widget&rsquo;s maximal size.
-
-
-    <ul>
-        <li><span class="parameter">space_for_scrolling</span>
-            <span class="types"><span class="type">number</span></span>
-         The space for scrolling
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:horizontal"></a>
-    <strong>wibox.container.scroll:horizontal ([widget[, fps=20[, speed=10[, extra_space=0[, expand=false[, max_size[, step_function=step_functions.linear_increase[, space_for_scrolling=2^1024]]]]]]]])</strong>
-    </dt>
-    <dd>
-    Get a new horizontal scrolling container.
-
-
-    <ul>
-        <li><span class="parameter">widget</span>
-         The widget that should be scrolled
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">fps</span>
-         The number of frames per second
-         (<em>default</em> 20)
-        </li>
-        <li><span class="parameter">speed</span>
-         The speed of the animation
-         (<em>default</em> 10)
-        </li>
-        <li><span class="parameter">extra_space</span>
-         The amount of extra space to include
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">expand</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Should the widget be expanded to include the
- extra space?
-         (<em>default</em> false)
-        </li>
-        <li><span class="parameter">max_size</span>
-         The maximum size of the child widget
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">step_function</span>
-         The step function to be used
-         (<em>default</em> step_functions.linear_increase)
-        </li>
-        <li><span class="parameter">space_for_scrolling</span>
-         The space for scrolling
-         (<em>default</em> 2^1024)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:vertical"></a>
-    <strong>wibox.container.scroll:vertical ([widget[, fps=20[, speed=10[, extra_space=0[, expand=false[, max_size[, step_function=step_functions.linear_increase[, space_for_scrolling=2^1024]]]]]]]])</strong>
-    </dt>
-    <dd>
-    Get a new vertical scrolling container.
-
-
-    <ul>
-        <li><span class="parameter">widget</span>
-         The widget that should be scrolled
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">fps</span>
-         The number of frames per second
-         (<em>default</em> 20)
-        </li>
-        <li><span class="parameter">speed</span>
-         The speed of the animation
-         (<em>default</em> 10)
-        </li>
-        <li><span class="parameter">extra_space</span>
-         The amount of extra space to include
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">expand</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Should the widget be expanded to include the
- extra space?
-         (<em>default</em> false)
-        </li>
-        <li><span class="parameter">max_size</span>
-         The maximum size of the child widget
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">step_function</span>
-         The step function to be used
-         (<em>default</em> step_functions.linear_increase)
-        </li>
-        <li><span class="parameter">space_for_scrolling</span>
-         The space for scrolling
-         (<em>default</em> 2^1024)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.container.scroll:index"></a>
-    <strong>wibox.container.scroll:index (widget[, recursive[, ...]])</strong>
+    <a name = "wibox.container.place:index"></a>
+    <strong>wibox.container.place:index (widget[, recursive[, ...]])</strong>
     </dt>
     <dd>
     Get a widex index.
@@ -1484,8 +1084,8 @@ cases.</li>
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:get_all_children"></a>
-    <strong>wibox.container.scroll:get_all_children ()</strong>
+    <a name = "wibox.container.place:get_all_children"></a>
+    <strong>wibox.container.place:get_all_children ()</strong>
     </dt>
     <dd>
     Get all direct and indirect children widgets.
@@ -1507,8 +1107,8 @@ cases.</li>
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:setup"></a>
-    <strong>wibox.container.scroll:setup (args)</strong>
+    <a name = "wibox.container.place:setup"></a>
+    <strong>wibox.container.place:setup (args)</strong>
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
@@ -1527,8 +1127,8 @@ cases.</li>
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:buttons"></a>
-    <strong>wibox.container.scroll:buttons (_buttons)</strong>
+    <a name = "wibox.container.place:buttons"></a>
+    <strong>wibox.container.place:buttons (_buttons)</strong>
     </dt>
     <dd>
     Set/get a widget&rsquo;s buttons.
@@ -1546,8 +1146,8 @@ cases.</li>
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:emit_signal_recursive"></a>
-    <strong>wibox.container.scroll:emit_signal_recursive (signal_name, ...)</strong>
+    <a name = "wibox.container.place:emit_signal_recursive"></a>
+    <strong>wibox.container.place:emit_signal_recursive (signal_name, ...)</strong>
     </dt>
     <dd>
     Emit a signal and ensure all parent widgets in the hierarchies also
@@ -1572,8 +1172,8 @@ cases.</li>
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:disconnect_signal"></a>
-    <strong>wibox.container.scroll:disconnect_signal (name, func)</strong>
+    <a name = "wibox.container.place:disconnect_signal"></a>
+    <strong>wibox.container.place:disconnect_signal (name, func)</strong>
     </dt>
     <dd>
     Disconnect to a signal.
@@ -1596,8 +1196,8 @@ cases.</li>
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:emit_signal"></a>
-    <strong>wibox.container.scroll:emit_signal (name, ...)</strong>
+    <a name = "wibox.container.place:emit_signal"></a>
+    <strong>wibox.container.place:emit_signal (name, ...)</strong>
     </dt>
     <dd>
     Emit a signal.
@@ -1621,8 +1221,8 @@ cases.</li>
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:connect_signal"></a>
-    <strong>wibox.container.scroll:connect_signal (name, func)</strong>
+    <a name = "wibox.container.place:connect_signal"></a>
+    <strong>wibox.container.place:connect_signal (name, func)</strong>
     </dt>
     <dd>
     Connect to a signal.
@@ -1645,8 +1245,8 @@ cases.</li>
 
 </dd>
     <dt>
-    <a name = "wibox.container.scroll:weak_connect_signal"></a>
-    <strong>wibox.container.scroll:weak_connect_signal (name, func)</strong>
+    <a name = "wibox.container.place:weak_connect_signal"></a>
+    <strong>wibox.container.place:weak_connect_signal (name, func)</strong>
     </dt>
     <dd>
     Connect to a signal weakly.  This allows the callback function to be garbage
