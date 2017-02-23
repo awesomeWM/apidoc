@@ -374,8 +374,9 @@ configurable rules.</p>
 <h3>A simple layout</h3>
 
 <ul>
-<li>Display <code>my_first_widget</code> only on screen one</li>
-<li>Add a background color to <code>my_third_widget</code></li>
+<li>Display <code>my_first_widget</code> only on primary screen</li>
+<li>Display <code>my_second_widget</code> only on screen two</li>
+<li>Add a background color to <code>my_fourth_widget</code></li>
 <li>Dispose in a <a href="../classes/wibox.layout.fixed.html#wibox.layout.fixed.horizontal">wibox.layout.fixed.horizontal</a> layout</li>
 </ul>
 
@@ -384,10 +385,11 @@ configurable rules.</p>
 
 <pre>
 s.mywibox : setup {
-    s == <span class="number">1</span> <span class="keyword">and</span> my_first_widget, <span class="comment">-- Only display on screen 1
-</span>    my_second_widget,
-    { <span class="comment">-- Add a background color/pattern for my_third_widget
-</span>          my_third_widget,
+    s == screen.primary <span class="keyword">and</span> my_first_widget, <span class="comment">-- Only display on primary screen
+</span>    s.index == <span class="number">2</span> <span class="keyword">and</span> my_second_widget, <span class="comment">-- Only display on screen 2
+</span>    my_third_widget, <span class="comment">-- Displayed on all screens
+</span>    { <span class="comment">-- Add a background color/pattern for my_fourth_widget
+</span>          my_fourth_widget,
           bg     = beautiful.bg_focus,
           widget = wibox.container.background,
     },
@@ -396,9 +398,9 @@ s.mywibox : setup {
 </pre>
 
 
-<p>In this example <code>s == 1</code> is an inline expression. In the default <code>rc.lua</code>,
-there is an <code>s</code> variable represent to define the current screen. Any Lua
-logic expression can be used as long as it returns a valid widget or a
+<p>In this example <code>s == screen.primary</code> is an inline expression. In the default
+<code>rc.lua</code>, there is an <code>s</code> variable represent to define the current screen. Any
+Lua logic expression can be used as long as it returns a valid widget or a
 declarative layout, or <code>nil</code>.</p>
 
 <h3>Composite widgets</h3>
