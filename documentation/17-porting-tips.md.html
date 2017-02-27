@@ -107,6 +107,11 @@
   <li><a href="../libraries/selection.html">selection</a></li>
   <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
 </ul>
+<h2>Sample files</h2>
+<ul class="nowrap">
+  <li><a href="../sample files/rc.lua.html">rc.lua</a></li>
+  <li><a href="../sample files/theme.lua.html">theme.lua</a></li>
+</ul>
 <h2>Classes</h2>
 <ul class="nowrap">
   <li><a href="../classes/awful.button.html">awful.button</a></li>
@@ -184,8 +189,8 @@
 <h2>From 3.5 to 4.0</h2>
 
 <p>The
-<strong>best advice is to start from the default <code>rc.lua</code> and backport any changes</strong>
-you might have added to your <code>rc.lua</code>.
+<strong>best advice is to start from the default <a href="../sample files/rc.lua.html#">rc.lua</a> and backport any changes</strong>
+you might have added to your <a href="../sample files/rc.lua.html#">rc.lua</a>.
 This avoids most of the possible errors due to missing important changes.</p>
 
 <p>If you still wish to ignore this advice, first read the
@@ -196,11 +201,11 @@ document assumes you did.</p>
 supports dynamic screen changes and will have many subtle bugs</strong>. The changes
 mentioned below <strong>are important for the stability of your window manager</strong>.</p>
 
-<p>Here is a diff of the 3.5.9 <code>rc.lua</code> with the 4.0 one. All changes due to
+<p>Here is a diff of the 3.5.9 <a href="../sample files/rc.lua.html#">rc.lua</a> with the 4.0 one. All changes due to
 new features and new syntaxes have been removed. A <code>&ndash;</code> in front of the line
-correspond to content of the 3.5 <code>rc.lua</code> and <code>+</code> its replacement in 4.0.</p>
+correspond to content of the 3.5 <a href="../sample files/rc.lua.html#">rc.lua</a> and <code>+</code> its replacement in 4.0.</p>
 
-<p>This document does not cover the new features added in the Awesome 4 <code>rc.lua</code>,
+<p>This document does not cover the new features added in the Awesome 4 <a href="../sample files/rc.lua.html#">rc.lua</a>,
 it only covers the minimal required changes to have a properly behaving config.</p>
 
 <p>To test during the port, we recommend the <code>Xephyr</code> X11 server.</p>
@@ -232,7 +237,7 @@ DISPLAY=:<span class="number">1</span> $HOME/awesome4_test/bin/awesome \
 </pre>
 
 
-<p>If Awesome 4 is <strong>already installed</strong>, then backup your old <code>rc.lua</code> and overwrite
+<p>If Awesome 4 is <strong>already installed</strong>, then backup your old <a href="../sample files/rc.lua.html#">rc.lua</a> and overwrite
 <code>~/.config/awesome/rc.lua</code> (replace this by another path if you use a custom
 XDH config local directory). And only execute:</p>
 
@@ -242,7 +247,7 @@ DISPLAY=:<span class="number">1</span> awesome
 </pre>
 
 
-<p>Screens are now added and removed without reloading <code>rc.lua</code>. The wallpaper are
+<p>Screens are now added and removed without reloading <a href="../sample files/rc.lua.html#">rc.lua</a>. The wallpaper are
 now set in a signal callback.</p>
 
 <pre>
@@ -335,7 +340,7 @@ they are still supported, but will be removed in the next release.</p>
 +                    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:<span class="backtick"><code>view_only</code></span>() <span class="keyword">end</span>),
 -                    awful.button({ modkey }, <span class="number">1</span>, <span class="backtick"><code>awful.client.movetotag</code></span>),
 +                    awful.button({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
-+                                              <span class="keyword">if</span> <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> <span class="keyword">then</span>
++                                              <span class="keyword">if</span> <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> <span class="keyword">then</span>
 +                                                  <span class="backtick"><code>client.focus:move_to_tag</code></span>(t)
 +                                              <span class="keyword">end</span>
 +                                          <span class="keyword">end</span>),
@@ -355,7 +360,7 @@ they are still supported, but will be removed in the next release.</p>
 -mytasklist.buttons = awful.util.<span class="global">table</span>.join(
 +<span class="keyword">local</span> tasklist_buttons = awful.util.<span class="global">table</span>.join(
                       awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> <span class="keyword">then</span>
+                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> <span class="keyword">then</span>
                                                    c.minimized = <span class="keyword">true</span>
                                                <span class="keyword">else</span>
                                                    <span class="comment">-- Without this, the following
@@ -368,7 +373,7 @@ they are still supported, but will be removed in the next release.</p>
                                                    <span class="keyword">end</span>
                                                    <span class="comment">-- This will also un-minimize
 </span>                                                   <span class="comment">-- the client, if needed
-</span>                                                   <span class="backtick"><a href="../classes/client.html#client.focus">client.focus</a></span> = c
+</span>                                                   <span class="backtick"><a href="../classes/client.html#.focus">client.focus</a></span> = c
                                                    c:raise()
                                                <span class="keyword">end</span>
                                            <span class="keyword">end</span>),
@@ -579,7 +584,7 @@ now access tags by name.</p>
 
 
 <p>If you need to get the current client object in global context, currently you can use
-<a href="../classes/client.html#client.focus">client.focus</a> for it. E.g., to mark/unmark the client:</p>
+<a href="../classes/client.html#.focus">client.focus</a> for it. E.g., to mark/unmark the client:</p>
 
 <pre>
 -    awful.client.mark()
