@@ -69,6 +69,7 @@
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
   <li><a href="../libraries/gears.debug.html">gears.debug</a></li>
   <li><a href="../libraries/gears.geometry.html">gears.geometry</a></li>
+  <li><a href="../libraries/gears.math.html">gears.math</a></li>
   <li><a href="../libraries/gears.object.properties.html">gears.object.properties</a></li>
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
@@ -209,10 +210,6 @@
 	<td class="summary">Get a valid color for Pango markup</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#cycle">cycle (t, i)</a></td>
-	<td class="summary">Make i cycle.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#mkdir">mkdir (dir)</a></td>
 	<td class="summary">Create a directory</td>
 	</tr>
@@ -281,10 +278,6 @@
 	<td class="summary">Check if a path is a directory.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#subsets">subsets (set)</a></td>
-	<td class="summary">Return all subsets of a specific set.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#util.table.join">util.table.join (args)</a></td>
 	<td class="summary">Join all tables given as parameters.</td>
 	</tr>
@@ -336,16 +329,24 @@
 	<td class="name" ><a href="#util.table.merge">util.table.merge (t, set)</a></td>
 	<td class="summary">Merge items from the one table to another one</td>
 	</tr>
-	<tr>
-	<td class="name" ><a href="#round">round (x)</a></td>
-	<td class="summary">Round a number to an integer.</td>
-	</tr>
 </table>
 <h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
 <table class="function_list">
 	<tr>
+	<td class="name" ><a href="#cycle">cycle</a></td>
+	<td class="summary">Make i cycle.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#subsets">subsets</a></td>
+	<td class="summary">Return all subsets of a specific set.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#awful.util.get_rectangle_in_direction">awful.util.get_rectangle_in_direction</a></td>
 	<td class="summary">Get the nearest rectangle in the given direction.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#round">round</a></td>
+	<td class="summary">Round a number to an integer.</td>
 	</tr>
 </table>
 <h2><a href="#Fields">Fields</a></h2>
@@ -453,33 +454,6 @@
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
         color if it is valid, else fallback.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "cycle"></a>
-    <strong>cycle (t, i)</strong>
-    </dt>
-    <dd>
-    Make i cycle.
-
-
-    <ul>
-        <li><span class="parameter">t</span>
-         A length. Must be greater than zero.
-        </li>
-        <li><span class="parameter">i</span>
-         An absolute index to fit into #t.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        An integer in (1, t) or nil if t is less than or equal to zero.
     </ol>
 
 
@@ -883,34 +857,6 @@
 
 </dd>
     <dt>
-    <a name = "subsets"></a>
-    <strong>subsets (set)</strong>
-    </dt>
-    <dd>
-    Return all subsets of a specific set.
- This function, giving a set, will return all subset it.
- For example, if we consider a set with value { 10, 15, 34 },
- it will return a table containing 2^n set:
- { }, { 10 }, { 15 }, { 34 }, { 10, 15 }, { 10, 34 }, etc.
-
-
-    <ul>
-        <li><span class="parameter">set</span>
-         A set.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        A table with all subset.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
     <a name = "util.table.join"></a>
     <strong>util.table.join (args)</strong>
     </dt>
@@ -1247,38 +1193,65 @@
 
 
 </dd>
-    <dt>
-    <a name = "round"></a>
-    <strong>round (x)</strong>
-    </dt>
-    <dd>
-    Round a number to an integer.
-
-
-    <ul>
-        <li><span class="parameter">x</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">integer</span></span>
-
-
-    </ol>
-
-
-
-
-</dd>
 </dl>
     <h2 class="section-header "><a name="Deprecated_functions"></a>Deprecated functions</h2>
 
     <dl class="function">
+    <dt>
+    <a name = "cycle"></a>
+    <strong>cycle</strong>
+    </dt>
+    <dd>
+    Make i cycle.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+         A length. Must be greater than zero.
+        </li>
+        <li><span class="parameter">i</span>
+         An absolute index to fit into #t.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.math.html#">gears.math</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "subsets"></a>
+    <strong>subsets</strong>
+    </dt>
+    <dd>
+    Return all subsets of a specific set.
+ This function, giving a set, will return all subset it.
+ For example, if we consider a set with value { 10, 15, 34 },
+ it will return a table containing 2^n set:
+ { }, { 10 }, { 15 }, { 34 }, { 10, 15 }, { 10, 34 }, etc.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">set</span>
+         A set.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.math.html#">gears.math</a>
+    </ul>
+
+
+</dd>
     <dt>
     <a name = "awful.util.get_rectangle_in_direction"></a>
     <strong>awful.util.get_rectangle_in_direction</strong>
@@ -1310,6 +1283,32 @@
 
 
 </dd>
+    <dt>
+    <a name = "round"></a>
+    <strong>round</strong>
+    </dt>
+    <dd>
+    Round a number to an integer.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.math.html#">gears.math</a>
+    </ul>
+
+
+</dd>
 </dl>
     <h2 class="section-header "><a name="Fields"></a>Fields</h2>
 
@@ -1335,7 +1334,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-03-02 01:12:56 </i>
+<i style="float:right;">Last updated 2017-03-03 21:36:48 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
