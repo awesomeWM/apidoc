@@ -35,7 +35,6 @@
 <li><a href="#Functions">Functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Signals">Signals</a></li>
-<li><a href="#Theme_variables">Theme variables</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
 
@@ -51,7 +50,7 @@
   <li><a href="../classes/awful.widget.keyboardlayout.html">awful.widget.keyboardlayout</a></li>
   <li><a href="../classes/awful.widget.launcher.html">awful.widget.launcher</a></li>
   <li><a href="../classes/awful.widget.layoutbox.html">awful.widget.layoutbox</a></li>
-  <li><a href="../classes/awful.widget.only_on_screen.html">awful.widget.only_on_screen</a></li>
+  <li><strong>awful.widget.only_on_screen</strong></li>
   <li><a href="../classes/awful.widget.progressbar.html">awful.widget.progressbar</a></li>
   <li><a href="../classes/awful.widget.prompt.html">awful.widget.prompt</a></li>
   <li><a href="../classes/awful.widget.taglist.html">awful.widget.taglist</a></li>
@@ -99,7 +98,7 @@
   <li><a href="../classes/wibox.widget.imagebox.html">wibox.widget.imagebox</a></li>
   <li><a href="../classes/wibox.widget.piechart.html">wibox.widget.piechart</a></li>
   <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
-  <li><strong>wibox.widget.slider</strong></li>
+  <li><a href="../classes/wibox.widget.slider.html">wibox.widget.slider</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../classes/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
@@ -187,114 +186,48 @@
 
 <div id="content">
 
-<h1>Class <code>wibox.widget.slider</code></h1>
-<p>An interactive mouse based slider widget.</p>
-<p><img src="../images/AUTOGEN_wibox_widget_defaults_slider.svg" alt="Usage example" /></p>
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">wibox.widget {
-    bar_shape           = gears.shape.rounded_rect,
-    bar_height          = 3,
-    bar_color           = beautiful.border_color,
-    handle_color        = beautiful.bg_normal,
-    handle_shape        = gears.shape.circle,
-    handle_border_color = beautiful.border_color,
-    handle_border_width = 1,
-    value               = 25,
-    widget              = wibox.widget.slider,
-}
-</pre>
-    </ul>
+<h1>Class <code>awful.widget.only_on_screen</code></h1>
+<p>A container that makes a widget display only on a specified screen.</p>
+<p>
+</p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2015 Grigory Mishchenko, 2016 Emmanuel Lepage Vallee</li>
-        <li><strong>Author</strong>: Grigory Mishchenko &lt;grishkokot@gmail.com&gt;,Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
+        <li><strong>Copyright</strong>: 2017 Uli Schlachter</li>
+        <li><strong>Author</strong>: Uli Schlachter</li>
     </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider">wibox.widget.slider ([args={}])</a></td>
-	<td class="summary">Create a slider widget.</td>
+	<td class="name" ><a href="#wibox.container.only_on_screen">wibox.container.only_on_screen ([widget[, s]])</a></td>
+	<td class="summary">Returns a new only_on_screen container.</td>
 	</tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.handle_shape">wibox.widget.slider.handle_shape</a></td>
-	<td class="summary">The slider handle shape.</td>
+	<td class="name" ><a href="#awful.widget.only_on_screen.widget">awful.widget.only_on_screen.widget</a></td>
+	<td class="summary">The widget to be displayed</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.handle_color">wibox.widget.slider.handle_color</a></td>
-	<td class="summary">The slider handle color.</td>
+	<td class="name" ><a href="#awful.widget.only_on_screen.screen">awful.widget.only_on_screen.screen</a></td>
+	<td class="summary">The screen to display on.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.handle_margins">wibox.widget.slider.handle_margins</a></td>
-	<td class="summary">The slider handle margins.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.handle_width">wibox.widget.slider.handle_width</a></td>
-	<td class="summary">The slider handle width.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.handle_border_color">wibox.widget.slider.handle_border_color</a></td>
-	<td class="summary">The handle border_color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.handle_border_width">wibox.widget.slider.handle_border_width</a></td>
-	<td class="summary">The handle border width.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.bar_shape">wibox.widget.slider.bar_shape</a></td>
-	<td class="summary">The bar (background) shape.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.bar_height">wibox.widget.slider.bar_height</a></td>
-	<td class="summary">The bar (background) height.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.bar_color">wibox.widget.slider.bar_color</a></td>
-	<td class="summary">The bar (background) color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.bar_margins">wibox.widget.slider.bar_margins</a></td>
-	<td class="summary">The bar (background) margins.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.bar_border_width">wibox.widget.slider.bar_border_width</a></td>
-	<td class="summary">The bar (background) border width.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.bar_border_color">wibox.widget.slider.bar_border_color</a></td>
-	<td class="summary">The bar (background) border_color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.value">wibox.widget.slider.value</a></td>
-	<td class="summary">The slider value.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.minimum">wibox.widget.slider.minimum</a></td>
-	<td class="summary">The slider minimum value.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.maximum">wibox.widget.slider.maximum</a></td>
-	<td class="summary">The slider maximum value.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.forced_height">wibox.widget.slider.forced_height</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen.forced_height">awful.widget.only_on_screen.forced_height</a></td>
 	<td class="summary">Force a widget height.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.forced_width">wibox.widget.slider.forced_width</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen.forced_width">awful.widget.only_on_screen.forced_width</a></td>
 	<td class="summary">Force a widget width.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.opacity">wibox.widget.slider.opacity</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen.opacity">awful.widget.only_on_screen.opacity</a></td>
 	<td class="summary">The widget opacity (transparency).</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider.visible">wibox.widget.slider.visible</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen.visible">awful.widget.only_on_screen.visible</a></td>
 	<td class="summary">The widget visibility.</td>
 	</tr>
 </table>
@@ -325,90 +258,52 @@
 	<td class="summary">When the mouse leave a widget.</td>
 	</tr>
 </table>
-<h2><a href="#Theme_variables">Theme variables</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_bar_border_width">beautiful.slider_bar_border_width</a></td>
-	<td class="summary">The bar (background) border width.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_bar_border_color">beautiful.slider_bar_border_color</a></td>
-	<td class="summary">The bar (background) border color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_handle_border_color">beautiful.slider_handle_border_color</a></td>
-	<td class="summary">The handle border_color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_handle_border_width">beautiful.slider_handle_border_width</a></td>
-	<td class="summary">The handle border width.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_handle_width">beautiful.slider_handle_width</a></td>
-	<td class="summary">The handle .</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_handle_shape">beautiful.slider_handle_shape</a></td>
-	<td class="summary">The handle shape.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_bar_shape">beautiful.slider_bar_shape</a></td>
-	<td class="summary">The bar (background) shape.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_bar_height">beautiful.slider_bar_height</a></td>
-	<td class="summary">The bar (background) height.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_bar_margins">beautiful.slider_bar_margins</a></td>
-	<td class="summary">The bar (background) margins.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_handle_margins">beautiful.slider_handle_margins</a></td>
-	<td class="summary">The slider handle margins.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.slider_bar_color">beautiful.slider_bar_color</a></td>
-	<td class="summary">The bar (background) color.</td>
-	</tr>
-</table>
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider:index">wibox.widget.slider:index (widget[, recursive[, ...]])</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen:get_children">awful.widget.only_on_screen:get_children ()</a></td>
+	<td class="summary">Get the number of children element</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.widget.only_on_screen:set_children">awful.widget.only_on_screen:set_children (children)</a></td>
+	<td class="summary">Replace the layout children
+ This layout only accept one children, all others will be ignored</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.widget.only_on_screen:index">awful.widget.only_on_screen:index (widget[, recursive[, ...]])</a></td>
 	<td class="summary">Get a widex index.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider:get_all_children">wibox.widget.slider:get_all_children ()</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen:get_all_children">awful.widget.only_on_screen:get_all_children ()</a></td>
 	<td class="summary">Get all direct and indirect children widgets.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider:setup">wibox.widget.slider:setup (args)</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen:setup">awful.widget.only_on_screen:setup (args)</a></td>
 	<td class="summary">Set a declarative widget hierarchy description.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider:buttons">wibox.widget.slider:buttons (_buttons)</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen:buttons">awful.widget.only_on_screen:buttons (_buttons)</a></td>
 	<td class="summary">Set/get a widget&rsquo;s buttons.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider:emit_signal_recursive">wibox.widget.slider:emit_signal_recursive (signal_name, ...)</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen:emit_signal_recursive">awful.widget.only_on_screen:emit_signal_recursive (signal_name, ...)</a></td>
 	<td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
  forward the signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider:disconnect_signal">wibox.widget.slider:disconnect_signal (name, func)</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen:disconnect_signal">awful.widget.only_on_screen:disconnect_signal (name, func)</a></td>
 	<td class="summary">Disconnect to a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider:emit_signal">wibox.widget.slider:emit_signal (name, ...)</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen:emit_signal">awful.widget.only_on_screen:emit_signal (name, ...)</a></td>
 	<td class="summary">Emit a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider:connect_signal">wibox.widget.slider:connect_signal (name, func)</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen:connect_signal">awful.widget.only_on_screen:connect_signal (name, func)</a></td>
 	<td class="summary">Connect to a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#wibox.widget.slider:weak_connect_signal">wibox.widget.slider:weak_connect_signal (name, func)</a></td>
+	<td class="name" ><a href="#awful.widget.only_on_screen:weak_connect_signal">awful.widget.only_on_screen:weak_connect_signal (name, func)</a></td>
 	<td class="summary">Connect to a signal weakly.</td>
 	</tr>
 </table>
@@ -421,22 +316,32 @@
     Methods
     <dl class="function">
     <dt>
-    <a name = "wibox.widget.slider"></a>
-    <strong>wibox.widget.slider ([args={}])</strong>
+    <a name = "wibox.container.only_on_screen"></a>
+    <strong>wibox.container.only_on_screen ([widget[, s]])</strong>
     </dt>
     <dd>
-    Create a slider widget.
+    Returns a new only_on_screen container.
+ This widget makes some other widget visible on just some screens. Use
+ <code>:set_widget()</code> to set the widget and <code>:set_screen()</code> to set the screen.
 
 
     <ul>
-        <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-
-
-         (<em>default</em> {})
+        <li><span class="parameter">widget</span>
+         The widget to display.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">s</span>
+         The screen to display on.
+         (<em>optional</em>)
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A new only_on_screen container
+    </ol>
 
 
 
@@ -447,49 +352,18 @@
 
     <dl class="function">
     <dt>
-    <a name = "wibox.widget.slider.handle_shape"></a>
-    <strong>wibox.widget.slider.handle_shape</strong>
+    <a name = "awful.widget.only_on_screen.widget"></a>
+    <strong>awful.widget.only_on_screen.widget</strong>
     </dt>
     <dd>
-    The slider handle shape. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_handle_shape.svg" alt="Usage example" />
+    The widget to be displayed
 
 
     <h3>Type:</h3>
     <ul>
-        <li><span class="parameter">shape</span>
-            <span class="types"><span class="type">gears.shape</span></span>
-
-
-         (<em>default</em> gears shape rectangle)
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/gears.shape.html#">gears.shape</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.handle_color"></a>
-    <strong>wibox.widget.slider.handle_color</strong>
-    </dt>
-    <dd>
-    The slider handle color. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_handle_color.svg" alt="Usage example" />
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-
-
+        <li><span class="parameter">widget</span>
+            <span class="types"><a class="type" href="../classes/awful.widget.only_on_screen.html#awful.widget.only_on_screen.widget">widget</a></span>
+         The widget
         </li>
     </ul>
 
@@ -499,67 +373,19 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider.handle_margins"></a>
-    <strong>wibox.widget.slider.handle_margins</strong>
+    <a name = "awful.widget.only_on_screen.screen"></a>
+    <strong>awful.widget.only_on_screen.screen</strong>
     </dt>
     <dd>
-    The slider handle margins. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_handle_margins.svg" alt="Usage example" />
+    The screen to display on.  Can be a screen object, a screen index, a screen
+ name (&ldquo;VGA1&rdquo;) or the string &ldquo;primary&rdquo; for the primary screen.
 
 
     <h3>Type:</h3>
     <ul>
-        <li><span class="parameter">margins</span>
-
-        <ul>
-        <li><span class="parameter">left</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">right</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">top</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">bottom</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        </li></ul>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.handle_width"></a>
-    <strong>wibox.widget.slider.handle_width</strong>
-    </dt>
-    <dd>
-    The slider handle width. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_handle_width.svg" alt="Usage example" />
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">number</span>
-
-
+        <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a>, <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">integer</span></span>
+         The screen.
         </li>
     </ul>
 
@@ -569,288 +395,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider.handle_border_color"></a>
-    <strong>wibox.widget.slider.handle_border_color</strong>
-    </dt>
-    <dd>
-    The handle border_color. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_handle_border.svg" alt="Usage example" />
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.handle_border_width"></a>
-    <strong>wibox.widget.slider.handle_border_width</strong>
-    </dt>
-    <dd>
-    The handle border width.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">number</span>
-
-
-         (<em>default</em> 0)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.bar_shape"></a>
-    <strong>wibox.widget.slider.bar_shape</strong>
-    </dt>
-    <dd>
-    The bar (background) shape. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_bar_shape.svg" alt="Usage example" />
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">shape</span>
-            <span class="types"><span class="type">gears.shape</span></span>
-
-
-         (<em>default</em> gears shape rectangle)
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/gears.shape.html#">gears.shape</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.bar_height"></a>
-    <strong>wibox.widget.slider.bar_height</strong>
-    </dt>
-    <dd>
-    The bar (background) height. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_bar_height.svg" alt="Usage example" />
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">number</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.bar_color"></a>
-    <strong>wibox.widget.slider.bar_color</strong>
-    </dt>
-    <dd>
-    The bar (background) color. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_bar_color.svg" alt="Usage example" />
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.bar_margins"></a>
-    <strong>wibox.widget.slider.bar_margins</strong>
-    </dt>
-    <dd>
-    The bar (background) margins. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_bar_margins.svg" alt="Usage example" />
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">margins</span>
-
-        <ul>
-        <li><span class="parameter">left</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">right</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">top</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">bottom</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        </li></ul>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.bar_border_width"></a>
-    <strong>wibox.widget.slider.bar_border_width</strong>
-    </dt>
-    <dd>
-    The bar (background) border width.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">numbergb</span>
-
-
-         (<em>default</em> 0)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.bar_border_color"></a>
-    <strong>wibox.widget.slider.bar_border_color</strong>
-    </dt>
-    <dd>
-    The bar (background) border_color. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_bar_border.svg" alt="Usage example" />
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.value"></a>
-    <strong>wibox.widget.slider.value</strong>
-    </dt>
-    <dd>
-    The slider value. </p>
-
-<p><img src="../images/AUTOGEN_wibox_widget_slider_value.svg" alt="Usage example" />
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">number</span>
-
-
-         (<em>default</em> 0)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.minimum"></a>
-    <strong>wibox.widget.slider.minimum</strong>
-    </dt>
-    <dd>
-    The slider minimum value.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">number</span>
-
-
-         (<em>default</em> 0)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.maximum"></a>
-    <strong>wibox.widget.slider.maximum</strong>
-    </dt>
-    <dd>
-    The slider maximum value.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">number</span>
-
-
-         (<em>default</em> 100)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.widget.slider.forced_height"></a>
-    <strong>wibox.widget.slider.forced_height</strong>
+    <a name = "awful.widget.only_on_screen.forced_height"></a>
+    <strong>awful.widget.only_on_screen.forced_height</strong>
     </dt>
     <dd>
     Force a widget height.
@@ -870,8 +416,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider.forced_width"></a>
-    <strong>wibox.widget.slider.forced_width</strong>
+    <a name = "awful.widget.only_on_screen.forced_width"></a>
+    <strong>awful.widget.only_on_screen.forced_width</strong>
     </dt>
     <dd>
     Force a widget width.
@@ -891,8 +437,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider.opacity"></a>
-    <strong>wibox.widget.slider.opacity</strong>
+    <a name = "awful.widget.only_on_screen.opacity"></a>
+    <strong>awful.widget.only_on_screen.opacity</strong>
     </dt>
     <dd>
     The widget opacity (transparency).
@@ -913,8 +459,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider.visible"></a>
-    <strong>wibox.widget.slider.visible</strong>
+    <a name = "awful.widget.only_on_screen.visible"></a>
+    <strong>awful.widget.only_on_screen.visible</strong>
     </dt>
     <dd>
     The widget visibility.
@@ -953,7 +499,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/wibox.widget.slider.html#widget::redraw_needed">widget::redraw_needed</a>
+         <a href="../classes/awful.widget.only_on_screen.html#widget::redraw_needed">widget::redraw_needed</a>
     </ul>
 
 
@@ -974,7 +520,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/wibox.widget.slider.html#widget::layout_changed">widget::layout_changed</a>
+         <a href="../classes/awful.widget.only_on_screen.html#widget::layout_changed">widget::layout_changed</a>
     </ul>
 
 
@@ -1016,7 +562,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><span class="type">widget</span></span>
+            <span class="types"><a class="type" href="../classes/awful.widget.only_on_screen.html#awful.widget.only_on_screen.widget">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -1103,7 +649,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><span class="type">widget</span></span>
+            <span class="types"><a class="type" href="../classes/awful.widget.only_on_screen.html#awful.widget.only_on_screen.widget">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -1172,7 +718,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><span class="type">widget</span></span>
+            <span class="types"><a class="type" href="../classes/awful.widget.only_on_screen.html#awful.widget.only_on_screen.widget">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -1241,7 +787,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><span class="type">widget</span></span>
+            <span class="types"><a class="type" href="../classes/awful.widget.only_on_screen.html#awful.widget.only_on_screen.widget">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -1292,307 +838,53 @@
 
 </dd>
 </dl>
-    <h2 class="section-header "><a name="Theme_variables"></a>Theme variables</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "beautiful.slider_bar_border_width"></a>
-    <strong>beautiful.slider_bar_border_width</strong>
-    </dt>
-    <dd>
-    The bar (background) border width.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">number</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.slider_bar_border_color"></a>
-    <strong>beautiful.slider_bar_border_color</strong>
-    </dt>
-    <dd>
-    The bar (background) border color.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.slider_handle_border_color"></a>
-    <strong>beautiful.slider_handle_border_color</strong>
-    </dt>
-    <dd>
-    The handle border_color.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.slider_handle_border_width"></a>
-    <strong>beautiful.slider_handle_border_width</strong>
-    </dt>
-    <dd>
-    The handle border width.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">number</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.slider_handle_width"></a>
-    <strong>beautiful.slider_handle_width</strong>
-    </dt>
-    <dd>
-    The handle .
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">number</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.slider_handle_shape"></a>
-    <strong>beautiful.slider_handle_shape</strong>
-    </dt>
-    <dd>
-    The handle shape.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">shape</span>
-            <span class="types"><span class="type">gears.shape</span></span>
-
-
-         (<em>default</em> gears shape rectangle)
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/gears.shape.html#">gears.shape</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.slider_bar_shape"></a>
-    <strong>beautiful.slider_bar_shape</strong>
-    </dt>
-    <dd>
-    The bar (background) shape.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">shape</span>
-            <span class="types"><span class="type">gears.shape</span></span>
-
-
-         (<em>default</em> gears shape rectangle)
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/gears.shape.html#">gears.shape</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.slider_bar_height"></a>
-    <strong>beautiful.slider_bar_height</strong>
-    </dt>
-    <dd>
-    The bar (background) height.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">number</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.slider_bar_margins"></a>
-    <strong>beautiful.slider_bar_margins</strong>
-    </dt>
-    <dd>
-    The bar (background) margins.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">margins</span>
-
-        <ul>
-        <li><span class="parameter">left</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">right</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">top</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">bottom</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        </li></ul>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.slider_handle_margins"></a>
-    <strong>beautiful.slider_handle_margins</strong>
-    </dt>
-    <dd>
-    The slider handle margins.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">margins</span>
-
-        <ul>
-        <li><span class="parameter">left</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">right</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">top</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        <li><span class="parameter">bottom</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-         (<em>default</em> 0)
-        </li>
-        </li></ul>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.slider_bar_color"></a>
-    <strong>beautiful.slider_bar_color</strong>
-    </dt>
-    <dd>
-    The bar (background) color.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-</dl>
     <h2 class="section-header "><a name="Methods"></a>Methods</h2>
 
     <dl class="function">
     <dt>
-    <a name = "wibox.widget.slider:index"></a>
-    <strong>wibox.widget.slider:index (widget[, recursive[, ...]])</strong>
+    <a name = "awful.widget.only_on_screen:get_children"></a>
+    <strong>awful.widget.only_on_screen:get_children ()</strong>
+    </dt>
+    <dd>
+    Get the number of children element
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The children
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.widget.only_on_screen:set_children"></a>
+    <strong>awful.widget.only_on_screen:set_children (children)</strong>
+    </dt>
+    <dd>
+    Replace the layout children
+ This layout only accept one children, all others will be ignored
+
+
+    <ul>
+        <li><span class="parameter">children</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table composed of valid widgets
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.widget.only_on_screen:index"></a>
+    <strong>awful.widget.only_on_screen:index (widget[, recursive[, ...]])</strong>
     </dt>
     <dd>
     Get a widex index.
@@ -1627,8 +919,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider:get_all_children"></a>
-    <strong>wibox.widget.slider:get_all_children ()</strong>
+    <a name = "awful.widget.only_on_screen:get_all_children"></a>
+    <strong>awful.widget.only_on_screen:get_all_children ()</strong>
     </dt>
     <dd>
     Get all direct and indirect children widgets.
@@ -1650,8 +942,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider:setup"></a>
-    <strong>wibox.widget.slider:setup (args)</strong>
+    <a name = "awful.widget.only_on_screen:setup"></a>
+    <strong>awful.widget.only_on_screen:setup (args)</strong>
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
@@ -1670,8 +962,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider:buttons"></a>
-    <strong>wibox.widget.slider:buttons (_buttons)</strong>
+    <a name = "awful.widget.only_on_screen:buttons"></a>
+    <strong>awful.widget.only_on_screen:buttons (_buttons)</strong>
     </dt>
     <dd>
     Set/get a widget&rsquo;s buttons.
@@ -1689,8 +981,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider:emit_signal_recursive"></a>
-    <strong>wibox.widget.slider:emit_signal_recursive (signal_name, ...)</strong>
+    <a name = "awful.widget.only_on_screen:emit_signal_recursive"></a>
+    <strong>awful.widget.only_on_screen:emit_signal_recursive (signal_name, ...)</strong>
     </dt>
     <dd>
     Emit a signal and ensure all parent widgets in the hierarchies also
@@ -1715,8 +1007,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider:disconnect_signal"></a>
-    <strong>wibox.widget.slider:disconnect_signal (name, func)</strong>
+    <a name = "awful.widget.only_on_screen:disconnect_signal"></a>
+    <strong>awful.widget.only_on_screen:disconnect_signal (name, func)</strong>
     </dt>
     <dd>
     Disconnect to a signal.
@@ -1739,8 +1031,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider:emit_signal"></a>
-    <strong>wibox.widget.slider:emit_signal (name, ...)</strong>
+    <a name = "awful.widget.only_on_screen:emit_signal"></a>
+    <strong>awful.widget.only_on_screen:emit_signal (name, ...)</strong>
     </dt>
     <dd>
     Emit a signal.
@@ -1764,8 +1056,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider:connect_signal"></a>
-    <strong>wibox.widget.slider:connect_signal (name, func)</strong>
+    <a name = "awful.widget.only_on_screen:connect_signal"></a>
+    <strong>awful.widget.only_on_screen:connect_signal (name, func)</strong>
     </dt>
     <dd>
     Connect to a signal.
@@ -1788,8 +1080,8 @@
 
 </dd>
     <dt>
-    <a name = "wibox.widget.slider:weak_connect_signal"></a>
-    <strong>wibox.widget.slider:weak_connect_signal (name, func)</strong>
+    <a name = "awful.widget.only_on_screen:weak_connect_signal"></a>
+    <strong>awful.widget.only_on_screen:weak_connect_signal (name, func)</strong>
     </dt>
     <dd>
     Connect to a signal weakly.  This allows the callback function to be garbage
