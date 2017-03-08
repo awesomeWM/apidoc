@@ -30,6 +30,10 @@
   <li><a href="../index.html">Index</a></li>
 </ul>
 
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
 
 
 <h2>Libraries</h2>
@@ -50,7 +54,7 @@
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
-  <li><strong>awful.screen</strong></li>
+  <li><a href="../libraries/awful.screen.html">awful.screen</a></li>
   <li><a href="../libraries/awful.spawn.html">awful.spawn</a></li>
   <li><a href="../libraries/awful.tag.html">awful.tag</a></li>
   <li><a href="../libraries/awful.titlebar.html">awful.titlebar</a></li>
@@ -68,7 +72,7 @@
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
   <li><a href="../libraries/gears.surface.html">gears.surface</a></li>
-  <li><a href="../libraries/gears.table.html">gears.table</a></li>
+  <li><strong>gears.table</strong></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
@@ -181,17 +185,349 @@
 
 <div id="content">
 
-<h1>Module <code>awful.screen</code></h1>
-<p>This module documentation has been merged with the <a href="../classes/screen.html#">screen</a> class.</p>
+<h1>Module <code>gears.table</code></h1>
+<p>Table module for gears</p>
 <p>
 </p>
 
 
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#join">join (args)</a></td>
+	<td class="summary">Join all tables given as parameters.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#crush">crush (t, set[, raw=false])</a></td>
+	<td class="summary">Override elements in the first table by the one in the second.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#from_sparse">from_sparse (t)</a></td>
+	<td class="summary">Pack all elements with an integer key into a new table
+ While both lua and luajit implement __len over sparse
+ table, the standard define it as an implementation
+ detail.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#hasitem">hasitem (t, item)</a></td>
+	<td class="summary">Check if a table has an item and return its key.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#keys">keys (t)</a></td>
+	<td class="summary">Get a sorted table with all integer keys from a table</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#keys_filter">keys_filter (t, ...)</a></td>
+	<td class="summary">Filter a tables keys for certain content types</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#reverse">reverse (t)</a></td>
+	<td class="summary">Reverse a table</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#clone">clone (t, deep)</a></td>
+	<td class="summary">Clone a table</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#iterate">iterate (t, filter, start)</a></td>
+	<td class="summary">Returns an iterator to cycle through, starting from the first element or the
+ given index, all elements of a table that match a given criteria.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#merge">merge (t, set)</a></td>
+	<td class="summary">Merge items from the one table to another one</td>
+	</tr>
+</table>
 
 <br/>
 <br/>
 
 
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    Methods
+    <dl class="function">
+    <dt>
+    <a name = "join"></a>
+    <strong>join (args)</strong>
+    </dt>
+    <dd>
+    Join all tables given as parameters.
+ This will iterate all tables and insert all their keys into a new table.
+
+
+    <ul>
+        <li><span class="parameter">args</span>
+         A list of tables to join
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new table containing all keys from the arguments.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "crush"></a>
+    <strong>crush (t, set[, raw=false])</strong>
+    </dt>
+    <dd>
+    Override elements in the first table by the one in the second. </p>
+
+<p> Note that this method doesn&rsquo;t copy entries found in <code>__index</code>.
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         the table to be overriden
+        </li>
+        <li><span class="parameter">set</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         the table used to override members of <code>t</code>
+        </li>
+        <li><span class="parameter">raw</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use rawset (avoid the metatable)
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        t (for convenience)
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "from_sparse"></a>
+    <strong>from_sparse (t)</strong>
+    </dt>
+    <dd>
+    Pack all elements with an integer key into a new table
+ While both lua and luajit implement __len over sparse
+ table, the standard define it as an implementation
+ detail. </p>
+
+<p> This function remove any non numeric keys from the value set
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A potentially sparse table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A packed table with all numeric keys
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "hasitem"></a>
+    <strong>hasitem (t, item)</strong>
+    </dt>
+    <dd>
+    Check if a table has an item and return its key.
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+         The table.
+        </li>
+        <li><span class="parameter">item</span>
+         The item to look for in values of the table.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The key were the item is found, or nil if not found.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "keys"></a>
+    <strong>keys (t)</strong>
+    </dt>
+    <dd>
+    Get a sorted table with all integer keys from a table
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+         the table for which the keys to get
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A table with keys
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "keys_filter"></a>
+    <strong>keys_filter (t, ...)</strong>
+    </dt>
+    <dd>
+    Filter a tables keys for certain content types
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+         The table to retrieve the keys for
+        </li>
+        <li><span class="parameter">...</span>
+         the types to look for
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A filtered table with keys
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "reverse"></a>
+    <strong>reverse (t)</strong>
+    </dt>
+    <dd>
+    Reverse a table
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+         the table to reverse
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the reversed table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "clone"></a>
+    <strong>clone (t, deep)</strong>
+    </dt>
+    <dd>
+    Clone a table
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+         the table to clone
+        </li>
+        <li><span class="parameter">deep</span>
+         Create a deep clone? (default: true)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        a clone of t
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "iterate"></a>
+    <strong>iterate (t, filter, start)</strong>
+    </dt>
+    <dd>
+    Returns an iterator to cycle through, starting from the first element or the
+ given index, all elements of a table that match a given criteria.
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+        <pre><code>  the table to iterate
+</code></pre>
+
+        </li>
+        <li><span class="parameter">filter</span>
+         a function that returns true to indicate a positive match
+        </li>
+        <li><span class="parameter">start</span>
+          what index to start iterating from.  Default is 1 (=> start of
+ the table)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "merge"></a>
+    <strong>merge (t, set)</strong>
+    </dt>
+    <dd>
+    Merge items from the one table to another one
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         the container table
+        </li>
+        <li><span class="parameter">set</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         the mixin table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        Return <code>t</code> for convenience
+    </ol>
+
+
+
+
+</dd>
+</dl>
 
 
 </div> <!-- id="content" -->
