@@ -73,6 +73,7 @@
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
   <li><a href="../libraries/gears.surface.html">gears.surface</a></li>
+  <li><a href="../libraries/gears.table.html">gears.table</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
@@ -310,7 +311,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 </span>mytextclock = wibox.widget.textclock()
 
 <span class="comment">-- Create a wibox for each screen and add it
-</span><span class="keyword">local</span> taglist_buttons = awful.util.<span class="global">table</span>.join(
+</span><span class="keyword">local</span> taglist_buttons = gears.<span class="global">table</span>.join(
                     awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:view_only() <span class="keyword">end</span>),
                     awful.button({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
                                               <span class="keyword">if</span> client.focus <span class="keyword">then</span>
@@ -327,7 +328,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                     awful.button({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) awful.tag.viewprev(t.screen) <span class="keyword">end</span>)
                 )
 
-<span class="keyword">local</span> tasklist_buttons = awful.util.<span class="global">table</span>.join(
+<span class="keyword">local</span> tasklist_buttons = gears.<span class="global">table</span>.join(
                      awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
                                               <span class="keyword">if</span> c == client.focus <span class="keyword">then</span>
                                                   c.minimized = <span class="keyword">true</span>
@@ -379,7 +380,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <span class="comment">-- Create an imagebox widget which will contains an icon indicating which layout we're using.
 </span>    <span class="comment">-- We need one layoutbox per screen.
 </span>    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(awful.util.<span class="global">table</span>.join(
+    s.mylayoutbox:buttons(gears.<span class="global">table</span>.join(
                            awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> () awful.layout.inc( <span class="number">1</span>) <span class="keyword">end</span>),
                            awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span> () awful.layout.inc(-<span class="number">1</span>) <span class="keyword">end</span>),
                            awful.button({ }, <span class="number">4</span>, <span class="keyword">function</span> () awful.layout.inc( <span class="number">1</span>) <span class="keyword">end</span>),
@@ -415,7 +416,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 <span class="comment">-- }}}
 </span>
 <span class="comment">-- {{{ Mouse bindings
-</span>root.buttons(awful.util.<span class="global">table</span>.join(
+</span>root.buttons(gears.<span class="global">table</span>.join(
     awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span> () mymainmenu:toggle() <span class="keyword">end</span>),
     awful.button({ }, <span class="number">4</span>, awful.tag.viewnext),
     awful.button({ }, <span class="number">5</span>, awful.tag.viewprev)
@@ -423,7 +424,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 <span class="comment">-- }}}
 </span>
 <span class="comment">-- {{{ Key bindings
-</span>globalkeys = awful.util.<span class="global">table</span>.join(
+</span>globalkeys = gears.<span class="global">table</span>.join(
     awful.key({ modkey,           }, <span class="string">"s"</span>,      hotkeys_popup.show_help,
               {description=<span class="string">"show help"</span>, group=<span class="string">"awesome"</span>}),
     awful.key({ modkey,           }, <span class="string">"Left"</span>,   awful.tag.viewprev,
@@ -523,7 +524,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
               {description = <span class="string">"show the menubar"</span>, group = <span class="string">"launcher"</span>})
 )
 
-clientkeys = awful.util.<span class="global">table</span>.join(
+clientkeys = gears.<span class="global">table</span>.join(
     awful.key({ modkey,           }, <span class="string">"f"</span>,
         <span class="keyword">function</span> (c)
             c.fullscreen = <span class="keyword">not</span> c.fullscreen
@@ -571,7 +572,7 @@ clientkeys = awful.util.<span class="global">table</span>.join(
 </span><span class="comment">-- Be careful: we use keycodes to make it work on any keyboard layout.
 </span><span class="comment">-- This should map on the top row of your keyboard, usually 1 to 9.
 </span><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">9</span> <span class="keyword">do</span>
-    globalkeys = awful.util.<span class="global">table</span>.join(globalkeys,
+    globalkeys = gears.<span class="global">table</span>.join(globalkeys,
         <span class="comment">-- View tag only.
 </span>        awful.key({ modkey }, <span class="string">"#"</span> .. i + <span class="number">9</span>,
                   <span class="keyword">function</span> ()
@@ -617,7 +618,7 @@ clientkeys = awful.util.<span class="global">table</span>.join(
     )
 <span class="keyword">end</span>
 
-clientbuttons = awful.util.<span class="global">table</span>.join(
+clientbuttons = gears.<span class="global">table</span>.join(
     awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c) client.focus = c; c:raise() <span class="keyword">end</span>),
     awful.button({ modkey }, <span class="number">1</span>, awful.mouse.client.move),
     awful.button({ modkey }, <span class="number">3</span>, awful.mouse.client.resize))
@@ -697,7 +698,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 <span class="comment">-- Add a titlebar if titlebars_enabled is set to true in the rules.
 </span>client.connect_signal(<span class="string">"request::titlebars"</span>, <span class="keyword">function</span>(c)
     <span class="comment">-- buttons for the titlebar
-</span>    <span class="keyword">local</span> buttons = awful.util.<span class="global">table</span>.join(
+</span>    <span class="keyword">local</span> buttons = gears.<span class="global">table</span>.join(
         awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>()
             client.focus = c
             c:raise()
