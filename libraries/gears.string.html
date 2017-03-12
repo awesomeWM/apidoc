@@ -71,10 +71,10 @@
   <li><a href="../libraries/gears.object.properties.html">gears.object.properties</a></li>
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
-  <li><a href="../libraries/gears.string.html">gears.string</a></li>
+  <li><strong>gears.string</strong></li>
   <li><a href="../libraries/gears.surface.html">gears.surface</a></li>
   <li><a href="../libraries/gears.table.html">gears.table</a></li>
-  <li><strong>gears.wallpaper</strong></li>
+  <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
   <li><a href="../libraries/menubar.menu_gen.html">menubar.menu_gen</a></li>
@@ -186,43 +186,38 @@
 
 <div id="content">
 
-<h1>Module <code>gears.wallpaper</code></h1>
+<h1>Module <code>gears.string</code></h1>
+<p>String module for gears</p>
 <p>
 </p>
-<p>
-</p>
-    <h3>Info:</h3>
-    <ul>
-        <li><strong>Copyright</strong>: 2012 Uli Schlachter</li>
-        <li><strong>Author</strong>: Uli Schlachter</li>
-    </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#prepare_context">prepare_context (s)</a></td>
-	<td class="summary">Prepare the needed state for setting a wallpaper.</td>
+	<td class="name" ><a href="#escape">escape (text)</a></td>
+	<td class="summary">Escape a string from XML char.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#set">set (pattern)</a></td>
-	<td class="summary">Set the current wallpaper.</td>
+	<td class="name" ><a href="#unescape">unescape (text)</a></td>
+	<td class="summary">Unescape a string from entities.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#centered">centered (surf, s, background)</a></td>
-	<td class="summary">Set a centered wallpaper.</td>
+	<td class="name" ><a href="#linecount">linecount (text)</a></td>
+	<td class="summary">Count number of lines in a string</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#tiled">tiled (surf, s, offset)</a></td>
-	<td class="summary">Set a tiled wallpaper.</td>
+	<td class="name" ><a href="#linewrap">linewrap (text, width, indent)</a></td>
+	<td class="summary">Split a string into multiple lines</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#maximized">maximized (surf, s, ignore_aspect, offset)</a></td>
-	<td class="summary">Set a maximized wallpaper.</td>
+	<td class="name" ><a href="#quote_pattern">quote_pattern ()</a></td>
+	<td class="summary">Escape all special pattern-matching characters so that lua interprets them
+ literally instead of as a character class.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#fit">fit (surf, s, background)</a></td>
-	<td class="summary">Set a fitting wallpaper.</td>
+	<td class="name" ><a href="#query_to_pattern">query_to_pattern (s)</a></td>
+	<td class="summary">Generate a pattern matching expression that ignores case.</td>
 	</tr>
 </table>
 
@@ -234,28 +229,24 @@
     Methods
     <dl class="function">
     <dt>
-    <a name = "prepare_context"></a>
-    <strong>prepare_context (s)</strong>
+    <a name = "escape"></a>
+    <strong>escape (text)</strong>
     </dt>
     <dd>
-    Prepare the needed state for setting a wallpaper.
- This function returns a cairo context through which a wallpaper can be drawn.
- The context is only valid for a short time and should not be saved in a
- global variable.
+    Escape a string from XML char.
+ Useful to set raw text in textbox.
 
 
     <ul>
-        <li><span class="parameter">s</span>
-         The screen to set the wallpaper on or nil for all screens
+        <li><span class="parameter">text</span>
+         Text to escape.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
-        <li>
-        The available geometry (table with entries width and height)</li>
-        <li>
-        A cairo context that the wallpaper should be drawn to</li>
+
+        Escape text.
     </ol>
 
 
@@ -263,110 +254,95 @@
 
 </dd>
     <dt>
-    <a name = "set"></a>
-    <strong>set (pattern)</strong>
+    <a name = "unescape"></a>
+    <strong>unescape (text)</strong>
     </dt>
     <dd>
-    Set the current wallpaper.
+    Unescape a string from entities.
 
 
     <ul>
-        <li><span class="parameter">pattern</span>
-         The wallpaper that should be set. This can be a cairo surface,
-   a description for gears.color or a cairo pattern.
+        <li><span class="parameter">text</span>
+         Text to unescape.
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
 
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/gears.color.html#">gears.color</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "centered"></a>
-    <strong>centered (surf, s, background)</strong>
-    </dt>
-    <dd>
-    Set a centered wallpaper.
-
-
-    <ul>
-        <li><span class="parameter">surf</span>
-         The wallpaper to center. Either a cairo surface or a file name.
-        </li>
-        <li><span class="parameter">s</span>
-         The screen whose wallpaper should be set. Can be nil, in which case
-   all screens are set.
-        </li>
-        <li><span class="parameter">background</span>
-         The background color that should be used. Gets handled via
-   gears.color. The default is black.
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/gears.color.html#">gears.color</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "tiled"></a>
-    <strong>tiled (surf, s, offset)</strong>
-    </dt>
-    <dd>
-    Set a tiled wallpaper.
-
-
-    <ul>
-        <li><span class="parameter">surf</span>
-         The wallpaper to tile. Either a cairo surface or a file name.
-        </li>
-        <li><span class="parameter">s</span>
-         The screen whose wallpaper should be set. Can be nil, in which case
-   all screens are set.
-        </li>
-        <li><span class="parameter">offset</span>
-         This can be set to a table with entries x and y.
-        </li>
-    </ul>
-
+        Unescaped text.
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "maximized"></a>
-    <strong>maximized (surf, s, ignore_aspect, offset)</strong>
+    <a name = "linecount"></a>
+    <strong>linecount (text)</strong>
     </dt>
     <dd>
-    Set a maximized wallpaper.
+    Count number of lines in a string
 
 
     <ul>
-        <li><span class="parameter">surf</span>
-         The wallpaper to set. Either a cairo surface or a file name.
-        </li>
-        <li><span class="parameter">s</span>
-         The screen whose wallpaper should be set. Can be nil, in which case
-   all screens are set.
-        </li>
-        <li><span class="parameter">ignore_aspect</span>
-         If this is true, the image&rsquo;s aspect ratio is ignored.
-   The default is to honor the aspect ratio.
-        </li>
-        <li><span class="parameter">offset</span>
-         This can be set to a table with entries x and y.
+        <li><span class="parameter">text</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Input string.
         </li>
     </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        Number of lines.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "linewrap"></a>
+    <strong>linewrap (text, width, indent)</strong>
+    </dt>
+    <dd>
+    Split a string into multiple lines
+
+
+    <ul>
+        <li><span class="parameter">text</span>
+         String to wrap.
+        </li>
+        <li><span class="parameter">width</span>
+         Maximum length of each line. Default: 72.
+        </li>
+        <li><span class="parameter">indent</span>
+         Number of spaces added before each wrapped line. Default: 0.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The string with lines wrapped to width.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "quote_pattern"></a>
+    <strong>quote_pattern ()</strong>
+    </dt>
+    <dd>
+    Escape all special pattern-matching characters so that lua interprets them
+ literally instead of as a character class.
+ Source: http://stackoverflow.com/a/20778724/15690
+
+
 
 
 
@@ -374,33 +350,21 @@
 
 </dd>
     <dt>
-    <a name = "fit"></a>
-    <strong>fit (surf, s, background)</strong>
+    <a name = "query_to_pattern"></a>
+    <strong>query_to_pattern (s)</strong>
     </dt>
     <dd>
-    Set a fitting wallpaper.
+    Generate a pattern matching expression that ignores case.
 
 
     <ul>
-        <li><span class="parameter">surf</span>
-         The wallpaper to set. Either a cairo surface or a file name.
-        </li>
         <li><span class="parameter">s</span>
-         The screen whose wallpaper should be set. Can be nil, in which case
-   all screens are set.
-        </li>
-        <li><span class="parameter">background</span>
-         The background color that should be used. Gets handled via
-   gears.color. The default is black.
+         Original pattern matching expression.
         </li>
     </ul>
 
 
 
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/gears.color.html#">gears.color</a>
-    </ul>
 
 
 </dd>
