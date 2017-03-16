@@ -418,9 +418,17 @@ configurable rules.</p>
 
 <pre>
 s.mywibox : setup {
-    s == screen.primary <span class="keyword">and</span> my_first_widget, <span class="comment">-- Only display on primary screen
-</span>    s.index == <span class="number">2</span> <span class="keyword">and</span> my_second_widget, <span class="comment">-- Only display on screen 2
-</span>    my_third_widget, <span class="comment">-- Displayed on all screens
+    {
+        layout = awful.widget.only_on_screen,
+        screen = <span class="string">"primary"</span>, <span class="comment">-- Only display on primary screen
+</span>        my_first_widget,
+    },
+    {
+        layout = awful.widget.only_on_screen,
+        screen = <span class="number">2</span>, <span class="comment">-- Only display on screen 2
+</span>        my_second_widget,
+    },
+    my_third_widget, <span class="comment">-- Displayed on all screens
 </span>    { <span class="comment">-- Add a background color/pattern for my_fourth_widget
 </span>          my_fourth_widget,
           bg     = beautiful.bg_focus,
@@ -431,10 +439,8 @@ s.mywibox : setup {
 </pre>
 
 
-<p>In this example <code>s == screen.primary</code> is an inline expression. In the default
-<a href="../sample files/rc.lua.html#">rc.lua</a>, there is an <code>s</code> variable represent to define the current screen. Any
-Lua logic expression can be used as long as it returns a valid widget or a
-declarative layout, or <code>nil</code>.</p>
+<p>This examples uses the <a href="../classes/awful.widget.only_on_screen.html#">awful.widget.only_on_screen</a> container to display
+widgets only on some screens.</p>
 
 <h3>Composite widgets</h3>
 
