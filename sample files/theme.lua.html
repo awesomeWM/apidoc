@@ -67,6 +67,7 @@
   <li><a href="../libraries/dbus.html">dbus</a></li>
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
   <li><a href="../libraries/gears.debug.html">gears.debug</a></li>
+  <li><a href="../libraries/gears.filesystem.html">gears.filesystem</a></li>
   <li><a href="../libraries/gears.geometry.html">gears.geometry</a></li>
   <li><a href="../libraries/gears.math.html">gears.math</a></li>
   <li><a href="../libraries/gears.object.properties.html">gears.object.properties</a></li>
@@ -190,14 +191,14 @@
  and replace:</p>
 
 <pre>
-beautiful.init(awful.util.get_themes_dir() .. <span class="string">"default/theme.lua"</span>)
+beautiful.init(gears.filesystem.get_themes_dir() .. <span class="string">"default/theme.lua"</span>)
 </pre>
 
 
 <p> with</p>
 
 <pre>
-beautiful.init(awful.util.getdir(<span class="string">"config"</span>) .. <span class="string">"mytheme.lua"</span>)
+beautiful.init(gears.filesystem.get_dir(<span class="string">"config"</span>) .. <span class="string">"mytheme.lua"</span>)
 </pre>
 
 
@@ -214,8 +215,8 @@ beautiful.init(awful.util.getdir(<span class="string">"config"</span>) .. <span 
 <span class="keyword">local</span> xresources = <span class="global">require</span>(<span class="string">"<a href="../libraries/beautiful.xresources.html#">beautiful.xresources</a>"</span>)
 <span class="keyword">local</span> dpi = xresources.apply_dpi
 
-<span class="keyword">local</span> util = <span class="global">require</span>(<span class="string">'<a href="../libraries/awful.util.html#">awful.util</a>'</span>)
-<span class="keyword">local</span> themes_path = util.get_themes_dir()
+<span class="keyword">local</span> gfs = <span class="global">require</span>(<span class="string">"<a href="../libraries/gears.filesystem.html#">gears.filesystem</a>"</span>)
+<span class="keyword">local</span> themes_path = gfs.get_themes_dir()
 
 <span class="keyword">local</span> theme = {}
 

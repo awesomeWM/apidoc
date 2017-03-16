@@ -66,7 +66,7 @@
   <li><a href="../libraries/dbus.html">dbus</a></li>
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
   <li><a href="../libraries/gears.debug.html">gears.debug</a></li>
-  <li><a href="../libraries/gears.filesystem.html">gears.filesystem</a></li>
+  <li><strong>gears.filesystem</strong></li>
   <li><a href="../libraries/gears.geometry.html">gears.geometry</a></li>
   <li><a href="../libraries/gears.math.html">gears.math</a></li>
   <li><a href="../libraries/gears.object.properties.html">gears.object.properties</a></li>
@@ -74,7 +74,7 @@
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
   <li><a href="../libraries/gears.string.html">gears.string</a></li>
   <li><a href="../libraries/gears.surface.html">gears.surface</a></li>
-  <li><strong>gears.table</strong></li>
+  <li><a href="../libraries/gears.table.html">gears.table</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
@@ -188,8 +188,8 @@
 
 <div id="content">
 
-<h1>Module <code>gears.table</code></h1>
-<p>Table module for gears</p>
+<h1>Module <code>gears.filesystem</code></h1>
+<p>Filesystem module for gears</p>
 <p>
 </p>
 
@@ -197,48 +197,48 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#join">join (args)</a></td>
-	<td class="summary">Join all tables given as parameters.</td>
+	<td class="name" ><a href="#mkdir">mkdir (dir)</a></td>
+	<td class="summary">Create a directory</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#crush">crush (t, set[, raw=false])</a></td>
-	<td class="summary">Override elements in the first table by the one in the second.</td>
+	<td class="name" ><a href="#file_readable">file_readable (filename)</a></td>
+	<td class="summary">Check if a file exists, is readable and not a directory.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#from_sparse">from_sparse (t)</a></td>
-	<td class="summary">Pack all elements with an integer key into a new table
- While both lua and luajit implement __len over sparse
- table, the standard define it as an implementation
- detail.</td>
+	<td class="name" ><a href="#dir_readable">dir_readable (path)</a></td>
+	<td class="summary">Check if a path exists, is readable and a directory.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#hasitem">hasitem (t, item)</a></td>
-	<td class="summary">Check if a table has an item and return its key.</td>
+	<td class="name" ><a href="#is_dir">is_dir (path)</a></td>
+	<td class="summary">Check if a path is a directory.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#keys">keys (t)</a></td>
-	<td class="summary">Get a sorted table with all integer keys from a table</td>
+	<td class="name" ><a href="#get_xdg_config_home">get_xdg_config_home ()</a></td>
+	<td class="summary">Get the config home according to the XDG basedir specification.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#keys_filter">keys_filter (t, ...)</a></td>
-	<td class="summary">Filter a tables keys for certain content types</td>
+	<td class="name" ><a href="#get_xdg_cache_home">get_xdg_cache_home ()</a></td>
+	<td class="summary">Get the cache home according to the XDG basedir specification.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#reverse">reverse (t)</a></td>
-	<td class="summary">Reverse a table</td>
+	<td class="name" ><a href="#get_configuration_dir">get_configuration_dir ()</a></td>
+	<td class="summary">Get the path to the user&rsquo;s config dir.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#clone">clone (t, deep)</a></td>
-	<td class="summary">Clone a table</td>
+	<td class="name" ><a href="#get_cache_dir">get_cache_dir ()</a></td>
+	<td class="summary">Get the path to a directory that should be used for caching data.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#iterate">iterate (t, filter, start)</a></td>
-	<td class="summary">Returns an iterator to cycle through, starting from the first element or the
- given index, all elements of a table that match a given criteria.</td>
+	<td class="name" ><a href="#get_themes_dir">get_themes_dir ()</a></td>
+	<td class="summary">Get the path to the directory where themes are installed.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#merge">merge (t, set)</a></td>
-	<td class="summary">Merge items from the one table to another one</td>
+	<td class="name" ><a href="#get_awesome_icon_dir">get_awesome_icon_dir ()</a></td>
+	<td class="summary">Get the path to the directory where our icons are installed.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#get_dir">get_dir (d)</a></td>
+	<td class="summary">Get the user&rsquo;s config or cache dir.</td>
 	</tr>
 </table>
 
@@ -250,24 +250,24 @@
     Methods
     <dl class="function">
     <dt>
-    <a name = "join"></a>
-    <strong>join (args)</strong>
+    <a name = "mkdir"></a>
+    <strong>mkdir (dir)</strong>
     </dt>
     <dd>
-    Join all tables given as parameters.
- This will iterate all tables and insert all their keys into a new table.
+    Create a directory
 
 
     <ul>
-        <li><span class="parameter">args</span>
-         A list of tables to join
+        <li><span class="parameter">dir</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The directory.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        A new table containing all keys from the arguments.
+        (true, nil) on success, (false, err) on failure
     </ol>
 
 
@@ -275,36 +275,25 @@
 
 </dd>
     <dt>
-    <a name = "crush"></a>
-    <strong>crush (t, set[, raw=false])</strong>
+    <a name = "file_readable"></a>
+    <strong>file_readable (filename)</strong>
     </dt>
     <dd>
-    Override elements in the first table by the one in the second. </p>
-
-<p> Note that this method doesn&rsquo;t copy entries found in <code>__index</code>.
+    Check if a file exists, is readable and not a directory.
 
 
     <ul>
-        <li><span class="parameter">t</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         the table to be overriden
-        </li>
-        <li><span class="parameter">set</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         the table used to override members of <code>t</code>
-        </li>
-        <li><span class="parameter">raw</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Use rawset (avoid the metatable)
-         (<em>default</em> false)
+        <li><span class="parameter">filename</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The file path.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        t (for convenience)
+           <span class="types"><span class="type">boolean</span></span>
+        True if file exists and is readable.
     </ol>
 
 
@@ -312,30 +301,25 @@
 
 </dd>
     <dt>
-    <a name = "from_sparse"></a>
-    <strong>from_sparse (t)</strong>
+    <a name = "dir_readable"></a>
+    <strong>dir_readable (path)</strong>
     </dt>
     <dd>
-    Pack all elements with an integer key into a new table
- While both lua and luajit implement __len over sparse
- table, the standard define it as an implementation
- detail. </p>
-
-<p> This function remove any non numeric keys from the value set
+    Check if a path exists, is readable and a directory.
 
 
     <ul>
-        <li><span class="parameter">t</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A potentially sparse table
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The directory path.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        A packed table with all numeric keys
+           <span class="types"><span class="type">boolean</span></span>
+        True if path exists and is readable.
     </ol>
 
 
@@ -343,26 +327,25 @@
 
 </dd>
     <dt>
-    <a name = "hasitem"></a>
-    <strong>hasitem (t, item)</strong>
+    <a name = "is_dir"></a>
+    <strong>is_dir (path)</strong>
     </dt>
     <dd>
-    Check if a table has an item and return its key.
+    Check if a path is a directory.
 
 
     <ul>
-        <li><span class="parameter">t</span>
-         The table.
-        </li>
-        <li><span class="parameter">item</span>
-         The item to look for in values of the table.
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The directory path
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        The key were the item is found, or nil if not found.
+           <span class="types"><span class="type">boolean</span></span>
+        True if path exists and is a directory.
     </ol>
 
 
@@ -370,23 +353,18 @@
 
 </dd>
     <dt>
-    <a name = "keys"></a>
-    <strong>keys (t)</strong>
+    <a name = "get_xdg_config_home"></a>
+    <strong>get_xdg_config_home ()</strong>
     </dt>
     <dd>
-    Get a sorted table with all integer keys from a table
+    Get the config home according to the XDG basedir specification.
 
 
-    <ul>
-        <li><span class="parameter">t</span>
-         the table for which the keys to get
-        </li>
-    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        A table with keys
+        the config home (XDG_CONFIG_HOME) with a slash at the end.
     </ol>
 
 
@@ -394,26 +372,18 @@
 
 </dd>
     <dt>
-    <a name = "keys_filter"></a>
-    <strong>keys_filter (t, ...)</strong>
+    <a name = "get_xdg_cache_home"></a>
+    <strong>get_xdg_cache_home ()</strong>
     </dt>
     <dd>
-    Filter a tables keys for certain content types
+    Get the cache home according to the XDG basedir specification.
 
 
-    <ul>
-        <li><span class="parameter">t</span>
-         The table to retrieve the keys for
-        </li>
-        <li><span class="parameter">...</span>
-         the types to look for
-        </li>
-    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        A filtered table with keys
+        the cache home (XDG_CACHE_HOME) with a slash at the end.
     </ol>
 
 
@@ -421,23 +391,19 @@
 
 </dd>
     <dt>
-    <a name = "reverse"></a>
-    <strong>reverse (t)</strong>
+    <a name = "get_configuration_dir"></a>
+    <strong>get_configuration_dir ()</strong>
     </dt>
     <dd>
-    Reverse a table
+    Get the path to the user&rsquo;s config dir.
+ This is the directory containing the configuration file (&ldquo;rc.lua&rdquo;).
 
 
-    <ul>
-        <li><span class="parameter">t</span>
-         the table to reverse
-        </li>
-    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the reversed table
+        A string with the requested path with a slash at the end.
     </ol>
 
 
@@ -445,26 +411,18 @@
 
 </dd>
     <dt>
-    <a name = "clone"></a>
-    <strong>clone (t, deep)</strong>
+    <a name = "get_cache_dir"></a>
+    <strong>get_cache_dir ()</strong>
     </dt>
     <dd>
-    Clone a table
+    Get the path to a directory that should be used for caching data.
 
 
-    <ul>
-        <li><span class="parameter">t</span>
-         the table to clone
-        </li>
-        <li><span class="parameter">deep</span>
-         Create a deep clone? (default: true)
-        </li>
-    </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        a clone of t
+        A string with the requested path with a slash at the end.
     </ol>
 
 
@@ -472,58 +430,63 @@
 
 </dd>
     <dt>
-    <a name = "iterate"></a>
-    <strong>iterate (t, filter, start)</strong>
+    <a name = "get_themes_dir"></a>
+    <strong>get_themes_dir ()</strong>
     </dt>
     <dd>
-    Returns an iterator to cycle through, starting from the first element or the
- given index, all elements of a table that match a given criteria.
+    Get the path to the directory where themes are installed.
 
 
-    <ul>
-        <li><span class="parameter">t</span>
-        <pre><code>  the table to iterate
-</code></pre>
 
-        </li>
-        <li><span class="parameter">filter</span>
-         a function that returns true to indicate a positive match
-        </li>
-        <li><span class="parameter">start</span>
-          what index to start iterating from.  Default is 1 (=> start of
- the table)
-        </li>
-    </ul>
+    <h3>Returns:</h3>
+    <ol>
 
+        A string with the requested path with a slash at the end.
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "merge"></a>
-    <strong>merge (t, set)</strong>
+    <a name = "get_awesome_icon_dir"></a>
+    <strong>get_awesome_icon_dir ()</strong>
     </dt>
     <dd>
-    Merge items from the one table to another one
+    Get the path to the directory where our icons are installed.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A string with the requested path with a slash at the end.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_dir"></a>
+    <strong>get_dir (d)</strong>
+    </dt>
+    <dd>
+    Get the user&rsquo;s config or cache dir.
+ It first checks XDG_CONFIG_HOME / XDG_CACHE_HOME, but then goes with the
+ default paths.
 
 
     <ul>
-        <li><span class="parameter">t</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         the container table
-        </li>
-        <li><span class="parameter">set</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         the mixin table
+        <li><span class="parameter">d</span>
+         The directory to get (either &ldquo;config&rdquo; or &ldquo;cache&rdquo;).
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        Return <code>t</code> for convenience
+        A string containing the requested path.
     </ol>
 
 
