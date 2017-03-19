@@ -554,6 +554,14 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 	<td class="name" ><a href="#property::urgent_count">property::urgent_count</a></td>
 	<td class="summary">The number of urgent tagged clients</td>
 	</tr>
+	<tr>
+	<td class="name" ><a href="#request::screen">request::screen</a></td>
+	<td class="summary">Emitted when a screen is removed.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#tag.removal-pending">tag.removal-pending</a></td>
+	<td class="summary">Emitted after <a href="../classes/tag.html#request::screen">request::screen</a> if no new screen has been set.</td>
+	</tr>
 </table>
 <h2><a href="#Theme_variables">Theme variables</a></h2>
 <table class="function_list">
@@ -1152,7 +1160,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.selected">selected</a>
+         <a href="../classes/tag.html#awful.tag.selected">selected</a>
     </ul>
 
 
@@ -1379,7 +1387,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>See also:</h3>
     <ul>
          <li><a href="../classes/tag.html#beautiful.master_count">master_count</a></li>
-         <li><a href="../classes/tag.html#tag.column_count">column_count</a></li>
+         <li><a href="../classes/tag.html#beautiful.column_count">column_count</a></li>
          <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
     </ul>
@@ -1521,7 +1529,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.gap_single_client">gap_single_client</a>
+         <a href="../classes/tag.html#beautiful.gap_single_client">gap_single_client</a>
     </ul>
 
 
@@ -1776,6 +1784,42 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 </dd>
+    <dt>
+    <a name = "request::screen"></a>
+    <strong>request::screen</strong>
+    </dt>
+    <dd>
+    Emitted when a screen is removed.
+ This can be used to salvage existing tags by moving them to a new
+ screen (or creating a virtual screen). By default, there is no
+ handler for this request. The tags will be deleted. To prevent
+ this, an handler for this request must simply set a new screen
+ for the tag.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "tag.removal-pending"></a>
+    <strong>tag.removal-pending</strong>
+    </dt>
+    <dd>
+    Emitted after <a href="../classes/tag.html#request::screen">request::screen</a> if no new screen has been set.
+ The tag will be deleted, this is a last chance to move its clients
+ before they are sent to a fallback tag. Connect to <a href="../classes/tag.html#request::screen">request::screen</a>
+ if you wish to salvage the tag.
+
+
+
+
+
+
+
+</dd>
 </dl>
     <h2 class="section-header "><a name="Theme_variables"></a>Theme variables</h2>
 
@@ -1825,7 +1869,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>See also:</h3>
     <ul>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
-         <li><a href="../classes/tag.html#tag.gap_single_client">gap_single_client</a></li>
+         <li><a href="../classes/tag.html#beautiful.gap_single_client">gap_single_client</a></li>
     </ul>
 
 
@@ -1850,7 +1894,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>See also:</h3>
     <ul>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
-         <li><a href="../classes/tag.html#tag.gap_single_client">gap_single_client</a></li>
+         <li><a href="../classes/tag.html#beautiful.gap_single_client">gap_single_client</a></li>
     </ul>
 
 
@@ -1932,7 +1976,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.column_count">column_count</a>
+         <a href="../classes/tag.html#beautiful.column_count">column_count</a>
     </ul>
 
 
@@ -2526,7 +2570,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.column_count">column_count</a>
+         <a href="../classes/tag.html#beautiful.column_count">column_count</a>
     </ul>
 
 
@@ -2551,7 +2595,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.column_count">column_count</a>
+         <a href="../classes/tag.html#beautiful.column_count">column_count</a>
     </ul>
 
 
@@ -2941,7 +2985,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.selected">selected</a>
+         <a href="../classes/tag.html#awful.tag.selected">selected</a>
     </ul>
 
 
@@ -2953,7 +2997,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-03-19 21:25:07 </i>
+<i style="float:right;">Last updated 2017-03-19 21:33:58 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
