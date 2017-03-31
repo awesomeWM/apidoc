@@ -413,17 +413,17 @@ maximized_horizontal = <span class="keyword">false</span>,
 
 <h3>How to move and resize floaters with the keyboard?</h3>
 
-<p>You can use the <code>awful.client.moveresize</code> function. The following <code>clientkeys</code>
+<p>You can use the <a href="../classes/client.html#client:relative_move">client:relative_move</a> function. The following <code>clientkeys</code>
 example will move floaters with &ldquo;Mod4 + Arrow keys&rdquo; and resize them with &ldquo;Mod4 +
 PgUP/DN&rdquo; keys:</p>
 
 <pre>
-awful.key({ modkey }, <span class="string">"Next"</span>,  <span class="keyword">function</span> () awful.client.moveresize( <span class="number">20</span>,  <span class="number">20</span>, -<span class="number">40</span>, -<span class="number">40</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"Prior"</span>, <span class="keyword">function</span> () awful.client.moveresize(-<span class="number">20</span>, -<span class="number">20</span>,  <span class="number">40</span>,  <span class="number">40</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"Down"</span>,  <span class="keyword">function</span> () awful.client.moveresize(  <span class="number">0</span>,  <span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"Up"</span>,    <span class="keyword">function</span> () awful.client.moveresize(  <span class="number">0</span>, -<span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"Left"</span>,  <span class="keyword">function</span> () awful.client.moveresize(-<span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"Right"</span>, <span class="keyword">function</span> () awful.client.moveresize( <span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
+awful.key({ modkey }, <span class="string">"Next"</span>,  <span class="keyword">function</span> (c) c:relative_move( <span class="number">20</span>,  <span class="number">20</span>, -<span class="number">40</span>, -<span class="number">40</span>) <span class="keyword">end</span>),
+awful.key({ modkey }, <span class="string">"Prior"</span>, <span class="keyword">function</span> (c) c:relative_move(-<span class="number">20</span>, -<span class="number">20</span>,  <span class="number">40</span>,  <span class="number">40</span>) <span class="keyword">end</span>),
+awful.key({ modkey }, <span class="string">"Down"</span>,  <span class="keyword">function</span> (c) c:relative_move(  <span class="number">0</span>,  <span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
+awful.key({ modkey }, <span class="string">"Up"</span>,    <span class="keyword">function</span> (c) c:relative_move(  <span class="number">0</span>, -<span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
+awful.key({ modkey }, <span class="string">"Left"</span>,  <span class="keyword">function</span> (c) c:relative_move(-<span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
+awful.key({ modkey }, <span class="string">"Right"</span>, <span class="keyword">function</span> (c) c:relative_move( <span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
 </pre>
 
 
@@ -497,7 +497,7 @@ example shows a mapped multimedia/extra key, that&rsquo;s why the modifier is no
 present (but it could be):</p>
 
 <pre>
-awful.key({}, <span class="string">"#160"</span>, <span class="keyword">function</span> () awful.util.spawn(<span class="string">"kscreenlocker --forcelock"</span>) <span class="keyword">end</span>),
+awful.key({}, <span class="string">"#160"</span>, <span class="keyword">function</span> () awful.spawn(<span class="string">"kscreenlocker --forcelock"</span>) <span class="keyword">end</span>),
 </pre>
 
 
