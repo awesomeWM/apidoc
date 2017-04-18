@@ -198,8 +198,12 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#mkdir">mkdir (dir)</a></td>
-	<td class="summary">Create a directory</td>
+	<td class="name" ><a href="#make_directories">make_directories (dir)</a></td>
+	<td class="summary">Create a directory, including all missing parent directories.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#make_parent_directories">make_parent_directories (path)</a></td>
+	<td class="summary">Create all parent directories for a given path.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#file_readable">file_readable (filename)</a></td>
@@ -259,17 +263,42 @@
     Methods
     <dl class="function">
     <dt>
-    <a name = "mkdir"></a>
-    <strong>mkdir (dir)</strong>
+    <a name = "make_directories"></a>
+    <strong>make_directories (dir)</strong>
     </dt>
     <dd>
-    Create a directory
+    Create a directory, including all missing parent directories.
 
 
     <ul>
         <li><span class="parameter">dir</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The directory.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        (true, nil) on success, (false, err) on failure
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "make_parent_directories"></a>
+    <strong>make_parent_directories (path)</strong>
+    </dt>
+    <dd>
+    Create all parent directories for a given path.
+
+
+    <ul>
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The path whose parents should be created.
         </li>
     </ul>
 
