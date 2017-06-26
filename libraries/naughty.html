@@ -932,7 +932,7 @@
         </li>
         <li><span class="parameter">notify_callback</span>
             <span class="types"><span class="type">function</span></span>
-        <p> Callback used to modify or reject
+         Callback used to modify or reject
 notifications, e.g.</p>
 
 <pre><code>naughty.config.notify_callback = function(args)
@@ -941,6 +941,10 @@ notifications, e.g.</p>
 end
 </code></pre>
 
+<p>  To reject a notification return <code>nil</code> from the callback.
+  If the notification is a freedesktop notification received via DBUS, you can
+  access the freedesktop hints via <code>args.freedesktop_hints</code> if any where
+  specified.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">presets</span>

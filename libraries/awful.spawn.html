@@ -394,6 +394,10 @@ awful.spawn({<span class="string">"xdg-open"</span>, <span class="string">"/path
 	<td class="summary">Asynchronously spawn a program and capture its output.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#easy_async_with_shell">easy_async_with_shell (cmd, callback)</a></td>
+	<td class="summary">Call <a href="../libraries/awful.spawn.html#easy_async">spawn.easy_async</a> with a shell.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#read_lines">read_lines (input_stream, line_callback[, done_callback[, close=false]])</a></td>
 	<td class="summary">Read lines from a Gio input stream</td>
 	</tr>
@@ -570,14 +574,75 @@ awful.spawn({<span class="string">"xdg-open"</span>, <span class="string">"/path
         </li>
         <li><span class="parameter">exitreason</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         Exit Reason.
- The reason can be &ldquo;exit&rdquo; or &ldquo;signal&rdquo;.
+         Exit reason (&ldquo;exit&rdquo; or &ldquo;signal&rdquo;).
         </li>
         <li><span class="parameter">exitcode</span>
             <span class="types"><span class="type">integer</span></span>
-         Exit code.
- For &ldquo;exit&rdquo; reason it&rsquo;s the exit code.
- For &ldquo;signal&rdquo; reason — the signal causing process termination.
+        <p> Exit code (exit code or signal number,</p>
+
+<pre><code> depending on "exitreason").
+</code></pre>
+
+        </li>
+        </li></ul>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Integer</span></span>
+        the PID of the forked process.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        Error message.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.spawn.html#with_line_callback">spawn.with_line_callback</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "easy_async_with_shell"></a>
+    <strong>easy_async_with_shell (cmd, callback)</strong>
+    </dt>
+    <dd>
+    Call <a href="../libraries/awful.spawn.html#easy_async">spawn.easy_async</a> with a shell.
+ This calls <code>cmd</code> with <code>$SHELL -c</code> (via <a href="../libraries/awful.util.html#shell">awful.util.shell</a>).
+
+
+    <ul>
+        <li><span class="parameter">cmd</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The command.
+        </li>
+        <li><span class="parameter">callback</span> Function with the following arguments
+        <ul>
+        <li><span class="parameter">stdout</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Output on stdout.
+        </li>
+        <li><span class="parameter">stderr</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Output on stderr.
+        </li>
+        <li><span class="parameter">exitreason</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Exit reason (&ldquo;exit&rdquo; or &ldquo;signal&rdquo;).
+        </li>
+        <li><span class="parameter">exitcode</span>
+            <span class="types"><span class="type">integer</span></span>
+        <p> Exit code (exit code or signal number,</p>
+
+<pre><code> depending on "exitreason").
+</code></pre>
+
         </li>
         </li></ul>
     </ul>
