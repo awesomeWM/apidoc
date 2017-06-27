@@ -229,6 +229,10 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)
 	<td class="summary">Get all direct children of this layout.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#wibox.layout.ratio.inner_fill_strategy">wibox.layout.ratio.inner_fill_strategy</a></td>
+	<td class="summary">Set how the space of invisible or <code>0x0</code> sized widget is redistributed.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#wibox.layout.ratio.forced_height">wibox.layout.ratio.forced_height</a></td>
 	<td class="summary">Force a widget height.</td>
 	</tr>
@@ -407,6 +411,42 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)
     <ul>
         <li><span class="parameter">layout</span>
          The layout you are modifying.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.ratio.inner_fill_strategy"></a>
+    <strong>wibox.layout.ratio.inner_fill_strategy</strong>
+    </dt>
+    <dd>
+    Set how the space of invisible or <code>0x0</code> sized widget is redistributed. </p>
+
+<p> Possible values:</p>
+
+<ul>
+<li>&ldquo;default&rdquo;: Honor the ratio and do not redistribute the space.</li>
+<li>&ldquo;justify&rdquo;: Distribute the space among remaining widgets.</li>
+<li>&ldquo;center&rdquo;: Squash remaining widgets and leave equal space on both side.</li>
+<li>&ldquo;inner_spacing&rdquo;: Add equal spacing between all widgets.</li>
+<li>&ldquo;spacing&rdquo;: Add equal spacing between all widgets and on the outside.</li>
+<li>&ldquo;left&rdquo;: Squash remaining widgets and leave empty space on the left.</li>
+<li>&ldquo;right&rdquo;: Squash remaining widgets and leave empty space on the right.</li>
+</ul>
+
+
+<p><img src="../images/AUTOGEN_wibox_layout_ratio_strategy.svg" alt="Usage example" />
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">inner_fill_strategy</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         One of the value listed above.
         </li>
     </ul>
 
@@ -1022,7 +1062,9 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)
     <dd>
     Increase the ratio of &ldquo;widget&rdquo;
  If the increment produce an invalid ratio (not between 0 and 1), the method
- do nothing.
+ do nothing. </p>
+
+<p><img src="../images/AUTOGEN_wibox_layout_ratio_inc_ratio.svg" alt="Usage example" />
 
 
     <ul>
@@ -1040,6 +1082,19 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> ret = wibox.layout.fixed.vertical()
+<span class="keyword">local</span> w = wibox.widget {
+    first,
+    second,
+    third,
+    layout  = wibox.layout.ratio.horizontal
+}
+<span class="keyword">for</span> i=<span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
+    w:inc_ratio(<span class="number">2</span>, <span class="number">0.1</span>)
+<span class="keyword">end</span></pre>
+    </ul>
 
 </dd>
     <dt>
@@ -1148,7 +1203,9 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)
     </dt>
     <dd>
     Update all widgets to match a set of a ratio.
- The sum of before, itself and after must be 1 or nothing will be done
+ The sum of before, itself and after must be 1 or nothing will be done.</p>
+
+<p><img src="../images/AUTOGEN_wibox_layout_ratio_ajust_ratio.svg" alt="Usage example" />
 
 
     <ul>
@@ -1173,6 +1230,26 @@ w:ajust_ratio(2, 0.44, 0.33, 0.22)
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> ret = wibox.layout.fixed.vertical()
+<span class="keyword">local</span> w = wibox.widget {
+    first,
+    second,
+    third,
+    layout  = wibox.layout.ratio.horizontal
+}
+<span class="keyword">local</span> values = {
+    {<span class="number">0.25</span>, <span class="number">0.50</span>, <span class="number">0.25</span>},
+    {<span class="number">0.33</span>, <span class="number">0.55</span>, <span class="number">0.12</span>},
+    {<span class="number">0.123</span>, <span class="number">0.456</span>, <span class="number">0.789</span>},
+    {<span class="number">0.123</span>, <span class="number">0</span>, <span class="number">0.789</span>},
+    {<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>},
+}
+<span class="keyword">for</span> i=<span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
+    w:ajust_ratio(<span class="number">2</span>, unpack(values[i]))
+<span class="keyword">end</span></pre>
+    </ul>
 
 </dd>
     <dt>
