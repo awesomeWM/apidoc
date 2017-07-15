@@ -32,10 +32,10 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#New_features">New features </a></li>
-<li><a href="#New_theme_variables">New theme variables </a></li>
 <li><a href="#Noteworthy_fixes">Noteworthy fixes </a></li>
+<li><a href="#New_features">New features </a></li>
 <li><a href="#Behavior_changes">Behavior changes </a></li>
+<li><a href="#New_theme_variables">New theme variables </a></li>
 <li><a href="#Other">Other </a></li>
 <li><a href="#Breaking_changes">Breaking changes </a></li>
 </ul>
@@ -202,12 +202,107 @@
 
     <h1>NEWS</h1>
 
-<p><a name="v41"></a></p>
+<p><a name="v42"></a></p>
 
-<h1>Awesome window manager framework version 4.1 changes</h1>
+<h1>Awesome window manager framework version 4.2 changes</h1>
 
 <center> <img src="../images/AUTOGEN_wibox_logo_logo_and_name.svg" /> </center>
 
+
+<p>Awesome v4.2 is the second release of the 4.x API. It mostly fix the bugs
+reported over the last 3 months and add a couple widgets. Almost 150 issues
+have been resolved or decided to be obsolete.</p>
+
+<p><a name="Noteworthy_fixes"></a></p>
+
+<h2>Noteworthy fixes</h2>
+
+<ul>
+<li>The annoying maximization regression from v4.1 have been fixed</li>
+<li>Fixes broken drag&amp;drop with some applications like FlowBlade</li>
+<li>Changing the keyboard layout using <code>xmodmap</code> is now much faster</li>
+<li>Fixes a regression that prevents Awesome to start with the wallpaper is invalid</li>
+<li>The client history is now more reliable</li>
+<li>Another instance where clients ended up in the wrong screen has been fixed</li>
+<li>Awesome will no longer generate zombie processes when restarted</li>
+<li>All official themes now support HiDPI screens</li>
+<li>The <code>magnifier</code> layout has been fixed</li>
+<li>The menubar has been fixed for Lua 5.1 users</li>
+</ul>
+
+
+<p><a name="New_features"></a></p>
+
+<h2>New features</h2>
+
+<ul>
+<li>The hotkey popup has been extended to support Firefox, Qutebrowser and TMUX</li>
+<li>Naughty (the notification system) has a new <code>ignore_suspend</code> flag</li>
+<li>The <code>textclock</code> widget now supports timezones</li>
+<li>New utility functions have been added:
+
+<ul>
+<li><a href="../libraries/gears.string.html#split">gears.string.split</a></li>
+<li><a href="../libraries/gears.table.html#map">gears.table.map</a></li>
+<li><a href="../libraries/gears.filesystem.html#make_parent_directories">gears.filesystem.make_parent_directories</a></li>
+</ul>
+</li>
+<li>New widget functions (moved out of the <code>gears</code> module):
+
+<ul>
+<li><a href="../classes/wibox.widget.html#wibox.widget:draw_to_cairo_context">wibox.widget.draw_to_cairo_context</a></li>
+<li><a href="../classes/wibox.widget.html#wibox.widget:draw_to_svg_file">wibox.widget.draw_to_svg_file</a></li>
+<li><a href="../classes/wibox.widget.html#wibox.widget:draw_to_image_surface">wibox.widget.draw_to_image_surface</a></li>
+</ul>
+</li>
+<li>Maximization requests from clients can now be intercepted using a
+<code>request::geometry</code> signal handler.</li>
+<li>A new <a href="../classes/wibox.layout.manual.html#">wibox.layout.manual</a> layout has been added (see below)</li>
+<li>Two new <code>calendar</code> widgets have been added, a widget and a popup (see below)</li>
+<li>The <code>ratio</code> layout now supports various strategies to redistribute space</li>
+<li>The <code>stack</code> layout now supports offsets</li>
+<li>The notifications now have a <code>naughty.destroy_all_notifications()</code> function</li>
+<li>The <code>xresources</code> theme now supports the titlebar <code>hover</code> and <code>press</code> states</li>
+</ul>
+
+
+<p>The stack layout offsets:</p>
+
+<p><a href="../classes/wibox.layout.stack.html"><img src="../images/AUTOGEN_wibox_layout_stack_offset.svg" alt="The stack offset" /></a></p>
+
+<p>The ratio layout new full strategies:</p>
+
+<p><a href="../classes/wibox.layout.ratio.html"><img src="../images/AUTOGEN_wibox_layout_ratio_strategy.svg" alt="The ratio strategies" /></a></p>
+
+<p>The <code>manual</code> layout fix a capability gap where hierarchical elements need to be
+placed manually. It has multiple modes including an <a href="../libraries/awful.placement.html#">awful.placement</a> integration.</p>
+
+<p><a href="../classes/wibox.layout.manual.html"><img src="../images/AUTOGEN_wibox_layout_manual_add_at.svg" alt="The manual layout" /></a></p>
+
+<p>The new calendar widgets are very flexible and can be themed down to the very small details:</p>
+
+<p><a href="../classes/wibox.widget.calendar.html"><img src="../images/AUTOGEN_wibox_widget_calendar_fn_embed_cell.svg" alt="The calendar widget" /></a>
+<a href="../classes/wibox.widget.calendar.html"><img src="../images/AUTOGEN_wibox_widget_calendar_font.svg" alt="The calendar widget" /></a></p>
+
+<p><a name="Behavior_changes"></a></p>
+
+<h2>Behavior changes</h2>
+
+<ul>
+<li>The client <code>property::floating</code> is now also emitted when when the floating
+state changes implicitly, e.g. because the client gets maximized or
+fullscreened.</li>
+<li>Building Awesome from its root source directory is no longer supported and
+will print an error.</li>
+</ul>
+
+
+<hr />
+
+
+<p><a name="v41"></a></p>
+
+<h1>Awesome window manager framework version 4.1 changes</h1>
 
 <p>Awesome v4.1 is the first stable release for the Awesome 4.0 API. It adds
 non-breaking new features and fixes bugs. The main purpose of the release is to
@@ -408,6 +503,9 @@ an issue in the menubar module when used with 0.7.3.</li>
 </ul>
 
 
+<hr />
+
+
 <p><a name="v4"></a></p>
 
 <h1>Awesome window manager framework version 4.0 changes</h1>
@@ -501,7 +599,7 @@ awful.mouse.snap.client_enabled = <span class="keyword">false</span>
 <ul>
 <li><a href="../classes/tag.html#">tag</a></li>
 <li><a href="../classes/tag.html#tag.gap">tag.gap</a></li>
-<li><a href="../classes/tag.html#beautiful.gap_single_client">tag.gap_single_client</a></li>
+<li><a href="../classes/tag.html#tag.gap_single_client">tag.gap_single_client</a></li>
 </ul>
 
 
@@ -1176,7 +1274,7 @@ undertaking in 4.0 to make the API coherent and well documented.</p>
 <p>Those functions have been renamed or converted to methods:</p>
 
 <ul>
-<li>awful.<a href="../classes/client.html#awful.urgent.jumpto">client.jumpto</a></li>
+<li>awful.<a href="../classes/client.html#awful.client.jumpto">client.jumpto</a></li>
 <li>awful.<a href="../classes/client.html#awful.client.visible">client.visible</a></li>
 <li>awful.<a href="../classes/client.html#awful.client.tiled">client.tiled</a></li>
 <li>awful.<a href="../classes/client.html#awful.client.moveresize">client.moveresize</a></li>
@@ -1195,21 +1293,21 @@ undertaking in 4.0 to make the API coherent and well documented.</p>
 <li>awful.<code>client.dockable.set</code></li>
 <li>awful.<code>client.property.get</code></li>
 <li>awful.<code>client.property.set</code></li>
-<li>awful.<a href="../classes/client.html#client:get_transient_for_matching">client.get_transient_for_matching</a></li>
-<li>awful.<a href="../classes/client.html#awful.client.is_transient_for">client.is_transient_for</a></li>
+<li>awful.<a href="../classes/client.html#awful.client.get_transient_for_matching">client.get_transient_for_matching</a></li>
+<li>awful.<a href="../classes/client.html#client:is_transient_for">client.is_transient_for</a></li>
 <li>awful.<a href="../libraries/mouse.html#awful.mouse.client_under_pointer">mouse.client_under_pointer</a></li>
 <li>awful.<code>mouse.client.dragtotag.border</code></li>
 <li>awful.<code>mouse.client.corner</code></li>
 <li>awful.<a href="../classes/screen.html#awful.screen.getdistance_sq">screen.getdistance_sq</a></li>
 <li>awful.<a href="../classes/screen.html#screen.padding">screen.padding</a></li>
 <li>awful.<a href="../classes/tag.html#awful.tag.move">tag.move</a></li>
-<li>awful.<a href="../classes/tag.html#tag:swap">tag.swap</a></li>
-<li>awful.<a href="../classes/tag.html#tag:delete">tag.delete</a></li>
+<li>awful.<a href="../classes/tag.html#awful.tag.swap">tag.swap</a></li>
+<li>awful.<a href="../classes/tag.html#awful.tag.delete">tag.delete</a></li>
 <li>awful.<a href="../classes/tag.html#awful.tag.gettags">tag.gettags</a></li>
 <li>awful.<a href="../classes/tag.html#awful.tag.setscreen">tag.setscreen</a></li>
 <li>awful.<a href="../classes/tag.html#awful.tag.getscreen">tag.getscreen</a></li>
 <li>awful.<a href="../classes/tag.html#awful.tag.selectedlist">tag.selectedlist</a></li>
-<li>awful.<a href="../classes/tag.html#tag.selected">tag.selected</a></li>
+<li>awful.<a href="../classes/tag.html#awful.tag.selected">tag.selected</a></li>
 <li>awful.<a href="../classes/tag.html#awful.tag.setmwfact">tag.setmwfact</a></li>
 <li>awful.<a href="../classes/tag.html#awful.tag.getmwfact">tag.getmwfact</a></li>
 <li>awful.<a href="../classes/tag.html#awful.tag.setlayout">tag.setlayout</a></li>
@@ -1396,7 +1494,7 @@ tests</li>
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2017-07-14 19:36:24 </i>
+<i style="float:right;">Last updated 2017-07-15 14:06:44 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
