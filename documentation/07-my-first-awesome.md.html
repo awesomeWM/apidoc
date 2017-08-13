@@ -413,7 +413,37 @@ Xephyr :<span class="number">5</span> &amp; sleep <span class="number">1</span> 
 
 <h2>Add widgets</h2>
 
-<p>TODO: Write this section.</p>
+<p>Before the following line:</p>
+
+<pre>
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+</pre>
+
+
+<p>Add this to create a new widget:</p>
+
+<pre>
+praisewidget = wibox.widget.textbox()
+praisewidget.text = <span class="string">"You are great!"</span>
+</pre>
+
+
+<p>The widget still needs to be added to a wibar. For this, find the definition of
+your wibar and change it as follows:</p>
+
+<pre>
+{ <span class="comment">-- Left widgets
+</span>    layout = wibox.layout.fixed.horizontal,
+    mylauncher,
+    praisewidget, <span class="comment">-- This line is new
+</span>    s.mytaglist,
+    s.mypromptbox,
+},
+</pre>
+
+
+<p>This gives you a basic idea on how to add a widget. For an overview of available
+widgets and how to arrange them, please read <a href="../documentation/03-declarative-layout.md.html#">03-declarative-layout.md</a>.</p>
 
 <p><a name="Further_reading"></a></p>
 
