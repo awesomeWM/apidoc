@@ -958,15 +958,17 @@
  forward the signal.  This is useful to track signals when there is a dynamic
  set of containers and layouts wrapping the widget.</p>
 
-<p> Note that this function has two flaws:</p>
+<p> Note that this function has some flaws:</p>
 
 <ol>
 <li>The signal is only forwarded once the widget tree has been built. This
 happens after all currently scheduled functions have been executed.
 Therefore, it will not start to work right away.</li>
 <li>In case the widget is present multiple times in a single widget tree,
-this function will also forward the signal multiple time (one per upward
+this function will also forward the signal multiple times (once per upward
 tree path).</li>
+<li>If the widget is removed from the widget tree, the signal is still
+forwarded for some time, similar to the first case.</li>
 </ol>
 
 
