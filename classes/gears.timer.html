@@ -233,6 +233,7 @@ local mybatterybar = wibox.widget {
 
 gears.timer {
     timeout   = 10,
+    call_now  = true,
     autostart = true,
     callback  = function()
         -- You should read it from `/sys/class/power_supply/` (on Linux)
@@ -347,6 +348,11 @@ gears.timer {
         <li><span class="parameter">autostart</span>
             <span class="types"><span class="type">boolean</span></span>
          Automatically start the timer.
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">call_now</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Call the callback at timer creation.
          (<em>default</em> false)
         </li>
         <li><span class="parameter">callback</span>
