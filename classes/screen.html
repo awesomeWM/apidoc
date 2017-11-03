@@ -258,18 +258,6 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	<td class="summary">Get the focused screen.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#client:get_clients">client:get_clients ([stacked=true])</a></td>
-	<td class="summary">Get the list of visible clients for the screen.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#client:get_all_clients">client:get_all_clients ([stacked=true])</a></td>
-	<td class="summary">Get all clients assigned to the screen.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#client:get_tiled_clients">client:get_tiled_clients ([stacked=true])</a></td>
-	<td class="summary">Get tiled clients for the screen.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#awful.screen.connect_for_each_screen">awful.screen.connect_for_each_screen (func)</a></td>
 	<td class="summary">Call a function for each existing and created-in-the-future screen.</td>
 	</tr>
@@ -430,6 +418,18 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	<td class="name" ><a href="#screen:get_bounding_geometry">screen:get_bounding_geometry ([args={}])</a></td>
 	<td class="summary">Get a placement bounding geometry.</td>
 	</tr>
+	<tr>
+	<td class="name" ><a href="#screen:get_clients">screen:get_clients ([stacked=true])</a></td>
+	<td class="summary">Get the list of visible clients for the screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen:get_all_clients">screen:get_all_clients ([stacked=true])</a></td>
+	<td class="summary">Get all clients assigned to the screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen:get_tiled_clients">screen:get_tiled_clients ([stacked=true])</a></td>
+	<td class="summary">Get tiled clients for the screen.</td>
+	</tr>
 </table>
 
 <br/>
@@ -577,93 +577,6 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
            <span class="types">optional <a class="type" href="../classes/screen.html#">screen</a></span>
         The focused screen object, or <code>nil</code> in case no screen is
    present currently.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "client:get_clients"></a>
-    <strong>client:get_clients ([stacked=true])</strong>
-    </dt>
-    <dd>
-    Get the list of visible clients for the screen. </p>
-
-<p> This is used by <a href="../classes/screen.html#screen.clients">screen.clients</a> internally (with <code>stacked=true</code>).
-
-
-    <ul>
-        <li><span class="parameter">stacked</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Use stacking order? (top to bottom)
-         (<em>default</em> true)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        The clients list.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "client:get_all_clients"></a>
-    <strong>client:get_all_clients ([stacked=true])</strong>
-    </dt>
-    <dd>
-    Get all clients assigned to the screen. </p>
-
-<p> This is used by <a href="../classes/screen.html#screen.all_clients">all_clients</a> internally (with <code>stacked=true</code>).
-
-
-    <ul>
-        <li><span class="parameter">stacked</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Use stacking order? (top to bottom)
-         (<em>default</em> true)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        The clients list.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "client:get_tiled_clients"></a>
-    <strong>client:get_tiled_clients ([stacked=true])</strong>
-    </dt>
-    <dd>
-    Get tiled clients for the screen. </p>
-
-<p> This is used by <code>tiles_clients</code> internally (with <code>stacked=true</code>).
-
-
-    <ul>
-        <li><span class="parameter">stacked</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Use stacking order? (top to bottom)
-         (<em>default</em> true)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        The clients list.
     </ol>
 
 
@@ -949,7 +862,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 <p> The clients on tags that are currently not visible are not part of this list.</p>
 
 <p> Clients are returned using the stacking order (from top to bottom).
- See <a href="../classes/screen.html#client:get_clients">get_clients</a> if you want them in the order used in the tasklist by
+ See <a href="../classes/screen.html#screen:get_clients">get_clients</a> if you want them in the order used in the tasklist by
  default.
 
 
@@ -966,7 +879,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
          <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.focus.history.get">client.get</a></li>
+         <li><a href="../classes/client.html#awful.client.property.get">client.get</a></li>
     </ul>
 
 
@@ -994,7 +907,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.clients">clients</a></li>
          <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.focus.history.get">client.get</a></li>
+         <li><a href="../classes/client.html#awful.client.property.get">client.get</a></li>
     </ul>
 
 
@@ -1020,7 +933,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.clients">clients</a></li>
          <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.focus.history.get">client.get</a></li>
+         <li><a href="../classes/client.html#awful.client.property.get">client.get</a></li>
     </ul>
 
 
@@ -1304,7 +1217,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/screen.html#awful.screen.padding">padding</a>
+         <a href="../classes/screen.html#screen.padding">padding</a>
     </ul>
 
 
@@ -1678,6 +1591,93 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     },
 }</pre>
     </ul>
+
+</dd>
+    <dt>
+    <a name = "screen:get_clients"></a>
+    <strong>screen:get_clients ([stacked=true])</strong>
+    </dt>
+    <dd>
+    Get the list of visible clients for the screen. </p>
+
+<p> This is used by <a href="../classes/screen.html#screen.clients">screen.clients</a> internally (with <code>stacked=true</code>).
+
+
+    <ul>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order? (top to bottom)
+         (<em>default</em> true)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The clients list.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "screen:get_all_clients"></a>
+    <strong>screen:get_all_clients ([stacked=true])</strong>
+    </dt>
+    <dd>
+    Get all clients assigned to the screen. </p>
+
+<p> This is used by <a href="../classes/screen.html#screen.all_clients">all_clients</a> internally (with <code>stacked=true</code>).
+
+
+    <ul>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order? (top to bottom)
+         (<em>default</em> true)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The clients list.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "screen:get_tiled_clients"></a>
+    <strong>screen:get_tiled_clients ([stacked=true])</strong>
+    </dt>
+    <dd>
+    Get tiled clients for the screen. </p>
+
+<p> This is used by <code>tiles_clients</code> internally (with <code>stacked=true</code>).
+
+
+    <ul>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order? (top to bottom)
+         (<em>default</em> true)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The clients list.
+    </ol>
+
+
+
 
 </dd>
 </dl>
