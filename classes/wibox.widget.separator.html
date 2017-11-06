@@ -32,9 +32,9 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Signals">Signals</a></li>
+<li><a href="#Theme_variables">Theme variables</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
 
@@ -46,7 +46,7 @@
   <li><a href="../classes/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../classes/awful.widget.button.html">awful.widget.button</a></li>
   <li><a href="../classes/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
-  <li><strong>awful.widget.clienticon</strong></li>
+  <li><a href="../classes/awful.widget.clienticon.html">awful.widget.clienticon</a></li>
   <li><a href="../classes/awful.widget.common.html">awful.widget.common</a></li>
   <li><a href="../classes/awful.widget.graph.html">awful.widget.graph</a></li>
   <li><a href="../classes/awful.widget.keyboardlayout.html">awful.widget.keyboardlayout</a></li>
@@ -104,7 +104,7 @@
   <li><a href="../classes/wibox.widget.imagebox.html">wibox.widget.imagebox</a></li>
   <li><a href="../classes/wibox.widget.piechart.html">wibox.widget.piechart</a></li>
   <li><a href="../classes/wibox.widget.progressbar.html">wibox.widget.progressbar</a></li>
-  <li><a href="../classes/wibox.widget.separator.html">wibox.widget.separator</a></li>
+  <li><strong>wibox.widget.separator</strong></li>
   <li><a href="../classes/wibox.widget.slider.html">wibox.widget.slider</a></li>
   <li><a href="../classes/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../classes/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
@@ -199,44 +199,84 @@
 
 <div id="content">
 
-<h1>Class <code>awful.widget.clienticon</code></h1>
-<p>Container showing the icon of a client.</p>
-<p>
-</p>
+<h1>Class <code>wibox.widget.separator</code></h1>
+<p>A flexible separator widget.</p>
+<p> By default, this widget display a simple line, but can be extended by themes
+ (or directly) to display much more complex visuals.</p>
+
+<p> This widget is mainly intended to be used alongside the <code>spacing_widget</code>
+ property supported by various layouts such as:</p>
+
+<ul>
+<li><a href="../classes/wibox.layout.fixed.html#">wibox.layout.fixed</a></li>
+<li><a href="../classes/wibox.layout.flex.html#">wibox.layout.flex</a></li>
+<li><a href="../classes/wibox.layout.ratio.html#">wibox.layout.ratio</a></li>
+</ul>
+
+
+<p> When used with these layouts, it is also possible to provide custom clipping
+ functions. This is useful when the layout has overlapping widgets (negative
+ spacing).</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_defaults_separator.svg" alt="Usage example" /></p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">wibox.widget {
+    widget = wibox.widget.separator
+}
+</pre>
+    </ul>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2017 Uli Schlachter</li>
-        <li><strong>Author</strong>: Uli Schlachter</li>
+        <li><strong>Copyright</strong>: 2014, 2017 Emmanuel Lepage Vallee</li>
+        <li><strong>Author</strong>: Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
     </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon">awful.widget.clienticon (c)</a></td>
-	<td class="summary">Returns a new clienticon.</td>
-	</tr>
-</table>
 <h2><a href="#Object_properties">Object properties</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon.client">awful.widget.clienticon.client</a></td>
-	<td class="summary">The widget&rsquo;s <a href="../classes/client.html#">client</a>.</td>
+	<td class="name" ><a href="#wibox.widget.separator.orientation">wibox.widget.separator.orientation</a></td>
+	<td class="summary">The separator&rsquo;s orientation.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon.forced_height">awful.widget.clienticon.forced_height</a></td>
+	<td class="name" ><a href="#wibox.widget.separator.thickness">wibox.widget.separator.thickness</a></td>
+	<td class="summary">The separator&rsquo;s thickness.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.separator.shape">wibox.widget.separator.shape</a></td>
+	<td class="summary">The separator&rsquo;s shape.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.separator.span_ratio">wibox.widget.separator.span_ratio</a></td>
+	<td class="summary">The relative percentage covered by the bar.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.separator.color">wibox.widget.separator.color</a></td>
+	<td class="summary">The separator&rsquo;s color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.separator.border_color">wibox.widget.separator.border_color</a></td>
+	<td class="summary">The separator&rsquo;s border color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.separator.border_width">wibox.widget.separator.border_width</a></td>
+	<td class="summary">The separator&rsquo;s border width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.widget.separator.forced_height">wibox.widget.separator.forced_height</a></td>
 	<td class="summary">Force a widget height.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon.forced_width">awful.widget.clienticon.forced_width</a></td>
+	<td class="name" ><a href="#wibox.widget.separator.forced_width">wibox.widget.separator.forced_width</a></td>
 	<td class="summary">Force a widget width.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon.opacity">awful.widget.clienticon.opacity</a></td>
+	<td class="name" ><a href="#wibox.widget.separator.opacity">wibox.widget.separator.opacity</a></td>
 	<td class="summary">The widget opacity (transparency).</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon.visible">awful.widget.clienticon.visible</a></td>
+	<td class="name" ><a href="#wibox.widget.separator.visible">wibox.widget.separator.visible</a></td>
 	<td class="summary">The widget visibility.</td>
 	</tr>
 </table>
@@ -267,43 +307,70 @@
 	<td class="summary">When the mouse leave a widget.</td>
 	</tr>
 </table>
+<h2><a href="#Theme_variables">Theme variables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#beautiful.separator_thickness">beautiful.separator_thickness</a></td>
+	<td class="summary">The separator thickness.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.separator_border_color">beautiful.separator_border_color</a></td>
+	<td class="summary">The separator border color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.separator_border_width">beautiful.separator_border_width</a></td>
+	<td class="summary">The separator border width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.separator_span_ratio">beautiful.separator_span_ratio</a></td>
+	<td class="summary">The relative percentage covered by the bar.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.separator_color">beautiful.separator_color</a></td>
+	<td class="summary">The separator&rsquo;s color.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#beautiful.separator_shape">beautiful.separator_shape</a></td>
+	<td class="summary">The separator&rsquo;s shape.</td>
+	</tr>
+</table>
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon:index">awful.widget.clienticon:index (widget[, recursive[, ...]])</a></td>
+	<td class="name" ><a href="#wibox.widget.separator:index">wibox.widget.separator:index (widget[, recursive[, ...]])</a></td>
 	<td class="summary">Get a widget index.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon:get_all_children">awful.widget.clienticon:get_all_children ()</a></td>
+	<td class="name" ><a href="#wibox.widget.separator:get_all_children">wibox.widget.separator:get_all_children ()</a></td>
 	<td class="summary">Get all direct and indirect children widgets.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon:setup">awful.widget.clienticon:setup (args)</a></td>
+	<td class="name" ><a href="#wibox.widget.separator:setup">wibox.widget.separator:setup (args)</a></td>
 	<td class="summary">Set a declarative widget hierarchy description.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon:buttons">awful.widget.clienticon:buttons (_buttons)</a></td>
+	<td class="name" ><a href="#wibox.widget.separator:buttons">wibox.widget.separator:buttons (_buttons)</a></td>
 	<td class="summary">Set/get a widget&rsquo;s buttons.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon:emit_signal_recursive">awful.widget.clienticon:emit_signal_recursive (signal_name, ...)</a></td>
+	<td class="name" ><a href="#wibox.widget.separator:emit_signal_recursive">wibox.widget.separator:emit_signal_recursive (signal_name, ...)</a></td>
 	<td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
  forward the signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon:disconnect_signal">awful.widget.clienticon:disconnect_signal (name, func)</a></td>
+	<td class="name" ><a href="#wibox.widget.separator:disconnect_signal">wibox.widget.separator:disconnect_signal (name, func)</a></td>
 	<td class="summary">Disconnect to a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon:emit_signal">awful.widget.clienticon:emit_signal (name, ...)</a></td>
+	<td class="name" ><a href="#wibox.widget.separator:emit_signal">wibox.widget.separator:emit_signal (name, ...)</a></td>
 	<td class="summary">Emit a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon:connect_signal">awful.widget.clienticon:connect_signal (name, func)</a></td>
+	<td class="name" ><a href="#wibox.widget.separator:connect_signal">wibox.widget.separator:connect_signal (name, func)</a></td>
 	<td class="summary">Connect to a signal.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.widget.clienticon:weak_connect_signal">awful.widget.clienticon:weak_connect_signal (name, func)</a></td>
+	<td class="name" ><a href="#wibox.widget.separator:weak_connect_signal">wibox.widget.separator:weak_connect_signal (name, func)</a></td>
 	<td class="summary">Connect to a signal weakly.</td>
 	</tr>
 </table>
@@ -312,50 +379,34 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-    Methods
-    <dl class="function">
-    <dt>
-    <a name = "awful.widget.clienticon"></a>
-    <strong>awful.widget.clienticon (c)</strong>
-    </dt>
-    <dd>
-    Returns a new clienticon.
-
-
-    <ul>
-        <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#">client</a></span>
-         The client whose icon should be displayed.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">widget</span></span>
-        A new <code>widget</code>
-    </ol>
-
-
-
-
-</dd>
-</dl>
     <h2 class="section-header "><a name="Object_properties"></a>Object properties</h2>
 
     <dl class="function">
     <dt>
-    <a name = "awful.widget.clienticon.client"></a>
-    <strong>awful.widget.clienticon.client</strong>
+    <a name = "wibox.widget.separator.orientation"></a>
+    <strong>wibox.widget.separator.orientation</strong>
     </dt>
     <dd>
-    The widget&rsquo;s <a href="../classes/client.html#">client</a>.
+    The separator&rsquo;s orientation. </p>
+
+<p> Valid values are:</p>
+
+<ul>
+<li><em>vertical</em>: From top to bottom</li>
+<li><em>horizontal</em>: From left to right</li>
+<li><em>auto</em>: Decide depending on the widget geometry (default)</li>
+</ul>
+
+
+<p> The default value is selected automatically. If the widget is taller than
+ large, it will use vertical and vice versa.</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_separator_orientation.svg" alt="Usage example" />
 
 
     <h3>Type:</h3>
     <ul>
-        <li><span class="parameter">client</span>
+        <li><span class="parameter">string</span>
 
 
         </li>
@@ -367,8 +418,172 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon.forced_height"></a>
-    <strong>awful.widget.clienticon.forced_height</strong>
+    <a name = "wibox.widget.separator.thickness"></a>
+    <strong>wibox.widget.separator.thickness</strong>
+    </dt>
+    <dd>
+    The separator&rsquo;s thickness. </p>
+
+<p> This is used by the default line separator, but ignored when a shape is used.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.separator.shape"></a>
+    <strong>wibox.widget.separator.shape</strong>
+    </dt>
+    <dd>
+    The separator&rsquo;s shape. </p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_separator_shape.svg" alt="Usage example" />
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">function</span></span>
+         A valid shape function
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.shape.html#">gears.shape</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, s <span class="keyword">in</span> <span class="global">ipairs</span> { <span class="string">'losange'</span> ,<span class="string">'circle'</span>, <span class="string">'isosceles_triangle'</span>, <span class="string">'cross'</span> } <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.widget {
+        shape  = gears.shape[s],
+        widget = wibox.widget.separator,
+    }
+<span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.separator.span_ratio"></a>
+    <strong>wibox.widget.separator.span_ratio</strong>
+    </dt>
+    <dd>
+    The relative percentage covered by the bar.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">A</span>
+            <span class="types"><span class="type">number</span></span>
+         number between 0 and 1.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.separator.color"></a>
+    <strong>wibox.widget.separator.color</strong>
+    </dt>
+    <dd>
+    The separator&rsquo;s color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.color.html#">gears.color</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.separator.border_color"></a>
+    <strong>wibox.widget.separator.border_color</strong>
+    </dt>
+    <dd>
+    The separator&rsquo;s border color. </p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_separator_border_color.svg" alt="Usage example" />
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.color.html#">gears.color</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">wibox.widget {
+    shape        = gears.shape.circle,
+    color        = <span class="string">'#00000000'</span>,
+    border_width = <span class="number">1</span>,
+    border_color = beautiful.bg_normal,
+    widget       = wibox.widget.separator,
+}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.separator.border_width"></a>
+    <strong>wibox.widget.separator.border_width</strong>
+    </dt>
+    <dd>
+    The separator&rsquo;s border width.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.widget.separator.forced_height"></a>
+    <strong>wibox.widget.separator.forced_height</strong>
     </dt>
     <dd>
     Force a widget height.
@@ -388,8 +603,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon.forced_width"></a>
-    <strong>awful.widget.clienticon.forced_width</strong>
+    <a name = "wibox.widget.separator.forced_width"></a>
+    <strong>wibox.widget.separator.forced_width</strong>
     </dt>
     <dd>
     Force a widget width.
@@ -409,8 +624,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon.opacity"></a>
-    <strong>awful.widget.clienticon.opacity</strong>
+    <a name = "wibox.widget.separator.opacity"></a>
+    <strong>wibox.widget.separator.opacity</strong>
     </dt>
     <dd>
     The widget opacity (transparency).
@@ -431,8 +646,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon.visible"></a>
-    <strong>awful.widget.clienticon.visible</strong>
+    <a name = "wibox.widget.separator.visible"></a>
+    <strong>wibox.widget.separator.visible</strong>
     </dt>
     <dd>
     The widget visibility.
@@ -471,7 +686,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/awful.widget.clienticon.html#widget::redraw_needed">widget::redraw_needed</a>
+         <a href="../classes/wibox.widget.separator.html#widget::redraw_needed">widget::redraw_needed</a>
     </ul>
 
 
@@ -492,7 +707,7 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/awful.widget.clienticon.html#widget::layout_changed">widget::layout_changed</a>
+         <a href="../classes/wibox.widget.separator.html#widget::layout_changed">widget::layout_changed</a>
     </ul>
 
 
@@ -534,7 +749,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><span class="type">widget</span></span>
+            <span class="types"><a class="type" href="../classes/wibox.widget.html">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -621,7 +836,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><span class="type">widget</span></span>
+            <span class="types"><a class="type" href="../classes/wibox.widget.html">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -690,7 +905,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><span class="type">widget</span></span>
+            <span class="types"><a class="type" href="../classes/wibox.widget.html">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -759,7 +974,7 @@
  the widget.
         </li>
         <li><span class="parameter">widget</span>
-            <span class="types"><span class="type">widget</span></span>
+            <span class="types"><a class="type" href="../classes/wibox.widget.html">widget</a></span>
          The widget being displayed.
         </li>
         <li><span class="parameter">hierarchy</span>
@@ -810,12 +1025,156 @@
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Theme_variables"></a>Theme variables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "beautiful.separator_thickness"></a>
+    <strong>beautiful.separator_thickness</strong>
+    </dt>
+    <dd>
+    The separator thickness.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.separator.html#wibox.widget.separator.thickness">thickness</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.separator_border_color"></a>
+    <strong>beautiful.separator_border_color</strong>
+    </dt>
+    <dd>
+    The separator border color.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.separator.html#wibox.widget.separator.border_color">border_color</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.separator_border_width"></a>
+    <strong>beautiful.separator_border_width</strong>
+    </dt>
+    <dd>
+    The separator border width.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.widget.separator.html#wibox.widget.separator.border_width">border_width</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.separator_span_ratio"></a>
+    <strong>beautiful.separator_span_ratio</strong>
+    </dt>
+    <dd>
+    The relative percentage covered by the bar.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">A</span>
+            <span class="types"><span class="type">number</span></span>
+         number between 0 and 1.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.separator_color"></a>
+    <strong>beautiful.separator_color</strong>
+    </dt>
+    <dd>
+    The separator&rsquo;s color.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.color.html#">gears.color</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "beautiful.separator_shape"></a>
+    <strong>beautiful.separator_shape</strong>
+    </dt>
+    <dd>
+    The separator&rsquo;s shape.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">function</span></span>
+         A valid shape function
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/gears.shape.html#">gears.shape</a>
+    </ul>
+
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Methods"></a>Methods</h2>
 
     <dl class="function">
     <dt>
-    <a name = "awful.widget.clienticon:index"></a>
-    <strong>awful.widget.clienticon:index (widget[, recursive[, ...]])</strong>
+    <a name = "wibox.widget.separator:index"></a>
+    <strong>wibox.widget.separator:index (widget[, recursive[, ...]])</strong>
     </dt>
     <dd>
     Get a widget index.
@@ -850,8 +1209,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon:get_all_children"></a>
-    <strong>awful.widget.clienticon:get_all_children ()</strong>
+    <a name = "wibox.widget.separator:get_all_children"></a>
+    <strong>wibox.widget.separator:get_all_children ()</strong>
     </dt>
     <dd>
     Get all direct and indirect children widgets.
@@ -873,8 +1232,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon:setup"></a>
-    <strong>awful.widget.clienticon:setup (args)</strong>
+    <a name = "wibox.widget.separator:setup"></a>
+    <strong>wibox.widget.separator:setup (args)</strong>
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
@@ -893,8 +1252,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon:buttons"></a>
-    <strong>awful.widget.clienticon:buttons (_buttons)</strong>
+    <a name = "wibox.widget.separator:buttons"></a>
+    <strong>wibox.widget.separator:buttons (_buttons)</strong>
     </dt>
     <dd>
     Set/get a widget&rsquo;s buttons.
@@ -912,8 +1271,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon:emit_signal_recursive"></a>
-    <strong>awful.widget.clienticon:emit_signal_recursive (signal_name, ...)</strong>
+    <a name = "wibox.widget.separator:emit_signal_recursive"></a>
+    <strong>wibox.widget.separator:emit_signal_recursive (signal_name, ...)</strong>
     </dt>
     <dd>
     Emit a signal and ensure all parent widgets in the hierarchies also
@@ -938,8 +1297,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon:disconnect_signal"></a>
-    <strong>awful.widget.clienticon:disconnect_signal (name, func)</strong>
+    <a name = "wibox.widget.separator:disconnect_signal"></a>
+    <strong>wibox.widget.separator:disconnect_signal (name, func)</strong>
     </dt>
     <dd>
     Disconnect to a signal.
@@ -962,8 +1321,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon:emit_signal"></a>
-    <strong>awful.widget.clienticon:emit_signal (name, ...)</strong>
+    <a name = "wibox.widget.separator:emit_signal"></a>
+    <strong>wibox.widget.separator:emit_signal (name, ...)</strong>
     </dt>
     <dd>
     Emit a signal.
@@ -987,8 +1346,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon:connect_signal"></a>
-    <strong>awful.widget.clienticon:connect_signal (name, func)</strong>
+    <a name = "wibox.widget.separator:connect_signal"></a>
+    <strong>wibox.widget.separator:connect_signal (name, func)</strong>
     </dt>
     <dd>
     Connect to a signal.
@@ -1011,8 +1370,8 @@
 
 </dd>
     <dt>
-    <a name = "awful.widget.clienticon:weak_connect_signal"></a>
-    <strong>awful.widget.clienticon:weak_connect_signal (name, func)</strong>
+    <a name = "wibox.widget.separator:weak_connect_signal"></a>
+    <strong>wibox.widget.separator:weak_connect_signal (name, func)</strong>
     </dt>
     <dd>
     Connect to a signal weakly.  This allows the callback function to be garbage
