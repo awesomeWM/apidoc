@@ -205,7 +205,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
 
 <p> Most basic Awesome objects also have a screen property, see <a href="../libraries/mouse.html#screen">mouse.screen</a>
- <a href="../classes/client.html#client.screen">client.screen</a>, <a href="../classes/wibox.html#wibox.screen">wibox.screen</a> and <a href="../classes/tag.html#request::screen">tag.screen</a>.</p>
+ <a href="../classes/client.html#client.screen">client.screen</a>, <a href="../classes/wibox.html#wibox.screen">wibox.screen</a> and <a href="../classes/tag.html#tag.screen">tag.screen</a>.</p>
 
 <p> Furthermore to the classes described here, one can also use signals as
  described in <a href="../classes/signals.html#">signals</a>.</p>
@@ -410,6 +410,10 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	<tr>
 	<td class="name" ><a href="#screen:get_tiled_clients">screen:get_tiled_clients ([stacked=true])</a></td>
 	<td class="summary">Get tiled clients for the screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#screen:set_auto_dpi_enabled">screen:set_auto_dpi_enabled (enabled)</a></td>
+	<td class="summary">Enable the automatic calculation of the screen DPI (experimental).</td>
 	</tr>
 </table>
 
@@ -860,7 +864,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
          <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.property.get">client.get</a></li>
+         <li><a href="../classes/client.html#client:get">client.get</a></li>
     </ul>
 
 
@@ -888,7 +892,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.clients">clients</a></li>
          <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.property.get">client.get</a></li>
+         <li><a href="../classes/client.html#client:get">client.get</a></li>
     </ul>
 
 
@@ -914,7 +918,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <ul>
          <li><a href="../classes/screen.html#screen.clients">clients</a></li>
          <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.property.get">client.get</a></li>
+         <li><a href="../classes/client.html#client:get">client.get</a></li>
     </ul>
 
 
@@ -956,7 +960,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <dd>
     A list of all tags on the screen. </p>
 
-<p> This property is read only, use <a href="../classes/tag.html#request::screen">tag.screen</a>, <code>awful.tag.add</code>,
+<p> This property is read only, use <a href="../classes/tag.html#tag.screen">tag.screen</a>, <code>awful.tag.add</code>,
  <code>awful.tag.new</code> or <code>t:delete()</code> to alter this list.
 
 
@@ -993,7 +997,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#awful.tag.selected">tag.selected</a></li>
+         <li><a href="../classes/tag.html#tag.selected">tag.selected</a></li>
          <li><a href="../classes/client.html#client:to_selected_tags">client.to_selected_tags</a></li>
     </ul>
 
@@ -1019,7 +1023,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#awful.tag.selected">tag.selected</a></li>
+         <li><a href="../classes/tag.html#tag.selected">tag.selected</a></li>
          <li><a href="../classes/screen.html#screen.selected_tags">selected_tags</a></li>
     </ul>
 
@@ -1656,6 +1660,44 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The clients list.
     </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "screen:set_auto_dpi_enabled"></a>
+    <strong>screen:set_auto_dpi_enabled (enabled)</strong>
+    </dt>
+    <dd>
+    Enable the automatic calculation of the screen DPI (experimental). </p>
+
+<p> This will cause many elements such as the font and some widgets to be scaled
+ so they look the same (physical) size on different devices with different
+ pixel density.</p>
+
+<p> It is calculated using the information provided from <code>xrandr</code>.</p>
+
+<p> When enabled, the theme and configuration must avoid using pixel sizes for
+ different elements as this will cause misalignment or hidden content on some
+ devices.</p>
+
+<p> Note that it has to be called early in <a href="../sample files/rc.lua.html#">rc.lua</a> and requires restarting
+ awesome to take effect. It is disabled by default and changes introduced in
+ minor releases of Awesome may slightly break the behavior as more components
+ gain support for HiDPI.</p>
+
+<p> When disabled the DPI is acquired from the <code>Xft.dpi</code> X resource (xrdb),
+ defaulting to 96.
+
+
+    <ul>
+        <li><span class="parameter">enabled</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Enable or disable automatic DPI support.
+        </li>
+    </ul>
+
 
 
 

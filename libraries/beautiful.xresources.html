@@ -33,6 +33,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
+<li><a href="#Deprecated_functions">Deprecated functions</a></li>
 </ul>
 
 
@@ -194,16 +195,19 @@
 	<td class="summary">Get current base colorscheme from xrdb.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#get_dpi">get_dpi ([s])</a></td>
-	<td class="summary">Get global or per-screen DPI value falling back to xrdb.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#set_dpi">set_dpi (dpi[, s])</a></td>
 	<td class="summary">Set DPI for a given screen (defaults to global).</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#apply_dpi">apply_dpi (size[, s])</a></td>
 	<td class="summary">Compute resulting size applying current DPI value (optionally per screen).</td>
+	</tr>
+</table>
+<h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#get_dpi">get_dpi</a></td>
+	<td class="summary">Get global or per-screen DPI value falling back to xrdb.</td>
 	</tr>
 </table>
 
@@ -228,33 +232,6 @@
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         Color table with keys &lsquo;background&rsquo;, &lsquo;foreground&rsquo; and &lsquo;color0&rsquo;..&lsquo;color15&rsquo;
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "get_dpi"></a>
-    <strong>get_dpi ([s])</strong>
-    </dt>
-    <dd>
-    Get global or per-screen DPI value falling back to xrdb.
-
-
-    <ul>
-        <li><span class="parameter">s</span>
-            <span class="types"><span class="type">integer</span> or <a class="type" href="../classes/screen.html#">screen</a></span>
-         The screen.
-         (<em>optional</em>)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">number</span></span>
-        DPI value.
     </ol>
 
 
@@ -312,6 +289,35 @@
            <span class="types"><span class="type">integer</span></span>
         Resulting size (rounded to integer).
     </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Deprecated_functions"></a>Deprecated functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "get_dpi"></a>
+    <strong>get_dpi</strong>
+    </dt>
+    <dd>
+    Get global or per-screen DPI value falling back to xrdb. </p>
+
+<p> This function is deprecated. Use <code>s.dpi</code> and avoid getting the DPI without
+ a screen.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">s</span>
+            <span class="types"><span class="type">integer</span> or <a class="type" href="../classes/screen.html#">screen</a></span>
+         The screen.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
 
 
 
