@@ -277,6 +277,10 @@
 	<td class="summary">The wibar&rsquo;s shape.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#wibox.input_passthrough">wibox.input_passthrough</a></td>
+	<td class="summary">Forward the inputs to the client below the wibox.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#wibox.bg">wibox.bg</a></td>
 	<td class="summary">The background of the wibox.</td>
 	</tr>
@@ -287,10 +291,6 @@
 	<tr>
 	<td class="name" ><a href="#wibox.fg">wibox.fg</a></td>
 	<td class="summary">The foreground (text) of the wibox.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.shape">wibox.shape</a></td>
-	<td class="summary">Set the wibox shape.</td>
 	</tr>
 </table>
 <h2><a href="#Theme_variables">Theme variables</a></h2>
@@ -370,6 +370,7 @@
         <li><span class="parameter">ontop</span>
             <span class="types"><span class="type">boolean</span></span>
          On top of other windows.
+         (<em>default</em> false)
         </li>
         <li><span class="parameter">cursor</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
@@ -381,7 +382,8 @@
         </li>
         <li><span class="parameter">opacity</span>
             <span class="types"><span class="type">number</span></span>
-         The opacity of the wibox, between 0 and 1.
+         The opacity, between 0 and 1.
+         (<em>default</em> 1)
         </li>
         <li><span class="parameter">type</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
@@ -397,11 +399,11 @@
         </li>
         <li><span class="parameter">width</span>
             <span class="types"><span class="type">integer</span></span>
-         The width of the wibox.
+         The width.
         </li>
         <li><span class="parameter">height</span>
             <span class="types"><span class="type">integer</span></span>
-         The height of the wibox.
+         The height.
         </li>
         <li><span class="parameter">screen</span>
             <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
@@ -422,7 +424,7 @@
         </li>
         <li><span class="parameter">bg</span>
             <span class="types"><span class="type">color</span></span>
-         The background of the wibox.
+         The background.
         </li>
         <li><span class="parameter">bgimage</span>
             <span class="types"><span class="type">surface</span></span>
@@ -430,7 +432,17 @@
         </li>
         <li><span class="parameter">fg</span>
             <span class="types"><span class="type">color</span></span>
-         The foreground (text) of the wibox.
+         The foreground (text) color.
+        </li>
+        <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">gears.shape</span></span>
+         The shape.
+        </li>
+        <li><span class="parameter">input_passthrough</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If the inputs are
+  forward to the element below.
+         (<em>default</em> false)
         </li>
         </li></ul>
     </ul>
@@ -894,7 +906,7 @@ Green   Alpha
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#client.window">client.window</a>
+         <a href="../classes/client.html#property::window">client.window</a>
     </ul>
 
 
@@ -996,6 +1008,46 @@ Green   Alpha
 
 </dd>
     <dt>
+    <a name = "wibox.input_passthrough"></a>
+    <strong>wibox.input_passthrough</strong>
+    </dt>
+    <dd>
+    <p>Forward the inputs to the client below the wibox. </p>
+
+<p> This replace the <a href="../classes/wibox.html#wibox.shape_input">shape_input</a> mask with an empty area. All mouse and
+ keyboard events are sent to the object (such as a client) positioned below
+ this wibox. When used alongside compositing, it allows, for example, to have
+ a subtle transparent wibox on top a fullscreen client to display important
+ data such as a low battery warning.</p>
+
+<p> <strong>Signal:</strong></p>
+
+<ul>
+<li><em>property::input_passthrough</em></li>
+</ul>
+
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">boolean</span>
+
+
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/wibox.html#wibox.shape_input">shape_input</a>
+    </ul>
+
+
+</dd>
+    <dt>
     <a name = "wibox.bg"></a>
     <strong>wibox.bg</strong>
     </dt>
@@ -1067,31 +1119,6 @@ Green   Alpha
     <h3>See also:</h3>
     <ul>
          <a href="../libraries/gears.color.html#">gears.color</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "wibox.shape"></a>
-    <strong>wibox.shape</strong>
-    </dt>
-    <dd>
-    Set the wibox shape.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">A</span>
-            <span class="types"><span class="type">gears.shape</span></span>
-         gears.shape compatible function.
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/gears.shape.html#">gears.shape</a>
     </ul>
 
 
