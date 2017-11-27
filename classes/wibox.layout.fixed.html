@@ -218,12 +218,16 @@
 	<td class="summary">Get all direct children of this layout.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed.spacing_widget">wibox.layout.fixed.spacing_widget</a></td>
+	<td class="summary">The widget used to fill the spacing between the layout elements.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed.fill_space">wibox.layout.fixed.fill_space</a></td>
 	<td class="summary">Set the layout&rsquo;s fill_space property.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed.spacing">wibox.layout.fixed.spacing</a></td>
-	<td class="summary">Add spacing between each layout widgets</td>
+	<td class="summary">Add spacing between each layout widgets.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed.forced_height">wibox.layout.fixed.forced_height</a></td>
@@ -433,6 +437,73 @@
 
 </dd>
     <dt>
+    <a name = "wibox.layout.fixed.spacing_widget"></a>
+    <strong>wibox.layout.fixed.spacing_widget</strong>
+    </dt>
+    <dd>
+    The widget used to fill the spacing between the layout elements. </p>
+
+<p> By default, no widget is used.</p>
+
+<p><img src="../images/AUTOGEN_wibox_layout_fixed_spacing_widget.svg" alt="Usage example" />
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">widget</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="comment">-- Use the separator widget directly
+</span><span class="keyword">local</span> w1 = wibox.widget {
+    spacing        = <span class="number">10</span>,
+    spacing_widget = wibox.widget.separator,
+    layout         = wibox.layout.fixed.horizontal
+}
+<span class="comment">-- Use a standard declarative widget construct
+</span><span class="keyword">local</span> w2 = wibox.widget {
+    spacing = <span class="number">10</span>,
+    spacing_widget = {
+        color  = <span class="string">'#00ff00'</span>,
+        shape  = gears.shape.circle,
+        widget = wibox.widget.separator,
+    },
+    layout = wibox.layout.fixed.horizontal
+}
+<span class="comment">-- Use composed widgets
+</span><span class="keyword">local</span> w3 = wibox.widget {
+    spacing = <span class="number">10</span>,
+    spacing_widget = {
+        {
+            text   = <span class="string">'F'</span>,
+            widget = wibox.widget.textbox,
+        },
+        bg     = <span class="string">'#ff0000'</span>,
+        widget = wibox.container.background,
+    },
+    layout = wibox.layout.fixed.horizontal
+}
+<span class="comment">-- Use negative spacing to create a powerline effect
+</span><span class="keyword">local</span> w4 = wibox.widget {
+    spacing = -<span class="number">12</span>,
+    spacing_widget = {
+        color  = <span class="string">'#ff0000'</span>,
+        shape  = gears.shape.powerline,
+        widget = wibox.widget.separator,
+    },
+    layout = wibox.layout.fixed.horizontal
+}</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "wibox.layout.fixed.fill_space"></a>
     <strong>wibox.layout.fixed.fill_space</strong>
     </dt>
@@ -453,7 +524,9 @@
     <strong>wibox.layout.fixed.spacing</strong>
     </dt>
     <dd>
-    Add spacing between each layout widgets
+    Add spacing between each layout widgets. </p>
+
+<p><img src="../images/AUTOGEN_wibox_layout_fixed_spacing.svg" alt="Usage example" />
 
 
     <h3>Type:</h3>
@@ -467,6 +540,18 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> i=<span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.widget {
+        first,
+        second,
+        third,
+        spacing = i*<span class="number">3</span>,
+        layout  = wibox.layout.fixed.horizontal
+    }
+<span class="keyword">end</span></pre>
+    </ul>
 
 </dd>
     <dt>
