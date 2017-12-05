@@ -382,10 +382,18 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
                            awful.button({ }, <span class="number">4</span>, <span class="keyword">function</span> () awful.layout.inc( <span class="number">1</span>) <span class="keyword">end</span>),
                            awful.button({ }, <span class="number">5</span>, <span class="keyword">function</span> () awful.layout.inc(-<span class="number">1</span>) <span class="keyword">end</span>)))
     <span class="comment">-- Create a taglist widget
-</span>    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
+</span>    s.mytaglist = awful.widget.taglist {
+        screen  = s,
+        filter  = awful.widget.taglist.filter.all,
+        buttons = taglist_buttons
+    }
 
     <span class="comment">-- Create a tasklist widget
-</span>    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
+</span>    s.mytasklist = awful.widget.tasklist {
+        screen  = s,
+        filter  = awful.widget.tasklist.filter.currenttags,
+        buttons = tasklist_buttons
+    }
 
     <span class="comment">-- Create the wibox
 </span>    s.mywibox = awful.wibar({ position = <span class="string">"top"</span>, screen = s })
