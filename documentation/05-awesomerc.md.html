@@ -543,10 +543,18 @@ screen.connect_signal(<span class="string">"property::geometry"</span>, set_wall
                            <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#inc">awful.layout.inc</a></span>( <span class="number">1</span>) <span class="keyword">end</span>),
                            <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#inc">awful.layout.inc</a></span>(-<span class="number">1</span>) <span class="keyword">end</span>)))
     <span class="comment">-- Create a taglist widget
-</span>    s.mytaglist = <span class="backtick"><a href="../classes/awful.widget.taglist.html#">awful.widget.taglist</a></span>(s, <span class="backtick"><code>awful.widget.taglist.filter.all</code></span>, taglist_buttons)
+</span>    s.mytaglist = <span class="backtick"><a href="../classes/awful.widget.taglist.html#">awful.widget.taglist</a></span> {
+        screen  = s,
+        filter  = <span class="backtick"><code>awful.widget.taglist.filter.all</code></span>,
+        buttons = taglist_buttons
+    }
 
     <span class="comment">-- Create a tasklist widget
-</span>    s.mytasklist = <span class="backtick"><a href="../classes/awful.widget.tasklist.html#">awful.widget.tasklist</a></span>(s, <span class="backtick"><code>awful.widget.tasklist.filter.currenttags</code></span>, tasklist_buttons)
+</span>    s.mytasklist = <span class="backtick"><a href="../classes/awful.widget.tasklist.html#">awful.widget.tasklist</a></span> {
+        screen  = s,
+        filter  = <span class="backtick"><code>awful.widget.tasklist.filter.currenttags</code></span>,
+        buttons = tasklist_buttons
+    }
 </pre>
 
 

@@ -179,7 +179,125 @@
 
 <h1>Class <code>awful.widget.taglist</code></h1>
 <p>Taglist widget module for awful</p>
-<p>
+
+<p> Here is a more advanced example of how to extent the <a href="../classes/awful.widget.taglist.html">taglist</a>.</p>
+<p><p> It provides:</p>
+
+<ul>
+<li>mouse &ldquo;hover&rdquo; color</li>
+<li>an extra index field</li>
+<li>a powerline look and feel</li>
+</ul>
+
+
+<p><img src="../images/AUTOGEN_wibox_awidget_taglist_indexed.svg" alt="Usage example" /></p>
+
+<pre>
+s.mytaglist = awful.widget.taglist {
+    screen  = s,
+    filter  = awful.widget.taglist.filter.all,
+    style   = {
+        shape = gears.shape.powerline
+    },
+    layout   = {
+        spacing = -<span class="number">12</span>,
+        spacing_widget = {
+            color  = <span class="string">'#dddddd'</span>,
+            shape  = gears.shape.powerline,
+            widget = wibox.widget.separator,
+        },
+        layout  = wibox.layout.fixed.horizontal
+    },
+    widget_template = {
+        {
+            {
+                {
+                    {
+                        {
+                            id     = <span class="string">'index_role'</span>,
+                            widget = wibox.widget.textbox,
+                        },
+                        margins = <span class="number">4</span>,
+                        widget  = wibox.container.margin,
+                    },
+                    bg     = <span class="string">'#dddddd'</span>,
+                    shape  = gears.shape.circle,
+                    widget = wibox.container.background,
+                },
+                {
+                    {
+                        id     = <span class="string">'icon_role'</span>,
+                        widget = wibox.widget.imagebox,
+                    },
+                    margins = <span class="number">2</span>,
+                    widget  = wibox.container.margin,
+                },
+                {
+                    id     = <span class="string">'text_role'</span>,
+                    widget = wibox.widget.textbox,
+                },
+                layout = wibox.layout.fixed.horizontal,
+            },
+            left  = <span class="number">18</span>,
+            right = <span class="number">18</span>,
+            widget = wibox.container.margin
+        },
+        id     = <span class="string">'background_role'</span>,
+        widget = wibox.container.background,
+        <span class="comment">-- Add support for hover colors and an index label
+</span>        create_callback = <span class="keyword">function</span>(self, c3, index, objects) <span class="comment">--luacheck: no unused args
+</span>            self:get_children_by_id(<span class="string">'index_role'</span>)[<span class="number">1</span>].markup = <span class="string">'&lt;b&gt; '</span>..index..<span class="string">' &lt;/b&gt;'</span>
+            self:connect_signal(<span class="string">'mouse::enter'</span>, <span class="keyword">function</span>()
+                <span class="keyword">if</span> self.bg ~= <span class="string">'#ff0000'</span> <span class="keyword">then</span>
+                    self.backup     = self.bg
+                    self.has_backup = <span class="keyword">true</span>
+                <span class="keyword">end</span>
+                self.bg = <span class="string">'#ff0000'</span>
+            <span class="keyword">end</span>)
+            self:connect_signal(<span class="string">'mouse::leave'</span>, <span class="keyword">function</span>()
+                <span class="keyword">if</span> self.has_backup <span class="keyword">then</span> self.bg = self.backup <span class="keyword">end</span>
+            <span class="keyword">end</span>)
+        <span class="keyword">end</span>,
+        update_callback = <span class="keyword">function</span>(self, c3, index, objects) <span class="comment">--luacheck: no unused args
+</span>            self:get_children_by_id(<span class="string">'index_role'</span>)[<span class="number">1</span>].markup = <span class="string">'&lt;b&gt; '</span>..index..<span class="string">' &lt;/b&gt;'</span>
+        <span class="keyword">end</span>,
+    },
+    buttons = taglist_buttons
+}
+</pre>
+
+
+<p> As demonstrated in the example above, there are a few &ldquo;shortcuts&rdquo; to avoid
+ re-inventing the wheel. By setting the predefined roles as widget <code>id</code>s,
+ <a href="../classes/awful.widget.common.html#">awful.widget.common</a> will do most of the work to update the values
+ automatically. All of them are optional. The supported roles are:</p>
+
+<ul>
+<li><code>icon_role</code>: A <a href="../classes/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></li>
+<li><code>text_role</code>: A <a href="../classes/wibox.widget.textbox.html#">wibox.widget.textbox</a></li>
+<li><code>background_role</code>: A <a href="../classes/wibox.container.background.html#">wibox.container.background</a></li>
+<li><code>text_margin_role</code>: A <a href="../classes/wibox.container.margin.html#">wibox.container.margin</a></li>
+<li><code>icon_margin_role</code>: A <a href="../classes/wibox.container.margin.html#">wibox.container.margin</a></li>
+</ul>
+
+
+<p> <a href="../classes/awful.widget.common.html#">awful.widget.common</a> also has 2 callbacks to give more control over the widget:</p>
+
+<ul>
+<li><code>create_callback</code>: Called once after the widget instance is created</li>
+<li><code>update_callback</code>: Called everytime the data is refreshed</li>
+</ul>
+
+
+<p> Both callback have the same parameters:</p>
+
+<ul>
+<li><code>self</code>: The widget instance (<em>widget</em>).</li>
+<li><code>t</code>: The tag (<em>tag</em>)</li>
+<li><code>index</code>: The widget position in the list (<em>number</em>)</li>
+<li><code>tags</code>: The list of tag, in order (<em>table</em>)</li>
+</ul>
+
 </p>
     <h3>Info:</h3>
     <ul>
@@ -191,7 +309,7 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#awful.taglist">awful.taglist (screen, filter, buttons[, style={}[, update_function=nil[, base_widget=nil]]])</a></td>
+	<td class="name" ><a href="#awful.taglist">awful.taglist (args, widget_template, filter, buttons[, style[, update_function[, base_widget]]])</a></td>
 	<td class="summary">Create a new taglist widget.</td>
 	</tr>
 	<tr>
@@ -352,181 +470,184 @@
     <dl class="function">
     <dt>
     <a name = "awful.taglist"></a>
-    <strong>awful.taglist (screen, filter, buttons[, style={}[, update_function=nil[, base_widget=nil]]])</strong>
+    <strong>awful.taglist (args, widget_template, filter, buttons[, style[, update_function[, base_widget]]])</strong>
     </dt>
     <dd>
     Create a new taglist widget.  The last two arguments (update_function
- and base_widget) serve to customize the layout of the taglist (eg. to
+ and layout) serve to customize the layout of the taglist (eg. to
  make it vertical). For that, you will need to copy the
  awful.widget.common.list_update function, make your changes to it
- and pass it as update_function here. Also change the base_widget if the
+ and pass it as update_function here. Also change the layout if the
  default is not what you want.
 
 
     <ul>
-        <li><span class="parameter">screen</span>
-         The screen to draw taglist for.
-        </li>
-        <li><span class="parameter">filter</span>
-         Filter function to define what clients will be listed.
-        </li>
-        <li><span class="parameter">buttons</span>
-         A table with buttons binding to set.
-        </li>
-        <li><span class="parameter">style</span> The style overrides default theme.
+        <li><span class="parameter">args</span>
+
         <ul>
-        <li><span class="parameter">fg_focus</span>
+        <li><span class="parameter">style</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The style overrides default theme.
+         (<em>default</em> {})
+        </li>
+        <li><span class="parameter">style.fg_focus</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+         The foreground color for focused client.
+        </li>
+        <li><span class="parameter">style.bg_focus</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+         The background color for focused client.
+        </li>
+        <li><span class="parameter">style.fg_urgent</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+         The foreground color for urgent clients.
+        </li>
+        <li><span class="parameter">style.bg_urgent</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+         The background color for urgent clients.
+        </li>
+        <li><span class="parameter">style.bg_occupied</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
 
 
          (<em>default</em> nil)
         </li>
-        <li><span class="parameter">bg_focus</span>
+        <li><span class="parameter">style.fg_occupied</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
 
 
          (<em>default</em> nil)
         </li>
-        <li><span class="parameter">fg_urgent</span>
+        <li><span class="parameter">style.bg_empty</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
 
 
          (<em>default</em> nil)
         </li>
-        <li><span class="parameter">bg_urgent</span>
+        <li><span class="parameter">style.fg_empty</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
 
 
          (<em>default</em> nil)
         </li>
-        <li><span class="parameter">bg_occupied</span>
+        <li><span class="parameter">style.bg_volatile</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
 
 
          (<em>default</em> nil)
         </li>
-        <li><span class="parameter">fg_occupied</span>
+        <li><span class="parameter">style.fg_volatile</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
 
 
          (<em>default</em> nil)
         </li>
-        <li><span class="parameter">bg_empty</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
-
-
-         (<em>default</em> nil)
+        <li><span class="parameter">style.squares_sel</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         A user provided image for selected squares.
+         (<em>optional</em>)
         </li>
-        <li><span class="parameter">fg_empty</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
-
-
-         (<em>default</em> nil)
+        <li><span class="parameter">style.squares_unsel</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         A user provided image for unselected squares.
+         (<em>optional</em>)
         </li>
-        <li><span class="parameter">bg_volatile</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
-
-
-         (<em>default</em> nil)
+        <li><span class="parameter">style.squares_sel_empty</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         A user provided image for selected squares for empty tags.
+         (<em>optional</em>)
         </li>
-        <li><span class="parameter">fg_volatile</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
-
-
-         (<em>default</em> nil)
+        <li><span class="parameter">style.squares_unsel_empty</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         A user provided image for unselected squares for empty tags.
+         (<em>optional</em>)
         </li>
-        <li><span class="parameter">squares_sel</span>
+        <li><span class="parameter">style.squares_resize</span>
+            <span class="types"><span class="type">boolean</span></span>
+         True or false to resize squares.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">style.disable_icon</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
 
          (<em>default</em> nil)
         </li>
-        <li><span class="parameter">squares_unsel</span>
+        <li><span class="parameter">style.font</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-
-         (<em>default</em> nil)
+         The font.
         </li>
-        <li><span class="parameter">squares_sel_empty</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-
-         (<em>default</em> nil)
-        </li>
-        <li><span class="parameter">squares_unsel_empty</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-
-         (<em>default</em> nil)
-        </li>
-        <li><span class="parameter">squares_resize</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-
-         (<em>default</em> nil)
-        </li>
-        <li><span class="parameter">disable_icon</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-
-         (<em>default</em> nil)
-        </li>
-        <li><span class="parameter">font</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-
-         (<em>default</em> nil)
-        </li>
-        <li><span class="parameter">spacing</span>
+        <li><span class="parameter">style.spacing</span>
             <span class="types"><span class="type">number</span></span>
          The spacing between tags.
          (<em>default</em> nil)
         </li>
-        </li></ul>
-        <li><span class="parameter">update_function</span>
-         Function to create a tag widget on each
-   update. See <a href="../classes/awful.widget.common.html#">awful.widget.common</a>.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">base_widget</span> Optional container widget for tag widgets. Default
-   is wibox.layout.fixed.horizontal().
-        <ul>
-        <li><span class="parameter">bg_focus</span>
-         The background color for focused client.
-        </li>
-        <li><span class="parameter">fg_focus</span>
-         The foreground color for focused client.
-        </li>
-        <li><span class="parameter">bg_urgent</span>
-         The background color for urgent clients.
-        </li>
-        <li><span class="parameter">fg_urgent</span>
-         The foreground color for urgent clients.
-        </li>
-        <li><span class="parameter">squares_sel</span>
+        <li><span class="parameter">style.squares_sel</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          A user provided image for selected squares.
          (<em>optional</em>)
         </li>
-        <li><span class="parameter">squares_unsel</span>
+        <li><span class="parameter">style.squares_unsel</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          A user provided image for unselected squares.
          (<em>optional</em>)
         </li>
-        <li><span class="parameter">squares_sel_empty</span>
+        <li><span class="parameter">style.squares_sel_empty</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          A user provided image for selected squares for empty tags.
          (<em>optional</em>)
         </li>
-        <li><span class="parameter">squares_unsel_empty</span>
+        <li><span class="parameter">style.squares_unsel_empty</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          A user provided image for unselected squares for empty tags.
          (<em>optional</em>)
         </li>
-        <li><span class="parameter">squares_resize</span>
+        <li><span class="parameter">style.squares_resize</span>
+            <span class="types"><span class="type">boolean</span></span>
          True or false to resize squares.
          (<em>optional</em>)
         </li>
-        <li><span class="parameter">font</span>
+        <li><span class="parameter">style.bg_focus</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+         The background color for focused client.
+        </li>
+        <li><span class="parameter">style.fg_focus</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+         The foreground color for focused client.
+        </li>
+        <li><span class="parameter">style.bg_urgent</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+         The background color for urgent clients.
+        </li>
+        <li><span class="parameter">style.fg_urgent</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+         The foreground color for urgent clients.
+        </li>
+        <li><span class="parameter">style.font</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The font.
         </li>
         </li></ul>
+        <li><span class="parameter">widget_template</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A custom widget to be used for each tag
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">filter</span>
+         <strong>DEPRECATED</strong> use args.filter
+        </li>
+        <li><span class="parameter">buttons</span>
+         <strong>DEPRECATED</strong> use args.buttons
+        </li>
+        <li><span class="parameter">style</span>
+         <strong>DEPRECATED</strong> use args.style
+        </li>
+        <li><span class="parameter">update_function</span>
+         <strong>DEPRECATED</strong> use args.update_function
+        </li>
+        <li><span class="parameter">base_widget</span>
+         <strong>DEPRECATED</strong> use args.base_widget
+        </li>
     </ul>
 
 
