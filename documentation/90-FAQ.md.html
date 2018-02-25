@@ -34,6 +34,7 @@
 <ul>
 <li><a href="#Configuration">Configuration </a></li>
 <li><a href="#General">General </a></li>
+<li><a href="#Common_issues">Common issues </a></li>
 <li><a href="#Usage">Usage </a></li>
 <li><a href="#Development">Development </a></li>
 </ul>
@@ -189,6 +190,56 @@
 <p>The name <em>Awesome</em> comes from the English word <em>awesome</em> often used by the
 character <a href="http://en.wikipedia.org/wiki/Barney_Stinson">Barney Stinson</a>
 from the TV series HIMYM.</p>
+
+<p><a name="Common_issues"></a></p>
+
+<h2>Common issues</h2>
+
+<h3>My screens are not configured correctly</h3>
+
+<p>Awesome is a window manager, not a desktop environment. To configure your
+screens, the <code>xrandr</code> tool or various GUI applications exist. For more
+information, refer to the
+<a href="https://wiki.archlinux.org/index.php/xrandr">Arch Linux wiki</a>.</p>
+
+<h3>There is a noticeable delay with inputs</h3>
+
+<p>There are two common causes for this:</p>
+
+<p>The first is a display driver issue where painting on the screen takes long
+time. All input events (keyboard and mouse) are processed in the main thread.
+The drawing is also locking the main thread to avoid artifacts and race
+ccontiditions. If there is a delay with the painting, it will delay the inputs.
+The solution to this problem is using a compositing manager such as
+<a href="https://github.com/chjj/compton">compton</a> or the older <code>xcompmgr</code>. This will
+move painting to another process and fully mitigate the issue.</p>
+
+<p>The second one is when using <a href="https://www.lua.org/manual/5.2/manual.html#pdf-io.popen">io.popen</a> or other blocking functions in <a href="../sample files/rc.lua.html#">rc.lua</a>
+and most commonly manifests itself as occasional freezes instead of a generic delay.
+Do <strong>not</strong> use such functions and prefer <a href="../libraries/awful.spawn.html#easy_async">awful.spawn.easy_async</a>,
+<a href="../classes/awful.widget.watch.html#">awful.widget.watch</a> or the GIO async API. Even if you <em>think</em> a command is
+fast enough and won&rsquo;t impact the main event loop iteration time, you are wrong.
+<em>Every</em> calls to <a href="https://www.lua.org/manual/5.2/manual.html#pdf-io.open">io.open</a> are impacted by the system <code>iowait</code> queue and can
+spend hundreds of milliseconds blocked <em>before</em> being executed. Note that
+some common widget or probe libraries such as
+<a href="https://github.com/Mic92/vicious">Vicious</a> do not follow this
+advice currently and are known to cause input lag on some systems (but not all).</p>
+
+<p>In both case, a warning like:</p>
+
+<pre>
+<span class="number">2018</span>-<span class="number">01</span>-<span class="number">23</span> <span class="number">09</span>:<span class="number">58</span>:<span class="number">48</span> W: awesome: a_glib_poll:<span class="number">432</span>: Last main loop iteration took <span class="number">14.416777</span> seconds! Increasing limit <span class="keyword">for</span> this warning to that value
+</pre>
+
+
+<p>will be printed to warn you about the issue.</p>
+
+<h3>The applications look ugly</h3>
+
+<p>Awesome is a window manager, not a desktop environment. It does not
+provide a theme daemon. For more information about how to manage the
+look and feel of applications, refer to the
+<a href="https://wiki.archlinux.org/index.php/Category:Eye_candy">Arch Linux Wiki</a>.</p>
 
 <p><a name="Configuration"></a></p>
 
