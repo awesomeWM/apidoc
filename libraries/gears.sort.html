@@ -32,10 +32,7 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
-<li><a href="#Deprecated_functions">Deprecated functions</a></li>
-<li><a href="#Tables">Tables</a></li>
-<li><a href="#Fields">Fields</a></li>
+<li><a href="#lib_gears_sort_topological_Functions">lib.gears.sort.topological Functions</a></li>
 </ul>
 
 
@@ -73,13 +70,13 @@
   <li><a href="../libraries/gears.object.properties.html">gears.object.properties</a></li>
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
-  <li><a href="../libraries/gears.sort.html">gears.sort</a></li>
+  <li><strong>gears.sort</strong></li>
   <li><a href="../libraries/gears.string.html">gears.string</a></li>
   <li><a href="../libraries/gears.surface.html">gears.surface</a></li>
   <li><a href="../libraries/gears.table.html">gears.table</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
   <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
-  <li><strong>menubar</strong></li>
+  <li><a href="../libraries/menubar.html">menubar</a></li>
   <li><a href="../libraries/menubar.menu_gen.html">menubar.menu_gen</a></li>
   <li><a href="../libraries/menubar.utils.html">menubar.utils</a></li>
   <li><a href="../libraries/mouse.html">mouse</a></li>
@@ -179,89 +176,37 @@
 
 <div id="content">
 
-<h1>Module <code>menubar</code></h1>
-<p>Menubar module, which aims to provide a freedesktop menu alternative</p>
-<p><p> List of menubar keybindings:</p>
-
-<hr />
-
-<ul>
-<li> &ldquo;Left&rdquo;  | &ldquo;C-j&rdquo; select an item on the left</li>
-<li> &ldquo;Right&rdquo; | &ldquo;C-k&rdquo; select an item on the right</li>
-<li> &ldquo;Backspace&rdquo;     exit the current category if we are in any</li>
-<li> &ldquo;Escape&rdquo;        exit the current directory or exit menubar</li>
-<li> &ldquo;Home&rdquo;          select the first item</li>
-<li> &ldquo;End&rdquo;           select the last</li>
-<li> &ldquo;Return&rdquo;        execute the entry</li>
-<li> &ldquo;C-Return&rdquo;      execute the command with awful.spawn</li>
-<li> &ldquo;C-M-Return&rdquo;    execute the command in a terminal</li>
-</ul>
-
+<h1>Module <code>gears.sort</code></h1>
+<p>Extra sorting algorithms.</p>
+<p>
 </p>
-    <h3>Info:</h3>
-    <ul>
-        <li><strong>Copyright</strong>: 2011-2012 Alexander Yakushev</li>
-        <li><strong>Author</strong>: Alexander Yakushev &lt;yakushev.alex@gmail.com&gt;</li>
-    </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
+<h2><a href="#lib_gears_sort_topological_Functions">lib.gears.sort.topological Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#refresh">refresh ([scr])</a></td>
-	<td class="summary">Refresh menubar&rsquo;s cache by reloading .desktop files.</td>
+	<td class="name" ><a href="#tsort:append">tsort:append (node, dependencies)</a></td>
+	<td class="summary">Ensure that <code>node</code> appears after all <code>dependencies</code>.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#show">show ([scr])</a></td>
-	<td class="summary">Show the menubar on the given screen.</td>
+	<td class="name" ><a href="#tsort:prepend">tsort:prepend (node, subordinates)</a></td>
+	<td class="summary">Ensure that <code>node</code> appears before all <code>subordinates</code>.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#hide">hide ()</a></td>
-	<td class="summary">Hide the menubar.</td>
-	</tr>
-</table>
-<h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#get">get</a></td>
-	<td class="summary">Get a menubar wibox.</td>
-	</tr>
-</table>
-<h2><a href="#Tables">Tables</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#geometry">geometry</a></td>
-	<td class="summary">Specifies the geometry of the menubar.</td>
+	<td class="name" ><a href="#tsort:clone">tsort:clone ()</a></td>
+	<td class="summary">Create a copy of this topological sort.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#prompt_args">prompt_args</a></td>
-	<td class="summary">Allows user to specify custom parameters for prompt.run function
- (like colors).</td>
-	</tr>
-</table>
-<h2><a href="#Fields">Fields</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#cache_entries">cache_entries</a></td>
-	<td class="summary">When true the .desktop files will be reparsed only when the
- extension is initialized.</td>
+	<td class="name" ><a href="#tsort:remove">tsort:remove (node)</a></td>
+	<td class="summary">Remove a node from the topological map.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#show_categories">show_categories</a></td>
-	<td class="summary">When true the categories will be shown alongside application
- entries.</td>
+	<td class="name" ><a href="#tsort:sort">tsort:sort ()</a></td>
+	<td class="summary">Try to sort the nodes.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#right_margin">right_margin</a></td>
-	<td class="summary">Width of blank space left in the right side.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#right_label">right_label</a></td>
-	<td class="summary">Label used for &ldquo;Next page&rdquo;, default &ldquo;▶▶&rdquo;.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#left_label">left_label</a></td>
-	<td class="summary">Label used for &ldquo;Previous page&rdquo;, default &ldquo;◀◀&rdquo;.</td>
+	<td class="name" ><a href="#gears.sort.topological">gears.sort.topological ()</a></td>
+	<td class="summary">A topological sorting class.</td>
 	</tr>
 </table>
 
@@ -269,149 +214,24 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-    Methods
-    <dl class="function">
-    <dt>
-    <a name = "refresh"></a>
-    <strong>refresh ([scr])</strong>
-    </dt>
-    <dd>
-    Refresh menubar&rsquo;s cache by reloading .desktop files.
-
-
-    <ul>
-        <li><span class="parameter">scr</span>
-            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
-         Screen.
-         (<em>optional</em>)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "show"></a>
-    <strong>show ([scr])</strong>
-    </dt>
-    <dd>
-    Show the menubar on the given screen.
-
-
-    <ul>
-        <li><span class="parameter">scr</span>
-         Screen.
-         (<em>optional</em>)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "hide"></a>
-    <strong>hide ()</strong>
-    </dt>
-    <dd>
-    Hide the menubar.
-
-
-
-
-
-
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Deprecated_functions"></a>Deprecated functions</h2>
+    <h2 class="section-header "><a name="lib_gears_sort_topological_Functions"></a>lib.gears.sort.topological Functions</h2>
 
     <dl class="function">
     <dt>
-    <a name = "get"></a>
-    <strong>get</strong>
+    <a name = "tsort:append"></a>
+    <strong>tsort:append (node, dependencies)</strong>
     </dt>
     <dd>
-    Get a menubar wibox.
+    Ensure that <code>node</code> appears after all <code>dependencies</code>.
 
 
-    <h3>param:</h3>
     <ul>
-        <li><span class="parameter">scr</span>
-            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
-         Screen.
-         (<em>optional</em>)
+        <li><span class="parameter">node</span>
+         The node that edges are added to.
         </li>
-    </ul>
-
-
-
-
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "geometry"></a>
-    <strong>geometry</strong>
-    </dt>
-    <dd>
-    Specifies the geometry of the menubar.  This is a table with the keys
- x, y, width and height. Missing values are replaced via the screen&rsquo;s
- geometry. However, missing height is replaced by the font size.
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "prompt_args"></a>
-    <strong>prompt_args</strong>
-    </dt>
-    <dd>
-    Allows user to specify custom parameters for prompt.run function
- (like colors).
-
-
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/awful.prompt.html#">awful.prompt</a>
-    </ul>
-
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "cache_entries"></a>
-    <strong>cache_entries</strong>
-    </dt>
-    <dd>
-    When true the .desktop files will be reparsed only when the
- extension is initialized.  Use this if menubar takes much time to
- open.
-
-
-    <ul>
-        <li><span class="parameter">cache_entries</span>
-            <span class="types"><span class="type">boolean</span></span>
-
-
-         (<em>default</em> true)
+        <li><span class="parameter">dependencies</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         List of nodes that have to appear before <code>node</code>.
         </li>
     </ul>
 
@@ -421,20 +241,20 @@
 
 </dd>
     <dt>
-    <a name = "show_categories"></a>
-    <strong>show_categories</strong>
+    <a name = "tsort:prepend"></a>
+    <strong>tsort:prepend (node, subordinates)</strong>
     </dt>
     <dd>
-    When true the categories will be shown alongside application
- entries.
+    Ensure that <code>node</code> appears before all <code>subordinates</code>.
 
 
     <ul>
-        <li><span class="parameter">show_categories</span>
-            <span class="types"><span class="type">boolean</span></span>
-
-
-         (<em>default</em> true)
+        <li><span class="parameter">node</span>
+         The node that edges are added to.
+        </li>
+        <li><span class="parameter">subordinates</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         List of nodes that have to appear after <code>node</code>.
         </li>
     </ul>
 
@@ -444,18 +264,32 @@
 
 </dd>
     <dt>
-    <a name = "right_margin"></a>
-    <strong>right_margin</strong>
+    <a name = "tsort:clone"></a>
+    <strong>tsort:clone ()</strong>
     </dt>
     <dd>
-    Width of blank space left in the right side.
+    Create a copy of this topological sort.
+ This is useful to backup it before adding elements that can potentially
+ have circular dependencies and thus render the original useless.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "tsort:remove"></a>
+    <strong>tsort:remove (node)</strong>
+    </dt>
+    <dd>
+    Remove a node from the topological map.
 
 
     <ul>
-        <li><span class="parameter">right_margin</span>
-            <span class="types"><span class="type">number</span></span>
-
-
+        <li><span class="parameter">node</span>
+         The node
         </li>
     </ul>
 
@@ -465,47 +299,73 @@
 
 </dd>
     <dt>
-    <a name = "right_label"></a>
-    <strong>right_label</strong>
+    <a name = "tsort:sort"></a>
+    <strong>tsort:sort ()</strong>
     </dt>
     <dd>
-    Label used for &ldquo;Next page&rdquo;, default &ldquo;▶▶&rdquo;.
+    Try to sort the nodes.
 
 
-    <ul>
-        <li><span class="parameter">right_label</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
+    <h3>Returns:</h3>
+    <ol>
 
-         (<em>default</em> "▶▶")
-        </li>
-    </ul>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A sorted list of nodes
+    </ol>
+     <h3>Or</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">nil</span></span>
 
+</li>
+        <li>
+        A node around which a loop exists</li>
+    </ol>
 
 
 
 
 </dd>
     <dt>
-    <a name = "left_label"></a>
-    <strong>left_label</strong>
+    <a name = "gears.sort.topological"></a>
+    <strong>gears.sort.topological ()</strong>
     </dt>
     <dd>
-    Label used for &ldquo;Previous page&rdquo;, default &ldquo;◀◀&rdquo;.
+    <p>A topological sorting class. </p>
+
+<p> The object returned by this function allows to create simple dependency
+ graphs. It can be used for decision making or ordering of complex sequences.</p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>The position #1 is: a
+The position #2 is: b
+The position #3 is: c
+The position #4 is: d
+The position #5 is: e
+The position #6 is: f
+</code></pre>
 
 
+
+
+
+
+
+    <h3>Usage:</h3>
     <ul>
-        <li><span class="parameter">left_label</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-
-         (<em>default</em> "◀◀")
-        </li>
+        <pre class="example"><span class="keyword">local</span> tsort = gears.sort.topological()
+tsort:prepend(<span class="string">'a'</span>, { <span class="string">'b'</span> })
+tsort:prepend(<span class="string">'b'</span>, { <span class="string">'c'</span> })
+tsort:prepend(<span class="string">'c'</span>, { <span class="string">'d'</span> })
+tsort:append(<span class="string">'e'</span>, { <span class="string">'d'</span> })
+tsort:append(<span class="string">'f'</span>, { <span class="string">'e'</span>, <span class="string">'d'</span> })
+<span class="keyword">local</span> res = <span class="global">assert</span>(tsort:sort())
+<span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">ipairs</span>(res) <span class="keyword">do</span>
+    <span class="global">print</span>(<span class="string">'The position #'</span>..k..<span class="string">' is: '</span>..v)
+<span class="keyword">end</span></pre>
     </ul>
-
-
-
-
 
 </dd>
 </dl>
