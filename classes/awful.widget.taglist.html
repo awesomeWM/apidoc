@@ -309,7 +309,7 @@ s.mytaglist = awful.widget.taglist {
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#awful.taglist">awful.taglist (args, widget_template, filter, buttons[, style[, update_function[, base_widget]]])</a></td>
+	<td class="name" ><a href="#awful.taglist">awful.taglist (args, filter, buttons, style[, update_function[, base_widget]])</a></td>
 	<td class="summary">Create a new taglist widget.</td>
 	</tr>
 	<tr>
@@ -470,7 +470,7 @@ s.mytaglist = awful.widget.taglist {
     <dl class="function">
     <dt>
     <a name = "awful.taglist"></a>
-    <strong>awful.taglist (args, widget_template, filter, buttons[, style[, update_function[, base_widget]]])</strong>
+    <strong>awful.taglist (args, filter, buttons, style[, update_function[, base_widget]])</strong>
     </dt>
     <dd>
     Create a new taglist widget.  The last two arguments (update_function
@@ -485,6 +485,35 @@ s.mytaglist = awful.widget.taglist {
         <li><span class="parameter">args</span>
 
         <ul>
+        <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+         The screen to draw taglist for.
+        </li>
+        <li><span class="parameter">filter</span>
+            <span class="types"><span class="type">function[opt=nil]</span></span>
+         Filter function to define what clients will be listed.
+        </li>
+        <li><span class="parameter">buttons</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with buttons binding to set.
+        </li>
+        <li><span class="parameter">update_function</span>
+            <span class="types"><span class="type">function</span></span>
+         Function to create a tag widget on each
+   update. See <a href="../classes/awful.widget.common.html#">awful.widget.common</a>.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">layout</span>
+            <span class="types"><span class="type">widget</span></span>
+         Optional layout widget for tag widgets. Default
+   is wibox.layout.fixed.horizontal().
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">widget_template</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A custom widget to be used for each tag
+         (<em>optional</em>)
+        </li>
         <li><span class="parameter">style</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The style overrides default theme.
@@ -628,11 +657,6 @@ s.mytaglist = awful.widget.taglist {
          The font.
         </li>
         </li></ul>
-        <li><span class="parameter">widget_template</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A custom widget to be used for each tag
-         (<em>optional</em>)
-        </li>
         <li><span class="parameter">filter</span>
          <strong>DEPRECATED</strong> use args.filter
         </li>
