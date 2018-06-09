@@ -623,9 +623,21 @@ clientkeys = gears.<span class="global">table</span>.join(
 <span class="keyword">end</span>
 
 clientbuttons = gears.<span class="global">table</span>.join(
-    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c) client.focus = c; c:raise() <span class="keyword">end</span>),
-    awful.button({ modkey }, <span class="number">1</span>, awful.mouse.client.move),
-    awful.button({ modkey }, <span class="number">3</span>, awful.mouse.client.resize))
+    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
+        client.focus = c;
+        c:raise()
+    <span class="keyword">end</span>),
+    awful.button({ modkey }, <span class="number">1</span>, <span class="keyword">function</span> (c)
+        client.focus = c
+        c:raise()
+        awful.mouse.client.move(c)
+    <span class="keyword">end</span>),
+    awful.button({ modkey }, <span class="number">3</span>, <span class="keyword">function</span> (c)
+        client.focus = c
+        c:raise()
+        awful.mouse.client.resize(c)
+    <span class="keyword">end</span>)
+)
 
 <span class="comment">-- Set keys
 </span>root.keys(globalkeys)
