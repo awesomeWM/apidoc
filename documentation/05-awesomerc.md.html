@@ -881,9 +881,21 @@ clientkeys = <span class="backtick"><a href="../libraries/gears.table.html#join"
 
 <pre>
 clientbuttons = <span class="backtick"><a href="../libraries/gears.table.html#join">gears.table.join</a></span>(
-    <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> (c) client.focus = c; c:raise() <span class="keyword">end</span>),
-    <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">1</span>, <span class="backtick"><code>awful.mouse.client.move</code></span>),
-    <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="backtick"><code>awful.mouse.client.resize</code></span>))
+    <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
+        client.focus = c;
+        c:raise()
+    <span class="keyword">end</span>),
+    <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">1</span>, <span class="keyword">function</span> (c)
+        client.focus = c
+        c:raise()
+        <span class="backtick"><code>awful.mouse.client.move</code></span>(c)
+    <span class="keyword">end</span>),
+    <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="keyword">function</span> (c)
+        client.focus = c
+        c:raise()
+        <span class="backtick"><code>awful.mouse.client.resize</code></span>(c)
+    <span class="keyword">end</span>)
+)
 </pre>
 
 
