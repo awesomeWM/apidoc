@@ -2611,6 +2611,53 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
  identifier remain the same. This allow to match a spawn event to an actual
  client.</p>
 
+<p> This is used to display a different mouse cursor when the application is
+ loading and also to attach some properties to the newly created client (like
+ a <a href="../classes/tag.html#">tag</a> or <a href="../classes/client.html#client.floating">floating</a> state).</p>
+
+<p> Some applications, like <code>xterm</code>, don&rsquo;t support startup notification. While
+ not perfect, the addition the following code to <a href="../sample files/rc.lua.html#">rc.lua</a> will mitigate the
+ issue. Please note that this code is Linux specific.</p>
+
+<pre><code>local blacklisted_snid = setmetatable({}, {__mode = "v" })
+
+--- Make startup notification work for some clients like XTerm. This is ugly
+-- but works often enough to be useful.
+local function fix_startup_id(c)
+    -- Prevent "broken" sub processes created by &lt;code&gt;c&lt;/code&gt; to inherit its SNID
+    if c.startup_id then
+        blacklisted_snid[c.startup_id] = blacklisted_snid[c.startup_id] or c
+        return
+    end
+
+    if not c.pid then return end
+
+    -- Read the process environment variables
+    local f = io.open("/proc/"..c.pid.."/environ", "rb")
+
+    -- It will only work on Linux, that's already 99% of the userbase.
+    if not f then return end
+
+    local value = _VERSION &lt;= "Lua 5.1" and "([^\z]*)\0" or "([^\0]*)\0"
+    local snid = f:read("*all"):match("STARTUP_ID=" .. value)
+    f:close()
+
+    -- If there is already a client using this SNID, it means it's either a
+    -- subprocess or another window for the same process. While it makes sense
+    -- in some case to apply the same rules, it is not always the case, so
+    -- better doing nothing rather than something stupid.
+    if blacklisted_snid[snid] then return end
+
+    c.startup_id = snid
+
+    blacklisted_snid[snid] = c
+end
+
+awful.rules.add_rule_source(
+    "snid", fix_startup_id, {}, {"awful.spawn", "awful.rules"}
+)
+</code></pre>
+
 <p> <strong>Signal:</strong></p>
 
 <ul>
@@ -2630,6 +2677,10 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.spawn.html#">awful.spawn</a>
+    </ul>
 
 
 </dd>
@@ -4179,7 +4230,7 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#awful.client.is_transient_for">client.is_transient_for</a>
+         <a href="../classes/client.html#client:is_transient_for">client.is_transient_for</a>
     </ul>
 
 
