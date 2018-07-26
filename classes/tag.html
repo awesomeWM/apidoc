@@ -723,6 +723,18 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 	<td class="summary">Get or set the clients attached to this tag.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#tag:disconnect_signal">tag:disconnect_signal (name, func)</a></td>
+	<td class="summary">Disconnect from a signal.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#tag:emit_signal">tag:emit_signal (name, ...)</a></td>
+	<td class="summary">Emit a signal.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#tag:connect_signal">tag:connect_signal (name, func)</a></td>
+	<td class="summary">Connect to a signal.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#tag:swap">tag:swap (tag2)</a></td>
 	<td class="summary">Swap 2 tags</td>
 	</tr>
@@ -782,7 +794,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag:delete">tag.delete</a>
+         <a href="../classes/tag.html#awful.tag.delete">tag.delete</a>
     </ul>
 
 
@@ -954,7 +966,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -1379,7 +1391,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <ul>
          <li><a href="../classes/tag.html#tag.master_count">master_count</a></li>
          <li><a href="../classes/tag.html#tag.column_count">column_count</a></li>
-         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
+         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
     </ul>
 
@@ -1752,7 +1764,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#request::urgent">client.urgent</a>
+         <a href="../classes/client.html#client.urgent">client.urgent</a>
     </ul>
 
 
@@ -1770,7 +1782,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#request::urgent">client.urgent</a>
+         <a href="../classes/client.html#client.urgent">client.urgent</a>
     </ul>
 
 
@@ -1919,7 +1931,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -2053,7 +2065,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag:delete">tag.delete</a>
+         <a href="../classes/tag.html#awful.tag.delete">tag.delete</a>
     </ul>
 
 
@@ -2205,7 +2217,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
+         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
          <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
     </ul>
 
@@ -2232,7 +2244,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>See also:</h3>
     <ul>
          <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
-         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
+         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
     </ul>
 
 
@@ -2403,7 +2415,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -2429,7 +2441,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -2847,6 +2859,79 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
         A table with the clients attached to this tags.
     </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "tag:disconnect_signal"></a>
+    <strong>tag:disconnect_signal (name, func)</strong>
+    </dt>
+    <dd>
+    Disconnect from a signal.
+
+
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback that should be disconnected.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "tag:emit_signal"></a>
+    <strong>tag:emit_signal (name, ...)</strong>
+    </dt>
+    <dd>
+    Emit a signal.
+
+
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">...</span>
+         Extra arguments for the callback functions. Each connected
+   function receives the object as first argument and then any extra
+   arguments that are given to emit_signal().
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "tag:connect_signal"></a>
+    <strong>tag:connect_signal (name, func)</strong>
+    </dt>
+    <dd>
+    Connect to a signal.
+
+
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted.
+        </li>
+    </ul>
+
 
 
 

@@ -372,7 +372,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 	</tr>
 	<tr>
 	<td class="name" ><a href="#client.icon">icon</a></td>
-	<td class="summary">The client icon.</td>
+	<td class="summary">The client icon as a surface.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#client.icon_sizes">icon_sizes</a></td>
@@ -875,6 +875,18 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 	<tr>
 	<td class="name" ><a href="#client:get_icon">client:get_icon (index)</a></td>
 	<td class="summary">Get the client&rsquo;s n-th icon.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#client:disconnect_signal">client:disconnect_signal (name, func)</a></td>
+	<td class="summary">Disconnect from a signal.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#client:emit_signal">client:emit_signal (name, ...)</a></td>
+	<td class="summary">Emit a signal.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#client:connect_signal">client:connect_signal (name, func)</a></td>
+	<td class="summary">Connect to a signal.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#client:jump_to">client:jump_to (merge)</a></td>
@@ -1676,7 +1688,27 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>icon</strong>
     </dt>
     <dd>
-    <p>The client icon. </p>
+    <p>The client icon as a surface. </p>
+
+<p> This property holds the client icon closest to the size configured via
+ <a href="../libraries/awesome.html#set_preferred_icon_size">awesome.set_preferred_icon_size</a>.</p>
+
+<p> It is not a path or an &ldquo;real&rdquo; file. Rather, it is already a bitmap surface.</p>
+
+<p> Typically you would want to use <a href="../classes/awful.widget.clienticon.html#">awful.widget.clienticon</a> to get this as a
+ widget.</p>
+
+<p> Working with icons is tricky because their surfaces do not use reference
+ counting correctly. If <code>gears.surface(c.icon)</code> is called multiple time on
+ the same icon, it will cause a double-free error and Awesome will crash. To
+ get a copy of the icon, you can use:</p>
+
+<pre><code> local s = gears.surface(c.icon)
+ local img = cairo.ImageSurface.create(cairo.Format.ARGB32, s:get_width(), s:get_height())
+ local cr  = cairo.Context(img)
+ cr:set_source_surface(s, 0, 0)
+ cr:paint()
+</code></pre>
 
 <p> <strong>Signal:</strong></p>
 
@@ -1698,6 +1730,10 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> ib = wibox.widget.imagebox(c.icon)</pre>
+    </ul>
 
 </dd>
     <dt>
@@ -4230,7 +4266,7 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#awful.client.is_transient_for">client.is_transient_for</a>
+         <a href="../classes/client.html#client:is_transient_for">client.is_transient_for</a>
     </ul>
 
 
@@ -4763,6 +4799,79 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
         A lightuserdata for a cairo surface. This reference must be
  destroyed!
     </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "client:disconnect_signal"></a>
+    <strong>client:disconnect_signal (name, func)</strong>
+    </dt>
+    <dd>
+    Disconnect from a signal.
+
+
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback that should be disconnected.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "client:emit_signal"></a>
+    <strong>client:emit_signal (name, ...)</strong>
+    </dt>
+    <dd>
+    Emit a signal.
+
+
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">...</span>
+         Extra arguments for the callback functions. Each connected
+   function receives the object as first argument and then any extra
+   arguments that are given to emit_signal().
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "client:connect_signal"></a>
+    <strong>client:connect_signal (name, func)</strong>
+    </dt>
+    <dd>
+    Connect to a signal.
+
+
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted.
+        </li>
+    </ul>
+
 
 
 

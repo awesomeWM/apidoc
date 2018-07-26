@@ -215,10 +215,6 @@
 <h2><a href="#Object_properties">Object properties</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed.children">children</a></td>
-	<td class="summary">Get all direct children of this layout.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed.spacing_widget">spacing_widget</a></td>
 	<td class="summary">The widget used to fill the spacing between the layout elements.</td>
 	</tr>
@@ -229,6 +225,10 @@
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed.spacing">spacing</a></td>
 	<td class="summary">Add spacing between each layout widgets.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed.children">children</a></td>
+	<td class="summary">Get all direct children of this layout.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed.forced_height">forced_height</a></td>
@@ -277,26 +277,6 @@
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:set">wibox.layout.fixed:set (index, widget2)</a></td>
-	<td class="summary">Set a widget at a specific index, replace the current one.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:replace_widget">wibox.layout.fixed:replace_widget (widget, widget2[, recursive=false])</a></td>
-	<td class="summary">Replace the first instance of <a href="../classes/wibox.widget.html">widget</a> in the layout with <code>widget2</code>.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:swap">wibox.layout.fixed:swap (index1, index2)</a></td>
-	<td class="summary">Swap 2 widgets in a layout.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:swap_widgets">wibox.layout.fixed:swap_widgets (widget1, widget2[, recursive=false])</a></td>
-	<td class="summary">Swap 2 widgets in a layout.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#wibox.layout.fixed:reset">wibox.layout.fixed:reset (layout)</a></td>
-	<td class="summary">Reset a ratio layout.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:add">wibox.layout.fixed:add (...)</a></td>
 	<td class="summary">Add some widgets to the given fixed layout</td>
 	</tr>
@@ -318,6 +298,26 @@
 	<td class="name" ><a href="#wibox.layout.fixed:insert">wibox.layout.fixed:insert (index, widget)</a></td>
 	<td class="summary">Insert a new widget in the layout at position <code>index</code>
  <strong>Signal:</strong> widget::inserted The arguments are the widget and the index</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:set">wibox.layout.fixed:set (index, widget2)</a></td>
+	<td class="summary">Set a widget at a specific index, replace the current one.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:replace_widget">wibox.layout.fixed:replace_widget (widget, widget2[, recursive=false])</a></td>
+	<td class="summary">Replace the first instance of <a href="../classes/wibox.widget.html">widget</a> in the layout with <code>widget2</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:swap">wibox.layout.fixed:swap (index1, index2)</a></td>
+	<td class="summary">Swap 2 widgets in a layout.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:swap_widgets">wibox.layout.fixed:swap_widgets (widget1, widget2[, recursive=false])</a></td>
+	<td class="summary">Swap 2 widgets in a layout.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#wibox.layout.fixed:reset">wibox.layout.fixed:reset (layout)</a></td>
+	<td class="summary">Reset a ratio layout.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#wibox.layout.fixed:get_all_children">wibox.layout.fixed:get_all_children ()</a></td>
@@ -409,26 +409,6 @@
     <h2 class="section-header "><a name="Object_properties"></a>Object properties</h2>
 
     <dl class="function">
-    <dt>
-    <a name = "wibox.layout.fixed.children"></a>
-    <strong>children</strong>
-    </dt>
-    <dd>
-    Get all direct children of this layout.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">layout</span>
-         The layout you are modifying.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
     <dt>
     <a name = "wibox.layout.fixed.spacing_widget"></a>
     <strong>spacing_widget</strong>
@@ -545,6 +525,26 @@
     }
 <span class="keyword">end</span></pre>
     </ul>
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed.children"></a>
+    <strong>children</strong>
+    </dt>
+    <dd>
+    Get all direct children of this layout.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">layout</span>
+         The layout you are modifying.
+        </li>
+    </ul>
+
+
+
+
 
 </dd>
     <dt>
@@ -995,6 +995,141 @@
 
     <dl class="function">
     <dt>
+    <a name = "wibox.layout.fixed:add"></a>
+    <strong>wibox.layout.fixed:add (...)</strong>
+    </dt>
+    <dd>
+    Add some widgets to the given fixed layout
+
+
+    <ul>
+        <li><span class="parameter">...</span>
+         Widgets that should be added (must at least be one)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed:remove"></a>
+    <strong>wibox.layout.fixed:remove (index)</strong>
+    </dt>
+    <dd>
+    Remove a widget from the layout
+
+
+    <ul>
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">number</span></span>
+         The widget index to remove
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        index If the operation is successful
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed:remove_widgets"></a>
+    <strong>wibox.layout.fixed:remove_widgets (widget)</strong>
+    </dt>
+    <dd>
+    Remove one or more widgets from the layout
+ The last parameter can be a boolean, forcing a recursive seach of the
+ widget(s) to remove.
+
+
+    <ul>
+        <li><span class="parameter">widget</span>
+         &hellip; Widgets that should be removed (must at least be one)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed:replace_widget"></a>
+    <strong>wibox.layout.fixed:replace_widget (widget, widget2[, recursive=false])</strong>
+    </dt>
+    <dd>
+    Replace the first instance of <a href="../classes/wibox.widget.html">widget</a> in the layout with <code>widget2</code>
+
+
+    <ul>
+        <li><span class="parameter">widget</span>
+         The widget to replace
+        </li>
+        <li><span class="parameter">widget2</span>
+         The widget to replace <a href="../classes/wibox.widget.html">widget</a> with
+        </li>
+        <li><span class="parameter">recursive</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Digg in all compatible layouts to find the widget.
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wibox.layout.fixed:insert"></a>
+    <strong>wibox.layout.fixed:insert (index, widget)</strong>
+    </dt>
+    <dd>
+    Insert a new widget in the layout at position <code>index</code>
+ <strong>Signal:</strong> widget::inserted The arguments are the widget and the index
+
+
+    <ul>
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">number</span></span>
+         The position
+        </li>
+        <li><span class="parameter">widget</span>
+         The widget
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "wibox.layout.fixed:set"></a>
     <strong>wibox.layout.fixed:set (index, widget2)</strong>
     </dt>
@@ -1148,141 +1283,6 @@
 
 </dd>
     <dt>
-    <a name = "wibox.layout.fixed:add"></a>
-    <strong>wibox.layout.fixed:add (...)</strong>
-    </dt>
-    <dd>
-    Add some widgets to the given fixed layout
-
-
-    <ul>
-        <li><span class="parameter">...</span>
-         Widgets that should be added (must at least be one)
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.fixed:remove"></a>
-    <strong>wibox.layout.fixed:remove (index)</strong>
-    </dt>
-    <dd>
-    Remove a widget from the layout
-
-
-    <ul>
-        <li><span class="parameter">index</span>
-            <span class="types"><span class="type">number</span></span>
-         The widget index to remove
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-        index If the operation is successful
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.fixed:remove_widgets"></a>
-    <strong>wibox.layout.fixed:remove_widgets (widget)</strong>
-    </dt>
-    <dd>
-    Remove one or more widgets from the layout
- The last parameter can be a boolean, forcing a recursive seach of the
- widget(s) to remove.
-
-
-    <ul>
-        <li><span class="parameter">widget</span>
-         &hellip; Widgets that should be removed (must at least be one)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.fixed:replace_widget"></a>
-    <strong>wibox.layout.fixed:replace_widget (widget, widget2[, recursive=false])</strong>
-    </dt>
-    <dd>
-    Replace the first instance of <a href="../classes/wibox.widget.html">widget</a> in the layout with <code>widget2</code>
-
-
-    <ul>
-        <li><span class="parameter">widget</span>
-         The widget to replace
-        </li>
-        <li><span class="parameter">widget2</span>
-         The widget to replace <a href="../classes/wibox.widget.html">widget</a> with
-        </li>
-        <li><span class="parameter">recursive</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Digg in all compatible layouts to find the widget.
-         (<em>default</em> false)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "wibox.layout.fixed:insert"></a>
-    <strong>wibox.layout.fixed:insert (index, widget)</strong>
-    </dt>
-    <dd>
-    Insert a new widget in the layout at position <code>index</code>
- <strong>Signal:</strong> widget::inserted The arguments are the widget and the index
-
-
-    <ul>
-        <li><span class="parameter">index</span>
-            <span class="types"><span class="type">number</span></span>
-         The position
-        </li>
-        <li><span class="parameter">widget</span>
-         The widget
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
-    </ol>
-
-
-
-
-</dd>
-    <dt>
     <a name = "wibox.layout.fixed:get_all_children"></a>
     <strong>wibox.layout.fixed:get_all_children ()</strong>
     </dt>
@@ -1381,12 +1381,12 @@
     <ul>
         <li><span class="parameter">name</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The name of the signal
+         The name of the signal.
         </li>
         <li><span class="parameter">...</span>
          Extra arguments for the callback functions. Each connected
-   function receives the object as first argument and then any extra arguments
-   that are given to emit_signal()
+   function receives the object as first argument and then any extra
+   arguments that are given to emit_signal().
         </li>
     </ul>
 
@@ -1406,11 +1406,11 @@
     <ul>
         <li><span class="parameter">name</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The name of the signal
+         The name of the signal.
         </li>
         <li><span class="parameter">func</span>
             <span class="types"><span class="type">function</span></span>
-         The callback to call when the signal is emitted
+         The callback to call when the signal is emitted.
         </li>
     </ul>
 
@@ -1424,8 +1424,10 @@
     <strong>wibox.layout.fixed:weak_connect_signal (name, func)</strong>
     </dt>
     <dd>
-    Connect to a signal weakly.  This allows the callback function to be garbage
- collected and automatically disconnects the signal when that happens.</p>
+    Connect to a signal weakly. </p>
+
+<p> This allows the callback function to be garbage collected and
+ automatically disconnects the signal when that happens.</p>
 
 <p> <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
@@ -1435,11 +1437,11 @@
     <ul>
         <li><span class="parameter">name</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The name of the signal
+         The name of the signal.
         </li>
         <li><span class="parameter">func</span>
             <span class="types"><span class="type">function</span></span>
-         The callback to call when the signal is emitted
+         The callback to call when the signal is emitted.
         </li>
     </ul>
 
