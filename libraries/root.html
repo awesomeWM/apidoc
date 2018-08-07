@@ -46,7 +46,6 @@
   <li><a href="../libraries/awful.hotkeys_popup.keys.termite.html">awful.hotkeys_popup.keys.termite</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.widget.html">awful.hotkeys_popup.widget</a></li>
   <li><a href="../libraries/awful.key.html">awful.key</a></li>
-  <li><a href="../libraries/awful.keygrabber.html">awful.keygrabber</a></li>
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
   <li><a href="../libraries/awful.menu.html">awful.menu</a></li>
   <li><a href="../libraries/awful.mouse.html">awful.mouse</a></li>
@@ -76,7 +75,6 @@
   <li><a href="../libraries/gears.surface.html">gears.surface</a></li>
   <li><a href="../libraries/gears.table.html">gears.table</a></li>
   <li><a href="../libraries/gears.wallpaper.html">gears.wallpaper</a></li>
-  <li><a href="../libraries/keygrabber.html">keygrabber</a></li>
   <li><a href="../libraries/menubar.html">menubar</a></li>
   <li><a href="../libraries/menubar.menu_gen.html">menubar.menu_gen</a></li>
   <li><a href="../libraries/menubar.utils.html">menubar.utils</a></li>
@@ -95,6 +93,7 @@
 <h2>Classes</h2>
 <ul class="nowrap">
   <li><a href="../classes/awful.button.html">awful.button</a></li>
+  <li><a href="../classes/awful.keygrabber.html">awful.keygrabber</a></li>
   <li><a href="../classes/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../classes/awful.tooltip.html">awful.tooltip</a></li>
   <li><a href="../classes/awful.wibar.html">awful.wibar</a></li>
@@ -192,7 +191,7 @@
 <table class="function_list">
 	<tr>
 	<td class="name" ><a href="#fake_input">fake_input (event_type, detail, x, y)</a></td>
-	<td class="summary">Send fake events.</td>
+	<td class="summary">Send fake keyboard or mouse events.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#keys">keys (keys_array)</a></td>
@@ -240,7 +239,73 @@
     <strong>fake_input (event_type, detail, x, y)</strong>
     </dt>
     <dd>
-    Send fake events.  Usually the currently focused client will get it.
+    <p>Send fake keyboard or mouse events. </p>
+
+<p> Usually the currently focused client or the keybindings will receive those
+ events. If a <code>keygrabber</code> or <a href="../libraries/mousegrabber.html#">mousegrabber</a> is running, then it will get them.</p>
+
+<p> Some keys have different names compared to the ones generally used in
+ Awesome. For example, Awesome uses &ldquo;modifier keys&rdquo; for keybindings using
+ their X11 names such as &ldquo;Control&rdquo; or &ldquo;Mod1&rdquo; (for &ldquo;Alt&rdquo;). These are not the
+ name of the key but is only the name of the modifier they represent. Some
+ modifiers are even present twice on some keyboard like the left and right
+ &ldquo;Shift&rdquo;. Here is a list of the &ldquo;real&rdquo; key names matching the modifiers in
+ <a href="../libraries/root.html#fake_input">fake_input</a>:</p>
+
+<p> <table>
+  <tr style='font-weight: bold;'>
+   <th align='center'>Modifier name </th>
+   <th align='center'>Key name</th>
+   <th align='center'>Other key name</th>
+  </tr>
+  <tr><td> Mod4</td><td align='center'> Super_L </td><td align='center'> Super_R </td></tr>
+  <tr><td> Control </td><td align='center'> Control_L </td><td align='center'> Control_R </td></tr>
+  <tr><td> Shift </td><td align='center'> Shift_L </td><td align='center'> Shift_R </td></tr>
+  <tr><td> Mod1</td><td align='center'> Alt_L </td><td align='center'> Alt_R </td></tr>
+ </table></p>
+
+<p> Note that this is valid for most of the modern &ldquo;western&rdquo; keyboard layouts.
+ Some older, custom or foreign layouts may break this convention.</p>
+
+<p> This function is very low level, to be more useful, it can be wrapped into
+ higher level constructs such as:</p>
+
+<p> <strong>Sending strings:</strong></p>
+
+<pre><code>local function send_string_to_client(s, c)
+    local old_c = client.focus
+    client.focus = c
+    for i=1, #s do
+        local char = s:sub(i,i)
+        root.fake_input('key_press'  , char)
+        root.fake_input('key_release', char)
+    end
+    client.focus = old_c
+end
+
+send_string_to_client('Hello world!')
+</code></pre>
+
+<p> Note that this example works for most ASCII inputs but may fail depending on
+ how the string is encoded. Some multi-byte characters may not represent
+ keys and some UTF-8 encoding format create characters by combining multiple
+ elements such as accent + base character or various escape sequences. If you
+ wish to use this example for &ldquo;real world&rdquo; i18n use cases, learning about
+ XKB event and UTF-8 encoding is a prerequisites.</p>
+
+<p> <strong>Clicking:</strong></p>
+
+<p> <img src="../images/mouse.svg" alt="Client geometry" /></p>
+
+<pre><code>local function click(button_id, x, y)
+    mouse.coords {x = x, y = y}
+    root.fake_input('button_press' , button_id)
+    root.fake_input('button_release', button_id)
+end
+
+click(1, 42, 42)
+</code></pre>
+
 
 
     <ul>
