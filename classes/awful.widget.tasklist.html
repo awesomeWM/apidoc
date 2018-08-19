@@ -34,6 +34,7 @@
 <ul>
 <li><a href="#Functions">Functions</a></li>
 <li><a href="#Theme_variables">Theme variables</a></li>
+<li><a href="#List_filters">List filters</a></li>
 </ul>
 
 
@@ -367,26 +368,6 @@ s.mytasklist = awful.widget.tasklist {
 	<td class="name" ><a href="#awful.tasklist">awful.tasklist (args, filter, buttons, style[, update_function[, base_widget]])</a></td>
 	<td class="summary">Create a new tasklist widget.</td>
 	</tr>
-	<tr>
-	<td class="name" ><a href="#tasklist.filter.allscreen">tasklist.filter.allscreen ()</a></td>
-	<td class="summary">Filtering function to include all clients.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#tasklist.filter.alltags">tasklist.filter.alltags (c, screen)</a></td>
-	<td class="summary">Filtering function to include the clients from all tags on the screen.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#tasklist.filter.currenttags">tasklist.filter.currenttags (c, screen)</a></td>
-	<td class="summary">Filtering function to include only the clients from currently selected tags.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#tasklist.filter.minimizedcurrenttags">tasklist.filter.minimizedcurrenttags (c, screen)</a></td>
-	<td class="summary">Filtering function to include only the minimized clients from currently selected tags.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#tasklist.filter.focused">tasklist.filter.focused (c, screen)</a></td>
-	<td class="summary">Filtering function to include only the currently focused client.</td>
-	</tr>
 </table>
 <h2><a href="#Theme_variables">Theme variables</a></h2>
 <table class="function_list">
@@ -521,6 +502,29 @@ s.mytasklist = awful.widget.tasklist {
 	<tr>
 	<td class="name" ><a href="#beautiful.tasklist_shape_border_color_urgent">beautiful.tasklist_shape_border_color_urgent</a></td>
 	<td class="summary">The urgent clients border color.</td>
+	</tr>
+</table>
+<h2><a href="#List_filters">List filters</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#awful.tasklist.filter.allscreen">awful.tasklist.filter.allscreen</a></td>
+	<td class="summary">Filtering function to include all clients.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.tasklist.filter.alltags">awful.tasklist.filter.alltags</a></td>
+	<td class="summary">Filtering function to include the clients from all tags on the screen.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.tasklist.filter.currenttags">awful.tasklist.filter.currenttags</a></td>
+	<td class="summary">Filtering function to include only the clients from currently selected tags.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.tasklist.filter.minimizedcurrenttags">awful.tasklist.filter.minimizedcurrenttags</a></td>
+	<td class="summary">Filtering function to include only the minimized clients from currently selected tags.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.tasklist.filter.focused">awful.tasklist.filter.focused</a></td>
+	<td class="summary">Filtering function to include only the currently focused client.</td>
 	</tr>
 </table>
 
@@ -791,133 +795,6 @@ s.mytasklist = awful.widget.tasklist {
         </li>
     </ul>
 
-
-
-
-
-</dd>
-    <dt>
-    <a name = "tasklist.filter.allscreen"></a>
-    <strong>tasklist.filter.allscreen ()</strong>
-    </dt>
-    <dd>
-    Filtering function to include all clients.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        true
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "tasklist.filter.alltags"></a>
-    <strong>tasklist.filter.alltags (c, screen)</strong>
-    </dt>
-    <dd>
-    Filtering function to include the clients from all tags on the screen.
-
-
-    <ul>
-        <li><span class="parameter">c</span>
-         The client.
-        </li>
-        <li><span class="parameter">screen</span>
-         The screen we are drawing on.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        true if c is on screen, false otherwise
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "tasklist.filter.currenttags"></a>
-    <strong>tasklist.filter.currenttags (c, screen)</strong>
-    </dt>
-    <dd>
-    Filtering function to include only the clients from currently selected tags.
-
-
-    <ul>
-        <li><span class="parameter">c</span>
-         The client.
-        </li>
-        <li><span class="parameter">screen</span>
-         The screen we are drawing on.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        true if c is in a selected tag on screen, false otherwise
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "tasklist.filter.minimizedcurrenttags"></a>
-    <strong>tasklist.filter.minimizedcurrenttags (c, screen)</strong>
-    </dt>
-    <dd>
-    Filtering function to include only the minimized clients from currently selected tags.
-
-
-    <ul>
-        <li><span class="parameter">c</span>
-         The client.
-        </li>
-        <li><span class="parameter">screen</span>
-         The screen we are drawing on.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        true if c is in a selected tag on screen and is minimized, false otherwise
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "tasklist.filter.focused"></a>
-    <strong>tasklist.filter.focused (c, screen)</strong>
-    </dt>
-    <dd>
-    Filtering function to include only the currently focused client.
-
-
-    <ul>
-        <li><span class="parameter">c</span>
-         The client.
-        </li>
-        <li><span class="parameter">screen</span>
-         The screen we are drawing on.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        true if c is focused on screen, false otherwise
-    </ol>
 
 
 
@@ -1731,6 +1608,112 @@ s.mytasklist = awful.widget.tasklist {
     <ul>
          <a href="../libraries/gears.color.html#">gears.color</a>
     </ul>
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="List_filters"></a>List filters</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awful.tasklist.filter.allscreen"></a>
+    <strong>awful.tasklist.filter.allscreen</strong>
+    </dt>
+    <dd>
+    Filtering function to include all clients.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.tasklist.filter.alltags"></a>
+    <strong>awful.tasklist.filter.alltags</strong>
+    </dt>
+    <dd>
+    Filtering function to include the clients from all tags on the screen.
+
+
+    <ul>
+        <li><span class="parameter">c</span>
+         The client.
+        </li>
+        <li><span class="parameter">screen</span>
+         The screen we are drawing on.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.tasklist.filter.currenttags"></a>
+    <strong>awful.tasklist.filter.currenttags</strong>
+    </dt>
+    <dd>
+    Filtering function to include only the clients from currently selected tags.
+
+
+    <ul>
+        <li><span class="parameter">c</span>
+         The client.
+        </li>
+        <li><span class="parameter">screen</span>
+         The screen we are drawing on.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.tasklist.filter.minimizedcurrenttags"></a>
+    <strong>awful.tasklist.filter.minimizedcurrenttags</strong>
+    </dt>
+    <dd>
+    Filtering function to include only the minimized clients from currently selected tags.
+
+
+    <ul>
+        <li><span class="parameter">c</span>
+         The client.
+        </li>
+        <li><span class="parameter">screen</span>
+         The screen we are drawing on.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.tasklist.filter.focused"></a>
+    <strong>awful.tasklist.filter.focused</strong>
+    </dt>
+    <dd>
+    Filtering function to include only the currently focused client.
+
+
+    <ul>
+        <li><span class="parameter">c</span>
+         The client.
+        </li>
+        <li><span class="parameter">screen</span>
+         The screen we are drawing on.
+        </li>
+    </ul>
+
+
+
 
 
 </dd>
