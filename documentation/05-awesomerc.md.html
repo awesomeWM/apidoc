@@ -967,12 +967,22 @@ root.keys(globalkeys)
 <pre>
 <span class="comment">-- Add titlebars to normal clients and dialogs
 </span>{ rule_any = {<span class="global">type</span> = { <span class="string">"normal"</span>, <span class="string">"dialog"</span> }
-  }, properties = { titlebars_enabled = <span class="keyword">true</span> }
-},
+</pre>
 
-<span class="comment">-- Set Firefox to always map on the tag named "2" on screen 1.
-</span><span class="comment">-- { rule = { class = "Firefox" },
-</span><span class="comment">--   properties = { screen = 1, tag = "2" } },</span>
+
+<p> For client side decorations, clients might request no titlebars via
+ Motif WM hints. To honor these hints, use:
+ <code>titlebars_enabled = function&copy; return c.requests_no_titlebar end</code></p>
+
+<p> See <a href="../classes/client.html#client.requests_no_titlebar">client.requests_no_titlebar</a> for more details.</p>
+
+<pre>
+}, properties = { titlebars_enabled = <span class="keyword">true</span> }
+
+
+ Set Firefox to always map on the tag named <span class="string">"2"</span> on screen <span class="number">1.</span>
+ { rule = { class = <span class="string">"Firefox"</span> },
+   properties = { screen = <span class="number">1</span>, tag = <span class="string">"2"</span> } },
 </pre>
 
 
