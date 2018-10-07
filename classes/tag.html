@@ -449,7 +449,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 	<td class="summary">View previous tag.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.tag.viewmore">awful.tag.viewmore (tags[, screen])</a></td>
+	<td class="name" ><a href="#awful.tag.viewmore">awful.tag.viewmore (tags[, screen[, maximum=#tags]])</a></td>
 	<td class="summary">View only a set of tags.</td>
 	</tr>
 	<tr>
@@ -914,7 +914,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a>
+         <a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a>
     </ul>
 
 
@@ -965,7 +965,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -998,7 +998,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
+         <a href="../classes/tag.html#tag.master_count">master_count</a>
     </ul>
 
 
@@ -1122,10 +1122,14 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.viewmore"></a>
-    <strong>awful.tag.viewmore (tags[, screen])</strong>
+    <strong>awful.tag.viewmore (tags[, screen[, maximum=#tags]])</strong>
     </dt>
     <dd>
-    View only a set of tags.
+    View only a set of tags. </p>
+
+<p> If <code>maximum</code> is set, there will be a limit on the number of new tag being
+ selected. The tags already selected do not count. To do nothing if one or
+ more of the tags are already selected, set <code>maximum</code> to zero.
 
 
     <ul>
@@ -1135,6 +1139,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
         <li><span class="parameter">screen</span>
          The screen of the tags.
          (<em>optional</em>)
+        </li>
+        <li><span class="parameter">maximum</span>
+            <span class="types"><span class="type">number</span></span>
+         The maximum number of tags to select.
+         (<em>default</em> #tags)
         </li>
     </ul>
 
@@ -1388,9 +1397,9 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#beautiful.master_count">master_count</a></li>
+         <li><a href="../classes/tag.html#tag.master_count">master_count</a></li>
          <li><a href="../classes/tag.html#beautiful.column_count">column_count</a></li>
-         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
+         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
     </ul>
 
@@ -1576,7 +1585,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 <ul>
 <li><em>expand</em>: Take all the space</li>
 <li><em>master_width_factor</em>: Only take the ratio defined by the
-<a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
+<a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
 </ul>
 
 
@@ -1763,7 +1772,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#request::urgent">client.urgent</a>
+         <a href="../classes/client.html#client.urgent">client.urgent</a>
     </ul>
 
 
@@ -1781,7 +1790,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/client.html#request::urgent">client.urgent</a>
+         <a href="../classes/client.html#client.urgent">client.urgent</a>
     </ul>
 
 
@@ -1845,7 +1854,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
+         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
          <li><a href="../classes/tag.html#tag.gap">gap</a></li>
     </ul>
 
@@ -1913,7 +1922,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 <ul>
 <li><em>expand</em>: Take all the space</li>
 <li><em>master_width_factor</em>: Only take the ratio defined by the
-<a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
+<a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
 </ul>
 
 
@@ -1930,7 +1939,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -1954,7 +1963,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
+         <a href="../classes/tag.html#tag.master_count">master_count</a>
     </ul>
 
 
@@ -2216,8 +2225,8 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
-         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
+         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
+         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
     </ul>
 
 
@@ -2242,8 +2251,8 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#beautiful.master_width_factor">master_width_factor</a></li>
-         <li><a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a></li>
+         <li><a href="../classes/tag.html#tag.master_width_factor">master_width_factor</a></li>
+         <li><a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a></li>
     </ul>
 
 
@@ -2414,7 +2423,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -2440,7 +2449,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_fill_policy">master_fill_policy</a>
+         <a href="../classes/tag.html#tag.master_fill_policy">master_fill_policy</a>
     </ul>
 
 
@@ -2469,7 +2478,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
+         <a href="../classes/tag.html#tag.master_count">master_count</a>
     </ul>
 
 
@@ -2494,7 +2503,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/tag.html#beautiful.master_count">master_count</a>
+         <a href="../classes/tag.html#tag.master_count">master_count</a>
     </ul>
 
 
