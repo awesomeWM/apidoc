@@ -198,7 +198,7 @@ any other unix shell language syntax</li>
  <code>bash</code>, <code>zsh</code>, <code>busybox sh</code> or <code>Debian ash</code>.</p>
 
 <p> If you wish to open a process in a terminal window, check that your terminal
- emulator supports the common <code>-e</code> option. If it does, then something like
+ emulator supports the common <a href="../libraries/awful.spawn.html#once">-e</a> option. If it does, then something like
  this should work:</p>
 
 <pre>
@@ -381,6 +381,18 @@ awful.spawn({<span class="string">"xdg-open"</span>, <span class="string">"/path
 	<tr>
 	<td class="name" ><a href="#read_lines">read_lines (input_stream, line_callback[, done_callback[, close=false]])</a></td>
 	<td class="summary">Read lines from a Gio input stream</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#once">once (cmd, rules[, matcher[, unique_id[, callback]]])</a></td>
+	<td class="summary">Spawn a command if it has not been spawned before.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#single_instance">single_instance (cmd, rules[, matcher[, unique_id[, callback]]])</a></td>
+	<td class="summary">Spawn a command if an instance is not already running.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#raise_or_spawn">raise_or_spawn (cmd, rules[, matcher[, unique_id[, callback]]])</a></td>
+	<td class="summary">Raise a client if it exists or spawn a new one then raise it.</td>
 	</tr>
 </table>
 
@@ -682,6 +694,176 @@ awful.spawn({<span class="string">"xdg-open"</span>, <span class="string">"/path
 
 
 
+
+
+</dd>
+    <dt>
+    <a name = "once"></a>
+    <strong>once (cmd, rules[, matcher[, unique_id[, callback]]])</strong>
+    </dt>
+    <dd>
+    Spawn a command if it has not been spawned before. </p>
+
+<p> This function tries its best to preserve the state across <code>awesome.restart()</code>.</p>
+
+<p> By default, when no <code>unique_id</code> is specified, this function will generate one by
+ hashing the command and its rules. If you have multiple instance of the same
+ command and rules, you need to specify an UID or only the first one will be
+ executed.</p>
+
+<p> The <a href="../libraries/awful.rules.html">rules</a> are standard <a href="../libraries/awful.rules.html#">awful.rules</a>.</p>
+
+<p> This function depends on the startup notification protocol to be correctly
+ implemented by the command. See <a href="../classes/client.html#client.startup_id">client.startup_id</a> for more information.
+ Note that this also wont work with shell or terminal commands.
+
+
+    <ul>
+        <li><span class="parameter">cmd</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The command.
+        </li>
+        <li><span class="parameter">rules</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The properties that need to be applied to the client.
+        </li>
+        <li><span class="parameter">matcher</span>
+            <span class="types"><span class="type">function</span></span>
+         A matching function to find the instance
+  among running clients.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">unique_id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         A string to identify the client so it isn&rsquo;t executed
+  multiple time.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">function</span></span>
+         A callback function when the client is created.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.rules.html#">awful.rules</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "single_instance"></a>
+    <strong>single_instance (cmd, rules[, matcher[, unique_id[, callback]]])</strong>
+    </dt>
+    <dd>
+    Spawn a command if an instance is not already running. </p>
+
+<p> This is like <a href="../libraries/awful.spawn.html#once">awful.spawn.once</a>, but will spawn new instances if the previous
+ has finished.</p>
+
+<p> The <a href="../libraries/awful.rules.html">rules</a> are standard <a href="../libraries/awful.rules.html#">awful.rules</a>.</p>
+
+<p> This function depends on the startup notification protocol to be correctly
+ implemented by the command. See <a href="../classes/client.html#client.startup_id">client.startup_id</a> for more information.
+ Note that this also wont work with shell or terminal commands.</p>
+
+<p> Note that multiple instances can still be spawned if the command is called
+ faster than the client has time to start.
+
+
+    <ul>
+        <li><span class="parameter">cmd</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The command.
+        </li>
+        <li><span class="parameter">rules</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The properties that need to be applied to the client.
+        </li>
+        <li><span class="parameter">matcher</span>
+            <span class="types"><span class="type">function</span></span>
+         A matching function to find the instance
+  among running clients.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">unique_id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         A string to identify the client so it isn&rsquo;t executed
+  multiple time.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">function</span></span>
+         A callback function when the client is created.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.rules.html#">awful.rules</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "raise_or_spawn"></a>
+    <strong>raise_or_spawn (cmd, rules[, matcher[, unique_id[, callback]]])</strong>
+    </dt>
+    <dd>
+    Raise a client if it exists or spawn a new one then raise it. </p>
+
+<p> This function depends on the startup notification protocol to be correctly
+ implemented by the command. See <a href="../classes/client.html#client.startup_id">client.startup_id</a> for more information.
+ Note that this also wont work with shell or terminal commands.
+
+
+    <ul>
+        <li><span class="parameter">cmd</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The command.
+        </li>
+        <li><span class="parameter">rules</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The properties that need to be applied to the client.
+        </li>
+        <li><span class="parameter">matcher</span>
+            <span class="types"><span class="type">function</span></span>
+         A matching function to find the instance
+  among running clients.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">unique_id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         A string to identify the client so it isn&rsquo;t executed
+  multiple time.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">function</span></span>
+         A callback function when the client is created.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/client.html#">client</a></span>
+        The client if it already exists.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.rules.html#">awful.rules</a>
+    </ul>
 
 
 </dd>

@@ -311,10 +311,6 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
  the given index, all clients that match a given criteria.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.client.run_or_raise">awful.client.run_or_raise (cmd, matcher, merge)</a></td>
-	<td class="summary">Switch to a client matching the given condition if running, else spawn it.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#awful.client.focus.history.disable_tracking">awful.client.focus.history.disable_tracking ()</a></td>
 	<td class="summary">Disable history tracking.</td>
 	</tr>
@@ -769,6 +765,10 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 	<tr>
 	<td class="name" ><a href="#awful.client.property.set">awful.client.property.set</a> <i class="deprecated_label">[deprecated]</i><a></a></td>
 	<td class="summary">Set a client property.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.client.run_or_raise">awful.client.run_or_raise</a> <i class="deprecated_label">[deprecated]</i><a></a></td>
+	<td class="summary">Switch to a client matching the given condition if running, else spawn it.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#awful.client.get_transient_for_matching">awful.client.get_transient_for_matching</a> <i class="deprecated_label">[deprecated]</i><a></a></td>
@@ -1259,46 +1259,6 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 <span class="keyword">for</span> c <span class="keyword">in</span> awful.client.iterate(urxvt) <span class="keyword">do</span>
   c.minimized = <span class="keyword">false</span>
 <span class="keyword">end</span></pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "awful.client.run_or_raise"></a>
-    <strong>awful.client.run_or_raise (cmd, matcher, merge)</strong>
-    </dt>
-    <dd>
-    Switch to a client matching the given condition if running, else spawn it.
- If multiple clients match the given condition then the next one is
- focussed.
-
-
-    <ul>
-        <li><span class="parameter">cmd</span>
-         the command to execute
-        </li>
-        <li><span class="parameter">matcher</span>
-         a function that returns true to indicate a matching client
-        </li>
-        <li><span class="parameter">merge</span>
-            <span class="types"><span class="type">bool</span> or <span class="type">function</span></span>
-         If true then merge tags (select the client&rsquo;s
-   first tag additionally) when the client is not visible.
-   If it is a function, it will be called with the client as argument.
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="comment">-- run or raise urxvt (perhaps, with tabs) on modkey + semicolon
-</span>awful.key({ modkey, }, <span class="string">'semicolon'</span>, <span class="keyword">function</span> ()
-    <span class="keyword">local</span> matcher = <span class="keyword">function</span> (c)
-        <span class="keyword">return</span> awful.rules.match(c, {class = <span class="string">'URxvt'</span>})
-    <span class="keyword">end</span>
-    awful.client.run_or_raise(<span class="string">'urxvt'</span>, matcher)
-<span class="keyword">end</span>);</pre>
     </ul>
 
 </dd>
@@ -4394,6 +4354,53 @@ change (from <a href="../classes/client.html#awful.client.swap.bydirection">awfu
 
 
 
+
+</dd>
+    <dt>
+    <a name = "awful.client.run_or_raise"></a>
+    <strong>awful.client.run_or_raise</a> <i class="deprecated_label">[deprecated]</i><a></strong>
+    </dt>
+    <dd>
+    Switch to a client matching the given condition if running, else spawn it.
+ If multiple clients match the given condition then the next one is
+ focussed.
+
+
+    <h3>param:</h3>
+    <ul>
+        <li><span class="parameter">cmd</span>
+         the command to execute
+        </li>
+        <li><span class="parameter">matcher</span>
+         a function that returns true to indicate a matching client
+        </li>
+        <li><span class="parameter">merge</span>
+            <span class="types"><span class="type">bool</span> or <span class="type">function</span></span>
+         If true then merge tags (select the client&rsquo;s
+   first tag additionally) when the client is not visible.
+   If it is a function, it will be called with the client as argument.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.spawn.html#once">awful.spawn.once</a></li>
+         <li><a href="../libraries/awful.spawn.html#single_instance">awful.spawn.single_instance</a></li>
+         <li><a href="../libraries/awful.spawn.html#raise_or_spawn">awful.spawn.raise_or_spawn</a></li>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="comment">-- run or raise urxvt (perhaps, with tabs) on modkey + semicolon
+</span>awful.key({ modkey, }, <span class="string">'semicolon'</span>, <span class="keyword">function</span> ()
+    <span class="keyword">local</span> matcher = <span class="keyword">function</span> (c)
+        <span class="keyword">return</span> awful.rules.match(c, {class = <span class="string">'URxvt'</span>})
+    <span class="keyword">end</span>
+    awful.client.run_or_raise(<span class="string">'urxvt'</span>, matcher)
+<span class="keyword">end</span>);</pre>
+    </ul>
 
 </dd>
     <dt>
