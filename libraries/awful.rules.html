@@ -91,6 +91,7 @@
 <h2>Sample files</h2>
 <ul class="nowrap">
   <li><a href="../sample files/rc.lua.html">rc.lua</a></li>
+  <li><a href="../sample files/theme.lua.html">theme.lua</a></li>
 </ul>
 <h2>Classes</h2>
 <ul class="nowrap">
@@ -187,19 +188,199 @@
  to add random properties that will be later accessible as <code>c.property_name</code>
  (where <code>c</code> is a valid client object)</p>
 
-<p> In addition to the existing properties, the following are supported:</p>
+<p> Syntax
+ ===
+ You should fill this table with your rule and properties to apply.
+ For example, if you want to set xterm maximized at startup, you can add:</p>
 
-<ul>
-<li>placement</li>
-<li>honor_padding</li>
-<li>honor_workarea</li>
-<li>tag</li>
-<li>new_tag</li>
-<li>switch_to_tags (also called switchtotag)</li>
-<li>focus</li>
-<li>titlebars_enabled</li>
-<li>callback</li>
-</ul>
+<pre>
+{ rule = { class = <span class="string">"xterm"</span> },
+  properties = { maximized_vertical = <span class="keyword">true</span>, maximized_horizontal = <span class="keyword">true</span> } }
+</pre>
+
+
+<p> If you want to set mplayer floating at startup, you can add:</p>
+
+<pre>
+{ rule = { name = <span class="string">"MPlayer"</span> },
+  properties = { floating = <span class="keyword">true</span> } }
+</pre>
+
+
+<p> If you want to put Firefox on a specific tag at startup, you can add:</p>
+
+<pre>
+{ rule = { instance = <span class="string">"firefox"</span> },
+  properties = { tag = mytagobject } }
+</pre>
+
+
+<p> Alternatively, you can specify the tag by name:</p>
+
+<pre>
+{ rule = { instance = <span class="string">"firefox"</span> },
+  properties = { tag = <span class="string">"3"</span> } }
+</pre>
+
+
+<p> If you want to put Thunderbird on a specific screen at startup, use:</p>
+
+<pre>
+{ rule = { instance = <span class="string">"Thunderbird"</span> },
+  properties = { screen = <span class="number">1</span> } }
+</pre>
+
+
+<p> Assuming that your X11 server supports the RandR extension, you can also specify
+ the screen by name:</p>
+
+<pre>
+{ rule = { instance = <span class="string">"Thunderbird"</span> },
+  properties = { screen = <span class="string">"VGA1"</span> } }
+</pre>
+
+
+<p> If you want to put Emacs on a specific tag at startup, and immediately switch
+ to that tag you can add:</p>
+
+<pre>
+{ rule = { class = <span class="string">"Emacs"</span> },
+  properties = { tag = mytagobject, switchtotag = <span class="keyword">true</span> } }
+</pre>
+
+
+<p> If you want to apply a custom callback to execute when a rule matched,
+ for example to pause playing music from mpd when you start dosbox, you
+ can add:</p>
+
+<pre>
+{ rule = { class = <span class="string">"dosbox"</span> },
+  callback = <span class="keyword">function</span>(c)
+     awful.spawn(<span class="string">'mpc pause'</span>)
+  <span class="keyword">end</span> }
+</pre>
+
+
+<p> Note that all &ldquo;rule&rdquo; entries need to match. If any of the entry does not
+ match, the rule won&rsquo;t be applied.</p>
+
+<p> If a client matches multiple rules, they are applied in the order they are
+ put in this global rules table. If the value of a rule is a string, then the
+ match function is used to determine if the client matches the rule.</p>
+
+<p> If the value of a property is a function, that function gets called and
+ function&rsquo;s return value is used for the property.</p>
+
+<p> To match multiple clients to a rule one need to use slightly different
+ syntax:</p>
+
+<pre>
+{ rule_any = { class = { <span class="string">"MPlayer"</span>, <span class="string">"Nitrogen"</span> }, instance = { <span class="string">"xterm"</span> } },
+  properties = { floating = <span class="keyword">true</span> } }
+</pre>
+
+
+<p> To match multiple clients with an exception one can couple <code>rules.except</code> or
+ <code>rules.except_any</code> with the rules:</p>
+
+<pre>
+{ rule = { class = <span class="string">"Firefox"</span> },
+  except = { instance = <span class="string">"Navigator"</span> },
+  properties = {floating = <span class="keyword">true</span>},
+},
+
+{ rule_any = { class = { <span class="string">"Pidgin"</span>, <span class="string">"Xchat"</span> } },
+  except_any = { role = { <span class="string">"conversation"</span> } },
+  properties = { tag = <span class="string">"1"</span> }
+}
+
+{ rule = {},
+  except_any = { class = { <span class="string">"Firefox"</span>, <span class="string">"Vim"</span> } },
+  properties = { floating = <span class="keyword">true</span> }
+}
+</pre>
+
+
+<p> Applicable client properties
+ ===</p>
+
+<p> The table below holds the list of default client properties along with
+ some extra properties that are specific to the rules. Note that any property
+ can be set in the rules and interpreted by user provided code. This table
+ only represent those offered by default.</p>
+
+<table class='widget_list' border=1>
+ <tr>
+  <th align='center'>Name</th>
+  <th align='center'>Description</th>
+ </tr>
+   <tr><td><a href='../classes/client.html#client.placement'>placement</a></td><td>The client default placement on the screen</td></tr>
+   <tr><td><a href='../classes/client.html#client.honor_padding'>honor\_padding</a></td><td>When applying the placement, honor the screen padding</td></tr>
+   <tr><td><a href='../classes/client.html#client.honor_workarea'>honor\_workarea</a></td><td>When applying the placement, honor the screen work area</td></tr>
+   <tr><td><a href='../classes/client.html#client.tag'>tag</a></td><td>The client default tag</td></tr>
+   <tr><td><a href='../classes/client.html#client.tags'>tags</a></td><td>The client default tags</td></tr>
+   <tr><td><a href='../classes/client.html#client.new_tag'>new\_tag</a></td><td>Create a new tag for this client</td></tr>
+   <tr><td><a href='../classes/client.html#client.switch_to_tags'>switch\_to\_tags</a></td><td>Unselect the current tags and select this client tags</td></tr>
+   <tr><td><a href='../classes/client.html#client.focus'>focus</a></td><td>Define if the client should grab focus by default</td></tr>
+   <tr><td><a href='../classes/client.html#client.titlebars_enabled'>titlebars\_enabled</a></td><td>Should this client have a titlebar by default</td></tr>
+   <tr><td><a href='../classes/client.html#client.callback'>callback</a></td><td>A function to call when this client is ready</td></tr>
+   <tr><td><a href='../classes/client.html#client.marked'>marked</a></td><td>If a client is marked or not</td></tr>
+   <tr><td><a href='../classes/client.html#client.is_fixed'>is\_fixed</a></td><td>Return if a client has a fixed size or not</td></tr>
+   <tr><td><a href='../classes/client.html#client.immobilized'>immobilized</a></td><td>Is the client immobilized horizontally?</td></tr>
+   <tr><td><a href='../classes/client.html#client.immobilized'>immobilized</a></td><td>Is the client immobilized vertically?</td></tr>
+   <tr><td><a href='../classes/client.html#client.floating'>floating</a></td><td>The client floating state</td></tr>
+   <tr><td><a href='../classes/client.html#client.x'>x</a></td><td>The x coordinates</td></tr>
+   <tr><td><a href='../classes/client.html#client.y'>y</a></td><td>The y coordinates</td></tr>
+   <tr><td><a href='../classes/client.html#client.width'>width</a></td><td>The width of the client</td></tr>
+   <tr><td><a href='../classes/client.html#client.height'>height</a></td><td>The height of the client</td></tr>
+   <tr><td><a href='../classes/client.html#client.dockable'>dockable</a></td><td>If the client is dockable</td></tr>
+   <tr><td><a href='../classes/client.html#client.requests_no_titlebar'>requests\_no\_titlebar</a></td><td>If the client requests not to be decorated with a titlebar</td></tr>
+   <tr><td><a href='../classes/client.html#client.shape'>shape</a></td><td>Set the client shape</td></tr>
+   <tr><td><a href='../classes/client.html#client.window'>window</a></td><td>The X window id</td></tr>
+   <tr><td><a href='../classes/client.html#client.name'>name</a></td><td>The client title</td></tr>
+   <tr><td><a href='../classes/client.html#client.skip_taskbar'>skip\_taskbar</a></td><td>True if the client does not want to be in taskbar</td></tr>
+   <tr><td><a href='../classes/client.html#client.type'>type</a></td><td>The window type</td></tr>
+   <tr><td><a href='../classes/client.html#client.class'>class</a></td><td>The client class</td></tr>
+   <tr><td><a href='../classes/client.html#client.instance'>instance</a></td><td>The client instance</td></tr>
+   <tr><td><a href='../classes/client.html#client.pid'>pid</a></td><td>The client PID, if available</td></tr>
+   <tr><td><a href='../classes/client.html#client.role'>role</a></td><td>The window role, if available</td></tr>
+   <tr><td><a href='../classes/client.html#client.machine'>machine</a></td><td>The machine client is running on</td></tr>
+   <tr><td><a href='../classes/client.html#client.icon_name'>icon\_name</a></td><td>The client name when iconified</td></tr>
+   <tr><td><a href='../classes/client.html#client.icon'>icon</a></td><td>The client icon as a surface</td></tr>
+   <tr><td><a href='../classes/client.html#client.icon_sizes'>icon\_sizes</a></td><td>The available sizes of client icons</td></tr>
+   <tr><td><a href='../classes/client.html#client.screen'>screen</a></td><td>Client screen</td></tr>
+   <tr><td><a href='../classes/client.html#client.hidden'>hidden</a></td><td>Define if the client must be hidden, i</td></tr>
+   <tr><td><a href='../classes/client.html#client.minimized'>minimized</a></td><td>Define it the client must be iconify, i</td></tr>
+   <tr><td><a href='../classes/client.html#client.size_hints_honor'>size\_hints\_honor</a></td><td>Honor size hints, e</td></tr>
+   <tr><td><a href='../classes/client.html#client.border_width'>border\_width</a></td><td>The client border width</td></tr>
+   <tr><td><a href='../classes/client.html#client.border_color'>border\_color</a></td><td>The client border color</td></tr>
+   <tr><td><a href='../classes/client.html#client.urgent'>urgent</a></td><td>The client urgent state</td></tr>
+   <tr><td><a href='../classes/client.html#client.content'>content</a></td><td>A cairo surface for the client window content</td></tr>
+   <tr><td><a href='../classes/client.html#client.opacity'>opacity</a></td><td>The client opacity</td></tr>
+   <tr><td><a href='../classes/client.html#client.ontop'>ontop</a></td><td>The client is on top of every other windows</td></tr>
+   <tr><td><a href='../classes/client.html#client.above'>above</a></td><td>The client is above normal windows</td></tr>
+   <tr><td><a href='../classes/client.html#client.below'>below</a></td><td>The client is below normal windows</td></tr>
+   <tr><td><a href='../classes/client.html#client.fullscreen'>fullscreen</a></td><td>The client is fullscreen or not</td></tr>
+   <tr><td><a href='../classes/client.html#client.maximized'>maximized</a></td><td>The client is maximized (horizontally and vertically) or not</td></tr>
+   <tr><td><a href='../classes/client.html#client.maximized_horizontal'>maximized\_horizontal</a></td><td>The client is maximized horizontally or not</td></tr>
+   <tr><td><a href='../classes/client.html#client.maximized_vertical'>maximized\_vertical</a></td><td>The client is maximized vertically or not</td></tr>
+   <tr><td><a href='../classes/client.html#client.transient_for'>transient\_for</a></td><td>The client the window is transient for</td></tr>
+   <tr><td><a href='../classes/client.html#client.group_window'>group\_window</a></td><td>Window identification unique to a group of windows</td></tr>
+   <tr><td><a href='../classes/client.html#client.leader_window'>leader\_window</a></td><td>Identification unique to windows spawned by the same command</td></tr>
+   <tr><td><a href='../classes/client.html#client.size_hints'>size\_hints</a></td><td>A table with size hints of the client</td></tr>
+   <tr><td><a href='../classes/client.html#client.motif_wm_hints'>motif\_wm\_hints</a></td><td>The motif WM hints of the client</td></tr>
+   <tr><td><a href='../classes/client.html#client.sticky'>sticky</a></td><td>Set the client sticky, i</td></tr>
+   <tr><td><a href='../classes/client.html#client.modal'>modal</a></td><td>Indicate if the client is modal</td></tr>
+   <tr><td><a href='../classes/client.html#client.focusable'>focusable</a></td><td>True if the client can receive the input focus</td></tr>
+   <tr><td><a href='../classes/client.html#client.shape_bounding'>shape\_bounding</a></td><td>The client's bounding shape as set by awesome as a (native) cairo surface</td></tr>
+   <tr><td><a href='../classes/client.html#client.shape_clip'>shape\_clip</a></td><td>The client's clip shape as set by awesome as a (native) cairo surface</td></tr>
+   <tr><td><a href='../classes/client.html#client.shape_input'>shape\_input</a></td><td>The client's input shape as set by awesome as a (native) cairo surface</td></tr>
+   <tr><td><a href='../classes/client.html#client.client_shape_bounding'>client\_shape\_bounding</a></td><td>The client's bounding shape as set by the program as a (native) cairo surface</td></tr>
+   <tr><td><a href='../classes/client.html#client.client_shape_clip'>client\_shape\_clip</a></td><td>The client's clip shape as set by the program as a (native) cairo surface</td></tr>
+   <tr><td><a href='../classes/client.html#client.startup_id'>startup\_id</a></td><td>The FreeDesktop StartId</td></tr>
+   <tr><td><a href='../classes/client.html#client.valid'>valid</a></td><td>If the client that this object refers to is still managed by awesome</td></tr>
+   <tr><td><a href='../classes/client.html#client.first_tag'>first\_tag</a></td><td>The first tag of the client</td></tr>
+ </table>
 
 </p>
     <h3>Info:</h3>
@@ -242,10 +423,6 @@
 	<tr>
 	<td class="name" ><a href="#apply">apply (c)</a></td>
 	<td class="summary">Apply awful.rules.rules to a client.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#rules.high_priority_properties.new_tag">rules.high_priority_properties.new_tag (c, value, props)</a></td>
-	<td class="summary">Create a new tag based on a rule.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#execute">execute (c, props[, callbacks])</a></td>
@@ -304,7 +481,7 @@
 
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
+            <span class="types"><a class="type" href="../classes/client.html#awful.object">client.object</a></span>
          The client.
         </li>
         <li><span class="parameter">rule</span>
@@ -334,7 +511,7 @@
 
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
+            <span class="types"><a class="type" href="../classes/client.html#awful.object">client.object</a></span>
          The client.
         </li>
         <li><span class="parameter">rule</span>
@@ -364,7 +541,7 @@
 
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
+            <span class="types"><a class="type" href="../classes/client.html#awful.object">client.object</a></span>
          The client.
         </li>
         <li><span class="parameter">entry</span>
@@ -396,7 +573,7 @@
 
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
+            <span class="types"><a class="type" href="../classes/client.html#awful.object">client.object</a></span>
          The client.
         </li>
         <li><span class="parameter">_rules</span>
@@ -427,7 +604,7 @@
 
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
+            <span class="types"><a class="type" href="../classes/client.html#awful.object">client.object</a></span>
          The client.
         </li>
         <li><span class="parameter">_rules</span>
@@ -480,7 +657,7 @@
  upward everytime Awesome is restarted. A rule source <em>cannot</em> change this.
  It is up to the callback to be aware of the dependencies and avoid to
  introduce issues. For example, if the source wants to set a <a href="../classes/screen.html#">screen</a>, it has
- to check if the <a href="../classes/tag.html#">tag</a>, <code>tags</code> or <a href="../libraries/awful.rules.html#rules.high_priority_properties.new_tag">new_tag</a> are on that <a href="../classes/screen.html#">screen</a> or remove
+ to check if the <a href="../classes/tag.html#">tag</a>, <code>tags</code> or <code>new_tag</code> are on that <a href="../classes/screen.html#">screen</a> or remove
  those properties. Otherwise, they will be ignored once the rule is applied.
 
 
@@ -567,45 +744,11 @@
 
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
+            <span class="types"><a class="type" href="../classes/client.html#awful.object">client.object</a></span>
          The client.
         </li>
     </ul>
 
-
-
-
-
-</dd>
-    <dt>
-    <a name = "rules.high_priority_properties.new_tag"></a>
-    <strong>rules.high_priority_properties.new_tag (c, value, props)</strong>
-    </dt>
-    <dd>
-    Create a new tag based on a rule.
-
-
-    <ul>
-        <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#">client</a></span>
-         The client
-        </li>
-        <li><span class="parameter">value</span>
-            <span class="types"><span class="type">boolean</span>, <span class="type">function</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The value.
-        </li>
-        <li><span class="parameter">props</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The properties.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="../classes/tag.html#">tag</a></span>
-        The new tag
-    </ol>
 
 
 
@@ -621,7 +764,7 @@
 
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#client.object">client.object</a></span>
+            <span class="types"><a class="type" href="../classes/client.html#awful.object">client.object</a></span>
          The client.
         </li>
         <li><span class="parameter">props</span>
@@ -722,99 +865,7 @@
     <strong>rules</strong>
     </dt>
     <dd>
-    <p>This is the global rules table. </p>
-
-<p>You should fill this table with your rule and properties to apply.
-For example, if you want to set xterm maximized at startup, you can add:</p>
-
-<pre><code>{ rule = { class = "xterm" },
-  properties = { maximized_vertical = true, maximized_horizontal = true } }
-</code></pre>
-
-<p>If you want to set mplayer floating at startup, you can add:</p>
-
-<pre><code>{ rule = { name = "MPlayer" },
-  properties = { floating = true } }
-</code></pre>
-
-<p>If you want to put Firefox on a specific tag at startup, you can add:</p>
-
-<pre><code>{ rule = { instance = "firefox" },
-  properties = { tag = mytagobject } }
-</code></pre>
-
-<p>Alternatively, you can specify the tag by name:</p>
-
-<pre><code>{ rule = { instance = "firefox" },
-  properties = { tag = "3" } }
-</code></pre>
-
-<p>If you want to put Thunderbird on a specific screen at startup, use:</p>
-
-<pre><code>{ rule = { instance = "Thunderbird" },
-  properties = { screen = 1 } }
-</code></pre>
-
-<p>Assuming that your X11 server supports the RandR extension, you can also specify
-the screen by name:</p>
-
-<pre><code>{ rule = { instance = "Thunderbird" },
-  properties = { screen = "VGA1" } }
-</code></pre>
-
-<p>If you want to put Emacs on a specific tag at startup, and immediately switch
-to that tag you can add:</p>
-
-<pre><code>{ rule = { class = "Emacs" },
-  properties = { tag = mytagobject, switch_to_tags = true } }
-</code></pre>
-
-<p>If you want to apply a custom callback to execute when a rule matched,
-for example to pause playing music from mpd when you start dosbox, you
-can add:</p>
-
-<pre><code>{ rule = { class = "dosbox" },
-  callback = function(c)
-     awful.spawn('mpc pause')
-  end }
-</code></pre>
-
-<p>Note that all &ldquo;rule&rdquo; entries need to match. If any of the entry does not
-match, the rule won&rsquo;t be applied.</p>
-
-<p>If a client matches multiple rules, they are applied in the order they are
-put in this global rules table. If the value of a rule is a string, then the
-match function is used to determine if the client matches the rule.</p>
-
-<p>If the value of a property is a function, that function gets called and
-function&rsquo;s return value is used for the property.</p>
-
-<p>To match multiple clients to a rule one need to use slightly different
-syntax:</p>
-
-<pre><code>{ rule_any = { class = { "MPlayer", "Nitrogen" }, instance = { "xterm" } },
-  properties = { floating = true } }
-</code></pre>
-
-<p>To match multiple clients with an exception one can couple <code>rules.except</code> or
-<code>rules.except_any</code> with the rules:</p>
-
-<pre><code>{ rule = { class = "Firefox" },
-  except = { instance = "Navigator" },
-  properties = {floating = true},
-},
-
-{ rule_any = { class = { "Pidgin", "Xchat" } },
-  except_any = { role = { "conversation" } },
-  properties = { tag = "1" }
-}
-
-{ rule = {},
-  except_any = { class = { "Firefox", "Vim" } },
-  properties = { floating = true }
-}
-</code></pre>
-
+    This is the global rules table.
 
 
 

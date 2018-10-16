@@ -105,6 +105,7 @@
 <h2>Sample files</h2>
 <ul class="nowrap">
   <li><a href="../sample files/rc.lua.html">rc.lua</a></li>
+  <li><a href="../sample files/theme.lua.html">theme.lua</a></li>
 </ul>
 <h2>Classes</h2>
 <ul class="nowrap">
@@ -185,13 +186,15 @@
 
 <p>Beautiful is where Awesome theme variables are stored.</p>
 
-<br \><br \><table class='widget_list' border=1>
+<br /><br />
 
 
-<p> <tr style='font-weight: bold;'>
-  <th align='center'>Name</th>
-  <th align='center'>Description</th>
- </tr>  <tr><td><a href='../libraries/awful.client.html#beautiful.border_marked'>border_marked</a></td><td>The border color when the client is focused</td></tr>
+<p>&mdash;<table class='widget_list' border=1>
+<tr>
+ <th align='center'>Name</th>
+ <th align='center'>Description</th>
+</tr>
+  <tr><td><a href='../libraries/awful.client.html#beautiful.border_marked'>border_marked</a></td><td>The border color when the client is focused</td></tr>
   <tr><td><a href='../libraries/awful.ewmh.html#beautiful.maximized_honor_padding'>maximized_honor_padding</a></td><td>Honor the screen padding when maximizing</td></tr>
   <tr><td><a href='../libraries/awful.ewmh.html#beautiful.fullscreen_hide_border'>fullscreen_hide_border</a></td><td>Hide the border on fullscreen clients</td></tr>
   <tr><td><a href='../libraries/awful.ewmh.html#beautiful.maximized_hide_border'>maximized_hide_border</a></td><td>Hide the border on maximized clients</td></tr>
@@ -518,6 +521,9 @@
   <tr><td><a href='../classes/wibox.widget.systray.html#beautiful.bg_systray'>bg_systray</a></td><td>The systray background color</td></tr>
   <tr><td><a href='../classes/wibox.widget.systray.html#beautiful.systray_icon_spacing'>systray_icon_spacing</a></td><td>The systray icon spacing</td></tr>
   <tr><td><a href='../classes/wibox.widget.textbox.html#beautiful.font'>font</a></td><td>The textbox font</td></tr>
+  <tr><td><a href='../classes/client.html#beautiful.border_focus'>border_focus</a></td><td>The border color when the client is focused</td></tr>
+  <tr><td><a href='../classes/client.html#beautiful.border_normal'>border_normal</a></td><td>The border color when the client is not focused</td></tr>
+  <tr><td><a href='../classes/client.html#beautiful.border_width'>border_width</a></td><td>The client border width</td></tr>
 </table></p>
 
 <p><a name="Sample_theme_file"></a></p>
@@ -528,397 +534,408 @@
 <span class="keyword">local</span> theme = {}
 
 <span class="comment">-- Default variables
-</span><span class="comment">-- theme.border_marked = nil
-</span><span class="comment">-- theme.useless_gap = nil
-</span><span class="comment">-- theme.bg_normal = nil
-</span><span class="comment">-- theme.fg_normal = nil
 </span><span class="comment">-- theme.font = nil
-</span><span class="comment">-- theme.bg_normal = nil
-</span><span class="comment">-- theme.bg_focus = nil
-</span><span class="comment">-- theme.bg_urgent = nil
-</span><span class="comment">-- theme.bg_minimize = nil
-</span><span class="comment">-- theme.bg_systray = nil
-</span><span class="comment">-- theme.fg_normal = nil
-</span><span class="comment">-- theme.fg_focus = nil
-</span><span class="comment">-- theme.fg_urgent = nil
-</span><span class="comment">-- theme.fg_minimize = nil
-</span><span class="comment">-- theme.useless_gap = nil
-</span><span class="comment">-- theme.border_width = nil
-</span><span class="comment">-- theme.border_normal = nil
-</span><span class="comment">-- theme.border_focus = nil
-</span><span class="comment">-- theme.border_marked = nil
 </span><span class="comment">-- theme.wallpaper = nil
-</span><span class="comment">-- theme.bg_normal = nil
-</span><span class="comment">-- theme.fg_normal = nil
-</span><span class="comment">-- theme.bg_systray = nil
 </span><span class="comment">-- theme.font = nil
 </span>
-<span class="comment">-- arcchart
-</span><span class="comment">-- theme.arcchart_border_color = nil
-</span><span class="comment">-- theme.arcchart_color = nil
-</span><span class="comment">-- theme.arcchart_border_width = nil
-</span><span class="comment">-- theme.arcchart_paddings = nil
-</span><span class="comment">-- theme.arcchart_thickness = nil
+<span class="comment">-- arcchart\
+</span><span class="comment">-- theme.arcchart\_border\_color = nil
+</span><span class="comment">-- theme.arcchart\_color = nil
+</span><span class="comment">-- theme.arcchart\_border\_width = nil
+</span><span class="comment">-- theme.arcchart\_paddings = nil
+</span><span class="comment">-- theme.arcchart\_thickness = nil
 </span>
-<span class="comment">-- awesome
-</span><span class="comment">-- theme.awesome_icon = nil
+<span class="comment">-- awesome\
+</span><span class="comment">-- theme.awesome\_icon = nil
 </span>
-<span class="comment">-- calendar
-</span><span class="comment">-- theme.calendar_style = nil
-</span><span class="comment">-- theme.calendar_font = nil
-</span><span class="comment">-- theme.calendar_spacing = nil
-</span><span class="comment">-- theme.calendar_week_numbers = nil
-</span><span class="comment">-- theme.calendar_start_sunday = nil
-</span><span class="comment">-- theme.calendar_long_weekdays = nil
+<span class="comment">-- bg\
+</span><span class="comment">-- theme.bg\_normal = nil
+</span><span class="comment">-- theme.bg\_normal = nil
+</span><span class="comment">-- theme.bg\_focus = nil
+</span><span class="comment">-- theme.bg\_urgent = nil
+</span><span class="comment">-- theme.bg\_minimize = nil
+</span><span class="comment">-- theme.bg\_systray = nil
+</span><span class="comment">-- theme.bg\_normal = nil
+</span><span class="comment">-- theme.bg\_systray = nil
 </span>
-<span class="comment">-- checkbox
-</span><span class="comment">-- theme.checkbox_border_width = nil
-</span><span class="comment">-- theme.checkbox_bg = nil
-</span><span class="comment">-- theme.checkbox_border_color = nil
-</span><span class="comment">-- theme.checkbox_check_border_color = nil
-</span><span class="comment">-- theme.checkbox_check_border_width = nil
-</span><span class="comment">-- theme.checkbox_check_color = nil
-</span><span class="comment">-- theme.checkbox_shape = nil
-</span><span class="comment">-- theme.checkbox_check_shape = nil
-</span><span class="comment">-- theme.checkbox_paddings = nil
-</span><span class="comment">-- theme.checkbox_color = nil
+<span class="comment">-- border\
+</span><span class="comment">-- theme.border\_marked = nil
+</span><span class="comment">-- theme.border\_width = nil
+</span><span class="comment">-- theme.border\_normal = nil
+</span><span class="comment">-- theme.border\_focus = nil
+</span><span class="comment">-- theme.border\_marked = nil
+</span><span class="comment">-- theme.border\_focus = nil
+</span><span class="comment">-- theme.border\_normal = nil
+</span><span class="comment">-- theme.border\_width = nil
 </span>
-<span class="comment">-- column
-</span><span class="comment">-- theme.column_count = nil
+<span class="comment">-- calendar\
+</span><span class="comment">-- theme.calendar\_style = nil
+</span><span class="comment">-- theme.calendar\_font = nil
+</span><span class="comment">-- theme.calendar\_spacing = nil
+</span><span class="comment">-- theme.calendar\_week\_numbers = nil
+</span><span class="comment">-- theme.calendar\_start\_sunday = nil
+</span><span class="comment">-- theme.calendar\_long\_weekdays = nil
 </span>
-<span class="comment">-- cursor
-</span><span class="comment">-- theme.cursor_mouse_resize = nil
-</span><span class="comment">-- theme.cursor_mouse_move = nil
+<span class="comment">-- checkbox\
+</span><span class="comment">-- theme.checkbox\_border\_width = nil
+</span><span class="comment">-- theme.checkbox\_bg = nil
+</span><span class="comment">-- theme.checkbox\_border\_color = nil
+</span><span class="comment">-- theme.checkbox\_check\_border\_color = nil
+</span><span class="comment">-- theme.checkbox\_check\_border\_width = nil
+</span><span class="comment">-- theme.checkbox\_check\_color = nil
+</span><span class="comment">-- theme.checkbox\_shape = nil
+</span><span class="comment">-- theme.checkbox\_check\_shape = nil
+</span><span class="comment">-- theme.checkbox\_paddings = nil
+</span><span class="comment">-- theme.checkbox\_color = nil
 </span>
-<span class="comment">-- enable
-</span><span class="comment">-- theme.enable_spawn_cursor = nil
+<span class="comment">-- column\
+</span><span class="comment">-- theme.column\_count = nil
 </span>
-<span class="comment">-- fullscreen
-</span><span class="comment">-- theme.fullscreen_hide_border = nil
+<span class="comment">-- cursor\
+</span><span class="comment">-- theme.cursor\_mouse\_resize = nil
+</span><span class="comment">-- theme.cursor\_mouse\_move = nil
 </span>
-<span class="comment">-- gap
-</span><span class="comment">-- theme.gap_single_client = nil
+<span class="comment">-- enable\
+</span><span class="comment">-- theme.enable\_spawn\_cursor = nil
 </span>
-<span class="comment">-- graph
-</span><span class="comment">-- theme.graph_bg = nil
-</span><span class="comment">-- theme.graph_fg = nil
-</span><span class="comment">-- theme.graph_border_color = nil
+<span class="comment">-- fg\
+</span><span class="comment">-- theme.fg\_normal = nil
+</span><span class="comment">-- theme.fg\_normal = nil
+</span><span class="comment">-- theme.fg\_focus = nil
+</span><span class="comment">-- theme.fg\_urgent = nil
+</span><span class="comment">-- theme.fg\_minimize = nil
+</span><span class="comment">-- theme.fg\_normal = nil
 </span>
-<span class="comment">-- hotkeys
-</span><span class="comment">-- theme.hotkeys_bg = nil
-</span><span class="comment">-- theme.hotkeys_fg = nil
-</span><span class="comment">-- theme.hotkeys_border_width = nil
-</span><span class="comment">-- theme.hotkeys_border_color = nil
-</span><span class="comment">-- theme.hotkeys_shape = nil
-</span><span class="comment">-- theme.hotkeys_modifiers_fg = nil
-</span><span class="comment">-- theme.hotkeys_label_bg = nil
-</span><span class="comment">-- theme.hotkeys_label_fg = nil
-</span><span class="comment">-- theme.hotkeys_font = nil
-</span><span class="comment">-- theme.hotkeys_description_font = nil
-</span><span class="comment">-- theme.hotkeys_group_margin = nil
+<span class="comment">-- fullscreen\
+</span><span class="comment">-- theme.fullscreen\_hide\_border = nil
 </span>
-<span class="comment">-- icon
-</span><span class="comment">-- theme.icon_theme = nil
+<span class="comment">-- gap\
+</span><span class="comment">-- theme.gap\_single\_client = nil
 </span>
-<span class="comment">-- layout
-</span><span class="comment">-- theme.layout_cornernw = nil
-</span><span class="comment">-- theme.layout_cornerne = nil
-</span><span class="comment">-- theme.layout_cornersw = nil
-</span><span class="comment">-- theme.layout_cornerse = nil
-</span><span class="comment">-- theme.layout_fairh = nil
-</span><span class="comment">-- theme.layout_fairv = nil
-</span><span class="comment">-- theme.layout_floating = nil
-</span><span class="comment">-- theme.layout_magnifier = nil
-</span><span class="comment">-- theme.layout_max = nil
-</span><span class="comment">-- theme.layout_fullscreen = nil
-</span><span class="comment">-- theme.layout_spiral = nil
-</span><span class="comment">-- theme.layout_dwindle = nil
-</span><span class="comment">-- theme.layout_tile = nil
-</span><span class="comment">-- theme.layout_tiletop = nil
-</span><span class="comment">-- theme.layout_tilebottom = nil
-</span><span class="comment">-- theme.layout_tileleft = nil
+<span class="comment">-- graph\
+</span><span class="comment">-- theme.graph\_bg = nil
+</span><span class="comment">-- theme.graph\_fg = nil
+</span><span class="comment">-- theme.graph\_border\_color = nil
 </span>
-<span class="comment">-- master
-</span><span class="comment">-- theme.master_width_factor = nil
-</span><span class="comment">-- theme.master_fill_policy = nil
-</span><span class="comment">-- theme.master_count = nil
+<span class="comment">-- hotkeys\
+</span><span class="comment">-- theme.hotkeys\_bg = nil
+</span><span class="comment">-- theme.hotkeys\_fg = nil
+</span><span class="comment">-- theme.hotkeys\_border\_width = nil
+</span><span class="comment">-- theme.hotkeys\_border\_color = nil
+</span><span class="comment">-- theme.hotkeys\_shape = nil
+</span><span class="comment">-- theme.hotkeys\_modifiers\_fg = nil
+</span><span class="comment">-- theme.hotkeys\_label\_bg = nil
+</span><span class="comment">-- theme.hotkeys\_label\_fg = nil
+</span><span class="comment">-- theme.hotkeys\_font = nil
+</span><span class="comment">-- theme.hotkeys\_description\_font = nil
+</span><span class="comment">-- theme.hotkeys\_group\_margin = nil
 </span>
-<span class="comment">-- maximized
-</span><span class="comment">-- theme.maximized_honor_padding = nil
-</span><span class="comment">-- theme.maximized_hide_border = nil
+<span class="comment">-- icon\
+</span><span class="comment">-- theme.icon\_theme = nil
 </span>
-<span class="comment">-- menu
-</span><span class="comment">-- theme.menu_submenu_icon = nil
-</span><span class="comment">-- theme.menu_font = nil
-</span><span class="comment">-- theme.menu_height = nil
-</span><span class="comment">-- theme.menu_width = nil
-</span><span class="comment">-- theme.menu_border_color = nil
-</span><span class="comment">-- theme.menu_border_width = nil
-</span><span class="comment">-- theme.menu_fg_focus = nil
-</span><span class="comment">-- theme.menu_bg_focus = nil
-</span><span class="comment">-- theme.menu_fg_normal = nil
-</span><span class="comment">-- theme.menu_bg_normal = nil
-</span><span class="comment">-- theme.menu_submenu = nil
+<span class="comment">-- layout\
+</span><span class="comment">-- theme.layout\_cornernw = nil
+</span><span class="comment">-- theme.layout\_cornerne = nil
+</span><span class="comment">-- theme.layout\_cornersw = nil
+</span><span class="comment">-- theme.layout\_cornerse = nil
+</span><span class="comment">-- theme.layout\_fairh = nil
+</span><span class="comment">-- theme.layout\_fairv = nil
+</span><span class="comment">-- theme.layout\_floating = nil
+</span><span class="comment">-- theme.layout\_magnifier = nil
+</span><span class="comment">-- theme.layout\_max = nil
+</span><span class="comment">-- theme.layout\_fullscreen = nil
+</span><span class="comment">-- theme.layout\_spiral = nil
+</span><span class="comment">-- theme.layout\_dwindle = nil
+</span><span class="comment">-- theme.layout\_tile = nil
+</span><span class="comment">-- theme.layout\_tiletop = nil
+</span><span class="comment">-- theme.layout\_tilebottom = nil
+</span><span class="comment">-- theme.layout\_tileleft = nil
 </span>
-<span class="comment">-- menubar
-</span><span class="comment">-- theme.menubar_fg_normal = nil
-</span><span class="comment">-- theme.menubar_bg_normal = nil
-</span><span class="comment">-- theme.menubar_border_width = nil
-</span><span class="comment">-- theme.menubar_border_color = nil
-</span><span class="comment">-- theme.menubar_fg_normal = nil
-</span><span class="comment">-- theme.menubar_bg_normal = nil
+<span class="comment">-- master\
+</span><span class="comment">-- theme.master\_width\_factor = nil
+</span><span class="comment">-- theme.master\_fill\_policy = nil
+</span><span class="comment">-- theme.master\_count = nil
 </span>
-<span class="comment">-- notification
-</span><span class="comment">-- theme.notification_font = nil
-</span><span class="comment">-- theme.notification_bg = nil
-</span><span class="comment">-- theme.notification_fg = nil
-</span><span class="comment">-- theme.notification_border_width = nil
-</span><span class="comment">-- theme.notification_border_color = nil
-</span><span class="comment">-- theme.notification_shape = nil
-</span><span class="comment">-- theme.notification_opacity = nil
-</span><span class="comment">-- theme.notification_margin = nil
-</span><span class="comment">-- theme.notification_width = nil
-</span><span class="comment">-- theme.notification_height = nil
-</span><span class="comment">-- theme.notification_max_width = nil
-</span><span class="comment">-- theme.notification_max_height = nil
-</span><span class="comment">-- theme.notification_icon_size = nil
+<span class="comment">-- maximized\
+</span><span class="comment">-- theme.maximized\_honor\_padding = nil
+</span><span class="comment">-- theme.maximized\_hide\_border = nil
 </span>
-<span class="comment">-- piechart
-</span><span class="comment">-- theme.piechart_border_color = nil
-</span><span class="comment">-- theme.piechart_border_width = nil
-</span><span class="comment">-- theme.piechart_colors = nil
+<span class="comment">-- menu\
+</span><span class="comment">-- theme.menu\_submenu\_icon = nil
+</span><span class="comment">-- theme.menu\_font = nil
+</span><span class="comment">-- theme.menu\_height = nil
+</span><span class="comment">-- theme.menu\_width = nil
+</span><span class="comment">-- theme.menu\_border\_color = nil
+</span><span class="comment">-- theme.menu\_border\_width = nil
+</span><span class="comment">-- theme.menu\_fg\_focus = nil
+</span><span class="comment">-- theme.menu\_bg\_focus = nil
+</span><span class="comment">-- theme.menu\_fg\_normal = nil
+</span><span class="comment">-- theme.menu\_bg\_normal = nil
+</span><span class="comment">-- theme.menu\_submenu = nil
 </span>
-<span class="comment">-- progressbar
-</span><span class="comment">-- theme.progressbar_bg = nil
-</span><span class="comment">-- theme.progressbar_fg = nil
-</span><span class="comment">-- theme.progressbar_shape = nil
-</span><span class="comment">-- theme.progressbar_border_color = nil
-</span><span class="comment">-- theme.progressbar_border_width = nil
-</span><span class="comment">-- theme.progressbar_bar_shape = nil
-</span><span class="comment">-- theme.progressbar_bar_border_width = nil
-</span><span class="comment">-- theme.progressbar_bar_border_color = nil
-</span><span class="comment">-- theme.progressbar_margins = nil
-</span><span class="comment">-- theme.progressbar_paddings = nil
+<span class="comment">-- menubar\
+</span><span class="comment">-- theme.menubar\_fg\_normal = nil
+</span><span class="comment">-- theme.menubar\_bg\_normal = nil
+</span><span class="comment">-- theme.menubar\_border\_width = nil
+</span><span class="comment">-- theme.menubar\_border\_color = nil
+</span><span class="comment">-- theme.menubar\_fg\_normal = nil
+</span><span class="comment">-- theme.menubar\_bg\_normal = nil
 </span>
-<span class="comment">-- prompt
-</span><span class="comment">-- theme.prompt_fg_cursor = nil
-</span><span class="comment">-- theme.prompt_bg_cursor = nil
-</span><span class="comment">-- theme.prompt_font = nil
-</span><span class="comment">-- theme.prompt_fg = nil
-</span><span class="comment">-- theme.prompt_bg = nil
+<span class="comment">-- notification\
+</span><span class="comment">-- theme.notification\_font = nil
+</span><span class="comment">-- theme.notification\_bg = nil
+</span><span class="comment">-- theme.notification\_fg = nil
+</span><span class="comment">-- theme.notification\_border\_width = nil
+</span><span class="comment">-- theme.notification\_border\_color = nil
+</span><span class="comment">-- theme.notification\_shape = nil
+</span><span class="comment">-- theme.notification\_opacity = nil
+</span><span class="comment">-- theme.notification\_margin = nil
+</span><span class="comment">-- theme.notification\_width = nil
+</span><span class="comment">-- theme.notification\_height = nil
+</span><span class="comment">-- theme.notification\_max\_width = nil
+</span><span class="comment">-- theme.notification\_max\_height = nil
+</span><span class="comment">-- theme.notification\_icon\_size = nil
 </span>
-<span class="comment">-- radialprogressbar
-</span><span class="comment">-- theme.radialprogressbar_border_color = nil
-</span><span class="comment">-- theme.radialprogressbar_color = nil
-</span><span class="comment">-- theme.radialprogressbar_border_width = nil
-</span><span class="comment">-- theme.radialprogressbar_paddings = nil
+<span class="comment">-- piechart\
+</span><span class="comment">-- theme.piechart\_border\_color = nil
+</span><span class="comment">-- theme.piechart\_border\_width = nil
+</span><span class="comment">-- theme.piechart\_colors = nil
 </span>
-<span class="comment">-- separator
-</span><span class="comment">-- theme.separator_thickness = nil
-</span><span class="comment">-- theme.separator_border_color = nil
-</span><span class="comment">-- theme.separator_border_width = nil
-</span><span class="comment">-- theme.separator_span_ratio = nil
-</span><span class="comment">-- theme.separator_color = nil
-</span><span class="comment">-- theme.separator_shape = nil
+<span class="comment">-- progressbar\
+</span><span class="comment">-- theme.progressbar\_bg = nil
+</span><span class="comment">-- theme.progressbar\_fg = nil
+</span><span class="comment">-- theme.progressbar\_shape = nil
+</span><span class="comment">-- theme.progressbar\_border\_color = nil
+</span><span class="comment">-- theme.progressbar\_border\_width = nil
+</span><span class="comment">-- theme.progressbar\_bar\_shape = nil
+</span><span class="comment">-- theme.progressbar\_bar\_border\_width = nil
+</span><span class="comment">-- theme.progressbar\_bar\_border\_color = nil
+</span><span class="comment">-- theme.progressbar\_margins = nil
+</span><span class="comment">-- theme.progressbar\_paddings = nil
 </span>
-<span class="comment">-- slider
-</span><span class="comment">-- theme.slider_bar_border_width = nil
-</span><span class="comment">-- theme.slider_bar_border_color = nil
-</span><span class="comment">-- theme.slider_handle_border_color = nil
-</span><span class="comment">-- theme.slider_handle_border_width = nil
-</span><span class="comment">-- theme.slider_handle_width = nil
-</span><span class="comment">-- theme.slider_handle_color = nil
-</span><span class="comment">-- theme.slider_handle_shape = nil
-</span><span class="comment">-- theme.slider_bar_shape = nil
-</span><span class="comment">-- theme.slider_bar_height = nil
-</span><span class="comment">-- theme.slider_bar_margins = nil
-</span><span class="comment">-- theme.slider_handle_margins = nil
-</span><span class="comment">-- theme.slider_bar_color = nil
+<span class="comment">-- prompt\
+</span><span class="comment">-- theme.prompt\_fg\_cursor = nil
+</span><span class="comment">-- theme.prompt\_bg\_cursor = nil
+</span><span class="comment">-- theme.prompt\_font = nil
+</span><span class="comment">-- theme.prompt\_fg = nil
+</span><span class="comment">-- theme.prompt\_bg = nil
 </span>
-<span class="comment">-- snap
-</span><span class="comment">-- theme.snap_bg = nil
-</span><span class="comment">-- theme.snap_border_width = nil
-</span><span class="comment">-- theme.snap_shape = nil
+<span class="comment">-- radialprogressbar\
+</span><span class="comment">-- theme.radialprogressbar\_border\_color = nil
+</span><span class="comment">-- theme.radialprogressbar\_color = nil
+</span><span class="comment">-- theme.radialprogressbar\_border\_width = nil
+</span><span class="comment">-- theme.radialprogressbar\_paddings = nil
 </span>
-<span class="comment">-- snapper
-</span><span class="comment">-- theme.snapper_gap = nil
+<span class="comment">-- separator\
+</span><span class="comment">-- theme.separator\_thickness = nil
+</span><span class="comment">-- theme.separator\_border\_color = nil
+</span><span class="comment">-- theme.separator\_border\_width = nil
+</span><span class="comment">-- theme.separator\_span\_ratio = nil
+</span><span class="comment">-- theme.separator\_color = nil
+</span><span class="comment">-- theme.separator\_shape = nil
 </span>
-<span class="comment">-- systray
-</span><span class="comment">-- theme.systray_icon_spacing = nil
+<span class="comment">-- slider\
+</span><span class="comment">-- theme.slider\_bar\_border\_width = nil
+</span><span class="comment">-- theme.slider\_bar\_border\_color = nil
+</span><span class="comment">-- theme.slider\_handle\_border\_color = nil
+</span><span class="comment">-- theme.slider\_handle\_border\_width = nil
+</span><span class="comment">-- theme.slider\_handle\_width = nil
+</span><span class="comment">-- theme.slider\_handle\_color = nil
+</span><span class="comment">-- theme.slider\_handle\_shape = nil
+</span><span class="comment">-- theme.slider\_bar\_shape = nil
+</span><span class="comment">-- theme.slider\_bar\_height = nil
+</span><span class="comment">-- theme.slider\_bar\_margins = nil
+</span><span class="comment">-- theme.slider\_handle\_margins = nil
+</span><span class="comment">-- theme.slider\_bar\_color = nil
 </span>
-<span class="comment">-- taglist
-</span><span class="comment">-- theme.taglist_fg_focus = nil
-</span><span class="comment">-- theme.taglist_bg_focus = nil
-</span><span class="comment">-- theme.taglist_fg_urgent = nil
-</span><span class="comment">-- theme.taglist_bg_urgent = nil
-</span><span class="comment">-- theme.taglist_bg_occupied = nil
-</span><span class="comment">-- theme.taglist_fg_occupied = nil
-</span><span class="comment">-- theme.taglist_bg_empty = nil
-</span><span class="comment">-- theme.taglist_fg_empty = nil
-</span><span class="comment">-- theme.taglist_bg_volatile = nil
-</span><span class="comment">-- theme.taglist_fg_volatile = nil
-</span><span class="comment">-- theme.taglist_squares_sel = nil
-</span><span class="comment">-- theme.taglist_squares_unsel = nil
-</span><span class="comment">-- theme.taglist_squares_sel_empty = nil
-</span><span class="comment">-- theme.taglist_squares_unsel_empty = nil
-</span><span class="comment">-- theme.taglist_squares_resize = nil
-</span><span class="comment">-- theme.taglist_disable_icon = nil
-</span><span class="comment">-- theme.taglist_font = nil
-</span><span class="comment">-- theme.taglist_spacing = nil
-</span><span class="comment">-- theme.taglist_shape = nil
-</span><span class="comment">-- theme.taglist_shape_border_width = nil
-</span><span class="comment">-- theme.taglist_shape_border_color = nil
-</span><span class="comment">-- theme.taglist_shape_empty = nil
-</span><span class="comment">-- theme.taglist_shape_border_width_empty = nil
-</span><span class="comment">-- theme.taglist_shape_border_color_empty = nil
-</span><span class="comment">-- theme.taglist_shape_focus = nil
-</span><span class="comment">-- theme.taglist_shape_border_width_focus = nil
-</span><span class="comment">-- theme.taglist_shape_border_color_focus = nil
-</span><span class="comment">-- theme.taglist_shape_urgent = nil
-</span><span class="comment">-- theme.taglist_shape_border_width_urgent = nil
-</span><span class="comment">-- theme.taglist_shape_border_color_urgent = nil
-</span><span class="comment">-- theme.taglist_shape_volatile = nil
-</span><span class="comment">-- theme.taglist_shape_border_width_volatile = nil
-</span><span class="comment">-- theme.taglist_shape_border_color_volatile = nil
+<span class="comment">-- snap\
+</span><span class="comment">-- theme.snap\_bg = nil
+</span><span class="comment">-- theme.snap\_border\_width = nil
+</span><span class="comment">-- theme.snap\_shape = nil
 </span>
-<span class="comment">-- tasklist
-</span><span class="comment">-- theme.tasklist_fg_normal = nil
-</span><span class="comment">-- theme.tasklist_bg_normal = nil
-</span><span class="comment">-- theme.tasklist_fg_focus = nil
-</span><span class="comment">-- theme.tasklist_bg_focus = nil
-</span><span class="comment">-- theme.tasklist_fg_urgent = nil
-</span><span class="comment">-- theme.tasklist_bg_urgent = nil
-</span><span class="comment">-- theme.tasklist_fg_minimize = nil
-</span><span class="comment">-- theme.tasklist_bg_minimize = nil
-</span><span class="comment">-- theme.tasklist_bg_image_normal = nil
-</span><span class="comment">-- theme.tasklist_bg_image_focus = nil
-</span><span class="comment">-- theme.tasklist_bg_image_urgent = nil
-</span><span class="comment">-- theme.tasklist_bg_image_minimize = nil
-</span><span class="comment">-- theme.tasklist_disable_icon = nil
-</span><span class="comment">-- theme.tasklist_disable_task_name = nil
-</span><span class="comment">-- theme.tasklist_plain_task_name = nil
-</span><span class="comment">-- theme.tasklist_font = nil
-</span><span class="comment">-- theme.tasklist_align = nil
-</span><span class="comment">-- theme.tasklist_font_focus = nil
-</span><span class="comment">-- theme.tasklist_font_minimized = nil
-</span><span class="comment">-- theme.tasklist_font_urgent = nil
-</span><span class="comment">-- theme.tasklist_spacing = nil
-</span><span class="comment">-- theme.tasklist_shape = nil
-</span><span class="comment">-- theme.tasklist_shape_border_width = nil
-</span><span class="comment">-- theme.tasklist_shape_border_color = nil
-</span><span class="comment">-- theme.tasklist_shape_focus = nil
-</span><span class="comment">-- theme.tasklist_shape_border_width_focus = nil
-</span><span class="comment">-- theme.tasklist_shape_border_color_focus = nil
-</span><span class="comment">-- theme.tasklist_shape_minimized = nil
-</span><span class="comment">-- theme.tasklist_shape_border_width_minimized = nil
-</span><span class="comment">-- theme.tasklist_shape_border_color_minimized = nil
-</span><span class="comment">-- theme.tasklist_shape_urgent = nil
-</span><span class="comment">-- theme.tasklist_shape_border_width_urgent = nil
-</span><span class="comment">-- theme.tasklist_shape_border_color_urgent = nil
+<span class="comment">-- snapper\
+</span><span class="comment">-- theme.snapper\_gap = nil
 </span>
-<span class="comment">-- titlebar
-</span><span class="comment">-- theme.titlebar_fg_normal = nil
-</span><span class="comment">-- theme.titlebar_bg_normal = nil
-</span><span class="comment">-- theme.titlebar_bgimage_normal = nil
-</span><span class="comment">-- theme.titlebar_fg = nil
-</span><span class="comment">-- theme.titlebar_bg = nil
-</span><span class="comment">-- theme.titlebar_bgimage = nil
-</span><span class="comment">-- theme.titlebar_fg_focus = nil
-</span><span class="comment">-- theme.titlebar_bg_focus = nil
-</span><span class="comment">-- theme.titlebar_bgimage_focus = nil
-</span><span class="comment">-- theme.titlebar_floating_button_normal = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_normal = nil
-</span><span class="comment">-- theme.titlebar_minimize_button_normal = nil
-</span><span class="comment">-- theme.titlebar_minimize_button_normal_hover = nil
-</span><span class="comment">-- theme.titlebar_minimize_button_normal_press = nil
-</span><span class="comment">-- theme.titlebar_close_button_normal = nil
-</span><span class="comment">-- theme.titlebar_close_button_normal_hover = nil
-</span><span class="comment">-- theme.titlebar_close_button_normal_press = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_normal = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_normal = nil
-</span><span class="comment">-- theme.titlebar_floating_button_focus = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_focus = nil
-</span><span class="comment">-- theme.titlebar_minimize_button_focus = nil
-</span><span class="comment">-- theme.titlebar_minimize_button_focus_hover = nil
-</span><span class="comment">-- theme.titlebar_minimize_button_focus_press = nil
-</span><span class="comment">-- theme.titlebar_close_button_focus = nil
-</span><span class="comment">-- theme.titlebar_close_button_focus_hover = nil
-</span><span class="comment">-- theme.titlebar_close_button_focus_press = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_focus = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_focus = nil
-</span><span class="comment">-- theme.titlebar_floating_button_normal_active = nil
-</span><span class="comment">-- theme.titlebar_floating_button_normal_active_hover = nil
-</span><span class="comment">-- theme.titlebar_floating_button_normal_active_press = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_normal_active = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_normal_active_hover = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_normal_active_press = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_normal_active = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_normal_active_hover = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_normal_active_press = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_normal_active = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_normal_active_hover = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_normal_active_press = nil
-</span><span class="comment">-- theme.titlebar_floating_button_focus_active = nil
-</span><span class="comment">-- theme.titlebar_floating_button_focus_active_hover = nil
-</span><span class="comment">-- theme.titlebar_floating_button_focus_active_press = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_focus_active = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_focus_active_hover = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_focus_active_press = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_focus_active = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_focus_active_hover = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_focus_active_press = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_focus_active = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_focus_active_hover = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_focus_active_press = nil
-</span><span class="comment">-- theme.titlebar_floating_button_normal_inactive = nil
-</span><span class="comment">-- theme.titlebar_floating_button_normal_inactive_hover = nil
-</span><span class="comment">-- theme.titlebar_floating_button_normal_inactive_press = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_normal_inactive = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_normal_inactive_hover = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_normal_inactive_press = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_normal_inactive = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_normal_inactive_hover = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_normal_inactive_press = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_normal_inactive = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_normal_inactive_hover = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_normal_inactive_press = nil
-</span><span class="comment">-- theme.titlebar_floating_button_focus_inactive = nil
-</span><span class="comment">-- theme.titlebar_floating_button_focus_inactive_hover = nil
-</span><span class="comment">-- theme.titlebar_floating_button_focus_inactive_press = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_focus_inactive = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_focus_inactive_hover = nil
-</span><span class="comment">-- theme.titlebar_maximized_button_focus_inactive_press = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_focus_inactive = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_focus_inactive_hover = nil
-</span><span class="comment">-- theme.titlebar_ontop_button_focus_inactive_press = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_focus_inactive = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_focus_inactive_hover = nil
-</span><span class="comment">-- theme.titlebar_sticky_button_focus_inactive_press = nil
+<span class="comment">-- systray\
+</span><span class="comment">-- theme.systray\_icon\_spacing = nil
 </span>
-<span class="comment">-- tooltip
-</span><span class="comment">-- theme.tooltip_border_color = nil
-</span><span class="comment">-- theme.tooltip_bg = nil
-</span><span class="comment">-- theme.tooltip_fg = nil
-</span><span class="comment">-- theme.tooltip_font = nil
-</span><span class="comment">-- theme.tooltip_border_width = nil
-</span><span class="comment">-- theme.tooltip_opacity = nil
-</span><span class="comment">-- theme.tooltip_shape = nil
-</span><span class="comment">-- theme.tooltip_align = nil
+<span class="comment">-- taglist\
+</span><span class="comment">-- theme.taglist\_fg\_focus = nil
+</span><span class="comment">-- theme.taglist\_bg\_focus = nil
+</span><span class="comment">-- theme.taglist\_fg\_urgent = nil
+</span><span class="comment">-- theme.taglist\_bg\_urgent = nil
+</span><span class="comment">-- theme.taglist\_bg\_occupied = nil
+</span><span class="comment">-- theme.taglist\_fg\_occupied = nil
+</span><span class="comment">-- theme.taglist\_bg\_empty = nil
+</span><span class="comment">-- theme.taglist\_fg\_empty = nil
+</span><span class="comment">-- theme.taglist\_bg\_volatile = nil
+</span><span class="comment">-- theme.taglist\_fg\_volatile = nil
+</span><span class="comment">-- theme.taglist\_squares\_sel = nil
+</span><span class="comment">-- theme.taglist\_squares\_unsel = nil
+</span><span class="comment">-- theme.taglist\_squares\_sel\_empty = nil
+</span><span class="comment">-- theme.taglist\_squares\_unsel\_empty = nil
+</span><span class="comment">-- theme.taglist\_squares\_resize = nil
+</span><span class="comment">-- theme.taglist\_disable\_icon = nil
+</span><span class="comment">-- theme.taglist\_font = nil
+</span><span class="comment">-- theme.taglist\_spacing = nil
+</span><span class="comment">-- theme.taglist\_shape = nil
+</span><span class="comment">-- theme.taglist\_shape\_border\_width = nil
+</span><span class="comment">-- theme.taglist\_shape\_border\_color = nil
+</span><span class="comment">-- theme.taglist\_shape\_empty = nil
+</span><span class="comment">-- theme.taglist\_shape\_border\_width\_empty = nil
+</span><span class="comment">-- theme.taglist\_shape\_border\_color\_empty = nil
+</span><span class="comment">-- theme.taglist\_shape\_focus = nil
+</span><span class="comment">-- theme.taglist\_shape\_border\_width\_focus = nil
+</span><span class="comment">-- theme.taglist\_shape\_border\_color\_focus = nil
+</span><span class="comment">-- theme.taglist\_shape\_urgent = nil
+</span><span class="comment">-- theme.taglist\_shape\_border\_width\_urgent = nil
+</span><span class="comment">-- theme.taglist\_shape\_border\_color\_urgent = nil
+</span><span class="comment">-- theme.taglist\_shape\_volatile = nil
+</span><span class="comment">-- theme.taglist\_shape\_border\_width\_volatile = nil
+</span><span class="comment">-- theme.taglist\_shape\_border\_color\_volatile = nil
 </span>
-<span class="comment">-- wibar
-</span><span class="comment">-- theme.wibar_stretch = nil
-</span><span class="comment">-- theme.wibar_border_width = nil
-</span><span class="comment">-- theme.wibar_border_color = nil
-</span><span class="comment">-- theme.wibar_ontop = nil
-</span><span class="comment">-- theme.wibar_cursor = nil
-</span><span class="comment">-- theme.wibar_opacity = nil
-</span><span class="comment">-- theme.wibar_type = nil
-</span><span class="comment">-- theme.wibar_width = nil
-</span><span class="comment">-- theme.wibar_height = nil
-</span><span class="comment">-- theme.wibar_bg = nil
-</span><span class="comment">-- theme.wibar_bgimage = nil
-</span><span class="comment">-- theme.wibar_fg = nil
-</span><span class="comment">-- theme.wibar_shape = nil
+<span class="comment">-- tasklist\
+</span><span class="comment">-- theme.tasklist\_fg\_normal = nil
+</span><span class="comment">-- theme.tasklist\_bg\_normal = nil
+</span><span class="comment">-- theme.tasklist\_fg\_focus = nil
+</span><span class="comment">-- theme.tasklist\_bg\_focus = nil
+</span><span class="comment">-- theme.tasklist\_fg\_urgent = nil
+</span><span class="comment">-- theme.tasklist\_bg\_urgent = nil
+</span><span class="comment">-- theme.tasklist\_fg\_minimize = nil
+</span><span class="comment">-- theme.tasklist\_bg\_minimize = nil
+</span><span class="comment">-- theme.tasklist\_bg\_image\_normal = nil
+</span><span class="comment">-- theme.tasklist\_bg\_image\_focus = nil
+</span><span class="comment">-- theme.tasklist\_bg\_image\_urgent = nil
+</span><span class="comment">-- theme.tasklist\_bg\_image\_minimize = nil
+</span><span class="comment">-- theme.tasklist\_disable\_icon = nil
+</span><span class="comment">-- theme.tasklist\_disable\_task\_name = nil
+</span><span class="comment">-- theme.tasklist\_plain\_task\_name = nil
+</span><span class="comment">-- theme.tasklist\_font = nil
+</span><span class="comment">-- theme.tasklist\_align = nil
+</span><span class="comment">-- theme.tasklist\_font\_focus = nil
+</span><span class="comment">-- theme.tasklist\_font\_minimized = nil
+</span><span class="comment">-- theme.tasklist\_font\_urgent = nil
+</span><span class="comment">-- theme.tasklist\_spacing = nil
+</span><span class="comment">-- theme.tasklist\_shape = nil
+</span><span class="comment">-- theme.tasklist\_shape\_border\_width = nil
+</span><span class="comment">-- theme.tasklist\_shape\_border\_color = nil
+</span><span class="comment">-- theme.tasklist\_shape\_focus = nil
+</span><span class="comment">-- theme.tasklist\_shape\_border\_width\_focus = nil
+</span><span class="comment">-- theme.tasklist\_shape\_border\_color\_focus = nil
+</span><span class="comment">-- theme.tasklist\_shape\_minimized = nil
+</span><span class="comment">-- theme.tasklist\_shape\_border\_width\_minimized = nil
+</span><span class="comment">-- theme.tasklist\_shape\_border\_color\_minimized = nil
+</span><span class="comment">-- theme.tasklist\_shape\_urgent = nil
+</span><span class="comment">-- theme.tasklist\_shape\_border\_width\_urgent = nil
+</span><span class="comment">-- theme.tasklist\_shape\_border\_color\_urgent = nil
+</span>
+<span class="comment">-- titlebar\
+</span><span class="comment">-- theme.titlebar\_fg\_normal = nil
+</span><span class="comment">-- theme.titlebar\_bg\_normal = nil
+</span><span class="comment">-- theme.titlebar\_bgimage\_normal = nil
+</span><span class="comment">-- theme.titlebar\_fg = nil
+</span><span class="comment">-- theme.titlebar\_bg = nil
+</span><span class="comment">-- theme.titlebar\_bgimage = nil
+</span><span class="comment">-- theme.titlebar\_fg\_focus = nil
+</span><span class="comment">-- theme.titlebar\_bg\_focus = nil
+</span><span class="comment">-- theme.titlebar\_bgimage\_focus = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_normal = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_normal = nil
+</span><span class="comment">-- theme.titlebar\_minimize\_button\_normal = nil
+</span><span class="comment">-- theme.titlebar\_minimize\_button\_normal\_hover = nil
+</span><span class="comment">-- theme.titlebar\_minimize\_button\_normal\_press = nil
+</span><span class="comment">-- theme.titlebar\_close\_button\_normal = nil
+</span><span class="comment">-- theme.titlebar\_close\_button\_normal\_hover = nil
+</span><span class="comment">-- theme.titlebar\_close\_button\_normal\_press = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_normal = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_normal = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_focus = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_focus = nil
+</span><span class="comment">-- theme.titlebar\_minimize\_button\_focus = nil
+</span><span class="comment">-- theme.titlebar\_minimize\_button\_focus\_hover = nil
+</span><span class="comment">-- theme.titlebar\_minimize\_button\_focus\_press = nil
+</span><span class="comment">-- theme.titlebar\_close\_button\_focus = nil
+</span><span class="comment">-- theme.titlebar\_close\_button\_focus\_hover = nil
+</span><span class="comment">-- theme.titlebar\_close\_button\_focus\_press = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_focus = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_focus = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_normal\_active = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_normal\_active\_hover = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_normal\_active\_press = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_normal\_active = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_normal\_active\_hover = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_normal\_active\_press = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_normal\_active = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_normal\_active\_hover = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_normal\_active\_press = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_normal\_active = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_normal\_active\_hover = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_normal\_active\_press = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_focus\_active = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_focus\_active\_hover = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_focus\_active\_press = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_focus\_active = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_focus\_active\_hover = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_focus\_active\_press = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_focus\_active = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_focus\_active\_hover = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_focus\_active\_press = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_focus\_active = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_focus\_active\_hover = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_focus\_active\_press = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_normal\_inactive = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_normal\_inactive\_hover = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_normal\_inactive\_press = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_normal\_inactive = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_normal\_inactive\_hover = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_normal\_inactive\_press = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_normal\_inactive = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_normal\_inactive\_hover = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_normal\_inactive\_press = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_normal\_inactive = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_normal\_inactive\_hover = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_normal\_inactive\_press = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_focus\_inactive = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_focus\_inactive\_hover = nil
+</span><span class="comment">-- theme.titlebar\_floating\_button\_focus\_inactive\_press = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_focus\_inactive = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_focus\_inactive\_hover = nil
+</span><span class="comment">-- theme.titlebar\_maximized\_button\_focus\_inactive\_press = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_focus\_inactive = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_focus\_inactive\_hover = nil
+</span><span class="comment">-- theme.titlebar\_ontop\_button\_focus\_inactive\_press = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_focus\_inactive = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_focus\_inactive\_hover = nil
+</span><span class="comment">-- theme.titlebar\_sticky\_button\_focus\_inactive\_press = nil
+</span>
+<span class="comment">-- tooltip\
+</span><span class="comment">-- theme.tooltip\_border\_color = nil
+</span><span class="comment">-- theme.tooltip\_bg = nil
+</span><span class="comment">-- theme.tooltip\_fg = nil
+</span><span class="comment">-- theme.tooltip\_font = nil
+</span><span class="comment">-- theme.tooltip\_border\_width = nil
+</span><span class="comment">-- theme.tooltip\_opacity = nil
+</span><span class="comment">-- theme.tooltip\_shape = nil
+</span><span class="comment">-- theme.tooltip\_align = nil
+</span>
+<span class="comment">-- useless\
+</span><span class="comment">-- theme.useless\_gap = nil
+</span><span class="comment">-- theme.useless\_gap = nil
+</span>
+<span class="comment">-- wibar\
+</span><span class="comment">-- theme.wibar\_stretch = nil
+</span><span class="comment">-- theme.wibar\_border\_width = nil
+</span><span class="comment">-- theme.wibar\_border\_color = nil
+</span><span class="comment">-- theme.wibar\_ontop = nil
+</span><span class="comment">-- theme.wibar\_cursor = nil
+</span><span class="comment">-- theme.wibar\_opacity = nil
+</span><span class="comment">-- theme.wibar\_type = nil
+</span><span class="comment">-- theme.wibar\_width = nil
+</span><span class="comment">-- theme.wibar\_height = nil
+</span><span class="comment">-- theme.wibar\_bg = nil
+</span><span class="comment">-- theme.wibar\_bgimage = nil
+</span><span class="comment">-- theme.wibar\_fg = nil
+</span><span class="comment">-- theme.wibar\_shape = nil
 </span>
 <span class="keyword">return</span> theme
 
