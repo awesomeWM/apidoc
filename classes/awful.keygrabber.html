@@ -209,8 +209,8 @@ awful.keygrabber {
         {{<span class="string">'Mod1'</span>, <span class="string">'Shift'</span>}, <span class="string">'Tab'</span>, awful.client.focus.history.select_next    },
     },
     <span class="comment">-- Note that it is using the key name and not the modifier name.
-</span>    stop_key        = <span class="string">'Alt_L'</span>,
-    release_event      = <span class="string">'release'</span>,
+</span>    stop_key           = <span class="string">'Alt_L'</span>,
+    stop_event         = <span class="string">'release'</span>,
     start_callback     = awful.client.focus.history.disable_tracking,
     stop_callback      = awful.client.focus.history.enable_tracking,
     export_keybindings = <span class="keyword">true</span>,
@@ -343,7 +343,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 	<td class="summary">The key on which the keygrabber listen to terminate itself.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.keygrabber.release_event">release_event</a></td>
+	<td class="name" ><a href="#awful.keygrabber.stop_event">stop_event</a></td>
 	<td class="summary">The event on which the keygrabbing will be terminated.</td>
 	</tr>
 	<tr>
@@ -484,7 +484,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
  navigation.</p>
 
 <p> Note that the object returned can be used as a client or global keybinding
- callback without modification. Make sure to set <a href="../classes/awful.keygrabber.html#awful.keygrabber.stop_key">stop_key</a> and <a href="../classes/awful.keygrabber.html#awful.keygrabber.release_event">release_event</a>
+ callback without modification. Make sure to set <a href="../classes/awful.keygrabber.html#awful.keygrabber.stop_key">stop_key</a> and <a href="../classes/awful.keygrabber.html#awful.keygrabber.stop_event">stop_event</a>
  to proper values to avoid permanently locking the keyboard.
 
 
@@ -492,7 +492,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
         <li><span class="parameter">args</span>
 
         <ul>
-        <li><span class="parameter">release_event</span>
+        <li><span class="parameter">stop_event</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          Release event (&ldquo;press&rdquo; or &ldquo;release&rdquo;)
          (<em>default</em> "press")
@@ -773,7 +773,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <dd>
     The key on which the keygrabber listen to terminate itself. </p>
 
-<p> When this is set, the running keygrabber will quit when [one of] the release
+<p> When this is set, the running keygrabber will quit when [one of] the stop
  key event occurs.</p>
 
 <p> By default, the event is <code>press</code>. It is common for use case like the
@@ -800,14 +800,14 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/awful.keygrabber.html#awful.keygrabber.release_event">release_event</a>
+         <a href="../classes/awful.keygrabber.html#awful.keygrabber.stop_event">stop_event</a>
     </ul>
 
 
 </dd>
     <dt>
-    <a name = "awful.keygrabber.release_event"></a>
-    <strong>release_event</strong>
+    <a name = "awful.keygrabber.stop_event"></a>
+    <strong>stop_event</strong>
     </dt>
     <dd>
     <p>The event on which the keygrabbing will be terminated. </p>
@@ -1258,9 +1258,9 @@ pressed.</li>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          The key(s) that stop the keygrabbing (if any)
         </li>
-        <li><span class="parameter">release_mods</span>
+        <li><span class="parameter">stop_mods</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The release modifiers key (if any)
+         The modifiers key (if any)
         </li>
         <li><span class="parameter">sequence</span>
             <span class="types"><span class="type">sting</span></span>
@@ -1278,7 +1278,7 @@ pressed.</li>
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_done_cb(self, stop_key, release_mods, sequence)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_done_cb(self, stop_key, stop_mods, sequence)
    <span class="comment">-- do something
 </span><span class="keyword">end</span></pre>
     </ul>
