@@ -30,12 +30,13 @@
   <li><a href="../index.html">Index</a></li>
 </ul>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
+
+
+<h2>Sample files</h2>
+<ul class="nowrap">
+  <li><a href="../sample files/rc.lua.html">rc.lua</a></li>
+  <li><strong>theme.lua</strong></li>
 </ul>
-
-
 <h2>Libraries</h2>
 <ul class="nowrap">
   <li><a href="../libraries/awesome.html">awesome</a></li>
@@ -58,7 +59,7 @@
   <li><a href="../libraries/awful.util.html">awful.util</a></li>
   <li><a href="../libraries/awful.wibox.html">awful.wibox</a></li>
   <li><a href="../libraries/beautiful.html">beautiful</a></li>
-  <li><strong>beautiful.gtk</strong></li>
+  <li><a href="../libraries/beautiful.gtk.html">beautiful.gtk</a></li>
   <li><a href="../libraries/beautiful.theme_assets.html">beautiful.theme_assets</a></li>
   <li><a href="../libraries/beautiful.xresources.html">beautiful.xresources</a></li>
   <li><a href="../libraries/dbus.html">dbus</a></li>
@@ -85,11 +86,6 @@
   <li><a href="../libraries/root.html">root</a></li>
   <li><a href="../libraries/selection.html">selection</a></li>
   <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
-</ul>
-<h2>Sample files</h2>
-<ul class="nowrap">
-  <li><a href="../sample files/rc.lua.html">rc.lua</a></li>
-  <li><a href="../sample files/theme.lua.html">theme.lua</a></li>
 </ul>
 <h2>Classes</h2>
 <ul class="nowrap">
@@ -177,95 +173,170 @@
 
 <div id="content">
 
-<h1>Module <code>beautiful.gtk</code></h1>
-<p>Querying current GTK+ 3 theme via GtkStyleContext.</p>
-<p>
+<h1>Script <code>theme.lua</code></h1>
+<p>The default theme file.</p>
+<p><p> If you wish to create a custom theme, copy this file to
+ <code>~/.config/awesome/mytheme.lua</code>
+ and replace:</p>
+
+<pre>
+beautiful.init(gears.filesystem.get_themes_dir() .. <span class="string">"default/theme.lua"</span>)
+</pre>
+
+
+<p> with</p>
+
+<pre>
+beautiful.init(gears.filesystem.get_configuration_dir() .. <span class="string">"mytheme.lua"</span>)
+</pre>
+
+
+<p> in your <a href="../sample files/rc.lua.html#">rc.lua</a>.</p>
+
+<p> Here is the default theme content:</p>
+
+<pre>
+<span class="comment">---------------------------
+</span><span class="comment">-- Default awesome theme --
+</span><span class="comment">---------------------------
+</span>
+<span class="keyword">local</span> theme_assets = <span class="global">require</span>(<span class="string">"<code>beautiful.theme</code>_assets"</span>)
+<span class="keyword">local</span> xresources = <span class="global">require</span>(<span class="string">"<a href="../libraries/beautiful.xresources.html#">beautiful.xresources</a>"</span>)
+<span class="keyword">local</span> dpi = xresources.apply_dpi
+
+<span class="keyword">local</span> gfs = <span class="global">require</span>(<span class="string">"<a href="../libraries/gears.filesystem.html#">gears.filesystem</a>"</span>)
+<span class="keyword">local</span> themes_path = gfs.get_themes_dir()
+
+<span class="keyword">local</span> theme = {}
+
+theme.font          = <span class="string">"sans 8"</span>
+
+theme.bg_normal     = <span class="string">"#222222"</span>
+theme.bg_focus      = <span class="string">"#535d6c"</span>
+theme.bg_urgent     = <span class="string">"#ff0000"</span>
+theme.bg_minimize   = <span class="string">"#444444"</span>
+theme.bg_systray    = theme.bg_normal
+
+theme.fg_normal     = <span class="string">"#aaaaaa"</span>
+theme.fg_focus      = <span class="string">"#ffffff"</span>
+theme.fg_urgent     = <span class="string">"#ffffff"</span>
+theme.fg_minimize   = <span class="string">"#ffffff"</span>
+
+theme.useless_gap   = dpi(<span class="number">0</span>)
+theme.border_width  = dpi(<span class="number">1</span>)
+theme.border_normal = <span class="string">"#000000"</span>
+theme.border_focus  = <span class="string">"#535d6c"</span>
+theme.border_marked = <span class="string">"#91231c"</span>
+
+<span class="comment">-- There are other variable sets
+</span><span class="comment">-- overriding the default one when
+</span><span class="comment">-- defined, the sets are:
+</span><span class="comment">-- taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
+</span><span class="comment">-- tasklist_[bg|fg]_[focus|urgent]
+</span><span class="comment">-- titlebar_[bg|fg]_[normal|focus]
+</span><span class="comment">-- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
+</span><span class="comment">-- mouse_finder_[color|timeout|animate_timeout|radius|factor]
+</span><span class="comment">-- prompt_[fg|bg|fg_cursor|bg_cursor|font]
+</span><span class="comment">-- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
+</span><span class="comment">-- Example:
+</span><span class="comment">--theme.taglist_bg_focus = "#ff0000"
+</span>
+<span class="comment">-- Generate taglist squares:
+</span><span class="keyword">local</span> taglist_square_size = dpi(<span class="number">4</span>)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+    taglist_square_size, theme.fg_normal
+)
+theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+    taglist_square_size, theme.fg_normal
+)
+
+<span class="comment">-- Variables set for theming notifications:
+</span><span class="comment">-- notification_font
+</span><span class="comment">-- notification_[bg|fg]
+</span><span class="comment">-- notification_[width|height|margin]
+</span><span class="comment">-- notification_[border_color|border_width|shape|opacity]
+</span>
+<span class="comment">-- Variables set for theming the menu:
+</span><span class="comment">-- menu_[bg|fg]_[normal|focus]
+</span><span class="comment">-- menu_[border_color|border_width]
+</span>theme.menu_submenu_icon = themes_path..<span class="string">"default/submenu.png"</span>
+theme.menu_height = dpi(<span class="number">15</span>)
+theme.menu_width  = dpi(<span class="number">100</span>)
+
+<span class="comment">-- You can add as many variables as
+</span><span class="comment">-- you wish and access them by using
+</span><span class="comment">-- <code>beautiful.variable</code> in your rc.lua
+</span><span class="comment">--theme.bg_widget = "#cc0000"
+</span>
+<span class="comment">-- Define the image to load
+</span>theme.titlebar_close_button_normal = themes_path..<span class="string">"default/titlebar/close_normal.png"</span>
+theme.titlebar_close_button_focus  = themes_path..<span class="string">"default/titlebar/close_focus.png"</span>
+
+theme.titlebar_minimize_button_normal = themes_path..<span class="string">"default/titlebar/minimize_normal.png"</span>
+theme.titlebar_minimize_button_focus  = themes_path..<span class="string">"default/titlebar/minimize_focus.png"</span>
+
+theme.titlebar_ontop_button_normal_inactive = themes_path..<span class="string">"default/titlebar/ontop_normal_inactive.png"</span>
+theme.titlebar_ontop_button_focus_inactive  = themes_path..<span class="string">"default/titlebar/ontop_focus_inactive.png"</span>
+theme.titlebar_ontop_button_normal_active = themes_path..<span class="string">"default/titlebar/ontop_normal_active.png"</span>
+theme.titlebar_ontop_button_focus_active  = themes_path..<span class="string">"default/titlebar/ontop_focus_active.png"</span>
+
+theme.titlebar_sticky_button_normal_inactive = themes_path..<span class="string">"default/titlebar/sticky_normal_inactive.png"</span>
+theme.titlebar_sticky_button_focus_inactive  = themes_path..<span class="string">"default/titlebar/sticky_focus_inactive.png"</span>
+theme.titlebar_sticky_button_normal_active = themes_path..<span class="string">"default/titlebar/sticky_normal_active.png"</span>
+theme.titlebar_sticky_button_focus_active  = themes_path..<span class="string">"default/titlebar/sticky_focus_active.png"</span>
+
+theme.titlebar_floating_button_normal_inactive = themes_path..<span class="string">"default/titlebar/floating_normal_inactive.png"</span>
+theme.titlebar_floating_button_focus_inactive  = themes_path..<span class="string">"default/titlebar/floating_focus_inactive.png"</span>
+theme.titlebar_floating_button_normal_active = themes_path..<span class="string">"default/titlebar/floating_normal_active.png"</span>
+theme.titlebar_floating_button_focus_active  = themes_path..<span class="string">"default/titlebar/floating_focus_active.png"</span>
+
+theme.titlebar_maximized_button_normal_inactive = themes_path..<span class="string">"default/titlebar/maximized_normal_inactive.png"</span>
+theme.titlebar_maximized_button_focus_inactive  = themes_path..<span class="string">"default/titlebar/maximized_focus_inactive.png"</span>
+theme.titlebar_maximized_button_normal_active = themes_path..<span class="string">"default/titlebar/maximized_normal_active.png"</span>
+theme.titlebar_maximized_button_focus_active  = themes_path..<span class="string">"default/titlebar/maximized_focus_active.png"</span>
+
+theme.wallpaper = themes_path..<span class="string">"default/background.png"</span>
+
+<span class="comment">-- You can use your own layout icons like this:
+</span>theme.layout_fairh = themes_path..<span class="string">"default/layouts/fairhw.png"</span>
+theme.layout_fairv = themes_path..<span class="string">"default/layouts/fairvw.png"</span>
+theme.layout_floating  = themes_path..<span class="string">"default/layouts/floatingw.png"</span>
+theme.layout_magnifier = themes_path..<span class="string">"default/layouts/magnifierw.png"</span>
+theme.layout_max = themes_path..<span class="string">"default/layouts/maxw.png"</span>
+theme.layout_fullscreen = themes_path..<span class="string">"default/layouts/fullscreenw.png"</span>
+theme.layout_tilebottom = themes_path..<span class="string">"default/layouts/tilebottomw.png"</span>
+theme.layout_tileleft   = themes_path..<span class="string">"default/layouts/tileleftw.png"</span>
+theme.layout_tile = themes_path..<span class="string">"default/layouts/tilew.png"</span>
+theme.layout_tiletop = themes_path..<span class="string">"default/layouts/tiletopw.png"</span>
+theme.layout_spiral  = themes_path..<span class="string">"default/layouts/spiralw.png"</span>
+theme.layout_dwindle = themes_path..<span class="string">"default/layouts/dwindlew.png"</span>
+theme.layout_cornernw = themes_path..<span class="string">"default/layouts/cornernww.png"</span>
+theme.layout_cornerne = themes_path..<span class="string">"default/layouts/cornernew.png"</span>
+theme.layout_cornersw = themes_path..<span class="string">"default/layouts/cornersww.png"</span>
+theme.layout_cornerse = themes_path..<span class="string">"default/layouts/cornersew.png"</span>
+
+<span class="comment">-- Generate Awesome icon:
+</span>theme.awesome_icon = theme_assets.awesome_icon(
+    theme.menu_height, theme.bg_focus, theme.fg_focus
+)
+
+<span class="comment">-- Define the icon theme for application icons. If not set then the icons
+</span><span class="comment">-- from /usr/share/icons and /usr/share/icons/hicolor will be used.
+</span>theme.icon_theme = <span class="keyword">nil</span>
+
+<span class="keyword">return</span> theme
+
+<span class="comment">-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80</span>
+</pre>
+
 </p>
-    <h3>Info:</h3>
-    <ul>
-        <li><strong>Copyright</strong>: 2016-2017 Yauheni Kirylau</li>
-        <li><strong>Author</strong>: Yauheni Kirylau &lt;yawghen@gmail.com&gt;</li>
-    </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#get_theme_variables">get_theme_variables ()</a></td>
-	<td class="summary">Get GTK+3 theme variables from GtkStyleContext</td>
-	</tr>
-</table>
 
 <br/>
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-    Methods
-    <dl class="function">
-    <dt>
-    <a name = "get_theme_variables"></a>
-    <strong>get_theme_variables ()</strong>
-    </dt>
-    <dd>
-    Get GTK+3 theme variables from GtkStyleContext
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Key-value table with the following structure:
- <table class='widget_list' border=1>
- <tr style='font-weight: bold;'> <th align='center'>Result key</th> <th align='center'>StyleContext key</th> <th align='center'>StyleContext fallback #1</th> <th align='center'>StyleContext fallback #2</th> <th align='center'>GTK Widget fallback</th> </tr>
- <tr> <td><code>font_size</code></td> <td></td> <td></td> <td></td> <td>Label font-size</td> </tr>
- <tr> <td><code>font_family</code></td> <td></td> <td></td> <td></td> <td>Label font-family</td> </tr>
- <tr> <td><code>bg_color</code></td> <td><code>theme_bg_color</code></td> <td></td> <td></td> <td>Window bg</td> </tr>
- <tr> <td><code>fg_color</code></td> <td><code>theme_fg_color</code></td> <td></td> <td></td> <td>Window fg</td> </tr>
- <tr> <td><code>base_color</code></td> <td><code>theme_base_color</code></td> <td></td> <td></td> <td>Entry bg</td> </tr>
- <tr> <td><code>text_color</code></td> <td><code>theme_text_color</code></td> <td></td> <td></td> <td>Entry fg</td> </tr>
- <tr> <td><code>button_bg_color</code></td> <td><code>theme_button_bg_color</code></td> <td><code>theme_bg_color</code></td> <td></td> <td>Button bg</td> </tr>
- <tr> <td><code>button_fg_color</code></td> <td><code>theme_button_fg_color</code></td> <td><code>theme_fg_color</code></td> <td></td> <td>Button fg</td> </tr>
- <tr> <td><code>button_border_color</code></td> <td></td> <td></td> <td></td> <td>Button border-color</td> </tr>
- <tr> <td><code>button_border_radius</code></td> <td></td> <td></td> <td></td> <td>Button border-radius</td> </tr>
- <tr> <td><code>button_border_width</code></td> <td></td> <td></td> <td></td> <td>Button border-top-width</td> </tr>
- <tr> <td><code>selected_bg_color</code></td> <td><code>theme_selected_bg_color</code></td> <td></td> <td></td> <td>ToggleButton bg</td> </tr>
- <tr> <td><code>selected_fg_color</code></td> <td><code>theme_selected_fg_color</code></td> <td></td> <td></td> <td>ToggleButton fg</td> </tr>
- <tr> <td><code>menubar_bg_color</code></td> <td><code>menubar_bg_color</code></td> <td><code>theme_bg_color</code></td> <td></td> <td>HeaderBar bg</td> </tr>
- <tr> <td><code>menubar_fg_color</code></td> <td><code>menubar_fg_color</code></td> <td><code>theme_fg_color</code></td> <td></td> <td>HeaderBar fg</td> </tr>
- <tr> <td><code>header_button_bg_color</code></td> <td><code>header_button_bg_color</code></td> <td><code>menubar_bg_color</code></td> <td><code>theme_bg_color</code></td> <td>HeaderBar > Button bg</td> </tr>
- <tr> <td><code>header_button_fg_color</code></td> <td><code>header_button_fg_color</code></td> <td><code>menubar_fg_color</code></td> <td><code>theme_fg_color</code></td> <td>HeaderBar > Button fg</td> </tr>
- <tr> <td><code>header_button_border_color</code></td> <td></td> <td></td> <td></td> <td>HeaderBar > Button border-color</td> </tr>
- <tr> <td><code>error_color</code></td> <td><code>error_color</code></td> <td><code>error_bg_color</code></td> <td></td> <td>destructive Button bg</td> </tr>
- <tr> <td><code>error_bg_color</code></td> <td><code>error_bg_color</code></td> <td><code>error_color</code></td> <td></td> <td>destructive Button bg</td> </tr>
- <tr> <td><code>error_fg_color</code></td> <td><code>error_fg_color</code></td> <td><code>theme_selected_fg_color</code></td> <td></td> <td>destructive Button fg</td> </tr>
- <tr> <td><code>warning_color</code></td> <td><code>warning_color</code></td> <td><code>warning_bg_color</code></td> <td></td> <td></td> </tr>
- <tr> <td><code>warning_bg_color</code></td> <td><code>warning_bg_color</code></td> <td><code>warning_color</code></td> <td></td> <td></td> </tr>
- <tr> <td><code>warning_fg_color</code></td> <td><code>warning_fg_color</code></td> <td><code>theme_selected_fg_color</code></td> <td></td> <td></td> </tr>
- <tr> <td><code>success_color</code></td> <td><code>success_color</code></td> <td><code>success_bg_color</code></td> <td></td> <td></td> </tr>
- <tr> <td><code>success_bg_color</code></td> <td><code>success_bg_color</code></td> <td><code>success_color</code></td> <td></td> <td></td> </tr>
- <tr> <td><code>success_fg_color</code></td> <td><code>success_fg_color</code></td> <td><code>theme_selected_fg_color</code></td> <td></td> <td></td> </tr>
- <tr> <td><code>tooltip_bg_color</code></td> <td><code>theme_tooltip_bg_color</code></td> <td><code>theme_bg_color</code></td> <td></td> <td></td> </tr>
- <tr> <td><code>tooltip_fg_color</code></td> <td><code>theme_tooltip_fg_color</code></td> <td><code>theme_fg_color</code></td> <td></td> <td></td> </tr>
- <tr> <td><code>osd_bg_color</code></td> <td><code>osd_bg</code></td> <td><code>theme_tooltip_bg_color</code></td> <td><code>theme_bg_color</code></td> <td></td> </tr>
- <tr> <td><code>osd_fg_color</code></td> <td><code>osd_fg</code></td> <td><code>theme_tooltip_fg_color</code></td> <td><code>theme_fg_color</code></td> <td></td> </tr>
- <tr> <td><code>osd_border_color</code></td> <td><code>osd_borders_color</code></td> <td><code>osd_fg_color</code></td> <td></td> <td></td> </tr>
- <tr> <td><code>wm_bg_color</code></td> <td><code>wm_bg</code></td> <td><code>menubar_bg_color</code></td> <td><code>theme_bg_color</code></td> <td>HeaderBar bg</td> </tr>
- <tr> <td><code>wm_border_focused_color</code></td> <td><code>wm_border_focused</code></td> <td><code>theme_selected_bg_color</code></td> <td></td> <td>ToggleButton bg</td> </tr>
- <tr> <td><code>wm_border_unfocused_color</code></td> <td><code>wm_border_unfocused</code></td> <td><code>wm_border</code></td> <td><code>menubar_bg_color</code></td> <!--&lt;td><code>theme_bg_color</code></td>&mdash;> <td>HeaderBar bg</td> </tr>
- <tr> <td><code>wm_title_focused_color</code></td> <td><code>wm_title_focused</code></td> <td><code>wm_title</code></td> <td><code>theme_selected_fg_color</code></td> <td>ToggleButton fg</td> </tr>
- <tr> <td><code>wm_title_unfocused_color</code></td> <td><code>wm_title_unfocused</code></td> <td><code>wm_unfocused_title</code></td> <td><code>menubar_fg_color</code></td> <!--&lt;td><code>theme_fg_color</code></td>&mdash;> <td>HeaderBar fg</td> </tr>
- <tr> <td><code>wm_icons_focused_color</code></td> <td><code>wm_icons_focused</code></td> <td><code>wm_title_focused</code></td> <td><code>theme_selected_fg_color</code></td> <td>ToggleButton fg</td> </tr>
- <tr> <td><code>wm_icons_unfocused_color</code></td> <td><code>wm_icons_unfocused</code></td> <td><code>wm_title_unfocused</code></td> <td><code>menubar_fg_color</code></td> <!--&lt;td><code>theme_fg_color</code></td>&mdash;> <td>HeaderBar fg</td> </tr>
- </table>
-    </ol>
-
-
-
-
-</dd>
-</dl>
 
 
 </div> <!-- id="content" -->
