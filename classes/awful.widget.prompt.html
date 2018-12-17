@@ -192,7 +192,7 @@ myprompt:run()
 </p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2009 Julien Danjou</li>
+        <li><strong>Copyright</strong>: 2009 Julien Danjou,2018 Aire-One</li>
         <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
     </ul>
 
@@ -229,6 +229,8 @@ myprompt:run()
     </dt>
     <dd>
     Create a prompt widget which will launch a command.
+ For additional documentation about <code>args</code> parameter, please refer to
+ <a href="../libraries/awful.prompt.html#">awful.prompt</a> and <a href="../libraries/awful.prompt.html#run">awful.prompt.run</a>.
 
 
     <ul>
@@ -241,18 +243,102 @@ myprompt:run()
         </li>
         <li><span class="parameter">bg</span>
             <span class="types"><span class="type">color</span></span>
-         Prompt background color.
+           Prompt background color.
          (<em>default</em> `beautiful.prompt_bg` or `beautiful.bg_normal`)
         </li>
         <li><span class="parameter">fg</span>
             <span class="types"><span class="type">color</span></span>
-         Prompt foreground color.
+           Prompt foreground color.
          (<em>default</em> `beautiful.prompt_fg` or `beautiful.fg_normal`)
+        </li>
+        <li><span class="parameter">fg_cursor</span>
+            <span class="types"><span class="type">gears.color</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">bg_cursor</span>
+            <span class="types"><span class="type">gears.color</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">ul_cursor</span>
+            <span class="types"><span class="type">gears.color</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">font</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">autoexec</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">highlighter</span>
+            <span class="types"><span class="type">function</span></span>
+         A function to add syntax highlighting
+   to the command.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">exe_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to call with
+   command as argument when finished.
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">completion_callback</span>
             <span class="types"><span class="type">function</span></span>
-           The callback function to call to get completion. See <a href="../libraries/awful.prompt.html#run">awful.prompt.run</a> for details.
+           The callback function to call to get completion. See <a href="../libraries/awful.prompt.html#run">awful.prompt.run</a>
+   for details.
          (<em>default</em> `awful.completion.shell`)
+        </li>
+        <li><span class="parameter">history_path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         File path where the history should be saved.
+         (<em>default</em> `gears.filesystem.get_cache_dir() .. '/history'`)
+        </li>
+        <li><span class="parameter">history_max</span>
+            <span class="types"><span class="type">integer</span></span>
+         Set the maximum entries in
+   history file.
+         (<em>default</em> 50)
+        </li>
+        <li><span class="parameter">done_callback</span>
+            <span class="types"><span class="type">function</span></span>
+           The callback function to always call without arguments, regardless of
+   whether the prompt was cancelled. See <a href="../libraries/awful.prompt.html#run">awful.prompt.run</a> for details.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">changed_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to call
+   with command as argument when a command was changed.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">keypressed_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to call
+   with mod table, key and command as arguments when a key was pressed.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">keyreleased_callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback function to call
+   with mod table, key and command as arguments when a key was pressed.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">hook</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Similar to <a href="../libraries/awful.key.html#">awful.key</a>. It will call a function
+   for the matching modifiers + key. See <a href="../libraries/awful.prompt.html#run">awful.prompt.run</a> for details.
+         (<em>optional</em>)
         </li>
         </li></ul>
     </ul>
@@ -260,7 +346,8 @@ myprompt:run()
     <h3>Returns:</h3>
     <ol>
 
-        An instance of prompt widget, inherits from <a href="../classes/wibox.container.background.html#">wibox.container.background</a>.
+        An instance of prompt widget, inherits from
+   <a href="../classes/wibox.container.background.html#">wibox.container.background</a>.
     </ol>
 
 
