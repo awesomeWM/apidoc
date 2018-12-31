@@ -192,14 +192,50 @@
 
 <hr />
 
+<p><img src="../images/AUTOGEN_awful_tooltip_textclock.svg" alt="Usage example" /></p>
+
 <pre>
-myclock = wibox.widget.textclock(<span class="string">"%T"</span>, <span class="number">1</span>)
-myclock_t = awful.tooltip({
-    objects = { myclock },
+<span class="keyword">local</span> mytextclock = wibox.widget.textclock()
+
+<span class="keyword">local</span> myclock_t = awful.tooltip {
+    objects        = { mytextclock },
     timer_function = <span class="keyword">function</span>()
-            <span class="keyword">return</span> <span class="global">os</span>.date(<span class="string">"Today is %A %B %d %Y\nThe time is %T"</span>)
-        <span class="keyword">end</span>,
-    })
+        <span class="keyword">return</span> <span class="global">os</span>.date(<span class="string">'Today is %A %B %d %Y\nThe time is %T'</span>)
+    <span class="keyword">end</span>,
+}
+</pre>
+
+
+<p> Alternatively, you can use <code>mouse::enter</code> signal:</p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_textclock2.svg" alt="Usage example" /></p>
+
+<pre>
+<span class="keyword">local</span> mytextclock = wibox.widget.textclock()
+
+<span class="keyword">local</span> myclock_t = awful.tooltip { }
+
+myclock_t:add_to_object(mytextclock)
+
+mytextclock:connect_signal(<span class="string">'mouse::enter'</span>, <span class="keyword">function</span>()
+    myclock_t.text = <span class="global">os</span>.date(<span class="string">'Today is %A %B %d %Y\nThe time is %T'</span>)
+<span class="keyword">end</span>)
+</pre>
+
+
+<p> How to create a tooltip without objects?</p>
+
+<hr />
+
+<p><img src="../images/AUTOGEN_awful_tooltip_mouse.svg" alt="Usage example" /></p>
+
+<pre>
+<span class="keyword">local</span> tt = awful.tooltip {
+    text = <span class="string">'A tooltip!'</span>,
+    visible = <span class="keyword">true</span>,
+}
+
+tt.bg = beautiful.bg_normal
 </pre>
 
 
@@ -267,6 +303,10 @@ myclock_t:remove_from_object(obj2)
 	<td class="summary">The preferred positions when in <code>outside</code> mode.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#awful.tooltip.preferred_alignments">preferred_alignments</a></td>
+	<td class="summary">The preferred alignment when using the <code>outside</code> mode.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#awful.tooltip.text">text</a></td>
 	<td class="summary">Change displayed text.</td>
 	</tr>
@@ -281,6 +321,14 @@ myclock_t:remove_from_object(obj2)
 	<tr>
 	<td class="name" ><a href="#awful.tooltip.margins">margins</a></td>
 	<td class="summary">Set all margins around the tooltip textbox</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.tooltip.border_width">border_width</a></td>
+	<td class="summary">The border width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.tooltip.border_color">border_color</a></td>
+	<td class="summary">The border color.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#awful.tooltip.margins_leftright">margins_leftright</a></td>
@@ -508,6 +556,13 @@ myclock_t:remove_from_object(obj2)
     <dd>
     <p>The horizontal alignment. </p>
 
+<p> This is valid for the mouse mode only. For the outside mode, use
+ <a href="../classes/awful.tooltip.html#awful.tooltip.preferred_positions">preferred_positions</a>.</p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_align.svg" alt="Usage example" /></p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_align2.svg" alt="Usage example" /></p>
+
 <p> The following values are valid:</p>
 
 <ul>
@@ -529,7 +584,9 @@ myclock_t:remove_from_object(obj2)
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/awful.tooltip.html#beautiful.tooltip_align">beautiful.tooltip_align</a>
+         <li><a href="../classes/awful.tooltip.html#beautiful.tooltip_align">beautiful.tooltip_align</a></li>
+         <li><a href="../classes/awful.tooltip.html#awful.tooltip.mode">mode</a></li>
+         <li><a href="../classes/awful.tooltip.html#awful.tooltip.preferred_positions">preferred_positions</a></li>
     </ul>
 
 
@@ -540,7 +597,9 @@ myclock_t:remove_from_object(obj2)
     </dt>
     <dd>
     The shape of the tooltip window.
- If the shape require some parameters, use <a href="../classes/awful.tooltip.html#awful.tooltip:set_shape">set_shape</a>.
+ If the shape require some parameters, use <a href="../classes/awful.tooltip.html#awful.tooltip:set_shape">set_shape</a>.</p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_shape.svg" alt="Usage example" />
 
 
 
@@ -564,6 +623,14 @@ myclock_t:remove_from_object(obj2)
  This affects how the tooltip is placed. By default, the tooltip is <a href="../classes/awful.tooltip.html#awful.tooltip.align">align</a>ed
  close to the mouse cursor. It is also possible to place the tooltip relative
  to the widget geometry.</p>
+
+<p> <strong>mouse:</strong></p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_mode.svg" alt="Usage example" /></p>
+
+<p> <strong>outside:</strong></p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_mode2.svg" alt="Usage example" /></p>
 
 <p> Valid modes are:</p>
 
@@ -595,8 +662,20 @@ myclock_t:remove_from_object(obj2)
     <dd>
     <p>The preferred positions when in <code>outside</code> mode. </p>
 
+<p><img src="../images/AUTOGEN_awful_tooltip_preferred_positions.svg" alt="Usage example" /></p>
+
 <p> If the tooltip fits on multiple sides of the drawable, then this defines the
- priority</p>
+ priority.</p>
+
+<p> The valid table values are:</p>
+
+<ul>
+<li>&ldquo;top&rdquo;</li>
+<li>&ldquo;right&rdquo;</li>
+<li>&ldquo;left&rdquo;</li>
+<li>&ldquo;bottom&rdquo;</li>
+</ul>
+
 
 <p> The default is:</p>
 
@@ -615,6 +694,67 @@ myclock_t:remove_from_object(obj2)
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../classes/awful.tooltip.html#awful.tooltip.align">align</a></li>
+         <li><a href="../classes/awful.tooltip.html#awful.tooltip.mode">mode</a></li>
+         <li><a href="../classes/awful.tooltip.html#awful.tooltip.preferred_alignments">preferred_alignments</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.tooltip.preferred_alignments"></a>
+    <strong>preferred_alignments</strong>
+    </dt>
+    <dd>
+    <p>The preferred alignment when using the <code>outside</code> mode. </p>
+
+<p> The values of the table are ordered by priority, the first one that fits
+ will be used.</p>
+
+<p> <strong>front:</strong></p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_preferred_alignment.svg" alt="Usage example" /></p>
+
+<p> <strong>middle:</strong></p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_preferred_alignment2.svg" alt="Usage example" /></p>
+
+<p> <strong>back:</strong></p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_preferred_alignment3.svg" alt="Usage example" /></p>
+
+<p> The valid table values are:</p>
+
+<ul>
+<li>front</li>
+<li>middle</li>
+<li>back</li>
+</ul>
+
+
+<p> The default is:</p>
+
+<pre><code>{"front", "back", "middle"}
+</code></pre>
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/awful.tooltip.html#awful.tooltip.preferred_positions">preferred_positions</a>
+    </ul>
 
 
 </dd>
@@ -708,7 +848,10 @@ myclock_t:remove_from_object(obj2)
     <strong>margins</strong>
     </dt>
     <dd>
-    Set all margins around the tooltip textbox
+    Set all margins around the tooltip textbox<br/>
+</p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_margins.svg" alt="Usage example" />
 
 
     <h3>Type:</h3>
@@ -729,11 +872,53 @@ myclock_t:remove_from_object(obj2)
 
 </dd>
     <dt>
+    <a name = "awful.tooltip.border_width"></a>
+    <strong>border_width</strong>
+    </dt>
+    <dd>
+    The border width. </p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_border_width.svg" alt="Usage example" />
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.tooltip.border_color"></a>
+    <strong>border_color</strong>
+    </dt>
+    <dd>
+    The border color. </p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_border_color.svg" alt="Usage example" />
+
+
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "awful.tooltip.margins_leftright"></a>
     <strong>margins_leftright</strong>
     </dt>
     <dd>
-    Set the margins around the left and right of the tooltip textbox
+    Set the margins around the left and right of the tooltip textbox<br/>
+</p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_margins_leftright.svg" alt="Usage example" />
 
 
     <h3>Type:</h3>
@@ -758,7 +943,10 @@ myclock_t:remove_from_object(obj2)
     <strong>margins_topbottom</strong>
     </dt>
     <dd>
-    Set the margins around the top and bottom of the tooltip textbox
+    Set the margins around the top and bottom of the tooltip textbox<br/>
+</p>
+
+<p><img src="../images/AUTOGEN_awful_tooltip_margins_topbottom.svg" alt="Usage example" />
 
 
     <h3>Type:</h3>
