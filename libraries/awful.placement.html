@@ -1460,13 +1460,32 @@ a table with multiple directions.</li>
     <dd>
     Move a drawable to a relative position next to another one. </p>
 
+<p> This placement function offers two additional settings to align the drawable
+ alongside the parent geometry. The first one, the position, sets the side
+ relative to the parent. The second one, the anchor, set the alignment within
+ the side selected by the <code>preferred_positions</code>. Both settings are tables of
+ priorities. The first available slot will be used. If there isn&rsquo;t enough
+ space, then it will fallback to the next until it is possible to fit the
+ drawable. This is meant to avoid going offscreen.</p>
+
 <p> The <code>args.preferred_positions</code> look like this:</p>
 
 <pre><code>{"top", "right", "left", "bottom"}
 </code></pre>
 
+<p> The <code>args.preferred_anchors</code> are:</p>
+
+<ul>
+<li>&ldquo;front&rdquo;: The closest to the origin (0,0)</li>
+<li>&ldquo;middle&rdquo;: Centered aligned with the parent</li>
+<li>"back": The opposite side compared to <code>front</code></li>
+</ul>
+
+
 <p> In that case, if there is room on the top of the geometry, then it will have
- priority, followed by all the others, in order.
+ priority, followed by all the others, in order.</p>
+
+<p><img src="../images/AUTOGEN_awful_placement_next_to.svg" alt="Usage example" />
 
 
     <ul>
@@ -1482,8 +1501,12 @@ a table with multiple directions.</li>
          The mode
         </li>
         <li><span class="parameter">preferred_positions</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The preferred positions (in order)
+        </li>
+        <li><span class="parameter">preferred_anchors</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The preferred anchor(s) (in order)
         </li>
         <li><span class="parameter">geometry</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
@@ -1499,14 +1522,37 @@ a table with multiple directions.</li>
         The new geometry</li>
         <li>
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-        The choosen position</li>
+        The choosen position (&ldquo;left&rdquo;, &ldquo;right&rdquo;, &ldquo;top&rdquo; or &ldquo;bottom&rdquo;)</li>
         <li>
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-        The choosen direction</li>
+        The choosen anchor (&ldquo;front&rdquo;, &ldquo;middle&rdquo; or &ldquo;back&rdquo;)</li>
     </ol>
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, pos <span class="keyword">in</span> <span class="global">ipairs</span>{<span class="string">'left'</span>, <span class="string">'right'</span>, <span class="string">'top'</span>, <span class="string">'bottom'</span>} <span class="keyword">do</span>
+    <span class="keyword">for</span> _, anchor <span class="keyword">in</span> <span class="global">ipairs</span>{<span class="string">'front'</span>, <span class="string">'middle'</span>, <span class="string">'back'</span>} <span class="keyword">do</span>
+        awful.placement.next_to(
+            client.focus,
+            {
+                preferred_positions = pos,
+                preferred_anchors   = anchor,
+                geometry            = parent_client,
+            }
+        )
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+The <span class="backtick"><code>args.mode</code></span> parameters allows to control from which <span class="backtick"><a href="../libraries/awful.placement.html#next_to">next_to</a></span> takes its
+source object from. The valid values are:
+
+* geometry: Next to this geometry, <span class="backtick"><code>args.geometry</code></span> has to be set.
+* cursor: Next to the mouse.
+* cursor_inside
+* geometry_inside</pre>
+    </ul>
 
 </dd>
     <dt>
