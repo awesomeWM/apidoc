@@ -34,6 +34,7 @@
 <ul>
 <li><a href="#Functions">Functions</a></li>
 <li><a href="#Methods">Methods</a></li>
+<li><a href="#lib_gears_object_properties_Functions">lib.gears.object.properties Functions</a></li>
 </ul>
 
 
@@ -110,7 +111,6 @@
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
   <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
-  <li><a href="../libraries/awful.hotkeys_popup.keys.termite.html">awful.hotkeys_popup.keys.termite</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.widget.html">awful.hotkeys_popup.widget</a></li>
   <li><a href="../libraries/awful.key.html">awful.key</a></li>
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
@@ -126,15 +126,12 @@
   <li><a href="../libraries/awful.wibox.html">awful.wibox</a></li>
   <li><a href="../libraries/beautiful.html">beautiful</a></li>
   <li><a href="../libraries/beautiful.gtk.html">beautiful.gtk</a></li>
-  <li><a href="../libraries/beautiful.theme_assets.html">beautiful.theme_assets</a></li>
-  <li><a href="../libraries/beautiful.xresources.html">beautiful.xresources</a></li>
   <li><a href="../libraries/dbus.html">dbus</a></li>
   <li><a href="../libraries/gears.color.html">gears.color</a></li>
   <li><a href="../libraries/gears.debug.html">gears.debug</a></li>
   <li><a href="../libraries/gears.filesystem.html">gears.filesystem</a></li>
   <li><a href="../libraries/gears.geometry.html">gears.geometry</a></li>
   <li><a href="../libraries/gears.math.html">gears.math</a></li>
-  <li><a href="../libraries/gears.object.properties.html">gears.object.properties</a></li>
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
   <li><a href="../libraries/gears.sort.html">gears.sort</a></li>
@@ -217,6 +214,13 @@
 	<tr>
 	<td class="name" ><a href="#gears.object:modulename">gears.object:modulename ([level=2])</a></td>
 	<td class="summary">Helper function to get the module name out of <code>debug.getinfo</code>.</td>
+	</tr>
+</table>
+<h2><a href="#lib_gears_object_properties_Functions">lib.gears.object.properties Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#gears.object.properties.capi_index_fallback">gears.object.properties.capi_index_fallback (class[, args={}])</a></td>
+	<td class="summary">Add the missing properties handler to a CAPI object such as client/tag/screen.</td>
 	</tr>
 </table>
 
@@ -488,6 +492,50 @@ mt.__tostring = <span class="keyword">function</span>(o)
 <span class="keyword">end</span>
 <span class="keyword">return</span> <span class="global">setmetatable</span>(ret, mt)</pre>
     </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="lib_gears_object_properties_Functions"></a>lib.gears.object.properties Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "gears.object.properties.capi_index_fallback"></a>
+    <strong>gears.object.properties.capi_index_fallback (class[, args={}])</strong>
+    </dt>
+    <dd>
+    <p>Add the missing properties handler to a CAPI object such as client/tag/screen.
+ Valid args:</p>
+
+<ul>
+<li><strong>getter</strong>: A smart getter (handle property getter itself)</li>
+<li><strong>getter_fallback</strong>: A dumb getter method (don&rsquo;t handle individual property getter)</li>
+<li><strong>getter_class</strong>: A module with individual property getter/setter</li>
+<li><strong>getter_prefix</strong>: A special getter prefix (like &ldquo;get&rdquo; or &ldquo;get_&rdquo; (default))</li>
+<li><strong>setter</strong>: A smart setter (handle property setter itself)</li>
+<li><strong>setter_fallback</strong>: A dumb setter method (don&rsquo;t handle individual property setter)</li>
+<li><strong>setter_class</strong>: A module with individual property getter/setter</li>
+<li><strong>setter_prefix</strong>: A special setter prefix (like &ldquo;set&rdquo; or &ldquo;set_&rdquo; (default))</li>
+<li><strong>auto_emit</strong>: Emit &ldquo;property::___&rdquo; automatically (default: false). This is
+  ignored when setter_fallback is set or a setter is found</li>
+</ul>
+
+
+
+
+    <ul>
+        <li><span class="parameter">class</span>
+         A standard luaobject derived object
+        </li>
+        <li><span class="parameter">args</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A set of accessors configuration parameters
+         (<em>default</em> {})
+        </li>
+    </ul>
+
+
+
+
 
 </dd>
 </dl>
