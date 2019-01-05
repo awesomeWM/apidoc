@@ -182,8 +182,8 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#join">join (args)</a></td>
-	<td class="summary">Join all tables given as parameters.</td>
+	<td class="name" ><a href="#join">join (...)</a></td>
+	<td class="summary">Join all tables given as arguments.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#crush">crush (t, set[, raw=false])</a></td>
@@ -191,10 +191,7 @@
 	</tr>
 	<tr>
 	<td class="name" ><a href="#from_sparse">from_sparse (t)</a></td>
-	<td class="summary">Pack all elements with an integer key into a new table
- While both lua and luajit implement __len over sparse
- table, the standard define it as an implementation
- detail.</td>
+	<td class="summary">Pack all elements with an integer key into a new table.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#hasitem">hasitem (t, item)</a></td>
@@ -202,28 +199,27 @@
 	</tr>
 	<tr>
 	<td class="name" ><a href="#keys">keys (t)</a></td>
-	<td class="summary">Get a sorted table with all integer keys from a table</td>
+	<td class="summary">Get a sorted table with all integer keys from a table.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#keys_filter">keys_filter (t, ...)</a></td>
-	<td class="summary">Filter a tables keys for certain content types</td>
+	<td class="summary">Filter a table&rsquo;s keys for certain content type.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#reverse">reverse (t)</a></td>
-	<td class="summary">Reverse a table</td>
+	<td class="summary">Reverse a table.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#clone">clone (t, deep)</a></td>
-	<td class="summary">Clone a table</td>
+	<td class="name" ><a href="#clone">clone (t[, deep=true])</a></td>
+	<td class="summary">Clone a table.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#iterate">iterate (t, filter, start)</a></td>
-	<td class="summary">Returns an iterator to cycle through, starting from the first element or the
- given index, all elements of a table that match a given criteria.</td>
+	<td class="summary">Iterate over a table.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#merge">merge (t, set)</a></td>
-	<td class="summary">Merge items from the one table to another one</td>
+	<td class="summary">Merge items from one table to another one.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#map">map (f, tbl)</a></td>
@@ -240,23 +236,25 @@
     <dl class="function">
     <dt>
     <a name = "join"></a>
-    <strong>join (args)</strong>
+    <strong>join (...)</strong>
     </dt>
     <dd>
-    Join all tables given as parameters.
- This will iterate all tables and insert all their keys into a new table.
+    Join all tables given as arguments.
+ This will iterate over all tables and insert their entries into a new table.
 
 
     <ul>
-        <li><span class="parameter">args</span>
-         A list of tables to join
+        <li><span class="parameter">...</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Tables to join.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        A new table containing all keys from the arguments.
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A new table containing all entries from the arguments.
     </ol>
 
 
@@ -283,7 +281,7 @@
          the table used to override members of <code>t</code>
         </li>
         <li><span class="parameter">raw</span>
-            <span class="types"><span class="type">boolean</span></span>
+            <span class="types"><span class="type">bool</span></span>
          Use rawset (avoid the metatable)
          (<em>default</em> false)
         </li>
@@ -305,18 +303,18 @@
     <strong>from_sparse (t)</strong>
     </dt>
     <dd>
-    Pack all elements with an integer key into a new table
+    Pack all elements with an integer key into a new table.
  While both lua and luajit implement __len over sparse
- table, the standard define it as an implementation
- detail. </p>
+ tables, the standard defines it as an implementation
+ detail.</p>
 
-<p> This function remove any non numeric keys from the value set
+<p> This function removes any entries with non-numeric keys.
 
 
     <ul>
         <li><span class="parameter">t</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A potentially sparse table
+         A potentially sparse table.
         </li>
     </ul>
 
@@ -324,7 +322,7 @@
     <ol>
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        A packed table with all numeric keys
+        A packed table with only numeric keys.
     </ol>
 
 
@@ -341,6 +339,7 @@
 
     <ul>
         <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The table.
         </li>
         <li><span class="parameter">item</span>
@@ -351,7 +350,15 @@
     <h3>Returns:</h3>
     <ol>
 
-        The key were the item is found, or nil if not found.
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">number</span></span>
+        The key of the item.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">nil</span></span>
+
+
     </ol>
 
 
@@ -363,18 +370,20 @@
     <strong>keys (t)</strong>
     </dt>
     <dd>
-    Get a sorted table with all integer keys from a table
+    Get a sorted table with all integer keys from a table.
 
 
     <ul>
         <li><span class="parameter">t</span>
-         the table for which the keys to get
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The table for which the keys to get.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         A table with keys
     </ol>
 
@@ -387,22 +396,25 @@
     <strong>keys_filter (t, ...)</strong>
     </dt>
     <dd>
-    Filter a tables keys for certain content types
+    Filter a table&rsquo;s keys for certain content type.
 
 
     <ul>
         <li><span class="parameter">t</span>
-         The table to retrieve the keys for
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The table to retrieve the keys for.
         </li>
         <li><span class="parameter">...</span>
-         the types to look for
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The types to look for.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        A filtered table with keys
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A filtered table.
     </ol>
 
 
@@ -414,19 +426,21 @@
     <strong>reverse (t)</strong>
     </dt>
     <dd>
-    Reverse a table
+    Reverse a table.
 
 
     <ul>
         <li><span class="parameter">t</span>
-         the table to reverse
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The table to reverse.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        the reversed table
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A reversed table.
     </ol>
 
 
@@ -435,25 +449,29 @@
 </dd>
     <dt>
     <a name = "clone"></a>
-    <strong>clone (t, deep)</strong>
+    <strong>clone (t[, deep=true])</strong>
     </dt>
     <dd>
-    Clone a table
+    Clone a table.
 
 
     <ul>
         <li><span class="parameter">t</span>
-         the table to clone
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The table to clone.
         </li>
         <li><span class="parameter">deep</span>
-         Create a deep clone? (default: true)
+            <span class="types"><span class="type">bool</span></span>
+         Create a deep clone?
+         (<em>default</em> true)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-        a clone of t
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        A clone of <code>t</code>.
     </ol>
 
 
@@ -465,8 +483,9 @@
     <strong>iterate (t, filter, start)</strong>
     </dt>
     <dd>
-    Returns an iterator to cycle through, starting from the first element or the
- given index, all elements of a table that match a given criteria.
+    Iterate over a table.
+ Returns an iterator to cycle through all elements of a table that match a
+ given criteria, starting from the first element or the given index.
 
 
     <ul>
@@ -504,17 +523,17 @@
     <strong>merge (t, set)</strong>
     </dt>
     <dd>
-    Merge items from the one table to another one
+    Merge items from one table to another one.
 
 
     <ul>
         <li><span class="parameter">t</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         the container table
+         The container table
         </li>
         <li><span class="parameter">set</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         the mixin table
+         The mixin table.
         </li>
     </ul>
 
@@ -522,7 +541,7 @@
     <ol>
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        Return <code>t</code> for convenience
+        (for convenience)
     </ol>
 
 
@@ -534,18 +553,19 @@
     <strong>map (f, tbl)</strong>
     </dt>
     <dd>
-    Map a function to a table.  The function is applied to each value
- on the table, returning a table of the results.
+    Map a function to a table.
+ The function is applied to each value on the table, returning a modified
+ table.
 
 
     <ul>
         <li><span class="parameter">f</span>
             <span class="types"><span class="type">function</span></span>
-         the function to be applied to each value on the table
+         The function to be applied to each value in the table.
         </li>
         <li><span class="parameter">tbl</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         the container table whose values will be operated on
+         The container table whose values will be operated on.
         </li>
     </ul>
 
@@ -553,7 +573,8 @@
     <ol>
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        Return a table of the results
+
+
     </ol>
 
 
