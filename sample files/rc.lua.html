@@ -192,7 +192,7 @@
 <span class="comment">-- Notification library
 </span><span class="keyword">local</span> naughty = <span class="global">require</span>(<span class="string">"naughty"</span>)
 <span class="keyword">local</span> menubar = <span class="global">require</span>(<span class="string">"menubar"</span>)
-<span class="keyword">local</span> hotkeys_popup = <span class="global">require</span>(<span class="string">"awful.hotkeys_popup"</span>).widget
+<span class="keyword">local</span> hotkeys_popup = <span class="global">require</span>(<span class="string">"awful.hotkeys_popup"</span>)
 <span class="comment">-- Enable hotkeys help widget for VIM and other apps
 </span><span class="comment">-- when client with a matching name is opened:
 </span><span class="global">require</span>(<span class="string">"awful.hotkeys_popup.keys"</span>)
@@ -277,11 +277,11 @@ editor_cmd = terminal .. <span class="string">" -e "</span> .. editor
 <span class="comment">-- {{{ Menu
 </span><span class="comment">-- Create a launcher widget and a main menu
 </span>myawesomemenu = {
-   { <span class="string">"hotkeys"</span>, <span class="keyword">function</span>() <span class="keyword">return</span> <span class="keyword">false</span>, hotkeys_popup.show_help <span class="keyword">end</span>},
+   { <span class="string">"hotkeys"</span>, <span class="keyword">function</span>() hotkeys_popup.show_help(<span class="keyword">nil</span>, awful.screen.focused()) <span class="keyword">end</span> },
    { <span class="string">"manual"</span>, terminal .. <span class="string">" -e man awesome"</span> },
    { <span class="string">"edit config"</span>, editor_cmd .. <span class="string">" "</span> .. awesome.conffile },
    { <span class="string">"restart"</span>, awesome.restart },
-   { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.quit() <span class="keyword">end</span>}
+   { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.quit() <span class="keyword">end</span> },
 }
 
 mymainmenu = awful.menu({ items = { { <span class="string">"awesome"</span>, myawesomemenu, beautiful.awesome_icon },
