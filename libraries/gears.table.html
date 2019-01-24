@@ -198,6 +198,14 @@
 	<td class="summary">Check if a table has an item and return its key.</td>
 	</tr>
 	<tr>
+	<td class="name" ><a href="#gtable.find_keys">gtable.find_keys (t, matcher[, ordered=false[, max=nil]])</a></td>
+	<td class="summary">Get all matching table keys for a <code>matcher</code> function.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#gtable.find_first_key">gtable.find_first_key (t, matcher[, ordered=false])</a></td>
+	<td class="summary">Find the first key that matches a function.</td>
+	</tr>
+	<tr>
 	<td class="name" ><a href="#keys">keys (t)</a></td>
 	<td class="summary">Get a sorted table with all integer keys from a table.</td>
 	</tr>
@@ -359,6 +367,85 @@
            <span class="types"><span class="type">nil</span></span>
 
 
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "gtable.find_keys"></a>
+    <strong>gtable.find_keys (t, matcher[, ordered=false[, max=nil]])</strong>
+    </dt>
+    <dd>
+    Get all matching table keys for a <code>matcher</code> function.
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The table.
+        </li>
+        <li><span class="parameter">matcher</span>
+            <span class="types"><span class="type">function</span></span>
+         A function taking the key and value as arguments and
+   returning a boolean.
+        </li>
+        <li><span class="parameter">ordered</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If true, only look for continuous
+   numeric keys.
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">max</span>
+            <span class="types"><span class="type">number</span></span>
+         The maximum number of entries to find.
+         (<em>default</em> nil)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">nil</span></span>
+        An ordered table with all the keys or <code>nil</code> if none were
+   found.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "gtable.find_first_key"></a>
+    <strong>gtable.find_first_key (t, matcher[, ordered=false])</strong>
+    </dt>
+    <dd>
+    Find the first key that matches a function.
+
+
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The table.
+        </li>
+        <li><span class="parameter">matcher</span>
+            <span class="types"><span class="type">function</span></span>
+         A function taking the key and value as arguments and
+   returning a boolean.
+        </li>
+        <li><span class="parameter">ordered</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If true, only look for continuous
+   numeric keys.
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        The table key or nil
     </ol>
 
 
