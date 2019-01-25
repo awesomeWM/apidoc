@@ -43,6 +43,7 @@
 <ul class="nowrap">
   <li><a href="../classes/awful.button.html">awful.button</a></li>
   <li><a href="../classes/awful.keygrabber.html">awful.keygrabber</a></li>
+  <li><a href="../classes/awful.popup.html">awful.popup</a></li>
   <li><a href="../classes/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../classes/awful.tooltip.html">awful.tooltip</a></li>
   <li><a href="../classes/awful.wibar.html">awful.wibar</a></li>
@@ -161,7 +162,7 @@
   <li><a href="../documentation/00-authors.md.html">Authors</a></li>
   <li><a href="../documentation/01-readme.md.html">Readme</a></li>
   <li><a href="../documentation/02-contributing.md.html">Contributing</a></li>
-  <li><a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a></li>
+  <li><a href="../documentation/03-declarative-layout.md.html">The AwesomeWM widget system</a></li>
   <li><a href="../documentation/04-new-widgets.md.html">Creating new widget</a></li>
   <li><a href="../documentation/05-awesomerc.md.html">Default configuration file documentation</a></li>
   <li><a href="../documentation/06-appearance.md.html">Change Awesome appearance</a></li>
@@ -178,7 +179,7 @@
 
 <h1>Class <code>awful.widget.tasklist</code></h1>
 <p>Tasklist widget module for awful.</p>
-<p> <a name="status_icons"></a>
+<p><p> <a name="status_icons"></a>
  <strong>Status icons:</strong></p>
 
 <p> By default, the tasklist prepends some symbols in front of the client name.
@@ -351,8 +352,52 @@ s.mytasklist = awful.widget.tasklist {
 </pre>
 
 
-<p> The tasklist can also be created in an <code>awful.popup</code> in case there is no
+<p> The tasklist can also be created in an <a href="../classes/awful.popup.html#">awful.popup</a> in case there is no
  permanent <a href="../classes/awful.wibar.html#">awful.wibar</a>:</p>
+
+<p><img src="../images/AUTOGEN_awful_popup_alttab.svg" alt="Usage example" /></p>
+
+<pre>
+awful.popup {
+    widget = awful.widget.tasklist {
+        screen   = screen[<span class="number">1</span>],
+        filter   = awful.widget.tasklist.filter.allscreen,
+        buttons  = tasklist_buttons,
+        style    = {
+            shape = gears.shape.rounded_rect,
+        },
+        layout   = {
+            spacing = <span class="number">5</span>,
+            forced_num_rows = <span class="number">2</span>,
+            layout = wibox.layout.grid.horizontal
+        },
+        widget_template = {
+            {
+                {
+                    id     = <span class="string">'clienticon'</span>,
+                    widget = awful.widget.clienticon,
+                },
+                margins = <span class="number">4</span>,
+                widget  = wibox.container.margin,
+            },
+            id              = <span class="string">'background_role'</span>,
+            forced_width    = <span class="number">48</span>,
+            forced_height   = <span class="number">48</span>,
+            widget          = wibox.container.background,
+            create_callback = <span class="keyword">function</span>(self, c, index, objects) <span class="comment">--luacheck: no unused
+</span>                self:get_children_by_id(<span class="string">'clienticon'</span>)[<span class="number">1</span>].client = c
+            <span class="keyword">end</span>,
+        },
+    },
+    border_color = <span class="string">'#777777'</span>,
+    border_width = <span class="number">2</span>,
+    ontop        = <span class="keyword">true</span>,
+    placement    = awful.placement.centered,
+    shape        = gears.shape.rounded_rect
+}
+</pre>
+
+</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008-2009 Julien Danjou</li>
