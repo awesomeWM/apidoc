@@ -33,7 +33,8 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#The_default_widgets">The default widgets </a></li>
-<li><a href="#Placing_widgets">Placing widgets </a></li>
+<li><a href="#The_different_syntaxes_to_initiate_widgets">The different syntaxes to initiate widgets </a></li>
+<li><a href="#Creating_and_placing_widgets_using_the_declarative_style">Creating and placing widgets using the declarative style </a></li>
 </ul>
 
 
@@ -42,7 +43,7 @@
   <li><a href="../documentation/00-authors.md.html">Authors</a></li>
   <li><a href="../documentation/01-readme.md.html">Readme</a></li>
   <li><a href="../documentation/02-contributing.md.html">Contributing</a></li>
-  <li><strong>The declarative layout system</strong></li>
+  <li><strong>The AwesomeWM widget system</strong></li>
   <li><a href="../documentation/04-new-widgets.md.html">Creating new widget</a></li>
   <li><a href="../documentation/05-awesomerc.md.html">Default configuration file documentation</a></li>
   <li><a href="../documentation/06-appearance.md.html">Change Awesome appearance</a></li>
@@ -107,6 +108,7 @@
 <ul class="nowrap">
   <li><a href="../classes/awful.button.html">awful.button</a></li>
   <li><a href="../classes/awful.keygrabber.html">awful.keygrabber</a></li>
+  <li><a href="../classes/awful.popup.html">awful.popup</a></li>
   <li><a href="../classes/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../classes/awful.tooltip.html">awful.tooltip</a></li>
   <li><a href="../classes/awful.wibar.html">awful.wibar</a></li>
@@ -174,10 +176,9 @@
 
 <div id="content">
 
-    <h1>The declarative layout system</h1>
+    <h1>The AwesomeWM widget system</h1>
 
-<p>The declarative layout system provides an alternative to the imperative system.
-It is inspired by the one used by Awesome 3.2-3.4 and the Qt QML style.</p>
+<p>This document explains how to define, place and manage widgets.</p>
 
 <p><a name="The_default_widgets"></a></p>
 
@@ -406,9 +407,141 @@ configurable rules.</p>
 </table>
 
 
-<p><a name="Placing_widgets"></a></p>
+<h3>The different type of widget boxes (Wibox)</h3>
 
-<h2>Placing widgets</h2>
+<p>The Awesome API uses the word &ldquo;wibox&rdquo; (widget box) to describe an area of the
+screen filled with widgets. There are many subvariants of wiboxes with
+specialized roles such as widget bars or tooltips. All variants mostly share the
+same characteristics, but add some extra features to make those specialized
+widget boxes easier to work with.</p>
+
+<p>&mdash;</p>
+
+<h2>&mdash;<img src="../images/AUTOGEN_awful_popup_wiboxtypes.svg" alt="Usage example" /></h2>
+
+<p>The normal <a href="../classes/wibox.html#">wibox</a> is the base class for each of these types. It is extremely
+flexible and allows to place just about anything on the screen. However it
+requires a lot of repetitive boilerplate code to use directly. For example,
+the user needs to compute the optimal size by hand or use <a href="../libraries/awful.placement.html#">awful.placement</a>.</p>
+
+<p>The <a href="../classes/awful.wibar.html#">awful.wibar</a> specialization allows to attach a <a href="../classes/wibox.html#">wibox</a> to a screen edge
+and prevents clients from using this area when tiled.</p>
+
+<p>The <a href="../classes/awful.popup.html#">awful.popup</a> allows to easily place widgets on the screen. It automatically
+resizes itself to fit the optimal widget size. It also has helper properties
+and methods to make it easy to place it on the screen. It supports absolute
+positioning, relative positioning, and manual positioning.</p>
+
+<p>The <a href="../classes/awful.tooltip.html#">awful.tooltip</a> is a very simple <a href="../classes/wibox.html#">wibox</a> that allows to display text next
+to an object such as the mouse.</p>
+
+<p>Finally, the <a href="../classes/awful.titlebar.html#">awful.titlebar</a>, while not technically a real <a href="../classes/wibox.html#">wibox</a>, acts
+exactly the same way and allows to attach widgets on each side of clients.</p>
+
+<p><a name="The_different_syntaxes_to_initiate_widgets"></a></p>
+
+<h2>The different syntaxes to initiate widgets</h2>
+
+<p>Awesome provides 2 totally different API access styles to manage widgets. Both
+suit different use cases. Under the hood, both produce the
+exact same code. Consider the declarative API to be compiled into the
+imperative syntax when loaded. Also note that in contrast to technologies such
+as QML, it is interpreted only once and isn&rsquo;t automatically updated when
+values change.</p>
+
+<p>The <strong>imperative</strong> widget initialization is similar to QtWidgets, GTK and Win32.
+You create the object, then set the property and add the widget as a child to
+another already declared widget. It is quite simple to use but very verbose
+and full of boilerplate code. The imperative API also offers properties both
+with accessors or directly. It is useful when creating highly dynamic layouts
+where widgets are added and removed over the course of their lifecycle.</p>
+
+<p>The <strong>declarative</strong> syntax resembles HTML style code
+written in JSON or YAML. The widget instances are created automatically and
+the hierarchy is related to the table nesting (indentation). It is preferred
+when creating static layouts that won&rsquo;t change over the course of their
+lifecycle.</p>
+
+<p>Here is the same code written in both the imperative and declarative style</p>
+
+<p><strong>Imperative with accessors</strong></p>
+
+<p>Code:</p>
+
+<pre>
+<span class="keyword">local</span> bg = wibox.container.background()
+bg:set_bg(<span class="string">"#ff0000"</span>)
+
+<span class="keyword">local</span> tb1 = wibox.widget.textbox()
+<span class="keyword">local</span> tb2 = wibox.widget.textbox(<span class="string">"bar"</span>)
+
+tb1:set_text(<span class="string">"foo"</span>)
+tb2:set_text(<span class="string">"bar"</span>)
+
+<span class="keyword">local</span> l = wibox.layout.fixed.vertical()
+l:add(tb1)
+l:add(tb2)
+
+bg:set_widget(l)
+</pre>
+
+
+<p><strong>Imperative with properties</strong></p>
+
+<p>Code:</p>
+
+<pre>
+<span class="keyword">local</span> bg = wibox.container.background()
+bg.bg = <span class="string">"#ff0000"</span>
+
+<span class="keyword">local</span> tb1 = wibox.widget.textbox(<span class="string">"foo"</span>)
+<span class="keyword">local</span> tb2 = wibox.widget.textbox(<span class="string">"bar"</span>)
+
+tb1.text = <span class="string">"foo"</span>
+tb2.text = <span class="string">"bar"</span>
+
+<span class="keyword">local</span> l = wibox.layout.fixed.vertical()
+l:add(tb1)
+l:add(tb2)
+
+bg.widget = l
+</pre>
+
+
+<p><strong>Declarative</strong></p>
+
+<p>Code:</p>
+
+<pre>
+<span class="keyword">local</span> bg = wibox.widget {
+    {
+        {
+            text = <span class="string">"foo"</span>,
+            widget = wibox.widget.textbox
+        },
+        {
+            text = <span class="string">"bar"</span>,
+            widget = wibox.widget.textbox
+        },
+        layout = wibox.layout.fixed.vertical
+    },
+    bg = <span class="string">"#ff0000"</span>,
+    widget = wibox.container.background
+}
+</pre>
+
+
+<p>The Awesome documentation mostly uses the declarative style for consistency,
+but both are <strong>always</strong> available. Note that each style can be mixed with other
+styles, but this creates very confusing code and should be avoided.</p>
+
+<p><a name="Creating_and_placing_widgets_using_the_declarative_style"></a></p>
+
+<h2>Creating and placing widgets using the declarative style</h2>
+
+<p>The examples below explain in detail how to use the declarative layout system.
+The imperative system is quite self explanatory and the respective widget API
+documentation should be enough for most.</p>
 
 <h3>A simple layout</h3>
 

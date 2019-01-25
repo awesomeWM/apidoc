@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Class awful.wibar - awesome API documentation</title>
+    <title>Class awful.popup - awesome API documentation</title>
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
 </head>
 <body>
@@ -35,7 +35,6 @@
 <li><a href="#Functions">Functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Theme_variables">Theme variables</a></li>
-<li><a href="#Deprecated_functions">Deprecated functions</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
 
@@ -44,10 +43,10 @@
 <ul class="nowrap">
   <li><a href="../classes/awful.button.html">awful.button</a></li>
   <li><a href="../classes/awful.keygrabber.html">awful.keygrabber</a></li>
-  <li><a href="../classes/awful.popup.html">awful.popup</a></li>
+  <li><strong>awful.popup</strong></li>
   <li><a href="../classes/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../classes/awful.tooltip.html">awful.tooltip</a></li>
-  <li><strong>awful.wibar</strong></li>
+  <li><a href="../classes/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../classes/awful.widget.button.html">awful.widget.button</a></li>
   <li><a href="../classes/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../classes/awful.widget.clienticon.html">awful.widget.clienticon</a></li>
@@ -178,193 +177,257 @@
 
 <div id="content">
 
-<h1>Class <code>awful.wibar</code></h1>
-<p>Wibox module for awful.</p>
-<p> This module allows you to easily create wibox and attach them to the edge of
- a screen.</p>
+<h1>Class <code>awful.popup</code></h1>
+<p>An auto-resized, free floating or modal wibox built around a widget.</p>
+<p><p> This type of widget box (wibox) is auto closed when being clicked on and is
+ automatically resized to the size of its main widget.</p>
+
+<p> Note that the widget itself should have a finite size. If something like a
+ <a href="../classes/wibox.layout.flex.html#">wibox.layout.flex</a> is used, then the size would be unlimited and an error
+ will be printed. The <a href="../classes/wibox.layout.fixed.html#">wibox.layout.fixed</a>, <a href="../classes/wibox.container.constraint.html#">wibox.container.constraint</a>,
+ <code>forced_width</code> and <code>forced_height</code> are recommended.</p>
+
+<p><img src="../images/AUTOGEN_awful_popup_simple.svg" alt="Usage example" /></p>
+
+<pre>
+awful.popup {
+    widget = {
+        {
+            {
+                text   = <span class="string">'foobar'</span>,
+                widget = wibox.widget.textbox
+            },
+            {
+                {
+                    text   = <span class="string">'foobar'</span>,
+                    widget = wibox.widget.textbox
+                },
+                bg     = <span class="string">'#ff00ff'</span>,
+                clip   = <span class="keyword">true</span>,
+                shape  = gears.shape.rounded_bar,
+                widget = wibox.widget.background
+            },
+            {
+                value         = <span class="number">0.5</span>,
+                forced_height = <span class="number">30</span>,
+                forced_width  = <span class="number">100</span>,
+                widget        = wibox.widget.progressbar
+            },
+            layout = wibox.layout.fixed.vertical,
+        },
+        margins = <span class="number">10</span>,
+        widget  = wibox.container.margin
+    },
+    border_color = <span class="string">'#00ff00'</span>,
+    border_width = <span class="number">5</span>,
+    placement    = awful.placement.top_left,
+    shape        = gears.shape.rounded_rect,
+    visible      = <span class="keyword">true</span>,
+}
+</pre>
+
+
+<p> Here is an example of how to create an alt-tab like dialog by leveraging
+ the <a href="../classes/awful.widget.tasklist.html#">awful.widget.tasklist</a>.</p>
+
+<p><img src="../images/AUTOGEN_awful_popup_alttab.svg" alt="Usage example" /></p>
+
+<pre>
+awful.popup {
+    widget = awful.widget.tasklist {
+        screen   = screen[<span class="number">1</span>],
+        filter   = awful.widget.tasklist.filter.allscreen,
+        buttons  = tasklist_buttons,
+        style    = {
+            shape = gears.shape.rounded_rect,
+        },
+        layout   = {
+            spacing = <span class="number">5</span>,
+            forced_num_rows = <span class="number">2</span>,
+            layout = wibox.layout.grid.horizontal
+        },
+        widget_template = {
+            {
+                {
+                    id     = <span class="string">'clienticon'</span>,
+                    widget = awful.widget.clienticon,
+                },
+                margins = <span class="number">4</span>,
+                widget  = wibox.container.margin,
+            },
+            id              = <span class="string">'background_role'</span>,
+            forced_width    = <span class="number">48</span>,
+            forced_height   = <span class="number">48</span>,
+            widget          = wibox.container.background,
+            create_callback = <span class="keyword">function</span>(self, c, index, objects) <span class="comment">--luacheck: no unused
+</span>                self:get_children_by_id(<span class="string">'clienticon'</span>)[<span class="number">1</span>].client = c
+            <span class="keyword">end</span>,
+        },
+    },
+    border_color = <span class="string">'#777777'</span>,
+    border_width = <span class="number">2</span>,
+    ontop        = <span class="keyword">true</span>,
+    placement    = awful.placement.centered,
+    shape        = gears.shape.rounded_rect
+}
+</pre>
+
+</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2016 Emmanuel Lepage Vallee</li>
-        <li><strong>Author</strong>: Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
+        <li><strong>Author</strong>: Emmanuel Lepage Vallee</li>
     </ul>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#awful.wibar">awful.wibar ([args=nil])</a></td>
-	<td class="summary">Create a new wibox and attach it to a screen edge.</td>
+	<td class="name" ><a href="#awful.popup">awful.popup ([args=nil])</a></td>
+	<td class="summary">Create a new popup build around a passed in widget.</td>
 	</tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#awful.wibar.stretch">stretch</a></td>
-	<td class="summary">If the wibar needs to be stretched to fill the screen.</td>
+	<td class="name" ><a href="#awful.popup.preferred_positions">preferred_positions</a></td>
+	<td class="summary">Set the preferred popup position relative to its parent.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.width">width</a></td>
-	<td class="summary">The wibar&rsquo;s width.</td>
+	<td class="name" ><a href="#awful.popup.preferred_anchors">preferred_anchors</a></td>
+	<td class="summary">Set the preferred popup anchors relative to the parent.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.height">height</a></td>
-	<td class="summary">The wibar&rsquo;s height.</td>
+	<td class="name" ><a href="#awful.popup.current_position">current_position</a></td>
+	<td class="summary">The current position relative to the parent object.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.position">position</a></td>
-	<td class="summary">The wibox position.</td>
+	<td class="name" ><a href="#awful.popup.current_anchor">current_anchor</a></td>
+	<td class="summary">Get the current anchor relative to the parent object.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.stretch">stretch</a></td>
-	<td class="summary">Stretch the wibar.</td>
+	<td class="name" ><a href="#awful.popup.hide_on_right_click">hide_on_right_click</a></td>
+	<td class="summary">Hide the popup when right clicked.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.border_width">border_width</a></td>
+	<td class="name" ><a href="#awful.popup.minimum_width">minimum_width</a></td>
+	<td class="summary">The popup minimum width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.popup.minimum_height">minimum_height</a></td>
+	<td class="summary">The popup minimum height.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.popup.maxmimum_width">maxmimum_width</a></td>
+	<td class="summary">The popup minimum width.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.popup.maximum_height">maximum_height</a></td>
+	<td class="summary">The popup maximum height.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.popup.offset">offset</a></td>
+	<td class="summary">The distance between the popup and its parent (if any).</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.popup.placement">placement</a></td>
+	<td class="summary">Set the placement function.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.popup.border_width">border_width</a></td>
 	<td class="summary">Border width.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.border_color">border_color</a></td>
+	<td class="name" ><a href="#awful.popup.border_color">border_color</a></td>
 	<td class="summary">Border color.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.ontop">ontop</a></td>
+	<td class="name" ><a href="#awful.popup.ontop">ontop</a></td>
 	<td class="summary">On top of other windows.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.cursor">cursor</a></td>
+	<td class="name" ><a href="#awful.popup.cursor">cursor</a></td>
 	<td class="summary">The mouse cursor.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.visible">visible</a></td>
+	<td class="name" ><a href="#awful.popup.visible">visible</a></td>
 	<td class="summary">Visibility.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.opacity">opacity</a></td>
+	<td class="name" ><a href="#awful.popup.opacity">opacity</a></td>
 	<td class="summary">The opacity of the wibox, between 0 and 1.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.type">type</a></td>
+	<td class="name" ><a href="#awful.popup.type">type</a></td>
 	<td class="summary">The window type (desktop, normal, dock, &hellip;).</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.x">x</a></td>
+	<td class="name" ><a href="#awful.popup.x">x</a></td>
 	<td class="summary">The x coordinates.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.y">y</a></td>
+	<td class="name" ><a href="#awful.popup.y">y</a></td>
 	<td class="summary">The y coordinates.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.width">width</a></td>
+	<td class="name" ><a href="#awful.popup.width">width</a></td>
 	<td class="summary">The width of the wibox.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.height">height</a></td>
+	<td class="name" ><a href="#awful.popup.height">height</a></td>
 	<td class="summary">The height of the wibox.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.screen">screen</a></td>
+	<td class="name" ><a href="#awful.popup.screen">screen</a></td>
 	<td class="summary">The wibox screen.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.drawable">drawable</a></td>
+	<td class="name" ><a href="#awful.popup.drawable">drawable</a></td>
 	<td class="summary">The wibox&rsquo;s <a href="../classes/drawable.html#">drawable</a>.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.widget">widget</a></td>
+	<td class="name" ><a href="#awful.popup.widget">widget</a></td>
 	<td class="summary">The widget that the <a href="../classes/wibox.html#">wibox</a> displays.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.window">window</a></td>
+	<td class="name" ><a href="#awful.popup.window">window</a></td>
 	<td class="summary">The X window id.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.shape_bounding">shape_bounding</a></td>
+	<td class="name" ><a href="#awful.popup.shape_bounding">shape_bounding</a></td>
 	<td class="summary">The wibox&rsquo;s bounding shape as a (native) cairo surface.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.shape_clip">shape_clip</a></td>
+	<td class="name" ><a href="#awful.popup.shape_clip">shape_clip</a></td>
 	<td class="summary">The wibox&rsquo;s clip shape as a (native) cairo surface.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.shape_input">shape_input</a></td>
+	<td class="name" ><a href="#awful.popup.shape_input">shape_input</a></td>
 	<td class="summary">The wibox&rsquo;s input shape as a (native) cairo surface.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.shape">shape</a></td>
+	<td class="name" ><a href="#awful.popup.shape">shape</a></td>
 	<td class="summary">The wibar&rsquo;s shape.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.input_passthrough">input_passthrough</a></td>
+	<td class="name" ><a href="#awful.popup.input_passthrough">input_passthrough</a></td>
 	<td class="summary">Forward the inputs to the client below the wibox.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.bg">bg</a></td>
+	<td class="name" ><a href="#awful.popup.bg">bg</a></td>
 	<td class="summary">The background of the wibox.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.bgimage">bgimage</a></td>
+	<td class="name" ><a href="#awful.popup.bgimage">bgimage</a></td>
 	<td class="summary">The background image of the drawable.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar.fg">fg</a></td>
+	<td class="name" ><a href="#awful.popup.fg">fg</a></td>
 	<td class="summary">The foreground (text) of the wibox.</td>
 	</tr>
 </table>
 <h2><a href="#Theme_variables">Theme variables</a></h2>
 <table class="function_list">
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_stretch">beautiful.wibar_stretch</a></td>
-	<td class="summary">If the wibar needs to be stretched to fill the screen.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_border_width">beautiful.wibar_border_width</a></td>
-	<td class="summary">The wibar border width.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_border_color">beautiful.wibar_border_color</a></td>
-	<td class="summary">The wibar border color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_ontop">beautiful.wibar_ontop</a></td>
-	<td class="summary">If the wibar is to be on top of other windows.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_cursor">beautiful.wibar_cursor</a></td>
-	<td class="summary">The wibar&rsquo;s mouse cursor.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_opacity">beautiful.wibar_opacity</a></td>
-	<td class="summary">The wibar opacity, between 0 and 1.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_type">beautiful.wibar_type</a></td>
-	<td class="summary">The window type (desktop, normal, dock, …).</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_width">beautiful.wibar_width</a></td>
-	<td class="summary">The wibar&rsquo;s width.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_height">beautiful.wibar_height</a></td>
-	<td class="summary">The wibar&rsquo;s height.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_bg">beautiful.wibar_bg</a></td>
-	<td class="summary">The wibar&rsquo;s background color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_bgimage">beautiful.wibar_bgimage</a></td>
-	<td class="summary">The wibar&rsquo;s background image.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_fg">beautiful.wibar_fg</a></td>
-	<td class="summary">The wibar&rsquo;s foreground (text) color.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#beautiful.wibar_shape">beautiful.wibar_shape</a></td>
-	<td class="summary">The wibar&rsquo;s shape.</td>
-	</tr>
 	<tr>
 	<td class="name" ><a href="#beautiful.bg_normal">beautiful.bg_normal</a></td>
 	<td class="summary">The default background color.</td>
@@ -374,53 +437,38 @@
 	<td class="summary">The default foreground (text) color.</td>
 	</tr>
 </table>
-<h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#awful.wibar.get_position">awful.wibar.get_position</a> <i class="deprecated_label">[deprecated]</i><a></a></td>
-	<td class="summary">Get a wibox position if it has been set, or return top.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#awful.wibar.set_position">awful.wibar.set_position</a> <i class="deprecated_label">[deprecated]</i><a></a></td>
-	<td class="summary">Put a wibox on a screen at this position.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#awful.wibar.attach">awful.wibar.attach</a> <i class="deprecated_label">[deprecated]</i><a></a></td>
-	<td class="summary">Attach a wibox to a screen.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#awful.wibar.align">awful.wibar.align</a> <i class="deprecated_label">[deprecated]</i><a></a></td>
-	<td class="summary">Align a wibox.</td>
-	</tr>
-	<tr>
-	<td class="name" ><a href="#awful.wibox.stretch">awful.wibox.stretch</a> <i class="deprecated_label">[deprecated]</i><a></a></td>
-	<td class="summary">Stretch a wibox so it takes all screen width or height.</td>
-	</tr>
-</table>
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#awful.wibar:remove">awful.wibar:remove ()</a></td>
-	<td class="summary">Remove a wibar.</td>
+	<td class="name" ><a href="#awful.popup:move_next_to">awful.popup:move_next_to ([obj=mouse])</a></td>
+	<td class="summary">Move the wibox to a position relative to <code>geo</code>.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar:buttons">awful.wibar:buttons (buttons_table)</a></td>
+	<td class="name" ><a href="#awful.popup:bind_to_widget">awful.popup:bind_to_widget (widget[, button=1])</a></td>
+	<td class="summary">Bind the popup to a widget button press.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.popup:unbind_to_widget">awful.popup:unbind_to_widget (widget)</a></td>
+	<td class="summary">Unbind the popup from a widget button.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.popup:buttons">awful.popup:buttons (buttons_table)</a></td>
 	<td class="summary">Get or set mouse buttons bindings to a wibox.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar:geometry">awful.wibar:geometry (A)</a></td>
+	<td class="name" ><a href="#awful.popup:geometry">awful.popup:geometry (A)</a></td>
 	<td class="summary">Get or set wibox geometry.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar:struts">awful.wibar:struts (strut)</a></td>
+	<td class="name" ><a href="#awful.popup:struts">awful.popup:struts (strut)</a></td>
 	<td class="summary">Get or set wibox struts.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar:setup">awful.wibar:setup (args)</a></td>
+	<td class="name" ><a href="#awful.popup:setup">awful.popup:setup (args)</a></td>
 	<td class="summary">Set a declarative widget hierarchy description.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#awful.wibar:find_widgets">awful.wibar:find_widgets (x, y)</a></td>
+	<td class="name" ><a href="#awful.popup:find_widgets">awful.popup:find_widgets (x, y)</a></td>
 	<td class="summary">Find a widget by a point.</td>
 	</tr>
 </table>
@@ -433,29 +481,17 @@
     Methods
     <dl class="function">
     <dt>
-    <a name = "awful.wibar"></a>
-    <strong>awful.wibar ([args=nil])</strong>
+    <a name = "awful.popup"></a>
+    <strong>awful.popup ([args=nil])</strong>
     </dt>
     <dd>
-    Create a new wibox and attach it to a screen edge.
- You can add also position key with value top, bottom, left or right.
- You can also use width or height in % and set align to center, right or left.
- You can also set the screen key with a screen number to attach the wibox.
- If not specified, the primary screen is assumed.
+    Create a new popup build around a passed in widget.
 
 
     <ul>
         <li><span class="parameter">args</span>
 
         <ul>
-        <li><span class="parameter">position</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The position.
-        </li>
-        <li><span class="parameter">stretch</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         If the wibar need to be stretched to fill the screen.
-        </li>
         <li><span class="parameter">border_width</span>
             <span class="types"><span class="type">integer</span></span>
          Border width.
@@ -541,20 +577,34 @@
   forward to the element below.
          (<em>default</em> false)
         </li>
+        <li><span class="parameter">placement</span>
+            <span class="types"><span class="type">function</span></span>
+         The <a href="../libraries/awful.placement.html#">awful.placement</a> function
+        </li>
+        <li><span class="parameter">preferred_positions</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+
+
+        </li>
+        <li><span class="parameter">preferred_anchors</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+
+
+        </li>
+        <li><span class="parameter">offset</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">number</span></span>
+         The X and Y offset compared to the parent object
+        </li>
+        <li><span class="parameter">hide_on_right_click</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Whether or not to hide the popup on
+  right clicks.
+        </li>
         </li></ul>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-
-        The new wibar
-    </ol>
 
 
-    <h3>See also:</h3>
-    <ul>
-         <a href="../classes/wibox.html#">wibox</a>
-    </ul>
 
 
 </dd>
@@ -563,19 +613,221 @@
 
     <dl class="function">
     <dt>
-    <a name = "awful.wibar.stretch"></a>
-    <strong>stretch</strong>
+    <a name = "awful.popup.preferred_positions"></a>
+    <strong>preferred_positions</strong>
     </dt>
     <dd>
-    If the wibar needs to be stretched to fill the screen.
+    <p>Set the preferred popup position relative to its parent. </p>
+
+<p> This allows, for example, to have a submenu that goes on the right of the
+ parent menu. If there is no space on the right, it tries on the left and so
+ on.</p>
+
+<p> Valid directions are:</p>
+
+<ul>
+<li>left</li>
+<li>right</li>
+<li>top</li>
+<li>bottom</li>
+</ul>
+
+
+<p> The basic use case for this method is to give it a parent wibox:</p>
+
+<p><img src="../images/AUTOGEN_awful_popup_position1.svg" alt="Usage example" /></p>
+
+<pre><code>for _, v in ipairs {'left', 'right', 'bottom', 'top'} do
+    local p2 = awful.popup {
+        widget = wibox.widget {
+            text   = 'On the '..v,
+            widget = wibox.widget.textbox
+        },
+        border_color        = '#777777',
+        border_width        = 2,
+        preferred_positions = v,
+        ontop               = true,
+    }
+    p2:move_next_to(p)
+end
+</code></pre>
+
+<p> As demonstrated by this second example, it is also possible to use a widget
+ as a parent object:</p>
+
+<p><img src="../images/AUTOGEN_awful_popup_position2.svg" alt="Usage example" /></p>
+
+<pre><code>for _, v in ipairs {'left', 'right'} do
+    local p2 = awful.popup {
+        widget = wibox.widget {
+            text = 'On the '..v,
+            forced_height = 100,
+            widget = wibox.widget.textbox
+        },
+        border_color  = '#0000ff',
+        preferred_positions = v,
+        border_width  = 2,
+    }
+    p2:move_next_to(textboxinstance, v)
+end
+</code></pre>
+
 
 
     <h3>Type:</h3>
     <ul>
-        <li><span class="parameter">stretch</span>
+        <li><span class="parameter">preferred_positions</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         A position name or an ordered
+  table of positions
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.placement.html#next_to">awful.placement.next_to</a></li>
+         <li><a href="../classes/awful.popup.html#awful.popup.preferred_anchors">awful.popup.preferred_anchors</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.popup.preferred_anchors"></a>
+    <strong>preferred_anchors</strong>
+    </dt>
+    <dd>
+    <p>Set the preferred popup anchors relative to the parent. </p>
+
+<p> The possible values are:</p>
+
+<ul>
+<li>front</li>
+<li>middle</li>
+<li>back</li>
+</ul>
+
+
+<p> For details information, see the <a href="../libraries/awful.placement.html#next_to">awful.placement.next_to</a> documentation.</p>
+
+<p> In this example, it is possible to see the effect of having a fallback
+ preferred anchors when the popup would otherwise not fit:</p>
+
+<p><img src="../images/AUTOGEN_awful_popup_anchors.svg" alt="Usage example" /></p>
+
+<pre><code> local p2 = awful.popup {
+     widget = wibox.widget {
+         text   = 'A popup',
+         forced_height = 100,
+         widget = wibox.widget.textbox
+     },
+     border_color        = '#777777',
+     border_width        = 2,
+     preferred_positions = 'right',
+     preferred_anchors   = {'front', 'back'},
+ }
+ local p4 = awful.popup {
+     widget = wibox.widget {
+         text   = 'A popup2',
+         forced_height = 100,
+         widget = wibox.widget.textbox
+     },
+     border_color        = '#777777',
+     border_width        = 2,
+     preferred_positions = 'right',
+     preferred_anchors   = {'front', 'back'},
+ }
+</code></pre>
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">preferred_anchors</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Either a single anchor name or a table
+  ordered by priority.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.placement.html#next_to">awful.placement.next_to</a></li>
+         <li><a href="../classes/awful.popup.html#awful.popup.preferred_positions">awful.popup.preferred_positions</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.popup.current_position"></a>
+    <strong>current_position</strong>
+    </dt>
+    <dd>
+    The current position relative to the parent object. </p>
+
+<p> If there is a parent object (widget, wibox, wibar, client or the mouse), then
+ this property returns the current position. This is determined using
+ <a href="../classes/awful.popup.html#awful.popup.preferred_positions">preferred_positions</a>. It is usually the preferred position, but when there
+ isn&rsquo;t enough space, it can also be one of the fallback.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">current_position</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Either &ldquo;left&rdquo;, &ldquo;right&rdquo;, &ldquo;top&rdquo; or &ldquo;bottom&rdquo;
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.popup.current_anchor"></a>
+    <strong>current_anchor</strong>
+    </dt>
+    <dd>
+    Get the current anchor relative to the parent object. </p>
+
+<p> If there is a parent object (widget, wibox, wibar, client or the mouse), then
+ this property returns the current anchor. The anchor is the &ldquo;side&rdquo; of the
+ parent object on which the popup is based on. It will &ldquo;grow&rdquo; in the
+ opposite direction from the anchor.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">current_anchor</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Either &ldquo;front&rdquo;, &ldquo;middle&rdquo;, &ldquo;back&rdquo;
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.popup.hide_on_right_click"></a>
+    <strong>hide_on_right_click</strong>
+    </dt>
+    <dd>
+    Hide the popup when right clicked.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">hide_on_right_click</span>
             <span class="types"><span class="type">boolean</span></span>
 
 
+         (<em>default</em> false)
         </li>
     </ul>
 
@@ -585,19 +837,19 @@
 
 </dd>
     <dt>
-    <a name = "awful.wibar.width"></a>
-    <strong>width</strong>
+    <a name = "awful.popup.minimum_width"></a>
+    <strong>minimum_width</strong>
     </dt>
     <dd>
-    The wibar&rsquo;s width.
+    The popup minimum width.
 
 
     <h3>Type:</h3>
     <ul>
-        <li><span class="parameter">width</span>
-            <span class="types"><span class="type">integer</span></span>
-
-
+        <li><span class="parameter">The</span>
+            <span class="types"><span class="type">number</span></span>
+         minimum width
+         (<em>default</em> 1)
         </li>
     </ul>
 
@@ -607,19 +859,19 @@
 
 </dd>
     <dt>
-    <a name = "awful.wibar.height"></a>
-    <strong>height</strong>
+    <a name = "awful.popup.minimum_height"></a>
+    <strong>minimum_height</strong>
     </dt>
     <dd>
-    The wibar&rsquo;s height.
+    The popup minimum height.
 
 
     <h3>Type:</h3>
     <ul>
-        <li><span class="parameter">height</span>
-            <span class="types"><span class="type">integer</span></span>
-
-
+        <li><span class="parameter">The</span>
+            <span class="types"><span class="type">number</span></span>
+         minimum height
+         (<em>default</em> 1)
         </li>
     </ul>
 
@@ -629,17 +881,19 @@
 
 </dd>
     <dt>
-    <a name = "awful.wibar.position"></a>
-    <strong>position</strong>
+    <a name = "awful.popup.maxmimum_width"></a>
+    <strong>maxmimum_width</strong>
     </dt>
     <dd>
-    The wibox position.
+    The popup minimum width.
 
 
     <h3>Type:</h3>
     <ul>
-        <li><span class="parameter">string</span>
-         Either &ldquo;left&rdquo;, right", &ldquo;top&rdquo; or &ldquo;bottom&rdquo;
+        <li><span class="parameter">The</span>
+            <span class="types"><span class="type">number</span></span>
+         maxmimum width
+         (<em>default</em> 1)
         </li>
     </ul>
 
@@ -649,19 +903,19 @@
 
 </dd>
     <dt>
-    <a name = "awful.wibar.stretch"></a>
-    <strong>stretch</strong>
+    <a name = "awful.popup.maximum_height"></a>
+    <strong>maximum_height</strong>
     </dt>
     <dd>
-    Stretch the wibar.
+    The popup maximum height.
 
 
     <h3>Type:</h3>
     <ul>
-        <li><span class="parameter">boolean</span>
-
-
-         (<em>default</em> true)
+        <li><span class="parameter">The</span>
+            <span class="types"><span class="type">number</span></span>
+         maximum height
+         (<em>default</em> 1)
         </li>
     </ul>
 
@@ -671,7 +925,91 @@
 
 </dd>
     <dt>
-    <a name = "awful.wibar.border_width"></a>
+    <a name = "awful.popup.offset"></a>
+    <strong>offset</strong>
+    </dt>
+    <dd>
+    <p>The distance between the popup and its parent (if any). </p>
+
+<p> Here is an example of 5 popups stacked one below the other with an y axis
+ offset (spacing).</p>
+
+<p><img src="../images/AUTOGEN_awful_popup_position3.svg" alt="Usage example" /></p>
+
+<pre><code>local previous = nil
+for i=1, 5 do
+    local p2 = awful.popup {
+        widget = wibox.widget {
+            text   = 'Hello world!  '..i..'  aaaa.',
+            widget = wibox.widget.textbox
+        },
+        border_color        = beautiful.border_color,
+        preferred_positions = 'bottom',
+        border_width        = 2,
+        preferred_anchors   = 'back',
+        placement           = (not previous) and awful.placement.top or nil,
+        offset = {
+             y = 10,
+        },
+    }
+    p2:move_next_to(previous)
+    previous = p2
+end
+</code></pre>
+
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">offset</span> An integer value or a <code>{x=, y=}</code> table.
+        <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         The horizontal distance.
+         (<em>default</em> offset)
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         The vertical distance.
+         (<em>default</em> offset)
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.popup.placement"></a>
+    <strong>placement</strong>
+    </dt>
+    <dd>
+    Set the placement function.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">The</span>
+            <span class="types"><span class="type">function</span>, <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">boolean</span></span>
+         placement function or name
+ (or false to disable placement)
+         (<em>default</em> next_to)
+        </li>
+        <li><span class="parameter">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.popup.border_width"></a>
     <strong>border_width</strong>
     </dt>
     <dd>
@@ -700,7 +1038,7 @@
 
 </dd>
     <dt>
-    <a name = "awful.wibar.border_color"></a>
+    <a name = "awful.popup.border_color"></a>
     <strong>border_color</strong>
     </dt>
     <dd>
@@ -746,7 +1084,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.ontop"></a>
+    <a name = "awful.popup.ontop"></a>
     <strong>ontop</strong>
     </dt>
     <dd>
@@ -775,7 +1113,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.cursor"></a>
+    <a name = "awful.popup.cursor"></a>
     <strong>cursor</strong>
     </dt>
     <dd>
@@ -808,7 +1146,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.visible"></a>
+    <a name = "awful.popup.visible"></a>
     <strong>visible</strong>
     </dt>
     <dd>
@@ -837,7 +1175,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.opacity"></a>
+    <a name = "awful.popup.opacity"></a>
     <strong>opacity</strong>
     </dt>
     <dd>
@@ -866,7 +1204,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.type"></a>
+    <a name = "awful.popup.type"></a>
     <strong>type</strong>
     </dt>
     <dd>
@@ -899,7 +1237,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.x"></a>
+    <a name = "awful.popup.x"></a>
     <strong>x</strong>
     </dt>
     <dd>
@@ -928,7 +1266,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.y"></a>
+    <a name = "awful.popup.y"></a>
     <strong>y</strong>
     </dt>
     <dd>
@@ -957,7 +1295,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.width"></a>
+    <a name = "awful.popup.width"></a>
     <strong>width</strong>
     </dt>
     <dd>
@@ -986,7 +1324,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.height"></a>
+    <a name = "awful.popup.height"></a>
     <strong>height</strong>
     </dt>
     <dd>
@@ -1015,7 +1353,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.screen"></a>
+    <a name = "awful.popup.screen"></a>
     <strong>screen</strong>
     </dt>
     <dd>
@@ -1036,7 +1374,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.drawable"></a>
+    <a name = "awful.popup.drawable"></a>
     <strong>drawable</strong>
     </dt>
     <dd>
@@ -1066,7 +1404,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.widget"></a>
+    <a name = "awful.popup.widget"></a>
     <strong>widget</strong>
     </dt>
     <dd>
@@ -1087,7 +1425,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.window"></a>
+    <a name = "awful.popup.window"></a>
     <strong>window</strong>
     </dt>
     <dd>
@@ -1120,7 +1458,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.shape_bounding"></a>
+    <a name = "awful.popup.shape_bounding"></a>
     <strong>shape_bounding</strong>
     </dt>
     <dd>
@@ -1142,7 +1480,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.shape_clip"></a>
+    <a name = "awful.popup.shape_clip"></a>
     <strong>shape_clip</strong>
     </dt>
     <dd>
@@ -1164,7 +1502,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.shape_input"></a>
+    <a name = "awful.popup.shape_input"></a>
     <strong>shape_input</strong>
     </dt>
     <dd>
@@ -1186,7 +1524,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.shape"></a>
+    <a name = "awful.popup.shape"></a>
     <strong>shape</strong>
     </dt>
     <dd>
@@ -1216,13 +1554,13 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.input_passthrough"></a>
+    <a name = "awful.popup.input_passthrough"></a>
     <strong>input_passthrough</strong>
     </dt>
     <dd>
     <p>Forward the inputs to the client below the wibox. </p>
 
-<p> This replace the <a href="../classes/awful.wibar.html#awful.wibar.shape_input">shape_input</a> mask with an empty area. All mouse and
+<p> This replace the <a href="../classes/awful.popup.html#awful.popup.shape_input">shape_input</a> mask with an empty area. All mouse and
  keyboard events are sent to the object (such as a client) positioned below
  this wibox. When used alongside compositing, it allows, for example, to have
  a subtle transparent wibox on top a fullscreen client to display important
@@ -1250,13 +1588,13 @@ Green   Alpha
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/awful.wibar.html#awful.wibar.shape_input">shape_input</a>
+         <a href="../classes/awful.popup.html#awful.popup.shape_input">shape_input</a>
     </ul>
 
 
 </dd>
     <dt>
-    <a name = "awful.wibar.bg"></a>
+    <a name = "awful.popup.bg"></a>
     <strong>bg</strong>
     </dt>
     <dd>
@@ -1281,7 +1619,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.bgimage"></a>
+    <a name = "awful.popup.bgimage"></a>
     <strong>bgimage</strong>
     </dt>
     <dd>
@@ -1307,7 +1645,7 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar.fg"></a>
+    <a name = "awful.popup.fg"></a>
     <strong>fg</strong>
     </dt>
     <dd>
@@ -1336,292 +1674,6 @@ Green   Alpha
 
     <dl class="function">
     <dt>
-    <a name = "beautiful.wibar_stretch"></a>
-    <strong>beautiful.wibar_stretch</strong>
-    </dt>
-    <dd>
-    If the wibar needs to be stretched to fill the screen.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">stretch</span>
-            <span class="types"><span class="type">boolean</span></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_border_width"></a>
-    <strong>beautiful.wibar_border_width</strong>
-    </dt>
-    <dd>
-    The wibar border width.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">border_width</span>
-            <span class="types"><span class="type">integer</span></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_border_color"></a>
-    <strong>beautiful.wibar_border_color</strong>
-    </dt>
-    <dd>
-    The wibar border color.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">border_color</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_ontop"></a>
-    <strong>beautiful.wibar_ontop</strong>
-    </dt>
-    <dd>
-    If the wibar is to be on top of other windows.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">ontop</span>
-            <span class="types"><span class="type">boolean</span></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_cursor"></a>
-    <strong>beautiful.wibar_cursor</strong>
-    </dt>
-    <dd>
-    The wibar&rsquo;s mouse cursor.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">cursor</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_opacity"></a>
-    <strong>beautiful.wibar_opacity</strong>
-    </dt>
-    <dd>
-    The wibar opacity, between 0 and 1.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">opacity</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_type"></a>
-    <strong>beautiful.wibar_type</strong>
-    </dt>
-    <dd>
-    The window type (desktop, normal, dock, …).
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">type</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_width"></a>
-    <strong>beautiful.wibar_width</strong>
-    </dt>
-    <dd>
-    The wibar&rsquo;s width.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">width</span>
-            <span class="types"><span class="type">integer</span></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_height"></a>
-    <strong>beautiful.wibar_height</strong>
-    </dt>
-    <dd>
-    The wibar&rsquo;s height.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">height</span>
-            <span class="types"><span class="type">integer</span></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_bg"></a>
-    <strong>beautiful.wibar_bg</strong>
-    </dt>
-    <dd>
-    The wibar&rsquo;s background color.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">bg</span>
-            <span class="types"><span class="type">color</span></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_bgimage"></a>
-    <strong>beautiful.wibar_bgimage</strong>
-    </dt>
-    <dd>
-    The wibar&rsquo;s background image.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">bgimage</span>
-            <span class="types"><span class="type">surface</span></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_fg"></a>
-    <strong>beautiful.wibar_fg</strong>
-    </dt>
-    <dd>
-    The wibar&rsquo;s foreground (text) color.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">fg</span>
-            <span class="types"><span class="type">color</span></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "beautiful.wibar_shape"></a>
-    <strong>beautiful.wibar_shape</strong>
-    </dt>
-    <dd>
-    The wibar&rsquo;s shape.
-
-
-    <h3>Type:</h3>
-    <ul>
-        <li><span class="parameter">shape</span>
-            <span class="types"><span class="type">gears.shape</span></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
     <a name = "beautiful.bg_normal"></a>
     <strong>beautiful.bg_normal</strong>
     </dt>
@@ -1634,7 +1686,7 @@ Green   Alpha
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/awful.wibar.html#awful.wibar.bg">bg</a>
+         <a href="../classes/awful.popup.html#awful.popup.bg">bg</a>
     </ul>
 
 
@@ -1652,160 +1704,7 @@ Green   Alpha
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/awful.wibar.html#awful.wibar.fg">fg</a>
-    </ul>
-
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Deprecated_functions"></a>Deprecated functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "awful.wibar.get_position"></a>
-    <strong>awful.wibar.get_position</a> <i class="deprecated_label">[deprecated]</i><a></strong>
-    </dt>
-    <dd>
-    Get a wibox position if it has been set, or return top.
-
-
-    <h3>param:</h3>
-    <ul>
-        <li><span class="parameter">wb</span>
-         The wibox
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "awful.wibar.set_position"></a>
-    <strong>awful.wibar.set_position</a> <i class="deprecated_label">[deprecated]</i><a></strong>
-    </dt>
-    <dd>
-    Put a wibox on a screen at this position.
-
-
-    <h3>param:</h3>
-    <ul>
-        <li><span class="parameter">wb</span>
-         The wibox to attach.
-        </li>
-        <li><span class="parameter">position</span>
-         The position: top, bottom left or right.
-        </li>
-        <li><span class="parameter">screen</span>
-         This argument is deprecated, use wb.screen directly.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "awful.wibar.attach"></a>
-    <strong>awful.wibar.attach</a> <i class="deprecated_label">[deprecated]</i><a></strong>
-    </dt>
-    <dd>
-    Attach a wibox to a screen. </p>
-
-<p> This function has been moved to the <a href="../libraries/awful.placement.html#">awful.placement</a> module. Calling this
- no longer does anything.
-
-
-    <h3>param:</h3>
-    <ul>
-        <li><span class="parameter">wb</span>
-         The wibox to attach.
-        </li>
-        <li><span class="parameter">position</span>
-         The position of the wibox: top, bottom, left or right.
-        </li>
-        <li><span class="parameter">screen</span>
-         The screen to attach to
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/awful.placement.html#">awful.placement</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "awful.wibar.align"></a>
-    <strong>awful.wibar.align</a> <i class="deprecated_label">[deprecated]</i><a></strong>
-    </dt>
-    <dd>
-    <p>Align a wibox. </p>
-
-<p> Supported alignment are:</p>
-
-<ul>
-<li>top_left</li>
-<li>top_right</li>
-<li>bottom_left</li>
-<li>bottom_right</li>
-<li>left</li>
-<li>right</li>
-<li>top</li>
-<li>bottom</li>
-<li>centered</li>
-<li>center_vertical</li>
-<li>center_horizontal</li>
-</ul>
-
-
-
-
-    <h3>param:</h3>
-    <ul>
-        <li><span class="parameter">wb</span>
-         The wibox.
-        </li>
-        <li><span class="parameter">align</span>
-         The alignment
-        </li>
-        <li><span class="parameter">screen</span>
-         This argument is deprecated. It is not used. Use wb.screen
-  directly.
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/awful.placement.html#align">awful.placement.align</a>
-    </ul>
-
-
-</dd>
-    <dt>
-    <a name = "awful.wibox.stretch"></a>
-    <strong>awful.wibox.stretch</a> <i class="deprecated_label">[deprecated]</i><a></strong>
-    </dt>
-    <dd>
-    Stretch a wibox so it takes all screen width or height. </p>
-
-<p> <strong>This function has been removed.</strong>
-
-
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <li><a href="../libraries/awful.placement.html#">awful.placement</a></li>
-         <li><a href="../classes/awful.wibar.html#awful.wibar.stretch">awful.wibar.stretch</a></li>
+         <a href="../classes/awful.popup.html#awful.popup.fg">fg</a>
     </ul>
 
 
@@ -1815,13 +1714,59 @@ Green   Alpha
 
     <dl class="function">
     <dt>
-    <a name = "awful.wibar:remove"></a>
-    <strong>awful.wibar:remove ()</strong>
+    <a name = "awful.popup:move_next_to"></a>
+    <strong>awful.popup:move_next_to ([obj=mouse])</strong>
     </dt>
     <dd>
-    Remove a wibar.
+    Move the wibox to a position relative to <code>geo</code>.
+ This will try to avoid overlapping the source wibox and auto-detect the right
+ direction to avoid going off-screen.
 
 
+    <ul>
+        <li><span class="parameter">obj</span>
+         An object such as a wibox, client or a table entry
+  returned by <code>wibox:find_widgets()</code>.
+         (<em>default</em> mouse)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new geometry
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.placement.html#next_to">awful.placement.next_to</a></li>
+         <li><a href="../classes/awful.popup.html#awful.popup.preferred_positions">awful.popup.preferred_positions</a></li>
+         <li><a href="../classes/awful.popup.html#awful.popup.preferred_anchors">awful.popup.preferred_anchors</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.popup:bind_to_widget"></a>
+    <strong>awful.popup:bind_to_widget (widget[, button=1])</strong>
+    </dt>
+    <dd>
+    Bind the popup to a widget button press.
+
+
+    <ul>
+        <li><span class="parameter">widget</span>
+            <span class="types"><a class="type" href="../classes/awful.popup.html#awful.popup.widget">widget</a></span>
+         The widget
+        </li>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">number</span></span>
+         The button index
+         (<em>default</em> 1)
+        </li>
+    </ul>
 
 
 
@@ -1829,8 +1774,28 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar:buttons"></a>
-    <strong>awful.wibar:buttons (buttons_table)</strong>
+    <a name = "awful.popup:unbind_to_widget"></a>
+    <strong>awful.popup:unbind_to_widget (widget)</strong>
+    </dt>
+    <dd>
+    Unbind the popup from a widget button.
+
+
+    <ul>
+        <li><span class="parameter">widget</span>
+            <span class="types"><a class="type" href="../classes/awful.popup.html#awful.popup.widget">widget</a></span>
+         The widget
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.popup:buttons"></a>
+    <strong>awful.popup:buttons (buttons_table)</strong>
     </dt>
     <dd>
     Get or set mouse buttons bindings to a wibox.
@@ -1848,8 +1813,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar:geometry"></a>
-    <strong>awful.wibar:geometry (A)</strong>
+    <a name = "awful.popup:geometry"></a>
+    <strong>awful.popup:geometry (A)</strong>
     </dt>
     <dd>
     Get or set wibox geometry.  That&rsquo;s the same as accessing or setting the x,
@@ -1873,8 +1838,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar:struts"></a>
-    <strong>awful.wibar:struts (strut)</strong>
+    <a name = "awful.popup:struts"></a>
+    <strong>awful.popup:struts (strut)</strong>
     </dt>
     <dd>
     Get or set wibox struts.
@@ -1901,8 +1866,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar:setup"></a>
-    <strong>awful.wibar:setup (args)</strong>
+    <a name = "awful.popup:setup"></a>
+    <strong>awful.popup:setup (args)</strong>
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
@@ -1921,8 +1886,8 @@ Green   Alpha
 
 </dd>
     <dt>
-    <a name = "awful.wibar:find_widgets"></a>
-    <strong>awful.wibar:find_widgets (x, y)</strong>
+    <a name = "awful.popup:find_widgets"></a>
+    <strong>awful.popup:find_widgets (x, y)</strong>
     </dt>
     <dd>
     Find a widget by a point.
