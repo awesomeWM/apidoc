@@ -205,7 +205,7 @@
 	</tr>
 	<tr>
 	<td class="name" ><a href="#init">init (config)</a></td>
-	<td class="summary">Init function, should be run at the beginning of configuration file.</td>
+	<td class="summary">Function that initializes the theme settings.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#get">get ()</a></td>
@@ -410,18 +410,50 @@
     <strong>init (config)</strong>
     </dt>
     <dd>
-    Init function, should be run at the beginning of configuration file.
+    <p>Function that initializes the theme settings.  Should be run at the
+ beginning of the awesome configuration file (normally rc.lua).</p>
+
+<p> Example usages:</p>
+
+<pre><code>-- Using a table
+beautiful.init({font = 'Monospace Bold 10'})
+
+-- From a config file
+beautiful.init("&lt;path&gt;/theme.lua")
+</code></pre>
+
+<p> Example &ldquo;<path>/theme.lua&rdquo; (see <a href="../documentation/05-awesomerc.md.html#Variable_definitions">05-awesomerc.md:Variable_definitions</a>):</p>
+
+<pre><code>theme = setmetatable({}, { __index = function() error("May not access theme before beautiful.init()") end })
+    theme.font = 'Monospace Bold 10'
+return theme
+</code></pre>
+
+<p> Example using the return value:</p>
+
+<pre><code>local beautiful = require("beautiful")
+if not beautiful.init("&lt;path&gt;/theme.lua") then
+    beautiful.init("&lt;path&gt;/.last.theme.lua") -- a known good fallback
+end
+</code></pre>
+
 
 
     <ul>
         <li><span class="parameter">config</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The theme to load. It can be either the path to
-   the theme file (returning a table) or directly the table
+   the theme file (which should return a table) or directly a table
    containing all the theme values.
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">true</span> or <span class="type">nil</span></span>
+        True if successful, nil in case of error.
+    </ol>
 
 
 
