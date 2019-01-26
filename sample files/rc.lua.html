@@ -260,21 +260,6 @@ editor_cmd = terminal .. <span class="string">" -e "</span> .. editor
 </span>}
 <span class="comment">-- }}}
 </span>
-<span class="comment">-- {{{ Helper functions
-</span><span class="keyword">local</span> <span class="keyword">function</span> client_menu_toggle_fn()
-    <span class="keyword">local</span> instance = <span class="keyword">nil</span>
-
-    <span class="keyword">return</span> <span class="keyword">function</span> ()
-        <span class="keyword">if</span> instance <span class="keyword">and</span> instance.wibox.visible <span class="keyword">then</span>
-            instance:hide()
-            instance = <span class="keyword">nil</span>
-        <span class="keyword">else</span>
-            instance = awful.menu.clients({ theme = { width = <span class="number">250</span> } })
-        <span class="keyword">end</span>
-    <span class="keyword">end</span>
-<span class="keyword">end</span>
-<span class="comment">-- }}}
-</span>
 <span class="comment">-- {{{ Menu
 </span><span class="comment">-- Create a launcher widget and a main menu
 </span>myawesomemenu = {
@@ -334,7 +319,9 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                                   )
                                               <span class="keyword">end</span>
                                           <span class="keyword">end</span>),
-                     awful.button({ }, <span class="number">3</span>, client_menu_toggle_fn()),
+                     awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span>()
+                                              awful.menu.client_list({ theme = { width = <span class="number">250</span> } })
+                                          <span class="keyword">end</span>),
                      awful.button({ }, <span class="number">4</span>, <span class="keyword">function</span> ()
                                               awful.client.focus.byidx(<span class="number">1</span>)
                                           <span class="keyword">end</span>),
