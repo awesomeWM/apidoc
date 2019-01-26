@@ -34,7 +34,6 @@
 <ul>
 <li><a href="#Error_handling">Error handling </a></li>
 <li><a href="#Variable_definitions">Variable definitions </a></li>
-<li><a href="#Helper_functions">Helper functions </a></li>
 <li><a href="#Menu">Menu </a></li>
 <li><a href="#Wibar">Wibar </a></li>
 <li><a href="#Mouse_bindings">Mouse bindings </a></li>
@@ -373,26 +372,6 @@ modkey = <span class="string">"Mod4"</span>
 </pre>
 
 
-<p><a name="Helper_functions"></a></p>
-
-<h2>Helper functions</h2>
-
-<pre>
-<span class="keyword">local</span> <span class="keyword">function</span> client_menu_toggle_fn()
-    <span class="keyword">local</span> instance = <span class="keyword">nil</span>
-
-    <span class="keyword">return</span> <span class="keyword">function</span> ()
-        <span class="keyword">if</span> instance <span class="keyword">and</span> instance.<span class="backtick"><a href="../classes/wibox.html#wibox.visible">wibox.visible</a></span> <span class="keyword">then</span>
-            instance:hide()
-            instance = <span class="keyword">nil</span>
-        <span class="keyword">else</span>
-            instance = <span class="backtick"><a href="../libraries/awful.menu.html#clients">awful.menu.clients</a></span>({ theme = { width = <span class="number">250</span> } })
-        <span class="keyword">end</span>
-    <span class="keyword">end</span>
-<span class="keyword">end</span>
-</pre>
-
-
 <p><a name="Menu"></a></p>
 
 <h2>Menu</h2>
@@ -482,7 +461,9 @@ mytextclock = <span class="backtick"><a href="../classes/wibox.widget.textclock.
                                                   )
                                               <span class="keyword">end</span>
                                           <span class="keyword">end</span>),
-                     <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, client_menu_toggle_fn()),
+                     <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span>()
+                                              <span class="backtick"><code>awful.menu.client</code></span>_list({ theme = { width = <span class="number">250</span> } })
+                                          <span class="keyword">end</span>),
                      <span class="backtick"><a href="../classes/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span> ()
                                               <span class="backtick"><code>awful.client.focus.byidx</code></span>(<span class="number">1</span>)
                                           <span class="keyword">end</span>),
