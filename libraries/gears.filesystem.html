@@ -243,6 +243,10 @@
 	<td class="name" ><a href="#get_dir">get_dir (d)</a></td>
 	<td class="summary">Get the user&rsquo;s config or cache dir.</td>
 	</tr>
+	<tr>
+	<td class="name" ><a href="#get_random_file_from_dir">get_random_file_from_dir (path[, exts])</a></td>
+	<td class="summary">Get the name of a random file from a given directory.</td>
+	</tr>
 </table>
 
 <br/>
@@ -581,6 +585,39 @@
     <ol>
 
         A string containing the requested path.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_random_file_from_dir"></a>
+    <strong>get_random_file_from_dir (path[, exts])</strong>
+    </dt>
+    <dd>
+    Get the name of a random file from a given directory.
+
+
+    <ul>
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The directory to search.
+        </li>
+        <li><span class="parameter">exts</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         Specific extensions to limit the search to. eg:<code>{ &quot;jpg&quot;, &quot;png&quot; }</code>
+   If ommited, all files are considered.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">nil</span></span>
+        A randomly selected filename from the specified path (with
+   a specified extension if required) or nil if no suitable file is found.
     </ol>
 
 
