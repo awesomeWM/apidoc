@@ -79,7 +79,6 @@
   <li><a href="../libraries/mouse.html">mouse</a></li>
   <li><a href="../libraries/mousegrabber.html">mousegrabber</a></li>
   <li><a href="../libraries/naughty.html">naughty</a></li>
-  <li><a href="../libraries/naughty.dbus.html">naughty.dbus</a></li>
   <li><a href="../libraries/root.html">root</a></li>
   <li><a href="../libraries/selection.html">selection</a></li>
   <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
@@ -121,6 +120,9 @@
   <li><a href="../classes/key.html">key</a></li>
   <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
   <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
+  <li><a href="../classes/naughty.action.html">naughty.action</a></li>
+  <li><a href="../classes/naughty.layout.legacy.html">naughty.layout.legacy</a></li>
+  <li><a href="../classes/naughty.notification.html">naughty.notification</a></li>
   <li><a href="../classes/screen.html">screen</a></li>
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/tag.html">tag</a></li>
@@ -242,7 +244,7 @@ user editing.</li>
 </span>        textbox      = atextbox,
         exe_callback = <span class="keyword">function</span>(input)
             <span class="keyword">if</span> <span class="keyword">not</span> input <span class="keyword">or</span> #input == <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
-            naughty.notify{ text = <span class="string">'The input was: '</span>..input }
+            naughty.notification { message = <span class="string">'The input was: '</span>..input }
         <span class="keyword">end</span>
     }
 <span class="keyword">end</span>
@@ -383,7 +385,7 @@ awful.prompt.run {
     prompt               = <span class="string">'&lt;b&gt;Run: &lt;/b&gt;'</span>,
     keypressed_callback  = <span class="keyword">function</span>(mod, key, cmd) <span class="comment">--luacheck: no unused args
 </span>        <span class="keyword">if</span> key == <span class="string">'Shift_L'</span> <span class="keyword">then</span>
-            notif = naughty.notify { text = <span class="string">'Shift pressed'</span> }
+            notif = naughty.notification { message = <span class="string">'Shift pressed'</span> }
         <span class="keyword">end</span>
     <span class="keyword">end</span>,
     keyreleased_callback = <span class="keyword">function</span>(mod, key, cmd) <span class="comment">--luacheck: no unused args

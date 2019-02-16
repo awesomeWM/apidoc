@@ -99,7 +99,6 @@
   <li><a href="../libraries/mouse.html">mouse</a></li>
   <li><a href="../libraries/mousegrabber.html">mousegrabber</a></li>
   <li><a href="../libraries/naughty.html">naughty</a></li>
-  <li><a href="../libraries/naughty.dbus.html">naughty.dbus</a></li>
   <li><a href="../libraries/root.html">root</a></li>
   <li><a href="../libraries/selection.html">selection</a></li>
   <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
@@ -141,6 +140,9 @@
   <li><a href="../classes/key.html">key</a></li>
   <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
   <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
+  <li><a href="../classes/naughty.action.html">naughty.action</a></li>
+  <li><a href="../classes/naughty.layout.legacy.html">naughty.layout.legacy</a></li>
+  <li><a href="../classes/naughty.notification.html">naughty.notification</a></li>
   <li><a href="../classes/screen.html">screen</a></li>
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/tag.html">tag</a></li>
@@ -284,9 +286,11 @@ depending on the distribution. By default, Awesome will print errors on
 
 <pre>
 <span class="keyword">if</span> awesome.startup_errors <span class="keyword">then</span>
-    <span class="backtick"><a href="../libraries/naughty.html#notify">naughty.notify</a></span>({ preset = <span class="backtick"><code>naughty.config.presets.critical</code></span>,
-                     title = <span class="string">"Oops, there were errors during startup!"</span>,
-                     text = awesome.startup_errors })
+    <span class="backtick"><a href="../classes/naughty.notification.html#">naughty.notification</a></span> {
+        preset  = <span class="backtick"><code>naughty.config.presets.critical</code></span>,
+        title   = <span class="string">"Oops, there were errors during startup!"</span>,
+        message = awesome.startup_errors
+    }
 <span class="keyword">end</span>
 </pre>
 
@@ -301,9 +305,12 @@ depending on the distribution. By default, Awesome will print errors on
 </span>        <span class="keyword">if</span> in_error <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
         in_error = <span class="keyword">true</span>
 
-        <span class="backtick"><a href="../libraries/naughty.html#notify">naughty.notify</a></span>({ preset = <span class="backtick"><code>naughty.config.presets.critical</code></span>,
-                         title = <span class="string">"Oops, an error happened!"</span>,
-                         text = <span class="global">tostring</span>(err) })
+        <span class="backtick"><a href="../classes/naughty.notification.html#">naughty.notification</a></span> {
+            preset  = <span class="backtick"><code>naughty.config.presets.critical</code></span>,
+            title   = <span class="string">"Oops, an error happened!"</span>,
+            message = <span class="global">tostring</span>(err)
+        }
+
         in_error = <span class="keyword">false</span>
     <span class="keyword">end</span>)
 <span class="keyword">end</span>

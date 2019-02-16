@@ -77,7 +77,6 @@
   <li><a href="../libraries/mouse.html">mouse</a></li>
   <li><a href="../libraries/mousegrabber.html">mousegrabber</a></li>
   <li><a href="../libraries/naughty.html">naughty</a></li>
-  <li><a href="../libraries/naughty.dbus.html">naughty.dbus</a></li>
   <li><a href="../libraries/root.html">root</a></li>
   <li><a href="../libraries/selection.html">selection</a></li>
   <li><a href="../libraries/wibox.hierarchy.html">wibox.hierarchy</a></li>
@@ -119,6 +118,9 @@
   <li><a href="../classes/key.html">key</a></li>
   <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
   <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
+  <li><a href="../classes/naughty.action.html">naughty.action</a></li>
+  <li><a href="../classes/naughty.layout.legacy.html">naughty.layout.legacy</a></li>
+  <li><a href="../classes/naughty.notification.html">naughty.notification</a></li>
   <li><a href="../classes/screen.html">screen</a></li>
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/tag.html">tag</a></li>
@@ -325,10 +327,10 @@ awful.spawn.easy_async_with_shell(command, <span class="keyword">function</span>
 <pre>
 awful.spawn.with_line_callback(noisy, {
     stdout = <span class="keyword">function</span>(line)
-        naughty.notify { text = <span class="string">"LINE:"</span>..line }
+        naughty.notification { message = <span class="string">"LINE:"</span>..line }
     <span class="keyword">end</span>,
     stderr = <span class="keyword">function</span>(line)
-        naughty.notify { text = <span class="string">"ERR:"</span>..line}
+        naughty.notification { message = <span class="string">"ERR:"</span>..line}
     <span class="keyword">end</span>,
 })
 </pre>
@@ -338,7 +340,7 @@ awful.spawn.with_line_callback(noisy, {
 
 <pre>
 awful.spawn.easy_async(noisy, <span class="keyword">function</span>(stdout, stderr, reason, exit_code)
-    naughty.notify { text = stdout }
+    naughty.notification { message = stdout }
 <span class="keyword">end</span>)
 </pre>
 
