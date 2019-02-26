@@ -453,7 +453,6 @@ awful.prompt.run {
     }
 <span class="keyword">end</span>
 </pre>
-
 </p>
     <h3>Info:</h3>
     <ul>
@@ -545,48 +544,40 @@ awful.prompt.run {
         <li><span class="parameter">fg_cursor</span>
             <span class="types"><span class="type">gears.color</span></span>
 
-
          (<em>optional</em>)
         </li>
         <li><span class="parameter">bg_cursor</span>
             <span class="types"><span class="type">gears.color</span></span>
-
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">ul_cursor</span>
             <span class="types"><span class="type">gears.color</span></span>
 
-
          (<em>optional</em>)
         </li>
         <li><span class="parameter">prompt</span>
             <span class="types"><span class="type">widget</span></span>
-
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">text</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-
          (<em>optional</em>)
         </li>
         <li><span class="parameter">selectall</span>
             <span class="types"><span class="type">boolean</span></span>
-
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">font</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-
          (<em>optional</em>)
         </li>
         <li><span class="parameter">autoexec</span>
             <span class="types"><span class="type">boolean</span></span>
-
 
          (<em>optional</em>)
         </li>
@@ -647,30 +638,27 @@ awful.prompt.run {
         </li>
         <li><span class="parameter">hooks</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        <p> The &ldquo;hooks&rdquo; argument uses a syntax similar to
+         The &ldquo;hooks&rdquo; argument uses a syntax similar to
    <a href="../libraries/awful.key.html#">awful.key</a>.  It will call a function for the matching modifiers + key.
    It receives the command (widget text/input) as an argument.
    If the callback returns a command, this will be passed to the
    <a href="../libraries/awful.prompt.html#exe_callback">exe_callback</a>, otherwise nothing gets executed by default, and the hook
-   needs to handle it.</p>
-
-<pre><code> hooks = {
-   -- Apply startup notification properties with Shift-Return.
-   {{"Shift"  }, "Return", function(command)
-     awful.screen.focused().mypromptbox:spawn_and_handle_error(
-       command, {floating=true})
-   end},
-   -- Override default behavior of "Return": launch commands prefixed
-   -- with ":" in a terminal.
-   {{}, "Return", function(command)
-     if command:sub(1,1) == ":" then
-       return terminal .. ' -e ' .. command:sub(2)
-     end
-     return command
-   end}
- }
-</code></pre>
-
+   needs to handle it.
+     hooks = {
+       &ndash; Apply startup notification properties with Shift-Return.
+       {{&ldquo;Shift&rdquo;  }, &ldquo;Return&rdquo;, function(command)
+         awful.screen.focused().mypromptbox:spawn_and_handle_error(
+           command, {floating=true})
+       end},
+       &ndash; Override default behavior of &ldquo;Return&rdquo;: launch commands prefixed
+       &ndash; with &ldquo;:&rdquo; in a terminal.
+       {{}, &ldquo;Return&rdquo;, function(command)
+         if command:sub(1,1) == &ldquo;:&rdquo; then
+           return terminal .. &lsquo; -e &rsquo; .. command:sub(2)
+         end
+         return command
+       end}
+     }
          (<em>optional</em>)
         </li>
         </li></ul>
@@ -739,7 +727,6 @@ awful.prompt.run {
     <ul>
         <li><span class="parameter">color</span>
 
-
         </li>
     </ul>
 
@@ -764,7 +751,6 @@ awful.prompt.run {
     <ul>
         <li><span class="parameter">color</span>
 
-
         </li>
     </ul>
 
@@ -788,7 +774,6 @@ awful.prompt.run {
     <h3>Type:</h3>
     <ul>
         <li><span class="parameter">string</span>
-
 
         </li>
     </ul>
@@ -1002,11 +987,9 @@ awful.prompt.run {
         <li><span class="parameter">before_cursor</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-
         </li>
         <li><span class="parameter">after_cursor</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
 
         </li>
     </ul>

@@ -193,24 +193,30 @@
 
 <p> In general, patterns are specified as strings formatted as
  <code>&quot;type:arguments&quot;</code>. <code>&quot;arguments&quot;</code> is specific to the pattern being used. For
- example, one can use:
+ example, one can use:</p>
+
 <pre>
-<span class="string">&ldquo;radial:50,50,10:55,55,30:0,#ff0000:0.5,#00ff00:1,#0000ff&rdquo;</span>
+<span class="string">"radial:50,50,10:55,55,30:0,#ff0000:0.5,#00ff00:1,#0000ff"</span>
 </pre>
- The above will call <a href="../libraries/gears.color.html#create_radial_pattern">create_radial_pattern</a> with the provided string, after
+
+
+<p> The above will call <a href="../libraries/gears.color.html#create_radial_pattern">create_radial_pattern</a> with the provided string, after
  stripping the <code>radial:</code> prefix.</p>
 
 <p> Alternatively, patterns can be specified via tables. In this case, the
- table&rsquo;s &lsquo;type&rsquo; member specifies the type. For example:
+ table&rsquo;s &lsquo;type&rsquo; member specifies the type. For example:</p>
+
 <pre>
 {
-  <span class="global">type</span> = <span class="string">&ldquo;radial&rdquo;</span>,
+  <span class="global">type</span> = <span class="string">"radial"</span>,
   from = { <span class="number">50</span>, <span class="number">50</span>, <span class="number">10</span> },
   to = { <span class="number">55</span>, <span class="number">55</span>, <span class="number">30</span> },
-  stops = { { <span class="number">0</span>, <span class="string">&ldquo;#ff0000&rdquo;</span> }, { <span class="number">0.5</span>, <span class="string">&ldquo;#00ff00&rdquo;</span> }, { <span class="number">1</span>, <span class="string">&ldquo;#0000ff&rdquo;</span> } }
+  stops = { { <span class="number">0</span>, <span class="string">"#ff0000"</span> }, { <span class="number">0.5</span>, <span class="string">"#00ff00"</span> }, { <span class="number">1</span>, <span class="string">"#0000ff"</span> } }
 }
 </pre>
- Any argument that cannot be understood is passed to <a href="../libraries/gears.color.html#create_solid_pattern">create_solid_pattern</a>.</p>
+
+
+<p> Any argument that cannot be understood is passed to <a href="../libraries/gears.color.html#create_solid_pattern">create_solid_pattern</a>.</p>
 
 <p> Please note that you MUST NOT modify the returned pattern, for example by
  calling :set_matrix() on it, because this function uses a cache and your
@@ -235,8 +241,7 @@
 <table class="function_list">
 	<tr>
 	<td class="name" ><a href="#returns...">returns... (col)</a></td>
-	<td class="summary">
-</td>
+	<td class="summary"></td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#parse_color">parse_color (col)</a></td>
@@ -306,7 +311,6 @@
     <strong>returns... (col)</strong>
     </dt>
     <dd>
-
 
 
 
@@ -416,13 +420,10 @@
     Create a linear pattern object.
  The pattern is created from a string. This string should have the following
  form: <code>&quot;x0, y0:x1, y1:&lt;stops&gt;&quot;</code>
- Alternatively, the pattern can be specified as a table:</p>
-
-<pre><code>{ type = "linear", from = { x0, y0 }, to = { x1, y1 },
-  stops = { &lt;stops&gt; } }
-</code></pre>
-
-<p> <code>x0,y0</code> and <code>x1,y1</code> are the start and stop point of the pattern.
+ Alternatively, the pattern can be specified as a table:
+    { type = &ldquo;linear&rdquo;, from = { x0, y0 }, to = { x1, y1 },
+      stops = { <stops> } }
+ <code>x0,y0</code> and <code>x1,y1</code> are the start and stop point of the pattern.
  For the explanation of <code>&lt;stops&gt;</code>, see <a href="../libraries/gears.color.html#create_pattern">color.create_pattern</a>.
 
 
@@ -451,13 +452,10 @@
     Create a radial pattern object.
  The pattern is created from a string. This string should have the following
  form: <code>&quot;x0, y0, r0:x1, y1, r1:&lt;stops&gt;&quot;</code>
- Alternatively, the pattern can be specified as a table:</p>
-
-<pre><code>{ type = "radial", from = { x0, y0, r0 }, to = { x1, y1, r1 },
-  stops = { &lt;stops&gt; } }
-</code></pre>
-
-<p> <code>x0,y0</code> and <code>x1,y1</code> are the start and stop point of the pattern.
+ Alternatively, the pattern can be specified as a table:
+    { type = &ldquo;radial&rdquo;, from = { x0, y0, r0 }, to = { x1, y1, r1 },
+      stops = { <stops> } }
+ <code>x0,y0</code> and <code>x1,y1</code> are the start and stop point of the pattern.
  <code>r0</code> and <code>r1</code> are the radii of the start / stop circle.
  For the explanation of <code>&lt;stops&gt;</code>, see <a href="../libraries/gears.color.html#create_pattern">color.create_pattern</a>.
 
@@ -522,7 +520,6 @@
 
     <ul>
         <li><span class="parameter">col</span>
-
 
         </li>
     </ul>
@@ -634,18 +631,14 @@
     <ul>
         <li><span class="parameter">solid</span>
 
-
         </li>
         <li><span class="parameter">png</span>
-
 
         </li>
         <li><span class="parameter">linear</span>
 
-
         </li>
         <li><span class="parameter">radial</span>
-
 
         </li>
     </ul>
