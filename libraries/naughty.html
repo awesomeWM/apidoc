@@ -289,7 +289,7 @@
 <table class="function_list">
 	<tr>
 	<td class="name" ><a href="#config">config</a></td>
-	<td class="summary">Naughty configuration &ndash; a table containing common popup settings.</td>
+	<td class="summary">Naughty configuration - a table containing common popup settings.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#config.presets">config.presets</a></td>
@@ -321,7 +321,7 @@
     <strong>connect_signal (name, func)</strong>
     </dt>
     <dd>
-    Connect a global signal on the notification engine. </p>
+    Connect a global signal on the notification engine.</p>
 
 <p> Functions connected to this signal source will be executed when any
  notification object emits the signal.</p>
@@ -475,7 +475,7 @@
     <strong>suspended</strong>
     </dt>
     <dd>
-    The global suspension state. </p>
+    The global suspension state.</p>
 
 <p> When suspended, no notification widget should interrupt the user. This is
  useful when watching movies or doing presentations.
@@ -484,7 +484,6 @@
     <h3>Type:</h3>
     <ul>
         <li><span class="parameter">boolean</span>
-
 
         </li>
     </ul>
@@ -499,7 +498,7 @@
     <strong>expiration_paused</strong>
     </dt>
     <dd>
-    Do not allow notifications to auto-expire. </p>
+    Do not allow notifications to auto-expire.</p>
 
 <p> When navigating the notifications, for example on mouse over or when
  keyboard navigation is enabled, it is very annoying when notifications
@@ -509,7 +508,6 @@
     <h3>Type:</h3>
     <ul>
         <li><span class="parameter">boolean</span>
-
 
          (<em>default</em> false)
         </li>
@@ -571,7 +569,7 @@
     <strong>request::display</strong>
     </dt>
     <dd>
-    <p>Emitted when a notification has to be displayed. </p>
+    <p>Emitted when a notification has to be displayed.</p>
 
 <p> To add an handler, use:</p>
 
@@ -579,7 +577,6 @@
     -- do something
 end)
 </code></pre>
-
 
 
     <h3>Arguments:</h3>
@@ -635,7 +632,7 @@ end)
     <strong>is_suspended</a> <i class="deprecated_label">[deprecated]</i><a></strong>
     </dt>
     <dd>
-    Notification state. </p>
+    Notification state.</p>
 
 <p> This function is deprecated, use <a href="../libraries/naughty.html#suspended">naughty.suspended</a>.
 
@@ -651,7 +648,7 @@ end)
     <strong>suspend</a> <i class="deprecated_label">[deprecated]</i><a></strong>
     </dt>
     <dd>
-    Suspend notifications. </p>
+    Suspend notifications.</p>
 
 <p> This function is deprecated, use <code>naughty.suspended = true</code>.
 
@@ -667,7 +664,7 @@ end)
     <strong>resume</a> <i class="deprecated_label">[deprecated]</i><a></strong>
     </dt>
     <dd>
-    Resume notifications. </p>
+    Resume notifications.</p>
 
 <p> This function is deprecated, use <code>naughty.suspended = false</code>.
 
@@ -683,7 +680,7 @@ end)
     <strong>toggle</a> <i class="deprecated_label">[deprecated]</i><a></strong>
     </dt>
     <dd>
-    Toggle notification state. </p>
+    Toggle notification state.</p>
 
 <p> This function is deprecated, use <code>naughty.suspended = not naughty.suspended</code>.
 
@@ -747,7 +744,7 @@ end)
     <strong>reset_timeout</a> <i class="deprecated_label">[deprecated]</i><a></strong>
     </dt>
     <dd>
-    Set new notification timeout. </p>
+    Set new notification timeout.</p>
 
 <p> This function is deprecated, use <code>notification:reset_timeout(new_timeout)</code>.
 
@@ -774,7 +771,7 @@ end)
     <strong>replace_text</a> <i class="deprecated_label">[deprecated]</i><a></strong>
     </dt>
     <dd>
-    Replace title and text of an existing notification. </p>
+    Replace title and text of an existing notification.</p>
 
 <p> This function is deprecated, use <code>notification.message = new_text</code> and
  <code>notification.title = new_title</code>
@@ -806,13 +803,12 @@ end)
     <strong>notify</a> <i class="deprecated_label">[deprecated]</i><a></strong>
     </dt>
     <dd>
-    <p>Create a notification. </p>
+    <p>Create a notification.</p>
 
 <p> This function is deprecated, create notification objects instead:</p>
 
 <pre><code>local notif = naughty.notification(args)
 </code></pre>
-
 
 
     <h3>param:</h3>
@@ -982,7 +978,7 @@ end)
     <strong>config</strong>
     </dt>
     <dd>
-    Naughty configuration &ndash; a table containing common popup settings.
+    Naughty configuration - a table containing common popup settings.
 
 
     <h3>Fields:</h3>
@@ -1013,15 +1009,12 @@ end)
         <li><span class="parameter">notify_callback</span>
             <span class="types"><span class="type">function</span></span>
          Callback used to modify or reject
- notifications, e.g.</p>
-
-<pre><code> naughty.config.notify_callback = function(args)
-     args.text = 'prefix: ' .. args.text
-     return args
- end
-</code></pre>
-
-<p>   To reject a notification return <code>nil</code> from the callback.
+ notifications, e.g.
+     naughty.config.notify_callback = function(args)
+         args.text = &lsquo;prefix: &rsquo; .. args.text
+         return args
+     end
+   To reject a notification return <code>nil</code> from the callback.
    If the notification is a freedesktop notification received via DBUS, you can
    access the freedesktop hints via <code>args.freedesktop_hints</code> if any where
    specified.
@@ -1067,7 +1060,6 @@ end)
         <li><span class="parameter">timeout</span>
             <span class="types"><span class="type">int</span></span>
 
-
          (<em>default</em> 5)
         </li>
         </li></ul>
@@ -1083,18 +1075,15 @@ end)
         <li><span class="parameter">bg</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-
          (<em>default</em> "#ff0000")
         </li>
         <li><span class="parameter">fg</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-
          (<em>default</em> "#ffffff")
         </li>
         <li><span class="parameter">timeout</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
 
          (<em>default</em> 0)
         </li>
@@ -1119,12 +1108,10 @@ end)
         <li><span class="parameter">timeout</span>
             <span class="types"><span class="type">int</span></span>
 
-
          (<em>default</em> 5)
         </li>
         <li><span class="parameter">text</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
 
          (<em>default</em> "")
         </li>
@@ -1136,24 +1123,20 @@ end)
         <li><span class="parameter">ontop</span>
             <span class="types"><span class="type">boolean</span></span>
 
-
          (<em>default</em> true)
         </li>
         <li><span class="parameter">margin</span>
             <span class="types"><span class="type">int</span></span>
-
 
          (<em>default</em> apply_dpi(5))
         </li>
         <li><span class="parameter">border_width</span>
             <span class="types"><span class="type">int</span></span>
 
-
          (<em>default</em> apply_dpi(1))
         </li>
         <li><span class="parameter">position</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
 
          (<em>default</em> "top_right")
         </li>
@@ -1179,26 +1162,21 @@ end)
         <li><span class="parameter">silent</span>
             <span class="types"><span class="type">number</span></span>
 
-
         </li>
         <li><span class="parameter">expired</span>
             <span class="types"><span class="type">number</span></span>
-
 
         </li>
         <li><span class="parameter">dismissed_by_user</span>
             <span class="types"><span class="type">number</span></span>
 
-
         </li>
         <li><span class="parameter">dismissed_by_command</span>
             <span class="types"><span class="type">number</span></span>
 
-
         </li>
         <li><span class="parameter">undefined</span>
             <span class="types"><span class="type">number</span></span>
-
 
         </li>
     </ul>
