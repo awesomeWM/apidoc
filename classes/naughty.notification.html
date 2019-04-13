@@ -672,6 +672,20 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> text = <span class="string">[[An &lt;b&gt;important&lt;/b&gt;;&lt;i&gt;notification&lt;/i&gt;;]]</span>
+<span class="global">require</span>(<span class="string">'naughty'</span>).notify {
+    title        = <span class="string">'Hello world!'</span>,
+    text         = text,
+    icon         = beautiful.icon,
+    bg           = <span class="string">'#0000ff'</span>,
+    fg           = <span class="string">'#ff0000'</span>,
+    font         = <span class="string">'verdana 14'</span>,
+    border_width = <span class="number">1</span>,
+    border_color = <span class="string">'#ff0000'</span>
+}</pre>
+    </ul>
 
 </dd>
     <dt>
@@ -828,6 +842,29 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> text = <span class="string">[[An &lt;b&gt;important&lt;/b&gt;;&lt;i&gt;notification&lt;/i&gt;;]]</span>
+<span class="keyword">local</span> shapes = {
+    gears.shape.rounded_rect,
+    gears.shape.hexagon,
+    gears.shape.octogon,
+    <span class="keyword">function</span>(cr, w, h)
+        <span class="keyword">return</span> gears.shape.infobubble(cr, w, h, <span class="number">20</span>, <span class="number">10</span>, w/<span class="number">2</span> - <span class="number">10</span>)
+    <span class="keyword">end</span>
+}
+<span class="keyword">for</span> _, s <span class="keyword">in</span> <span class="global">ipairs</span>(shapes) <span class="keyword">do</span>
+    naughty.notify {
+        title        = <span class="string">'Hello world!'</span>,
+        text         = text,
+        icon         = beautiful.icon,
+        shape        = s,
+        border_width = <span class="number">3</span>,
+        border_color = beautiful.bg_highlight,
+        margin       = <span class="number">15</span>,
+    }
+<span class="keyword">end</span></pre>
+    </ul>
 
 </dd>
     <dt>
