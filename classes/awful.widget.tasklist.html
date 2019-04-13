@@ -220,9 +220,9 @@ s.mytasklist = awful.widget.tasklist {
     filter   = awful.widget.tasklist.filter.currenttags,
     buttons  = tasklist_buttons,
     style    = {
-        shape_border_width = <span class="number">1</span>,
-        shape_border_color = <span class="string">'#777777'</span>,
-        shape  = gears.shape.rounded_bar,
+        border_width = <span class="number">1</span>,
+        border_color = <span class="string">'#777777'</span>,
+        shape        = gears.shape.rounded_bar,
     },
     layout   = {
         spacing = <span class="number">10</span>,
@@ -338,17 +338,11 @@ s.mytasklist = awful.widget.tasklist {
             widget        = wibox.container.background,
         },
         {
-            {
-                id     = <span class="string">'clienticon'</span>,
-                widget = awful.widget.clienticon,
-            },
+            awful.widget.clienticon,
             margins = <span class="number">5</span>,
             widget  = wibox.container.margin
         },
         <span class="keyword">nil</span>,
-        create_callback = <span class="keyword">function</span>(self, c, index, objects) <span class="comment">--luacheck: no unused args
-</span>            self:get_children_by_id(<span class="string">'clienticon'</span>)[<span class="number">1</span>].client = c
-        <span class="keyword">end</span>,
         layout = wibox.layout.align.vertical,
     },
 }
@@ -707,6 +701,11 @@ awful.popup {
         <li><span class="parameter">style.tasklist_disable_icon</span>
             <span class="types"><span class="type">boolean</span></span>
 
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">style.icon_size</span>
+            <span class="types"><span class="type">number</span></span>
+         The size of the icon
          (<em>default</em> nil)
         </li>
         <li><span class="parameter">style.disable_task_name</span>
