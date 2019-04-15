@@ -34,6 +34,7 @@
 <ul>
 <li><a href="#Functions">Functions</a></li>
 <li><a href="#Rule_sources">Rule sources</a></li>
+<li><a href="#Rule_components">Rule components</a></li>
 <li><a href="#Tables">Tables</a></li>
 </ul>
 
@@ -65,6 +66,7 @@
   <li><a href="../libraries/gears.debug.html">gears.debug</a></li>
   <li><a href="../libraries/gears.filesystem.html">gears.filesystem</a></li>
   <li><a href="../libraries/gears.geometry.html">gears.geometry</a></li>
+  <li><a href="../libraries/gears.matcher.html">gears.matcher</a></li>
   <li><a href="../libraries/gears.math.html">gears.math</a></li>
   <li><a href="../libraries/gears.protected_call.html">gears.protected_call</a></li>
   <li><a href="../libraries/gears.shape.html">gears.shape</a></li>
@@ -280,8 +282,8 @@
 </pre>
 
 
-<p> To match multiple clients with an exception one can couple <code>rules.except</code> or
- <code>rules.except_any</code> with the rules:</p>
+<p> To match multiple clients with an exception one can couple <a href="../libraries/awful.rules.html#except">rules.except</a> or
+ <a href="../libraries/awful.rules.html#except_any">rules.except_any</a> with the rules:</p>
 
 <pre>
 { rule = { class = <span class="string">"Firefox"</span> },
@@ -411,10 +413,6 @@
 	<td class="summary">Check if a client matches a given set of rules.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#add_rule_source">add_rule_source (name, callback, depends_on, precede)</a></td>
-	<td class="summary">Add a new rule source.</td>
-	</tr>
-	<tr>
 	<td class="name" ><a href="#remove_rule_source">remove_rule_source (name)</a></td>
 	<td class="summary">Remove a source.</td>
 	</tr>
@@ -423,7 +421,11 @@
 	<td class="summary">Apply awful.rules.rules to a client.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#execute">execute (c, props[, callbacks])</a></td>
+	<td class="name" ><a href="#awful.rules.add_rule_source">awful.rules.add_rule_source (name, callback, depends_on, precede)</a></td>
+	<td class="summary">Add a new rule source.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#awful.rules.execute">awful.rules.execute (c, props[, callbacks])</a></td>
 	<td class="summary">Apply properties and callbacks to a client.</td>
 	</tr>
 </table>
@@ -440,6 +442,33 @@
 	<tr>
 	<td class="name" ><a href="#awful.spawn_once">awful.spawn_once</a></td>
 	<td class="summary">The rule source for clients spawned by <a href="../libraries/awful.spawn.html#once">awful.spawn.once</a> and <code>single_instance</code>.</td>
+	</tr>
+</table>
+<h2><a href="#Rule_components">Rule components</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" ><a href="#properties">properties</a></td>
+	<td class="summary">A table which content will be used to set the target object properties.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#callbacks">callbacks</a></td>
+	<td class="summary">A list of callback function to call <em>after</em> the properties have been apploed.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#rule">rule</a></td>
+	<td class="summary">A table which content will be compared to the target object current properties.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#rule_any">rule_any</a></td>
+	<td class="summary">Similar to <a href="../libraries/awful.rules.html#rule">rule</a>, but each entry is a table with multiple values.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#except">except</a></td>
+	<td class="summary">The negative equivalent of <a href="../libraries/awful.rules.html#rule">rule</a>.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#except_any">except_any</a></td>
+	<td class="summary">The negative equivalent of <a href="../libraries/awful.rules.html#rule_any">rule_any</a>.</td>
 	</tr>
 </table>
 <h2><a href="#Tables">Tables</a></h2>
@@ -544,8 +573,8 @@
         </li>
         <li><span class="parameter">entry</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Rule entry (with keys <code>rule</code>, <code>rule_any</code>, <code>except</code> and/or
-   <code>except_any</code>).
+         Rule entry (with keys <a href="../libraries/awful.rules.html#rule">rule</a>, <a href="../libraries/awful.rules.html#rule_any">rule_any</a>, <a href="../libraries/awful.rules.html#except">except</a> and/or
+   <a href="../libraries/awful.rules.html#except_any">except_any</a>).
         </li>
     </ul>
 
@@ -606,8 +635,8 @@
         </li>
         <li><span class="parameter">_rules</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The rules to check. List of tables with <code>rule</code>, <code>rule_any</code>,
-   <code>except</code> and <code>except_any</code> keys.
+         The rules to check. List of tables with <a href="../libraries/awful.rules.html#rule">rule</a>, <a href="../libraries/awful.rules.html#rule_any">rule_any</a>,
+   <a href="../libraries/awful.rules.html#except">except</a> and <a href="../libraries/awful.rules.html#except_any">except_any</a> keys.
         </li>
     </ul>
 
@@ -623,8 +652,54 @@
 
 </dd>
     <dt>
-    <a name = "add_rule_source"></a>
-    <strong>add_rule_source (name, callback, depends_on, precede)</strong>
+    <a name = "remove_rule_source"></a>
+    <strong>remove_rule_source (name)</strong>
+    </dt>
+    <dd>
+    Remove a source.
+
+
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The source name.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the source was removed,
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "apply"></a>
+    <strong>apply (c)</strong>
+    </dt>
+    <dd>
+    Apply awful.rules.rules to a client.
+
+
+    <ul>
+        <li><span class="parameter">c</span>
+            <span class="types"><a class="type" href="../classes/client.html#awful.object">client.object</a></span>
+         The client.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "awful.rules.add_rule_source"></a>
+    <strong>awful.rules.add_rule_source (name, callback, depends_on, precede)</strong>
     </dt>
     <dd>
     Add a new rule source.</p>
@@ -706,54 +781,8 @@
 
 </dd>
     <dt>
-    <a name = "remove_rule_source"></a>
-    <strong>remove_rule_source (name)</strong>
-    </dt>
-    <dd>
-    Remove a source.
-
-
-    <ul>
-        <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The source name.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-        If the source was removed
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "apply"></a>
-    <strong>apply (c)</strong>
-    </dt>
-    <dd>
-    Apply awful.rules.rules to a client.
-
-
-    <ul>
-        <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../classes/client.html#awful.object">client.object</a></span>
-         The client.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "execute"></a>
-    <strong>execute (c, props[, callbacks])</strong>
+    <a name = "awful.rules.execute"></a>
+    <strong>awful.rules.execute (c, props[, callbacks])</strong>
     </dt>
     <dd>
     Apply properties and callbacks to a client.
@@ -848,6 +877,160 @@
 
 
 
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Rule_components"></a>Rule components</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "properties"></a>
+    <strong>properties</strong>
+    </dt>
+    <dd>
+    A table which content will be used to set the target object properties.</p>
+
+<p> foo
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.rules.html#callbacks">callbacks</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "callbacks"></a>
+    <strong>callbacks</strong>
+    </dt>
+    <dd>
+    A list of callback function to call <em>after</em> the properties have been apploed.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.rules.html#properties">properties</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "rule"></a>
+    <strong>rule</strong>
+    </dt>
+    <dd>
+    A table which content will be compared to the target object current properties.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.rules.html#rule_any">rule_any</a></li>
+         <li><a href="../libraries/awful.rules.html#except">except</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "rule_any"></a>
+    <strong>rule_any</strong>
+    </dt>
+    <dd>
+    Similar to <a href="../libraries/awful.rules.html#rule">rule</a>, but each entry is a table with multiple values.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.rules.html#rule">rule</a></li>
+         <li><a href="../libraries/awful.rules.html#except_any">except_any</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "except"></a>
+    <strong>except</strong>
+    </dt>
+    <dd>
+    The negative equivalent of <a href="../libraries/awful.rules.html#rule">rule</a>.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.rules.html#rule">rule</a></li>
+         <li><a href="../libraries/awful.rules.html#except_any">except_any</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "except_any"></a>
+    <strong>except_any</strong>
+    </dt>
+    <dd>
+    The negative equivalent of <a href="../libraries/awful.rules.html#rule_any">rule_any</a>.
+
+
+    <h3>Type:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.rules.html#rule">rule</a></li>
+         <li><a href="../libraries/awful.rules.html#except">except</a></li>
+    </ul>
 
 
 </dd>
