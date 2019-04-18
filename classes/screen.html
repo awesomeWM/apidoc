@@ -207,7 +207,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 
 
 <p> Most basic Awesome objects also have a screen property, see <a href="../libraries/mouse.html#screen">mouse.screen</a>
- <a href="../classes/client.html#client.screen">client.screen</a>, <a href="../classes/wibox.html#wibox.screen">wibox.screen</a> and <a href="../classes/tag.html#tag.screen">tag.screen</a>.</p>
+ <a href="../classes/client.html#client.screen">client.screen</a>, <a href="../classes/wibox.html#wibox.screen">wibox.screen</a> and <a href="../classes/tag.html#request::screen">tag.screen</a>.</p>
 
 <p> Furthermore to the classes described here, one can also use signals as
  described in <a href="../classes/signals.html#">signals</a>.</p>
@@ -326,6 +326,14 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 	<tr>
 	<td class="name" ><a href="#screen.swapped">swapped</a></td>
 	<td class="summary">When 2 screens are swapped</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#request::desktop_decoration">request::desktop_decoration</a></td>
+	<td class="summary">Emitted when a new screen is added.</td>
+	</tr>
+	<tr>
+	<td class="name" ><a href="#request::wallpaper">request::wallpaper</a></td>
+	<td class="summary">Emitted when a new screen needs a wallpaper.</td>
 	</tr>
 	<tr>
 	<td class="name" ><a href="#tag::history::update">tag::history::update</a></td>
@@ -898,7 +906,7 @@ other.</li>
     <ul>
          <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
          <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.floating.get">client.get</a></li>
+         <li><a href="../classes/client.html#client:get">client.get</a></li>
     </ul>
 
 
@@ -926,7 +934,7 @@ other.</li>
     <ul>
          <li><a href="../classes/screen.html#screen.clients">clients</a></li>
          <li><a href="../classes/screen.html#screen.all_clients">all_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.floating.get">client.get</a></li>
+         <li><a href="../classes/client.html#client:get">client.get</a></li>
     </ul>
 
 
@@ -952,7 +960,7 @@ other.</li>
     <ul>
          <li><a href="../classes/screen.html#screen.clients">clients</a></li>
          <li><a href="../classes/screen.html#screen.hidden_clients">hidden_clients</a></li>
-         <li><a href="../classes/client.html#awful.client.floating.get">client.get</a></li>
+         <li><a href="../classes/client.html#client:get">client.get</a></li>
     </ul>
 
 
@@ -993,7 +1001,7 @@ other.</li>
     <dd>
     A list of all tags on the screen.</p>
 
-<p> This property is read only, use <a href="../classes/tag.html#tag.screen">tag.screen</a>, <code>awful.tag.add</code>,
+<p> This property is read only, use <a href="../classes/tag.html#request::screen">tag.screen</a>, <code>awful.tag.add</code>,
  <code>awful.tag.new</code> or <code>t:delete()</code> to alter this list.
 
 
@@ -1028,7 +1036,7 @@ other.</li>
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#tag.selected">tag.selected</a></li>
+         <li><a href="../classes/tag.html#awful.tag.selected">tag.selected</a></li>
          <li><a href="../classes/client.html#client:to_selected_tags">client.to_selected_tags</a></li>
     </ul>
 
@@ -1053,7 +1061,7 @@ other.</li>
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../classes/tag.html#tag.selected">tag.selected</a></li>
+         <li><a href="../classes/tag.html#awful.tag.selected">tag.selected</a></li>
          <li><a href="../classes/screen.html#screen.selected_tags">selected_tags</a></li>
     </ul>
 
@@ -1159,6 +1167,60 @@ other.</li>
 
 </dd>
     <dt>
+    <a name = "request::desktop_decoration"></a>
+    <strong>request::desktop_decoration</strong>
+    </dt>
+    <dd>
+    Emitted when a new screen is added.</p>
+
+<p> The handler(s) of this signal are responsible of adding elements such as
+ bars, docks or other elements to a screen. The signal is emitted when a
+ screen is added, including during startup.</p>
+
+<p> The only default implementation is the one provided by <a href="../sample files/rc.lua.html#">rc.lua</a>.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+         The screen object.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request::wallpaper"></a>
+    <strong>request::wallpaper</strong>
+    </dt>
+    <dd>
+    Emitted when a new screen needs a wallpaper.</p>
+
+<p> The handler(s) of this signal are responsible to set the wallpaper. The
+ signal is emitted when a screen is added (including at startup), when its
+ DPI changes or when its geometry changes.</p>
+
+<p> The only default implementation is the one provided by <a href="../sample files/rc.lua.html#">rc.lua</a>.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="../classes/screen.html#">screen</a></span>
+         The screen object.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
     <a name = "tag::history::update"></a>
     <strong>tag::history::update</strong>
     </dt>
@@ -1231,7 +1293,7 @@ other.</li>
 
     <h3>See also:</h3>
     <ul>
-         <a href="../classes/screen.html#screen.padding">padding</a>
+         <a href="../classes/screen.html#awful.screen.padding">padding</a>
     </ul>
 
 

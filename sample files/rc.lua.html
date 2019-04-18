@@ -338,7 +338,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                               awful.client.focus.byidx(-<span class="number">1</span>)
                                           <span class="keyword">end</span>))
 
-<span class="keyword">local</span> <span class="keyword">function</span> set_wallpaper(s)
+screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
     <span class="comment">-- Wallpaper
 </span>    <span class="keyword">if</span> beautiful.wallpaper <span class="keyword">then</span>
         <span class="keyword">local</span> wallpaper = beautiful.wallpaper
@@ -348,15 +348,9 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
         <span class="keyword">end</span>
         gears.wallpaper.maximized(wallpaper, s, <span class="keyword">true</span>)
     <span class="keyword">end</span>
-<span class="keyword">end</span>
+<span class="keyword">end</span>)
 
-<span class="comment">-- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-</span>screen.connect_signal(<span class="string">"property::geometry"</span>, set_wallpaper)
-
-awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
-    <span class="comment">-- Wallpaper
-</span>    set_wallpaper(s)
-
+screen.connect_signal(<span class="string">"request::desktop_decoration"</span>, <span class="keyword">function</span>(s)
     <span class="comment">-- Each screen has its own tag table.
 </span>    awful.tag({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, awful.layout.layouts[<span class="number">1</span>])
 
