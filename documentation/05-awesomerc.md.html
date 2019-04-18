@@ -484,7 +484,7 @@ mytextclock = <span class="backtick"><a href="../classes/wibox.widget.textclock.
 
 
 
-<span class="keyword">local</span> <span class="keyword">function</span> set_wallpaper(s)
+screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
     <span class="comment">-- Wallpaper
 </span>    <span class="keyword">if</span> <span class="backtick"><a href="../libraries/beautiful.html#wallpaper">beautiful.wallpaper</a></span> <span class="keyword">then</span>
         <span class="keyword">local</span> wallpaper = <span class="backtick"><a href="../libraries/beautiful.html#wallpaper">beautiful.wallpaper</a></span>
@@ -494,24 +494,14 @@ mytextclock = <span class="backtick"><a href="../classes/wibox.widget.textclock.
         <span class="keyword">end</span>
         <span class="backtick"><a href="../libraries/gears.wallpaper.html#maximized">gears.wallpaper.maximized</a></span>(wallpaper, s, <span class="keyword">true</span>)
     <span class="keyword">end</span>
-<span class="keyword">end</span>
-</pre>
-
-
-<p> Re-set wallpaper when a screen&rsquo;s geometry changes (e.g. different resolution)</p>
-
-<pre>
-screen.connect_signal(<span class="string">"property::geometry"</span>, set_wallpaper)
+<span class="keyword">end</span>)
 </pre>
 
 
 <p> &nbsp;</p>
 
 <pre>
-<span class="backtick"><code>awful.screen.connect</code></span>_for_each_screen(<span class="keyword">function</span>(s)
-    <span class="comment">-- Wallpaper
-</span>    set_wallpaper(s)
-
+screen.connect_signal(<span class="string">"request::desktop_decoration"</span>, <span class="keyword">function</span>(s)
     <span class="comment">-- Each screen has its own tag table.
 </span>    <span class="backtick"><a href="../libraries/awful.tag.html#">awful.tag</a></span>({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, <span class="backtick"><a href="../libraries/awful.layout.html#layouts">awful.layout.layouts</a></span>[<span class="number">1</span>])
 
