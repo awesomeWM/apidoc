@@ -65,6 +65,11 @@
   <li><a href="../widgets/awful.widget.taglist.html">awful.widget.taglist</a></li>
   <li><a href="../widgets/awful.widget.tasklist.html">awful.widget.tasklist</a></li>
   <li><a href="../widgets/awful.widget.watch.html">awful.widget.watch</a></li>
+  <li><a href="../widgets/naughty.list.actions.html">naughty.list.actions</a></li>
+  <li><a href="../widgets/naughty.list.notifications.html">naughty.list.notifications</a></li>
+  <li><a href="../widgets/naughty.widget.icon.html">naughty.widget.icon</a></li>
+  <li><a href="../widgets/naughty.widget.message.html">naughty.widget.message</a></li>
+  <li><a href="../widgets/naughty.widget.title.html">naughty.widget.title</a></li>
   <li><a href="../widgets/wibox.widget.calendar.html">wibox.widget.calendar</a></li>
   <li><a href="../widgets/wibox.widget.checkbox.html">wibox.widget.checkbox</a></li>
   <li><a href="../widgets/wibox.widget.graph.html">wibox.widget.graph</a></li>
@@ -80,6 +85,7 @@
 <h2>Widget containers</h2>
 <ul class="nowrap">
   <li><a href="../widget containers/awful.widget.only_on_screen.html">awful.widget.only_on_screen</a></li>
+  <li><a href="../widget containers/naughty.widget.background.html">naughty.widget.background</a></li>
   <li><a href="../widget containers/wibox.container.arcchart.html">wibox.container.arcchart</a></li>
   <li><a href="../widget containers/wibox.container.background.html">wibox.container.background</a></li>
   <li><a href="../widget containers/wibox.container.constraint.html">wibox.container.constraint</a></li>
@@ -110,6 +116,7 @@
   <li><a href="../core components/key.html">key</a></li>
   <li><a href="../core components/mouse.html">mouse<span class='listplusign'> and awful.mouse</span></a></li>
   <li><a href="../core components/mousegrabber.html">mousegrabber</a></li>
+  <li><a href="../core components/naughty.action.html">naughty.action</a></li>
   <li><a href="../core components/naughty.notification.html">naughty.notification</a></li>
   <li><a href="../core components/root.html">root</a></li>
   <li><a href="../core components/screen.html">screen<span class='listplusign'> and awful.screen</span></a></li>
@@ -125,6 +132,7 @@
   <li><a href="../popups and bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups and bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups and bars/menubar.html">menubar</a></li>
+  <li><a href="../popups and bars/naughty.layout.box.html">naughty.layout.box</a></li>
   <li><a href="../popups and bars/naughty.layout.legacy.html">naughty.layout.legacy</a></li>
   <li><a href="../popups and bars/wibox.html">wibox</a></li>
 </ul>
@@ -182,7 +190,6 @@
   <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
   <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
   <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
-  <li><a href="../classes/naughty.action.html">naughty.action</a></li>
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
   <li><a href="../classes/wibox.hierarchy.html">wibox.hierarchy</a></li>
@@ -425,6 +432,15 @@ configurable rules.</p>
 </table>
 
 
+<h3>Other</h3>
+
+<p>Notifications also have their own widgets.</p>
+
+<p><img src="../images/AUTOGEN_wibox_nwidget_default.svg" /></p>
+
+<p>More information about the notification widgets can be found on the
+<a href="../core components/naughty.notification.html#">naughty.notification</a> documentation page.</p>
+
 <h3>The different type of widget boxes (Wibox)</h3>
 
 <p>The Awesome API uses the word &ldquo;wibox&rdquo; (widget box) to describe an area of the
@@ -450,6 +466,9 @@ positioning, relative positioning, and manual positioning.</p>
 
 <p>The <a href="../popups and bars/awful.tooltip.html#">awful.tooltip</a> is a very simple <a href="../popups and bars/wibox.html#">wibox</a> that allows to display text next
 to an object such as the mouse.</p>
+
+<p>The <a href="../popups and bars/naughty.layout.box.html#">naughty.layout.box</a> allows to provide custom widgets to use within the
+notifications.</p>
 
 <p>Finally, the <a href="../popups and bars/awful.titlebar.html#">awful.titlebar</a>, while not technically a real <a href="../popups and bars/wibox.html#">wibox</a>, acts
 exactly the same way and allows to attach widgets on each side of clients.</p>
@@ -885,6 +904,34 @@ example:</p>
 
 s.mywibox : setup (three_circle)
 </pre>
+
+
+<h3>Instantiation rules</h3>
+
+<p>Whenever it can, Awesome tries to be asynchronous. This can take various form
+depending on the situation. For example, the <code>connect_signal</code> method allows to
+execute code when an event arrives. <code>awful.screen.connect_for_each_screen</code> also
+allows to instantiate various elements when a new screen is added. In the later
+case, it is why some widgets are added as properties to other objects instead of
+being global variables like in previous versions of Awesome.</p>
+
+<p>However, there is a case where this isn&rsquo;t enough and another abstract widget has
+to be used. This concept is called the <code>widget_template</code> and is an optional
+property of many widgets such as the <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a>,
+<a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a> and <a href="../popups and bars/naughty.layout.box.html#">naughty.layout.box</a>. These templates are a
+<strong>table</strong> using the exact same syntax as the declarative widgets, but without
+the <a href="../libraries/wibox.widget.html#">wibox.widget</a> prefix in front of the curly braces. These templates
+represents future widgets that will be created by their parent widget. This is
+necessary for three reasons:</p>
+
+<ul>
+<li>The widget must create many instances of the template at different points in
+time.</li>
+<li>The widget data is only partially available and other fields must be set
+at a later time (by the parent widget).</li>
+<li>The code is highly redundant and some of the logic is delegated to the parent
+widget to simplify everything.</li>
+</ul>
 
 
 </div> <!-- id="content" -->

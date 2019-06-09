@@ -30,10 +30,6 @@
   <li><a href="../index.html">Index</a></li>
 </ul>
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Request_handlers">Request handlers</a></li>
-</ul>
 
 
 <h2>Popups and bars</h2>
@@ -46,6 +42,7 @@
   <li><a href="../popups and bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups and bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups and bars/menubar.html">menubar</a></li>
+  <li><a href="../popups and bars/naughty.layout.box.html">naughty.layout.box</a></li>
   <li><strong>naughty.layout.legacy</strong></li>
   <li><a href="../popups and bars/wibox.html">wibox</a></li>
 </ul>
@@ -61,6 +58,11 @@
   <li><a href="../widgets/awful.widget.taglist.html">awful.widget.taglist</a></li>
   <li><a href="../widgets/awful.widget.tasklist.html">awful.widget.tasklist</a></li>
   <li><a href="../widgets/awful.widget.watch.html">awful.widget.watch</a></li>
+  <li><a href="../widgets/naughty.list.actions.html">naughty.list.actions</a></li>
+  <li><a href="../widgets/naughty.list.notifications.html">naughty.list.notifications</a></li>
+  <li><a href="../widgets/naughty.widget.icon.html">naughty.widget.icon</a></li>
+  <li><a href="../widgets/naughty.widget.message.html">naughty.widget.message</a></li>
+  <li><a href="../widgets/naughty.widget.title.html">naughty.widget.title</a></li>
   <li><a href="../widgets/wibox.widget.calendar.html">wibox.widget.calendar</a></li>
   <li><a href="../widgets/wibox.widget.checkbox.html">wibox.widget.checkbox</a></li>
   <li><a href="../widgets/wibox.widget.graph.html">wibox.widget.graph</a></li>
@@ -76,6 +78,7 @@
 <h2>Widget containers</h2>
 <ul class="nowrap">
   <li><a href="../widget containers/awful.widget.only_on_screen.html">awful.widget.only_on_screen</a></li>
+  <li><a href="../widget containers/naughty.widget.background.html">naughty.widget.background</a></li>
   <li><a href="../widget containers/wibox.container.arcchart.html">wibox.container.arcchart</a></li>
   <li><a href="../widget containers/wibox.container.background.html">wibox.container.background</a></li>
   <li><a href="../widget containers/wibox.container.constraint.html">wibox.container.constraint</a></li>
@@ -106,6 +109,7 @@
   <li><a href="../core components/key.html">key</a></li>
   <li><a href="../core components/mouse.html">mouse<span class='listplusign'> and awful.mouse</span></a></li>
   <li><a href="../core components/mousegrabber.html">mousegrabber</a></li>
+  <li><a href="../core components/naughty.action.html">naughty.action</a></li>
   <li><a href="../core components/naughty.notification.html">naughty.notification</a></li>
   <li><a href="../core components/root.html">root</a></li>
   <li><a href="../core components/screen.html">screen<span class='listplusign'> and awful.screen</span></a></li>
@@ -165,7 +169,6 @@
   <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
   <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
   <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
-  <li><a href="../classes/naughty.action.html">naughty.action</a></li>
   <li><a href="../classes/signals.html">signals</a></li>
   <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
   <li><a href="../classes/wibox.hierarchy.html">wibox.hierarchy</a></li>
@@ -203,6 +206,13 @@
 
 <p> If no other notification widget is specified, Awesome fallback to this
  widget.</p>
+
+<p><img src="../images/AUTOGEN_naughty_actions.svg" alt="Usage example" /></p>
+
+<p> Use the <a href="../core components/naughty.notification.html#position">naughty.notification.position</a> property to control where the popup
+ is located.</p>
+
+<p><img src="../images/AUTOGEN_awful_notification_corner.svg" alt="Usage example" /></p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008 koniu,2017 Emmanuel Lepage Vallee</li>
@@ -210,57 +220,11 @@
     </ul>
 
 
-<h2><a href="#Request_handlers">Request handlers</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" ><a href="#naughty.default_notification_handler">naughty.default_notification_handler</a></td>
-	<td class="summary">The default notification GUI handler.</td>
-	</tr>
-</table>
 
 <br/>
 <br/>
 
 
-    <h2 class="section-header "><a name="Request_handlers"></a>Request handlers</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "naughty.default_notification_handler"></a>
-    <strong>naughty.default_notification_handler</strong>
-    </dt>
-    <dd>
-    The default notification GUI handler.</p>
-
-<p> To disable this handler, use:</p>
-
-<pre><code>naughty.disconnect_signal(
-    "request::display", naughty.default_notification_handler
-)
-</code></pre>
-
-<p> It looks like:
-
-
-    <h3>Arguments:</h3>
-    <ul>
-        <li><span class="parameter">notification</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The <a href="../core components/naughty.notification.html#">naughty.notification</a> object.
-        </li>
-        <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Any arguments passed to the <a href="../libraries/naughty.html#notify">naughty.notify</a> function,
-  including, but not limited to all <a href="../core components/naughty.notification.html#">naughty.notification</a> properties.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-</dl>
 
 
 </div> <!-- id="content" -->
