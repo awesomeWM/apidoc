@@ -271,7 +271,7 @@ s.mytaglist = awful.widget.taglist {
         widget = wibox.container.background,
         <span class="comment">-- Add support for hover colors and an index label
 </span>        create_callback = <span class="keyword">function</span>(self, c3, index, objects) <span class="comment">--luacheck: no unused args
-</span>            self:get_children_by_id(<span class="string">'index_role'</span>)[<span class="number">1</span>].markup = <span class="string">'&lt;b&gt; '</span>..index..<span class="string">' &lt;/b&gt;'</span>
+</span>            self:get_children_by_id(<span class="string">'index_role'</span>)[<span class="number">1</span>].markup = <span class="string">'&lt;b&gt; '</span>..c3.index..<span class="string">' &lt;/b&gt;'</span>
             self:connect_signal(<span class="string">'mouse::enter'</span>, <span class="keyword">function</span>()
                 <span class="keyword">if</span> self.bg ~= <span class="string">'#ff0000'</span> <span class="keyword">then</span>
                     self.backup     = self.bg
@@ -284,7 +284,7 @@ s.mytaglist = awful.widget.taglist {
             <span class="keyword">end</span>)
         <span class="keyword">end</span>,
         update_callback = <span class="keyword">function</span>(self, c3, index, objects) <span class="comment">--luacheck: no unused args
-</span>            self:get_children_by_id(<span class="string">'index_role'</span>)[<span class="number">1</span>].markup = <span class="string">'&lt;b&gt; '</span>..index..<span class="string">' &lt;/b&gt;'</span>
+</span>            self:get_children_by_id(<span class="string">'index_role'</span>)[<span class="number">1</span>].markup = <span class="string">'&lt;b&gt; '</span>..c3.index..<span class="string">' &lt;/b&gt;'</span>
         <span class="keyword">end</span>,
     },
     buttons = taglist_buttons
