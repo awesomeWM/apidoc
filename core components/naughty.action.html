@@ -362,7 +362,37 @@
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     </dt>
     <dd>
-    If the action should hide the label and only display the icon.
+    <p>If the action should hide the label and only display the icon.</p>
+
+<p><img src="../images/AUTOGEN_wibox_nwidget_actionlist_icon_only.svg" alt="Usage example" /></p>
+
+<pre><code> local notif = naughty.notification {
+     title   = 'A notification',
+     message = 'This notification has actions!',
+     actions = {
+         naughty.action {
+             name = 'Accept',
+             icon = beautiful.awesome_icon,
+             icon_only = true,
+         },
+         naughty.action {
+             name = 'Refuse',
+             icon = beautiful.awesome_icon,
+             icon_only = true,
+         },
+         naughty.action {
+             name = 'Ignore',
+             icon = beautiful.awesome_icon,
+             icon_only = true,
+         },
+     }
+ }
+
+ wibox.widget {
+     notification = notif,
+     widget = naughty.list.actions,
+ }
+</code></pre>
 
 
 
