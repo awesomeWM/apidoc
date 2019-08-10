@@ -205,7 +205,8 @@
 <h1>Module: <code>naughty.action</code></h1>
 <p>A notification action.</p>
 <p> A notification can have multiple actions to chose from. This module allows
- to manage such actions.</p>
+ to manage such actions. An action object can be shared by multiple
+ notifications.</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2019 Emmanuel Lepage Vallee</li>
@@ -237,16 +238,11 @@
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
       <td class="summary">If the action should hide the label and only display the icon.</td>
     </tr>
-    <tr>
-      <td class="shortname" ><a href="#notification">notification</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>naughty.notification</span></td>
-      <td class="summary">The notification.</td>
-    </tr>
 </table>
 <h2><a href="#Object_methods">Object methods </a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#invoke">:invoke <span class='function_args'>()</span></a></td>
+      <td class="name" ><a href="#invoke">:invoke <span class='function_args'>([notif={}])</span></a></td>
       <td class="summary">Execute this action.</td>
     </tr>
     <tr>
@@ -401,28 +397,13 @@
 
 
 </dd>
-    <dt>
-    <a name = "notification"></a>
-    <strong>notification</strong>
-    <span class="proptype">(<span class='summary_type'>naughty.notification</span>)</span>
-    </dt>
-    <dd>
-    The notification.
-
-
-
-
-
-
-
-</dd>
 </dl>
     <h2 class="section-header "><a name="Object_methods"></a>Object methods </h2>
 
     <dl class="function">
     <dt>
     <a name = "invoke"></a>
-    <strong>:invoke <span class='function_args'>()</span></strong>
+    <strong>:invoke <span class='function_args'>([notif={}])</span></strong>
     </dt>
     <dd>
     Execute this action.</p>
@@ -430,6 +411,17 @@
 <p> This only emits the <a href="../core_components/naughty.action.html#invoked">invoked</a> signal.
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">notif</span>
+            <span class="types"><span class="type">naughty.notification</span></span>
+         A notification object on which
+  the action was invoked. If a notification is shared by many object (like
+  a &ldquo;mute&rdquo; or &ldquo;snooze&rdquo; action added to all notification), calling <code>:invoke()</code>
+  without adding the <code>notif</code> context will cause unexpected results.
+         (<em>default</em> {})
+        </li>
+    </ul>
 
 
 
