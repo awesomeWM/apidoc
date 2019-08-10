@@ -265,9 +265,23 @@
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
       <td class="summary">If the timeout needs to be reset when a property changes.</td>
     </tr>
+    <tr>
+      <td class="shortname" ><a href="#image_animations_enabled">image_animations_enabled</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summary">Enable or disable naughty ability to claim to support animations.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#persistence_enabled">persistence_enabled</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summary">Enable or disable the persistent notifications.</td>
+    </tr>
 </table>
 <h2><a href="#Signals">Signals</a></h2>
 <table class="function_list">
+    <tr>
+      <td class="name" ><a href="#request::display_error">request::display_error</a></td>
+      <td class="summary">Emitted when an error occurred and requires attention.</td>
+    </tr>
     <tr>
       <td class="name" ><a href="#added">added</a></td>
       <td class="summary">Emitted when a notification is created.</td>
@@ -283,6 +297,10 @@
     <tr>
       <td class="name" ><a href="#request::preset">request::preset</a></td>
       <td class="summary">Emitted when a notification needs pre-display configuration.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#request::icon">request::icon</a></td>
+      <td class="summary">Emitted when an action requires an icon it doesn&rsquo;t know.</td>
     </tr>
 </table>
 <h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
@@ -608,10 +626,80 @@
 
 
 </dd>
+    <dt>
+    <a name = "image_animations_enabled"></a>
+    <strong>image_animations_enabled</strong>
+    <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    </dt>
+    <dd>
+    Enable or disable naughty ability to claim to support animations.</p>
+
+<p> When this is true, applications which query <a href="../libraries/naughty.html#">naughty</a> feature support
+ will see that animations are supported. Note that there is <em>very little</em>
+ support for this and enabled it will cause bugs.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "persistence_enabled"></a>
+    <strong>persistence_enabled</strong>
+    <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    </dt>
+    <dd>
+    Enable or disable the persistent notifications.</p>
+
+<p> This is very annoying when using <a href="../popups_and_bars/naughty.layout.box.html#">naughty.layout.box</a> popups, but tolerable
+ when using <a href="../widgets/naughty.list.notifications.html#">naughty.list.notifications</a>.</p>
+
+<p> Note that enabling this <strong>does nothing</strong> in <a href="../libraries/naughty.html#">naughty</a> itself. The timeouts
+ are still honored and notifications still destroyed. It is the user
+ responsibility to disable the dismiss timer. However, this tells the
+ applications that notification persistence is supported so they might
+ stop using systray icons for the sake of displaying or other changes like
+ that.
+
+
+
+
+
+
+
+</dd>
 </dl>
     <h2 class="section-header "><a name="Signals"></a>Signals</h2>
 
     <dl class="function">
+    <dt>
+    <a name = "request::display_error"></a>
+    <strong>request::display_error</strong>
+    </dt>
+    <dd>
+    Emitted when an error occurred and requires attention.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">message</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The error message.
+        </li>
+        <li><span class="parameter">startup</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If the error occurred during the initial loading of
+  rc.lua (and thus caused the fallback to kick in).
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
     <dt>
     <a name = "added"></a>
     <strong>added</strong>
@@ -705,6 +793,37 @@ end)
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Any arguments passed to the <a href="../libraries/naughty.html#notify">naughty.notify</a> function,
   including, but not limited to, all <a href="../core_components/naughty.notification.html#">naughty.notification</a> properties.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request::icon"></a>
+    <strong>request::icon</strong>
+    </dt>
+    <dd>
+    Emitted when an action requires an icon it doesn&rsquo;t know.</p>
+
+<p> The implementation should look in the icon theme for an action icon or
+ provide something natively.</p>
+
+<p> If an icon is found, the handler must set the <a href="../libraries/naughty.html#request::icon">icon</a> property on the <code>action</code>
+ object to a path or a <a href="../libraries/gears.surface.html#">gears.surface</a>.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">action</span>
+            <span class="types"><span class="type">naughty.action</span></span>
+         The action.
+        </li>
+        <li><span class="parameter">icon_name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The icon name.
         </li>
     </ul>
 

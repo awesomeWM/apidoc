@@ -276,66 +276,17 @@
 
 <h2>Error handling</h2>
 
-<p>Awesome is a window managing framework. It allows its users great (ultimate?)
-flexibility. However, it also allows the user to write invalid code. Here&rsquo;s a
-non-exhaustive list of possible errors:</p>
-
-<ul>
-<li>Syntax: There is an <code>awesome -k</code> option available in the command line to
-check the configuration file. Awesome cannot start with an invalid <a href="../sample files/rc.lua.html#">rc.lua</a></li>
-<li>Invalid APIs and type errors: Lua is a dynamic language. It doesn&rsquo;t have much
-support for static/compile time checks. There is the <code>luacheck</code> utility to
-help find some categories of errors. Those errors will cause Awesome to
-&ldquo;drop&rdquo; the current call stack and start over. Note that if it cannot
-reach the end of the <a href="../sample files/rc.lua.html#">rc.lua</a> without errors, it will fall back to the
-original file.</li>
-<li>Invalid logic: It is possible to write fully valid code that will render
-Awesome unusable (like an infinite loop or blocking commands). In that case,
-the best way to debug this is either using <code>print()</code> or using <code>gdb</code>. For
-this, see the <a href="../documentation/01-readme.md.html">Debugging tips Readme section</a></li>
-<li>Deprecated APIs: The Awesome API is not frozen for eternity. After a decade
-of development and recent changes to enforce consistency, it hasn&rsquo;t
-changed much. This doesn&rsquo;t mean it won&rsquo;t change in the future. Whenever
-possible, changes won&rsquo;t cause errors but will instead print a deprecation
-message in the Awesome logs. These logs are placed in various places
-depending on the distribution. By default, Awesome will print errors on
-<code>stderr</code> and <code>stdout</code>.</li>
-</ul>
-
-
 <p> Check if awesome encountered an error during startup and fell back to
  another config (This code will only ever execute for the fallback config)</p>
 
 <pre>
-<span class="keyword">if</span> awesome.startup_errors <span class="keyword">then</span>
+<span class="backtick"><code>naughty.connect</code></span>_signal(<span class="string">"request::display_error"</span>, <span class="keyword">function</span>(message, startup)
     <span class="backtick"><a href="../core_components/naughty.notification.html#">naughty.notification</a></span> {
-        preset  = <span class="backtick"><code>naughty.config.presets.critical</code></span>,
-        title   = <span class="string">"Oops, there were errors during startup!"</span>,
-        message = awesome.startup_errors
+        urgency = <span class="string">"critical"</span>,
+        title   = <span class="string">"Oops, an error happened"</span>..(startup <span class="keyword">and</span> <span class="string">" during startup!"</span> <span class="keyword">or</span> <span class="string">"!"</span>),
+        message = message
     }
-<span class="keyword">end</span>
-</pre>
-
-
-<p> Handle runtime errors after startup</p>
-
-<pre>
-<span class="keyword">do</span>
-    <span class="keyword">local</span> in_error = <span class="keyword">false</span>
-    awesome.connect_signal(<span class="string">"debug::error"</span>, <span class="keyword">function</span> (err)
-        <span class="comment">-- Make sure we don't go into an endless error loop
-</span>        <span class="keyword">if</span> in_error <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
-        in_error = <span class="keyword">true</span>
-
-        <span class="backtick"><a href="../core_components/naughty.notification.html#">naughty.notification</a></span> {
-            preset  = <span class="backtick"><code>naughty.config.presets.critical</code></span>,
-            title   = <span class="string">"Oops, an error happened!"</span>,
-            message = <span class="global">tostring</span>(err)
-        }
-
-        in_error = <span class="keyword">false</span>
-    <span class="keyword">end</span>)
-<span class="keyword">end</span>
+<span class="keyword">end</span>)
 </pre>
 
 

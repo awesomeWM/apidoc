@@ -226,31 +226,13 @@
 <span class="comment">-- {{{ Error handling
 </span><span class="comment">-- Check if awesome encountered an error during startup and fell back to
 </span><span class="comment">-- another config (This code will only ever execute for the fallback config)
-</span><span class="keyword">if</span> awesome.startup_errors <span class="keyword">then</span>
+</span>naughty.connect_signal(<span class="string">"request::display_error"</span>, <span class="keyword">function</span>(message, startup)
     naughty.notification {
-        preset  = naughty.config.presets.critical,
-        title   = <span class="string">"Oops, there were errors during startup!"</span>,
-        message = awesome.startup_errors
+        urgency = <span class="string">"critical"</span>,
+        title   = <span class="string">"Oops, an error happened"</span>..(startup <span class="keyword">and</span> <span class="string">" during startup!"</span> <span class="keyword">or</span> <span class="string">"!"</span>),
+        message = message
     }
-<span class="keyword">end</span>
-
-<span class="comment">-- Handle runtime errors after startup
-</span><span class="keyword">do</span>
-    <span class="keyword">local</span> in_error = <span class="keyword">false</span>
-    awesome.connect_signal(<span class="string">"debug::error"</span>, <span class="keyword">function</span> (err)
-        <span class="comment">-- Make sure we don't go into an endless error loop
-</span>        <span class="keyword">if</span> in_error <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
-        in_error = <span class="keyword">true</span>
-
-        naughty.notification {
-            preset  = naughty.config.presets.critical,
-            title   = <span class="string">"Oops, an error happened!"</span>,
-            message = <span class="global">tostring</span>(err)
-        }
-
-        in_error = <span class="keyword">false</span>
-    <span class="keyword">end</span>)
-<span class="keyword">end</span>
+<span class="keyword">end</span>)
 <span class="comment">-- }}}
 </span>
 <span class="comment">-- {{{ Variable definitions
