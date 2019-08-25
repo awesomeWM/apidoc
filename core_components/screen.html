@@ -338,6 +338,11 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
       <td class="summary">The screen workarea.</td>
     </tr>
     <tr>
+      <td class="shortname" ><a href="#tiling_area">tiling_area</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
+      <td class="summary">The area where clients can be tiled.</td>
+    </tr>
+    <tr>
       <td class="shortname" ><a href="#padding">padding</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
       <td class="summary">The screen padding.</td>
@@ -1038,7 +1043,9 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 </ul>
 
 
-<p> <strong>Immutable:</strong> true
+<p> <strong>Immutable:</strong> true</p>
+
+<p> <img src="../images/AUTOGEN_screen_geometry.svg" alt="Usage example" />
 
 
 
@@ -1144,6 +1151,24 @@ other.</li>
 </ul>
 
 
+<p> <img src="../images/AUTOGEN_screen_workarea.svg" alt="Usage example" /></p>
+
+<pre><code>  -- With a padding, the tiled clients wont use 20px at the top and bottom
+  -- and 40px on the left and right.
+  screen[1].padding = {
+      left   = 40,
+      right  = 40,
+      top    = 20,
+      bottom = 20,
+  }
+
+  -- This will shift the workarea by 24px at the top.
+  awful.wibar {
+      position = 'top',
+      height   = 24,
+  }
+</code></pre>
+
 
 
 
@@ -1151,6 +1176,32 @@ other.</li>
     <h3>See also:</h3>
     <ul>
          <a href="../core_components/client.html#struts">client.struts</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "tiling_area"></a>
+    <strong>tiling_area</strong>
+    <span class="proptype">(<span class='summary_type'>table</span>)</span>
+    </dt>
+    <dd>
+    The area where clients can be tiled.</p>
+
+<p> This property holds the (read only) area where clients can be tiled. Use
+ the <a href="../core_components/screen.html#padding">padding</a> property, <a href="../popups_and_bars/wibox.html#struts">wibox.struts</a> and <a href="../core_components/client.html#struts">client.struts</a> to modify this
+ area.</p>
+
+<p><img src="../images/AUTOGEN_screen_tiling_area.svg" alt="Usage example" />
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/screen.html#padding">padding</a></li>
+         <li><a href="../core_components/screen.html#get_bounding_geometry">get_bounding_geometry</a></li>
     </ul>
 
 
@@ -1171,6 +1222,18 @@ other.</li>
 <li><em>property::padding</em></li>
 </ul>
 
+
+<p><img src="../images/AUTOGEN_screen_padding.svg" alt="Usage example" /></p>
+
+<pre><code> -- With a padding, the tiled clients wont use 20px at the top and bottom
+ -- and 40px on the left and right.
+ screen[1].padding = {
+     left   = 40,
+     right  = 40,
+     top    = 20,
+     bottom = 20,
+ }
+</code></pre>
 
 
 
