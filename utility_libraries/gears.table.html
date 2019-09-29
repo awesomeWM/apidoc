@@ -104,6 +104,7 @@
 </ul>
 <h2>Core components</h2>
 <ul class="nowrap">
+  <li><a href="../core_components/awesome.html">awesome</a></li>
   <li><a href="../core_components/awful.keygrabber.html">awful.keygrabber</a></li>
   <li><a href="../core_components/button.html">button</a></li>
   <li><a href="../core_components/client.html">client<span class='listplusign'> and awful.client</span></a></li>
@@ -140,7 +141,6 @@
 </ul>
 <h2>Libraries</h2>
 <ul class="nowrap">
-  <li><a href="../libraries/awesome.html">awesome</a></li>
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
   <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
@@ -253,6 +253,10 @@
     <tr>
       <td class="name" ><a href="#merge"><span class='function_modname'>gears.table.</span>merge <span class='function_args'>(t, set)</span></a></td>
       <td class="summary">Merge items from one table to another one.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#diff_merge"><span class='function_modname'>gears.table.</span>diff_merge <span class='function_args'>(target, new, identifier[, merger])</span></a></td>
+      <td class="summary">Update the <code>target</code> table with entries from the <code>new</code> table.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#map"><span class='function_modname'>gears.table.</span>map <span class='function_args'>(f, tbl)</span></a></td>
@@ -669,6 +673,75 @@
 
 
 
+
+</dd>
+    <dt>
+    <a name = "diff_merge"></a>
+    <strong><span class='function_modname'>gears.table.</span>diff_merge <span class='function_args'>(target, new, identifier[, merger])</span></strong>
+    </dt>
+    <dd>
+    Update the <code>target</code> table with entries from the <code>new</code> table.</p>
+
+<p> Compared to <a href="../utility_libraries/gears.table.html#merge">gears.table.merge</a>, this version is intended to work using both
+ an <code>identifier</code> function and a <code>merger</code> function. This works only for
+ indexed tables.</p>
+
+<p> The main use case is when changing the table reference is not possible or
+ when the <code>target</code> contains additional content that must be kept.</p>
+
+<p> Note that calling this function involve a lot of looping and should not be
+ done often.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">target</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The table to modify.
+        </li>
+        <li><span class="parameter">new</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The table which contains the new content.
+        </li>
+        <li><span class="parameter">identifier</span>
+            <span class="types"><span class="type">function</span></span>
+         A function which take the table entry (either
+  from the <code>target</code> or <code>new</code> table) and return an unique identifier. The
+  identifier type isn&rsquo;t important as long as <code>==</code> works to compare them.
+        </li>
+        <li><span class="parameter">merger</span>
+            <span class="types"><span class="type">function</span></span>
+         A function takes the entry to modify as first
+  parameter and the new entry as second. The function must return the merged
+  value. If none is provided, there is no attempt to merge the content.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The target table (for daisy chaining).</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The new entries.</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The removed entries.</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        The updated entries.</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> output, added, removed, updated = gears.<span class="global">table</span>.diff_merge(
+    output, input, <span class="keyword">function</span>(v) <span class="keyword">return</span> v.id <span class="keyword">end</span>, gears.<span class="global">table</span>.crush,
+)</pre>
+    </ul>
 
 </dd>
     <dt>
