@@ -50,6 +50,7 @@
 
 <h2>Core components</h2>
 <ul class="nowrap">
+  <li><a href="../core_components/awesome.html">awesome</a></li>
   <li><a href="../core_components/awful.keygrabber.html">awful.keygrabber</a></li>
   <li><a href="../core_components/button.html">button</a></li>
   <li><strong>client<span class='listplusign'> and awful.client</span></strong></li>
@@ -152,7 +153,6 @@
 </ul>
 <h2>Libraries</h2>
 <ul class="nowrap">
-  <li><a href="../libraries/awesome.html">awesome</a></li>
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
   <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
@@ -746,6 +746,14 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 </table>
 <h2><a href="#Signals">Signals</a></h2>
 <table class="function_list">
+    <tr>
+      <td class="name" ><a href="#scanning">scanning</a></td>
+      <td class="summary">AwesomeWM is about to scan for existing clients.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#scanned">scanned</a></td>
+      <td class="summary">AwesomeWM is done scanning for clients.</td>
+    </tr>
     <tr>
       <td class="name" ><a href="#focus">focus</a></td>
       <td class="summary">When a client gains focus.</td>
@@ -1839,7 +1847,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <p>The client icon as a surface.</p>
 
 <p> This property holds the client icon closest to the size configured via
- <a href="../libraries/awesome.html#set_preferred_icon_size">awesome.set_preferred_icon_size</a>.</p>
+ <a href="../core_components/awesome.html#set_preferred_icon_size">awesome.set_preferred_icon_size</a>.</p>
 
 <p> It is not a path or an &ldquo;real&rdquo; file. Rather, it is already a bitmap surface.</p>
 
@@ -3630,6 +3638,39 @@ awful.rules.add_rule_source(
     <h2 class="section-header "><a name="Signals"></a>Signals</h2>
 
     <dl class="function">
+    <dt>
+    <a name = "scanning"></a>
+    <strong>scanning</strong>
+    </dt>
+    <dd>
+    AwesomeWM is about to scan for existing clients.</p>
+
+<p> Connect to this signal when code needs to be executed after screens are
+ initialized, but before clients are added.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "scanned"></a>
+    <strong>scanned</strong>
+    </dt>
+    <dd>
+    AwesomeWM is done scanning for clients.</p>
+
+<p> This is emitted before the <code>startup</code> signal and after the <a href="../core_components/client.html#scanning">scanning</a> signal.
+
+
+
+
+
+
+
+</dd>
     <dt>
     <a name = "focus"></a>
     <strong>focus</strong>

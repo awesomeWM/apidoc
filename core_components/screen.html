@@ -44,6 +44,7 @@
 
 <h2>Core components</h2>
 <ul class="nowrap">
+  <li><a href="../core_components/awesome.html">awesome</a></li>
   <li><a href="../core_components/awful.keygrabber.html">awful.keygrabber</a></li>
   <li><a href="../core_components/button.html">button</a></li>
   <li><a href="../core_components/client.html">client<span class='listplusign'> and awful.client</span></a></li>
@@ -146,7 +147,6 @@
 </ul>
 <h2>Libraries</h2>
 <ul class="nowrap">
-  <li><a href="../libraries/awesome.html">awesome</a></li>
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
   <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
@@ -438,6 +438,14 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 <h2><a href="#Signals">Signals</a></h2>
 <table class="function_list">
     <tr>
+      <td class="name" ><a href="#scanning">scanning</a></td>
+      <td class="summary">AwesomeWM is about to scan for existing screens.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#scanned">scanned</a></td>
+      <td class="summary">AwesomeWM is done scanning for screens.</td>
+    </tr>
+    <tr>
       <td class="name" ><a href="#primary_changed">primary_changed</a></td>
       <td class="summary"></td>
     </tr>
@@ -456,6 +464,10 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <tr>
       <td class="name" ><a href="#swapped">swapped</a></td>
       <td class="summary">When 2 screens are swapped</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#property::viewports">property::viewports</a></td>
+      <td class="summary">This signal is emitted when the list of physical screen viewport changes.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#request::desktop_decoration">request::desktop_decoration</a></td>
@@ -487,6 +499,11 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
       <td class="shortname" ><a href="#primary"><span class='function_modname'>screen.</span>primary</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>screen</span></td>
       <td class="summary">The primary screen.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#automatic_factory"><span class='function_modname'>screen.</span>automatic_factory</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>N/A</span></td>
+      <td class="summary">If <a href="../core_components/screen.html#">screen</a> objects are created automatically when new viewports are detected.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#awful.screen.default_focused_args"><span class='function_modname'>screen.</span>awful.screen.default_focused_args</a></td>
@@ -1750,6 +1767,61 @@ other.</li>
 
     <dl class="function">
     <dt>
+    <a name = "scanning"></a>
+    <strong>scanning</strong>
+    </dt>
+    <dd>
+    AwesomeWM is about to scan for existing screens.</p>
+
+<p> Connect to this signal when code needs to be executed after the Lua context
+ is initialized and modules are loaded, but before screens are added.</p>
+
+<p> To manage screens manually, set <code>screen.automatic_factory = false</code> and
+ connect to the <a href="../core_components/screen.html#property::viewports">property::viewports</a> signal. It is then possible to use
+ <a href="../core_components/screen.html#fake_add">screen.fake_add</a> to create virtual screens. Be careful when using this,
+ when done incorrectly, no screens will be created. Using Awesome with zero
+ screens is <strong>not</strong> supported.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/screen.html#property::viewports">property::viewports</a></li>
+         <li><a href="../core_components/screen.html#fake_add">screen.fake_add</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "scanned"></a>
+    <strong>scanned</strong>
+    </dt>
+    <dd>
+    AwesomeWM is done scanning for screens.</p>
+
+<p> Connect to this signal to execute code after the screens have been created,
+ but before the clients are added. This signal can also be used to split
+ physical screens into multiple virtual screens before the clients (and their
+ rules) are executed.</p>
+
+<p> Note that if no screens exist at this point, the fallback code will be
+ triggered and the default (detected) screens will be added.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/screen.html#fake_resize">screen.fake_resize</a></li>
+         <li><a href="../core_components/screen.html#fake_add">screen.fake_add</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
     <a name = "primary_changed"></a>
     <strong>primary_changed</strong>
     </dt>
@@ -1827,6 +1899,34 @@ other.</li>
 
 
 
+
+
+</dd>
+    <dt>
+    <a name = "property::viewports"></a>
+    <strong>property::viewports</strong>
+    </dt>
+    <dd>
+    This signal is emitted when the list of physical screen viewport changes.</p>
+
+<p> Each viewport in the list corresponds to a <strong>physical</strong> screen rectangle, which
+ is <strong>not</strong> the <a href="../core_components/screen.html#property::viewports">viewports</a> property of the <a href="../core_components/screen.html#">screen</a> objects.
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">viewports</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/screen.html#automatic_factory">automatic_factory</a>
+    </ul>
 
 
 </dd>
@@ -1989,6 +2089,29 @@ other.</li>
 
 
 
+
+
+</dd>
+    <dt>
+    <a name = "automatic_factory"></a>
+    <strong><span class='function_modname'>screen.</span>automatic_factory</strong>
+    <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
+    </dt>
+    <dd>
+    If <a href="../core_components/screen.html#">screen</a> objects are created automatically when new viewports are detected.</p>
+
+<p> Be very, very careful when setting this to false. You might end up with
+ no screens. This is <strong>not</strong> supported. Always connect to the <a href="../core_components/screen.html#scanned">scanned</a>
+ signal to make sure to create a fallback screen if none were created.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/screen.html#property::viewports">property::viewports</a>
+    </ul>
 
 
 </dd>
