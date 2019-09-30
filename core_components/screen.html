@@ -37,6 +37,7 @@
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
 <li><a href="#Signals">Signals</a></li>
+<li><a href="#Request_handlers">Request handlers</a></li>
 <li><a href="#Deprecated_functions">Deprecated functions</a></li>
 <li><a href="#Fields">Fields</a></li>
 </ul>
@@ -327,12 +328,6 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
       <td class="summary">The internal screen number.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#outputs">outputs</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">If RANDR information is available, a list of outputs
-   for this screen and their size in mm.</td>
-    </tr>
-    <tr>
       <td class="shortname" ><a href="#workarea">workarea</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
       <td class="summary">The screen workarea.</td>
@@ -346,6 +341,11 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
       <td class="shortname" ><a href="#padding">padding</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
       <td class="summary">The screen padding.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#outputs">outputs</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
+      <td class="summary">A list of outputs for this screen with their size in mm.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#clients">clients</a></td>
@@ -387,6 +387,41 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
       <td class="summary">The number of pixels per inch of the screen.</td>
     </tr>
+    <tr>
+      <td class="shortname" ><a href="#minimum_dpi">minimum_dpi</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">The lowest density DPI from all of the (physical) outputs.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#maximum_dpi">maximum_dpi</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">The highest density DPI from all of the (physical) outputs.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#preferred_dpi">preferred_dpi</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">The preferred DPI from all of the (physical) outputs.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#mm_maximum_size">mm_maximum_size</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">The maximum diagonal size in millimeters.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#mm_minimum_size">mm_minimum_size</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">The minimum diagonal size in millimeters.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#inch_maximum_size">inch_maximum_size</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">The maximum diagonal size in inches.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#inch_minimum_size">inch_minimum_size</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">The minimum diagonal size in inches.</td>
+    </tr>
 </table>
 <h2><a href="#Object_methods">Object methods </a></h2>
 <table class="function_list">
@@ -421,6 +456,10 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <tr>
       <td class="name" ><a href="#get_tiled_clients">:get_tiled_clients <span class='function_args'>([stacked=true])</span></a></td>
       <td class="summary">Get tiled clients for the screen.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#split">:split <span class='function_args'>([ratios[, mode]])</span></a></td>
+      <td class="summary">Split the screen into multiple screens.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'>(name, ...)</span></a></td>
@@ -478,8 +517,35 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
       <td class="summary">Emitted when a new screen needs a wallpaper.</td>
     </tr>
     <tr>
+      <td class="name" ><a href="#request::create">request::create</a></td>
+      <td class="summary">When a new (physical) screen area has been added.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#request::remove">request::remove</a></td>
+      <td class="summary">When a physical monitor viewport has been removed.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#request::resize">request::resize</a></td>
+      <td class="summary">When a physical viewport resolution has changed or it has been replaced.</td>
+    </tr>
+    <tr>
       <td class="name" ><a href="#tag::history::update">tag::history::update</a></td>
       <td class="summary">When the tag history changed.</td>
+    </tr>
+</table>
+<h2><a href="#Request_handlers">Request handlers</a></h2>
+<table class="function_list">
+    <tr>
+      <td class="name" ><a href="#awful.screen.create_screen_handler">awful.screen.create_screen_handler</a></td>
+      <td class="summary">Default handler for <a href="../core_components/screen.html#request::create">request::create</a>.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.screen.remove_screen_handler">awful.screen.remove_screen_handler</a></td>
+      <td class="summary">Default handler for <a href="../core_components/screen.html#request::remove">request::remove</a>.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.screen.resize_screen_handler">awful.screen.resize_screen_handler</a></td>
+      <td class="summary">Default handler for <a href="../core_components/screen.html#request::resize">request::resize</a>.</td>
     </tr>
 </table>
 <h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
@@ -1121,33 +1187,6 @@ other.</li>
 
 </dd>
     <dt>
-    <a name = "outputs"></a>
-    <strong>outputs</strong>
-    <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    </dt>
-    <dd>
-    If RANDR information is available, a list of outputs
-   for this screen and their size in mm.</p>
-
-<p> Please note that the table content may vary.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::outputs</em></li>
-</ul>
-
-
-<p> <strong>Immutable:</strong> true
-
-
-
-
-
-
-
-</dd>
-    <dt>
     <a name = "workarea"></a>
     <strong>workarea</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
@@ -1251,6 +1290,40 @@ other.</li>
      bottom = 20,
  }
 </code></pre>
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "outputs"></a>
+    <strong>outputs</strong>
+    <span class="proptype">(<span class='summary_type'>table</span>)</span>
+    </dt>
+    <dd>
+    A list of outputs for this screen with their size in mm.</p>
+
+<p> Please note that the table content may vary. In some case, it might also be
+ empty.</p>
+
+<p> An easy way to check if a screen is the laptop screen is usually:</p>
+
+<pre><code>if s.outputs["LVDS-1"] then
+    -- do something
+end
+</code></pre>
+
+<p> <strong>Signal:</strong></p>
+
+<ul>
+<li><em>property::outputs</em></li>
+</ul>
+
+
+<p> <strong>Immutable:</strong> true
 
 
 
@@ -1445,7 +1518,13 @@ other.</li>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
     </dt>
     <dd>
-    The number of pixels per inch of the screen.
+    The number of pixels per inch of the screen.</p>
+
+<p> The default DPI comes from the X11 server. In most case, it will be 96. If
+ <code>autodpi</code> is set to <code>true</code> on the screen, it will use the least dense dpi
+ from the screen outputs. Most of the time, screens only have a single output,
+ however it will have two (or more) when &ldquo;clone mode&rdquo; is used (eg, when a
+ screen is duplicated on a projector).
 
 
     <h3>Type constraints:</h3>
@@ -1454,6 +1533,132 @@ other.</li>
          the DPI value.
         </li>
     </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "minimum_dpi"></a>
+    <strong>minimum_dpi</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    </dt>
+    <dd>
+    The lowest density DPI from all of the (physical) outputs.
+
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+         the DPI value.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "maximum_dpi"></a>
+    <strong>maximum_dpi</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    </dt>
+    <dd>
+    The highest density DPI from all of the (physical) outputs.
+
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+         the DPI value.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "preferred_dpi"></a>
+    <strong>preferred_dpi</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    </dt>
+    <dd>
+    The preferred DPI from all of the (physical) outputs.</p>
+
+<p> This is computed by normalizing all output to fill the area, then picking
+ the lowest of the resulting virtual DPIs.
+
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+         the DPI value.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "mm_maximum_size"></a>
+    <strong>mm_maximum_size</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    </dt>
+    <dd>
+    The maximum diagonal size in millimeters.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "mm_minimum_size"></a>
+    <strong>mm_minimum_size</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    </dt>
+    <dd>
+    The minimum diagonal size in millimeters.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "inch_maximum_size"></a>
+    <strong>inch_maximum_size</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    </dt>
+    <dd>
+    The maximum diagonal size in inches.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "inch_minimum_size"></a>
+    <strong>inch_minimum_size</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    </dt>
+    <dd>
+    The minimum diagonal size in inches.
+
+
 
 
 
@@ -1674,6 +1879,50 @@ other.</li>
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         The clients list.
     </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "split"></a>
+    <strong>:split <span class='function_args'>([ratios[, mode]])</span></strong>
+    </dt>
+    <dd>
+    <p>Split the screen into multiple screens.</p>
+
+<p> This is useful to turn ultrawide monitors into something more useful without
+ fancy client layouts:</p>
+
+<p><img src="../images/AUTOGEN_awful_screen_split1.svg" alt="Usage example" /></p>
+
+<pre><code> screen[1]:split({1/5, 3/5, 1/5})
+</code></pre>
+
+<p> It can also be used to turn a vertical &ldquo;side&rdquo; screen into 2 smaller screens:</p>
+
+<p><img src="../images/AUTOGEN_awful_screen_split2.svg" alt="Usage example" /></p>
+
+<pre><code> screen[1]:split()
+</code></pre>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ratios</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The different ratios to split into. If none is
+  provided, it is split in half.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">mode</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Either &ldquo;vertical&rdquo; or &ldquo;horizontal&rdquo;. If none is
+  specified, it will split along the longest axis.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
 
 
 
@@ -1907,17 +2156,28 @@ other.</li>
     <strong>property::viewports</strong>
     </dt>
     <dd>
-    This signal is emitted when the list of physical screen viewport changes.</p>
+    <p>This signal is emitted when the list of physical screen viewport changes.</p>
 
 <p> Each viewport in the list corresponds to a <strong>physical</strong> screen rectangle, which
- is <strong>not</strong> the <a href="../core_components/screen.html#property::viewports">viewports</a> property of the <a href="../core_components/screen.html#">screen</a> objects.
+ is <strong>not</strong> the <a href="../core_components/screen.html#property::viewports">viewports</a> property of the <a href="../core_components/screen.html#">screen</a> objects.</p>
+
+<p> Each entry in the <a href="../core_components/screen.html#property::viewports">viewports</a> entry has the following keys:</p>
+
+<ul>
+<li><a href="../core_components/screen.html#geometry">geometry</a> <em>(table)</em>: A table with an <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code> keys.</li>
+<li><a href="../core_components/screen.html#outputs">outputs</a> <em>(table)</em>: All outputs sharing this viewport.</li>
+<li><a href="../core_components/screen.html#maximum_dpi">maximum_dpi</a> <em>(number)</em>: The DPI of the most dense output.</li>
+<li><a href="../core_components/screen.html#minimum_dpi">minimum_dpi</a> <em>(number)</em>: The DPI of the least dense output.</li>
+<li><a href="../core_components/screen.html#preferred_dpi">preferred_dpi</a> <em>(number)</em>: The optimal DPI.</li>
+</ul>
+
 
 
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">viewports</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-
+         A table containing all physical viewports.
         </li>
     </ul>
 
@@ -1985,6 +2245,263 @@ other.</li>
 
 </dd>
     <dt>
+    <a name = "request::create"></a>
+    <strong>request::create</strong>
+    </dt>
+    <dd>
+    <p>When a new (physical) screen area has been added.</p>
+
+<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.
+ Please also note that this doesn&rsquo;t mean it will appear when a screen is
+ physically plugged. Depending on the configuration a tool like <code>arandr</code> or
+ the <code>xrandr</code> command is needed.</p>
+
+<p> The default handler will create a screen that fills the area.</p>
+
+<p> To disconnect the default handler, use:</p>
+
+<pre><code>screen.disconnect_signal(
+    "request::create", awful.screen.create_screen_handler
+)
+</code></pre>
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">viewport</span>
+        <ul>
+        <li><span class="parameter">geometry</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code>
+  keys.
+        </li>
+        <li><span class="parameter">outputs</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with the monitor name and possibly the
+  <code>mm_width</code> and <code>mm_height</code> values if they are available.
+        </li>
+        <li><span class="parameter">id</span>
+            <span class="types"><span class="type">number</span></span>
+         An identifier for this viewport (by pixel
+  resolution). It
+  will not change when outputs are modified, but will change when the
+  resolution changes. Note that if it fully disappear, the next time an
+  viewport with the same resolution appears, it will have a different <code>id</code>.
+        </li>
+        <li><span class="parameter">minimum_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The least dense DPI.
+        </li>
+        <li><span class="parameter">maximum_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The most dense DPI.
+        </li>
+        <li><span class="parameter">preferred_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The relative least dense DPI.
+        </li>
+        </li></ul>
+        <li><span class="parameter">args</span>
+        <ul>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Why was this signal sent.
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/screen.html#outputs">outputs</a></li>
+         <li><a href="../core_components/screen.html#awful.screen.create_screen_handler">awful.screen.create_screen_handler</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "request::remove"></a>
+    <strong>request::remove</strong>
+    </dt>
+    <dd>
+    <p>When a physical monitor viewport has been removed.</p>
+
+<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.</p>
+
+<p> If you replace the default handler, it is up to you to find the screen(s)
+ associated with this viewport.</p>
+
+<p> To disconnect the default handler, use:</p>
+
+<pre><code>screen.disconnect_signal(
+    "request::remove", awful.screen.remove_screen_handler
+)
+</code></pre>
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">viewport</span>
+        <ul>
+        <li><span class="parameter">geometry</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code>
+  keys.
+        </li>
+        <li><span class="parameter">outputs</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with the monitor name and possibly the
+  <code>mm_width</code> and <code>mm_height</code> values if they are available.
+        </li>
+        <li><span class="parameter">id</span>
+            <span class="types"><span class="type">number</span></span>
+         An identifier for this viewport (by pixel
+  resolution). It will not change when outputs are modified, but will change
+  when the resolution changes. Note that if it fully disappear, the next time
+  an viewport with the same resolution appears, it will have a different <code>id</code>.
+        </li>
+        <li><span class="parameter">minimum_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The least dense DPI.
+        </li>
+        <li><span class="parameter">maximum_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The most dense DPI.
+        </li>
+        <li><span class="parameter">preferred_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The relative least dense DPI.
+        </li>
+        </li></ul>
+        <li><span class="parameter">args</span>
+        <ul>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Why was this signal sent.
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/screen.html#awful.screen.remove_screen_handler">awful.screen.remove_screen_handler</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "request::resize"></a>
+    <strong>request::resize</strong>
+    </dt>
+    <dd>
+    <p>When a physical viewport resolution has changed or it has been replaced.</p>
+
+<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.</p>
+
+<p> Note that given the viewports are not the same, the <code>id</code> wont be the same.
+ Also note that if multiple new viewports fit within a single &ldquo;old&rdquo; viewport,
+ the resized screen will be the one with the largest total overlapping
+ viewport (<code>intersection.width*intersection.height</code>), regardless of the
+ outputs names.</p>
+
+<p> To disconnect the default handler, use:</p>
+
+<pre><code>screen.disconnect_signal(
+    "request::resize", awful.screen.resize_screen_handler
+)
+</code></pre>
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">old_viewport</span>
+        <ul>
+        <li><span class="parameter">geometry</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with <code>x</code>, <code>y</code>, <code>width</code> and
+  <code>height</code> keys.
+        </li>
+        <li><span class="parameter">outputs</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with the monitor name and
+  possibly the <code>mm_width</code> and <code>mm_height</code> values if they are available.
+        </li>
+        <li><span class="parameter">id</span>
+            <span class="types"><span class="type">number</span></span>
+         An identifier for this viewport (by pixel
+  resolution). It will not change when outputs are modified, but will change
+  when the resolution changes. Note that if it fully disappear, the next
+  time an viewport with the same resolution appears, it will have a different
+  <code>id</code>.
+        </li>
+        <li><span class="parameter">minimum_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The least dense DPI.
+        </li>
+        <li><span class="parameter">maximum_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The most dense DPI.
+        </li>
+        <li><span class="parameter">preferred_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The relative least dense DPI.
+        </li>
+        </li></ul>
+        <li><span class="parameter">new_viewport</span>
+        <ul>
+        <li><span class="parameter">geometry</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with <code>x</code>, <code>y</code>, <code>width</code> and
+  <code>height</code> keys.
+        </li>
+        <li><span class="parameter">outputs</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with the monitor name and
+  possibly the
+  <code>mm_width</code> and <code>mm_height</code> values if they are available.
+        </li>
+        <li><span class="parameter">id</span>
+            <span class="types"><span class="type">number</span></span>
+         An identifier for this viewport (by pixel
+  resolution). It will not change when outputs are modified, but will change
+  when the  resolution changes. Note that if it fully disappear, the next time
+  an viewport with the same resolution appears, it will have a different <code>id</code>.
+        </li>
+        <li><span class="parameter">minimum_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The least dense DPI.
+        </li>
+        <li><span class="parameter">maximum_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The most dense DPI.
+        </li>
+        <li><span class="parameter">preferred_dpi</span>
+            <span class="types"><span class="type">number</span></span>
+         The relative least dense DPI.
+        </li>
+        </li></ul>
+        <li><span class="parameter">args</span>
+        <ul>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Why was this signal sent.
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/screen.html#awful.screen.resize_screen_handler">awful.screen.resize_screen_handler</a>
+    </ul>
+
+
+</dd>
+    <dt>
     <a name = "tag::history::update"></a>
     <strong>tag::history::update</strong>
     </dt>
@@ -1995,6 +2512,111 @@ other.</li>
 
 
 
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Request_handlers"></a>Request handlers</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awful.screen.create_screen_handler"></a>
+    <strong>awful.screen.create_screen_handler</strong>
+    </dt>
+    <dd>
+    Default handler for <a href="../core_components/screen.html#request::create">request::create</a>.</p>
+
+<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.</p>
+
+<p> A simplified implementation looks like:</p>
+
+<pre><code>function(viewport --[[, args]])
+    local geo = viewport.geometry
+    local s = screen.fake_add(geo.x, geo.y, geo.width, geo.height)
+    s:emit_signal("request::desktop_decoration")
+    s:emit_signal("request::wallpaper")
+end
+</code></pre>
+
+<p> If you implement this by hand, you must also implement handler for the
+ <a href="../core_components/screen.html#request::remove">request::remove</a> and <a href="../core_components/screen.html#request::resize">request::resize</a>.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/screen.html#request::create">request::create</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.screen.remove_screen_handler"></a>
+    <strong>awful.screen.remove_screen_handler</strong>
+    </dt>
+    <dd>
+    <p>Default handler for <a href="../core_components/screen.html#request::remove">request::remove</a>.</p>
+
+<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.</p>
+
+<p> A simplified version of the logic is:</p>
+
+<pre><code>function (viewport --[[, args]])
+    local geo = viewport.geometry
+    for s in screen do
+        if gears.geometry.rectangle.are_equal(geo, s.geometry) then
+            s:fake_remove()
+            return
+        end
+    end
+end
+</code></pre>
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/screen.html#request::remove">request::remove</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.screen.resize_screen_handler"></a>
+    <strong>awful.screen.resize_screen_handler</strong>
+    </dt>
+    <dd>
+    <p>Default handler for <a href="../core_components/screen.html#request::resize">request::resize</a>.</p>
+
+<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.</p>
+
+<p> A simplified version of the logic is:</p>
+
+<pre><code>function (old_viewport, new_viewport --[[, args]])
+    local old_geo, new_geo = old_viewport.geometry, new_viewport.geometry
+    for s in screen do
+        local sgeo = new_viewport.geometry
+        if gears.geometry.rectangle.are_equal(old_geo, s.geometry) then
+            s:fake_resize(
+                sgeo.x, sgeo.y, sgeo.width, sgeo.height
+            )
+        end
+    end
+end
+</code></pre>
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/screen.html#request::resize">request::resize</a>
+    </ul>
 
 
 </dd>
