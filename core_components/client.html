@@ -288,6 +288,85 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 <p> To get all the clients for a screen use either <a href="../core_components/screen.html#clients">screen.clients</a> or
  <a href="../core_components/screen.html#tiled_clients">screen.tiled_clients</a>.</p>
+
+<p> <img src="../images/AUTOGEN_uml_nav_tables_client.svg" alt="Usage example" /></p>
+
+<h2> Core components relationship</h2>
+
+<p> <table><tr>
+ <td valign='top'><table class='widget_list' border=1>
+   <colgroup span='3'></colgroup>
+  <tr><th align='center' colspan=3 scope=colgroup>Acquire other objects from a client</th></tr>
+  <tr style='font-weight: bold
+ '>
+   <th align='center'>Class</th>
+   <th align='center'></th>
+   <th align='center'>Property</th>
+  </tr>
+ <tr>
+   <td>tag</td>
+   <td><img src='../images/AUTOGEN_uml_nav_tables_client1.svg'></td>
+   <td>c.tags</td>
+  </tr>
+ <tr>
+   <td>screen</td>
+   <td><img src='../images/AUTOGEN_uml_nav_tables_client2.svg'></td>
+   <td>c.screen</td>
+  </tr>
+ <tr>
+   <td>awful.key</td>
+   <td><img src='../images/AUTOGEN_uml_nav_tables_client3.svg'></td>
+   <td>c:keys()</td>
+  </tr>
+ <tr>
+   <td>awful.button</td>
+   <td><img src='../images/AUTOGEN_uml_nav_tables_client4.svg'></td>
+   <td>c:buttons()</td>
+  </tr>
+ </table></td>
+ <td valign='top'><table class='widget_list' border=1>
+   <colgroup span='3'></colgroup>
+  <tr><th align='center' colspan=3 scope=colgroup>Acquire a client from other objects</th></tr>
+  <tr style='font-weight: bold
+ '>
+   <th align='center'>Class</th>
+   <th align='center'></th>
+   <th align='center'>Property</th>
+  </tr>
+ <tr>
+   <td>tag</td>
+   <td><img src='../images/AUTOGEN_uml_nav_tables_client5.svg'></td>
+   <td>t:clients()</td>
+  </tr>
+ <tr>
+   <td>screen</td>
+   <td><img src='../images/AUTOGEN_uml_nav_tables_client6.svg'></td>
+   <td>s.clients</td>
+  </tr>
+ <tr>
+   <td>screen</td>
+   <td><img src='../images/AUTOGEN_uml_nav_tables_client7.svg'></td>
+   <td>s.hidden_clients</td>
+  </tr>
+ <tr>
+   <td>screen</td>
+   <td><img src='../images/AUTOGEN_uml_nav_tables_client8.svg'></td>
+   <td>s.tiled_clients</td>
+  </tr>
+ <tr>
+   <td>mouse</td>
+   <td><img src='../images/AUTOGEN_uml_nav_tables_client9.svg'></td>
+   <td>mouse.current_client</td>
+  </tr>
+ </table></td>
+ </tr><tr>
+   <td colspan=2 style='color:#00000044'>
+   <b>Legend:</b> <i>c</i>: a client object, <i>t</i>: a tag object,
+   <i>s</i>: a screen object, <i>k</i>: an awful.key object,
+   <i>b</i>: a awful.button object, <i>n</i>: a naughty.notification object
+   </td>
+  </tr>
+ </table></p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008-2009 Julien Danjou</li>
@@ -1051,7 +1130,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 <h2><a href="#Tables">Tables</a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#awful.object">awful.object</a></td>
+      <td class="name" ><a href="#awful.client.object">awful.client.object</a></td>
       <td class="summary">Client class.</td>
     </tr>
 </table>
@@ -1289,7 +1368,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
          The index.  Use 1 to get the next, -1 to get the previous.
         </li>
         <li><span class="parameter">sel</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client.
          (<em>optional</em>)
         </li>
@@ -1332,7 +1411,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
          The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
         </li>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client.
          (<em>default</em> focused)
         </li>
@@ -1363,7 +1442,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
          The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
         </li>
         <li><span class="parameter">sel</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client.
          (<em>optional</em>)
         </li>
@@ -1388,7 +1467,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
          The index.
         </li>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client, otherwise focused one is used.
          (<em>optional</em>)
         </li>
@@ -3137,7 +3216,7 @@ awful.rules.add_rule_source(
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          A client to swap with.
         </li>
     </ul>
@@ -3535,7 +3614,7 @@ awful.rules.add_rule_source(
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c2</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The parent client to check.
         </li>
     </ul>
@@ -4225,7 +4304,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          the client to jump to
         </li>
         <li><span class="parameter">merge</span>
@@ -4342,7 +4421,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
          The relative height.
         </li>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client, otherwise focused one is used.
          (<em>optional</em>)
         </li>
@@ -4371,7 +4450,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
          The tag to move the client to.
         </li>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client to move, otherwise the focused one is used.
          (<em>optional</em>)
         </li>
@@ -4400,7 +4479,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
          The tag to toggle.
         </li>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client to toggle, otherwise the focused one is used.
          (<em>optional</em>)
         </li>
@@ -4426,7 +4505,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client to move.
         </li>
         <li><span class="parameter">s</span>
@@ -4455,7 +4534,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client to mark, the focused one if not specified.
         </li>
     </ul>
@@ -4476,7 +4555,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client to unmark, or the focused one if not specified.
         </li>
     </ul>
@@ -4497,7 +4576,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client to check, or the focused one otherwise.
         </li>
     </ul>
@@ -4518,7 +4597,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client to toggle mark.
         </li>
     </ul>
@@ -4559,7 +4638,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          A client.
         </li>
         <li><span class="parameter">s</span>
@@ -4584,7 +4663,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client.
         </li>
     </ul>
@@ -4610,7 +4689,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          A client.
         </li>
     </ul>
@@ -4643,7 +4722,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          A client.
         </li>
     </ul>
@@ -4668,7 +4747,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          A client.
         </li>
     </ul>
@@ -4698,7 +4777,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          A client.
         </li>
         <li><span class="parameter">value</span>
@@ -4724,7 +4803,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client.
         </li>
         <li><span class="parameter">prop</span>
@@ -4756,7 +4835,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client.
         </li>
         <li><span class="parameter">prop</span>
@@ -4830,7 +4909,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client.
         </li>
         <li><span class="parameter">matcher</span>
@@ -4866,11 +4945,11 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The child client (having transient_for).
         </li>
         <li><span class="parameter">c2</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The parent client to check.
         </li>
     </ul>
@@ -4926,7 +5005,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The window to set as master.
         </li>
     </ul>
@@ -4947,7 +5026,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The window to set as slave.
         </li>
     </ul>
@@ -4969,7 +5048,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          the client
         </li>
     </ul>
@@ -4993,7 +5072,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
          the window factor value
         </li>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          the client
         </li>
     </ul>
@@ -5020,7 +5099,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
    infinite.  The normalisation then ensures that the sum of all factors is 1.
         </li>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          the client
         </li>
     </ul>
@@ -5307,8 +5386,8 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
     <dl class="function">
     <dt>
-    <a name = "awful.object"></a>
-    <strong>awful.object</strong>
+    <a name = "awful.client.object"></a>
+    <strong>awful.client.object</strong>
     </dt>
     <dd>
     Client class.</p>
@@ -5376,7 +5455,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client that must be removed.
         </li>
     </ul>
@@ -5400,7 +5479,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
          The index.
         </li>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client.
          (<em>optional</em>)
         </li>
@@ -5424,7 +5503,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          A client.
         </li>
     </ul>
@@ -5450,7 +5529,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client that has been focused.
         </li>
     </ul>
@@ -5490,7 +5569,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+           <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
         A client.
     </ol>
 
@@ -5528,7 +5607,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
    <code>&quot;up&quot;</code>, <code>&quot;down&quot;</code>, <code>&quot;left&quot;</code> or <code>&quot;right&quot;</code>.
         </li>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client.
          (<em>optional</em>)
         </li>
@@ -5558,7 +5637,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
          The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
         </li>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client.
          (<em>optional</em>)
         </li>
@@ -5589,7 +5668,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client whose shape should be retrieved
         </li>
         <li><span class="parameter">shape_name</span>
@@ -5614,7 +5693,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client to act on
         </li>
     </ul>
@@ -5635,7 +5714,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client to act on
         </li>
     </ul>
@@ -5656,7 +5735,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client to act on
         </li>
     </ul>
@@ -5682,7 +5761,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+           <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
         The first urgent client.
     </ol>
 
@@ -5724,7 +5803,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client object.
         </li>
         <li><span class="parameter">prop</span>
@@ -5748,7 +5827,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
-            <span class="types"><a class="type" href="../core_components/client.html#awful.object">client.object</a></span>
+            <span class="types"><a class="type" href="../core_components/client.html#awful.client.object">client.object</a></span>
          The client object.
         </li>
     </ul>
