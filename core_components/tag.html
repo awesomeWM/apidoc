@@ -207,13 +207,23 @@
 <div id="content">
 
 <h1>Module: <code>tag</code></h1>
-<p>awesome tag API</p>
+<p>awesome tag API.</p>
+<p><h2> What is a tag?</h2>
 
-<p> Furthermore to the classes described here, one can also use signals as
- described in <a href="../classes/signals.html#">signals</a>.</p>
+<p> In AwesomeWM, a <a href="../core_components/tag.html#">tag</a> is a group of clients. It can either be used as labels
+ or as more classical workspaces depending on how they are configured.</p>
+
 <p> <img src="../images/tag_props.svg" alt="Client geometry" /></p>
 
-<p> <strong>Creating tags</strong>:</p>
+<ul>
+<li>A <strong>tag</strong> can be attached to <strong>multiple clients</strong></li>
+<li>A <strong>client</strong> can be attached to <strong>multiple tags</strong></li>
+<li>A <strong>tag</strong> can only be in 1 screen <em>any given time</em>, but can be moved</li>
+<li>All <strong>clients</strong> attached to a tag <strong>must be in the same screen as the tag</strong></li>
+</ul>
+
+
+<h2> Creating tags</h2>
 
 <p> The default config initializes tags like this:</p>
 
@@ -251,7 +261,7 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 <p> Note: the example above sets &ldquo;First tag&rdquo; to be selected explicitly,
  because otherwise you will find yourself without any selected tag.</p>
 
-<p> <strong>Accessing tags</strong>:</p>
+<h2> Accessing tags</h2>
 
 <p> To access the &ldquo;current tags&rdquo;, use</p>
 
@@ -306,7 +316,7 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 </pre>
 
 
-<p> <strong>Common shortcuts</strong>:</p>
+<h2> Common keybindings code</h2>
 
 <p> Here is a few useful shortcuts not part of the default <a href="../sample files/rc.lua.html#">rc.lua</a>. Add these
  functions above <code>&ndash; {{{ Key bindings</code>:</p>
@@ -469,7 +479,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
    <i>b</i>: a awful.button object, <i>n</i>: a naughty.notification object
    </td>
   </tr>
- </table></p>
+ </table></p></p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2008-2009 Julien Danjou</li>
@@ -480,7 +490,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 <h2><a href="#Constructors">Constructors</a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#awful.tag.add">awful.tag.add <span class='function_args'> <b>(</b>name, prop<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.add">awful.tag.add <span class='function_args'> <b>(</b>name, props<b>)</b></span></a></td>
       <td class="summary">Add a tag.</td>
     </tr>
 </table>
@@ -491,84 +501,84 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
       <td class="summary">Get the number of instances.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#disconnect_signal"><span class='function_modname'>tag.</span>disconnect_signal <span class='function_args'> <b>(</b>name, fun<b>)</b></span></a></td>
+      <td class="name" ><a href="#disconnect_signal"><span class='function_modname'>tag.</span>disconnect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
       <td class="summary">Disconnect from a signal.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#emit_signal"><span class='function_modname'>tag.</span>emit_signal <span class='function_args'> <b>(</b>name, ..<b>)</b></span></a></td>
+      <td class="name" ><a href="#emit_signal"><span class='function_modname'>tag.</span>emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
       <td class="summary">Emit a signal.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#connect_signal"><span class='function_modname'>tag.</span>connect_signal <span class='function_args'> <b>(</b>name, fun<b>)</b></span></a></td>
+      <td class="name" ><a href="#connect_signal"><span class='function_modname'>tag.</span>connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
       <td class="summary">Connect to a signal.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.new">awful.tag.new <span class='function_args'> <b>(</b>names, screen, layou<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.new">awful.tag.new <span class='function_args'> <b>(</b>names[, screen=1], layout<b>)</b></span></a></td>
       <td class="summary">Create a set of tags and attach it to a screen.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.find_fallback">awful.tag.find_fallback <span class='function_args'> <b>(</b>screen, invalid<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.find_fallback">awful.tag.find_fallback <span class='function_args'> <b>(</b>screen, invalids<b>)</b></span></a></td>
       <td class="summary">Find a suitable fallback tag.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.history.update">awful.tag.history.update <span class='function_args'> <b>(</b>ob<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.history.update">awful.tag.history.update <span class='function_args'> <b>(</b>obj<b>)</b></span></a></td>
       <td class="summary">Update the tag history.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.history.restore">awful.tag.history.restore <span class='function_args'> <b>(</b>screen, id<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.history.restore">awful.tag.history.restore <span class='function_args'> <b>(</b>screen, idx<b>)</b></span></a></td>
       <td class="summary">Revert tag history.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.find_by_name">awful.tag.find_by_name <span class='function_args'> <b>(</b>s, nam<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.find_by_name">awful.tag.find_by_name <span class='function_args'> <b>(</b>s, name<b>)</b></span></a></td>
       <td class="summary">Find a tag by name.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.incmwfact">awful.tag.incmwfact <span class='function_args'> <b>(</b>add, <b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.incmwfact">awful.tag.incmwfact <span class='function_args'> <b>(</b>add, t<b>)</b></span></a></td>
       <td class="summary">Increase master width factor.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.incgap">awful.tag.incgap <span class='function_args'> <b>(</b>add, <b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.incgap">awful.tag.incgap <span class='function_args'> <b>(</b>add, t<b>)</b></span></a></td>
       <td class="summary">Increase the spacing between clients</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.togglemfpol">awful.tag.togglemfpol <span class='function_args'> <b>(</b><b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.togglemfpol">awful.tag.togglemfpol <span class='function_args'> <b>(</b>t<b>)</b></span></a></td>
       <td class="summary">Toggle size fill policy for the master client(s)
  between &ldquo;expand&rdquo; and &ldquo;master_width_factor&rdquo;.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.incnmaster">awful.tag.incnmaster <span class='function_args'> <b>(</b>add[, t[, sensible=false]<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.incnmaster">awful.tag.incnmaster <span class='function_args'> <b>(</b>add[, t[, sensible=false]]<b>)</b></span></a></td>
       <td class="summary">Increase the number of master windows.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.incncol">awful.tag.incncol <span class='function_args'> <b>(</b>add[, t[, sensible=false]<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.incncol">awful.tag.incncol <span class='function_args'> <b>(</b>add[, t[, sensible=false]]<b>)</b></span></a></td>
       <td class="summary">Increase number of column windows.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.viewnone">awful.tag.viewnone <span class='function_args'> <b>(</b>[screen<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.viewnone">awful.tag.viewnone <span class='function_args'> <b>(</b>[screen]<b>)</b></span></a></td>
       <td class="summary">View no tag.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.viewidx">awful.tag.viewidx <span class='function_args'> <b>(</b>i[, screen<b>)</b></span></a></td>
-      <td class="summary">View a tag by its taglist index.</td>
+      <td class="name" ><a href="#awful.tag.viewidx">awful.tag.viewidx <span class='function_args'> <b>(</b>i[, screen]<b>)</b></span></a></td>
+      <td class="summary">Select a tag relative to the currently selected one.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.viewnext">awful.tag.viewnext <span class='function_args'> <b>(</b>scree<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.viewnext">awful.tag.viewnext <span class='function_args'> <b>(</b>screen<b>)</b></span></a></td>
       <td class="summary">View next tag.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.viewprev">awful.tag.viewprev <span class='function_args'> <b>(</b>scree<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.viewprev">awful.tag.viewprev <span class='function_args'> <b>(</b>screen<b>)</b></span></a></td>
       <td class="summary">View previous tag.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.viewmore">awful.tag.viewmore <span class='function_args'> <b>(</b>tags[, screen[, maximum=#tags]<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.viewmore">awful.tag.viewmore <span class='function_args'> <b>(</b>tags[, screen[, maximum=#tags]]<b>)</b></span></a></td>
       <td class="summary">View only a set of tags.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.viewtoggle">awful.tag.viewtoggle <span class='function_args'> <b>(</b><b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.viewtoggle">awful.tag.viewtoggle <span class='function_args'> <b>(</b>t<b>)</b></span></a></td>
       <td class="summary">Toggle selection of a tag</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.tag.attached_connect_signal">awful.tag.attached_connect_signal <span class='function_args'> <b>(</b>screen[, signal[, Callback]<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.tag.attached_connect_signal">awful.tag.attached_connect_signal <span class='function_args'> <b>(</b>screen[, signal[, Callback]]<b>)</b></span></a></td>
       <td class="summary">Add a signal to all attached tags and all tags that will be attached in the
  future.</td>
     </tr>
@@ -654,15 +664,15 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 <h2><a href="#Object_methods">Object methods </a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#clients">:clients <span class='function_args'> <b>(</b>[clients_table=nil<b>)</b></span></a></td>
+      <td class="name" ><a href="#clients">:clients <span class='function_args'> <b>(</b>[clients_table=nil]<b>)</b></span></a></td>
       <td class="summary">Get or set the clients attached to this tag.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#swap">:swap <span class='function_args'> <b>(</b>tag<b>)</b></span></a></td>
+      <td class="name" ><a href="#swap">:swap <span class='function_args'> <b>(</b>tag2<b>)</b></span></a></td>
       <td class="summary">Swap 2 tags.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#delete">:delete <span class='function_args'> <b>(</b>[fallback_tag=awful.tag.find_fallback()[, force=false]<b>)</b></span></a></td>
+      <td class="name" ><a href="#delete">:delete <span class='function_args'> <b>(</b>[fallback_tag=awful.tag.find_fallback()[, force=false]]<b>)</b></span></a></td>
       <td class="summary">Delete a tag.</td>
     </tr>
     <tr>
@@ -670,15 +680,15 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
       <td class="summary">View only a tag.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ..<b>)</b></span></a></td>
+      <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
       <td class="summary">Emit a signal.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#connect_signal">:connect_signal <span class='function_args'> <b>(</b>name, fun<b>)</b></span></a></td>
+      <td class="name" ><a href="#connect_signal">:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
       <td class="summary">Connect to a signal.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#weak_connect_signal">:weak_connect_signal <span class='function_args'> <b>(</b>name, fun<b>)</b></span></a></td>
+      <td class="name" ><a href="#weak_connect_signal">:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
       <td class="summary">Connect to a signal weakly.</td>
     </tr>
 </table>
@@ -888,7 +898,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <dl class="function">
     <dt>
     <a name = "awful.tag.add"></a>
-    <strong>awful.tag.add <span class='function_args'> <b>(</b>name, prop<b>)</b></span></strong>
+    <strong>awful.tag.add <span class='function_args'> <b>(</b>name, props<b>)</b></span></strong>
     </dt>
     <dd>
     <p>Add a tag.</p>
@@ -951,7 +961,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "disconnect_signal"></a>
-    <strong><span class='function_modname'>tag.</span>disconnect_signal <span class='function_args'> <b>(</b>name, fun<b>)</b></span></strong>
+    <strong><span class='function_modname'>tag.</span>disconnect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
     </dt>
     <dd>
     Disconnect from a signal.
@@ -976,7 +986,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "emit_signal"></a>
-    <strong><span class='function_modname'>tag.</span>emit_signal <span class='function_args'> <b>(</b>name, ..<b>)</b></span></strong>
+    <strong><span class='function_modname'>tag.</span>emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
     </dt>
     <dd>
     Emit a signal.
@@ -1002,7 +1012,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "connect_signal"></a>
-    <strong><span class='function_modname'>tag.</span>connect_signal <span class='function_args'> <b>(</b>name, fun<b>)</b></span></strong>
+    <strong><span class='function_modname'>tag.</span>connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
     </dt>
     <dd>
     Connect to a signal.
@@ -1027,21 +1037,56 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.new"></a>
-    <strong>awful.tag.new <span class='function_args'> <b>(</b>names, screen, layou<b>)</b></span></strong>
+    <strong>awful.tag.new <span class='function_args'> <b>(</b>names[, screen=1], layout<b>)</b></span></strong>
     </dt>
     <dd>
-    Create a set of tags and attach it to a screen.
+    <p>Create a set of tags and attach it to a screen.</p>
+
+<p> This is what&rsquo;s performed by the default config:</p>
+
+<p><img src="../images/AUTOGEN_sequences_tag_default_config.svg" alt="Usage example" /></p>
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ '1', '2', '3', '4', '5', '6', '7', '8', '9' }, screen[1], awful.layout.layouts[1])
+</code></pre>
+
+<p> It is also possible to set multiple layouts:</p>
+
+<p><img src="../images/AUTOGEN_sequences_tag_new_with_layouts.svg" alt="Usage example" /></p>
+
+<pre><code> local some_layouts = {
+     awful.layout.suit.fair,
+     awful.layout.suit.spiral,
+     awful.layout.suit.spiral.dwindle,
+     awful.layout.suit.magnifier,
+     awful.layout.suit.corner.nw,
+ }
+
+ -- Calling awful.tag.new
+ awful.tag({ 'one', 'two', 'three', 'four', 'five' }, screen[1], some_layouts)
+
+ -- Add some clients
+ for _, t in ipairs(screen[1].tags) do
+     for _ = 1, 5 do
+         awful.spawn('xterm', {tag = t})
+     end
+ end
+</code></pre>
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">names</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The tag name, in a table
         </li>
         <li><span class="parameter">screen</span>
-         The tag screen, or 1 if not set.
+            <span class="types"><a class="type" href="../core_components/tag.html#screen">screen</a> or <span class="type">number</span></span>
+         The tag screen (defaults to screen 1).
+         (<em>default</em> 1)
         </li>
         <li><span class="parameter">layout</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The layout or layout table to set for this tags by default.
         </li>
     </ul>
@@ -1049,6 +1094,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
         A table with all created tags.
     </ol>
 
@@ -1058,7 +1104,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.find_fallback"></a>
-    <strong>awful.tag.find_fallback <span class='function_args'> <b>(</b>screen, invalid<b>)</b></span></strong>
+    <strong>awful.tag.find_fallback <span class='function_args'> <b>(</b>screen, invalids<b>)</b></span></strong>
     </dt>
     <dd>
     Find a suitable fallback tag.
@@ -1081,7 +1127,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.history.update"></a>
-    <strong>awful.tag.history.update <span class='function_args'> <b>(</b>ob<b>)</b></span></strong>
+    <strong>awful.tag.history.update <span class='function_args'> <b>(</b>obj<b>)</b></span></strong>
     </dt>
     <dd>
     Update the tag history.
@@ -1101,7 +1147,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.history.restore"></a>
-    <strong>awful.tag.history.restore <span class='function_args'> <b>(</b>screen, id<b>)</b></span></strong>
+    <strong>awful.tag.history.restore <span class='function_args'> <b>(</b>screen, idx<b>)</b></span></strong>
     </dt>
     <dd>
     Revert tag history.
@@ -1126,7 +1172,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.find_by_name"></a>
-    <strong>awful.tag.find_by_name <span class='function_args'> <b>(</b>s, nam<b>)</b></span></strong>
+    <strong>awful.tag.find_by_name <span class='function_args'> <b>(</b>s, name<b>)</b></span></strong>
     </dt>
     <dd>
     Find a tag by name.
@@ -1167,7 +1213,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.incmwfact"></a>
-    <strong>awful.tag.incmwfact <span class='function_args'> <b>(</b>add, <b>)</b></span></strong>
+    <strong>awful.tag.incmwfact <span class='function_args'> <b>(</b>add, t<b>)</b></span></strong>
     </dt>
     <dd>
     Increase master width factor.
@@ -1194,7 +1240,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.incgap"></a>
-    <strong>awful.tag.incgap <span class='function_args'> <b>(</b>add, <b>)</b></span></strong>
+    <strong>awful.tag.incgap <span class='function_args'> <b>(</b>add, t<b>)</b></span></strong>
     </dt>
     <dd>
     Increase the spacing between clients
@@ -1221,7 +1267,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.togglemfpol"></a>
-    <strong>awful.tag.togglemfpol <span class='function_args'> <b>(</b><b>)</b></span></strong>
+    <strong>awful.tag.togglemfpol <span class='function_args'> <b>(</b>t<b>)</b></span></strong>
     </dt>
     <dd>
     Toggle size fill policy for the master client(s)
@@ -1247,7 +1293,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.incnmaster"></a>
-    <strong>awful.tag.incnmaster <span class='function_args'> <b>(</b>add[, t[, sensible=false]<b>)</b></span></strong>
+    <strong>awful.tag.incnmaster <span class='function_args'> <b>(</b>add[, t[, sensible=false]]<b>)</b></span></strong>
     </dt>
     <dd>
     Increase the number of master windows.
@@ -1281,7 +1327,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.incncol"></a>
-    <strong>awful.tag.incncol <span class='function_args'> <b>(</b>add[, t[, sensible=false]<b>)</b></span></strong>
+    <strong>awful.tag.incncol <span class='function_args'> <b>(</b>add[, t[, sensible=false]]<b>)</b></span></strong>
     </dt>
     <dd>
     Increase number of column windows.
@@ -1311,10 +1357,23 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.viewnone"></a>
-    <strong>awful.tag.viewnone <span class='function_args'> <b>(</b>[screen<b>)</b></span></strong>
+    <strong>awful.tag.viewnone <span class='function_args'> <b>(</b>[screen]<b>)</b></span></strong>
     </dt>
     <dd>
-    View no tag.
+    <p>View no tag.</p>
+
+<p><img src="../images/AUTOGEN_sequences_tag_viewnone.svg" alt="Usage example" /></p>
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ 'one', 'two', 'three', 'four' }, screen[1])
+
+ -- Manually select some tags (tag 1 was auto selected).
+ screen[1].tags[3].selected = true
+ screen[1].tags[4].selected = true
+
+ -- Deselect all tags.
+ awful.tag.viewnone()
+</code></pre>
 
 
     <h3>Parameters:</h3>
@@ -1333,10 +1392,26 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.viewidx"></a>
-    <strong>awful.tag.viewidx <span class='function_args'> <b>(</b>i[, screen<b>)</b></span></strong>
+    <strong>awful.tag.viewidx <span class='function_args'> <b>(</b>i[, screen]<b>)</b></span></strong>
     </dt>
     <dd>
-    View a tag by its taglist index.</p>
+    Select a tag relative to the currently selected one.</p>
+
+<p> Note that this doesn&rsquo;t work well with multiple selection.</p>
+
+<p><img src="../images/AUTOGEN_sequences_tag_viewidx.svg" alt="Usage example" /></p>
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ 'one', 'two', 'three', 'four' }, screen[1])
+
+ screen[1].tags[2]:view_only()
+
+ -- Select the tag relative to idx 2.
+ awful.tag.viewidx(2)
+
+ -- Select the tag relative to idx -2.
+ awful.tag.viewidx(-2)
+</code></pre>
 
 <p> This is equivalent to <code>screen.tags[i]:view_only()</code>
 
@@ -1344,9 +1419,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">i</span>
+            <span class="types"><span class="type">number</span></span>
          The <strong>relative</strong> index to see.
         </li>
         <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../core_components/tag.html#screen">screen</a></span>
          The screen.
          (<em>optional</em>)
         </li>
@@ -1356,54 +1433,100 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
     <h3>See also:</h3>
     <ul>
-         <a href="../core_components/screen.html#tags">screen.tags</a>
+         <li><a href="../core_components/screen.html#tags">screen.tags</a></li>
+         <li><a href="../core_components/tag.html#awful.tag.viewnext">awful.tag.viewnext</a></li>
+         <li><a href="../core_components/tag.html#awful.tag.viewprev">awful.tag.viewprev</a></li>
     </ul>
 
 
 </dd>
     <dt>
     <a name = "awful.tag.viewnext"></a>
-    <strong>awful.tag.viewnext <span class='function_args'> <b>(</b>scree<b>)</b></span></strong>
+    <strong>awful.tag.viewnext <span class='function_args'> <b>(</b>screen<b>)</b></span></strong>
     </dt>
     <dd>
-    View next tag.  This is the same as tag.viewidx(1).
+    <p>View next tag.  This is the same as <code>tag.viewidx(1)</code>.</p>
+
+<p> Note that this doesn&rsquo;t work well with multiple selection.</p>
+
+<p><img src="../images/AUTOGEN_sequences_tag_viewnext.svg" alt="Usage example" /></p>
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ 'one', 'two', 'three', 'four' }, screen[1])
+
+ screen[1].tags[3]:view_only()
+
+ -- Select the next tag.
+ awful.tag.viewnext()
+
+ -- Select the next tag (again).
+ awful.tag.viewnext()
+</code></pre>
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../core_components/tag.html#screen">screen</a></span>
          The screen.
         </li>
     </ul>
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/tag.html#awful.tag.viewidx">awful.tag.viewidx</a></li>
+         <li><a href="../core_components/tag.html#awful.tag.viewprev">awful.tag.viewprev</a></li>
+    </ul>
 
 
 </dd>
     <dt>
     <a name = "awful.tag.viewprev"></a>
-    <strong>awful.tag.viewprev <span class='function_args'> <b>(</b>scree<b>)</b></span></strong>
+    <strong>awful.tag.viewprev <span class='function_args'> <b>(</b>screen<b>)</b></span></strong>
     </dt>
     <dd>
-    View previous tag.  This is the same a tag.viewidx(-1).
+    <p>View previous tag.  This is the same a <code>tag.viewidx(-1)</code>.</p>
+
+<p> Note that this doesn&rsquo;t work well with multiple selection.</p>
+
+<p><img src="../images/AUTOGEN_sequences_tag_viewprev.svg" alt="Usage example" /></p>
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ 'one', 'two', 'three', 'four' }, screen[1])
+
+ screen[1].tags[2]:view_only()
+
+ -- Select the previous tag.
+ awful.tag.viewprev()
+
+ -- Select the previous tag (again).
+ awful.tag.viewprev()
+</code></pre>
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../core_components/tag.html#screen">screen</a></span>
          The screen.
         </li>
     </ul>
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/tag.html#awful.tag.viewidx">awful.tag.viewidx</a></li>
+         <li><a href="../core_components/tag.html#awful.tag.viewnext">awful.tag.viewnext</a></li>
+    </ul>
 
 
 </dd>
     <dt>
     <a name = "awful.tag.viewmore"></a>
-    <strong>awful.tag.viewmore <span class='function_args'> <b>(</b>tags[, screen[, maximum=#tags]<b>)</b></span></strong>
+    <strong>awful.tag.viewmore <span class='function_args'> <b>(</b>tags[, screen[, maximum=#tags]]<b>)</b></span></strong>
     </dt>
     <dd>
     View only a set of tags.</p>
@@ -1416,9 +1539,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tags</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          A table with tags to view only.
         </li>
         <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../core_components/tag.html#screen">screen</a></span>
          The screen of the tags.
          (<em>optional</em>)
         </li>
@@ -1436,7 +1561,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.viewtoggle"></a>
-    <strong>awful.tag.viewtoggle <span class='function_args'> <b>(</b><b>)</b></span></strong>
+    <strong>awful.tag.viewtoggle <span class='function_args'> <b>(</b>t<b>)</b></span></strong>
     </dt>
     <dd>
     Toggle selection of a tag
@@ -1461,7 +1586,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "awful.tag.attached_connect_signal"></a>
-    <strong>awful.tag.attached_connect_signal <span class='function_args'> <b>(</b>screen[, signal[, Callback]<b>)</b></span></strong>
+    <strong>awful.tag.attached_connect_signal <span class='function_args'> <b>(</b>screen[, signal[, Callback]]<b>)</b></span></strong>
     </dt>
     <dd>
     Add a signal to all attached tags and all tags that will be attached in the
@@ -1503,6 +1628,17 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <dd>
     <p>Tag name.</p>
 
+<p> <img src="../images/AUTOGEN_sequences_tag_name.svg" alt="Usage example" /></p>
+
+<pre><code>  -- Calling awful.tag.new
+  awful.tag({ 'one', 'two', 'three', 'four' }, screen[1])
+
+  screen[1].tags[2]:view_only()
+
+  -- Change the name to New*tag*name.
+  screen[1].tags[2].name = 'New*tag*name'
+</code></pre>
+
 <p> <strong>Signal:</strong></p>
 
 <ul>
@@ -1524,6 +1660,17 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     </dt>
     <dd>
     <p>True if the tag is selected to be viewed.</p>
+
+<p> <img src="../images/AUTOGEN_sequences_tag_selected.svg" alt="Usage example" /></p>
+
+<pre><code>  -- Calling awful.tag.new
+  awful.tag({ 'one', 'two', 'three', 'four' }, screen[1])
+
+  -- Change the selection.
+  screen[1].tags[1].selected = not screen[1].tags[1].selected
+  screen[1].tags[2].selected = true
+  screen[1].tags[3].selected = true
+</code></pre>
 
 <p> <strong>Signal:</strong></p>
 
@@ -1568,6 +1715,18 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     </dt>
     <dd>
     <p>The tag index.</p>
+
+<p><img src="../images/AUTOGEN_sequences_tag_index.svg" alt="Usage example" /></p>
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ 'one', 'two', 'three', 'four' }, screen[1])
+
+ -- Send the first tag to index 3.
+ screen[1].tags[1].index = 3
+
+ -- Send the first tag to index 3.
+ screen[1].tags[4].index = 1
+</code></pre>
 
 <p> The index is the position as shown in the <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a>.</p>
 
@@ -1759,17 +1918,60 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <p>Define if the tag must be deleted when the last client is untagged.</p>
 
 <p> This is useful to create &ldquo;throw-away&rdquo; tags for operation like 50/50
- side-by-side views.</p>
+ (Windows &ldquo;Aero Snap) side-by-side views. This keybinding code for this is:</p>
 
-<pre><code>local t = awful.tag.add("Temporary", {
-     screen   = client.focus.screen,
-     volatile = true,
-     clients  = {
-         client.focus,
-         awful.client.focus.history.get(client.focus.screen, 1)
-     }
-}
+<pre><code>local function aero_tag()
+    local c = client.focus
+
+    if not c then return end
+
+    local c2 = awful.client.focus.history.list[2]
+
+    if (not c2) or c2 == c then return end
+
+    local t = awful.tag.add("Aero", {
+        screen              = c.screen,
+        volatile            = true,
+        layout              = awful.layout.suit.tile,
+        master_width_factor = 0.5
+    })
+
+    t:clients({c, c2})
+
+    t:view_only()
+end
 </code></pre>
+
+<p><img src="../images/AUTOGEN_sequences_tag_volatile.svg" alt="Usage example" /></p>
+
+<pre><code> -- Create a non-volatile and a volatile tag.
+ awful.tag.add('Non-Volatile', {
+     screen   = screen[1],
+     layout   = awful.layout.suit.corner.nw,
+     volatile = false,
+ })
+
+ awful.tag.add('Volatile', {
+     screen   = screen[1],
+     layout   = awful.layout.suit.corner.nw,
+     volatile = true,
+ })
+
+ -- Add some clients.
+ for _, t in ipairs(screen[1].tags) do
+     for _ = 1, 5 do
+         awful.spawn('xterm', {tag = t})
+     end
+ end
+
+ -- Kill all clients.
+ while #client.get() ~= 0 do
+     client.get()[1]:kill()
+ end
+</code></pre>
+
+<p> As you can see, the &ldquo;Volatile&rdquo; tag has been automatically discarded while
+ the &ldquo;Non-volatile&rdquo; tag is still there (but with zero clients).</p>
 
 <p> <strong>Signal:</strong></p>
 
@@ -1782,6 +1984,10 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/tag.html#delete">delete</a>
+    </ul>
 
 
 </dd>
@@ -1979,7 +2185,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <dl class="function">
     <dt>
     <a name = "clients"></a>
-    <strong>:clients <span class='function_args'> <b>(</b>[clients_table=nil<b>)</b></span></strong>
+    <strong>:clients <span class='function_args'> <b>(</b>[clients_table=nil]<b>)</b></span></strong>
     </dt>
     <dd>
     Get or set the clients attached to this tag.
@@ -2007,10 +2213,21 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "swap"></a>
-    <strong>:swap <span class='function_args'> <b>(</b>tag<b>)</b></span></strong>
+    <strong>:swap <span class='function_args'> <b>(</b>tag2<b>)</b></span></strong>
     </dt>
     <dd>
-    Swap 2 tags.
+    <p>Swap 2 tags.</p>
+
+<p><img src="../images/AUTOGEN_sequences_tag_swap.svg" alt="Usage example" /></p>
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ 'one', 'two', 'three', 'four' }, screen[1])
+
+ screen[1].tags[2]:view_only()
+
+ -- Swap tag 2 with tag 4.
+ screen[1].tags[2]:swap(screen[1].tags[4])
+</code></pre>
 
 
     <h3>Parameters:</h3>
@@ -2031,14 +2248,22 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "delete"></a>
-    <strong>:delete <span class='function_args'> <b>(</b>[fallback_tag=awful.tag.find_fallback()[, force=false]<b>)</b></span></strong>
+    <strong>:delete <span class='function_args'> <b>(</b>[fallback_tag=awful.tag.find_fallback()[, force=false]]<b>)</b></span></strong>
     </dt>
     <dd>
     <p>Delete a tag.</p>
 
 <p> To delete the current tag:</p>
 
-<pre><code>mouse.screen.selected_tag:delete()
+<p><img src="../images/AUTOGEN_sequences_tag_delete.svg" alt="Usage example" /></p>
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ 'one', 'two', 'three', 'four' }, screen[1])
+
+ screen[1].tags[2]:view_only()
+
+ -- Delete the selected tag.
+ mouse.screen.selected_tag:delete()
 </code></pre>
 
 
@@ -2082,7 +2307,20 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <strong>:view_only <span class='function_args'> <b>(</b><b>)</b></span></strong>
     </dt>
     <dd>
-    View only a tag.
+    <p>View only a tag.</p>
+
+<p><img src="../images/AUTOGEN_sequences_tag_view_only.svg" alt="Usage example" /></p>
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ 'one', 'two', 'three', 'four' }, screen[1])
+
+ -- Manually select some tags (tag 1 was auto selected).
+ screen[1].tags[3].selected = true
+ screen[1].tags[4].selected = true
+
+ -- Call :view_only() on the second tag.
+ screen[1].tags[2]:view_only()
+</code></pre>
 
 
 
@@ -2097,7 +2335,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "emit_signal"></a>
-    <strong>:emit_signal <span class='function_args'> <b>(</b>name, ..<b>)</b></span></strong>
+    <strong>:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
     </dt>
     <dd>
     Emit a signal.
@@ -2123,7 +2361,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "connect_signal"></a>
-    <strong>:connect_signal <span class='function_args'> <b>(</b>name, fun<b>)</b></span></strong>
+    <strong>:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
     </dt>
     <dd>
     Connect to a signal.
@@ -2148,7 +2386,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 </dd>
     <dt>
     <a name = "weak_connect_signal"></a>
-    <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, fun<b>)</b></span></strong>
+    <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
     </dt>
     <dd>
     Connect to a signal weakly.</p>
@@ -3177,6 +3415,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">t</span>
+            <span class="types"><span class="type">tag</span></span>
          The tag object.
         </li>
     </ul>
