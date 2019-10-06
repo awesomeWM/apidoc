@@ -52,11 +52,9 @@
 <ul class="nowrap">
   <li><a href="../core_components/awesome.html">awesome</a></li>
   <li><a href="../core_components/awful.keygrabber.html">awful.keygrabber</a></li>
-  <li><a href="../core_components/button.html">button</a></li>
   <li><strong>client<span class='listplusign'> and awful.client</span></strong></li>
   <li><a href="../core_components/drawable.html">drawable</a></li>
   <li><a href="../core_components/gears.timer.html">gears.timer</a></li>
-  <li><a href="../core_components/key.html">key</a></li>
   <li><a href="../core_components/mouse.html">mouse<span class='listplusign'> and awful.mouse</span></a></li>
   <li><a href="../core_components/mousegrabber.html">mousegrabber</a></li>
   <li><a href="../core_components/naughty.action.html">naughty.action</a></li>
@@ -664,6 +662,16 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td class="summary">The first tag of the client.</td>
     </tr>
     <tr>
+      <td class="shortname" ><a href="#buttons">buttons</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
+      <td class="summary">Get or set mouse buttons bindings for a client.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#keys">keys</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
+      <td class="summary">Get or set keys bindings for a client.</td>
+    </tr>
+    <tr>
       <td class="shortname" ><a href="#marked">marked</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
       <td class="summary">If a client is marked or not.</td>
@@ -731,10 +739,6 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td class="summary">Return client struts (reserved space at the edge of the screen).</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#buttons">:buttons <span class='function_args'> <b>(</b>buttons_table<b>)</b></span></a></td>
-      <td class="summary">Get or set mouse buttons bindings for a client.</td>
-    </tr>
-    <tr>
       <td class="name" ><a href="#isvisible">:isvisible <span class='function_args'> <b>(</b><b>)</b></span></a></td>
       <td class="summary">Check if a client is visible on its screen.</td>
     </tr>
@@ -769,10 +773,6 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <tr>
       <td class="name" ><a href="#apply_size_hints">:apply_size_hints <span class='function_args'> <b>(</b>width, height<b>)</b></span></a></td>
       <td class="summary">Apply size hints to a size.</td>
-    </tr>
-    <tr>
-      <td class="name" ><a href="#keys">:keys <span class='function_args'> <b>(</b>keys_table<b>)</b></span></a></td>
-      <td class="summary">Get or set keys bindings for a client.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#get_icon">:get_icon <span class='function_args'> <b>(</b>index<b>)</b></span></a></td>
@@ -2815,6 +2815,44 @@ awful.rules.add_rule_source(
 
 </dd>
     <dt>
+    <a name = "buttons"></a>
+    <strong>buttons</strong>
+    <span class="proptype">(<span class='summary_type'>table</span>)</span>
+    </dt>
+    <dd>
+    Get or set mouse buttons bindings for a client.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/awful.button.html#">awful.button</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "keys"></a>
+    <strong>keys</strong>
+    <span class="proptype">(<span class='summary_type'>table</span>)</span>
+    </dt>
+    <dd>
+    Get or set keys bindings for a client.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/awful.key.html#">awful.key</a>
+    </ul>
+
+
+</dd>
+    <dt>
     <a name = "marked"></a>
     <strong>marked</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
@@ -3180,31 +3218,6 @@ awful.rules.add_rule_source(
 
 </dd>
     <dt>
-    <a name = "buttons"></a>
-    <strong>:buttons <span class='function_args'> <b>(</b>buttons_table<b>)</b></span></strong>
-    </dt>
-    <dd>
-    Get or set mouse buttons bindings for a client.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">buttons_table</span>
-         An array of mouse button bindings objects, or nothing.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        A table with all buttons.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
     <a name = "isvisible"></a>
     <strong>:isvisible <span class='function_args'> <b>(</b><b>)</b></span></strong>
     </dt>
@@ -3388,31 +3401,6 @@ awful.rules.add_rule_source(
         Actual width of client</li>
         <li>
         Actual height of client</li>
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "keys"></a>
-    <strong>:keys <span class='function_args'> <b>(</b>keys_table<b>)</b></span></strong>
-    </dt>
-    <dd>
-    Get or set keys bindings for a client.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">keys_table</span>
-         An array of key bindings objects, or nothing.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        A table with all keys.
     </ol>
 
 

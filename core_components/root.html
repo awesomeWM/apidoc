@@ -33,6 +33,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Static_module_functions">Static module functions</a></li>
+<li><a href="#Object_properties">Object properties</a></li>
 </ul>
 
 
@@ -40,11 +41,9 @@
 <ul class="nowrap">
   <li><a href="../core_components/awesome.html">awesome</a></li>
   <li><a href="../core_components/awful.keygrabber.html">awful.keygrabber</a></li>
-  <li><a href="../core_components/button.html">button</a></li>
   <li><a href="../core_components/client.html">client<span class='listplusign'> and awful.client</span></a></li>
   <li><a href="../core_components/drawable.html">drawable</a></li>
   <li><a href="../core_components/gears.timer.html">gears.timer</a></li>
-  <li><a href="../core_components/key.html">key</a></li>
   <li><a href="../core_components/mouse.html">mouse<span class='listplusign'> and awful.mouse</span></a></li>
   <li><a href="../core_components/mousegrabber.html">mousegrabber</a></li>
   <li><a href="../core_components/naughty.action.html">naughty.action</a></li>
@@ -216,14 +215,6 @@
       <td class="summary">Send fake keyboard or mouse events.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#keys"><span class='function_modname'>root.</span>keys <span class='function_args'> <b>(</b>keys_array<b>)</b></span></a></td>
-      <td class="summary">Get or set global key bindings.</td>
-    </tr>
-    <tr>
-      <td class="name" ><a href="#buttons"><span class='function_modname'>root.</span>buttons <span class='function_args'> <b>(</b>button_table<b>)</b></span></a></td>
-      <td class="summary">Get or set global mouse bindings.</td>
-    </tr>
-    <tr>
       <td class="name" ><a href="#cursor"><span class='function_modname'>root.</span>cursor <span class='function_args'> <b>(</b>cursor_name<b>)</b></span></a></td>
       <td class="summary">Set the root cursor</td>
     </tr>
@@ -246,6 +237,20 @@
     <tr>
       <td class="name" ><a href="#tags"><span class='function_modname'>root.</span>tags <span class='function_args'> <b>(</b><b>)</b></span></a></td>
       <td class="summary">Get the attached tags.</td>
+    </tr>
+</table>
+<h2><a href="#Object_properties">Object properties</a></h2>
+<table class="function_list">
+    <tr>
+      <td class="shortname" ><a href="#keys">keys</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
+      <td class="summary">Get or set global key bindings.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#buttons">buttons</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
+      <td class="summary">Store the list of mouse buttons to be applied on the wallpaper (also
+ known as root window).</td>
     </tr>
 </table>
 
@@ -349,59 +354,6 @@ click(1, 42, 42)
         </li>
     </ul>
 
-
-
-
-
-</dd>
-    <dt>
-    <a name = "keys"></a>
-    <strong><span class='function_modname'>root.</span>keys <span class='function_args'> <b>(</b>keys_array<b>)</b></span></strong>
-    </dt>
-    <dd>
-    Get or set global key bindings.
- These bindings will be available when you press keys on the root window.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">keys_array</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">nil</span></span>
-         An array of key binding objects, or nothing.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The array of key bindings objects of this client.
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "buttons"></a>
-    <strong><span class='function_modname'>root.</span>buttons <span class='function_args'> <b>(</b>button_table<b>)</b></span></strong>
-    </dt>
-    <dd>
-    Get or set global mouse bindings.
- This binding will be available when you click on the root window.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">button_table</span>
-         An array of mouse button bindings objects, or nothing.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        The array of mouse button bindings objects.
-    </ol>
 
 
 
@@ -614,6 +566,67 @@ click(1, 42, 42)
 
 
 
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Object_properties"></a>Object properties</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "keys"></a>
+    <strong>keys</strong>
+    <span class="proptype">(<span class='summary_type'>table</span>)</span>
+    </dt>
+    <dd>
+    Get or set global key bindings.
+ These bindings will be available when you press keys on the root window
+ (the wallpaper).
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/awful.key.html#">awful.key</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "buttons"></a>
+    <strong>buttons</strong>
+    <span class="proptype">(<span class='summary_type'>table</span>)</span>
+    </dt>
+    <dd>
+    Store the list of mouse buttons to be applied on the wallpaper (also
+ known as root window).
+
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">buttons</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The list of buttons.
+         (<em>default</em> {})
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/awful.button.html#">awful.button</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">root.buttons = {
+    awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span> () mymainmenu:toggle() <span class="keyword">end</span>),
+    awful.button({ }, <span class="number">4</span>, awful.tag.viewnext),
+    awful.button({ }, <span class="number">5</span>, awful.tag.viewprev),
+}</pre>
+    </ul>
 
 </dd>
 </dl>
