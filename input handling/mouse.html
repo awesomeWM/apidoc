@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Coreclassmod mouse - awesome API documentation</title>
+    <title>Inputmodule mouse - awesome API documentation</title>
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
 </head>
 <body>
@@ -32,6 +32,7 @@
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Functions">Functions</a></li>
 <li><a href="#Static_module_functions">Static module functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Request_handlers">Request handlers</a></li>
@@ -43,6 +44,13 @@
 </ul>
 
 
+<h2>Input handling</h2>
+<ul class="nowrap">
+  <li><a href="../input handling/awful.button.html">awful.button</a></li>
+  <li><a href="../input handling/awful.key.html">awful.key</a></li>
+  <li><a href="../input handling/awful.keyboard.html">awful.keyboard</a></li>
+  <li><strong>mouse</strong></li>
+</ul>
 <h2>Core components</h2>
 <ul class="nowrap">
   <li><a href="../core_components/awesome.html">awesome</a></li>
@@ -50,7 +58,6 @@
   <li><a href="../core_components/client.html">client<span class='listplusign'> and awful.client</span></a></li>
   <li><a href="../core_components/drawable.html">drawable</a></li>
   <li><a href="../core_components/gears.timer.html">gears.timer</a></li>
-  <li><strong>mouse<span class='listplusign'> and awful.mouse</span></strong></li>
   <li><a href="../core_components/mousegrabber.html">mousegrabber</a></li>
   <li><a href="../core_components/naughty.action.html">naughty.action</a></li>
   <li><a href="../core_components/naughty.notification.html">naughty.notification</a></li>
@@ -171,8 +178,6 @@
 </ul>
 <h2>Classes</h2>
 <ul class="nowrap">
-  <li><a href="../classes/awful.button.html">awful.button</a></li>
-  <li><a href="../classes/awful.key.html">awful.key</a></li>
   <li><a href="../classes/awful.widget.common.html">awful.widget.common</a></li>
   <li><a href="../classes/gears.cache.html">gears.cache</a></li>
   <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
@@ -255,6 +260,13 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </ul>
 
 
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+    <tr>
+      <td class="name" ><a href="#append_global_mousebindings"><span class='function_modname'>mouse.</span>append_global_mousebindings (buttons)</a></td>
+      <td class="summary">Add multiple <a href="../input handling/awful.button.html#">awful.button</a> based mousebindings to the global set.</td>
+    </tr>
+</table>
 <h2><a href="#Static_module_functions">Static module functions</a></h2>
 <table class="function_list">
     <tr>
@@ -272,6 +284,14 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     <tr>
       <td class="name" ><a href="#awful.mouse.client.resize">awful.mouse.client.resize <span class='function_args'> <b>(</b>c, corner[, args={}]<b>)</b></span></a></td>
       <td class="summary">Resize a client.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.mouse.append_global_mousebinding">awful.mouse.append_global_mousebinding <span class='function_args'> <b>(</b>button<b>)</b></span></a></td>
+      <td class="summary">Add an <a href="../input handling/awful.button.html#">awful.button</a> based mousebinding to the global set.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.mouse.remove_global_mousebinding">awful.mouse.remove_global_mousebinding <span class='function_args'> <b>(</b>button<b>)</b></span></a></td>
+      <td class="summary">Remove a mousebinding from the global set.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#coords"><span class='function_modname'>mouse.</span>coords <span class='function_args'> <b>(</b>[coords_table=nil[, silent=nil]]<b>)</b></span></a></td>
@@ -445,6 +465,41 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 <br/>
 
 
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "append_global_mousebindings"></a>
+    <strong><span class='function_modname'>mouse.</span>append_global_mousebindings (buttons)</strong>
+    </dt>
+    <dd>
+    Add multiple <a href="../input handling/awful.button.html#">awful.button</a> based mousebindings to the global set.</p>
+
+<p> A <strong>global</strong> mousebinding is one which is always present, even when there is
+ no focused client. If your intent is too add a mousebinding which acts on
+ the focused client do <strong>not</strong> use this
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">buttons</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table of <a href="../input handling/awful.button.html#">awful.button</a> objects. Optionally, it can have
+  a <code>group</code> entry. If set, the <code>group</code> property will be set on all <code>awful.buttons</code>
+  objects.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../input handling/awful.button.html#">awful.button</a>
+    </ul>
+
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Static_module_functions"></a>Static module functions</h2>
 
     <dl class="function">
@@ -547,6 +602,60 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </ol>
 
 
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.append_global_mousebinding"></a>
+    <strong>awful.mouse.append_global_mousebinding <span class='function_args'> <b>(</b>button<b>)</b></span></strong>
+    </dt>
+    <dd>
+    Add an <a href="../input handling/awful.button.html#">awful.button</a> based mousebinding to the global set.</p>
+
+<p> A <strong>global</strong> mousebinding is one which is always present, even when there is
+ no focused client. If your intent is too add a mousebinding which acts on
+ the focused client do <strong>not</strong> use this.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">awful.button</span></span>
+         The button object.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../input handling/awful.button.html#">awful.button</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.remove_global_mousebinding"></a>
+    <strong>awful.mouse.remove_global_mousebinding <span class='function_args'> <b>(</b>button<b>)</b></span></strong>
+    </dt>
+    <dd>
+    Remove a mousebinding from the global set.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">awful.button</span></span>
+         The button object.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../input handling/awful.button.html#">awful.button</a>
+    </ul>
 
 
 </dd>
@@ -723,7 +832,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
     <h3>See also:</h3>
     <ul>
-         <a href="../core_components/mouse.html#current_widget_geometry">current_widget_geometry</a>
+         <a href="../input handling/mouse.html#current_widget_geometry">current_widget_geometry</a>
     </ul>
 
 
@@ -749,7 +858,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
     <h3>See also:</h3>
     <ul>
-         <a href="../core_components/mouse.html#current_widget">current_widget</a>
+         <a href="../input handling/mouse.html#current_widget">current_widget</a>
     </ul>
 
 
@@ -775,7 +884,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
     <h3>See also:</h3>
     <ul>
-         <a href="../core_components/mouse.html#current_widgets">current_widgets</a>
+         <a href="../input handling/mouse.html#current_widgets">current_widgets</a>
     </ul>
 
 
@@ -959,7 +1068,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
     <h3>See also:</h3>
     <ul>
-         <a href="../core_components/mouse.html#current_client">current_client</a>
+         <a href="../input handling/mouse.html#current_client">current_client</a>
     </ul>
 
 
@@ -1042,7 +1151,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
     <h3>See also:</h3>
     <ul>
-         <a href="../core_components/mouse.html#awful.mouse.snap">awful.mouse.snap</a>
+         <a href="../input handling/mouse.html#awful.mouse.snap">awful.mouse.snap</a>
     </ul>
 
 
@@ -1188,7 +1297,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </dt>
     <dd>
     Add a &ldquo;move&rdquo; callback.
- This callback is executed in &ldquo;after&rdquo; mode (see <a href="../core_components/mouse.html#awful.mouse.resize.set_mode">set_mode</a>) instead of
+ This callback is executed in &ldquo;after&rdquo; mode (see <a href="../input handling/mouse.html#awful.mouse.resize.set_mode">set_mode</a>) instead of
  applying the operation.
 
 
