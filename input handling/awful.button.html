@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Widgetmod awful.widget.prompt - awesome API documentation</title>
+    <title>Inputmodule awful.button - awesome API documentation</title>
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
 </head>
 <body>
@@ -34,10 +34,32 @@
 <ul>
 <li><a href="#Constructors">Constructors</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
-<li><a href="#Theme_variables">Theme variables</a></li>
+<li><a href="#Object_methods">Object methods </a></li>
+<li><a href="#Tables">Tables</a></li>
 </ul>
 
 
+<h2>Input handling</h2>
+<ul class="nowrap">
+  <li><strong>awful.button</strong></li>
+  <li><a href="../input handling/awful.key.html">awful.key</a></li>
+  <li><a href="../input handling/awful.keyboard.html">awful.keyboard</a></li>
+  <li><a href="../input handling/mouse.html">mouse</a></li>
+</ul>
+<h2>Core components</h2>
+<ul class="nowrap">
+  <li><a href="../core_components/awesome.html">awesome</a></li>
+  <li><a href="../core_components/awful.keygrabber.html">awful.keygrabber</a></li>
+  <li><a href="../core_components/client.html">client<span class='listplusign'> and awful.client</span></a></li>
+  <li><a href="../core_components/drawable.html">drawable</a></li>
+  <li><a href="../core_components/gears.timer.html">gears.timer</a></li>
+  <li><a href="../core_components/mousegrabber.html">mousegrabber</a></li>
+  <li><a href="../core_components/naughty.action.html">naughty.action</a></li>
+  <li><a href="../core_components/naughty.notification.html">naughty.notification</a></li>
+  <li><a href="../core_components/root.html">root</a></li>
+  <li><a href="../core_components/screen.html">screen<span class='listplusign'> and awful.screen</span></a></li>
+  <li><a href="../core_components/tag.html">tag<span class='listplusign'> and awful.tag</span></a></li>
+</ul>
 <h2>Widgets</h2>
 <ul class="nowrap">
   <li><a href="../widgets/awful.widget.button.html">awful.widget.button</a></li>
@@ -46,7 +68,7 @@
   <li><a href="../widgets/awful.widget.launcher.html">awful.widget.launcher</a></li>
   <li><a href="../widgets/awful.widget.layoutbox.html">awful.widget.layoutbox</a></li>
   <li><a href="../widgets/awful.widget.layoutlist.html">awful.widget.layoutlist</a></li>
-  <li><strong>awful.widget.prompt</strong></li>
+  <li><a href="../widgets/awful.widget.prompt.html">awful.widget.prompt</a></li>
   <li><a href="../widgets/awful.widget.taglist.html">awful.widget.taglist</a></li>
   <li><a href="../widgets/awful.widget.tasklist.html">awful.widget.tasklist</a></li>
   <li><a href="../widgets/awful.widget.watch.html">awful.widget.watch</a></li>
@@ -66,27 +88,6 @@
   <li><a href="../widgets/wibox.widget.systray.html">wibox.widget.systray</a></li>
   <li><a href="../widgets/wibox.widget.textbox.html">wibox.widget.textbox</a></li>
   <li><a href="../widgets/wibox.widget.textclock.html">wibox.widget.textclock</a></li>
-</ul>
-<h2>Core components</h2>
-<ul class="nowrap">
-  <li><a href="../core_components/awesome.html">awesome</a></li>
-  <li><a href="../core_components/awful.keygrabber.html">awful.keygrabber</a></li>
-  <li><a href="../core_components/client.html">client<span class='listplusign'> and awful.client</span></a></li>
-  <li><a href="../core_components/drawable.html">drawable</a></li>
-  <li><a href="../core_components/gears.timer.html">gears.timer</a></li>
-  <li><a href="../core_components/mousegrabber.html">mousegrabber</a></li>
-  <li><a href="../core_components/naughty.action.html">naughty.action</a></li>
-  <li><a href="../core_components/naughty.notification.html">naughty.notification</a></li>
-  <li><a href="../core_components/root.html">root</a></li>
-  <li><a href="../core_components/screen.html">screen<span class='listplusign'> and awful.screen</span></a></li>
-  <li><a href="../core_components/tag.html">tag<span class='listplusign'> and awful.tag</span></a></li>
-</ul>
-<h2>Input handling</h2>
-<ul class="nowrap">
-  <li><a href="../input handling/awful.button.html">awful.button</a></li>
-  <li><a href="../input handling/awful.key.html">awful.key</a></li>
-  <li><a href="../input handling/awful.keyboard.html">awful.keyboard</a></li>
-  <li><a href="../input handling/mouse.html">mouse</a></li>
 </ul>
 <h2>Widget containers</h2>
 <ul class="nowrap">
@@ -203,50 +204,81 @@
 
 <div id="content">
 
-<h1>Module: <code>awful.widget.prompt</code></h1>
-<p>The widget version of <a href="../libraries/awful.prompt.html#">awful.prompt</a>.</p>
-<p><p><img src="../images/AUTOGEN_wibox_awidget_defaults_prompt.svg" alt="Usage example" /></p>
-
-<pre>
-<span class="keyword">local</span> myprompt = awful.widget.prompt {
-    prompt = <span class="string">'Execute: '</span>
-}
-myprompt:run()
-</pre>
-</p>
+<h1>Module: <code>awful.button</code></h1>
+<p>Create easily new buttons objects ignoring certain modifiers.</p>
+<p></p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2009 Julien Danjou,2018 Aire-One</li>
-        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;</li>
+        <li><strong>Copyright</strong>: 2018 Emmanuel Lepage Vallee,2009 Julien Danjou</li>
+        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;,Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
     </ul>
 
 
 <h2><a href="#Constructors">Constructors</a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#awful.widget.prompt">awful.widget.prompt <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
-      <td class="summary">Create a prompt widget which will launch a command.</td>
+      <td class="name" ><a href="#awful.button">awful.button <span class='function_args'> <b>(</b>mod, button, press, release<b>)</b></span></a></td>
+      <td class="summary">Create a new button to use as binding.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.button">awful.button <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
+      <td class="summary">Create a new button to use as binding.</td>
     </tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
 <table class="function_list">
     <tr>
-      <td class="shortname" ><a href="#with_shell">with_shell</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Always spawn using a shell.</td>
+      <td class="shortname" ><a href="#modifiers">modifiers</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>N/A</span></td>
+      <td class="summary">The table of modifier keys.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#button">button</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td class="summary">The mouse button identifier.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#description">description</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td class="summary">The button description.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#name">name</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td class="summary">The button name.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#group">group</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td class="summary">The button group.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#on_press">on_press</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
+      <td class="summary">The callback when this button is pressed.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#on_release">on_release</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
+      <td class="summary">The callback when this button is released.</td>
     </tr>
 </table>
-<h2><a href="#Theme_variables">Theme variables</a></h2>
+<h2><a href="#Object_methods">Object methods </a></h2>
 <table class="function_list">
     <tr>
-      <td class="shortname" ><a href="#beautiful.prompt_fg">beautiful.prompt_fg</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td class="summary">The prompt foreground color.</td>
+      <td class="name" ><a href="#:trigger">:trigger <span class='function_args'> <b>(</b><b>)</b></span></a></td>
+      <td class="summary">Execute this mousebinding.</td>
+    </tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+    <tr>
+      <td class="name" ><a href="#ignore_modifiers">ignore_modifiers</a></td>
+      <td class="summary">Modifiers to ignore.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#beautiful.prompt_bg">beautiful.prompt_bg</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td class="summary">The prompt background color.</td>
+      <td class="name" ><a href="#names">names</a></td>
+      <td class="summary">The mouse buttons names.</td>
     </tr>
 </table>
 
@@ -258,122 +290,78 @@ myprompt:run()
 
     <dl class="function">
     <dt>
-    <a name = "awful.widget.prompt"></a>
-    <strong>awful.widget.prompt <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
+    <a name = "awful.button"></a>
+    <strong>awful.button <span class='function_args'> <b>(</b>mod, button, press, release<b>)</b></span></strong>
     </dt>
     <dd>
-    Create a prompt widget which will launch a command.
- For additional documentation about <code>args</code> parameter, please refer to
- <a href="../libraries/awful.prompt.html#">awful.prompt</a> and <a href="../libraries/awful.prompt.html#awful.prompt.run">awful.prompt.run</a>.
+    Create a new button to use as binding.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">args</span> Prompt arguments.
-        <ul>
-        <li><span class="parameter">prompt</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         Prompt text.
-         (<em>default</em> "Run: ")
-        </li>
-        <li><span class="parameter">bg</span>
-            <span class="types"><span class="type">color</span></span>
-           Prompt background color.
-         (<em>default</em> `beautiful.prompt_bg` or `beautiful.bg_normal`)
-        </li>
-        <li><span class="parameter">fg</span>
-            <span class="types"><span class="type">color</span></span>
-           Prompt foreground color.
-         (<em>default</em> `beautiful.prompt_fg` or `beautiful.fg_normal`)
-        </li>
-        <li><span class="parameter">fg_cursor</span>
-            <span class="types"><span class="type">gears.color</span></span>
-
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">bg_cursor</span>
-            <span class="types"><span class="type">gears.color</span></span>
-
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">ul_cursor</span>
-            <span class="types"><span class="type">gears.color</span></span>
-
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">font</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">autoexec</span>
-            <span class="types"><span class="type">boolean</span></span>
-
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">highlighter</span>
-            <span class="types"><span class="type">function</span></span>
-         A function to add syntax highlighting
-   to the command.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">exe_callback</span>
-            <span class="types"><span class="type">function</span></span>
-         The callback function to call with
-   command as argument when finished.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">with_shell</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Use a (terminal) shell to execute this.
-         (<em>default</em> false)
-        </li>
-        <li><span class="parameter">completion_callback</span>
-            <span class="types"><span class="type">function</span></span>
-           The callback function to call to get completion. See <a href="../libraries/awful.prompt.html#awful.prompt.run">awful.prompt.run</a>
-   for details.
-         (<em>default</em> `awful.completion.shell`)
-        </li>
-        <li><span class="parameter">history_path</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         File path where the history should be saved.
-         (<em>default</em> `gears.filesystem.get_cache_dir() .. '/history'`)
-        </li>
-        <li><span class="parameter">history_max</span>
-            <span class="types"><span class="type">integer</span></span>
-         Set the maximum entries in
-   history file.
-         (<em>default</em> 50)
-        </li>
-        <li><span class="parameter">done_callback</span>
-            <span class="types"><span class="type">function</span></span>
-           The callback function to always call without arguments, regardless of
-   whether the prompt was cancelled. See <a href="../libraries/awful.prompt.html#awful.prompt.run">awful.prompt.run</a> for details.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">changed_callback</span>
-            <span class="types"><span class="type">function</span></span>
-         The callback function to call
-   with command as argument when a command was changed.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">keypressed_callback</span>
-            <span class="types"><span class="type">function</span></span>
-         The callback function to call
-   with mod table, key and command as arguments when a key was pressed.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">keyreleased_callback</span>
-            <span class="types"><span class="type">function</span></span>
-         The callback function to call
-   with mod table, key and command as arguments when a key was pressed.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">hooks</span>
+        <li><span class="parameter">mod</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Similar to <a href="../input handling/awful.key.html#">awful.key</a>. It will call a function
-   for the matching modifiers + key. See <a href="../libraries/awful.prompt.html#awful.prompt.run">awful.prompt.run</a> for details.
-         (<em>optional</em>)
+         A list of modifier keys.  Valid modifiers are:
+  <code>Any</code>, <code>Mod1</code>, Mod2<code>, </code>Mod3<code>, </code>Mod4<code>, </code>Mod5<code>, </code>Shift<code>, </code>Lock<code> and </code>Control`.
+  This argument is (<strong>mandatory</strong>).
+        </li>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">number</span></span>
+         The mouse button (it is recommended to use the
+  <a href="../input handling/awful.button.html#names">awful.button.names</a> constants.
+        </li>
+        <li><span class="parameter">press</span>
+            <span class="types"><span class="type">function</span></span>
+         Callback for when the button is pressed.
+        </li>
+        <li><span class="parameter">release</span>
+            <span class="types"><span class="type">function</span></span>
+         Callback for when the button is released.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        An <a href="../input handling/awful.button.html#">awful.button</a> object.
+    </ol>
+
+
+
+
+</dd>
+
+    <dt>
+    <a name = "awful.button"></a>
+    <strong>awful.button <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
+    </dt>
+    <dd>
+    Create a new button to use as binding.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">args</span>
+        <ul>
+        <li><span class="parameter">modifiers</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A list of modifier keys.  Valid modifiers are:
+  <code>Any</code>, <code>Mod1</code>, Mod2<code>, </code>Mod3<code>, </code>Mod4<code>, </code>Mod5<code>, </code>Shift<code>, </code>Lock<code> and </code>Control`.
+  This argument is (<strong>mandatory</strong>).
+        </li>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">number</span></span>
+         The mouse button (it is recommended to use the
+  <a href="../input handling/awful.button.html#names">awful.button.names</a> constants.
+        </li>
+        <li><span class="parameter">on_press</span>
+            <span class="types"><span class="type">function</span></span>
+         Callback for when the button is pressed.
+        </li>
+        <li><span class="parameter">on_release</span>
+            <span class="types"><span class="type">function</span></span>
+         Callback for when the button is released.
         </li>
         </li></ul>
     </ul>
@@ -381,8 +369,8 @@ myprompt:run()
     <h3>Returns:</h3>
     <ol>
 
-        An instance of prompt widget, inherits from
-   <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>.
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+        An <a href="../input handling/awful.button.html#">awful.button</a> object.
     </ol>
 
 
@@ -394,16 +382,124 @@ myprompt:run()
 
     <dl class="function">
     <dt>
-    <a name = "with_shell"></a>
-    <strong>with_shell</strong>
-    <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <a name = "modifiers"></a>
+    <strong>modifiers</strong>
+    <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
     </dt>
     <dd>
-    Always spawn using a shell.</p>
+    The table of modifier keys.</p>
 
-<p> When using the default <code>exe_callback</code>, use <a href="../libraries/awful.spawn.html#awful.spawn.with_shell">awful.spawn.with_shell</a> instead
- of <a href="../libraries/awful.spawn.html#">awful.spawn</a>. Depending on the ammount of customization to your shell
- environment, this can increase startup time.
+<p> A modifier, such as <code>Control</code> are a predetermined set of keys that can be
+ used to implement keybindings. Note that this list is fix and cannot be
+ extended using random key names, code or characters.</p>
+
+<p> Common modifiers are:</p>
+
+<p> <table class='widget_list' border=1>
+  <tr style='font-weight: bold;'>
+   <th align='center'>Name</th>
+   <th align='center'>Description</th>
+  </tr>
+  <tr><td>Mod1</td><td>Usually called Alt on PCs and Option on Macs</td></tr>
+  <tr><td>Mod4</td><td>Also called Super, Windows and Command ⌘</td></tr>
+  <tr><td>Mod5</td><td>Also called AltGr or ISO Level 3</td></tr>
+  <tr><td>Shift</td><td>Both left and right shift keys</td></tr>
+  <tr><td>Control</td><td>Also called CTRL on some keyboards</td></tr>
+ </table></p>
+
+<p> Please note that Awesome ignores the status of &ldquo;Lock&rdquo; and &ldquo;Mod2&rdquo; (Num Lock).
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "button"></a>
+    <strong>button</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    </dt>
+    <dd>
+    The mouse button identifier.</p>
+
+<p> <img src="../images/mouse.svg" alt="Mouse buttons" />
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "description"></a>
+    <strong>description</strong>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    </dt>
+    <dd>
+    The button description.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "name"></a>
+    <strong>name</strong>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    </dt>
+    <dd>
+    The button name.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "group"></a>
+    <strong>group</strong>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    </dt>
+    <dd>
+    The button group.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "on_press"></a>
+    <strong>on_press</strong>
+    <span class="proptype">(<span class='summary_type'>function</span>)</span>
+    </dt>
+    <dd>
+    The callback when this button is pressed.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "on_release"></a>
+    <strong>on_release</strong>
+    <span class="proptype">(<span class='summary_type'>function</span>)</span>
+    </dt>
+    <dd>
+    The callback when this button is released.
 
 
 
@@ -413,44 +509,85 @@ myprompt:run()
 
 </dd>
 </dl>
-    <h2 class="section-header "><a name="Theme_variables"></a>Theme variables</h2>
+    <h2 class="section-header "><a name="Object_methods"></a>Object methods </h2>
 
     <dl class="function">
     <dt>
-    <a name = "beautiful.prompt_fg"></a>
-    <strong>beautiful.prompt_fg</strong>
-    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <a name = ":trigger"></a>
+    <strong>:trigger <span class='function_args'> <b>(</b><b>)</b></span></strong>
     </dt>
     <dd>
-    The prompt foreground color.
+    Execute this mousebinding.
 
 
 
 
 
-    <h3>See also:</h3>
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "ignore_modifiers"></a>
+    <strong>ignore_modifiers</strong>
+    </dt>
+    <dd>
+    Modifiers to ignore.</p>
+
+<p> By default this is initialized as <code>{ &quot;Lock&quot;, &quot;Mod2&quot; }</code>
+ so the <code>Caps Lock</code> or <code>Num Lock</code> modifier are not taking into account by awesome
+ when pressing keys.
+
+
+    <h3>Fields:</h3>
     <ul>
-         <a href="../theme_related_libraries/gears.color.html#">gears.color</a>
+        <li><span class="parameter">Lock</span>
+
+        </li>
+        <li><span class="parameter">Mod2</span>
+
+        </li>
     </ul>
+
+
+
 
 
 </dd>
     <dt>
-    <a name = "beautiful.prompt_bg"></a>
-    <strong>beautiful.prompt_bg</strong>
-    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <a name = "names"></a>
+    <strong>names</strong>
     </dt>
     <dd>
-    The prompt background color.
+    The mouse buttons names.</p>
+
+<p> It can be used instead of the button ids.
 
 
-
-
-
-    <h3>See also:</h3>
+    <h3>Fields:</h3>
     <ul>
-         <a href="../theme_related_libraries/gears.color.html#">gears.color</a>
+        <li><span class="parameter">LEFT</span>
+        The left mouse button.
+        </li>
+        <li><span class="parameter">MIDDLE</span>
+        The scrollwheel button.
+        </li>
+        <li><span class="parameter">RIGHT</span>
+        The context menu button.
+        </li>
+        <li><span class="parameter">SCROLL_UP</span>
+        A scroll up increment.
+        </li>
+        <li><span class="parameter">SCROLL_DOWN</span>
+        A scroll down increment.
+        </li>
     </ul>
+
+
+
 
 
 </dd>

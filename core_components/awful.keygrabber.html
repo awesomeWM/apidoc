@@ -50,13 +50,19 @@
   <li><a href="../core_components/client.html">client<span class='listplusign'> and awful.client</span></a></li>
   <li><a href="../core_components/drawable.html">drawable</a></li>
   <li><a href="../core_components/gears.timer.html">gears.timer</a></li>
-  <li><a href="../core_components/mouse.html">mouse<span class='listplusign'> and awful.mouse</span></a></li>
   <li><a href="../core_components/mousegrabber.html">mousegrabber</a></li>
   <li><a href="../core_components/naughty.action.html">naughty.action</a></li>
   <li><a href="../core_components/naughty.notification.html">naughty.notification</a></li>
   <li><a href="../core_components/root.html">root</a></li>
   <li><a href="../core_components/screen.html">screen<span class='listplusign'> and awful.screen</span></a></li>
   <li><a href="../core_components/tag.html">tag<span class='listplusign'> and awful.tag</span></a></li>
+</ul>
+<h2>Input handling</h2>
+<ul class="nowrap">
+  <li><a href="../input handling/awful.button.html">awful.button</a></li>
+  <li><a href="../input handling/awful.key.html">awful.key</a></li>
+  <li><a href="../input handling/awful.keyboard.html">awful.keyboard</a></li>
+  <li><a href="../input handling/mouse.html">mouse</a></li>
 </ul>
 <h2>Widgets</h2>
 <ul class="nowrap">
@@ -171,8 +177,6 @@
 </ul>
 <h2>Classes</h2>
 <ul class="nowrap">
-  <li><a href="../classes/awful.button.html">awful.button</a></li>
-  <li><a href="../classes/awful.key.html">awful.key</a></li>
   <li><a href="../classes/awful.widget.common.html">awful.widget.common</a></li>
   <li><a href="../classes/gears.cache.html">gears.cache</a></li>
   <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
@@ -225,8 +229,16 @@
 <pre>
 awful.keygrabber {
     keybindings = {
-        {{<span class="string">'Mod1'</span>         }, <span class="string">'Tab'</span>, awful.client.focus.history.select_previous},
-        {{<span class="string">'Mod1'</span>, <span class="string">'Shift'</span>}, <span class="string">'Tab'</span>, awful.client.focus.history.select_next    },
+        awful.key {
+            modifiers = {<span class="string">'Mod1'</span>},
+            key       = <span class="string">'Tab'</span>,
+            on_press  = awful.client.focus.history.select_previous
+        },
+        awful.key {
+            modifiers = {<span class="string">'Mod1'</span>, <span class="string">'Shift'</span>},
+            key       = <span class="string">'Tab'</span>,
+            on_press  = awful.client.focus.history.select_next
+        },
     },
     <span class="comment">-- Note that it is using the key name and not the modifier name.
 </span>    stop_key           = <span class="string">'Mod1'</span>,
@@ -294,7 +306,7 @@ awful.keygrabber {
     stop_callback = parse,
     stop_key   = gears.<span class="global">table</span>.keys(map.verbs),
     root_keybindings = {
-        {{<span class="string">'Mod4'</span>}, <span class="string">'v'</span>}
+        awful.key({<span class="string">'Mod4'</span>}, <span class="string">'v'</span>)
     },
 }
 </pre>
@@ -411,7 +423,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
       <td class="summary">Stop the keygrabber.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#add_keybinding">:add_keybinding <span class='function_args'> <b>(</b>mods, key, callback[, description]<b>)</b></span></a></td>
+      <td class="name" ><a href="#add_keybinding">:add_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></a></td>
       <td class="summary">Add a keybinding to this keygrabber.</td>
     </tr>
     <tr>
@@ -842,7 +854,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     Export all keygrabber keybindings as root (global) keybindings.</p>
 
 <p> When this is enabled, calling all of the keygrabber object <code>keybinding</code>s will
- will create root <a href="../classes/awful.key.html#">awful.key</a> and will automatically starts the grabbing.</p>
+ will create root <a href="../input handling/awful.key.html#">awful.key</a> and will automatically starts the grabbing.</p>
 
 <p> Use this with caution. If many keygrabber or &ldquo;real&rdquo; root keybindings are set
  on the same key combination, they are all executed and there is almost no
@@ -891,15 +903,23 @@ Called again!
         <pre class="example">awful.keygrabber {
     mask_modkeys = <span class="keyword">true</span>,
     root_keybindings = {
-        {{<span class="string">'Mod4'</span>}, <span class="string">'i'</span>, <span class="keyword">function</span>(self)
-            <span class="global">print</span>(<span class="string">'Is now active!'</span>, self)
-        <span class="keyword">end</span>},
+        awful.key {
+            modifiers = {<span class="string">'Mod4'</span>},
+            key       = <span class="string">'i'</span>,
+            on_press  = <span class="keyword">function</span>(self)
+                <span class="global">print</span>(<span class="string">'Is now active!'</span>, self)
+            <span class="keyword">end</span>
+        },
     },
     keybindings = {
-        {{<span class="string">'Mod4'</span>, <span class="string">'Shift'</span>}, <span class="string">'i'</span>, <span class="keyword">function</span>(self)
-            <span class="global">print</span>(<span class="string">'Called again!'</span>)
-            self:stop()
-        <span class="keyword">end</span>},
+        awful.key {
+            modifiers = {<span class="string">'Mod4'</span>, <span class="string">'Shift'</span>},
+            key       = <span class="string">'i'</span>,
+            on_press  = <span class="keyword">function</span>(self)
+                <span class="global">print</span>(<span class="string">'Called again!'</span>)
+                self:stop()
+            <span class="keyword">end</span>
+        },
     },
     keypressed_callback  = <span class="keyword">function</span>(_, modifiers, key)
         <span class="global">print</span>(<span class="string">'A key was pressed:'</span>, key, <span class="string">'with'</span>, #modifiers, <span class="string">'modifier!'</span>)
@@ -934,20 +954,9 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
     </dt>
     <dd>
-    <p>The keybindings associated with this keygrabber.</p>
+    The keybindings associated with this keygrabber.</p>
 
-<p> The keybindings syntax is the same as <a href="../classes/awful.key.html#">awful.key</a> or <code>awful.prompt.hooks</code>. It
- consists of a table with 4 entries.</p>
-
-<ul>
-<li><code>mods</code> A table with modifier keys, such as <code>shift</code>, <code>mod4</code>, <code>mod1</code> (alt) or
-<code>control</code>.</li>
-<li><code>key</code> The key name, such as <code>left</code> or <code>f</code></li>
-<li><code>callback</code> A function that will be called when the key combination is
-pressed.</li>
-<li><code>description</code> A table various metadata to be used for <a href="../libraries/awful.hotkeys_popup.html#">awful.hotkeys_popup</a>.</li>
-</ul>
-
+<p> This property contains a table of <a href="../input handling/awful.key.html#">awful.key</a> objects.
 
 
 
@@ -957,6 +966,7 @@ pressed.</li>
     <ul>
          <li><a href="../core_components/awful.keygrabber.html#export_keybindings">export_keybindings</a></li>
          <li><a href="../core_components/awful.keygrabber.html#root_keybindings">root_keybindings</a></li>
+         <li><a href="../input handling/awful.key.html#">awful.key</a></li>
     </ul>
 
 
@@ -1021,7 +1031,7 @@ pressed.</li>
     <ul>
         <pre class="example">awful.keygrabber {
     autostart      = <span class="keyword">true</span>,
-    stop_key    = <span class="string">'Return'</span>,
+    stop_key       = <span class="string">'Return'</span>,
     stop_callback  = <span class="keyword">function</span>(_, _, _, sequence)
         naughty.notification {message=<span class="string">'The keys were:'</span>..sequence}
     <span class="keyword">end</span>,
@@ -1072,7 +1082,7 @@ pressed.</li>
 </dd>
     <dt>
     <a name = "add_keybinding"></a>
-    <strong>:add_keybinding <span class='function_args'> <b>(</b>mods, key, callback[, description]<b>)</b></span></strong>
+    <strong>:add_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></strong>
     </dt>
     <dd>
     Add a keybinding to this keygrabber.</p>
@@ -1082,31 +1092,10 @@ pressed.</li>
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A table with modifier keys, such as <code>shift</code>, <code>mod4</code>, <code>mod1</code> (alt) or
-  <code>control</code>.
-        </li>
         <li><span class="parameter">key</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The key name, such as <code>left</code> or <code>f</code>
+            <span class="types"><span class="type">awful.key</span></span>
+         The key.
         </li>
-        <li><span class="parameter">callback</span>
-            <span class="types"><span class="type">function</span></span>
-         A function that will be called when the key
- combination is pressed.
-        </li>
-        <li><span class="parameter">description</span> A table various metadata to be used for <a href="../libraries/awful.hotkeys_popup.html#">awful.hotkeys_popup</a>.
-        <ul>
-        <li><span class="parameter">description</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The keybinding description
-        </li>
-        <li><span class="parameter">group</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The keybinding group
-        </li>
-        </li></ul>
     </ul>
 
 
