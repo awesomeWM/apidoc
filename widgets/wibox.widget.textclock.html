@@ -218,7 +218,7 @@
 <h2><a href="#Constructors">Constructors</a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#wibox.widget.textclock">wibox.widget.textclock <span class='function_args'> <b>(</b>[format=" %a %b %d[, refresh=60[, timezone=local timezone]]]<b>)</b></span></a></td>
+      <td class="name" ><a href="#wibox.widget.textclock">wibox.widget.textclock <span class='function_args'> <b>(</b>[format=" %a %b %d&comma; %H:%M "[, refresh=60[, timezone=local timezone]]]<b>)</b></span></a></td>
       <td class="summary">Create a textclock widget.</td>
     </tr>
 </table>
@@ -239,7 +239,8 @@
     <tr>
       <td class="shortname" ><a href="#timezone">timezone</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td class="summary">Set the clock&rsquo;s timezone</td>
+      <td class="summary">Set the clock&rsquo;s timezone
+ e.g.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#refresh">refresh</a></td>
@@ -347,7 +348,7 @@
     <dl class="function">
     <dt>
     <a name = "wibox.widget.textclock"></a>
-    <strong>wibox.widget.textclock <span class='function_args'> <b>(</b>[format=" %a %b %d[, refresh=60[, timezone=local timezone]]]<b>)</b></span></strong>
+    <strong>wibox.widget.textclock <span class='function_args'> <b>(</b>[format=" %a %b %d&comma; %H:%M "[, refresh=60[, timezone=local timezone]]]<b>)</b></span></strong>
     </dt>
     <dd>
     Create a textclock widget.  It draws the time it is in a textbox.
@@ -357,8 +358,8 @@
     <ul>
         <li><span class="parameter">format</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The time format.
-         (<em>default</em> " %a %b %d)
+         The time <a href="#format">format</a>.
+         (<em>default</em> " %a %b %d&comma; %H:%M ")
         </li>
         <li><span class="parameter">refresh</span>
             <span class="types"><span class="type">number</span></span>
@@ -367,9 +368,7 @@
         </li>
         <li><span class="parameter">timezone</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The timezone to use,
-   e.g. &ldquo;Z&rdquo; for UTC, &ldquo;±hh:mm&rdquo; or &ldquo;Europe/Amsterdam&rdquo;. See
-   https://developer.gnome.org/glib/stable/glib-GTimeZone.html#g-time-zone-new.
+         The <a href="#timezone">timezone</a> to use.
          (<em>default</em> local timezone)
         </li>
     </ul>
@@ -445,6 +444,8 @@
     </dt>
     <dd>
     Set the clock&rsquo;s timezone
+ e.g.  &ldquo;Z&rdquo; for UTC, &ldquo;±hh:mm&rdquo; or &ldquo;Europe/Amsterdam&rdquo;. See
+ <a href="https://developer.gnome.org/glib/stable/glib-GTimeZone.html#g-time-zone-new">GTimeZone</a>.
 
 
 
@@ -464,9 +465,9 @@
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">How</span>
+        <li><span class="parameter">refresh</span>
             <span class="types"><span class="type">number</span></span>
-         often the clock is updated, in seconds
+         How often the clock is updated, in seconds
         </li>
     </ul>
 
