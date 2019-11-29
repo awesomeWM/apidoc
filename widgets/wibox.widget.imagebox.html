@@ -217,17 +217,34 @@
 <div id="content">
 
 <h1>Module: <code>wibox.widget.imagebox</code></h1>
-<p></p>
+<p>A widget to display image.</p>
+<p><p> The <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a> is part of the Awesome WM&rsquo;s wiboxes system
+ (see <a href="../documentation/03-declarative-layout.md.html#">03-declarative-layout.md</a>).</p>
+
+<p> This widget displays an image. The image can be a file,
+ a cairo image surface, or an rsvg handle object (see the
+ <a href="#image">image property</a>).</p>
+
+<h2> Use a <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></h2>
+
 <p><img src="../images/AUTOGEN_wibox_widget_defaults_imagebox.svg" alt="Usage example" /></p>
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">wibox.widget {
+
+<pre>
+<span class="keyword">local</span> my_imagebox = wibox.widget.imagebox(beautiful.awesome_icon, <span class="keyword">false</span>)
+</pre>
+
+
+<p> Alternatively, you can declare the <a href="../widgets/wibox.widget.imagebox.html#wibox.widget.imagebox">imagebox</a> widget using the
+ declarative pattern (Both codes are strictly equivalent):</p>
+
+<pre>
+<span class="keyword">local</span> my_imagebox = wibox.widget {
     image  = beautiful.awesome_icon,
-    resize = false,
+    resize = <span class="keyword">false</span>,
     widget = wibox.widget.imagebox
 }
 </pre>
-    </ul>
+</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2010 Uli Schlachter</li>
@@ -238,8 +255,8 @@
 <h2><a href="#Constructors">Constructors</a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#wibox.widget.imagebox">wibox.widget.imagebox <span class='function_args'> <b>(</b>image, resize_allowed, clip_shape<b>)</b></span></a></td>
-      <td class="summary">Returns a new imagebox.</td>
+      <td class="name" ><a href="#wibox.widget.imagebox">wibox.widget.imagebox <span class='function_args'> <b>(</b>[image[, resize_allowed[, clip_shape]]]<b>)</b></span></a></td>
+      <td class="summary">Returns a new <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a> instance.</td>
       <td class="baseclass" >
       </td>
     </tr>
@@ -259,22 +276,20 @@
     <tr>
       <td class="shortname" ><a href="#image">image</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>image</span></td>
-      <td class="summary">Set an imagebox' image</td>
+      <td class="summary">The image rendered by the <a href="../widgets/wibox.widget.imagebox.html#wibox.widget.imagebox">imagebox</a>.</td>
       <td class="baseclass" >
       </td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#clip_shape">clip_shape</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>gears.shape</span></td>
-      <td class="summary">Set a clip shape for this imagebox
- A clip shape define an area where the content is displayed and one where it
- is trimmed.</td>
+      <td class="summarytype" nowrap><span class='summary_type'>function <i>or</i> gears.shape</span></td>
+      <td class="summary">Set a clip shape for this imagebox.</td>
       <td class="baseclass" >
       </td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#resize">resize</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>allowed</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
       <td class="summary">Should the image be resized to fit into the available space?</td>
       <td class="baseclass" >
       </td>
@@ -339,10 +354,20 @@
 <h2><a href="#Object_methods">Object methods </a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#set_clip_shape">:set_clip_shape <span class='function_args'> <b>(</b>clip_shape<b>)</b></span></a></td>
-      <td class="summary">Set a clip shape for this imagebox
- A clip shape define an area where the content is displayed and one where it
- is trimmed.</td>
+      <td class="name" ><a href="#imagebox:set_image">:set_image <span class='function_args'> <b>(</b>image<b>)</b></span></a></td>
+      <td class="summary">Set the <a href="../widgets/wibox.widget.imagebox.html#wibox.widget.imagebox">imagebox</a> image.</td>
+      <td class="baseclass" >
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#imagebox:set_clip_shape">:set_clip_shape <span class='function_args'> <b>(</b>clip_shape<b>)</b></span></a></td>
+      <td class="summary">Set a clip shape for this imagebox.</td>
+      <td class="baseclass" >
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#imagebox:set_resize">:set_resize <span class='function_args'> <b>(</b>allowed<b>)</b></span></a></td>
+      <td class="summary">Should the image be resized to fit into the available space?</td>
       <td class="baseclass" >
       </td>
     </tr>
@@ -438,31 +463,47 @@
     <dl class="function">
     <dt>
     <a name = "wibox.widget.imagebox"></a>
-    <strong>wibox.widget.imagebox <span class='function_args'> <b>(</b>image, resize_allowed, clip_shape<b>)</b></span></strong>
+    <strong>wibox.widget.imagebox <span class='function_args'> <b>(</b>[image[, resize_allowed[, clip_shape]]]<b>)</b></span></strong>
     </dt>
     <dd>
-    Returns a new imagebox.
- Any other arguments will be passed to the clip shape function
+    Returns a new <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a> instance.</p>
+
+<p> This is the constructor of <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a>. It creates a new
+ instance of imagebox widget.</p>
+
+<p> Alternatively, the declarative layout syntax can handle
+ <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a> instanciation.</p>
+
+<p> The image can be a file, a cairo image surface, or an rsvg handle object
+ (see the <a href="#image">image property</a>).</p>
+
+<p> Any additional arguments will be passed to the clip shape function.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">image</span>
-         the image to display, may be nil
+            <span class="types"><a class="type" href="../widgets/wibox.widget.imagebox.html#image">image</a></span>
+         The image to display (may be <code>nil</code>).
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">resize_allowed</span>
-         If false, the image will be clipped, else it will be resized
-   to fit into the available space.
+            <span class="types"><span class="type">boolean</span></span>
+         If <code>false</code>, the image will be
+   clipped, else it will be resized to fit into the available space.
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">clip_shape</span>
-         A <a href="../theme_related_libraries/gears.shape.html#">gears.shape</a> compatible function
+            <span class="types"><span class="type">function</span></span>
+         A <a href="../theme_related_libraries/gears.shape.html#">gears.shape</a> compatible function.
+         (<em>optional</em>)
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        A new <a href="../widgets/wibox.widget.imagebox.html#wibox.widget.imagebox">imagebox</a>
+           <span class="types"><a class="type" href="../widgets/wibox.widget.imagebox.html#wibox.widget.imagebox">wibox.widget.imagebox</a></span>
+        A new <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a> widget instance.
     </ol>
 
 
@@ -520,18 +561,32 @@
     <span class="proptype">(<span class='summary_type'>image</span>)</span>
     </dt>
     <dd>
-    Set an imagebox' image
+    <p>The image rendered by the <a href="../widgets/wibox.widget.imagebox.html#wibox.widget.imagebox">imagebox</a>.</p>
+
+<p> It can can be any of the following:</p>
+
+<ul>
+<li>A <a href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> : Interpreted as the path to an image file,</li>
+<li>A cairo image surface : Directly used as is,</li>
+<li>An rsvg handle object : Directly used as is,</li>
+<li><code>nil</code> : Unset the image.</li>
+</ul>
+
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">image</span>
-         This can can be string, cairo image surface, rsvg handle object or nil. A string is
-   interpreted as the path to an image file. Nil will deny previously set image.
+            <span class="types"><a class="type" href="../widgets/wibox.widget.imagebox.html#image">image</a></span>
+         The image to render.
         </li>
     </ul>
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../widgets/wibox.widget.imagebox.html#imagebox:set_image">set_image</a>
+    </ul>
 
 
     <br />
@@ -546,18 +601,18 @@
     <dt>
     <a name = "clip_shape"></a>
     <strong>clip_shape</strong>
-    <span class="proptype">(<span class='summary_type'>gears.shape</span>)</span>
+    <span class="proptype">(<span class='summary_type'>function <i>or</i> gears.shape</span>)</span>
     </dt>
     <dd>
-    Set a clip shape for this imagebox
+    Set a clip shape for this imagebox.
  A clip shape define an area where the content is displayed and one where it
  is trimmed.
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">clip_shape</span>
-            <span class="types"><span class="type">gears.shape</span></span>
-         A <code>gears_shape</code> compatible shape function
+            <span class="types"><span class="type">function</span> or <span class="type">gears.shape</span></span>
+         A <a href="../theme_related_libraries/gears.shape.html#">gears.shape</a> compatible shape function.
         </li>
     </ul>
 
@@ -566,7 +621,7 @@
     <h3>See also:</h3>
     <ul>
          <li><a href="../theme_related_libraries/gears.shape.html#">gears.shape</a></li>
-         <li><a href="../widgets/wibox.widget.imagebox.html#set_clip_shape">set_clip_shape</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#imagebox:set_clip_shape">set_clip_shape</a></li>
     </ul>
 
 
@@ -582,18 +637,13 @@
     <dt>
     <a name = "resize"></a>
     <strong>resize</strong>
-    <span class="proptype">(<span class='summary_type'>allowed</span>)</span>
+    <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     </dt>
     <dd>
-    Should the image be resized to fit into the available space?
+    Should the image be resized to fit into the available space?</p>
 
-    <h3>Type constraints:</h3>
-    <ul>
-        <li><span class="parameter">allowed</span>
-         If false, the image will be clipped, else it will be resized
-   to fit into the available space.
-        </li>
-    </ul>
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_resize.svg" alt="Usage example" />
+
 
 
 
@@ -819,20 +869,66 @@
 
     <dl class="function">
     <dt>
-    <a name = "set_clip_shape"></a>
+    <a name = "imagebox:set_image"></a>
+    <strong>:set_image <span class='function_args'> <b>(</b>image<b>)</b></span></strong>
+    </dt>
+    <dd>
+    Set the <a href="../widgets/wibox.widget.imagebox.html#wibox.widget.imagebox">imagebox</a> image.</p>
+
+<p> The image can be a file, a cairo image surface, or an rsvg handle object
+ (see the <a href="#image">image property</a>).
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">image</span>
+            <span class="types"><a class="type" href="../widgets/wibox.widget.imagebox.html#image">image</a></span>
+         The image to render.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        <code>true</code> on success, <code>false</code> if the image cannot be used.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../widgets/wibox.widget.imagebox.html#image">image</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">my_imagebox:set_image(beautiful.awesome_icon)</pre></li>
+        <li><pre class="example">my_imagebox:set_image(<span class="string">'/usr/share/icons/theme/my_icon.png'</span>)</pre></li>
+    </ul>
+
+    <br />
+    <a class="deprecated_h2" onclick="show_extra('item1171')">
+     Click to display more
+    </a>
+
+    <span id=item1171 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "imagebox:set_clip_shape"></a>
     <strong>:set_clip_shape <span class='function_args'> <b>(</b>clip_shape<b>)</b></span></strong>
     </dt>
     <dd>
-    Set a clip shape for this imagebox
+    Set a clip shape for this imagebox.
  A clip shape define an area where the content is displayed and one where it
  is trimmed.</p>
 
-<p> Any other parameters will be passed to the clip shape function
+<p> Any other parameters will be passed to the clip shape function.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">clip_shape</span>
-            <span class="types"><span class="type">function</span></span>
+            <span class="types"><span class="type">function</span> or <span class="type">gears.shape</span></span>
          A <code>gears_shape</code> compatible shape function.
         </li>
     </ul>
@@ -847,11 +943,40 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1171')">
+    <a class="deprecated_h2" onclick="show_extra('item1172')">
      Click to display more
     </a>
 
-    <span id=item1171 class="hide_extra">
+    <span id=item1172 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "imagebox:set_resize"></a>
+    <strong>:set_resize <span class='function_args'> <b>(</b>allowed<b>)</b></span></strong>
+    </dt>
+    <dd>
+    Should the image be resized to fit into the available space?
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">allowed</span>
+            <span class="types"><span class="type">boolean</span></span>
+         If <code>false</code>, the image will be clipped, else it will
+   be resized to fit into the available space.
+        </li>
+    </ul>
+
+
+
+
+
+    <br />
+    <a class="deprecated_h2" onclick="show_extra('item1173')">
+     Click to display more
+    </a>
+
+    <span id=item1173 class="hide_extra">
     </span>
 
 </dd>
@@ -876,11 +1001,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1172')">
+    <a class="deprecated_h2" onclick="show_extra('item1174')">
      Click to display more
     </a>
 
-    <span id=item1172 class="hide_extra">
+    <span id=item1174 class="hide_extra">
     </span>
 
 </dd>
@@ -910,11 +1035,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1173')">
+    <a class="deprecated_h2" onclick="show_extra('item1175')">
      Click to display more
     </a>
 
-    <span id=item1173 class="hide_extra">
+    <span id=item1175 class="hide_extra">
     </span>
 
 </dd>
@@ -944,11 +1069,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1174')">
+    <a class="deprecated_h2" onclick="show_extra('item1176')">
      Click to display more
     </a>
 
-    <span id=item1174 class="hide_extra">
+    <span id=item1176 class="hide_extra">
     </span>
 
 </dd>
@@ -977,11 +1102,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1175')">
+    <a class="deprecated_h2" onclick="show_extra('item1177')">
      Click to display more
     </a>
 
-    <span id=item1175 class="hide_extra">
+    <span id=item1177 class="hide_extra">
     </span>
 
 </dd>
@@ -1017,11 +1142,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1176')">
+    <a class="deprecated_h2" onclick="show_extra('item1178')">
      Click to display more
     </a>
 
-    <span id=item1176 class="hide_extra">
+    <span id=item1178 class="hide_extra">
     </span>
 
 </dd>
@@ -1050,11 +1175,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1177')">
+    <a class="deprecated_h2" onclick="show_extra('item1179')">
      Click to display more
     </a>
 
-    <span id=item1177 class="hide_extra">
+    <span id=item1179 class="hide_extra">
     </span>
 
 </dd>
@@ -1079,11 +1204,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1178')">
+    <a class="deprecated_h2" onclick="show_extra('item1180')">
      Click to display more
     </a>
 
-    <span id=item1178 class="hide_extra">
+    <span id=item1180 class="hide_extra">
     </span>
 
 </dd>
@@ -1174,11 +1299,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1179')">
+    <a class="deprecated_h2" onclick="show_extra('item1181')">
      Click to display more
     </a>
 
-    <span id=item1179 class="hide_extra">
+    <span id=item1181 class="hide_extra">
     </span>
 
 </dd>
@@ -1269,11 +1394,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1180')">
+    <a class="deprecated_h2" onclick="show_extra('item1182')">
      Click to display more
     </a>
 
-    <span id=item1180 class="hide_extra">
+    <span id=item1182 class="hide_extra">
     </span>
 
 </dd>
@@ -1346,11 +1471,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1181')">
+    <a class="deprecated_h2" onclick="show_extra('item1183')">
      Click to display more
     </a>
 
-    <span id=item1181 class="hide_extra">
+    <span id=item1183 class="hide_extra">
     </span>
 
 </dd>
@@ -1423,11 +1548,11 @@
 
 
     <br />
-    <a class="deprecated_h2" onclick="show_extra('item1182')">
+    <a class="deprecated_h2" onclick="show_extra('item1184')">
      Click to display more
     </a>
 
-    <span id=item1182 class="hide_extra">
+    <span id=item1184 class="hide_extra">
     </span>
 
 </dd>
