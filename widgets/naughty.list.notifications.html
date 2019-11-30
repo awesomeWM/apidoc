@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
    <script>
      function show_extra(id) {
-        var cur = document.getElementById(id).className
+        var cur = document.getElementById("item"+id).className
 
-        if (cur == "hide_extra")
-            document.getElementById(id).className = "show_more"
-        else
-            document.getElementById(id).className = "hide_extra"
+        if (cur == "hide_extra") {
+            document.getElementById("item"+id).className = "show_more"
+            document.getElementById("button"+id).className = "hide_extra"
+        }
      }
    </script>
 
@@ -44,7 +44,6 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Constructors">Constructors</a></li>
-<li><a href="#Functions">Functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
 <li><a href="#Signals">Signals</a></li>
@@ -317,19 +316,7 @@ notif_wb:setup {
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#naughty.list.notifications">naughty.list.notifications <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
-      <td class="summary">Create an notification list.</td>
-      <td class="baseclass" >
-      </td>
-    </tr>
-</table>
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-    <tr>
-      <td class="name" ><a href="#add_button"><span class='function_modname'>naughty.list.notifications.</span>add_button (button)</a></td>
-      <td class="summary">Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.</td>
-      <td class="baseclass" >
-        Inherited from wibox.widget
-      </td>
+      <td colspan="2" class="summary">Create an notification list.</td>
     </tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
@@ -337,49 +324,37 @@ notif_wb:setup {
     <tr>
       <td class="shortname" ><a href="#notification">notification</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>notification</span></td>
-      <td class="summary">The notificationlist parent notification.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The notificationlist parent notification.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#layout">layout</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>widget</span></td>
-      <td class="summary">The notificationlist layout.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The notificationlist layout.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#widget_template">widget_template</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">The notificationlist parent notification.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The notificationlist parent notification.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#style">style</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">A table with values to override each <code>beautiful.notification_action</code> values.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">A table with values to override each <code>beautiful.notification_action</code> values.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#base_layout">base_layout</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>widget</span></td>
-      <td class="summary">A <code>wibox.layout</code> to be used to place the entries.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">A <code>wibox.layout</code> to be used to place the entries.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#filter">filter</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
-      <td class="summary">A function to prevent some notifications from being added to the list.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">A function to prevent some notifications from being added to the list.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#children">children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">Get or set the children elements.</td>
+      <td colspan="1" class="summary">Get or set the children elements.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -387,7 +362,7 @@ notif_wb:setup {
     <tr>
       <td class="shortname" ><a href="#all_children">all_children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">Get all direct and indirect children widgets.</td>
+      <td colspan="1" class="summary">Get all direct and indirect children widgets.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -395,7 +370,7 @@ notif_wb:setup {
     <tr>
       <td class="shortname" ><a href="#forced_height">forced_height</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force a widget height.</td>
+      <td colspan="1" class="summary">Force a widget height.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -403,7 +378,7 @@ notif_wb:setup {
     <tr>
       <td class="shortname" ><a href="#forced_width">forced_width</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force a widget width.</td>
+      <td colspan="1" class="summary">Force a widget width.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -411,7 +386,7 @@ notif_wb:setup {
     <tr>
       <td class="shortname" ><a href="#opacity">opacity</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The widget opacity (transparency).</td>
+      <td colspan="1" class="summary">The widget opacity (transparency).</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -419,7 +394,7 @@ notif_wb:setup {
     <tr>
       <td class="shortname" ><a href="#visible">visible</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">The widget visibility.</td>
+      <td colspan="1" class="summary">The widget visibility.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -427,7 +402,7 @@ notif_wb:setup {
     <tr>
       <td class="shortname" ><a href="#buttons">buttons</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">The widget buttons.</td>
+      <td colspan="1" class="summary">The widget buttons.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -437,14 +412,21 @@ notif_wb:setup {
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#setup">:setup <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
-      <td class="summary">Set a declarative widget hierarchy description.</td>
+      <td colspan="1" class="summary">Set a declarative widget hierarchy description.</td>
+      <td class="baseclass" >
+        Inherited from wibox.widget
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#add_button">:add_button <span class='function_args'> <b>(</b>button<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal_recursive">:emit_signal_recursive <span class='function_args'> <b>(</b>signal_name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
+      <td colspan="1" class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
  forward the signal.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
@@ -452,21 +434,21 @@ notif_wb:setup {
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal.</td>
+      <td colspan="1" class="summary">Emit a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#connect_signal">:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal.</td>
+      <td colspan="1" class="summary">Connect to a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#weak_connect_signal">:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal weakly.</td>
+      <td colspan="1" class="summary">Connect to a signal weakly.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
@@ -476,42 +458,42 @@ notif_wb:setup {
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#widget::layout_changed">widget::layout_changed</a></td>
-      <td class="summary">When the layout (size) change.</td>
+      <td colspan="1" class="summary">When the layout (size) change.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#widget::redraw_needed">widget::redraw_needed</a></td>
-      <td class="summary">When the widget content changed.</td>
+      <td colspan="1" class="summary">When the widget content changed.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::press">button::press</a></td>
-      <td class="summary">When a mouse button is pressed over the widget.</td>
+      <td colspan="1" class="summary">When a mouse button is pressed over the widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::release">button::release</a></td>
-      <td class="summary">When a mouse button is released over the widget.</td>
+      <td colspan="1" class="summary">When a mouse button is released over the widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#mouse::enter">mouse::enter</a></td>
-      <td class="summary">When the mouse enter a widget.</td>
+      <td colspan="1" class="summary">When the mouse enter a widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#mouse::leave">mouse::leave</a></td>
-      <td class="summary">When the mouse leave a widget.</td>
+      <td colspan="1" class="summary">When the mouse leave a widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -522,115 +504,83 @@ notif_wb:setup {
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_shape_normal">beautiful.notification_shape_normal</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>gears.shape</span></td>
-      <td class="summary">The shape used for a normal notification.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The shape used for a normal notification.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_shape_selected">beautiful.notification_shape_selected</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>gears.shape</span></td>
-      <td class="summary">The shape used for a selected notification.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The shape used for a selected notification.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_shape_border_color_normal">beautiful.notification_shape_border_color_normal</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td class="summary">The shape border color for normal notifications.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The shape border color for normal notifications.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_shape_border_color_selected">beautiful.notification_shape_border_color_selected</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td class="summary">The shape border color for selected notifications.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The shape border color for selected notifications.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_shape_border_width_normal">beautiful.notification_shape_border_width_normal</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The shape border width for normal notifications.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The shape border width for normal notifications.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_shape_border_width_selected">beautiful.notification_shape_border_width_selected</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The shape border width for selected notifications.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The shape border width for selected notifications.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_icon_size_normal">beautiful.notification_icon_size_normal</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The notification icon size.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The notification icon size.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_icon_size_selected">beautiful.notification_icon_size_selected</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The selected notification icon size.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The selected notification icon size.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_bg_normal">beautiful.notification_bg_normal</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td class="summary">The background color for normal notifications.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The background color for normal notifications.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_bg_selected">beautiful.notification_bg_selected</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td class="summary">The background color for selected notifications.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The background color for selected notifications.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_fg_normal">beautiful.notification_fg_normal</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td class="summary">The foreground color for normal notifications.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The foreground color for normal notifications.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_fg_selected">beautiful.notification_fg_selected</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td class="summary">The foreground color for selected notifications.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The foreground color for selected notifications.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_bgimage_normal">beautiful.notification_bgimage_normal</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string <i>or</i> gears.surface</span></td>
-      <td class="summary">The background image for normal notifications.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The background image for normal notifications.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.notification_bgimage_selected">beautiful.notification_bgimage_selected</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string <i>or</i> gears.surface</span></td>
-      <td class="summary">The background image for selected notifications.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The background image for selected notifications.</td>
     </tr>
 </table>
 <h2><a href="#List_filters">List filters</a></h2>
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#naughty.list.notifications.filter.all"><span class='function_modname'>naughty.list.notifications.</span>filter.all</a></td>
-      <td class="summary"></td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary"></td>
     </tr>
     <tr>
       <td class="name" ><a href="#naughty.list.notifications.filter.most_recent"><span class='function_modname'>naughty.list.notifications.</span>filter.most_recent</a></td>
-      <td class="summary">Only get the most recent notification(s).</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Only get the most recent notification(s).</td>
     </tr>
 </table>
 
@@ -644,6 +594,8 @@ notif_wb:setup {
     <dt>
     <a name = "naughty.list.notifications"></a>
     <strong>naughty.list.notifications <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Create an notification list.
@@ -735,45 +687,8 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item960')">
-     Click to display more
-    </a>
 
     <span id=item960 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "add_button"></a>
-    <strong><span class='function_modname'>naughty.list.notifications.</span>add_button (button)</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
-    </dt>
-    <dd>
-    Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">button</span>
-            <span class="types"><span class="type">awful.button</span></span>
-         The button to add.
-        </li>
-    </ul>
-
-
-
-
-
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item961')">
-     Click to display more
-    </a>
-
-    <span id=item961 class="hide_extra">
     </span>
 
 </dd>
@@ -785,6 +700,8 @@ notif_wb:setup {
     <a name = "notification"></a>
     <strong>notification</strong>
     <span class="proptype">(<span class='summary_type'>notification</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The notificationlist parent notification.
@@ -798,12 +715,8 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item962')">
-     Click to display more
-    </a>
 
-    <span id=item962 class="hide_extra">
+    <span id=item961 class="hide_extra">
     </span>
 
 </dd>
@@ -811,6 +724,8 @@ notif_wb:setup {
     <a name = "layout"></a>
     <strong>layout</strong>
     <span class="proptype">(<span class='summary_type'>widget</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The notificationlist layout.
@@ -826,12 +741,8 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item963')">
-     Click to display more
-    </a>
 
-    <span id=item963 class="hide_extra">
+    <span id=item962 class="hide_extra">
     </span>
 
 </dd>
@@ -839,6 +750,8 @@ notif_wb:setup {
     <a name = "widget_template"></a>
     <strong>widget_template</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The notificationlist parent notification.
@@ -848,12 +761,8 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item964')">
-     Click to display more
-    </a>
 
-    <span id=item964 class="hide_extra">
+    <span id=item963 class="hide_extra">
     </span>
 
 </dd>
@@ -861,6 +770,8 @@ notif_wb:setup {
     <a name = "style"></a>
     <strong>style</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     A table with values to override each <code>beautiful.notification_action</code> values.
@@ -870,12 +781,8 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item965')">
-     Click to display more
-    </a>
 
-    <span id=item965 class="hide_extra">
+    <span id=item964 class="hide_extra">
     </span>
 
 </dd>
@@ -883,6 +790,8 @@ notif_wb:setup {
     <a name = "base_layout"></a>
     <strong>base_layout</strong>
     <span class="proptype">(<span class='summary_type'>widget</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     A <code>wibox.layout</code> to be used to place the entries.
@@ -900,12 +809,8 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item966')">
-     Click to display more
-    </a>
 
-    <span id=item966 class="hide_extra">
+    <span id=item965 class="hide_extra">
     </span>
 
 </dd>
@@ -913,6 +818,8 @@ notif_wb:setup {
     <a name = "filter"></a>
     <strong>filter</strong>
     <span class="proptype">(<span class='summary_type'>function</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     A function to prevent some notifications from being added to the list.
@@ -922,12 +829,8 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item967')">
-     Click to display more
-    </a>
 
-    <span id=item967 class="hide_extra">
+    <span id=item966 class="hide_extra">
     </span>
 
 </dd>
@@ -935,7 +838,9 @@ notif_wb:setup {
     <a name = "children"></a>
     <strong>children</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Get or set the children elements.
@@ -952,12 +857,8 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item968')">
-     Click to display more
-    </a>
 
-    <span id=item968 class="hide_extra">
+    <span id=item967 class="hide_extra">
     </span>
 
 </dd>
@@ -965,7 +866,9 @@ notif_wb:setup {
     <a name = "all_children"></a>
     <strong>all_children</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Get all direct and indirect children widgets.
@@ -985,12 +888,8 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item969')">
-     Click to display more
-    </a>
 
-    <span id=item969 class="hide_extra">
+    <span id=item968 class="hide_extra">
     </span>
 
 </dd>
@@ -998,7 +897,9 @@ notif_wb:setup {
     <a name = "forced_height"></a>
     <strong>forced_height</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Force a widget height.
@@ -1015,12 +916,8 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item970')">
-     Click to display more
-    </a>
 
-    <span id=item970 class="hide_extra">
+    <span id=item969 class="hide_extra">
     </span>
 
 </dd>
@@ -1028,7 +925,9 @@ notif_wb:setup {
     <a name = "forced_width"></a>
     <strong>forced_width</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Force a widget width.
@@ -1045,12 +944,8 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item971')">
-     Click to display more
-    </a>
 
-    <span id=item971 class="hide_extra">
+    <span id=item970 class="hide_extra">
     </span>
 
 </dd>
@@ -1058,7 +953,9 @@ notif_wb:setup {
     <a name = "opacity"></a>
     <strong>opacity</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget opacity (transparency).
@@ -1076,12 +973,8 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item972')">
-     Click to display more
-    </a>
 
-    <span id=item972 class="hide_extra">
+    <span id=item971 class="hide_extra">
     </span>
 
 </dd>
@@ -1089,7 +982,9 @@ notif_wb:setup {
     <a name = "visible"></a>
     <strong>visible</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget visibility.
@@ -1099,12 +994,8 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item973')">
-     Click to display more
-    </a>
 
-    <span id=item973 class="hide_extra">
+    <span id=item972 class="hide_extra">
     </span>
 
 </dd>
@@ -1112,7 +1003,9 @@ notif_wb:setup {
     <a name = "buttons"></a>
     <strong>buttons</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget buttons.</p>
@@ -1128,12 +1021,8 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item974')">
-     Click to display more
-    </a>
 
-    <span id=item974 class="hide_extra">
+    <span id=item973 class="hide_extra">
     </span>
 
 </dd>
@@ -1144,7 +1033,9 @@ notif_wb:setup {
     <dt>
     <a name = "setup"></a>
     <strong>:setup <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
@@ -1161,10 +1052,33 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item975')">
-     Click to display more
-    </a>
+
+    <span id=item974 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "add_button"></a>
+    <strong>:add_button <span class='function_args'> <b>(</b>button<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
+    </dt>
+    <dd>
+    Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">awful.button</span></span>
+         The button to add.
+        </li>
+    </ul>
+
+
+
+
+
 
     <span id=item975 class="hide_extra">
     </span>
@@ -1173,7 +1087,9 @@ notif_wb:setup {
     <dt>
     <a name = "emit_signal_recursive"></a>
     <strong>:emit_signal_recursive <span class='function_args'> <b>(</b>signal_name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Emit a signal and ensure all parent widgets in the hierarchies also
@@ -1195,10 +1111,6 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item976')">
-     Click to display more
-    </a>
 
     <span id=item976 class="hide_extra">
     </span>
@@ -1207,7 +1119,9 @@ notif_wb:setup {
     <dt>
     <a name = "emit_signal"></a>
     <strong>:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Emit a signal.
@@ -1229,10 +1143,6 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item977')">
-     Click to display more
-    </a>
 
     <span id=item977 class="hide_extra">
     </span>
@@ -1241,7 +1151,9 @@ notif_wb:setup {
     <dt>
     <a name = "connect_signal"></a>
     <strong>:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal.
@@ -1262,10 +1174,6 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item978')">
-     Click to display more
-    </a>
 
     <span id=item978 class="hide_extra">
     </span>
@@ -1274,7 +1182,9 @@ notif_wb:setup {
     <dt>
     <a name = "weak_connect_signal"></a>
     <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal weakly.</p>
@@ -1302,10 +1212,6 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item979')">
-     Click to display more
-    </a>
 
     <span id=item979 class="hide_extra">
     </span>
@@ -1318,7 +1224,9 @@ notif_wb:setup {
     <dt>
     <a name = "widget::layout_changed"></a>
     <strong>widget::layout_changed</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the layout (size) change.
@@ -1335,10 +1243,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item980')">
-     Click to display more
-    </a>
 
     <span id=item980 class="hide_extra">
     </span>
@@ -1347,7 +1251,9 @@ notif_wb:setup {
     <dt>
     <a name = "widget::redraw_needed"></a>
     <strong>widget::redraw_needed</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the widget content changed.
@@ -1364,10 +1270,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item981')">
-     Click to display more
-    </a>
 
     <span id=item981 class="hide_extra">
     </span>
@@ -1376,7 +1278,9 @@ notif_wb:setup {
     <dt>
     <a name = "button::press"></a>
     <strong>button::press</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When a mouse button is pressed over the widget.
@@ -1459,10 +1363,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item982')">
-     Click to display more
-    </a>
 
     <span id=item982 class="hide_extra">
     </span>
@@ -1471,7 +1371,9 @@ notif_wb:setup {
     <dt>
     <a name = "button::release"></a>
     <strong>button::release</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When a mouse button is released over the widget.
@@ -1554,10 +1456,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item983')">
-     Click to display more
-    </a>
 
     <span id=item983 class="hide_extra">
     </span>
@@ -1566,7 +1464,9 @@ notif_wb:setup {
     <dt>
     <a name = "mouse::enter"></a>
     <strong>mouse::enter</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the mouse enter a widget.
@@ -1631,10 +1531,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item984')">
-     Click to display more
-    </a>
 
     <span id=item984 class="hide_extra">
     </span>
@@ -1643,7 +1539,9 @@ notif_wb:setup {
     <dt>
     <a name = "mouse::leave"></a>
     <strong>mouse::leave</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the mouse leave a widget.
@@ -1708,10 +1606,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item985')">
-     Click to display more
-    </a>
 
     <span id=item985 class="hide_extra">
     </span>
@@ -1725,6 +1619,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_shape_normal"></a>
     <strong>beautiful.notification_shape_normal</strong>
     <span class="proptype">(<span class='summary_type'>gears.shape</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The shape used for a normal notification.
@@ -1738,10 +1634,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item986')">
-     Click to display more
-    </a>
 
     <span id=item986 class="hide_extra">
     </span>
@@ -1751,6 +1643,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_shape_selected"></a>
     <strong>beautiful.notification_shape_selected</strong>
     <span class="proptype">(<span class='summary_type'>gears.shape</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The shape used for a selected notification.
@@ -1764,10 +1658,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item987')">
-     Click to display more
-    </a>
 
     <span id=item987 class="hide_extra">
     </span>
@@ -1777,6 +1667,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_shape_border_color_normal"></a>
     <strong>beautiful.notification_shape_border_color_normal</strong>
     <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The shape border color for normal notifications.
@@ -1790,10 +1682,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item988')">
-     Click to display more
-    </a>
 
     <span id=item988 class="hide_extra">
     </span>
@@ -1803,6 +1691,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_shape_border_color_selected"></a>
     <strong>beautiful.notification_shape_border_color_selected</strong>
     <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The shape border color for selected notifications.
@@ -1816,10 +1706,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item989')">
-     Click to display more
-    </a>
 
     <span id=item989 class="hide_extra">
     </span>
@@ -1829,6 +1715,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_shape_border_width_normal"></a>
     <strong>beautiful.notification_shape_border_width_normal</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The shape border width for normal notifications.
@@ -1838,10 +1726,6 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item990')">
-     Click to display more
-    </a>
 
     <span id=item990 class="hide_extra">
     </span>
@@ -1851,6 +1735,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_shape_border_width_selected"></a>
     <strong>beautiful.notification_shape_border_width_selected</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The shape border width for selected notifications.
@@ -1860,10 +1746,6 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item991')">
-     Click to display more
-    </a>
 
     <span id=item991 class="hide_extra">
     </span>
@@ -1873,6 +1755,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_icon_size_normal"></a>
     <strong>beautiful.notification_icon_size_normal</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The notification icon size.
@@ -1882,10 +1766,6 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item992')">
-     Click to display more
-    </a>
 
     <span id=item992 class="hide_extra">
     </span>
@@ -1895,6 +1775,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_icon_size_selected"></a>
     <strong>beautiful.notification_icon_size_selected</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The selected notification icon size.
@@ -1904,10 +1786,6 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item993')">
-     Click to display more
-    </a>
 
     <span id=item993 class="hide_extra">
     </span>
@@ -1917,6 +1795,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_bg_normal"></a>
     <strong>beautiful.notification_bg_normal</strong>
     <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The background color for normal notifications.
@@ -1930,10 +1810,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item994')">
-     Click to display more
-    </a>
 
     <span id=item994 class="hide_extra">
     </span>
@@ -1943,6 +1819,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_bg_selected"></a>
     <strong>beautiful.notification_bg_selected</strong>
     <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The background color for selected notifications.
@@ -1956,10 +1834,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item995')">
-     Click to display more
-    </a>
 
     <span id=item995 class="hide_extra">
     </span>
@@ -1969,6 +1843,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_fg_normal"></a>
     <strong>beautiful.notification_fg_normal</strong>
     <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The foreground color for normal notifications.
@@ -1982,10 +1858,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item996')">
-     Click to display more
-    </a>
 
     <span id=item996 class="hide_extra">
     </span>
@@ -1995,6 +1867,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_fg_selected"></a>
     <strong>beautiful.notification_fg_selected</strong>
     <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The foreground color for selected notifications.
@@ -2008,10 +1882,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item997')">
-     Click to display more
-    </a>
 
     <span id=item997 class="hide_extra">
     </span>
@@ -2021,6 +1891,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_bgimage_normal"></a>
     <strong>beautiful.notification_bgimage_normal</strong>
     <span class="proptype">(<span class='summary_type'>string <i>or</i> gears.surface</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The background image for normal notifications.
@@ -2034,10 +1906,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item998')">
-     Click to display more
-    </a>
 
     <span id=item998 class="hide_extra">
     </span>
@@ -2047,6 +1915,8 @@ notif_wb:setup {
     <a name = "beautiful.notification_bgimage_selected"></a>
     <strong>beautiful.notification_bgimage_selected</strong>
     <span class="proptype">(<span class='summary_type'>string <i>or</i> gears.surface</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The background image for selected notifications.
@@ -2060,10 +1930,6 @@ notif_wb:setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item999')">
-     Click to display more
-    </a>
 
     <span id=item999 class="hide_extra">
     </span>
@@ -2076,6 +1942,8 @@ notif_wb:setup {
     <dt>
     <a name = "naughty.list.notifications.filter.all"></a>
     <strong><span class='function_modname'>naughty.list.notifications.</span>filter.all</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
 
@@ -2090,10 +1958,6 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1000')">
-     Click to display more
-    </a>
 
     <span id=item1000 class="hide_extra">
     </span>
@@ -2102,6 +1966,8 @@ notif_wb:setup {
     <dt>
     <a name = "naughty.list.notifications.filter.most_recent"></a>
     <strong><span class='function_modname'>naughty.list.notifications.</span>filter.most_recent</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     <p>Only get the most recent notification(s).</p>
@@ -2126,10 +1992,6 @@ notif_wb:setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1001')">
-     Click to display more
-    </a>
 
     <span id=item1001 class="hide_extra">
     </span>

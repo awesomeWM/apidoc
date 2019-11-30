@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
    <script>
      function show_extra(id) {
-        var cur = document.getElementById(id).className
+        var cur = document.getElementById("item"+id).className
 
-        if (cur == "hide_extra")
-            document.getElementById(id).className = "show_more"
-        else
-            document.getElementById(id).className = "hide_extra"
+        if (cur == "hide_extra") {
+            document.getElementById("item"+id).className = "show_more"
+            document.getElementById("button"+id).className = "hide_extra"
+        }
      }
    </script>
 
@@ -44,7 +44,6 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Constructors">Constructors</a></li>
-<li><a href="#Functions">Functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Deprecated_object_properties">Deprecated object properties</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
@@ -218,7 +217,7 @@
 <div id="content">
 
 <h1>Module: <code>wibox.container.background</code></h1>
-<p>A container capable of changing the background color, foreground color
+<p>A container capable of changing the background color, foreground color and
  widget shape.</p>
 <p><img src="../images/AUTOGEN_wibox_container_defaults_background.svg" alt="Usage example" /></p>
     <h3>Info:</h3>
@@ -232,19 +231,7 @@
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#wibox.container.background">wibox.container.background <span class='function_args'> <b>(</b>[widget[, bg[, shape]]]<b>)</b></span></a></td>
-      <td class="summary">Returns a new background container.</td>
-      <td class="baseclass" >
-      </td>
-    </tr>
-</table>
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-    <tr>
-      <td class="name" ><a href="#add_button"><span class='function_modname'>wibox.container.background.</span>add_button (button)</a></td>
-      <td class="summary">Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.</td>
-      <td class="baseclass" >
-        Inherited from wibox.widget
-      </td>
+      <td colspan="2" class="summary">Returns a new background container.</td>
     </tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
@@ -252,65 +239,47 @@
     <tr>
       <td class="shortname" ><a href="#widget">widget</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>widget</span></td>
-      <td class="summary">The widget displayed in the background widget.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The widget displayed in the background widget.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#bg">bg</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>bg</span></td>
-      <td class="summary">The background color/pattern/gradient to use.</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The background color/pattern/gradient to use.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#fg">fg</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>fg</span></td>
-      <td class="summary">The foreground (text) color/pattern/gradient to use.</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The foreground (text) color/pattern/gradient to use.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#shape">shape</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>shape</span></td>
-      <td class="summary">The background shape.</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>gears.shape <i>or</i> function</span></td>
+      <td colspan="2" class="summary">The background shape.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#border_width">border_width</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">Add a border of a specific width.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Add a border of a specific width.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#border_color">border_color</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>fg</span></td>
-      <td class="summary">Set the color for the border.</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">Set the color for the border.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#border_strategy">border_strategy</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td class="summary">How the border width affects the contained widget.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">How the border width affects the contained widget.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#bgimage">bgimage</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>image</span></td>
-      <td class="summary">The background image to use
- If <code>image</code> is a function, it will be called with <code>(context, cr, width, height)</code>
- as arguments.</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>string <i>or</i> surface <i>or</i> function</span></td>
+      <td colspan="2" class="summary">The background image to use.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#children">children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">Get or set the children elements.</td>
+      <td colspan="1" class="summary">Get or set the children elements.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -318,7 +287,7 @@
     <tr>
       <td class="shortname" ><a href="#all_children">all_children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">Get all direct and indirect children widgets.</td>
+      <td colspan="1" class="summary">Get all direct and indirect children widgets.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -326,7 +295,7 @@
     <tr>
       <td class="shortname" ><a href="#forced_height">forced_height</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force a widget height.</td>
+      <td colspan="1" class="summary">Force a widget height.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -334,7 +303,7 @@
     <tr>
       <td class="shortname" ><a href="#forced_width">forced_width</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force a widget width.</td>
+      <td colspan="1" class="summary">Force a widget width.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -342,7 +311,7 @@
     <tr>
       <td class="shortname" ><a href="#opacity">opacity</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The widget opacity (transparency).</td>
+      <td colspan="1" class="summary">The widget opacity (transparency).</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -350,7 +319,7 @@
     <tr>
       <td class="shortname" ><a href="#visible">visible</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">The widget visibility.</td>
+      <td colspan="1" class="summary">The widget visibility.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -358,7 +327,7 @@
     <tr>
       <td class="shortname" ><a href="#buttons">buttons</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">The widget buttons.</td>
+      <td colspan="1" class="summary">The widget buttons.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -369,36 +338,37 @@
     <tr>
       <td class="shortname" ><a href="#shape_border_width">shape_border_width</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">When a <a href="../widget_containers/wibox.container.background.html#shape">shape</a> is set, also draw a border.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">When a <a href="../widget_containers/wibox.container.background.html#shape">shape</a> is set, also draw a border.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#shape_border_color">shape_border_color</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>fg</span></td>
-      <td class="summary">When a <a href="../widget_containers/wibox.container.background.html#shape">shape</a> is set, also draw a border.</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">When a <a href="../widget_containers/wibox.container.background.html#shape">shape</a> is set, also draw a border.</td>
     </tr>
 </table>
 <h2><a href="#Object_methods">Object methods </a></h2>
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#set_shape">:set_shape <span class='function_args'> <b>(</b>shape<b>)</b></span></a></td>
-      <td class="summary">Set the background shape.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Set the background shape.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#setup">:setup <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
-      <td class="summary">Set a declarative widget hierarchy description.</td>
+      <td colspan="1" class="summary">Set a declarative widget hierarchy description.</td>
+      <td class="baseclass" >
+        Inherited from wibox.widget
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#add_button">:add_button <span class='function_args'> <b>(</b>button<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal_recursive">:emit_signal_recursive <span class='function_args'> <b>(</b>signal_name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
+      <td colspan="1" class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
  forward the signal.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
@@ -406,21 +376,21 @@
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal.</td>
+      <td colspan="1" class="summary">Emit a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#connect_signal">:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal.</td>
+      <td colspan="1" class="summary">Connect to a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#weak_connect_signal">:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal weakly.</td>
+      <td colspan="1" class="summary">Connect to a signal weakly.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
@@ -430,42 +400,42 @@
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#widget::layout_changed">widget::layout_changed</a></td>
-      <td class="summary">When the layout (size) change.</td>
+      <td colspan="1" class="summary">When the layout (size) change.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#widget::redraw_needed">widget::redraw_needed</a></td>
-      <td class="summary">When the widget content changed.</td>
+      <td colspan="1" class="summary">When the widget content changed.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::press">button::press</a></td>
-      <td class="summary">When a mouse button is pressed over the widget.</td>
+      <td colspan="1" class="summary">When a mouse button is pressed over the widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::release">button::release</a></td>
-      <td class="summary">When a mouse button is released over the widget.</td>
+      <td colspan="1" class="summary">When a mouse button is released over the widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#mouse::enter">mouse::enter</a></td>
-      <td class="summary">When the mouse enter a widget.</td>
+      <td colspan="1" class="summary">When the mouse enter a widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#mouse::leave">mouse::leave</a></td>
-      <td class="summary">When the mouse leave a widget.</td>
+      <td colspan="1" class="summary">When the mouse leave a widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -482,6 +452,8 @@
     <dt>
     <a name = "wibox.container.background"></a>
     <strong>wibox.container.background <span class='function_args'> <b>(</b>[widget[, bg[, shape]]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Returns a new background container.</p>
@@ -492,14 +464,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">widget</span>
+            <span class="types"><a class="type" href="../widget_containers/wibox.container.background.html#widget">widget</a></span>
          The widget to display.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">bg</span>
+            <span class="types"><span class="type">color</span></span>
          The background to use for that widget.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">gears.shape</span> or <span class="type">function</span></span>
          A <a href="../theme_related_libraries/gears.shape.html#">gears.shape</a> compatible shape function
          (<em>optional</em>)
         </li>
@@ -509,43 +484,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1509')">
-     Click to display more
-    </a>
-
-    <span id=item1509 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "add_button"></a>
-    <strong><span class='function_modname'>wibox.container.background.</span>add_button (button)</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
-    </dt>
-    <dd>
-    Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">button</span>
-            <span class="types"><span class="type">awful.button</span></span>
-         The button to add.
-        </li>
-    </ul>
-
-
-
-
-
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1510')">
-     Click to display more
-    </a>
 
     <span id=item1510 class="hide_extra">
     </span>
@@ -559,6 +497,8 @@
     <a name = "widget"></a>
     <strong>widget</strong>
     <span class="proptype">(<span class='summary_type'>widget</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The widget displayed in the background widget.
@@ -568,7 +508,7 @@
         <li><span class="parameter">widget</span>
             <span class="types"><a class="type" href="../widget_containers/wibox.container.background.html#widget">widget</a></span>
          The widget to be disaplayed inside of the background
-  area
+  area.
         </li>
     </ul>
 
@@ -576,10 +516,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1511')">
-     Click to display more
-    </a>
 
     <span id=item1511 class="hide_extra">
     </span>
@@ -588,7 +524,10 @@
     <dt>
     <a name = "bg"></a>
     <strong>bg</strong>
-    <span class="proptype">(<span class='summary_type'>bg</span>)</span>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
     </dt>
     <dd>
     The background color/pattern/gradient to use.</p>
@@ -598,6 +537,7 @@
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">bg</span>
+            <span class="types"><span class="type">color</span></span>
          A color string, pattern or gradient
         </li>
     </ul>
@@ -636,19 +576,32 @@ parent : setup {
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1512')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1512>
+     <a class="show_more_button" onclick="show_extra('1512')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1512 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::bg</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<a href="../widget_containers/wibox.container.background.html#bg">bg</a>)</span> The new value.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "fg"></a>
     <strong>fg</strong>
-    <span class="proptype">(<span class='summary_type'>fg</span>)</span>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
     </dt>
     <dd>
     The foreground (text) color/pattern/gradient to use.</p>
@@ -658,6 +611,7 @@ parent : setup {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
          A color string, pattern or gradient
         </li>
     </ul>
@@ -696,19 +650,31 @@ parent : setup {
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1513')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1513>
+     <a class="show_more_button" onclick="show_extra('1513')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1513 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::fg</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<a href="../widget_containers/wibox.container.background.html#fg">fg</a>)</span> The new value.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "shape"></a>
     <strong>shape</strong>
-    <span class="proptype">(<span class='summary_type'>shape</span>)</span>
+    <span class="proptype">(<span class='summary_type'>gears.shape <i>or</i> function</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The background shape.</p>
@@ -720,6 +686,7 @@ parent : setup {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">gears.shape</span> or <span class="type">function</span></span>
          A function taking a context, width and height as arguments
         </li>
     </ul>
@@ -771,10 +738,6 @@ parent : setup {
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1514')">
-     Click to display more
-    </a>
 
     <span id=item1514 class="hide_extra">
     </span>
@@ -784,6 +747,9 @@ parent : setup {
     <a name = "border_width"></a>
     <strong>border_width</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
     </dt>
     <dd>
     Add a border of a specific width.</p>
@@ -809,19 +775,33 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1515')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1515>
+     <a class="show_more_button" onclick="show_extra('1515')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1515 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::border_width</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<code>width</code>)</span> The new value.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "border_color"></a>
     <strong>border_color</strong>
-    <span class="proptype">(<span class='summary_type'>fg</span>)</span>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+         &middot 1 theme variables
+    </span>
     </dt>
     <dd>
     Set the color for the border.</p>
@@ -831,6 +811,7 @@ parent : setup {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
          The border color, pattern or gradient
          (<em>default</em> self._private.foreground)
         </li>
@@ -845,12 +826,30 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1516')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1516>
+     <a class="show_more_button" onclick="show_extra('1516')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1516 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::border_color</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<a href="../widget_containers/wibox.container.background.html#fg">fg</a>)</span> The new value.</li>
+           </ul>
+     </ul>
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><code>beautiful.fg_normal</code></td><td>Fallback when &lsquo;fg&rsquo; and <a href="../widget_containers/wibox.container.background.html#border_color">border_color</a> aren&rsquo;t set.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -858,6 +857,8 @@ parent : setup {
     <a name = "border_strategy"></a>
     <strong>border_strategy</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     <p>How the border width affects the contained widget.</p>
@@ -875,10 +876,6 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1517')">
-     Click to display more
-    </a>
 
     <span id=item1517 class="hide_extra">
     </span>
@@ -887,16 +884,20 @@ parent : setup {
     <dt>
     <a name = "bgimage"></a>
     <strong>bgimage</strong>
-    <span class="proptype">(<span class='summary_type'>image</span>)</span>
+    <span class="proptype">(<span class='summary_type'>string <i>or</i> surface <i>or</i> function</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
-    The background image to use
- If <code>image</code> is a function, it will be called with <code>(context, cr, width, height)</code>
- as arguments.  Any other arguments passed to this method will be appended.
+    The background image to use.</p>
+
+<p> If <code>image</code> is a function, it will be called with <code>(context, cr, width, height)</code>
+ as arguments. Any other arguments passed to this method will be appended.
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">image</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a>, <span class="type">surface</span> or <span class="type">function</span></span>
          A background image or a function
         </li>
     </ul>
@@ -909,10 +910,6 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1518')">
-     Click to display more
-    </a>
 
     <span id=item1518 class="hide_extra">
     </span>
@@ -922,7 +919,9 @@ parent : setup {
     <a name = "children"></a>
     <strong>children</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Get or set the children elements.
@@ -939,10 +938,6 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1519')">
-     Click to display more
-    </a>
 
     <span id=item1519 class="hide_extra">
     </span>
@@ -952,7 +947,9 @@ parent : setup {
     <a name = "all_children"></a>
     <strong>all_children</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Get all direct and indirect children widgets.
@@ -972,10 +969,6 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1520')">
-     Click to display more
-    </a>
 
     <span id=item1520 class="hide_extra">
     </span>
@@ -985,7 +978,9 @@ parent : setup {
     <a name = "forced_height"></a>
     <strong>forced_height</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Force a widget height.
@@ -1002,10 +997,6 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1521')">
-     Click to display more
-    </a>
 
     <span id=item1521 class="hide_extra">
     </span>
@@ -1015,7 +1006,9 @@ parent : setup {
     <a name = "forced_width"></a>
     <strong>forced_width</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Force a widget width.
@@ -1032,10 +1025,6 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1522')">
-     Click to display more
-    </a>
 
     <span id=item1522 class="hide_extra">
     </span>
@@ -1045,7 +1034,9 @@ parent : setup {
     <a name = "opacity"></a>
     <strong>opacity</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget opacity (transparency).
@@ -1063,10 +1054,6 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1523')">
-     Click to display more
-    </a>
 
     <span id=item1523 class="hide_extra">
     </span>
@@ -1076,7 +1063,9 @@ parent : setup {
     <a name = "visible"></a>
     <strong>visible</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget visibility.
@@ -1086,10 +1075,6 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1524')">
-     Click to display more
-    </a>
 
     <span id=item1524 class="hide_extra">
     </span>
@@ -1099,7 +1084,9 @@ parent : setup {
     <a name = "buttons"></a>
     <strong>buttons</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget buttons.</p>
@@ -1115,10 +1102,6 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1525')">
-     Click to display more
-    </a>
 
     <span id=item1525 class="hide_extra">
     </span>
@@ -1132,6 +1115,8 @@ parent : setup {
     <a name = "shape_border_width"></a>
     <strong>shape_border_width</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     When a <a href="../widget_containers/wibox.container.background.html#shape">shape</a> is set, also draw a border.</p>
@@ -1154,10 +1139,6 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1526')">
-     Click to display more
-    </a>
 
     <span id=item1526 class="hide_extra">
     </span>
@@ -1166,7 +1147,10 @@ parent : setup {
     <dt>
     <a name = "shape_border_color"></a>
     <strong>shape_border_color</strong>
-    <span class="proptype">(<span class='summary_type'>fg</span>)</span>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+         &middot 1 theme variables
+    </span>
     </dt>
     <dd>
     When a <a href="../widget_containers/wibox.container.background.html#shape">shape</a> is set, also draw a border.</p>
@@ -1176,6 +1160,7 @@ parent : setup {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">fg</span>
+            <span class="types"><span class="type">color</span></span>
          The border color, pattern or gradient
          (<em>default</em> self._private.foreground)
         </li>
@@ -1190,12 +1175,22 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1527')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1527>
+     <a class="show_more_button" onclick="show_extra('1527')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1527 class="hide_extra">
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><code>beautiful.fg_normal</code></td><td>Fallback when &lsquo;fg&rsquo; and <a href="../widget_containers/wibox.container.background.html#border_color">border_color</a> aren&rsquo;t set.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -1206,15 +1201,19 @@ parent : setup {
     <dt>
     <a name = "set_shape"></a>
     <strong>:set_shape <span class='function_args'> <b>(</b>shape<b>)</b></span></strong>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
     </dt>
     <dd>
     Set the background shape.</p>
 
-<p> Any other arguments will be passed to the shape function
+<p> Any other arguments will be passed to the shape function.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">shape</span>
+            <span class="types"><span class="type">gears.shape</span> or <span class="type">function</span></span>
          A function taking a context, width and height as arguments
         </li>
     </ul>
@@ -1228,19 +1227,31 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1528')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1528>
+     <a class="show_more_button" onclick="show_extra('1528')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1528 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::set_shape</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<a href="../widget_containers/wibox.container.background.html#shape">shape</a>)</span> The new value.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "setup"></a>
     <strong>:setup <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
@@ -1257,19 +1268,44 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1529')">
-     Click to display more
-    </a>
 
     <span id=item1529 class="hide_extra">
     </span>
 
 </dd>
     <dt>
+    <a name = "add_button"></a>
+    <strong>:add_button <span class='function_args'> <b>(</b>button<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
+    </dt>
+    <dd>
+    Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">awful.button</span></span>
+         The button to add.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item1530 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "emit_signal_recursive"></a>
     <strong>:emit_signal_recursive <span class='function_args'> <b>(</b>signal_name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Emit a signal and ensure all parent widgets in the hierarchies also
@@ -1291,19 +1327,17 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1530')">
-     Click to display more
-    </a>
 
-    <span id=item1530 class="hide_extra">
+    <span id=item1531 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "emit_signal"></a>
     <strong>:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Emit a signal.
@@ -1325,19 +1359,17 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1531')">
-     Click to display more
-    </a>
 
-    <span id=item1531 class="hide_extra">
+    <span id=item1532 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "connect_signal"></a>
     <strong>:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal.
@@ -1358,19 +1390,17 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1532')">
-     Click to display more
-    </a>
 
-    <span id=item1532 class="hide_extra">
+    <span id=item1533 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "weak_connect_signal"></a>
     <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal weakly.</p>
@@ -1398,12 +1428,8 @@ parent : setup {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1533')">
-     Click to display more
-    </a>
 
-    <span id=item1533 class="hide_extra">
+    <span id=item1534 class="hide_extra">
     </span>
 
 </dd>
@@ -1414,7 +1440,9 @@ parent : setup {
     <dt>
     <a name = "widget::layout_changed"></a>
     <strong>widget::layout_changed</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the layout (size) change.
@@ -1431,19 +1459,17 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1534')">
-     Click to display more
-    </a>
 
-    <span id=item1534 class="hide_extra">
+    <span id=item1535 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "widget::redraw_needed"></a>
     <strong>widget::redraw_needed</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the widget content changed.
@@ -1460,19 +1486,17 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1535')">
-     Click to display more
-    </a>
 
-    <span id=item1535 class="hide_extra">
+    <span id=item1536 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "button::press"></a>
     <strong>button::press</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When a mouse button is pressed over the widget.
@@ -1555,19 +1579,17 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1536')">
-     Click to display more
-    </a>
 
-    <span id=item1536 class="hide_extra">
+    <span id=item1537 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "button::release"></a>
     <strong>button::release</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When a mouse button is released over the widget.
@@ -1650,19 +1672,17 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1537')">
-     Click to display more
-    </a>
 
-    <span id=item1537 class="hide_extra">
+    <span id=item1538 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "mouse::enter"></a>
     <strong>mouse::enter</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the mouse enter a widget.
@@ -1727,19 +1747,17 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1538')">
-     Click to display more
-    </a>
 
-    <span id=item1538 class="hide_extra">
+    <span id=item1539 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "mouse::leave"></a>
     <strong>mouse::leave</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the mouse leave a widget.
@@ -1804,12 +1822,8 @@ parent : setup {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1539')">
-     Click to display more
-    </a>
 
-    <span id=item1539 class="hide_extra">
+    <span id=item1540 class="hide_extra">
     </span>
 
 </dd>

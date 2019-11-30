@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
    <script>
      function show_extra(id) {
-        var cur = document.getElementById(id).className
+        var cur = document.getElementById("item"+id).className
 
-        if (cur == "hide_extra")
-            document.getElementById(id).className = "show_more"
-        else
-            document.getElementById(id).className = "hide_extra"
+        if (cur == "hide_extra") {
+            document.getElementById("item"+id).className = "show_more"
+            document.getElementById("button"+id).className = "hide_extra"
+        }
      }
    </script>
 
@@ -352,30 +352,22 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#awful.keygrabber">awful.keygrabber <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
-      <td class="summary">A wrapper around the keygrabber to make it easier to add keybindings.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">A wrapper around the keygrabber to make it easier to add keybindings.</td>
     </tr>
 </table>
 <h2><a href="#Static_module_functions">Static module functions</a></h2>
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#connect_signal"><span class='function_modname'>awful.keygrabber.</span>connect_signal <span class='function_args'> <b>(</b>name, callback<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal for all keygrabbers at once.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Connect to a signal for all keygrabbers at once.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#disconnect_signal"><span class='function_modname'>awful.keygrabber.</span>disconnect_signal <span class='function_args'> <b>(</b>name, callback<b>)</b></span></a></td>
-      <td class="summary">Disconnect to a signal for all keygrabbers at once.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Disconnect to a signal for all keygrabbers at once.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal"><span class='function_modname'>awful.keygrabber.</span>emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal on the keygrabber module itself.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Emit a signal on the keygrabber module itself.</td>
     </tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
@@ -383,111 +375,85 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <tr>
       <td class="shortname" ><a href="#timeout">timeout</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The keygrabber timeout.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The keygrabber timeout.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#stop_key">stop_key</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td class="summary">The key on which the keygrabber listen to terminate itself.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The key on which the keygrabber listen to terminate itself.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#stop_event">stop_event</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td class="summary">The event on which the keygrabbing will be terminated.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The event on which the keygrabbing will be terminated.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#mask_event_callback">mask_event_callback</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Whether or not to execute the key press/release callbacks when keybindings are called.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Whether or not to execute the key press/release callbacks when keybindings are called.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#mask_modkeys">mask_modkeys</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Do not call the callbacks on modifier keys (like <code>Control</code> or <code>Mod4</code>) events.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Do not call the callbacks on modifier keys (like <code>Control</code> or <code>Mod4</code>) events.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#export_keybindings">export_keybindings</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Export all keygrabber keybindings as root (global) keybindings.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Export all keygrabber keybindings as root (global) keybindings.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#root_keybindings">root_keybindings</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">The root (global) keybinding to start this keygrabber.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The root (global) keybinding to start this keygrabber.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#keybindings">keybindings</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">The keybindings associated with this keygrabber.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The keybindings associated with this keygrabber.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#allowed_keys">allowed_keys</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table <i>or</i> nil</span></td>
-      <td class="summary">If any key is pressed that is not in this list, the keygrabber is stopped.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">If any key is pressed that is not in this list, the keygrabber is stopped.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#sequence">sequence</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td class="summary">The sequence of keys recorded since the start of the keygrabber.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The sequence of keys recorded since the start of the keygrabber.</td>
     </tr>
 </table>
 <h2><a href="#Object_methods">Object methods </a></h2>
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#start">:start <span class='function_args'> <b>(</b><b>)</b></span></a></td>
-      <td class="summary">Start the keygrabber.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Start the keygrabber.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#stop">:stop <span class='function_args'> <b>(</b><b>)</b></span></a></td>
-      <td class="summary">Stop the keygrabber.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Stop the keygrabber.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#add_keybinding">:add_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></a></td>
-      <td class="summary">Add a keybinding to this keygrabber.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Add a keybinding to this keygrabber.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal.</td>
+      <td colspan="1" class="summary">Emit a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#connect_signal">:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal.</td>
+      <td colspan="1" class="summary">Connect to a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#weak_connect_signal">:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal weakly.</td>
+      <td colspan="1" class="summary">Connect to a signal weakly.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
@@ -497,71 +463,51 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#property::current_instance">property::current_instance</a></td>
-      <td class="summary">The global signal used to track the <a href="../core_components/awful.keygrabber.html#current_instance">current_instance</a>.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The global signal used to track the <a href="../core_components/awful.keygrabber.html#current_instance">current_instance</a>.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#started">started</a></td>
-      <td class="summary">When the keygrabber starts.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">When the keygrabber starts.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#stopped">stopped</a></td>
-      <td class="summary">When the keygrabber stops.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">When the keygrabber stops.</td>
     </tr>
 </table>
 <h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#stop">awful.keygrabber.stop<i class="deprecated_label"> [deprecated]</i></a></td>
-      <td class="summary">Stop grabbing the keyboard for the provided callback.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Stop grabbing the keyboard for the provided callback.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#run">awful.keygrabber.run<i class="deprecated_label"> [deprecated]</i></a></td>
-      <td class="summary">A lower level API to interact with the keygrabber directly.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">A lower level API to interact with the keygrabber directly.</td>
     </tr>
 </table>
 <h2><a href="#Callback_functions_prototype">Callback functions prototype</a></h2>
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#start_callback">start_callback</a></td>
-      <td class="summary">A function called when a keygrabber starts.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">A function called when a keygrabber starts.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#stop_callback">stop_callback</a></td>
-      <td class="summary">The callback when the keygrabbing stops.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The callback when the keygrabbing stops.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#timeout_callback">timeout_callback</a></td>
-      <td class="summary">The function called when the keygrabber stops because of a <a href="../core_components/awful.keygrabber.html#timeout">timeout</a>.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The function called when the keygrabber stops because of a <a href="../core_components/awful.keygrabber.html#timeout">timeout</a>.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#keypressed_callback">keypressed_callback</a></td>
-      <td class="summary">The callback function to call with mod table, key and command as arguments
+      <td colspan="2" class="summary">The callback function to call with mod table, key and command as arguments
  when a key was pressed.</td>
-      <td class="baseclass" >
-      </td>
     </tr>
     <tr>
       <td class="name" ><a href="#keyreleased_callback">keyreleased_callback</a></td>
-      <td class="summary">The callback function to call with mod table, key and command as arguments
+      <td colspan="2" class="summary">The callback function to call with mod table, key and command as arguments
  when a key was released.</td>
-      <td class="baseclass" >
-      </td>
     </tr>
 </table>
 <h2><a href="#Fields">Fields</a></h2>
@@ -569,16 +515,12 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <tr>
       <td class="shortname" ><a href="#current_instance"><span class='function_modname'>awful.keygrabber.</span>current_instance</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>keygrabber</span></td>
-      <td class="summary">The current (running) instance of this keygrabber.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The current (running) instance of this keygrabber.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#is_running"><span class='function_modname'>awful.keygrabber.</span>is_running</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">If a keygrabber is currently running.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">If a keygrabber is currently running.</td>
     </tr>
 </table>
 
@@ -592,6 +534,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <dt>
     <a name = "awful.keygrabber"></a>
     <strong>awful.keygrabber <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     A wrapper around the keygrabber to make it easier to add keybindings.</p>
@@ -692,10 +636,6 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item168')">
-     Click to display more
-    </a>
 
     <span id=item168 class="hide_extra">
     </span>
@@ -708,6 +648,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <dt>
     <a name = "connect_signal"></a>
     <strong><span class='function_modname'>awful.keygrabber.</span>connect_signal <span class='function_args'> <b>(</b>name, callback<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Connect to a signal for all keygrabbers at once.
@@ -728,10 +670,6 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item169')">
-     Click to display more
-    </a>
 
     <span id=item169 class="hide_extra">
     </span>
@@ -740,6 +678,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <dt>
     <a name = "disconnect_signal"></a>
     <strong><span class='function_modname'>awful.keygrabber.</span>disconnect_signal <span class='function_args'> <b>(</b>name, callback<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Disconnect to a signal for all keygrabbers at once.
@@ -760,10 +700,6 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item170')">
-     Click to display more
-    </a>
 
     <span id=item170 class="hide_extra">
     </span>
@@ -772,6 +708,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <dt>
     <a name = "emit_signal"></a>
     <strong><span class='function_modname'>awful.keygrabber.</span>emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Emit a signal on the keygrabber module itself.</p>
@@ -795,10 +733,6 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item171')">
-     Click to display more
-    </a>
 
     <span id=item171 class="hide_extra">
     </span>
@@ -812,6 +746,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <a name = "timeout"></a>
     <strong>timeout</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The keygrabber timeout.
@@ -836,10 +772,6 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item172')">
-     Click to display more
-    </a>
 
     <span id=item172 class="hide_extra">
     </span>
@@ -849,6 +781,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <a name = "stop_key"></a>
     <strong>stop_key</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The key on which the keygrabber listen to terminate itself.</p>
@@ -883,10 +817,6 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item173')">
-     Click to display more
-    </a>
 
     <span id=item173 class="hide_extra">
     </span>
@@ -896,6 +826,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <a name = "stop_event"></a>
     <strong>stop_event</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     <p>The event on which the keygrabbing will be terminated.</p>
@@ -917,10 +849,6 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item174')">
-     Click to display more
-    </a>
 
     <span id=item174 class="hide_extra">
     </span>
@@ -930,6 +858,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <a name = "mask_event_callback"></a>
     <strong>mask_event_callback</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Whether or not to execute the key press/release callbacks when keybindings are called.</p>
@@ -951,10 +881,6 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item175')">
-     Click to display more
-    </a>
 
     <span id=item175 class="hide_extra">
     </span>
@@ -964,6 +890,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <a name = "mask_modkeys"></a>
     <strong>mask_modkeys</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Do not call the callbacks on modifier keys (like <code>Control</code> or <code>Mod4</code>) events.
@@ -977,10 +905,6 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item176')">
-     Click to display more
-    </a>
 
     <span id=item176 class="hide_extra">
     </span>
@@ -990,6 +914,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <a name = "export_keybindings"></a>
     <strong>export_keybindings</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Export all keygrabber keybindings as root (global) keybindings.</p>
@@ -1007,10 +933,6 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item177')">
-     Click to display more
-    </a>
 
     <span id=item177 class="hide_extra">
     </span>
@@ -1020,6 +942,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <a name = "root_keybindings"></a>
     <strong>root_keybindings</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     <p>The root (global) keybinding to start this keygrabber.</p>
@@ -1094,10 +1018,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 </span>root._execute_keybinding({<span class="string">'Mod4'</span>, <span class="string">'Shift'</span>}, <span class="string">'i'</span>)</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item178')">
-     Click to display more
-    </a>
 
     <span id=item178 class="hide_extra">
     </span>
@@ -1107,6 +1027,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <a name = "keybindings"></a>
     <strong>keybindings</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The keybindings associated with this keygrabber.</p>
@@ -1124,10 +1046,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item179')">
-     Click to display more
-    </a>
 
     <span id=item179 class="hide_extra">
     </span>
@@ -1137,6 +1055,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <a name = "allowed_keys"></a>
     <strong>allowed_keys</strong>
     <span class="proptype">(<span class='summary_type'>table <i>or</i> nil</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     If any key is pressed that is not in this list, the keygrabber is stopped.</p>
@@ -1168,10 +1088,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item180')">
-     Click to display more
-    </a>
 
     <span id=item180 class="hide_extra">
     </span>
@@ -1181,6 +1097,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <a name = "sequence"></a>
     <strong>sequence</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The sequence of keys recorded since the start of the keygrabber.</p>
@@ -1206,10 +1124,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item181')">
-     Click to display more
-    </a>
 
     <span id=item181 class="hide_extra">
     </span>
@@ -1222,6 +1136,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "start"></a>
     <strong>:start <span class='function_args'> <b>(</b><b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Start the keygrabber.</p>
@@ -1240,10 +1156,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item182')">
-     Click to display more
-    </a>
 
     <span id=item182 class="hide_extra">
     </span>
@@ -1252,6 +1164,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "stop"></a>
     <strong>:stop <span class='function_args'> <b>(</b><b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Stop the keygrabber.
@@ -1261,10 +1175,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item183')">
-     Click to display more
-    </a>
 
     <span id=item183 class="hide_extra">
     </span>
@@ -1273,6 +1183,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "add_keybinding"></a>
     <strong>:add_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Add a keybinding to this keygrabber.</p>
@@ -1291,10 +1203,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item184')">
-     Click to display more
-    </a>
 
     <span id=item184 class="hide_extra">
     </span>
@@ -1303,7 +1211,9 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "emit_signal"></a>
     <strong>:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Emit a signal.
@@ -1325,10 +1235,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item185')">
-     Click to display more
-    </a>
 
     <span id=item185 class="hide_extra">
     </span>
@@ -1337,7 +1243,9 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "connect_signal"></a>
     <strong>:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal.
@@ -1358,10 +1266,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item186')">
-     Click to display more
-    </a>
 
     <span id=item186 class="hide_extra">
     </span>
@@ -1370,7 +1274,9 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "weak_connect_signal"></a>
     <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal weakly.</p>
@@ -1398,10 +1304,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item187')">
-     Click to display more
-    </a>
 
     <span id=item187 class="hide_extra">
     </span>
@@ -1414,6 +1316,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "property::current_instance"></a>
     <strong>property::current_instance</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The global signal used to track the <a href="../core_components/awful.keygrabber.html#current_instance">current_instance</a>.
@@ -1423,10 +1327,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item188')">
-     Click to display more
-    </a>
 
     <span id=item188 class="hide_extra">
     </span>
@@ -1435,6 +1335,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "started"></a>
     <strong>started</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     When the keygrabber starts.
@@ -1444,10 +1346,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item189')">
-     Click to display more
-    </a>
 
     <span id=item189 class="hide_extra">
     </span>
@@ -1456,6 +1354,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "stopped"></a>
     <strong>stopped</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     When the keygrabber stops.
@@ -1465,10 +1365,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item190')">
-     Click to display more
-    </a>
 
     <span id=item190 class="hide_extra">
     </span>
@@ -1481,6 +1377,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "stop"></a>
     <strong>awful.keygrabber.stop<i class="deprecated_label"> [deprecated]</i></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Stop grabbing the keyboard for the provided callback.</p>
@@ -1500,10 +1398,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item191')">
-     Click to display more
-    </a>
 
     <span id=item191 class="hide_extra">
     </span>
@@ -1512,6 +1406,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "run"></a>
     <strong>awful.keygrabber.run<i class="deprecated_label"> [deprecated]</i></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     A lower level API to interact with the keygrabber directly.</p>
@@ -1584,10 +1480,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 <span class="keyword">end</span></pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item192')">
-     Click to display more
-    </a>
 
     <span id=item192 class="hide_extra">
     </span>
@@ -1600,6 +1492,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "start_callback"></a>
     <strong>start_callback</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     A function called when a keygrabber starts.
@@ -1616,10 +1510,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item193')">
-     Click to display more
-    </a>
 
     <span id=item193 class="hide_extra">
     </span>
@@ -1628,6 +1518,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "stop_callback"></a>
     <strong>stop_callback</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The callback when the keygrabbing stops.
@@ -1667,10 +1559,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 </span><span class="keyword">end</span></pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item194')">
-     Click to display more
-    </a>
 
     <span id=item194 class="hide_extra">
     </span>
@@ -1679,6 +1567,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "timeout_callback"></a>
     <strong>timeout_callback</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The function called when the keygrabber stops because of a <a href="../core_components/awful.keygrabber.html#timeout">timeout</a>.</p>
@@ -1694,10 +1584,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item195')">
-     Click to display more
-    </a>
 
     <span id=item195 class="hide_extra">
     </span>
@@ -1706,6 +1592,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "keypressed_callback"></a>
     <strong>keypressed_callback</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The callback function to call with mod table, key and command as arguments
@@ -1741,10 +1629,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 </span><span class="keyword">end</span></pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item196')">
-     Click to display more
-    </a>
 
     <span id=item196 class="hide_extra">
     </span>
@@ -1753,6 +1637,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <dt>
     <a name = "keyreleased_callback"></a>
     <strong>keyreleased_callback</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The callback function to call with mod table, key and command as arguments
@@ -1788,10 +1674,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 </span><span class="keyword">end</span></pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item197')">
-     Click to display more
-    </a>
 
     <span id=item197 class="hide_extra">
     </span>
@@ -1805,6 +1687,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <a name = "current_instance"></a>
     <strong><span class='function_modname'>awful.keygrabber.</span>current_instance</strong>
     <span class="proptype">(<span class='summary_type'>keygrabber</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The current (running) instance of this keygrabber.</p>
@@ -1823,10 +1707,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item198')">
-     Click to display more
-    </a>
 
     <span id=item198 class="hide_extra">
     </span>
@@ -1836,6 +1716,8 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <a name = "is_running"></a>
     <strong><span class='function_modname'>awful.keygrabber.</span>is_running</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     If a keygrabber is currently running.
@@ -1845,10 +1727,6 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item199')">
-     Click to display more
-    </a>
 
     <span id=item199 class="hide_extra">
     </span>
