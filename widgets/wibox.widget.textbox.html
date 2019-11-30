@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
    <script>
      function show_extra(id) {
-        var cur = document.getElementById(id).className
+        var cur = document.getElementById("item"+id).className
 
-        if (cur == "hide_extra")
-            document.getElementById(id).className = "show_more"
-        else
-            document.getElementById(id).className = "hide_extra"
+        if (cur == "hide_extra") {
+            document.getElementById("item"+id).className = "show_more"
+            document.getElementById("button"+id).className = "hide_extra"
+        }
      }
    </script>
 
@@ -44,7 +44,6 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Constructors">Constructors</a></li>
-<li><a href="#Functions">Functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
 <li><a href="#Signals">Signals</a></li>
@@ -241,19 +240,7 @@
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#wibox.widget.textbox">wibox.widget.textbox <span class='function_args'> <b>(</b>[text=""[, ignore_markup=false]]<b>)</b></span></a></td>
-      <td class="summary">Create a new textbox.</td>
-      <td class="baseclass" >
-      </td>
-    </tr>
-</table>
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-    <tr>
-      <td class="name" ><a href="#add_button"><span class='function_modname'>wibox.widget.textbox.</span>add_button (button)</a></td>
-      <td class="summary">Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.</td>
-      <td class="baseclass" >
-        Inherited from wibox.widget
-      </td>
+      <td colspan="2" class="summary">Create a new textbox.</td>
     </tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
@@ -261,57 +248,43 @@
     <tr>
       <td class="shortname" ><a href="#markup">markup</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td class="summary">Set the text of the textbox (with
+      <td colspan="2" class="summary">Set the text of the textbox (with
  <a href="https://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango markup</a>).</td>
-      <td class="baseclass" >
-      </td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#text">text</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>text</span></td>
-      <td class="summary">Set a textbox' text.</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="2" class="summary">Set a textbox text.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#ellipsize">ellipsize</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>mode</span></td>
-      <td class="summary">Set a textbox' ellipsize mode.</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="2" class="summary">Set a textbox ellipsize mode.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#wrap">wrap</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>mode</span></td>
-      <td class="summary">Set a textbox' wrap mode.</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="2" class="summary">Set a textbox wrap mode.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#valign">valign</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>mode</span></td>
-      <td class="summary">The textbox' vertical alignment</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="2" class="summary">The textbox' vertical alignment.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#align">align</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>mode</span></td>
-      <td class="summary">Set a textbox' horizontal alignment.</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="2" class="summary">Set a textbox horizontal alignment.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#font">font</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>font</span></td>
-      <td class="summary">Set a textbox' font</td>
-      <td class="baseclass" >
-      </td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="2" class="summary">Set a textbox font.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#children">children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">Get or set the children elements.</td>
+      <td colspan="1" class="summary">Get or set the children elements.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -319,7 +292,7 @@
     <tr>
       <td class="shortname" ><a href="#all_children">all_children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">Get all direct and indirect children widgets.</td>
+      <td colspan="1" class="summary">Get all direct and indirect children widgets.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -327,7 +300,7 @@
     <tr>
       <td class="shortname" ><a href="#forced_height">forced_height</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force a widget height.</td>
+      <td colspan="1" class="summary">Force a widget height.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -335,7 +308,7 @@
     <tr>
       <td class="shortname" ><a href="#forced_width">forced_width</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force a widget width.</td>
+      <td colspan="1" class="summary">Force a widget width.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -343,7 +316,7 @@
     <tr>
       <td class="shortname" ><a href="#opacity">opacity</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The widget opacity (transparency).</td>
+      <td colspan="1" class="summary">The widget opacity (transparency).</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -351,7 +324,7 @@
     <tr>
       <td class="shortname" ><a href="#visible">visible</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">The widget visibility.</td>
+      <td colspan="1" class="summary">The widget visibility.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -359,7 +332,7 @@
     <tr>
       <td class="shortname" ><a href="#buttons">buttons</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">The widget buttons.</td>
+      <td colspan="1" class="summary">The widget buttons.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -369,45 +342,42 @@
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#get_preferred_size">:get_preferred_size <span class='function_args'> <b>(</b>s<b>)</b></span></a></td>
-      <td class="summary">Get the preferred size of a textbox.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Get the preferred size of a textbox.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#get_height_for_width">:get_height_for_width <span class='function_args'> <b>(</b>width, s<b>)</b></span></a></td>
-      <td class="summary">Get the preferred height of a textbox at a given width.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Get the preferred height of a textbox at a given width.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#get_preferred_size_at_dpi">:get_preferred_size_at_dpi <span class='function_args'> <b>(</b>dpi<b>)</b></span></a></td>
-      <td class="summary">Get the preferred size of a textbox.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Get the preferred size of a textbox.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#get_height_for_width_at_dpi">:get_height_for_width_at_dpi <span class='function_args'> <b>(</b>width, dpi<b>)</b></span></a></td>
-      <td class="summary">Get the preferred height of a textbox at a given width.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Get the preferred height of a textbox at a given width.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#set_markup_silently">:set_markup_silently <span class='function_args'> <b>(</b>text<b>)</b></span></a></td>
-      <td class="summary">Set the text of the textbox (with
+      <td colspan="2" class="summary">Set the text of the textbox.(with
  <a href="https://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango markup</a>).</td>
-      <td class="baseclass" >
-      </td>
     </tr>
     <tr>
       <td class="name" ><a href="#setup">:setup <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
-      <td class="summary">Set a declarative widget hierarchy description.</td>
+      <td colspan="1" class="summary">Set a declarative widget hierarchy description.</td>
+      <td class="baseclass" >
+        Inherited from wibox.widget
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#add_button">:add_button <span class='function_args'> <b>(</b>button<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal_recursive">:emit_signal_recursive <span class='function_args'> <b>(</b>signal_name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
+      <td colspan="1" class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
  forward the signal.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
@@ -415,21 +385,21 @@
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal.</td>
+      <td colspan="1" class="summary">Emit a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#connect_signal">:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal.</td>
+      <td colspan="1" class="summary">Connect to a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#weak_connect_signal">:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal weakly.</td>
+      <td colspan="1" class="summary">Connect to a signal weakly.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
@@ -439,42 +409,42 @@
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#widget::layout_changed">widget::layout_changed</a></td>
-      <td class="summary">When the layout (size) change.</td>
+      <td colspan="1" class="summary">When the layout (size) change.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#widget::redraw_needed">widget::redraw_needed</a></td>
-      <td class="summary">When the widget content changed.</td>
+      <td colspan="1" class="summary">When the widget content changed.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::press">button::press</a></td>
-      <td class="summary">When a mouse button is pressed over the widget.</td>
+      <td colspan="1" class="summary">When a mouse button is pressed over the widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::release">button::release</a></td>
-      <td class="summary">When a mouse button is released over the widget.</td>
+      <td colspan="1" class="summary">When a mouse button is released over the widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#mouse::enter">mouse::enter</a></td>
-      <td class="summary">When the mouse enter a widget.</td>
+      <td colspan="1" class="summary">When the mouse enter a widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#mouse::leave">mouse::leave</a></td>
-      <td class="summary">When the mouse leave a widget.</td>
+      <td colspan="1" class="summary">When the mouse leave a widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -485,9 +455,7 @@
     <tr>
       <td class="shortname" ><a href="#beautiful.font">beautiful.font</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td class="summary">The textbox font.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The textbox font.</td>
     </tr>
 </table>
 
@@ -501,6 +469,8 @@
     <dt>
     <a name = "wibox.widget.textbox"></a>
     <strong>wibox.widget.textbox <span class='function_args'> <b>(</b>[text=""[, ignore_markup=false]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Create a new textbox.
@@ -529,43 +499,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1370')">
-     Click to display more
-    </a>
-
-    <span id=item1370 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "add_button"></a>
-    <strong><span class='function_modname'>wibox.widget.textbox.</span>add_button (button)</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
-    </dt>
-    <dd>
-    Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">button</span>
-            <span class="types"><span class="type">awful.button</span></span>
-         The button to add.
-        </li>
-    </ul>
-
-
-
-
-
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1371')">
-     Click to display more
-    </a>
 
     <span id=item1371 class="hide_extra">
     </span>
@@ -579,6 +512,9 @@
     <a name = "markup"></a>
     <strong>markup</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
     </dt>
     <dd>
     Set the text of the textbox (with
@@ -602,27 +538,42 @@
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1372')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1372>
+     <a class="show_more_button" onclick="show_extra('1372')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1372 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::markup</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<a href="../widgets/wibox.widget.textbox.html#text">text</a>)</span> The new value.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "text"></a>
     <strong>text</strong>
-    <span class="proptype">(<span class='summary_type'>text</span>)</span>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
     </dt>
     <dd>
-    Set a textbox' text.
+    Set a textbox text.
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">text</span>
-         The text to display. Pango markup is ignored and shown as-is.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The text to display. Pango markup is ignored and shown
+  as-is.
         </li>
     </ul>
 
@@ -634,27 +585,51 @@
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1373')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1373>
+     <a class="show_more_button" onclick="show_extra('1373')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1373 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::text</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<a href="../widgets/wibox.widget.textbox.html#text">text</a>)</span> The new value.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "ellipsize"></a>
     <strong>ellipsize</strong>
-    <span class="proptype">(<span class='summary_type'>mode</span>)</span>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
     </dt>
     <dd>
-    Set a textbox' ellipsize mode.
+    <p>Set a textbox ellipsize mode.</p>
+
+<p> Valid values are:</p>
+
+<ul>
+<li><strong>start</strong></li>
+<li><strong>middle</strong></li>
+<li><strong>end</strong></li>
+</ul>
+
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">mode</span>
-         Where should long lines be shortened? &ldquo;start&rdquo;, &ldquo;middle&rdquo; or &ldquo;end&rdquo;
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Where should long lines be shortened? &ldquo;start&rdquo;, &ldquo;middle&rdquo;
+  or &ldquo;end&rdquo;.
         </li>
     </ul>
 
@@ -662,27 +637,50 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1374')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1374>
+     <a class="show_more_button" onclick="show_extra('1374')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1374 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::ellipsize</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<code>mode</code>)</span> The new value.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "wrap"></a>
     <strong>wrap</strong>
-    <span class="proptype">(<span class='summary_type'>mode</span>)</span>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
     </dt>
     <dd>
-    Set a textbox' wrap mode.
+    <p>Set a textbox wrap mode.</p>
+
+<p> Valid values are:</p>
+
+<ul>
+<li><strong>word</strong></li>
+<li><strong>char</strong></li>
+<li><strong>word_char</strong></li>
+</ul>
+
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">mode</span>
-         Where to wrap? After &ldquo;word&rdquo;, &ldquo;char&rdquo; or &ldquo;word_char&rdquo;
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Where to wrap? After &ldquo;word&rdquo;, &ldquo;char&rdquo; or &ldquo;word_char&rdquo;.
         </li>
     </ul>
 
@@ -690,27 +688,51 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1375')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1375>
+     <a class="show_more_button" onclick="show_extra('1375')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1375 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::wrap</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<code>mode</code>)</span> The new value.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "valign"></a>
     <strong>valign</strong>
-    <span class="proptype">(<span class='summary_type'>mode</span>)</span>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
     </dt>
     <dd>
-    The textbox' vertical alignment
+    <p>The textbox' vertical alignment.</p>
+
+<p> Valid values are:</p>
+
+<ul>
+<li><strong>top</strong></li>
+<li><strong>center</strong></li>
+<li><strong>bottom</strong></li>
+</ul>
+
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">mode</span>
-         Where should the textbox be drawn? &ldquo;top&rdquo;, &ldquo;center&rdquo; or &ldquo;bottom&rdquo;
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Where should the textbox be drawn? &ldquo;top&rdquo;, &ldquo;center&rdquo; or
+  &ldquo;bottom&rdquo;.
         </li>
     </ul>
 
@@ -718,27 +740,51 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1376')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1376>
+     <a class="show_more_button" onclick="show_extra('1376')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1376 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::valign</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<code>mode</code>)</span> The new value.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "align"></a>
     <strong>align</strong>
-    <span class="proptype">(<span class='summary_type'>mode</span>)</span>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
     </dt>
     <dd>
-    Set a textbox' horizontal alignment.
+    <p>Set a textbox horizontal alignment.</p>
+
+<p> Valid values are:</p>
+
+<ul>
+<li><strong>left</strong></li>
+<li><strong>center</strong></li>
+<li><strong>right</strong></li>
+</ul>
+
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">mode</span>
-         Where should the textbox be drawn? &ldquo;left&rdquo;, &ldquo;center&rdquo; or &ldquo;right&rdquo;
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Where should the textbox be drawn? &ldquo;left&rdquo;, &ldquo;center&rdquo; or
+  &ldquo;right&rdquo;.
         </li>
     </ul>
 
@@ -746,27 +792,42 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1377')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1377>
+     <a class="show_more_button" onclick="show_extra('1377')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1377 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::align</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<code>mode</code>)</span> The new value.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "font"></a>
     <strong>font</strong>
-    <span class="proptype">(<span class='summary_type'>font</span>)</span>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+         &middot 1 signals
+         &middot 1 theme variables
+    </span>
     </dt>
     <dd>
-    Set a textbox' font
+    Set a textbox font.
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">font</span>
-         The font description as string
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The font description as string.
         </li>
     </ul>
 
@@ -774,12 +835,30 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1378')">
-     Click to display more
-    </a>
+     <br />
+     <center id=button1378>
+     <a class="show_more_button" onclick="show_extra('1378')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1378 class="hide_extra">
+     <h3>Emit signals::</h3>
+     <ul>
+          <li><span class="parameter"><code>property::font</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a>)</span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>v</code></span> <span class="parameter">(<a href="../widgets/wibox.widget.textbox.html#font">font</a>)</span> The new value.</li>
+           </ul>
+     </ul>
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><code>beautiful.textbox_font</code></td><td>Fallback when <a href="../widgets/wibox.widget.textbox.html#font">font</a> isn't set.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -787,7 +866,9 @@
     <a name = "children"></a>
     <strong>children</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Get or set the children elements.
@@ -804,10 +885,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1379')">
-     Click to display more
-    </a>
 
     <span id=item1379 class="hide_extra">
     </span>
@@ -817,7 +894,9 @@
     <a name = "all_children"></a>
     <strong>all_children</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Get all direct and indirect children widgets.
@@ -837,10 +916,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1380')">
-     Click to display more
-    </a>
 
     <span id=item1380 class="hide_extra">
     </span>
@@ -850,7 +925,9 @@
     <a name = "forced_height"></a>
     <strong>forced_height</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Force a widget height.
@@ -867,10 +944,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1381')">
-     Click to display more
-    </a>
 
     <span id=item1381 class="hide_extra">
     </span>
@@ -880,7 +953,9 @@
     <a name = "forced_width"></a>
     <strong>forced_width</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Force a widget width.
@@ -897,10 +972,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1382')">
-     Click to display more
-    </a>
 
     <span id=item1382 class="hide_extra">
     </span>
@@ -910,7 +981,9 @@
     <a name = "opacity"></a>
     <strong>opacity</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget opacity (transparency).
@@ -928,10 +1001,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1383')">
-     Click to display more
-    </a>
 
     <span id=item1383 class="hide_extra">
     </span>
@@ -941,7 +1010,9 @@
     <a name = "visible"></a>
     <strong>visible</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget visibility.
@@ -951,10 +1022,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1384')">
-     Click to display more
-    </a>
 
     <span id=item1384 class="hide_extra">
     </span>
@@ -964,7 +1031,9 @@
     <a name = "buttons"></a>
     <strong>buttons</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget buttons.</p>
@@ -980,10 +1049,6 @@
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1385')">
-     Click to display more
-    </a>
 
     <span id=item1385 class="hide_extra">
     </span>
@@ -996,10 +1061,13 @@
     <dt>
     <a name = "get_preferred_size"></a>
     <strong>:get_preferred_size <span class='function_args'> <b>(</b>s<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
-    Get the preferred size of a textbox.
- This returns the size that the textbox would use if infinite space were
+    Get the preferred size of a textbox.</p>
+
+<p> This returns the size that the textbox would use if infinite space were
  available.
 
     <h3>Parameters:</h3>
@@ -1023,10 +1091,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1386')">
-     Click to display more
-    </a>
 
     <span id=item1386 class="hide_extra">
     </span>
@@ -1035,10 +1099,13 @@
     <dt>
     <a name = "get_height_for_width"></a>
     <strong>:get_height_for_width <span class='function_args'> <b>(</b>width, s<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
-    Get the preferred height of a textbox at a given width.
- This returns the height that the textbox would use when it is limited to the
+    Get the preferred height of a textbox at a given width.</p>
+
+<p> This returns the height that the textbox would use when it is limited to the
  given width.
 
     <h3>Parameters:</h3>
@@ -1063,10 +1130,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1387')">
-     Click to display more
-    </a>
 
     <span id=item1387 class="hide_extra">
     </span>
@@ -1075,10 +1138,13 @@
     <dt>
     <a name = "get_preferred_size_at_dpi"></a>
     <strong>:get_preferred_size_at_dpi <span class='function_args'> <b>(</b>dpi<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
-    Get the preferred size of a textbox.
- This returns the size that the textbox would use if infinite space were
+    Get the preferred size of a textbox.</p>
+
+<p> This returns the size that the textbox would use if infinite space were
  available.
 
     <h3>Parameters:</h3>
@@ -1102,10 +1168,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1388')">
-     Click to display more
-    </a>
 
     <span id=item1388 class="hide_extra">
     </span>
@@ -1114,10 +1176,13 @@
     <dt>
     <a name = "get_height_for_width_at_dpi"></a>
     <strong>:get_height_for_width_at_dpi <span class='function_args'> <b>(</b>width, dpi<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
-    Get the preferred height of a textbox at a given width.
- This returns the height that the textbox would use when it is limited to the
+    Get the preferred height of a textbox at a given width.</p>
+
+<p> This returns the height that the textbox would use when it is limited to the
  given width.
 
     <h3>Parameters:</h3>
@@ -1142,10 +1207,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1389')">
-     Click to display more
-    </a>
 
     <span id=item1389 class="hide_extra">
     </span>
@@ -1154,9 +1215,11 @@
     <dt>
     <a name = "set_markup_silently"></a>
     <strong>:set_markup_silently <span class='function_args'> <b>(</b>text<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
-    Set the text of the textbox (with
+    Set the text of the textbox.(with
  <a href="https://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango markup</a>).
 
     <h3>Parameters:</h3>
@@ -1188,10 +1251,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1390')">
-     Click to display more
-    </a>
 
     <span id=item1390 class="hide_extra">
     </span>
@@ -1200,7 +1259,9 @@
     <dt>
     <a name = "setup"></a>
     <strong>:setup <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
@@ -1217,19 +1278,44 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1391')">
-     Click to display more
-    </a>
 
     <span id=item1391 class="hide_extra">
     </span>
 
 </dd>
     <dt>
+    <a name = "add_button"></a>
+    <strong>:add_button <span class='function_args'> <b>(</b>button<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
+    </dt>
+    <dd>
+    Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">awful.button</span></span>
+         The button to add.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item1392 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "emit_signal_recursive"></a>
     <strong>:emit_signal_recursive <span class='function_args'> <b>(</b>signal_name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Emit a signal and ensure all parent widgets in the hierarchies also
@@ -1251,19 +1337,17 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1392')">
-     Click to display more
-    </a>
 
-    <span id=item1392 class="hide_extra">
+    <span id=item1393 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "emit_signal"></a>
     <strong>:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Emit a signal.
@@ -1285,19 +1369,17 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1393')">
-     Click to display more
-    </a>
 
-    <span id=item1393 class="hide_extra">
+    <span id=item1394 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "connect_signal"></a>
     <strong>:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal.
@@ -1318,19 +1400,17 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1394')">
-     Click to display more
-    </a>
 
-    <span id=item1394 class="hide_extra">
+    <span id=item1395 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "weak_connect_signal"></a>
     <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal weakly.</p>
@@ -1358,12 +1438,8 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1395')">
-     Click to display more
-    </a>
 
-    <span id=item1395 class="hide_extra">
+    <span id=item1396 class="hide_extra">
     </span>
 
 </dd>
@@ -1374,7 +1450,9 @@
     <dt>
     <a name = "widget::layout_changed"></a>
     <strong>widget::layout_changed</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the layout (size) change.
@@ -1391,19 +1469,17 @@
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1396')">
-     Click to display more
-    </a>
 
-    <span id=item1396 class="hide_extra">
+    <span id=item1397 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "widget::redraw_needed"></a>
     <strong>widget::redraw_needed</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the widget content changed.
@@ -1420,19 +1496,17 @@
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1397')">
-     Click to display more
-    </a>
 
-    <span id=item1397 class="hide_extra">
+    <span id=item1398 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "button::press"></a>
     <strong>button::press</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When a mouse button is pressed over the widget.
@@ -1515,19 +1589,17 @@
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1398')">
-     Click to display more
-    </a>
 
-    <span id=item1398 class="hide_extra">
+    <span id=item1399 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "button::release"></a>
     <strong>button::release</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When a mouse button is released over the widget.
@@ -1610,19 +1682,17 @@
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1399')">
-     Click to display more
-    </a>
 
-    <span id=item1399 class="hide_extra">
+    <span id=item1400 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "mouse::enter"></a>
     <strong>mouse::enter</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the mouse enter a widget.
@@ -1687,19 +1757,17 @@
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1400')">
-     Click to display more
-    </a>
 
-    <span id=item1400 class="hide_extra">
+    <span id=item1401 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "mouse::leave"></a>
     <strong>mouse::leave</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the mouse leave a widget.
@@ -1764,12 +1832,8 @@
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1401')">
-     Click to display more
-    </a>
 
-    <span id=item1401 class="hide_extra">
+    <span id=item1402 class="hide_extra">
     </span>
 
 </dd>
@@ -1781,6 +1845,8 @@
     <a name = "beautiful.font"></a>
     <strong>beautiful.font</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The textbox font.
@@ -1790,12 +1856,8 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1402')">
-     Click to display more
-    </a>
 
-    <span id=item1402 class="hide_extra">
+    <span id=item1403 class="hide_extra">
     </span>
 
 </dd>

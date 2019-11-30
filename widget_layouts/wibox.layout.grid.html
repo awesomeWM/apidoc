@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
    <script>
      function show_extra(id) {
-        var cur = document.getElementById(id).className
+        var cur = document.getElementById("item"+id).className
 
-        if (cur == "hide_extra")
-            document.getElementById(id).className = "show_more"
-        else
-            document.getElementById(id).className = "hide_extra"
+        if (cur == "hide_extra") {
+            document.getElementById("item"+id).className = "show_more"
+            document.getElementById("button"+id).className = "hide_extra"
+        }
      }
    </script>
 
@@ -44,7 +44,6 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Constructors">Constructors</a></li>
-<li><a href="#Functions">Functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
 <li><a href="#Signals">Signals</a></li>
@@ -273,31 +272,15 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#wibox.layout.grid">wibox.layout.grid <span class='function_args'> <b>(</b>[orientation="y"]<b>)</b></span></a></td>
-      <td class="summary">Return a new grid layout.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Return a new grid layout.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#horizontal"><span class='function_modname'>wibox.layout.grid.</span>horizontal <span class='function_args'> <b>(</b>forced_num_rows, ...<b>)</b></span></a></td>
-      <td class="summary">Return a new horizontal grid layout.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Return a new horizontal grid layout.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#vertical"><span class='function_modname'>wibox.layout.grid.</span>vertical <span class='function_args'> <b>(</b>forced_num_cols, ...<b>)</b></span></a></td>
-      <td class="summary">Return a new vertical grid layout.</td>
-      <td class="baseclass" >
-      </td>
-    </tr>
-</table>
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-    <tr>
-      <td class="name" ><a href="#add_button"><span class='function_modname'>wibox.layout.grid.</span>add_button (button)</a></td>
-      <td class="summary">Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.</td>
-      <td class="baseclass" >
-        Inherited from wibox.widget
-      </td>
+      <td colspan="2" class="summary">Return a new vertical grid layout.</td>
     </tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
@@ -305,115 +288,85 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
     <tr>
       <td class="shortname" ><a href="#orientation">orientation</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td class="summary">Set the preferred orientation of the grid layout.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Set the preferred orientation of the grid layout.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#superpose">superpose</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Allow to superpose widgets in the same cell.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Allow to superpose widgets in the same cell.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#forced_num_rows">forced_num_rows</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force the number of rows of the layout.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Force the number of rows of the layout.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#forced_num_cols">forced_num_cols</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force the number of columns of the layout.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Force the number of columns of the layout.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#min_cols_size">min_cols_size</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">Set the minimum size for the columns.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Set the minimum size for the columns.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#min_rows_size">min_rows_size</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">Set the minimum size for the rows.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Set the minimum size for the rows.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#horizontal_spacing">horizontal_spacing</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The spacing between columns.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The spacing between columns.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#vertical_spacing">vertical_spacing</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The spacing between rows.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The spacing between rows.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#spacing">spacing</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The spacing between rows and columns.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The spacing between rows and columns.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#horizontal_expand">horizontal_expand</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Controls if the columns are expanded to use all the available width.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Controls if the columns are expanded to use all the available width.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#vertical_expand">vertical_expand</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Controls if the rows are expanded to use all the available height.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Controls if the rows are expanded to use all the available height.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#expand">expand</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Controls if the columns/rows are expanded to use all the available space.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Controls if the columns/rows are expanded to use all the available space.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#horizontal_homogeneous">horizontal_homogeneous</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Controls if the columns all have the same width or if the width of each
+      <td colspan="2" class="summary">Controls if the columns all have the same width or if the width of each
  column depends on the content.</td>
-      <td class="baseclass" >
-      </td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#vertical_homogeneous">vertical_homogeneous</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Controls if the rows all have the same height or if the height of each row
+      <td colspan="2" class="summary">Controls if the rows all have the same height or if the height of each row
  depends on the content.</td>
-      <td class="baseclass" >
-      </td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#homogeneous">homogeneous</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Controls if the columns/rows all have the same size or if the size depends
+      <td colspan="2" class="summary">Controls if the columns/rows all have the same size or if the size depends
  on the content.</td>
-      <td class="baseclass" >
-      </td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#children">children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">Get or set the children elements.</td>
+      <td colspan="1" class="summary">Get or set the children elements.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -421,7 +374,7 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
     <tr>
       <td class="shortname" ><a href="#all_children">all_children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">Get all direct and indirect children widgets.</td>
+      <td colspan="1" class="summary">Get all direct and indirect children widgets.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -429,7 +382,7 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
     <tr>
       <td class="shortname" ><a href="#forced_height">forced_height</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force a widget height.</td>
+      <td colspan="1" class="summary">Force a widget height.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -437,7 +390,7 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
     <tr>
       <td class="shortname" ><a href="#forced_width">forced_width</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force a widget width.</td>
+      <td colspan="1" class="summary">Force a widget width.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -445,7 +398,7 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
     <tr>
       <td class="shortname" ><a href="#opacity">opacity</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The widget opacity (transparency).</td>
+      <td colspan="1" class="summary">The widget opacity (transparency).</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -453,7 +406,7 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
     <tr>
       <td class="shortname" ><a href="#visible">visible</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">The widget visibility.</td>
+      <td colspan="1" class="summary">The widget visibility.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -461,7 +414,7 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
     <tr>
       <td class="shortname" ><a href="#buttons">buttons</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">The widget buttons.</td>
+      <td colspan="1" class="summary">The widget buttons.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -471,110 +424,105 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#get_dimension">:get_dimension <span class='function_args'> <b>(</b><b>)</b></span></a></td>
-      <td class="summary">Get the number of rows and columns occupied by the widgets in the grid.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Get the number of rows and columns occupied by the widgets in the grid.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#get_next_empty">:get_next_empty <span class='function_args'> <b>(</b>[hint_row=1[, hint_column=1]]<b>)</b></span></a></td>
-      <td class="summary">Find the next available cell to insert a widget.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Find the next available cell to insert a widget.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#add">:add <span class='function_args'> <b>(</b>...<b>)</b></span></a></td>
-      <td class="summary">Add some widgets to the given grid layout.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Add some widgets to the given grid layout.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#add_widget_at">:add_widget_at <span class='function_args'> <b>(</b>child, row, col[, row_span=1[, col_span=1]]<b>)</b></span></a></td>
-      <td class="summary">Add a widget to the grid layout at specific coordinate.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Add a widget to the grid layout at specific coordinate.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#remove">:remove <span class='function_args'> <b>(</b>...<b>)</b></span></a></td>
-      <td class="summary">Remove one or more widgets from the layout.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Remove one or more widgets from the layout.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#remove_widgets_at">:remove_widgets_at <span class='function_args'> <b>(</b>row, col[, row_span=1[, col_span=1]]<b>)</b></span></a></td>
-      <td class="summary">Remove widgets at the coordinates.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Remove widgets at the coordinates.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#get_widget_position">:get_widget_position <span class='function_args'> <b>(</b>widget<b>)</b></span></a></td>
-      <td class="summary">Return the coordinates of the widget.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Return the coordinates of the widget.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#get_widgets_at">:get_widgets_at <span class='function_args'> <b>(</b>row, col[, row_span=1[, col_span=1]]<b>)</b></span></a></td>
-      <td class="summary">Return the widgets at the coordinates.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Return the widgets at the coordinates.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#replace_widget">:replace_widget <span class='function_args'> <b>(</b>old, new<b>)</b></span></a></td>
-      <td class="summary">Replace old widget by new widget, spanning the same columns and rows.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Replace old widget by new widget, spanning the same columns and rows.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#insert_column">:insert_column <span class='function_args'> <b>(</b>index<b>)</b></span></a></td>
-      <td class="summary">Insert column at index.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Insert column at index.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#extend_column">:extend_column <span class='function_args'> <b>(</b>index<b>)</b></span></a></td>
-      <td class="summary">Extend column at index.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Extend column at index.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#remove_column">:remove_column <span class='function_args'> <b>(</b>index<b>)</b></span></a></td>
-      <td class="summary">Remove column at index.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Remove column at index.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#insert_row">:insert_row <span class='function_args'> <b>(</b>index<b>)</b></span></a></td>
-      <td class="summary">Insert row at index.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Insert row at index.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#extend_row">:extend_row <span class='function_args'> <b>(</b>index<b>)</b></span></a></td>
-      <td class="summary">Extend row at index.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Extend row at index.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#remove_row">:remove_row <span class='function_args'> <b>(</b>index<b>)</b></span></a></td>
-      <td class="summary">Remove row at index.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Remove row at index.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#reset">:reset <span class='function_args'> <b>(</b><b>)</b></span></a></td>
-      <td class="summary">Reset the grid layout.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Reset the grid layout.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#set">:set <span class='function_args'> <b>(</b>index, widget2<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Set a widget at a specific index, replace the current one.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#replace_widget">:replace_widget <span class='function_args'> <b>(</b>widget, widget2[, recursive=false]<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#swap">:swap <span class='function_args'> <b>(</b>index1, index2<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Swap 2 widgets in a layout.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#swap_widgets">:swap_widgets <span class='function_args'> <b>(</b>widget1, widget2[, recursive=false]<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Swap 2 widgets in a layout.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#reset">:reset <span class='function_args'> <b>(</b><b>)</b></span></a></td>
+      <td colspan="2" class="summary">Reset a ratio layout.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#setup">:setup <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
-      <td class="summary">Set a declarative widget hierarchy description.</td>
+      <td colspan="1" class="summary">Set a declarative widget hierarchy description.</td>
+      <td class="baseclass" >
+        Inherited from wibox.widget
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#add_button">:add_button <span class='function_args'> <b>(</b>button<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal_recursive">:emit_signal_recursive <span class='function_args'> <b>(</b>signal_name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
+      <td colspan="1" class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
  forward the signal.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
@@ -582,21 +530,21 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal.</td>
+      <td colspan="1" class="summary">Emit a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#connect_signal">:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal.</td>
+      <td colspan="1" class="summary">Connect to a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#weak_connect_signal">:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal weakly.</td>
+      <td colspan="1" class="summary">Connect to a signal weakly.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
@@ -606,48 +554,46 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#widget::reset">widget::reset</a></td>
-      <td class="summary">When the layout is reset.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">When the layout is reset.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#widget::layout_changed">widget::layout_changed</a></td>
-      <td class="summary">When the layout (size) change.</td>
+      <td colspan="1" class="summary">When the layout (size) change.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#widget::redraw_needed">widget::redraw_needed</a></td>
-      <td class="summary">When the widget content changed.</td>
+      <td colspan="1" class="summary">When the widget content changed.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::press">button::press</a></td>
-      <td class="summary">When a mouse button is pressed over the widget.</td>
+      <td colspan="1" class="summary">When a mouse button is pressed over the widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::release">button::release</a></td>
-      <td class="summary">When a mouse button is released over the widget.</td>
+      <td colspan="1" class="summary">When a mouse button is released over the widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#mouse::enter">mouse::enter</a></td>
-      <td class="summary">When the mouse enter a widget.</td>
+      <td colspan="1" class="summary">When the mouse enter a widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#mouse::leave">mouse::leave</a></td>
-      <td class="summary">When the mouse leave a widget.</td>
+      <td colspan="1" class="summary">When the mouse leave a widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -657,9 +603,7 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#position">position</a></td>
-      <td class="summary">Child widget position.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Child widget position.</td>
     </tr>
 </table>
 
@@ -673,6 +617,8 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
     <dt>
     <a name = "wibox.layout.grid"></a>
     <strong>wibox.layout.grid <span class='function_args'> <b>(</b>[orientation="y"]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Return a new grid layout.</p>
@@ -692,18 +638,16 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1842')">
-     Click to display more
-    </a>
 
-    <span id=item1842 class="hide_extra">
+    <span id=item1838 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "horizontal"></a>
     <strong><span class='function_modname'>wibox.layout.grid.</span>horizontal <span class='function_args'> <b>(</b>forced_num_rows, ...<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Return a new horizontal grid layout.</p>
@@ -727,18 +671,16 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1843')">
-     Click to display more
-    </a>
 
-    <span id=item1843 class="hide_extra">
+    <span id=item1839 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "vertical"></a>
     <strong><span class='function_modname'>wibox.layout.grid.</span>vertical <span class='function_args'> <b>(</b>forced_num_cols, ...<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Return a new vertical grid layout.</p>
@@ -762,45 +704,8 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1844')">
-     Click to display more
-    </a>
 
-    <span id=item1844 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "add_button"></a>
-    <strong><span class='function_modname'>wibox.layout.grid.</span>add_button (button)</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
-    </dt>
-    <dd>
-    Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">button</span>
-            <span class="types"><span class="type">awful.button</span></span>
-         The button to add.
-        </li>
-    </ul>
-
-
-
-
-
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1845')">
-     Click to display more
-    </a>
-
-    <span id=item1845 class="hide_extra">
+    <span id=item1840 class="hide_extra">
     </span>
 
 </dd>
@@ -812,6 +717,8 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
     <a name = "orientation"></a>
     <strong>orientation</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     <p>Set the preferred orientation of the grid layout.</p>
@@ -855,12 +762,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1846')">
-     Click to display more
-    </a>
 
-    <span id=item1846 class="hide_extra">
+    <span id=item1841 class="hide_extra">
     </span>
 
 </dd>
@@ -868,6 +771,8 @@ l:add(...)
     <a name = "superpose"></a>
     <strong>superpose</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Allow to superpose widgets in the same cell.
@@ -881,12 +786,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1847')">
-     Click to display more
-    </a>
 
-    <span id=item1847 class="hide_extra">
+    <span id=item1842 class="hide_extra">
     </span>
 
 </dd>
@@ -894,6 +795,8 @@ l:add(...)
     <a name = "forced_num_rows"></a>
     <strong>forced_num_rows</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Force the number of rows of the layout.
@@ -911,12 +814,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1848')">
-     Click to display more
-    </a>
 
-    <span id=item1848 class="hide_extra">
+    <span id=item1843 class="hide_extra">
     </span>
 
 </dd>
@@ -924,6 +823,8 @@ l:add(...)
     <a name = "forced_num_cols"></a>
     <strong>forced_num_cols</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Force the number of columns of the layout.
@@ -941,12 +842,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1849')">
-     Click to display more
-    </a>
 
-    <span id=item1849 class="hide_extra">
+    <span id=item1844 class="hide_extra">
     </span>
 
 </dd>
@@ -954,6 +851,8 @@ l:add(...)
     <a name = "min_cols_size"></a>
     <strong>min_cols_size</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Set the minimum size for the columns.</p>
@@ -972,12 +871,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1850')">
-     Click to display more
-    </a>
 
-    <span id=item1850 class="hide_extra">
+    <span id=item1845 class="hide_extra">
     </span>
 
 </dd>
@@ -985,6 +880,8 @@ l:add(...)
     <a name = "min_rows_size"></a>
     <strong>min_rows_size</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Set the minimum size for the rows.
@@ -1001,12 +898,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1851')">
-     Click to display more
-    </a>
 
-    <span id=item1851 class="hide_extra">
+    <span id=item1846 class="hide_extra">
     </span>
 
 </dd>
@@ -1014,6 +907,8 @@ l:add(...)
     <a name = "horizontal_spacing"></a>
     <strong>horizontal_spacing</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The spacing between columns.</p>
@@ -1032,12 +927,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1852')">
-     Click to display more
-    </a>
 
-    <span id=item1852 class="hide_extra">
+    <span id=item1847 class="hide_extra">
     </span>
 
 </dd>
@@ -1045,6 +936,8 @@ l:add(...)
     <a name = "vertical_spacing"></a>
     <strong>vertical_spacing</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The spacing between rows.</p>
@@ -1063,12 +956,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1853')">
-     Click to display more
-    </a>
 
-    <span id=item1853 class="hide_extra">
+    <span id=item1848 class="hide_extra">
     </span>
 
 </dd>
@@ -1076,6 +965,8 @@ l:add(...)
     <a name = "spacing"></a>
     <strong>spacing</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The spacing between rows and columns.
@@ -1097,12 +988,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1854')">
-     Click to display more
-    </a>
 
-    <span id=item1854 class="hide_extra">
+    <span id=item1849 class="hide_extra">
     </span>
 
 </dd>
@@ -1110,6 +997,8 @@ l:add(...)
     <a name = "horizontal_expand"></a>
     <strong>horizontal_expand</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Controls if the columns are expanded to use all the available width.</p>
@@ -1128,12 +1017,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1855')">
-     Click to display more
-    </a>
 
-    <span id=item1855 class="hide_extra">
+    <span id=item1850 class="hide_extra">
     </span>
 
 </dd>
@@ -1141,6 +1026,8 @@ l:add(...)
     <a name = "vertical_expand"></a>
     <strong>vertical_expand</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Controls if the rows are expanded to use all the available height.</p>
@@ -1159,12 +1046,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1856')">
-     Click to display more
-    </a>
 
-    <span id=item1856 class="hide_extra">
+    <span id=item1851 class="hide_extra">
     </span>
 
 </dd>
@@ -1172,6 +1055,8 @@ l:add(...)
     <a name = "expand"></a>
     <strong>expand</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Controls if the columns/rows are expanded to use all the available space.
@@ -1193,12 +1078,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1857')">
-     Click to display more
-    </a>
 
-    <span id=item1857 class="hide_extra">
+    <span id=item1852 class="hide_extra">
     </span>
 
 </dd>
@@ -1206,6 +1087,8 @@ l:add(...)
     <a name = "horizontal_homogeneous"></a>
     <strong>horizontal_homogeneous</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Controls if the columns all have the same width or if the width of each
@@ -1225,12 +1108,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1858')">
-     Click to display more
-    </a>
 
-    <span id=item1858 class="hide_extra">
+    <span id=item1853 class="hide_extra">
     </span>
 
 </dd>
@@ -1238,6 +1117,8 @@ l:add(...)
     <a name = "vertical_homogeneous"></a>
     <strong>vertical_homogeneous</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Controls if the rows all have the same height or if the height of each row
@@ -1257,12 +1138,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1859')">
-     Click to display more
-    </a>
 
-    <span id=item1859 class="hide_extra">
+    <span id=item1854 class="hide_extra">
     </span>
 
 </dd>
@@ -1270,6 +1147,8 @@ l:add(...)
     <a name = "homogeneous"></a>
     <strong>homogeneous</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Controls if the columns/rows all have the same size or if the size depends
@@ -1292,12 +1171,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1860')">
-     Click to display more
-    </a>
 
-    <span id=item1860 class="hide_extra">
+    <span id=item1855 class="hide_extra">
     </span>
 
 </dd>
@@ -1305,7 +1180,9 @@ l:add(...)
     <a name = "children"></a>
     <strong>children</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Get or set the children elements.
@@ -1322,12 +1199,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1861')">
-     Click to display more
-    </a>
 
-    <span id=item1861 class="hide_extra">
+    <span id=item1856 class="hide_extra">
     </span>
 
 </dd>
@@ -1335,7 +1208,9 @@ l:add(...)
     <a name = "all_children"></a>
     <strong>all_children</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Get all direct and indirect children widgets.
@@ -1355,12 +1230,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1862')">
-     Click to display more
-    </a>
 
-    <span id=item1862 class="hide_extra">
+    <span id=item1857 class="hide_extra">
     </span>
 
 </dd>
@@ -1368,7 +1239,9 @@ l:add(...)
     <a name = "forced_height"></a>
     <strong>forced_height</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Force a widget height.
@@ -1385,12 +1258,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1863')">
-     Click to display more
-    </a>
 
-    <span id=item1863 class="hide_extra">
+    <span id=item1858 class="hide_extra">
     </span>
 
 </dd>
@@ -1398,7 +1267,9 @@ l:add(...)
     <a name = "forced_width"></a>
     <strong>forced_width</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Force a widget width.
@@ -1415,12 +1286,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1864')">
-     Click to display more
-    </a>
 
-    <span id=item1864 class="hide_extra">
+    <span id=item1859 class="hide_extra">
     </span>
 
 </dd>
@@ -1428,7 +1295,9 @@ l:add(...)
     <a name = "opacity"></a>
     <strong>opacity</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget opacity (transparency).
@@ -1446,12 +1315,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1865')">
-     Click to display more
-    </a>
 
-    <span id=item1865 class="hide_extra">
+    <span id=item1860 class="hide_extra">
     </span>
 
 </dd>
@@ -1459,7 +1324,9 @@ l:add(...)
     <a name = "visible"></a>
     <strong>visible</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget visibility.
@@ -1469,12 +1336,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1866')">
-     Click to display more
-    </a>
 
-    <span id=item1866 class="hide_extra">
+    <span id=item1861 class="hide_extra">
     </span>
 
 </dd>
@@ -1482,7 +1345,9 @@ l:add(...)
     <a name = "buttons"></a>
     <strong>buttons</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget buttons.</p>
@@ -1498,12 +1363,8 @@ l:add(...)
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1867')">
-     Click to display more
-    </a>
 
-    <span id=item1867 class="hide_extra">
+    <span id=item1862 class="hide_extra">
     </span>
 
 </dd>
@@ -1514,6 +1375,8 @@ l:add(...)
     <dt>
     <a name = "get_dimension"></a>
     <strong>:get_dimension <span class='function_args'> <b>(</b><b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Get the number of rows and columns occupied by the widgets in the grid.
@@ -1529,18 +1392,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1868')">
-     Click to display more
-    </a>
 
-    <span id=item1868 class="hide_extra">
+    <span id=item1863 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "get_next_empty"></a>
     <strong>:get_next_empty <span class='function_args'> <b>(</b>[hint_row=1[, hint_column=1]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Find the next available cell to insert a widget.
@@ -1569,18 +1430,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1869')">
-     Click to display more
-    </a>
 
-    <span id=item1869 class="hide_extra">
+    <span id=item1864 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "add"></a>
     <strong>:add <span class='function_args'> <b>(</b>...<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Add some widgets to the given grid layout.</p>
@@ -1598,18 +1457,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1870')">
-     Click to display more
-    </a>
 
-    <span id=item1870 class="hide_extra">
+    <span id=item1865 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "add_widget_at"></a>
     <strong>:add_widget_at <span class='function_args'> <b>(</b>child, row, col[, row_span=1[, col_span=1]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     <p>Add a widget to the grid layout at specific coordinate.</p>
@@ -1656,18 +1513,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1871')">
-     Click to display more
-    </a>
 
-    <span id=item1871 class="hide_extra">
+    <span id=item1866 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "remove"></a>
     <strong>:remove <span class='function_args'> <b>(</b>...<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Remove one or more widgets from the layout.
@@ -1689,18 +1544,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1872')">
-     Click to display more
-    </a>
 
-    <span id=item1872 class="hide_extra">
+    <span id=item1867 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "remove_widgets_at"></a>
     <strong>:remove_widgets_at <span class='function_args'> <b>(</b>row, col[, row_span=1[, col_span=1]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     <p>Remove widgets at the coordinates.</p>
@@ -1744,18 +1597,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1873')">
-     Click to display more
-    </a>
 
-    <span id=item1873 class="hide_extra">
+    <span id=item1868 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "get_widget_position"></a>
     <strong>:get_widget_position <span class='function_args'> <b>(</b>widget<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Return the coordinates of the widget.
@@ -1778,18 +1629,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1874')">
-     Click to display more
-    </a>
 
-    <span id=item1874 class="hide_extra">
+    <span id=item1869 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "get_widgets_at"></a>
     <strong>:get_widgets_at <span class='function_args'> <b>(</b>row, col[, row_span=1[, col_span=1]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Return the widgets at the coordinates.
@@ -1826,18 +1675,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1875')">
-     Click to display more
-    </a>
 
-    <span id=item1875 class="hide_extra">
+    <span id=item1870 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "replace_widget"></a>
     <strong>:replace_widget <span class='function_args'> <b>(</b>old, new<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Replace old widget by new widget, spanning the same columns and rows.
@@ -1862,18 +1709,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1876')">
-     Click to display more
-    </a>
 
-    <span id=item1876 class="hide_extra">
+    <span id=item1871 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "insert_column"></a>
     <strong>:insert_column <span class='function_args'> <b>(</b>index<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     <p>Insert column at index.</p>
@@ -1903,18 +1748,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1877')">
-     Click to display more
-    </a>
 
-    <span id=item1877 class="hide_extra">
+    <span id=item1872 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "extend_column"></a>
     <strong>:extend_column <span class='function_args'> <b>(</b>index<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     <p>Extend column at index.</p>
@@ -1944,18 +1787,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1878')">
-     Click to display more
-    </a>
 
-    <span id=item1878 class="hide_extra">
+    <span id=item1873 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "remove_column"></a>
     <strong>:remove_column <span class='function_args'> <b>(</b>index<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     <p>Remove column at index.</p>
@@ -1985,18 +1826,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1879')">
-     Click to display more
-    </a>
 
-    <span id=item1879 class="hide_extra">
+    <span id=item1874 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "insert_row"></a>
     <strong>:insert_row <span class='function_args'> <b>(</b>index<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Insert row at index.</p>
@@ -2021,18 +1860,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1880')">
-     Click to display more
-    </a>
 
-    <span id=item1880 class="hide_extra">
+    <span id=item1875 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "extend_row"></a>
     <strong>:extend_row <span class='function_args'> <b>(</b>index<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Extend row at index.</p>
@@ -2057,18 +1894,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1881')">
-     Click to display more
-    </a>
 
-    <span id=item1881 class="hide_extra">
+    <span id=item1876 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "remove_row"></a>
     <strong>:remove_row <span class='function_args'> <b>(</b>index<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Remove row at index.</p>
@@ -2093,18 +1928,16 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1882')">
-     Click to display more
-    </a>
 
-    <span id=item1882 class="hide_extra">
+    <span id=item1877 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "reset"></a>
     <strong>:reset <span class='function_args'> <b>(</b><b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Reset the grid layout.
@@ -2117,19 +1950,280 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1883')">
-     Click to display more
-    </a>
+
+    <span id=item1878 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "set"></a>
+    <strong>:set <span class='function_args'> <b>(</b>index, widget2<b>)</b></span></strong>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
+    </dt>
+    <dd>
+    Set a widget at a specific index, replace the current one.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">number</span></span>
+         A widget or a widget index
+        </li>
+        <li><span class="parameter">widget2</span>
+            <span class="types"><span class="type">widget</span></span>
+         The widget to take the place of the first one
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+     <br />
+     <center id=button1879>
+     <a class="show_more_button" onclick="show_extra('1879')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1879 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>widget::replaced</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<code>widget</code>)</span> The layout.</li>
+             <li><span class="parameter"><code>widget</code></span> <span class="parameter">(<code>widget</code>)</span> index The inserted widget.</li>
+             <li><span class="parameter"><code>previous</code></span> <span class="parameter">(<code>widget</code>)</span> The previous widget.</li>
+             <li><span class="parameter"><code>index</code></span> <span class="parameter">(<code>number</code>)</span> The replaced index.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "replace_widget"></a>
+    <strong>:replace_widget <span class='function_args'> <b>(</b>widget, widget2[, recursive=false]<b>)</b></span></strong>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
+    </dt>
+    <dd>
+    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.</p>
+
+<p> <strong>Signal:</strong> widget::replaced The argument is the new widget and the old one
+ and the index.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">widget</span>
+            <span class="types"><span class="type">widget</span></span>
+         The widget to replace
+        </li>
+        <li><span class="parameter">widget2</span>
+            <span class="types"><span class="type">widget</span></span>
+         The widget to replace <code>widget</code> with
+        </li>
+        <li><span class="parameter">recursive</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Dig in all compatible layouts to find the widget.
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+     <br />
+     <center id=button1880>
+     <a class="show_more_button" onclick="show_extra('1880')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1880 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>widget::replaced</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<code>widget</code>)</span> The layout.</li>
+             <li><span class="parameter"><code>widget</code></span> <span class="parameter">(<code>widget</code>)</span> index The inserted widget.</li>
+             <li><span class="parameter"><code>previous</code></span> <span class="parameter">(<code>widget</code>)</span> The previous widget.</li>
+             <li><span class="parameter"><code>index</code></span> <span class="parameter">(<code>number</code>)</span> The replaced index.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "swap"></a>
+    <strong>:swap <span class='function_args'> <b>(</b>index1, index2<b>)</b></span></strong>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
+    </dt>
+    <dd>
+    Swap 2 widgets in a layout.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">index1</span>
+            <span class="types"><span class="type">number</span></span>
+         The first widget index
+        </li>
+        <li><span class="parameter">index2</span>
+            <span class="types"><span class="type">number</span></span>
+         The second widget index
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+     <br />
+     <center id=button1881>
+     <a class="show_more_button" onclick="show_extra('1881')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1881 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>widget::swapped</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<code>widget</code>)</span> The layout.</li>
+             <li><span class="parameter"><code>widget1</code></span> <span class="parameter">(<code>widget</code>)</span> index The first widget.</li>
+             <li><span class="parameter"><code>widget2</code></span> <span class="parameter">(<code>widget</code>)</span> index The second widget.</li>
+             <li><span class="parameter"><code>index1</code></span> <span class="parameter">(<code>number</code>)</span> The first index.</li>
+             <li><span class="parameter"><code>index1</code></span> <span class="parameter">(<code>number</code>)</span> The second index.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "swap_widgets"></a>
+    <strong>:swap_widgets <span class='function_args'> <b>(</b>widget1, widget2[, recursive=false]<b>)</b></span></strong>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
+    </dt>
+    <dd>
+    Swap 2 widgets in a layout.
+ If widget1 is present multiple time, only the first instance is swapped
+ <strong>Signal:</strong> widget::swapped The arguments are both widgets and both (new) indexes.
+ if the layouts not the same, then only <code>widget::replaced</code> will be emitted.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">widget1</span>
+            <span class="types"><span class="type">widget</span></span>
+         The first widget
+        </li>
+        <li><span class="parameter">widget2</span>
+            <span class="types"><span class="type">widget</span></span>
+         The second widget
+        </li>
+        <li><span class="parameter">recursive</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Dig in all compatible layouts to find the widget.
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the operation is successful
+    </ol>
+
+
+
+
+     <br />
+     <center id=button1882>
+     <a class="show_more_button" onclick="show_extra('1882')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1882 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>widget::swapped</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<code>widget</code>)</span> The layout.</li>
+             <li><span class="parameter"><code>widget1</code></span> <span class="parameter">(<code>widget</code>)</span> index The first widget.</li>
+             <li><span class="parameter"><code>widget2</code></span> <span class="parameter">(<code>widget</code>)</span> index The second widget.</li>
+             <li><span class="parameter"><code>index1</code></span> <span class="parameter">(<code>number</code>)</span> The first index.</li>
+             <li><span class="parameter"><code>index1</code></span> <span class="parameter">(<code>number</code>)</span> The second index.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "reset"></a>
+    <strong>:reset <span class='function_args'> <b>(</b><b>)</b></span></strong>
+    <span class="baseclass" >
+         &middot 1 signals
+    </span>
+    </dt>
+    <dd>
+    Reset a ratio layout.  This removes all widgets from the layout.
+
+
+
+
+
+
+     <br />
+     <center id=button1883>
+     <a class="show_more_button" onclick="show_extra('1883')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item1883 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><a href="../widget_layouts/wibox.layout.grid.html#widget::reset">widget::reset</a></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="parameter">(<code>widget</code>)</span> The layout.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "setup"></a>
     <strong>:setup <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
@@ -2146,19 +2240,44 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1884')">
-     Click to display more
-    </a>
 
     <span id=item1884 class="hide_extra">
     </span>
 
 </dd>
     <dt>
+    <a name = "add_button"></a>
+    <strong>:add_button <span class='function_args'> <b>(</b>button<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
+    </dt>
+    <dd>
+    Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">awful.button</span></span>
+         The button to add.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item1885 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "emit_signal_recursive"></a>
     <strong>:emit_signal_recursive <span class='function_args'> <b>(</b>signal_name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Emit a signal and ensure all parent widgets in the hierarchies also
@@ -2180,19 +2299,17 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1885')">
-     Click to display more
-    </a>
 
-    <span id=item1885 class="hide_extra">
+    <span id=item1886 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "emit_signal"></a>
     <strong>:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Emit a signal.
@@ -2214,19 +2331,17 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1886')">
-     Click to display more
-    </a>
 
-    <span id=item1886 class="hide_extra">
+    <span id=item1887 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "connect_signal"></a>
     <strong>:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal.
@@ -2247,19 +2362,17 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1887')">
-     Click to display more
-    </a>
 
-    <span id=item1887 class="hide_extra">
+    <span id=item1888 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "weak_connect_signal"></a>
     <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal weakly.</p>
@@ -2287,12 +2400,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1888')">
-     Click to display more
-    </a>
 
-    <span id=item1888 class="hide_extra">
+    <span id=item1889 class="hide_extra">
     </span>
 
 </dd>
@@ -2303,6 +2412,8 @@ l:add(...)
     <dt>
     <a name = "widget::reset"></a>
     <strong>widget::reset</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     When the layout is reset.
@@ -2314,19 +2425,17 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1889')">
-     Click to display more
-    </a>
 
-    <span id=item1889 class="hide_extra">
+    <span id=item1890 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "widget::layout_changed"></a>
     <strong>widget::layout_changed</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the layout (size) change.
@@ -2343,19 +2452,17 @@ l:add(...)
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1890')">
-     Click to display more
-    </a>
 
-    <span id=item1890 class="hide_extra">
+    <span id=item1891 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "widget::redraw_needed"></a>
     <strong>widget::redraw_needed</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the widget content changed.
@@ -2372,19 +2479,17 @@ l:add(...)
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1891')">
-     Click to display more
-    </a>
 
-    <span id=item1891 class="hide_extra">
+    <span id=item1892 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "button::press"></a>
     <strong>button::press</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When a mouse button is pressed over the widget.
@@ -2467,19 +2572,17 @@ l:add(...)
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1892')">
-     Click to display more
-    </a>
 
-    <span id=item1892 class="hide_extra">
+    <span id=item1893 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "button::release"></a>
     <strong>button::release</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When a mouse button is released over the widget.
@@ -2562,19 +2665,17 @@ l:add(...)
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1893')">
-     Click to display more
-    </a>
 
-    <span id=item1893 class="hide_extra">
+    <span id=item1894 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "mouse::enter"></a>
     <strong>mouse::enter</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the mouse enter a widget.
@@ -2639,19 +2740,17 @@ l:add(...)
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1894')">
-     Click to display more
-    </a>
 
-    <span id=item1894 class="hide_extra">
+    <span id=item1895 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "mouse::leave"></a>
     <strong>mouse::leave</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the mouse leave a widget.
@@ -2716,12 +2815,8 @@ l:add(...)
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1895')">
-     Click to display more
-    </a>
 
-    <span id=item1895 class="hide_extra">
+    <span id=item1896 class="hide_extra">
     </span>
 
 </dd>
@@ -2732,6 +2827,8 @@ l:add(...)
     <dt>
     <a name = "position"></a>
     <strong>position</strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Child widget position.  Return of <a href="../widget_layouts/wibox.layout.grid.html#get_widget_position">get_widget_position</a>.
@@ -2756,12 +2853,8 @@ l:add(...)
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1896')">
-     Click to display more
-    </a>
 
-    <span id=item1896 class="hide_extra">
+    <span id=item1897 class="hide_extra">
     </span>
 
 </dd>

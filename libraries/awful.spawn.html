@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
    <script>
      function show_extra(id) {
-        var cur = document.getElementById(id).className
+        var cur = document.getElementById("item"+id).className
 
-        if (cur == "hide_extra")
-            document.getElementById(id).className = "show_more"
-        else
-            document.getElementById(id).className = "hide_extra"
+        if (cur == "hide_extra") {
+            document.getElementById("item"+id).className = "show_more"
+            document.getElementById("button"+id).className = "hide_extra"
+        }
      }
    </script>
 
@@ -539,57 +539,39 @@ awesome-client <span class="string">'awful=require("awful");
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#awful.spawn">awful.spawn <span class='function_args'> <b>(</b>cmd[, sn_rules=true[, callback]]<b>)</b></span></a></td>
-      <td class="summary">Spawn a program, and optionally apply properties and/or run a callback.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Spawn a program, and optionally apply properties and/or run a callback.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#awful.spawn.with_shell"><span class='function_modname'>awful.spawn.</span>with_shell <span class='function_args'> <b>(</b>cmd<b>)</b></span></a></td>
-      <td class="summary">Spawn a program using the shell.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Spawn a program using the shell.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#awful.spawn.with_line_callback"><span class='function_modname'>awful.spawn.</span>with_line_callback <span class='function_args'> <b>(</b>cmd, callbacks<b>)</b></span></a></td>
-      <td class="summary">Spawn a program and asynchronously capture its output line by line.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Spawn a program and asynchronously capture its output line by line.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#awful.spawn.easy_async"><span class='function_modname'>awful.spawn.</span>easy_async <span class='function_args'> <b>(</b>cmd, callback<b>)</b></span></a></td>
-      <td class="summary">Asynchronously spawn a program and capture its output.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Asynchronously spawn a program and capture its output.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#awful.spawn.easy_async_with_shell"><span class='function_modname'>awful.spawn.</span>easy_async_with_shell <span class='function_args'> <b>(</b>cmd, callback<b>)</b></span></a></td>
-      <td class="summary">Call <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">spawn.easy_async</a> with a shell.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Call <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">spawn.easy_async</a> with a shell.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#awful.spawn.read_lines"><span class='function_modname'>awful.spawn.</span>read_lines <span class='function_args'> <b>(</b>input_stream, line_callback[, done_callback[, close=false]]<b>)</b></span></a></td>
-      <td class="summary">Read lines from a Gio input stream</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Read lines from a Gio input stream</td>
     </tr>
     <tr>
       <td class="name" ><a href="#awful.spawn.once"><span class='function_modname'>awful.spawn.</span>once <span class='function_args'> <b>(</b>cmd[, rules[, matcher[, unique_id[, callback]]]]<b>)</b></span></a></td>
-      <td class="summary">Spawn a command if it has not been spawned before.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Spawn a command if it has not been spawned before.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#awful.spawn.single_instance"><span class='function_modname'>awful.spawn.</span>single_instance <span class='function_args'> <b>(</b>cmd[, rules[, matcher[, unique_id[, callback]]]]<b>)</b></span></a></td>
-      <td class="summary">Spawn a command if an instance is not already running.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Spawn a command if an instance is not already running.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#awful.spawn.raise_or_spawn"><span class='function_modname'>awful.spawn.</span>raise_or_spawn <span class='function_args'> <b>(</b>cmd, rules[, matcher[, unique_id[, callback]]]<b>)</b></span></a></td>
-      <td class="summary">Raise a client if it exists or spawn a new one then raise it.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Raise a client if it exists or spawn a new one then raise it.</td>
     </tr>
 </table>
 
@@ -603,6 +585,8 @@ awesome-client <span class="string">'awful=require("awful");
     <dt>
     <a name = "awful.spawn"></a>
     <strong>awful.spawn <span class='function_args'> <b>(</b>cmd[, sn_rules=true[, callback]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Spawn a program, and optionally apply properties and/or run a callback.</p>
@@ -651,18 +635,16 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item2618')">
-     Click to display more
-    </a>
 
-    <span id=item2618 class="hide_extra">
+    <span id=item2622 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "awful.spawn.with_shell"></a>
     <strong><span class='function_modname'>awful.spawn.</span>with_shell <span class='function_args'> <b>(</b>cmd<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Spawn a program using the shell.
@@ -680,18 +662,16 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item2619')">
-     Click to display more
-    </a>
 
-    <span id=item2619 class="hide_extra">
+    <span id=item2623 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "awful.spawn.with_line_callback"></a>
     <strong><span class='function_modname'>awful.spawn.</span>with_line_callback <span class='function_args'> <b>(</b>cmd, callbacks<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Spawn a program and asynchronously capture its output line by line.
@@ -753,18 +733,16 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item2620')">
-     Click to display more
-    </a>
 
-    <span id=item2620 class="hide_extra">
+    <span id=item2624 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "awful.spawn.easy_async"></a>
     <strong><span class='function_modname'>awful.spawn.</span>easy_async <span class='function_args'> <b>(</b>cmd, callback<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Asynchronously spawn a program and capture its output.
@@ -818,18 +796,16 @@ awesome-client <span class="string">'awful=require("awful");
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item2621')">
-     Click to display more
-    </a>
 
-    <span id=item2621 class="hide_extra">
+    <span id=item2625 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "awful.spawn.easy_async_with_shell"></a>
     <strong><span class='function_modname'>awful.spawn.</span>easy_async_with_shell <span class='function_args'> <b>(</b>cmd, callback<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Call <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">spawn.easy_async</a> with a shell.
@@ -883,18 +859,16 @@ awesome-client <span class="string">'awful=require("awful");
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item2622')">
-     Click to display more
-    </a>
 
-    <span id=item2622 class="hide_extra">
+    <span id=item2626 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "awful.spawn.read_lines"></a>
     <strong><span class='function_modname'>awful.spawn.</span>read_lines <span class='function_args'> <b>(</b>input_stream, line_callback[, done_callback[, close=false]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Read lines from a Gio input stream
@@ -927,18 +901,16 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item2623')">
-     Click to display more
-    </a>
 
-    <span id=item2623 class="hide_extra">
+    <span id=item2627 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "awful.spawn.once"></a>
     <strong><span class='function_modname'>awful.spawn.</span>once <span class='function_args'> <b>(</b>cmd[, rules[, matcher[, unique_id[, callback]]]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Spawn a command if it has not been spawned before.</p>
@@ -994,18 +966,16 @@ awesome-client <span class="string">'awful=require("awful");
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item2624')">
-     Click to display more
-    </a>
 
-    <span id=item2624 class="hide_extra">
+    <span id=item2628 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "awful.spawn.single_instance"></a>
     <strong><span class='function_modname'>awful.spawn.</span>single_instance <span class='function_args'> <b>(</b>cmd[, rules[, matcher[, unique_id[, callback]]]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Spawn a command if an instance is not already running.</p>
@@ -1060,18 +1030,16 @@ awesome-client <span class="string">'awful=require("awful");
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item2625')">
-     Click to display more
-    </a>
 
-    <span id=item2625 class="hide_extra">
+    <span id=item2629 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "awful.spawn.raise_or_spawn"></a>
     <strong><span class='function_modname'>awful.spawn.</span>raise_or_spawn <span class='function_args'> <b>(</b>cmd, rules[, matcher[, unique_id[, callback]]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Raise a client if it exists or spawn a new one then raise it.</p>
@@ -1123,12 +1091,8 @@ awesome-client <span class="string">'awful=require("awful");
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item2626')">
-     Click to display more
-    </a>
 
-    <span id=item2626 class="hide_extra">
+    <span id=item2630 class="hide_extra">
     </span>
 
 </dd>

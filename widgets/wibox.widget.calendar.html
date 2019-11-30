@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
    <script>
      function show_extra(id) {
-        var cur = document.getElementById(id).className
+        var cur = document.getElementById("item"+id).className
 
-        if (cur == "hide_extra")
-            document.getElementById(id).className = "show_more"
-        else
-            document.getElementById(id).className = "hide_extra"
+        if (cur == "hide_extra") {
+            document.getElementById("item"+id).className = "show_more"
+            document.getElementById("button"+id).className = "hide_extra"
+        }
      }
    </script>
 
@@ -249,15 +249,11 @@
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#month"><span class='function_modname'>wibox.widget.calendar.</span>month <span class='function_args'> <b>(</b>date, font<b>)</b></span></a></td>
-      <td class="summary">A month calendar widget.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">A month calendar widget.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#year"><span class='function_modname'>wibox.widget.calendar.</span>year <span class='function_args'> <b>(</b>date, font<b>)</b></span></a></td>
-      <td class="summary">A year calendar widget.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">A year calendar widget.</td>
     </tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
@@ -265,51 +261,37 @@
     <tr>
       <td class="shortname" ><a href="#date">date</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>date</span></td>
-      <td class="summary">The calendar date.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The calendar date.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#font">font</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td class="summary">The calendar font.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The calendar font.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#spacing">spacing</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The calendar spacing.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The calendar spacing.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#week_numbers">week_numbers</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Display the calendar week numbers.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Display the calendar week numbers.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#start_sunday">start_sunday</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Start the week on Sunday.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Start the week on Sunday.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#long_weekdays">long_weekdays</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Format the weekdays with three characters instead of two</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Format the weekdays with three characters instead of two</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#fn_embed">fn_embed</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
-      <td class="summary">The widget encapsulating function.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The widget encapsulating function.</td>
     </tr>
 </table>
 <h2><a href="#Theme_variables">Theme variables</a></h2>
@@ -317,37 +299,27 @@
     <tr>
       <td class="shortname" ><a href="#beautiful.calendar_font">beautiful.calendar_font</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td class="summary">The calendar font.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The calendar font.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.calendar_spacing">beautiful.calendar_spacing</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The calendar spacing.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">The calendar spacing.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.calendar_week_numbers">beautiful.calendar_week_numbers</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Display the calendar week numbers.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Display the calendar week numbers.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.calendar_start_sunday">beautiful.calendar_start_sunday</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Start the week on Sunday.</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Start the week on Sunday.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.calendar_long_weekdays">beautiful.calendar_long_weekdays</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">Format the weekdays with three characters instead of two</td>
-      <td class="baseclass" >
-      </td>
+      <td colspan="2" class="summary">Format the weekdays with three characters instead of two</td>
     </tr>
 </table>
 
@@ -361,6 +333,8 @@
     <dt>
     <a name = "month"></a>
     <strong><span class='function_modname'>wibox.widget.calendar.</span>month <span class='function_args'> <b>(</b>date, font<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     A month calendar widget.</p>
@@ -404,10 +378,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1066')">
-     Click to display more
-    </a>
 
     <span id=item1066 class="hide_extra">
     </span>
@@ -416,6 +386,8 @@
     <dt>
     <a name = "year"></a>
     <strong><span class='function_modname'>wibox.widget.calendar.</span>year <span class='function_args'> <b>(</b>date, font<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     A year calendar widget.</p>
@@ -469,10 +441,6 @@
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1067')">
-     Click to display more
-    </a>
 
     <span id=item1067 class="hide_extra">
     </span>
@@ -486,6 +454,8 @@
     <a name = "date"></a>
     <strong>date</strong>
     <span class="proptype">(<span class='summary_type'>date</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The calendar date.</p>
@@ -506,10 +476,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1068')">
-     Click to display more
-    </a>
 
     <span id=item1068 class="hide_extra">
     </span>
@@ -519,6 +485,8 @@
     <a name = "font"></a>
     <strong>font</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The calendar font.</p>
@@ -544,10 +512,6 @@
     <span class="global">os</span>.date(<span class="string">'*t'</span>), <span class="string">'sans 12'</span>)</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1069')">
-     Click to display more
-    </a>
 
     <span id=item1069 class="hide_extra">
     </span>
@@ -557,6 +521,8 @@
     <a name = "spacing"></a>
     <strong>spacing</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The calendar spacing.</p>
@@ -576,10 +542,6 @@
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1070')">
-     Click to display more
-    </a>
 
     <span id=item1070 class="hide_extra">
     </span>
@@ -589,6 +551,8 @@
     <a name = "week_numbers"></a>
     <strong>week_numbers</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Display the calendar week numbers.</p>
@@ -616,10 +580,6 @@
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1071')">
-     Click to display more
-    </a>
 
     <span id=item1071 class="hide_extra">
     </span>
@@ -629,6 +589,8 @@
     <a name = "start_sunday"></a>
     <strong>start_sunday</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Start the week on Sunday.</p>
@@ -656,10 +618,6 @@
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1072')">
-     Click to display more
-    </a>
 
     <span id=item1072 class="hide_extra">
     </span>
@@ -669,6 +627,8 @@
     <a name = "long_weekdays"></a>
     <strong>long_weekdays</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Format the weekdays with three characters instead of two</p>
@@ -696,10 +656,6 @@
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1073')">
-     Click to display more
-    </a>
 
     <span id=item1073 class="hide_extra">
     </span>
@@ -709,6 +665,8 @@
     <a name = "fn_embed"></a>
     <strong>fn_embed</strong>
     <span class="proptype">(<span class='summary_type'>function</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The widget encapsulating function.</p>
@@ -800,10 +758,6 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 }</pre>
     </ul>
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1074')">
-     Click to display more
-    </a>
 
     <span id=item1074 class="hide_extra">
     </span>
@@ -817,6 +771,8 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
     <a name = "beautiful.calendar_font"></a>
     <strong>beautiful.calendar_font</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The calendar font.
@@ -833,10 +789,6 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1075')">
-     Click to display more
-    </a>
 
     <span id=item1075 class="hide_extra">
     </span>
@@ -846,6 +798,8 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
     <a name = "beautiful.calendar_spacing"></a>
     <strong>beautiful.calendar_spacing</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     The calendar spacing.
@@ -862,10 +816,6 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1076')">
-     Click to display more
-    </a>
 
     <span id=item1076 class="hide_extra">
     </span>
@@ -875,6 +825,8 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
     <a name = "beautiful.calendar_week_numbers"></a>
     <strong>beautiful.calendar_week_numbers</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Display the calendar week numbers.
@@ -890,10 +842,6 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1077')">
-     Click to display more
-    </a>
 
     <span id=item1077 class="hide_extra">
     </span>
@@ -903,6 +851,8 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
     <a name = "beautiful.calendar_start_sunday"></a>
     <strong>beautiful.calendar_start_sunday</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Start the week on Sunday.
@@ -918,10 +868,6 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1078')">
-     Click to display more
-    </a>
 
     <span id=item1078 class="hide_extra">
     </span>
@@ -931,6 +877,8 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
     <a name = "beautiful.calendar_long_weekdays"></a>
     <strong>beautiful.calendar_long_weekdays</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Format the weekdays with three characters instead of two
@@ -946,10 +894,6 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item1079')">
-     Click to display more
-    </a>
 
     <span id=item1079 class="hide_extra">
     </span>

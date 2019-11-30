@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
    <script>
      function show_extra(id) {
-        var cur = document.getElementById(id).className
+        var cur = document.getElementById("item"+id).className
 
-        if (cur == "hide_extra")
-            document.getElementById(id).className = "show_more"
-        else
-            document.getElementById(id).className = "hide_extra"
+        if (cur == "hide_extra") {
+            document.getElementById("item"+id).className = "show_more"
+            document.getElementById("button"+id).className = "hide_extra"
+        }
      }
    </script>
 
@@ -44,7 +44,6 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Constructors">Constructors</a></li>
-<li><a href="#Functions">Functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
 <li><a href="#Signals">Signals</a></li>
@@ -239,19 +238,7 @@ button.buttons = {
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#awful.widget.button">awful.widget.button <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
-      <td class="summary">Create a button widget.</td>
-      <td class="baseclass" >
-      </td>
-    </tr>
-</table>
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-    <tr>
-      <td class="name" ><a href="#add_button"><span class='function_modname'>awful.widget.button.</span>add_button (button)</a></td>
-      <td class="summary">Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.</td>
-      <td class="baseclass" >
-        Inherited from wibox.widget
-      </td>
+      <td colspan="2" class="summary">Create a button widget.</td>
     </tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
@@ -259,7 +246,7 @@ button.buttons = {
     <tr>
       <td class="shortname" ><a href="#children">children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">Get or set the children elements.</td>
+      <td colspan="1" class="summary">Get or set the children elements.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -267,7 +254,7 @@ button.buttons = {
     <tr>
       <td class="shortname" ><a href="#all_children">all_children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">Get all direct and indirect children widgets.</td>
+      <td colspan="1" class="summary">Get all direct and indirect children widgets.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -275,7 +262,7 @@ button.buttons = {
     <tr>
       <td class="shortname" ><a href="#forced_height">forced_height</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force a widget height.</td>
+      <td colspan="1" class="summary">Force a widget height.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -283,7 +270,7 @@ button.buttons = {
     <tr>
       <td class="shortname" ><a href="#forced_width">forced_width</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">Force a widget width.</td>
+      <td colspan="1" class="summary">Force a widget width.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -291,7 +278,7 @@ button.buttons = {
     <tr>
       <td class="shortname" ><a href="#opacity">opacity</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">The widget opacity (transparency).</td>
+      <td colspan="1" class="summary">The widget opacity (transparency).</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -299,7 +286,7 @@ button.buttons = {
     <tr>
       <td class="shortname" ><a href="#visible">visible</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">The widget visibility.</td>
+      <td colspan="1" class="summary">The widget visibility.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -307,7 +294,7 @@ button.buttons = {
     <tr>
       <td class="shortname" ><a href="#buttons">buttons</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td class="summary">The widget buttons.</td>
+      <td colspan="1" class="summary">The widget buttons.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -317,14 +304,21 @@ button.buttons = {
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#setup">:setup <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
-      <td class="summary">Set a declarative widget hierarchy description.</td>
+      <td colspan="1" class="summary">Set a declarative widget hierarchy description.</td>
+      <td class="baseclass" >
+        Inherited from wibox.widget
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#add_button">:add_button <span class='function_args'> <b>(</b>button<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal_recursive">:emit_signal_recursive <span class='function_args'> <b>(</b>signal_name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
+      <td colspan="1" class="summary">Emit a signal and ensure all parent widgets in the hierarchies also
  forward the signal.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
@@ -332,21 +326,21 @@ button.buttons = {
     </tr>
     <tr>
       <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
-      <td class="summary">Emit a signal.</td>
+      <td colspan="1" class="summary">Emit a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#connect_signal">:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal.</td>
+      <td colspan="1" class="summary">Connect to a signal.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#weak_connect_signal">:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td class="summary">Connect to a signal weakly.</td>
+      <td colspan="1" class="summary">Connect to a signal weakly.</td>
       <td class="baseclass" >
         Inherited from gears.object
       </td>
@@ -356,42 +350,42 @@ button.buttons = {
 <table class="function_list">
     <tr>
       <td class="name" ><a href="#widget::layout_changed">widget::layout_changed</a></td>
-      <td class="summary">When the layout (size) change.</td>
+      <td colspan="1" class="summary">When the layout (size) change.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#widget::redraw_needed">widget::redraw_needed</a></td>
-      <td class="summary">When the widget content changed.</td>
+      <td colspan="1" class="summary">When the widget content changed.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::press">button::press</a></td>
-      <td class="summary">When a mouse button is pressed over the widget.</td>
+      <td colspan="1" class="summary">When a mouse button is pressed over the widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::release">button::release</a></td>
-      <td class="summary">When a mouse button is released over the widget.</td>
+      <td colspan="1" class="summary">When a mouse button is released over the widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#mouse::enter">mouse::enter</a></td>
-      <td class="summary">When the mouse enter a widget.</td>
+      <td colspan="1" class="summary">When the mouse enter a widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
     </tr>
     <tr>
       <td class="name" ><a href="#mouse::leave">mouse::leave</a></td>
-      <td class="summary">When the mouse leave a widget.</td>
+      <td colspan="1" class="summary">When the mouse leave a widget.</td>
       <td class="baseclass" >
         Inherited from wibox.widget
       </td>
@@ -408,6 +402,8 @@ button.buttons = {
     <dt>
     <a name = "awful.widget.button"></a>
     <strong>awful.widget.button <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
+    <span class="baseclass" >
+    </span>
     </dt>
     <dd>
     Create a button widget.  When clicked, the image is deplaced to make it like
@@ -429,45 +425,8 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item724')">
-     Click to display more
-    </a>
 
     <span id=item724 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "add_button"></a>
-    <strong><span class='function_modname'>awful.widget.button.</span>add_button (button)</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
-    </dt>
-    <dd>
-    Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">button</span>
-            <span class="types"><span class="type">awful.button</span></span>
-         The button to add.
-        </li>
-    </ul>
-
-
-
-
-
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item725')">
-     Click to display more
-    </a>
-
-    <span id=item725 class="hide_extra">
     </span>
 
 </dd>
@@ -479,7 +438,9 @@ button.buttons = {
     <a name = "children"></a>
     <strong>children</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Get or set the children elements.
@@ -496,12 +457,8 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item726')">
-     Click to display more
-    </a>
 
-    <span id=item726 class="hide_extra">
+    <span id=item725 class="hide_extra">
     </span>
 
 </dd>
@@ -509,7 +466,9 @@ button.buttons = {
     <a name = "all_children"></a>
     <strong>all_children</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Get all direct and indirect children widgets.
@@ -529,12 +488,8 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item727')">
-     Click to display more
-    </a>
 
-    <span id=item727 class="hide_extra">
+    <span id=item726 class="hide_extra">
     </span>
 
 </dd>
@@ -542,7 +497,9 @@ button.buttons = {
     <a name = "forced_height"></a>
     <strong>forced_height</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Force a widget height.
@@ -559,12 +516,8 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item728')">
-     Click to display more
-    </a>
 
-    <span id=item728 class="hide_extra">
+    <span id=item727 class="hide_extra">
     </span>
 
 </dd>
@@ -572,7 +525,9 @@ button.buttons = {
     <a name = "forced_width"></a>
     <strong>forced_width</strong>
     <span class="proptype">(<span class='summary_type'>number <i>or</i> nil</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Force a widget width.
@@ -589,12 +544,8 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item729')">
-     Click to display more
-    </a>
 
-    <span id=item729 class="hide_extra">
+    <span id=item728 class="hide_extra">
     </span>
 
 </dd>
@@ -602,7 +553,9 @@ button.buttons = {
     <a name = "opacity"></a>
     <strong>opacity</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget opacity (transparency).
@@ -620,12 +573,8 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item730')">
-     Click to display more
-    </a>
 
-    <span id=item730 class="hide_extra">
+    <span id=item729 class="hide_extra">
     </span>
 
 </dd>
@@ -633,7 +582,9 @@ button.buttons = {
     <a name = "visible"></a>
     <strong>visible</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget visibility.
@@ -643,12 +594,8 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item731')">
-     Click to display more
-    </a>
 
-    <span id=item731 class="hide_extra">
+    <span id=item730 class="hide_extra">
     </span>
 
 </dd>
@@ -656,7 +603,9 @@ button.buttons = {
     <a name = "buttons"></a>
     <strong>buttons</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     The widget buttons.</p>
@@ -672,12 +621,8 @@ button.buttons = {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item732')">
-     Click to display more
-    </a>
 
-    <span id=item732 class="hide_extra">
+    <span id=item731 class="hide_extra">
     </span>
 
 </dd>
@@ -688,7 +633,9 @@ button.buttons = {
     <dt>
     <a name = "setup"></a>
     <strong>:setup <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
@@ -705,10 +652,33 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item733')">
-     Click to display more
-    </a>
+
+    <span id=item732 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "add_button"></a>
+    <strong>:add_button <span class='function_args'> <b>(</b>button<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
+    </dt>
+    <dd>
+    Add a new <a href="../input handling/awful.button.html#">awful.button</a> to this widget.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">awful.button</span></span>
+         The button to add.
+        </li>
+    </ul>
+
+
+
+
+
 
     <span id=item733 class="hide_extra">
     </span>
@@ -717,7 +687,9 @@ button.buttons = {
     <dt>
     <a name = "emit_signal_recursive"></a>
     <strong>:emit_signal_recursive <span class='function_args'> <b>(</b>signal_name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     Emit a signal and ensure all parent widgets in the hierarchies also
@@ -739,10 +711,6 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item734')">
-     Click to display more
-    </a>
 
     <span id=item734 class="hide_extra">
     </span>
@@ -751,7 +719,9 @@ button.buttons = {
     <dt>
     <a name = "emit_signal"></a>
     <strong>:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Emit a signal.
@@ -773,10 +743,6 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item735')">
-     Click to display more
-    </a>
 
     <span id=item735 class="hide_extra">
     </span>
@@ -785,7 +751,9 @@ button.buttons = {
     <dt>
     <a name = "connect_signal"></a>
     <strong>:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal.
@@ -806,10 +774,6 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item736')">
-     Click to display more
-    </a>
 
     <span id=item736 class="hide_extra">
     </span>
@@ -818,7 +782,9 @@ button.buttons = {
     <dt>
     <a name = "weak_connect_signal"></a>
     <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from gears.object</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
     </dt>
     <dd>
     Connect to a signal weakly.</p>
@@ -846,10 +812,6 @@ button.buttons = {
 
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item737')">
-     Click to display more
-    </a>
 
     <span id=item737 class="hide_extra">
     </span>
@@ -862,7 +824,9 @@ button.buttons = {
     <dt>
     <a name = "widget::layout_changed"></a>
     <strong>widget::layout_changed</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the layout (size) change.
@@ -879,10 +843,6 @@ button.buttons = {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item738')">
-     Click to display more
-    </a>
 
     <span id=item738 class="hide_extra">
     </span>
@@ -891,7 +851,9 @@ button.buttons = {
     <dt>
     <a name = "widget::redraw_needed"></a>
     <strong>widget::redraw_needed</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the widget content changed.
@@ -908,10 +870,6 @@ button.buttons = {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item739')">
-     Click to display more
-    </a>
 
     <span id=item739 class="hide_extra">
     </span>
@@ -920,7 +878,9 @@ button.buttons = {
     <dt>
     <a name = "button::press"></a>
     <strong>button::press</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When a mouse button is pressed over the widget.
@@ -1003,10 +963,6 @@ button.buttons = {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item740')">
-     Click to display more
-    </a>
 
     <span id=item740 class="hide_extra">
     </span>
@@ -1015,7 +971,9 @@ button.buttons = {
     <dt>
     <a name = "button::release"></a>
     <strong>button::release</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When a mouse button is released over the widget.
@@ -1098,10 +1056,6 @@ button.buttons = {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item741')">
-     Click to display more
-    </a>
 
     <span id=item741 class="hide_extra">
     </span>
@@ -1110,7 +1064,9 @@ button.buttons = {
     <dt>
     <a name = "mouse::enter"></a>
     <strong>mouse::enter</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the mouse enter a widget.
@@ -1175,10 +1131,6 @@ button.buttons = {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item742')">
-     Click to display more
-    </a>
 
     <span id=item742 class="hide_extra">
     </span>
@@ -1187,7 +1139,9 @@ button.buttons = {
     <dt>
     <a name = "mouse::leave"></a>
     <strong>mouse::leave</strong>
-    <span class="baseclass" >&nbsp;&middot;&nbsp;Inherited from wibox.widget</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget
+    </span>
     </dt>
     <dd>
     When the mouse leave a widget.
@@ -1252,10 +1206,6 @@ button.buttons = {
     </ul>
 
 
-    <br />
-    <a class="deprecated_h2" onclick="show_extra('item743')">
-     Click to display more
-    </a>
 
     <span id=item743 class="hide_extra">
     </span>
