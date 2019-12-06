@@ -46,10 +46,10 @@
 <li><a href="#Functions">Functions</a></li>
 <li><a href="#Static_module_functions">Static module functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
-<li><a href="#Request_handlers">Request handlers</a></li>
 <li><a href="#Theme_variables">Theme variables</a></li>
 <li><a href="#Deprecated_functions">Deprecated functions</a></li>
 <li><a href="#Fields">Fields</a></li>
+<li><a href="#lib_awful_mouse_client_Functions">lib.awful.mouse.client Functions</a></li>
 <li><a href="#lib_awful_mouse_resize_Functions">lib.awful.mouse.resize Functions</a></li>
 <li><a href="#lib_awful_mouse_snap_Functions">lib.awful.mouse.snap Functions</a></li>
 </ul>
@@ -285,16 +285,8 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
       <td colspan="2" class="summary">Get the client or any object which is under the pointer.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.mouse.client.move">awful.mouse.client.move <span class='function_args'> <b>(</b>c, snap, finished_cb<b>)</b></span></a></td>
-      <td colspan="2" class="summary">Move a client.</td>
-    </tr>
-    <tr>
       <td class="name" ><a href="#awful.mouse.wibox.move">awful.mouse.wibox.move <span class='function_args'> <b>(</b>w<b>)</b></span></a></td>
       <td colspan="2" class="summary">Move the wibox under the cursor.</td>
-    </tr>
-    <tr>
-      <td class="name" ><a href="#awful.mouse.client.resize">awful.mouse.client.resize <span class='function_args'> <b>(</b>c, corner[, args={}]<b>)</b></span></a></td>
-      <td colspan="2" class="summary">Resize a client.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#awful.mouse.append_global_mousebinding">awful.mouse.append_global_mousebinding <span class='function_args'> <b>(</b>button<b>)</b></span></a></td>
@@ -374,13 +366,6 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
       <td colspan="2" class="summary">True if the middle mouse button is pressed.</td>
     </tr>
 </table>
-<h2><a href="#Request_handlers">Request handlers</a></h2>
-<table class="function_list">
-    <tr>
-      <td class="name" ><a href="#awful.mouse.resize_handler">awful.mouse.resize_handler</a></td>
-      <td colspan="2" class="summary">Default handler for <code>request::geometry</code> signals with &ldquo;mouse.resize&rdquo; context.</td>
-    </tr>
-</table>
 <h2><a href="#Theme_variables">Theme variables</a></h2>
 <table class="function_list">
     <tr>
@@ -410,14 +395,6 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
       <td class="name" ><a href="#awful.mouse.client_under_pointer">awful.mouse.client_under_pointer<i class="deprecated_label"> [deprecated]</i></a></td>
       <td colspan="2" class="summary">Get the client object under the pointer.</td>
     </tr>
-    <tr>
-      <td class="name" ><a href="#awful.mouse.client.dragtotag.border">awful.mouse.client.dragtotag.border<i class="deprecated_label"> [deprecated]</i></a></td>
-      <td colspan="2" class="summary">Move a client to a tag by dragging it onto the left / right side of the screen.</td>
-    </tr>
-    <tr>
-      <td class="name" ><a href="#awful.mouse.client.corner">awful.mouse.client.corner<i class="deprecated_label"> [deprecated]</i></a></td>
-      <td colspan="2" class="summary">Get a client corner coordinates.</td>
-    </tr>
 </table>
 <h2><a href="#Fields">Fields</a></h2>
 <table class="function_list">
@@ -440,6 +417,25 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
       <td class="shortname" ><a href="#awful.mouse.drag_to_tag.enabled"><span class='function_modname'>mouse.</span>awful.mouse.drag_to_tag.enabled</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>N/A</span></td>
       <td colspan="2" class="summary">Enable changing tag when a client is dragged to the edge of the screen.</td>
+    </tr>
+</table>
+<h2><a href="#lib_awful_mouse_client_Functions">lib.awful.mouse.client Functions</a></h2>
+<table class="function_list">
+    <tr>
+      <td class="name" ><a href="#awful.mouse.client.move">awful.mouse.client.move <span class='function_args'> <b>(</b>c, snap, finished_cb<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Move a client.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.mouse.client.dragtotag.border">awful.mouse.client.dragtotag.border<i class="deprecated_label"> [deprecated]</i></a></td>
+      <td colspan="2" class="summary">Move a client to a tag by dragging it onto the left / right side of the screen.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.mouse.client.corner">awful.mouse.client.corner<i class="deprecated_label"> [deprecated]</i></a></td>
+      <td colspan="2" class="summary">Get a client corner coordinates.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.mouse.client.resize">awful.mouse.client.resize <span class='function_args'> <b>(</b>c, corner[, args={}]<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Resize a client.</td>
     </tr>
 </table>
 <h2><a href="#lib_awful_mouse_resize_Functions">lib.awful.mouse.resize Functions</a></h2>
@@ -557,37 +553,6 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 </dd>
     <dt>
-    <a name = "awful.mouse.client.move"></a>
-    <strong>awful.mouse.client.move <span class='function_args'> <b>(</b>c, snap, finished_cb<b>)</b></span></strong>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Move a client.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">c</span>
-         The client to move, or the focused one if nil.
-        </li>
-        <li><span class="parameter">snap</span>
-         The pixel to snap clients.
-        </li>
-        <li><span class="parameter">finished_cb</span>
-         Deprecated, do not use
-        </li>
-    </ul>
-
-
-
-
-
-
-    <span id=item698 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
     <a name = "awful.mouse.wibox.move"></a>
     <strong>awful.mouse.wibox.move <span class='function_args'> <b>(</b>w<b>)</b></span></strong>
     <span class="baseclass" >
@@ -609,47 +574,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item699 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "awful.mouse.client.resize"></a>
-    <strong>awful.mouse.client.resize <span class='function_args'> <b>(</b>c, corner[, args={}]<b>)</b></span></strong>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Resize a client.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">c</span>
-         The client to resize, or the focused one by default.
-        </li>
-        <li><span class="parameter">corner</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The corner to grab on resize. Auto detected by default.
-        </li>
-        <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A set of <a href="../libraries/awful.placement.html#">awful.placement</a> arguments
-         (<em>default</em> {})
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-        The corner (or side) name
-    </ol>
-
-
-
-
-
-    <span id=item700 class="hide_extra">
+    <span id=item698 class="hide_extra">
     </span>
 
 </dd>
@@ -683,7 +608,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item701 class="hide_extra">
+    <span id=item699 class="hide_extra">
     </span>
 
 </dd>
@@ -713,7 +638,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item702 class="hide_extra">
+    <span id=item700 class="hide_extra">
     </span>
 
 </dd>
@@ -745,13 +670,13 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
      <br />
-     <center id=button703>
-     <a class="show_more_button" onclick="show_extra('703')">
+     <center id=button701>
+     <a class="show_more_button" onclick="show_extra('701')">
       Click to display more
      </a>
      </center>
 
-    <span id=item703 class="hide_extra">
+    <span id=item701 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>client_mousebinding::added</code></span>  </li>
@@ -791,7 +716,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item704 class="hide_extra">
+    <span id=item702 class="hide_extra">
     </span>
 
 </dd>
@@ -827,7 +752,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item705 class="hide_extra">
+    <span id=item703 class="hide_extra">
     </span>
 
 </dd>
@@ -899,7 +824,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </ul>
 
 
-    <span id=item706 class="hide_extra">
+    <span id=item704 class="hide_extra">
     </span>
 
 </dd>
@@ -923,7 +848,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item707 class="hide_extra">
+    <span id=item705 class="hide_extra">
     </span>
 
 </dd>
@@ -950,7 +875,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item708 class="hide_extra">
+    <span id=item706 class="hide_extra">
     </span>
 
 </dd>
@@ -977,7 +902,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item709 class="hide_extra">
+    <span id=item707 class="hide_extra">
     </span>
 
 </dd>
@@ -1004,7 +929,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item710 class="hide_extra">
+    <span id=item708 class="hide_extra">
     </span>
 
 </dd>
@@ -1035,7 +960,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item711 class="hide_extra">
+    <span id=item709 class="hide_extra">
     </span>
 
 </dd>
@@ -1066,7 +991,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item712 class="hide_extra">
+    <span id=item710 class="hide_extra">
     </span>
 
 </dd>
@@ -1097,7 +1022,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item713 class="hide_extra">
+    <span id=item711 class="hide_extra">
     </span>
 
 </dd>
@@ -1117,7 +1042,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item714 class="hide_extra">
+    <span id=item712 class="hide_extra">
     </span>
 
 </dd>
@@ -1137,7 +1062,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item715 class="hide_extra">
+    <span id=item713 class="hide_extra">
     </span>
 
 </dd>
@@ -1157,46 +1082,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item716 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Request_handlers"></a>Request handlers</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "awful.mouse.resize_handler"></a>
-    <strong>awful.mouse.resize_handler</strong>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Default handler for <code>request::geometry</code> signals with &ldquo;mouse.resize&rdquo; context.
-
-    <h3>Arguments:</h3>
-    <ul>
-        <li><span class="parameter">c</span>
-            <span class="types"><span class="type">client</span></span>
-         The client
-        </li>
-        <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The context
-        </li>
-        <li><span class="parameter">hints</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The hints to pass to the handler
-         (<em>default</em> {})
-        </li>
-    </ul>
-
-
-
-
-
-
-    <span id=item717 class="hide_extra">
+    <span id=item714 class="hide_extra">
     </span>
 
 </dd>
@@ -1220,7 +1106,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item718 class="hide_extra">
+    <span id=item715 class="hide_extra">
     </span>
 
 </dd>
@@ -1240,7 +1126,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item719 class="hide_extra">
+    <span id=item716 class="hide_extra">
     </span>
 
 </dd>
@@ -1267,7 +1153,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item720 class="hide_extra">
+    <span id=item717 class="hide_extra">
     </span>
 
 </dd>
@@ -1294,7 +1180,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item721 class="hide_extra">
+    <span id=item718 class="hide_extra">
     </span>
 
 </dd>
@@ -1326,7 +1212,130 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
+    <span id=item719 class="hide_extra">
+    </span>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awful.mouse.snap.default_distance"></a>
+    <strong><span class='function_modname'>mouse.</span>awful.mouse.snap.default_distance</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The default snap distance.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../input handling/mouse.html#awful.mouse.snap">awful.mouse.snap</a>
+    </ul>
+
+
+
+    <span id=item720 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.snap.edge_enabled"></a>
+    <strong><span class='function_modname'>mouse.</span>awful.mouse.snap.edge_enabled</strong>
+    <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Enable screen edges snapping.
+
+
+
+
+
+
+
+    <span id=item721 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.snap.client_enabled"></a>
+    <strong><span class='function_modname'>mouse.</span>awful.mouse.snap.client_enabled</strong>
+    <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Enable client to client snapping.
+
+
+
+
+
+
+
     <span id=item722 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "awful.mouse.drag_to_tag.enabled"></a>
+    <strong><span class='function_modname'>mouse.</span>awful.mouse.drag_to_tag.enabled</strong>
+    <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Enable changing tag when a client is dragged to the edge of the screen.
+
+
+
+
+
+
+
+    <span id=item723 class="hide_extra">
+    </span>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="lib_awful_mouse_client_Functions"></a>lib.awful.mouse.client Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "awful.mouse.client.move"></a>
+    <strong>awful.mouse.client.move <span class='function_args'> <b>(</b>c, snap, finished_cb<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Move a client.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+         The client to move, or the focused one if nil.
+        </li>
+        <li><span class="parameter">snap</span>
+         The pixel to snap clients.
+        </li>
+        <li><span class="parameter">finished_cb</span>
+         Deprecated, do not use
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item724 class="hide_extra">
     </span>
 
 </dd>
@@ -1351,7 +1360,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item723 class="hide_extra">
+    <span id=item725 class="hide_extra">
     </span>
 
 </dd>
@@ -1396,95 +1405,47 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item724 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "awful.mouse.snap.default_distance"></a>
-    <strong><span class='function_modname'>mouse.</span>awful.mouse.snap.default_distance</strong>
-    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The default snap distance.
-
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../input handling/mouse.html#awful.mouse.snap">awful.mouse.snap</a>
-    </ul>
-
-
-
-    <span id=item725 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "awful.mouse.snap.edge_enabled"></a>
-    <strong><span class='function_modname'>mouse.</span>awful.mouse.snap.edge_enabled</strong>
-    <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Enable screen edges snapping.
-
-
-
-
-
-
-
     <span id=item726 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.mouse.snap.client_enabled"></a>
-    <strong><span class='function_modname'>mouse.</span>awful.mouse.snap.client_enabled</strong>
-    <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
+    <a name = "awful.mouse.client.resize"></a>
+    <strong>awful.mouse.client.resize <span class='function_args'> <b>(</b>c, corner[, args={}]<b>)</b></span></strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Enable client to client snapping.
+    Resize a client.
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+         The client to resize, or the focused one by default.
+        </li>
+        <li><span class="parameter">corner</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The corner to grab on resize. Auto detected by default.
+        </li>
+        <li><span class="parameter">args</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A set of <a href="../libraries/awful.placement.html#">awful.placement</a> arguments
+         (<em>default</em> {})
+        </li>
+    </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        The corner (or side) name
+    </ol>
 
 
 
 
 
     <span id=item727 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "awful.mouse.drag_to_tag.enabled"></a>
-    <strong><span class='function_modname'>mouse.</span>awful.mouse.drag_to_tag.enabled</strong>
-    <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Enable changing tag when a client is dragged to the edge of the screen.
-
-
-
-
-
-
-
-    <span id=item728 class="hide_extra">
     </span>
 
 </dd>
@@ -1508,7 +1469,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item729 class="hide_extra">
+    <span id=item728 class="hide_extra">
     </span>
 
 </dd>
@@ -1528,7 +1489,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item730 class="hide_extra">
+    <span id=item729 class="hide_extra">
     </span>
 
 </dd>
@@ -1563,7 +1524,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item731 class="hide_extra">
+    <span id=item730 class="hide_extra">
     </span>
 
 </dd>
@@ -1594,7 +1555,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item732 class="hide_extra">
+    <span id=item731 class="hide_extra">
     </span>
 
 </dd>
@@ -1626,7 +1587,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item733 class="hide_extra">
+    <span id=item732 class="hide_extra">
     </span>
 
 </dd>
@@ -1657,7 +1618,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item734 class="hide_extra">
+    <span id=item733 class="hide_extra">
     </span>
 
 </dd>
@@ -1702,7 +1663,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item735 class="hide_extra">
+    <span id=item734 class="hide_extra">
     </span>
 
 </dd>
@@ -1746,7 +1707,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
 
 
 
-    <span id=item736 class="hide_extra">
+    <span id=item735 class="hide_extra">
     </span>
 
 </dd>
