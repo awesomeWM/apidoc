@@ -217,7 +217,38 @@
 
 <h1>Module: <code>awful.widget.layoutbox</code></h1>
 <p>Display the current client layout (<a href="../libraries/awful.layout.html#">awful.layout</a>) icon or name.</p>
-<p></p>
+<p><p><img src="../images/AUTOGEN_awful_widget_layoutbox_default.svg" alt="Usage example" /></p>
+
+<pre>
+<span class="keyword">local</span> s = screen[<span class="number">1</span>]
+
+<span class="keyword">local</span> mylayoutbox = awful.widget.layoutbox {
+    screen = s,
+    <span class="comment">-- Add buttons, allowing you to change the layout
+</span>    buttons = {
+        awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> () awful.layout.inc( <span class="number">1</span>) <span class="keyword">end</span>),
+        awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span> () awful.layout.inc(-<span class="number">1</span>) <span class="keyword">end</span>),
+        awful.button({ }, <span class="number">4</span>, <span class="keyword">function</span> () awful.layout.inc( <span class="number">1</span>) <span class="keyword">end</span>),
+        awful.button({ }, <span class="number">5</span>, <span class="keyword">function</span> () awful.layout.inc(-<span class="number">1</span>) <span class="keyword">end</span>),
+    }
+}
+
+wb:setup {
+    layout = wibox.layout.align.horizontal,
+    { <span class="comment">-- Left widgets
+</span>        mytaglist,
+        layout = wibox.layout.fixed.horizontal,
+    },
+    mytasklist, <span class="comment">-- Middle widget
+</span>    { <span class="comment">-- Right widgets
+</span>        layout = wibox.layout.fixed.horizontal,
+        mykeyboardlayout,
+        mytextclock,
+        mylayoutbox,
+    },
+}
+</pre>
+</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2009 Julien Danjou</li>
