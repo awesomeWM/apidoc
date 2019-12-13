@@ -214,7 +214,22 @@
 
 <h1>Module: <code>gears.table</code></h1>
 <p>Table module for gears.</p>
-<p></p>
+<p><h2> Examples</h2>
+
+<p> Using <a href="../utility_libraries/gears.table.html#cycle_value">cycle_value</a>, you can cycle through values in a table.
+ When the end of the table is reached, <a href="../utility_libraries/gears.table.html#cycle_value">cycle_value</a> loops around to the beginning.</p>
+
+<p><strong>Usage example output</strong>:</p></p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local res = {&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;}
+for i=1, #res do
+    local k = res[i]
+    local v = gears.table.cycle_value(res, k, 1)
+    print(v)
+end
+</pre>
+    </ul>
 
 
 <h2><a href="#Static_module_functions">Static module functions</a></h2>
@@ -258,6 +273,10 @@
     <tr>
       <td class="name" ><a href="#clone"><span class='function_modname'>gears.table.</span>clone <span class='function_args'> <b>(</b>t[, deep=true]<b>)</b></span></a></td>
       <td colspan="2" class="summary">Clone a table.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#cycle_value"><span class='function_modname'>gears.table.</span>cycle_value <span class='function_args'> <b>(</b>t, value[, step_size=1[, filter=nil[, start_at=1]]]<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Get the next (or previous) value from a table and cycle if necessary.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#iterate"><span class='function_modname'>gears.table.</span>iterate <span class='function_args'> <b>(</b>t, filter, start<b>)</b></span></a></td>
@@ -667,6 +686,63 @@
 
 </dd>
     <dt>
+    <a name = "cycle_value"></a>
+    <strong><span class='function_modname'>gears.table.</span>cycle_value <span class='function_args'> <b>(</b>t, value[, step_size=1[, filter=nil[, start_at=1]]]<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Get the next (or previous) value from a table and cycle if necessary.</p>
+
+<p> If the table contains the same value multiple type (aka, is not a set), the
+ <code>first_index</code> has to be specified.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The input table.
+        </li>
+        <li><span class="parameter">value</span>
+         A value from the table.
+        </li>
+        <li><span class="parameter">step_size</span>
+            <span class="types"><span class="type">number</span></span>
+         How many element forward (or backward) to pick.
+         (<em>default</em> 1)
+        </li>
+        <li><span class="parameter">filter</span>
+            <span class="types"><span class="type">function</span></span>
+         An optional function. When it returns
+  <code>false</code>, the element are skipped until a match if found. It takes the value
+  as its sole parameter.
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">start_at</span>
+            <span class="types"><span class="type">number</span></span>
+         Where to start the lookup from.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        The value. If no element match, then <code>nil</code> is returned.</li>
+        <li>
+           <span class="types"><span class="type">number</span> or <span class="type">nil</span></span>
+        The element (if any) key.</li>
+    </ol>
+
+
+
+
+
+    <span id=item2438 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "iterate"></a>
     <strong><span class='function_modname'>gears.table.</span>iterate <span class='function_args'> <b>(</b>t, filter, start<b>)</b></span></strong>
     <span class="baseclass" >
@@ -708,7 +784,7 @@
 
 
 
-    <span id=item2438 class="hide_extra">
+    <span id=item2439 class="hide_extra">
     </span>
 
 </dd>
@@ -744,7 +820,7 @@
 
 
 
-    <span id=item2439 class="hide_extra">
+    <span id=item2440 class="hide_extra">
     </span>
 
 </dd>
@@ -818,7 +894,7 @@
     </ul>
 
 
-    <span id=item2440 class="hide_extra">
+    <span id=item2441 class="hide_extra">
     </span>
 
 </dd>
@@ -857,7 +933,7 @@
 
 
 
-    <span id=item2441 class="hide_extra">
+    <span id=item2442 class="hide_extra">
     </span>
 
 </dd>
