@@ -229,19 +229,19 @@
     </tr>
     <tr>
       <td class="name" ><a href="#linecount"><span class='function_modname'>gears.string.</span>linecount <span class='function_args'> <b>(</b>text<b>)</b></span></a></td>
-      <td colspan="2" class="summary">Count number of lines in a string</td>
+      <td colspan="2" class="summary">Count number of lines in a string.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#linewrap"><span class='function_modname'>gears.string.</span>linewrap <span class='function_args'> <b>(</b>text, width, indent<b>)</b></span></a></td>
       <td colspan="2" class="summary">Split a string into multiple lines.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#quote_pattern"><span class='function_modname'>gears.string.</span>quote_pattern <span class='function_args'> <b>(</b><b>)</b></span></a></td>
+      <td class="name" ><a href="#quote_pattern"><span class='function_modname'>gears.string.</span>quote_pattern <span class='function_args'> <b>(</b>s<b>)</b></span></a></td>
       <td colspan="2" class="summary">Escape all special pattern-matching characters so that lua interprets them
  literally instead of as a character class.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#query_to_pattern"><span class='function_modname'>gears.string.</span>query_to_pattern <span class='function_args'> <b>(</b>s<b>)</b></span></a></td>
+      <td class="name" ><a href="#query_to_pattern"><span class='function_modname'>gears.string.</span>query_to_pattern <span class='function_args'> <b>(</b>q<b>)</b></span></a></td>
       <td colspan="2" class="summary">Generate a pattern matching expression that ignores case.</td>
     </tr>
     <tr>
@@ -286,7 +286,8 @@
     <h3>Returns:</h3>
     <ol>
 
-        Escape text.
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        Escaped text.
     </ol>
 
 
@@ -316,6 +317,7 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
         Unescaped text.
     </ol>
 
@@ -334,7 +336,13 @@
     </span>
     </dt>
     <dd>
-    Count number of lines in a string
+    <p>Count number of lines in a string.</p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>Count is: 1
+Count is: 3
+</code></pre>
 
     <h3>Parameters:</h3>
     <ul>
@@ -353,6 +361,15 @@
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> test = <span class="string">'do.t'</span>
+<span class="keyword">local</span> res = gears.<span class="global">string</span>.linecount(test)
+<span class="global">print</span>(<span class="string">'Count is: '</span> .. res)
+<span class="keyword">local</span> test2 = <span class="string">'do\nit\nnow'</span>
+<span class="keyword">local</span> res2 = gears.<span class="global">string</span>.linecount(test2)
+<span class="global">print</span>(<span class="string">'Count is: '</span> .. res2)</pre>
+    </ul>
 
 
     <span id=item2421 class="hide_extra">
@@ -366,17 +383,26 @@
     </span>
     </dt>
     <dd>
-    Split a string into multiple lines.
+    <p>Split a string into multiple lines.</p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>do
+it
+</code></pre>
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">text</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          String to wrap.
         </li>
         <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
          Maximum length of each line. Default: 72.
         </li>
         <li><span class="parameter">indent</span>
+            <span class="types"><span class="type">number</span></span>
          Number of spaces added before each wrapped line. Default: 0.
         </li>
     </ul>
@@ -384,11 +410,18 @@
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
         The string with lines wrapped to width.
     </ol>
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> test = <span class="string">'do it'</span>
+<span class="keyword">local</span> res = gears.<span class="global">string</span>.linewrap(test, <span class="number">2</span>, <span class="number">0</span>)
+<span class="global">print</span>(res)</pre>
+    </ul>
 
 
     <span id=item2422 class="hide_extra">
@@ -397,19 +430,43 @@
 </dd>
     <dt>
     <a name = "quote_pattern"></a>
-    <strong><span class='function_modname'>gears.string.</span>quote_pattern <span class='function_args'> <b>(</b><b>)</b></span></strong>
+    <strong><span class='function_modname'>gears.string.</span>quote_pattern <span class='function_args'> <b>(</b>s<b>)</b></span></strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Escape all special pattern-matching characters so that lua interprets them
+    <p>Escape all special pattern-matching characters so that lua interprets them
  literally instead of as a character class.
- Source: http://stackoverflow.com/a/20778724/15690
+ Source: http://stackoverflow.com/a/20778724/15690</p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>do%.it
+</code></pre>
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">s</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         String to generate pattern for
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        string with escaped characters
+    </ol>
 
 
 
-
-
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> test = <span class="string">'do.it'</span>
+<span class="keyword">local</span> res = gears.<span class="global">string</span>.quote_pattern(test)
+<span class="global">print</span>(res)</pre>
+    </ul>
 
 
     <span id=item2423 class="hide_extra">
@@ -418,7 +475,7 @@
 </dd>
     <dt>
     <a name = "query_to_pattern"></a>
-    <strong><span class='function_modname'>gears.string.</span>query_to_pattern <span class='function_args'> <b>(</b>s<b>)</b></span></strong>
+    <strong><span class='function_modname'>gears.string.</span>query_to_pattern <span class='function_args'> <b>(</b>q<b>)</b></span></strong>
     <span class="baseclass" >
     </span>
     </dt>
@@ -427,7 +484,8 @@
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">s</span>
+        <li><span class="parameter">q</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          Original pattern matching expression.
         </li>
     </ul>
@@ -485,7 +543,13 @@
     </span>
     </dt>
     <dd>
-    Check if a string starts with another string.
+    <p>Check if a string starts with another string.</p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>true
+false
+</code></pre>
 
     <h3>Parameters:</h3>
     <ul>
@@ -499,9 +563,23 @@
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        <code>true</code> if string starts with specified string
+    </ol>
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> test = <span class="string">'do.it'</span>
+<span class="keyword">local</span> res = gears.<span class="global">string</span>.startswith(test,<span class="string">'do'</span>)
+<span class="global">print</span>(<span class="global">tostring</span>(res)) <span class="comment">-- Print boolean value
+</span>res = gears.<span class="global">string</span>.startswith(test,<span class="string">'it'</span>)
+<span class="global">print</span>(<span class="global">tostring</span>(res)) <span class="comment">-- print boolean value</span></pre>
+    </ul>
 
 
     <span id=item2426 class="hide_extra">
@@ -515,7 +593,13 @@
     </span>
     </dt>
     <dd>
-    Check if a string ends with another string.
+    <p>Check if a string ends with another string.</p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>true
+false
+</code></pre>
 
     <h3>Parameters:</h3>
     <ul>
@@ -529,9 +613,23 @@
         </li>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        <code>true</code> if string ends with specified string
+    </ol>
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> test = <span class="string">'do.it'</span>
+<span class="keyword">local</span> res = gears.<span class="global">string</span>.endswith(test,<span class="string">'it'</span>)
+<span class="global">print</span>(<span class="global">tostring</span>(res))
+res = gears.<span class="global">string</span>.endswith(test,<span class="string">'do'</span>)
+<span class="global">print</span>(<span class="global">tostring</span>(res))</pre>
+    </ul>
 
 
     <span id=item2427 class="hide_extra">
