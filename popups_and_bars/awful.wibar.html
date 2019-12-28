@@ -242,16 +242,6 @@
       <td colspan="2" class="summary">If the wibar needs to be stretched to fill the screen.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#width">width</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
-      <td colspan="2" class="summary">The wibar&rsquo;s width.</td>
-    </tr>
-    <tr>
-      <td class="shortname" ><a href="#height">height</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
-      <td colspan="2" class="summary">The wibar&rsquo;s height.</td>
-    </tr>
-    <tr>
       <td class="shortname" ><a href="#position">position</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td colspan="2" class="summary">The wibox position.</td>
@@ -417,6 +407,14 @@
       </td>
     </tr>
     <tr>
+      <td class="shortname" ><a href="#buttons">buttons</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>buttons_table</span></td>
+      <td colspan="1" class="summary">Get or set mouse buttons bindings to a wibox.</td>
+      <td class="baseclass" >
+        Inherited from wibox
+      </td>
+    </tr>
+    <tr>
       <td class="shortname" ><a href="#bg">bg</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>c</span></td>
       <td colspan="1" class="summary">The background of the wibox.</td>
@@ -426,7 +424,7 @@
     </tr>
     <tr>
       <td class="shortname" ><a href="#bgimage">bgimage</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>image</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>gears.suface <i>or</i> string <i>or</i> function</span></td>
       <td colspan="1" class="summary">The background image of the drawable.</td>
       <td class="baseclass" >
         Inherited from wibox
@@ -434,7 +432,7 @@
     </tr>
     <tr>
       <td class="shortname" ><a href="#fg">fg</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>c</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
       <td colspan="1" class="summary">The foreground (text) of the wibox.</td>
       <td class="baseclass" >
         Inherited from wibox
@@ -446,13 +444,6 @@
     <tr>
       <td class="name" ><a href="#remove">:remove <span class='function_args'> <b>(</b><b>)</b></span></a></td>
       <td colspan="2" class="summary">Remove a wibar.</td>
-    </tr>
-    <tr>
-      <td class="name" ><a href="#buttons">:buttons <span class='function_args'> <b>(</b>buttons_table<b>)</b></span></a></td>
-      <td colspan="1" class="summary">Get or set mouse buttons bindings to a wibox.</td>
-      <td class="baseclass" >
-        Inherited from wibox
-      </td>
     </tr>
     <tr>
       <td class="name" ><a href="#geometry">:geometry <span class='function_args'> <b>(</b>A<b>)</b></span></a></td>
@@ -480,6 +471,27 @@
       <td colspan="1" class="summary">Find a widget by a point.</td>
       <td class="baseclass" >
         Inherited from wibox
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Emit a signal.</td>
+      <td class="baseclass" >
+        Inherited from gears.object
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#connect_signal">:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Connect to a signal.</td>
+      <td class="baseclass" >
+        Inherited from gears.object
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#weak_connect_signal">:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Connect to a signal weakly.</td>
+      <td class="baseclass" >
+        Inherited from gears.object
       </td>
     </tr>
 </table>
@@ -725,7 +737,7 @@
 
 
 
-    <span id=item2223 class="hide_extra">
+    <span id=item2340 class="hide_extra">
     </span>
 
 </dd>
@@ -738,6 +750,8 @@
     <strong>stretch</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
+         &middot 1 theme variables
     </span>
     </dt>
     <dd>
@@ -748,48 +762,30 @@
 
 
 
+     <br />
+     <center id=button2341>
+     <a class="show_more_button" onclick="show_extra('2341')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2224 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "width"></a>
-    <strong>width</strong>
-    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The wibar&rsquo;s width.
-
-
-
-
-
-
-
-    <span id=item2225 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "height"></a>
-    <strong>height</strong>
-    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The wibar&rsquo;s height.
-
-
-
-
-
-
-
-    <span id=item2226 class="hide_extra">
+    <span id=item2341 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::stretch</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#stretch">stretch</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#stretch">stretch</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><a href="../popups_and_bars/awful.wibar.html#beautiful.wibar_stretch">beautiful.wibar_stretch</a></td><td>Fallback when <a href="../popups_and_bars/awful.wibar.html#stretch">stretch</a> isn't set.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -798,14 +794,26 @@
     <strong>position</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    The wibox position.
+    <p>The wibox position.</p>
+
+<p> The valid values are:</p>
+
+<ul>
+<li>left</li>
+<li>right</li>
+<li>top</li>
+<li>bottom</li>
+</ul>
+
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">string</span>
+        <li><span class="parameter">position</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          Either &ldquo;left&rdquo;, right", &ldquo;top&rdquo; or &ldquo;bottom&rdquo;
         </li>
     </ul>
@@ -814,8 +822,22 @@
 
 
 
+     <br />
+     <center id=button2342>
+     <a class="show_more_button" onclick="show_extra('2342')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2227 class="hide_extra">
+    <span id=item2342 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::position</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#position">position</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#position">position</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -825,25 +847,32 @@
     <span class="proptype">(<span class='summary_type'>integer</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>Border width.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::border_width</em></li>
-</ul>
+    Border width.
 
 
 
 
 
 
+     <br />
+     <center id=button2343>
+     <a class="show_more_button" onclick="show_extra('2343')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2228 class="hide_extra">
+    <span id=item2343 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::border_width</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#border_width">border_width</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -853,6 +882,7 @@
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -875,20 +905,26 @@ Red Blue
 Green   Alpha
 </code></pre>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::border_color</em></li>
-</ul>
 
 
 
 
 
+     <br />
+     <center id=button2344>
+     <a class="show_more_button" onclick="show_extra('2344')">
+      Click to display more
+     </a>
+     </center>
 
-
-
-    <span id=item2229 class="hide_extra">
+    <span id=item2344 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::border_color</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#border_color">border_color</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -898,25 +934,32 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>On top of other windows.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::ontop</em></li>
-</ul>
+    On top of other windows.
 
 
 
 
 
 
+     <br />
+     <center id=button2345>
+     <a class="show_more_button" onclick="show_extra('2345')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2230 class="hide_extra">
+    <span id=item2345 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::ontop</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#ontop">ontop</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -926,17 +969,11 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The mouse cursor.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::cursor</em></li>
-</ul>
-
+    The mouse cursor.
 
 
 
@@ -947,8 +984,21 @@ Green   Alpha
     </ul>
 
 
+     <br />
+     <center id=button2346>
+     <a class="show_more_button" onclick="show_extra('2346')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2231 class="hide_extra">
+    <span id=item2346 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::cursor</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#cursor">cursor</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -958,25 +1008,32 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>Visibility.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::visible</em></li>
-</ul>
+    Visibility.
 
 
 
 
 
 
+     <br />
+     <center id=button2347>
+     <a class="show_more_button" onclick="show_extra('2347')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2232 class="hide_extra">
+    <span id=item2347 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::visible</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#visible">visible</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -986,17 +1043,11 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The opacity of the wibox, between 0 and 1.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::opacity</em></li>
-</ul>
-
+    The opacity of the wibox, between 0 and 1.
 
     <h3>Type constraints:</h3>
     <ul>
@@ -1010,8 +1061,21 @@ Green   Alpha
 
 
 
+     <br />
+     <center id=button2348>
+     <a class="show_more_button" onclick="show_extra('2348')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2233 class="hide_extra">
+    <span id=item2348 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::opacity</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#opacity">opacity</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1021,17 +1085,11 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The window type (desktop, normal, dock, &hellip;).</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::type</em></li>
-</ul>
-
+    The window type (desktop, normal, dock, &hellip;).
 
 
 
@@ -1042,8 +1100,21 @@ Green   Alpha
     </ul>
 
 
+     <br />
+     <center id=button2349>
+     <a class="show_more_button" onclick="show_extra('2349')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2234 class="hide_extra">
+    <span id=item2349 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::type</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#type">type</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1053,25 +1124,32 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>integer</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The x coordinates.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::x</em></li>
-</ul>
+    The x coordinates.
 
 
 
 
 
 
+     <br />
+     <center id=button2350>
+     <a class="show_more_button" onclick="show_extra('2350')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2235 class="hide_extra">
+    <span id=item2350 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::x</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#x">x</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1081,25 +1159,32 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>integer</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The y coordinates.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::y</em></li>
-</ul>
+    The y coordinates.
 
 
 
 
 
 
+     <br />
+     <center id=button2351>
+     <a class="show_more_button" onclick="show_extra('2351')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2236 class="hide_extra">
+    <span id=item2351 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::y</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#y">y</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1109,25 +1194,32 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>width</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The width of the wibox.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::width</em></li>
-</ul>
+    The width of the wibox.
 
 
 
 
 
 
+     <br />
+     <center id=button2352>
+     <a class="show_more_button" onclick="show_extra('2352')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2237 class="hide_extra">
+    <span id=item2352 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::width</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#width">width</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1137,25 +1229,32 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>height</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The height of the wibox.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::height</em></li>
-</ul>
+    The height of the wibox.
 
 
 
 
 
 
+     <br />
+     <center id=button2353>
+     <a class="show_more_button" onclick="show_extra('2353')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2238 class="hide_extra">
+    <span id=item2353 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::height</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#height">height</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1165,6 +1264,7 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>screen</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -1175,8 +1275,22 @@ Green   Alpha
 
 
 
+     <br />
+     <center id=button2354>
+     <a class="show_more_button" onclick="show_extra('2354')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2239 class="hide_extra">
+    <span id=item2354 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::screen</code></span>  When the <a href="../core_components/screen.html#">screen</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../core_components/screen.html#">screen</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1186,25 +1300,32 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>drawable</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The wibox&rsquo;s <a href="../core_components/drawable.html#">drawable</a>.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::drawable</em></li>
-</ul>
+    The wibox&rsquo;s <a href="../core_components/drawable.html#">drawable</a>.
 
 
 
 
 
 
+     <br />
+     <center id=button2355>
+     <a class="show_more_button" onclick="show_extra('2355')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2240 class="hide_extra">
+    <span id=item2355 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::drawable</code></span>  When the <a href="../core_components/drawable.html#">drawable</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1214,6 +1335,7 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>widget</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -1224,8 +1346,22 @@ Green   Alpha
 
 
 
+     <br />
+     <center id=button2356>
+     <a class="show_more_button" onclick="show_extra('2356')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2241 class="hide_extra">
+    <span id=item2356 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::widget</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#widget">widget</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#widget">widget</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1235,17 +1371,11 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The X window id.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::window</em></li>
-</ul>
-
+    The X window id.
 
 
 
@@ -1256,8 +1386,21 @@ Green   Alpha
     </ul>
 
 
+     <br />
+     <center id=button2357>
+     <a class="show_more_button" onclick="show_extra('2357')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2242 class="hide_extra">
+    <span id=item2357 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::window</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#window">window</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1267,25 +1410,40 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The wibox&rsquo;s bounding shape as a (native) cairo surface.</p>
+    The wibox&rsquo;s bounding shape as a (native) cairo surface.</p>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::shape_bounding</em></li>
-</ul>
+<p> If you want to set a shape, let say some rounded corners, use
+ the <a href="../popups_and_bars/awful.wibar.html#shape">shape</a> property rather than this. If you want something
+ very complex, for example, holes, then use this.
 
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../popups_and_bars/awful.wibar.html#shape">shape</a>
+    </ul>
 
 
+     <br />
+     <center id=button2358>
+     <a class="show_more_button" onclick="show_extra('2358')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2243 class="hide_extra">
+    <span id=item2358 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::shape_bounding</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#shape_bounding">shape_bounding</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1295,25 +1453,39 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The wibox&rsquo;s clip shape as a (native) cairo surface.</p>
+    The wibox&rsquo;s clip shape as a (native) cairo surface.</p>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::shape_clip</em></li>
-</ul>
+<p> The clip shape is the shape of the window <em>content</em> rather
+ than the outer window shape.
 
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../popups_and_bars/awful.wibar.html#shape">shape</a>
+    </ul>
 
 
+     <br />
+     <center id=button2359>
+     <a class="show_more_button" onclick="show_extra('2359')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2244 class="hide_extra">
+    <span id=item2359 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::shape_clip</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#shape_clip">shape_clip</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1323,25 +1495,40 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The wibox&rsquo;s input shape as a (native) cairo surface.</p>
+    The wibox&rsquo;s input shape as a (native) cairo surface.</p>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::shape_input</em></li>
-</ul>
+<p> The input shape allows to disable clicks and mouse events
+ on part of the window. This is how <a href="../popups_and_bars/awful.wibar.html#input_passthrough">input_passthrough</a> is
+ implemented.
 
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../popups_and_bars/awful.wibar.html#input_passthrough">input_passthrough</a>
+    </ul>
 
 
+     <br />
+     <center id=button2360>
+     <a class="show_more_button" onclick="show_extra('2360')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2245 class="hide_extra">
+    <span id=item2360 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::shape_input</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#shape_input">shape_input</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1351,25 +1538,37 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>gears.shape</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The wibar&rsquo;s shape.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::shape</em></li>
-</ul>
+    The wibar&rsquo;s shape.
 
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../theme_related_libraries/gears.shape.html#">gears.shape</a>
+    </ul>
 
 
+     <br />
+     <center id=button2361>
+     <a class="show_more_button" onclick="show_extra('2361')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item2246 class="hide_extra">
+    <span id=item2361 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::shape</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#shape">shape</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#shape">shape</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1379,23 +1578,17 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>Forward the inputs to the client below the wibox.</p>
+    Forward the inputs to the client below the wibox.</p>
 
 <p> This replace the <a href="../popups_and_bars/awful.wibar.html#shape_input">shape_input</a> mask with an empty area. All mouse and
  keyboard events are sent to the object (such as a client) positioned below
  this wibox. When used alongside compositing, it allows, for example, to have
  a subtle transparent wibox on top a fullscreen client to display important
- data such as a low battery warning.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::input_passthrough</em></li>
-</ul>
-
+ data such as a low battery warning.
 
 
 
@@ -1406,8 +1599,63 @@ Green   Alpha
     </ul>
 
 
+     <br />
+     <center id=button2362>
+     <a class="show_more_button" onclick="show_extra('2362')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2247 class="hide_extra">
+    <span id=item2362 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::input_passthrough</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#input_passthrough">input_passthrough</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>boolean</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "buttons"></a>
+    <strong>buttons</strong>
+    <span class="proptype">(<span class='summary_type'>buttons_table</span>)</span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
+    </span>
+    </dt>
+    <dd>
+    Get or set mouse buttons bindings to a wibox.
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">buttons_table</span>
+         A table of buttons objects, or nothing.
+        </li>
+    </ul>
+
+
+
+
+
+     <br />
+     <center id=button2363>
+     <a class="show_more_button" onclick="show_extra('2363')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item2363 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::buttons</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#buttons">buttons</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1417,19 +1665,25 @@ Green   Alpha
     <span class="proptype">(<span class='summary_type'>c</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
+         &middot 1 theme variables
     </span>
     </dt>
     <dd>
-    The background of the wibox.
+    The background of the wibox.</p>
+
+<p> The background color can be transparent. If there is a
+ compositing manager such as compton, then it will be
+ real transparency and may include blur (provided by the
+ compositor). When there is no compositor, it will take
+ a picture of the wallpaper and blend it.
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">c</span>
-         The background to use. This must either be a cairo pattern object,
+        <li><span class="parameter">The</span>
+            <span class="types"><span class="type">c</span></span>
+         background to use. This must either be a cairo pattern object,
    nil or a string that gears.color() understands.
-        </li>
-        <li><span class="parameter">color</span>
-
         </li>
     </ul>
 
@@ -1441,28 +1695,53 @@ Green   Alpha
     </ul>
 
 
+     <br />
+     <center id=button2364>
+     <a class="show_more_button" onclick="show_extra('2364')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2248 class="hide_extra">
+    <span id=item2364 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::bg</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#bg">bg</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>The</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><a href="../popups_and_bars/awful.wibar.html#beautiful.bg_normal">beautiful.bg_normal</a></td><td>The default (fallback) bg color.</td></tr>
+     </table>
     </span>
 
 </dd>
     <dt>
     <a name = "bgimage"></a>
     <strong>bgimage</strong>
-    <span class="proptype">(<span class='summary_type'>image</span>)</span>
+    <span class="proptype">(<span class='summary_type'>gears.suface <i>or</i> string <i>or</i> function</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    The background image of the drawable.
- If <code>image</code> is a function, it will be called with <code>(context, cr, width, height)</code>
+    The background image of the drawable.</p>
+
+<p> If <code>image</code> is a function, it will be called with <code>(context, cr, width, height)</code>
  as arguments. Any other arguments passed to this method will be appended.
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">image</span>
-         A background image or a function
+            <span class="types"><span class="type">gears.suface</span>, <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">function</span></span>
+         A background image or a function.
         </li>
     </ul>
 
@@ -1474,17 +1753,33 @@ Green   Alpha
     </ul>
 
 
+     <br />
+     <center id=button2365>
+     <a class="show_more_button" onclick="show_extra('2365')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2249 class="hide_extra">
+    <span id=item2365 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::bgimage</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#bgimage">bgimage</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>image</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "fg"></a>
     <strong>fg</strong>
-    <span class="proptype">(<span class='summary_type'>c</span>)</span>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
+         &middot 1 theme variables
     </span>
     </dt>
     <dd>
@@ -1493,6 +1788,7 @@ Green   Alpha
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">c</span>
+            <span class="types"><span class="type">color</span></span>
          The foreground to use. This must either be a cairo pattern object,
    nil or a string that gears.color() understands.
         </li>
@@ -1509,8 +1805,30 @@ Green   Alpha
     </ul>
 
 
+     <br />
+     <center id=button2366>
+     <a class="show_more_button" onclick="show_extra('2366')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2250 class="hide_extra">
+    <span id=item2366 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::fg</code></span>  When the <a href="../popups_and_bars/awful.wibar.html#fg">fg</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>c</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><a href="../popups_and_bars/awful.wibar.html#beautiful.fg_normal">beautiful.fg_normal</a></td><td>The default (fallback) fg color.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -1533,33 +1851,7 @@ Green   Alpha
 
 
 
-    <span id=item2251 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "buttons"></a>
-    <strong>:buttons <span class='function_args'> <b>(</b>buttons_table<b>)</b></span></strong>
-    <span class="baseclass" >
-    &middot;&nbsp;Inherited from wibox
-    </span>
-    </dt>
-    <dd>
-    Get or set mouse buttons bindings to a wibox.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">buttons_table</span>
-         A table of buttons objects, or nothing.
-        </li>
-    </ul>
-
-
-
-
-
-
-    <span id=item2252 class="hide_extra">
+    <span id=item2367 class="hide_extra">
     </span>
 
 </dd>
@@ -1568,6 +1860,7 @@ Green   Alpha
     <strong>:geometry <span class='function_args'> <b>(</b>A<b>)</b></span></strong>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -1590,8 +1883,21 @@ Green   Alpha
 
 
 
+     <br />
+     <center id=button2368>
+     <a class="show_more_button" onclick="show_extra('2368')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2253 class="hide_extra">
+    <span id=item2368 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::geometry</code></span>  When the geometry change.</li>
+           <ul>
+             <li><span class="parameter"><code>geo</code></span> <span class="types"><a href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span> The geometry table.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1600,10 +1906,18 @@ Green   Alpha
     <strong>:struts <span class='function_args'> <b>(</b>strut<b>)</b></span></strong>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    Get or set wibox struts.
+    Get or set wibox struts.</p>
+
+<p> Struts are the area which should be reserved on each side of
+ the screen for this wibox. This is used to make bars and
+ docked displays. Note that <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a> implements all the
+ required boilerplate code to make bar. Only use this if you
+ want special type of bars (like bars not fully attached to
+ the side of the screen).
 
     <h3>Parameters:</h3>
     <ul>
@@ -1625,8 +1939,18 @@ Green   Alpha
     </ul>
 
 
+     <br />
+     <center id=button2369>
+     <a class="show_more_button" onclick="show_extra('2369')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2254 class="hide_extra">
+    <span id=item2369 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::struts</code></span>  </li>
+     </ul>
     </span>
 
 </dd>
@@ -1653,7 +1977,7 @@ Green   Alpha
 
 
 
-    <span id=item2255 class="hide_extra">
+    <span id=item2370 class="hide_extra">
     </span>
 
 </dd>
@@ -1693,7 +2017,108 @@ Green   Alpha
 
 
 
-    <span id=item2256 class="hide_extra">
+    <span id=item2371 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "emit_signal"></a>
+    <strong>:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
+    </dt>
+    <dd>
+    Emit a signal.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">...</span>
+         Extra arguments for the callback functions. Each connected
+   function receives the object as first argument and then any extra
+   arguments that are given to emit_signal().
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item2372 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "connect_signal"></a>
+    <strong>:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
+    </dt>
+    <dd>
+    Connect to a signal.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item2373 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "weak_connect_signal"></a>
+    <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
+    </dt>
+    <dd>
+    Connect to a signal weakly.</p>
+
+<p> This allows the callback function to be garbage collected and
+ automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
+ Only use this function if you really, really, really know what you
+ are doing.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item2374 class="hide_extra">
     </span>
 
 </dd>
@@ -1717,7 +2142,7 @@ Green   Alpha
 
 
 
-    <span id=item2257 class="hide_extra">
+    <span id=item2375 class="hide_extra">
     </span>
 
 </dd>
@@ -1737,7 +2162,7 @@ Green   Alpha
 
 
 
-    <span id=item2258 class="hide_extra">
+    <span id=item2376 class="hide_extra">
     </span>
 
 </dd>
@@ -1757,7 +2182,7 @@ Green   Alpha
 
 
 
-    <span id=item2259 class="hide_extra">
+    <span id=item2377 class="hide_extra">
     </span>
 
 </dd>
@@ -1777,7 +2202,7 @@ Green   Alpha
 
 
 
-    <span id=item2260 class="hide_extra">
+    <span id=item2378 class="hide_extra">
     </span>
 
 </dd>
@@ -1797,7 +2222,7 @@ Green   Alpha
 
 
 
-    <span id=item2261 class="hide_extra">
+    <span id=item2379 class="hide_extra">
     </span>
 
 </dd>
@@ -1817,7 +2242,7 @@ Green   Alpha
 
 
 
-    <span id=item2262 class="hide_extra">
+    <span id=item2380 class="hide_extra">
     </span>
 
 </dd>
@@ -1837,7 +2262,7 @@ Green   Alpha
 
 
 
-    <span id=item2263 class="hide_extra">
+    <span id=item2381 class="hide_extra">
     </span>
 
 </dd>
@@ -1857,7 +2282,7 @@ Green   Alpha
 
 
 
-    <span id=item2264 class="hide_extra">
+    <span id=item2382 class="hide_extra">
     </span>
 
 </dd>
@@ -1877,7 +2302,7 @@ Green   Alpha
 
 
 
-    <span id=item2265 class="hide_extra">
+    <span id=item2383 class="hide_extra">
     </span>
 
 </dd>
@@ -1897,7 +2322,7 @@ Green   Alpha
 
 
 
-    <span id=item2266 class="hide_extra">
+    <span id=item2384 class="hide_extra">
     </span>
 
 </dd>
@@ -1917,7 +2342,7 @@ Green   Alpha
 
 
 
-    <span id=item2267 class="hide_extra">
+    <span id=item2385 class="hide_extra">
     </span>
 
 </dd>
@@ -1937,7 +2362,7 @@ Green   Alpha
 
 
 
-    <span id=item2268 class="hide_extra">
+    <span id=item2386 class="hide_extra">
     </span>
 
 </dd>
@@ -1957,7 +2382,7 @@ Green   Alpha
 
 
 
-    <span id=item2269 class="hide_extra">
+    <span id=item2387 class="hide_extra">
     </span>
 
 </dd>
@@ -1970,7 +2395,13 @@ Green   Alpha
     </span>
     </dt>
     <dd>
-    The default background color.
+    The default background color.</p>
+
+<p> The background color can be transparent. If there is a
+ compositing manager such as compton, then it will be
+ real transparency and may include blur (provided by the
+ compositor). When there is no compositor, it will take
+ a picture of the wallpaper and blend it.
 
 
 
@@ -1982,7 +2413,7 @@ Green   Alpha
 
 
 
-    <span id=item2270 class="hide_extra">
+    <span id=item2388 class="hide_extra">
     </span>
 
 </dd>
@@ -2007,7 +2438,7 @@ Green   Alpha
 
 
 
-    <span id=item2271 class="hide_extra">
+    <span id=item2389 class="hide_extra">
     </span>
 
 </dd>
@@ -2041,7 +2472,7 @@ Green   Alpha
 
 
 
-    <span id=item2272 class="hide_extra">
+    <span id=item2390 class="hide_extra">
     </span>
 
 </dd>
@@ -2072,7 +2503,7 @@ Green   Alpha
 
 
 
-    <span id=item2273 class="hide_extra">
+    <span id=item2391 class="hide_extra">
     </span>
 
 </dd>
@@ -2110,7 +2541,7 @@ Green   Alpha
 
 
 
-    <span id=item2274 class="hide_extra">
+    <span id=item2392 class="hide_extra">
     </span>
 
 </dd>
@@ -2163,7 +2594,7 @@ Green   Alpha
 
 
 
-    <span id=item2275 class="hide_extra">
+    <span id=item2393 class="hide_extra">
     </span>
 
 </dd>
@@ -2189,7 +2620,7 @@ Green   Alpha
 
 
 
-    <span id=item2276 class="hide_extra">
+    <span id=item2394 class="hide_extra">
     </span>
 
 </dd>
