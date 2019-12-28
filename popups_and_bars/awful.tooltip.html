@@ -342,22 +342,22 @@ myclock_t:remove_from_object(obj2)
     </tr>
     <tr>
       <td class="shortname" ><a href="#text">text</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>tooltip</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td colspan="2" class="summary">Change displayed text.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#markup">markup</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>tooltip</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td colspan="2" class="summary">Change displayed markup.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#timeout">timeout</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>tooltip</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
       <td colspan="2" class="summary">Change the tooltip&rsquo;s update interval.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#margins">margins</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>tooltip</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> table</span></td>
       <td colspan="2" class="summary">Set all margins around the tooltip textbox</td>
     </tr>
     <tr>
@@ -372,12 +372,12 @@ myclock_t:remove_from_object(obj2)
     </tr>
     <tr>
       <td class="shortname" ><a href="#margins_leftright">margins_leftright</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>tooltip</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
       <td colspan="2" class="summary">Set the margins around the left and right of the tooltip textbox</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#margins_topbottom">margins_topbottom</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>tooltip</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
       <td colspan="2" class="summary">Set the margins around the top and bottom of the tooltip textbox</td>
     </tr>
 </table>
@@ -390,6 +390,27 @@ myclock_t:remove_from_object(obj2)
     <tr>
       <td class="name" ><a href="#remove_from_object">:remove_from_object <span class='function_args'> <b>(</b>self, obj<b>)</b></span></a></td>
       <td colspan="2" class="summary">Remove tooltip from an object.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Emit a signal.</td>
+      <td class="baseclass" >
+        Inherited from gears.object
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#connect_signal">:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Connect to a signal.</td>
+      <td class="baseclass" >
+        Inherited from gears.object
+      </td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#weak_connect_signal">:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
+      <td colspan="1" class="summary">Connect to a signal weakly.</td>
+      <td class="baseclass" >
+        Inherited from gears.object
+      </td>
     </tr>
 </table>
 <h2><a href="#Theme_variables">Theme variables</a></h2>
@@ -552,7 +573,7 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2197 class="hide_extra">
+    <span id=item2311 class="hide_extra">
     </span>
 
 </dd>
@@ -570,19 +591,13 @@ myclock_t:remove_from_object(obj2)
     <dd>
     The wibox containing the tooltip widgets.
 
-    <h3>Type constraints:</h3>
-    <ul>
-        <li><span class="parameter">wibox</span>
-        `
-        </li>
-    </ul>
 
 
 
 
 
 
-    <span id=item2198 class="hide_extra">
+    <span id=item2312 class="hide_extra">
     </span>
 
 </dd>
@@ -591,6 +606,7 @@ myclock_t:remove_from_object(obj2)
     <strong>visible</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -601,8 +617,22 @@ myclock_t:remove_from_object(obj2)
 
 
 
+     <br />
+     <center id=button2313>
+     <a class="show_more_button" onclick="show_extra('2313')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2199 class="hide_extra">
+    <span id=item2313 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::visible</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#visible">visible</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>boolean</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -611,6 +641,8 @@ myclock_t:remove_from_object(obj2)
     <strong>align</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
+         &middot 1 theme variables
     </span>
     </dt>
     <dd>
@@ -642,14 +674,35 @@ myclock_t:remove_from_object(obj2)
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../popups_and_bars/awful.tooltip.html#beautiful.tooltip_align">beautiful.tooltip_align</a></li>
          <li><a href="../popups_and_bars/awful.tooltip.html#mode">mode</a></li>
          <li><a href="../popups_and_bars/awful.tooltip.html#preferred_positions">preferred_positions</a></li>
     </ul>
 
 
+     <br />
+     <center id=button2314>
+     <a class="show_more_button" onclick="show_extra('2314')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2200 class="hide_extra">
+    <span id=item2314 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::align</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#align">align</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><a href="../popups_and_bars/awful.tooltip.html#beautiful.tooltip_align">beautiful.tooltip_align</a></td><td>Fallback when <a href="../popups_and_bars/awful.tooltip.html#align">align</a> isn't set.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -658,6 +711,8 @@ myclock_t:remove_from_object(obj2)
     <strong>shape</strong>
     <span class="proptype">(<span class='summary_type'>gears.shape</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
+         &middot 1 theme variables
     </span>
     </dt>
     <dd>
@@ -670,13 +725,34 @@ myclock_t:remove_from_object(obj2)
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../theme_related_libraries/gears.shape.html#">gears.shape</a></li>
-         <li><a href="../popups_and_bars/awful.tooltip.html#beautiful.tooltip_shape">beautiful.tooltip_shape</a></li>
+         <a href="../theme_related_libraries/gears.shape.html#">gears.shape</a>
     </ul>
 
 
+     <br />
+     <center id=button2315>
+     <a class="show_more_button" onclick="show_extra('2315')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2201 class="hide_extra">
+    <span id=item2315 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::shape</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#shape">shape</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#shape">shape</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><a href="../popups_and_bars/awful.tooltip.html#beautiful.tooltip_shape">beautiful.tooltip_shape</a></td><td>Fallback when <a href="../popups_and_bars/awful.tooltip.html#shape">shape</a> isn't set.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -685,6 +761,7 @@ myclock_t:remove_from_object(obj2)
     <strong>mode</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -714,8 +791,22 @@ myclock_t:remove_from_object(obj2)
 
 
 
+     <br />
+     <center id=button2316>
+     <a class="show_more_button" onclick="show_extra('2316')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2202 class="hide_extra">
+    <span id=item2316 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::mode</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#mode">mode</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -724,6 +815,7 @@ myclock_t:remove_from_object(obj2)
     <strong>preferred_positions</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -767,8 +859,22 @@ myclock_t:remove_from_object(obj2)
     </ul>
 
 
+     <br />
+     <center id=button2317>
+     <a class="show_more_button" onclick="show_extra('2317')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2203 class="hide_extra">
+    <span id=item2317 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::preferred_positions</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#preferred_positions">preferred_positions</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#preferred_positions">preferred_positions</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -777,6 +883,7 @@ myclock_t:remove_from_object(obj2)
     <strong>preferred_alignments</strong>
     <span class="proptype">(<span class='summary_type'>string</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -820,16 +927,31 @@ myclock_t:remove_from_object(obj2)
     </ul>
 
 
+     <br />
+     <center id=button2318>
+     <a class="show_more_button" onclick="show_extra('2318')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2204 class="hide_extra">
+    <span id=item2318 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::preferred_alignments</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#preferred_alignments">preferred_alignments</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "text"></a>
     <strong>text</strong>
-    <span class="proptype">(<span class='summary_type'>tooltip</span>)</span>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -837,10 +959,6 @@ myclock_t:remove_from_object(obj2)
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="../popups_and_bars/awful.tooltip.html#awful.tooltip">tooltip</a></span>
-         The tooltip object.
-        </li>
         <li><span class="parameter">text</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          New tooltip text, passed to
@@ -856,16 +974,31 @@ myclock_t:remove_from_object(obj2)
     </ul>
 
 
+     <br />
+     <center id=button2319>
+     <a class="show_more_button" onclick="show_extra('2319')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2205 class="hide_extra">
+    <span id=item2319 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::text</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#text">text</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#text">text</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "markup"></a>
     <strong>markup</strong>
-    <span class="proptype">(<span class='summary_type'>tooltip</span>)</span>
+    <span class="proptype">(<span class='summary_type'>string</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -873,10 +1006,6 @@ myclock_t:remove_from_object(obj2)
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="../popups_and_bars/awful.tooltip.html#awful.tooltip">tooltip</a></span>
-         The tooltip object.
-        </li>
         <li><span class="parameter">text</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          New tooltip markup, passed to
@@ -892,16 +1021,31 @@ myclock_t:remove_from_object(obj2)
     </ul>
 
 
+     <br />
+     <center id=button2320>
+     <a class="show_more_button" onclick="show_extra('2320')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2206 class="hide_extra">
+    <span id=item2320 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::markup</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#markup">markup</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#text">text</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "timeout"></a>
     <strong>timeout</strong>
-    <span class="proptype">(<span class='summary_type'>tooltip</span>)</span>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -909,10 +1053,6 @@ myclock_t:remove_from_object(obj2)
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="../popups_and_bars/awful.tooltip.html#awful.tooltip">tooltip</a></span>
-         A tooltip object.
-        </li>
         <li><span class="parameter">timeout</span>
             <span class="types"><span class="type">number</span></span>
          The timeout value.
@@ -923,16 +1063,31 @@ myclock_t:remove_from_object(obj2)
 
 
 
+     <br />
+     <center id=button2321>
+     <a class="show_more_button" onclick="show_extra('2321')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2207 class="hide_extra">
+    <span id=item2321 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::timeout</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#timeout">timeout</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#timeout">timeout</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "margins"></a>
     <strong>margins</strong>
-    <span class="proptype">(<span class='summary_type'>tooltip</span>)</span>
+    <span class="proptype">(<span class='summary_type'>number <i>or</i> table</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -942,12 +1097,8 @@ myclock_t:remove_from_object(obj2)
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="../popups_and_bars/awful.tooltip.html#awful.tooltip">tooltip</a></span>
-         A tooltip object
-        </li>
         <li><span class="parameter">New</span>
-            <span class="types"><span class="type">number</span></span>
+            <span class="types"><span class="type">number</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          margins value
         </li>
     </ul>
@@ -956,8 +1107,22 @@ myclock_t:remove_from_object(obj2)
 
 
 
+     <br />
+     <center id=button2322>
+     <a class="show_more_button" onclick="show_extra('2322')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2208 class="hide_extra">
+    <span id=item2322 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::margins</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#margins">margins</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>New</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -966,6 +1131,8 @@ myclock_t:remove_from_object(obj2)
     <strong>border_width</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
+         &middot 1 theme variables
     </span>
     </dt>
     <dd>
@@ -978,8 +1145,30 @@ myclock_t:remove_from_object(obj2)
 
 
 
+     <br />
+     <center id=button2323>
+     <a class="show_more_button" onclick="show_extra('2323')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2209 class="hide_extra">
+    <span id=item2323 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::border_width</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#border_width">border_width</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>number</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><a href="../popups_and_bars/awful.tooltip.html#beautiful.tooltip_border_width">beautiful.tooltip_border_width</a></td><td>Fallback when <a href="../popups_and_bars/awful.tooltip.html#border_width">border_width</a> isn't set.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -988,6 +1177,7 @@ myclock_t:remove_from_object(obj2)
     <strong>border_color</strong>
     <span class="proptype">(<span class='summary_type'>color</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -1000,16 +1190,31 @@ myclock_t:remove_from_object(obj2)
 
 
 
+     <br />
+     <center id=button2324>
+     <a class="show_more_button" onclick="show_extra('2324')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2210 class="hide_extra">
+    <span id=item2324 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::border_color</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#border_color">border_color</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>color</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "margins_leftright"></a>
     <strong>margins_leftright</strong>
-    <span class="proptype">(<span class='summary_type'>tooltip</span>)</span>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -1019,10 +1224,6 @@ myclock_t:remove_from_object(obj2)
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="../popups_and_bars/awful.tooltip.html#awful.tooltip">tooltip</a></span>
-         A tooltip object
-        </li>
         <li><span class="parameter">New</span>
             <span class="types"><span class="type">number</span></span>
          margins value
@@ -1033,16 +1234,31 @@ myclock_t:remove_from_object(obj2)
 
 
 
+     <br />
+     <center id=button2325>
+     <a class="show_more_button" onclick="show_extra('2325')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2211 class="hide_extra">
+    <span id=item2325 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::margins_leftright</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#margins_leftright">margins_leftright</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>New</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "margins_topbottom"></a>
     <strong>margins_topbottom</strong>
-    <span class="proptype">(<span class='summary_type'>tooltip</span>)</span>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -1052,10 +1268,6 @@ myclock_t:remove_from_object(obj2)
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="../popups_and_bars/awful.tooltip.html#awful.tooltip">tooltip</a></span>
-         A tooltip object
-        </li>
         <li><span class="parameter">New</span>
             <span class="types"><span class="type">number</span></span>
          margins value
@@ -1066,8 +1278,22 @@ myclock_t:remove_from_object(obj2)
 
 
 
+     <br />
+     <center id=button2326>
+     <a class="show_more_button" onclick="show_extra('2326')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item2212 class="hide_extra">
+    <span id=item2326 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::margins_topbottom</code></span>  When the <a href="../popups_and_bars/awful.tooltip.html#margins_topbottom">margins_topbottom</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>New</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -1102,7 +1328,7 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2213 class="hide_extra">
+    <span id=item2327 class="hide_extra">
     </span>
 
 </dd>
@@ -1133,7 +1359,108 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2214 class="hide_extra">
+    <span id=item2328 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "emit_signal"></a>
+    <strong>:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
+    </dt>
+    <dd>
+    Emit a signal.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">...</span>
+         Extra arguments for the callback functions. Each connected
+   function receives the object as first argument and then any extra
+   arguments that are given to emit_signal().
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item2329 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "connect_signal"></a>
+    <strong>:connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
+    </dt>
+    <dd>
+    Connect to a signal.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item2330 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "weak_connect_signal"></a>
+    <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
+    </dt>
+    <dd>
+    Connect to a signal weakly.</p>
+
+<p> This allows the callback function to be garbage collected and
+ automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
+ Only use this function if you really, really, really know what you
+ are doing.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item2331 class="hide_extra">
     </span>
 
 </dd>
@@ -1157,7 +1484,7 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2215 class="hide_extra">
+    <span id=item2332 class="hide_extra">
     </span>
 
 </dd>
@@ -1177,7 +1504,7 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2216 class="hide_extra">
+    <span id=item2333 class="hide_extra">
     </span>
 
 </dd>
@@ -1197,7 +1524,7 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2217 class="hide_extra">
+    <span id=item2334 class="hide_extra">
     </span>
 
 </dd>
@@ -1217,7 +1544,7 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2218 class="hide_extra">
+    <span id=item2335 class="hide_extra">
     </span>
 
 </dd>
@@ -1237,7 +1564,7 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2219 class="hide_extra">
+    <span id=item2336 class="hide_extra">
     </span>
 
 </dd>
@@ -1263,7 +1590,7 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2220 class="hide_extra">
+    <span id=item2337 class="hide_extra">
     </span>
 
 </dd>
@@ -1299,7 +1626,7 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2221 class="hide_extra">
+    <span id=item2338 class="hide_extra">
     </span>
 
 </dd>
@@ -1323,7 +1650,7 @@ myclock_t:remove_from_object(obj2)
 
 
 
-    <span id=item2222 class="hide_extra">
+    <span id=item2339 class="hide_extra">
     </span>
 
 </dd>
