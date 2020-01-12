@@ -54,9 +54,9 @@
 <h2>Libraries</h2>
 <ul class="nowrap">
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
-  <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
   <li><strong>awful.layout</strong></li>
+  <li><a href="../libraries/awful.permissions.html">awful.permissions</a></li>
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
@@ -254,6 +254,18 @@
     <tr>
       <td class="name" ><a href="#awful.layout.arrange"><span class='function_modname'>awful.layout.</span>arrange <span class='function_args'> <b>(</b>screen<b>)</b></span></a></td>
       <td colspan="2" class="summary">Arrange a screen using its current layout.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.layout.append_default_layout"><span class='function_modname'>awful.layout.</span>append_default_layout <span class='function_args'> <b>(</b>to_add<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Append a layout to the list of default tag layouts.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.layout.remove_default_layout"><span class='function_modname'>awful.layout.</span>remove_default_layout <span class='function_args'> <b>(</b>to_remove<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Remove a layout from the list of default layouts.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.layout.append_default_layouts"><span class='function_modname'>awful.layout.</span>append_default_layouts <span class='function_args'> <b>(</b>layouts<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Append many layouts to the list of default tag layouts.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#awful.layout.getname"><span class='function_modname'>awful.layout.</span>getname <span class='function_args'> <b>(</b>_layout<b>)</b></span></a></td>
@@ -475,7 +487,7 @@
 
 
 
-    <span id=item2645 class="hide_extra">
+    <span id=item2692 class="hide_extra">
     </span>
 
 </dd>
@@ -505,7 +517,7 @@
 
 
 
-    <span id=item2646 class="hide_extra">
+    <span id=item2693 class="hide_extra">
     </span>
 
 </dd>
@@ -537,7 +549,7 @@
 
 
 
-    <span id=item2647 class="hide_extra">
+    <span id=item2694 class="hide_extra">
     </span>
 
 </dd>
@@ -567,7 +579,7 @@
 
 
 
-    <span id=item2648 class="hide_extra">
+    <span id=item2695 class="hide_extra">
     </span>
 
 </dd>
@@ -612,7 +624,7 @@
 
 
 
-    <span id=item2649 class="hide_extra">
+    <span id=item2696 class="hide_extra">
     </span>
 
 </dd>
@@ -637,7 +649,129 @@
 
 
 
-    <span id=item2650 class="hide_extra">
+    <span id=item2697 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "awful.layout.append_default_layout"></a>
+    <strong><span class='function_modname'>awful.layout.</span>append_default_layout <span class='function_args'> <b>(</b>to_add<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Append a layout to the list of default tag layouts.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">to_add</span>
+            <span class="types"><span class="type">layout</span></span>
+         A valid tag layout.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.layout.html#awful.layout.layouts">awful.layout.layouts</a>
+    </ul>
+
+
+
+    <span id=item2698 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "awful.layout.remove_default_layout"></a>
+    <strong><span class='function_modname'>awful.layout.</span>remove_default_layout <span class='function_args'> <b>(</b>to_remove<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    <p>Remove a layout from the list of default layouts.</p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>Before: floating
+Before: tile
+Before: max
+After:  floating
+After:  max
+</code></pre>
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">to_remove</span>
+            <span class="types"><span class="type">layout</span></span>
+         A valid tag layout.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        True if the layout was found and removed.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.layout.html#awful.layout.layouts">awful.layout.layouts</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">awful.layout.append_default_layouts({
+    awful.layout.suit.floating,
+    awful.layout.suit.tile,
+    awful.layout.suit.max,
+})
+<span class="keyword">for</span> _, l <span class="keyword">in</span> <span class="global">ipairs</span>(awful.layout.layouts) <span class="keyword">do</span>
+    <span class="global">print</span>(<span class="string">'Before:'</span>, l.name)
+<span class="keyword">end</span>
+
+awful.layout.remove_default_layout(awful.layout.suit.tile)
+
+<span class="keyword">for</span> _, l <span class="keyword">in</span> <span class="global">ipairs</span>(awful.layout.layouts) <span class="keyword">do</span>
+    <span class="global">print</span>(<span class="string">'After:'</span>, l.name)
+<span class="keyword">end</span></pre>
+    </ul>
+
+
+    <span id=item2699 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "awful.layout.append_default_layouts"></a>
+    <strong><span class='function_modname'>awful.layout.</span>append_default_layouts <span class='function_args'> <b>(</b>layouts<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Append many layouts to the list of default tag layouts.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">layouts</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table of valid tag layout.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.layout.html#awful.layout.layouts">awful.layout.layouts</a>
+    </ul>
+
+
+
+    <span id=item2700 class="hide_extra">
     </span>
 
 </dd>
@@ -667,7 +801,7 @@
 
 
 
-    <span id=item2651 class="hide_extra">
+    <span id=item2701 class="hide_extra">
     </span>
 
 </dd>
@@ -706,7 +840,7 @@
 
 
 
-    <span id=item2652 class="hide_extra">
+    <span id=item2702 class="hide_extra">
     </span>
 
 </dd>
@@ -734,7 +868,7 @@
 
 
 
-    <span id=item2653 class="hide_extra">
+    <span id=item2703 class="hide_extra">
     </span>
 
 </dd>
@@ -758,7 +892,7 @@
 
 
 
-    <span id=item2654 class="hide_extra">
+    <span id=item2704 class="hide_extra">
     </span>
 
 </dd>
@@ -782,7 +916,7 @@
 
 
 
-    <span id=item2655 class="hide_extra">
+    <span id=item2705 class="hide_extra">
     </span>
 
 </dd>
@@ -806,7 +940,7 @@
 
 
 
-    <span id=item2656 class="hide_extra">
+    <span id=item2706 class="hide_extra">
     </span>
 
 </dd>
@@ -830,7 +964,7 @@
 
 
 
-    <span id=item2657 class="hide_extra">
+    <span id=item2707 class="hide_extra">
     </span>
 
 </dd>
@@ -854,7 +988,7 @@
 
 
 
-    <span id=item2658 class="hide_extra">
+    <span id=item2708 class="hide_extra">
     </span>
 
 </dd>
@@ -878,7 +1012,7 @@
 
 
 
-    <span id=item2659 class="hide_extra">
+    <span id=item2709 class="hide_extra">
     </span>
 
 </dd>
@@ -902,7 +1036,7 @@
 
 
 
-    <span id=item2660 class="hide_extra">
+    <span id=item2710 class="hide_extra">
     </span>
 
 </dd>
@@ -926,7 +1060,7 @@
 
 
 
-    <span id=item2661 class="hide_extra">
+    <span id=item2711 class="hide_extra">
     </span>
 
 </dd>
@@ -950,7 +1084,7 @@
 
 
 
-    <span id=item2662 class="hide_extra">
+    <span id=item2712 class="hide_extra">
     </span>
 
 </dd>
@@ -974,7 +1108,7 @@
 
 
 
-    <span id=item2663 class="hide_extra">
+    <span id=item2713 class="hide_extra">
     </span>
 
 </dd>
@@ -998,7 +1132,7 @@
 
 
 
-    <span id=item2664 class="hide_extra">
+    <span id=item2714 class="hide_extra">
     </span>
 
 </dd>
@@ -1022,7 +1156,7 @@
 
 
 
-    <span id=item2665 class="hide_extra">
+    <span id=item2715 class="hide_extra">
     </span>
 
 </dd>
@@ -1046,7 +1180,7 @@
 
 
 
-    <span id=item2666 class="hide_extra">
+    <span id=item2716 class="hide_extra">
     </span>
 
 </dd>
@@ -1070,7 +1204,7 @@
 
 
 
-    <span id=item2667 class="hide_extra">
+    <span id=item2717 class="hide_extra">
     </span>
 
 </dd>
@@ -1094,7 +1228,7 @@
 
 
 
-    <span id=item2668 class="hide_extra">
+    <span id=item2718 class="hide_extra">
     </span>
 
 </dd>
@@ -1119,7 +1253,7 @@
 
 
 
-    <span id=item2669 class="hide_extra">
+    <span id=item2719 class="hide_extra">
     </span>
 
 </dd>
@@ -1140,7 +1274,7 @@
 
 
 
-    <span id=item2670 class="hide_extra">
+    <span id=item2720 class="hide_extra">
     </span>
 
 </dd>
@@ -1161,7 +1295,7 @@
 
 
 
-    <span id=item2671 class="hide_extra">
+    <span id=item2721 class="hide_extra">
     </span>
 
 </dd>
@@ -1182,7 +1316,7 @@
 
 
 
-    <span id=item2672 class="hide_extra">
+    <span id=item2722 class="hide_extra">
     </span>
 
 </dd>
@@ -1202,7 +1336,7 @@
 
 
 
-    <span id=item2673 class="hide_extra">
+    <span id=item2723 class="hide_extra">
     </span>
 
 </dd>
@@ -1222,7 +1356,7 @@
 
 
 
-    <span id=item2674 class="hide_extra">
+    <span id=item2724 class="hide_extra">
     </span>
 
 </dd>
@@ -1241,7 +1375,7 @@
 
 
 
-    <span id=item2675 class="hide_extra">
+    <span id=item2725 class="hide_extra">
     </span>
 
 </dd>
@@ -1260,7 +1394,7 @@
 
 
 
-    <span id=item2676 class="hide_extra">
+    <span id=item2726 class="hide_extra">
     </span>
 
 </dd>
@@ -1279,7 +1413,7 @@
 
 
 
-    <span id=item2677 class="hide_extra">
+    <span id=item2727 class="hide_extra">
     </span>
 
 </dd>
@@ -1298,7 +1432,7 @@
 
 
 
-    <span id=item2678 class="hide_extra">
+    <span id=item2728 class="hide_extra">
     </span>
 
 </dd>
@@ -1317,7 +1451,7 @@
 
 
 
-    <span id=item2679 class="hide_extra">
+    <span id=item2729 class="hide_extra">
     </span>
 
 </dd>
@@ -1336,7 +1470,7 @@
 
 
 
-    <span id=item2680 class="hide_extra">
+    <span id=item2730 class="hide_extra">
     </span>
 
 </dd>
@@ -1361,7 +1495,7 @@
 
 
 
-    <span id=item2681 class="hide_extra">
+    <span id=item2731 class="hide_extra">
     </span>
 
 </dd>
@@ -1386,7 +1520,7 @@
 
 
 
-    <span id=item2682 class="hide_extra">
+    <span id=item2732 class="hide_extra">
     </span>
 
 </dd>
@@ -1411,7 +1545,7 @@
 
 
 
-    <span id=item2683 class="hide_extra">
+    <span id=item2733 class="hide_extra">
     </span>
 
 </dd>
@@ -1436,7 +1570,7 @@
 
 
 
-    <span id=item2684 class="hide_extra">
+    <span id=item2734 class="hide_extra">
     </span>
 
 </dd>
@@ -1480,7 +1614,7 @@ awful.layout.suit.corner.se,
 
 
 
-    <span id=item2685 class="hide_extra">
+    <span id=item2735 class="hide_extra">
     </span>
 
 </dd>
@@ -1500,7 +1634,7 @@ awful.layout.suit.corner.se,
 
 
 
-    <span id=item2686 class="hide_extra">
+    <span id=item2736 class="hide_extra">
     </span>
 
 </dd>
@@ -1520,7 +1654,7 @@ awful.layout.suit.corner.se,
 
 
 
-    <span id=item2687 class="hide_extra">
+    <span id=item2737 class="hide_extra">
     </span>
 
 </dd>

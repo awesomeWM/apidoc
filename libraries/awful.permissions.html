@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Module awful.ewmh - awesome API documentation</title>
+    <title>Module awful.permissions - awesome API documentation</title>
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
    <script>
      function show_extra(id) {
@@ -53,9 +53,9 @@
 <h2>Libraries</h2>
 <ul class="nowrap">
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
-  <li><strong>awful.ewmh</strong></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
+  <li><strong>awful.permissions</strong></li>
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
@@ -215,7 +215,7 @@
 
 <div id="content">
 
-<h1>Module: <code>awful.ewmh</code></h1>
+<h1>Module: <code>awful.permissions</code></h1>
 <p>Implements EWMH requests handling.</p>
 <p></p>
     <h3>Info:</h3>
@@ -228,39 +228,47 @@
 <h2><a href="#Static_module_functions">Static module functions</a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#awful.ewmh.add_activate_filter"><span class='function_modname'>awful.ewmh.</span>add_activate_filter <span class='function_args'> <b>(</b>f[, context]<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.permissions.add_activate_filter"><span class='function_modname'>awful.permissions.</span>add_activate_filter <span class='function_args'> <b>(</b>f[, context]<b>)</b></span></a></td>
       <td colspan="2" class="summary">Add an activate (focus stealing) filter function.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.ewmh.remove_activate_filter"><span class='function_modname'>awful.ewmh.</span>remove_activate_filter <span class='function_args'> <b>(</b>f[, context]<b>)</b></span></a></td>
+      <td class="name" ><a href="#awful.permissions.remove_activate_filter"><span class='function_modname'>awful.permissions.</span>remove_activate_filter <span class='function_args'> <b>(</b>f[, context]<b>)</b></span></a></td>
       <td colspan="2" class="summary">Remove an activate (focus stealing) filter function.</td>
     </tr>
 </table>
 <h2><a href="#Request_handlers">Request handlers</a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#awful.ewmh.activate"><span class='function_modname'>awful.ewmh.</span>activate</a></td>
+      <td class="name" ><a href="#awful.permissions.activate"><span class='function_modname'>awful.permissions.</span>activate</a></td>
       <td colspan="2" class="summary">Activate a window.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.ewmh.tag"><span class='function_modname'>awful.ewmh.</span>tag</a></td>
+      <td class="name" ><a href="#awful.permissions.tag"><span class='function_modname'>awful.permissions.</span>tag</a></td>
       <td colspan="2" class="summary">Tag a window with its requested tag.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.ewmh.urgent"><span class='function_modname'>awful.ewmh.</span>urgent</a></td>
+      <td class="name" ><a href="#awful.permissions.urgent"><span class='function_modname'>awful.permissions.</span>urgent</a></td>
       <td colspan="2" class="summary">Handle client urgent request</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.ewmh.geometry"><span class='function_modname'>awful.ewmh.</span>geometry</a></td>
+      <td class="name" ><a href="#awful.permissions.geometry"><span class='function_modname'>awful.permissions.</span>geometry</a></td>
       <td colspan="2" class="summary">Move and resize the client.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.ewmh.merge_maximization"><span class='function_modname'>awful.ewmh.</span>merge_maximization</a></td>
+      <td class="name" ><a href="#awful.permissions.merge_maximization"><span class='function_modname'>awful.permissions.</span>merge_maximization</a></td>
       <td colspan="2" class="summary">Merge the 2 requests sent by clients wanting to be maximized.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#awful.ewmh.client_geometry_requests"><span class='function_modname'>awful.ewmh.</span>client_geometry_requests</a></td>
+      <td class="name" ><a href="#awful.permissions.client_geometry_requests"><span class='function_modname'>awful.permissions.</span>client_geometry_requests</a></td>
       <td colspan="2" class="summary">Allow the client to move itself.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.ewmh.update_border">awful.ewmh.update_border</a></td>
+      <td colspan="2" class="summary">The default client <code>request::border</code> handler.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#awful.permissions.autoactivate"><span class='function_modname'>awful.permissions.</span>autoactivate</a></td>
+      <td colspan="2" class="summary">Default handler for the <code>request::autoactivate</code> signal.</td>
     </tr>
 </table>
 <h2><a href="#Theme_variables">Theme variables</a></h2>
@@ -303,8 +311,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "awful.ewmh.add_activate_filter"></a>
-    <strong><span class='function_modname'>awful.ewmh.</span>add_activate_filter <span class='function_args'> <b>(</b>f[, context]<b>)</b></span></strong>
+    <a name = "awful.permissions.add_activate_filter"></a>
+    <strong><span class='function_modname'>awful.permissions.</span>add_activate_filter <span class='function_args'> <b>(</b>f[, context]<b>)</b></span></strong>
     <span class="baseclass" >
     </span>
     </dt>
@@ -329,9 +337,9 @@
 
 <p> For example, to block Firefox from stealing the focus, use:</p>
 
-<pre><code>awful.ewmh.add_activate_filter(function(c)
+<pre><code>awful.permissions.add_activate_filter(function(c)
     if c.class == "Firefox" then return false end
-end, "ewmh")
+end, "permissions")
 </code></pre>
 
     <h3>Parameters:</h3>
@@ -351,26 +359,26 @@ end, "ewmh")
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../libraries/awful.ewmh.html#generic_activate_filters">generic_activate_filters</a></li>
-         <li><a href="../libraries/awful.ewmh.html#contextual_activate_filters">contextual_activate_filters</a></li>
-         <li><a href="../libraries/awful.ewmh.html#awful.ewmh.remove_activate_filter">remove_activate_filter</a></li>
+         <li><a href="../libraries/awful.permissions.html#generic_activate_filters">generic_activate_filters</a></li>
+         <li><a href="../libraries/awful.permissions.html#contextual_activate_filters">contextual_activate_filters</a></li>
+         <li><a href="../libraries/awful.permissions.html#awful.permissions.remove_activate_filter">remove_activate_filter</a></li>
     </ul>
 
 
 
-    <span id=item2630 class="hide_extra">
+    <span id=item2738 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.ewmh.remove_activate_filter"></a>
-    <strong><span class='function_modname'>awful.ewmh.</span>remove_activate_filter <span class='function_args'> <b>(</b>f[, context]<b>)</b></span></strong>
+    <a name = "awful.permissions.remove_activate_filter"></a>
+    <strong><span class='function_modname'>awful.permissions.</span>remove_activate_filter <span class='function_args'> <b>(</b>f[, context]<b>)</b></span></strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
     Remove an activate (focus stealing) filter function.
- This is an helper to avoid dealing with <a href="../libraries/awful.ewmh.html#awful.ewmh.add_activate_filter">ewmh.add_activate_filter</a> directly.
+ This is an helper to avoid dealing with <a href="../libraries/awful.permissions.html#awful.permissions.add_activate_filter">permissions.add_activate_filter</a> directly.
 
     <h3>Parameters:</h3>
     <ul>
@@ -395,14 +403,14 @@ end, "ewmh")
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../libraries/awful.ewmh.html#generic_activate_filters">generic_activate_filters</a></li>
-         <li><a href="../libraries/awful.ewmh.html#contextual_activate_filters">contextual_activate_filters</a></li>
-         <li><a href="../libraries/awful.ewmh.html#awful.ewmh.add_activate_filter">add_activate_filter</a></li>
+         <li><a href="../libraries/awful.permissions.html#generic_activate_filters">generic_activate_filters</a></li>
+         <li><a href="../libraries/awful.permissions.html#contextual_activate_filters">contextual_activate_filters</a></li>
+         <li><a href="../libraries/awful.permissions.html#awful.permissions.add_activate_filter">add_activate_filter</a></li>
     </ul>
 
 
 
-    <span id=item2631 class="hide_extra">
+    <span id=item2739 class="hide_extra">
     </span>
 
 </dd>
@@ -411,8 +419,8 @@ end, "ewmh")
 
     <dl class="function">
     <dt>
-    <a name = "awful.ewmh.activate"></a>
-    <strong><span class='function_modname'>awful.ewmh.</span>activate</strong>
+    <a name = "awful.permissions.activate"></a>
+    <strong><span class='function_modname'>awful.permissions.</span>activate</strong>
     <span class="baseclass" >
     </span>
     </dt>
@@ -460,13 +468,13 @@ end, "ewmh")
 
 
 
-    <span id=item2632 class="hide_extra">
+    <span id=item2740 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.ewmh.tag"></a>
-    <strong><span class='function_modname'>awful.ewmh.</span>tag</strong>
+    <a name = "awful.permissions.tag"></a>
+    <strong><span class='function_modname'>awful.permissions.</span>tag</strong>
     <span class="baseclass" >
     </span>
     </dt>
@@ -482,7 +490,7 @@ end, "ewmh")
          A client to tag
         </li>
         <li><span class="parameter">t</span>
-            <span class="types"><a class="type" href="../libraries/awful.ewmh.html#awful.ewmh.tag">tag</a> or <span class="type">boolean</span></span>
+            <span class="types"><a class="type" href="../libraries/awful.permissions.html#awful.permissions.tag">tag</a> or <span class="type">boolean</span></span>
          A tag to use. If true, then the client is made sticky.
          (<em>optional</em>)
         </li>
@@ -498,13 +506,13 @@ end, "ewmh")
 
 
 
-    <span id=item2633 class="hide_extra">
+    <span id=item2741 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.ewmh.urgent"></a>
-    <strong><span class='function_modname'>awful.ewmh.</span>urgent</strong>
+    <a name = "awful.permissions.urgent"></a>
+    <strong><span class='function_modname'>awful.permissions.</span>urgent</strong>
     <span class="baseclass" >
     </span>
     </dt>
@@ -528,13 +536,13 @@ end, "ewmh")
 
 
 
-    <span id=item2634 class="hide_extra">
+    <span id=item2742 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.ewmh.geometry"></a>
-    <strong><span class='function_modname'>awful.ewmh.</span>geometry</strong>
+    <a name = "awful.permissions.geometry"></a>
+    <strong><span class='function_modname'>awful.permissions.</span>geometry</strong>
     <span class="baseclass" >
     </span>
     </dt>
@@ -565,13 +573,13 @@ end, "ewmh")
 
 
 
-    <span id=item2635 class="hide_extra">
+    <span id=item2743 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.ewmh.merge_maximization"></a>
-    <strong><span class='function_modname'>awful.ewmh.</span>merge_maximization</strong>
+    <a name = "awful.permissions.merge_maximization"></a>
+    <strong><span class='function_modname'>awful.permissions.</span>merge_maximization</strong>
     <span class="baseclass" >
     </span>
     </dt>
@@ -605,20 +613,20 @@ end, "ewmh")
 
 
 
-    <span id=item2636 class="hide_extra">
+    <span id=item2744 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.ewmh.client_geometry_requests"></a>
-    <strong><span class='function_modname'>awful.ewmh.</span>client_geometry_requests</strong>
+    <a name = "awful.permissions.client_geometry_requests"></a>
+    <strong><span class='function_modname'>awful.permissions.</span>client_geometry_requests</strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
     Allow the client to move itself.</p>
 
-<p> This is the default geometry request handler when the context is <a href="../libraries/awful.ewmh.html">ewmh</a>.
+<p> This is the default geometry request handler when the context is <a href="../libraries/awful.permissions.html">permissions</a>.
 
     <h3>Arguments:</h3>
     <ul>
@@ -642,7 +650,135 @@ end, "ewmh")
 
 
 
-    <span id=item2637 class="hide_extra">
+    <span id=item2745 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "awful.ewmh.update_border"></a>
+    <strong>awful.ewmh.update_border</strong>
+    <span class="baseclass" >
+         &middot 1 theme variables
+    </span>
+    </dt>
+    <dd>
+    The default client <code>request::border</code> handler.</p>
+
+<p> To replace this handler with your own, use:</p>
+
+<pre><code>client.disconnect_signal("request::border", awful.ewmh.update_border)
+</code></pre>
+
+<p> The default implementation chooses from dozens beautiful theme variables
+ depending if the client is tiled, floating, maximized and then from its state
+ (urgent, new, active, normal)
+
+
+
+
+
+
+     <br />
+     <center id=button2746>
+     <a class="show_more_button" onclick="show_extra('2746')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item2746 class="hide_extra">
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><code>beautiful.border_color_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_floating</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_floating_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_floating_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_floating_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_floating_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_maximized</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_maximized_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_maximized_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_maximized_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_maximized_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_fullscreen</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_fullscreen_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_fullscreen_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_fullscreen_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_color_fullscreen_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_floating</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_floating_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_floating_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_floating_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_floating_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_maximized</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_maximized_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_maximized_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_maximized_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_maximized_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_fullscreen</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_fullscreen_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_fullscreen_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_fullscreen_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.border_width_fullscreen_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_floating</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_floating_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_floating_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_floating_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_floating_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_maximized</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_maximized_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_maximized_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_maximized_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_maximized_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_fullscreen</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_fullscreen_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_fullscreen_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_fullscreen_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_fullscreen_urgent</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_active</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_normal</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_new</code></td><td></td></tr>
+          <tr><td><code>beautiful.opacity_urgent</code></td><td></td></tr>
+     </table>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "awful.permissions.autoactivate"></a>
+    <strong><span class='function_modname'>awful.permissions.</span>autoactivate</strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    <p>Default handler for the <code>request::autoactivate</code> signal.</p>
+
+<p> All it does is to emit <code>request::activate</code> with the following context
+ mapping:</p>
+
+<ul>
+<li>mouse_enter: <em>mouse.enter</em></li>
+<li>switch_tag : <em>autofocus.check_focus_tag</em></li>
+<li>history    : <em>autofocus.check_focus</em></li>
+</ul>
+
+
+
+
+
+
+
+
+    <span id=item2747 class="hide_extra">
     </span>
 
 </dd>
@@ -666,7 +802,7 @@ end, "ewmh")
 
 
 
-    <span id=item2638 class="hide_extra">
+    <span id=item2748 class="hide_extra">
     </span>
 
 </dd>
@@ -686,7 +822,7 @@ end, "ewmh")
 
 
 
-    <span id=item2639 class="hide_extra">
+    <span id=item2749 class="hide_extra">
     </span>
 
 </dd>
@@ -706,7 +842,7 @@ end, "ewmh")
 
 
 
-    <span id=item2640 class="hide_extra">
+    <span id=item2750 class="hide_extra">
     </span>
 
 </dd>
@@ -723,21 +859,21 @@ end, "ewmh")
     <dd>
     The list of all registered generic request::activate (focus stealing)
  filters.  If a filter is added to only one context, it will be in
- <a href="../libraries/awful.ewmh.html#contextual_activate_filters">ewmh.contextual_activate_filters</a>[&ldquo;context_name&rdquo;].
+ <a href="../libraries/awful.permissions.html#contextual_activate_filters">permissions.contextual_activate_filters</a>[&ldquo;context_name&rdquo;].
 
 
 
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../libraries/awful.ewmh.html#awful.ewmh.activate">ewmh.activate</a></li>
-         <li><a href="../libraries/awful.ewmh.html#awful.ewmh.add_activate_filter">ewmh.add_activate_filter</a></li>
-         <li><a href="../libraries/awful.ewmh.html#awful.ewmh.remove_activate_filter">ewmh.remove_activate_filter</a></li>
+         <li><a href="../libraries/awful.permissions.html#awful.permissions.activate">permissions.activate</a></li>
+         <li><a href="../libraries/awful.permissions.html#awful.permissions.add_activate_filter">permissions.add_activate_filter</a></li>
+         <li><a href="../libraries/awful.permissions.html#awful.permissions.remove_activate_filter">permissions.remove_activate_filter</a></li>
     </ul>
 
 
 
-    <span id=item2641 class="hide_extra">
+    <span id=item2751 class="hide_extra">
     </span>
 
 </dd>
@@ -750,21 +886,21 @@ end, "ewmh")
     <dd>
     The list of all registered contextual request::activate (focus stealing)
  filters.  If a filter is added to only one context, it will be in
- <a href="../libraries/awful.ewmh.html#generic_activate_filters">ewmh.generic_activate_filters</a>.
+ <a href="../libraries/awful.permissions.html#generic_activate_filters">permissions.generic_activate_filters</a>.
 
 
 
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../libraries/awful.ewmh.html#awful.ewmh.activate">ewmh.activate</a></li>
-         <li><a href="../libraries/awful.ewmh.html#awful.ewmh.add_activate_filter">ewmh.add_activate_filter</a></li>
-         <li><a href="../libraries/awful.ewmh.html#awful.ewmh.remove_activate_filter">ewmh.remove_activate_filter</a></li>
+         <li><a href="../libraries/awful.permissions.html#awful.permissions.activate">permissions.activate</a></li>
+         <li><a href="../libraries/awful.permissions.html#awful.permissions.add_activate_filter">permissions.add_activate_filter</a></li>
+         <li><a href="../libraries/awful.permissions.html#awful.permissions.remove_activate_filter">permissions.remove_activate_filter</a></li>
     </ul>
 
 
 
-    <span id=item2642 class="hide_extra">
+    <span id=item2752 class="hide_extra">
     </span>
 
 </dd>

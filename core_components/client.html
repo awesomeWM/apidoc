@@ -47,6 +47,7 @@
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
 <li><a href="#Signals">Signals</a></li>
+<li><a href="#Deprecated_signals">Deprecated signals</a></li>
 <li><a href="#Theme_variables">Theme variables</a></li>
 <li><a href="#Deprecated_functions">Deprecated functions</a></li>
 <li><a href="#Layout_related_functions">Layout related functions</a></li>
@@ -169,9 +170,9 @@
 <h2>Libraries</h2>
 <ul class="nowrap">
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
-  <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
+  <li><a href="../libraries/awful.permissions.html">awful.permissions</a></li>
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
@@ -275,7 +276,7 @@
 <p> To execute a callback when a new client is added, use the <a href="../core_components/client.html#manage">manage</a> signal:</p>
 
 <pre>
-client.connect_signal(<span class="string">"manage"</span>, <span class="keyword">function</span>(c)
+client.connect_signal(<span class="string">"request::manage"</span>, <span class="keyword">function</span>(c)
     <span class="comment">-- do something
 </span><span class="keyword">end</span>)
 </pre>
@@ -543,7 +544,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </tr>
     <tr>
       <td class="shortname" ><a href="#border_color">border_color</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>pattern</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
       <td colspan="2" class="summary">The client border color.</td>
     </tr>
     <tr>
@@ -746,6 +747,11 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td class="summarytype" nowrap><span class='summary_type'>gears.shape</span></td>
       <td colspan="2" class="summary">Set the client shape.</td>
     </tr>
+    <tr>
+      <td class="shortname" ><a href="#active">active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td colspan="2" class="summary">Return true if the client is active (has focus).</td>
+    </tr>
 </table>
 <h2><a href="#Object_methods">Object methods </a></h2>
 <table class="function_list">
@@ -842,6 +848,18 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td colspan="2" class="summary">Is a client transient for another one?</td>
     </tr>
     <tr>
+      <td class="name" ><a href="#activate">:activate <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
+      <td colspan="2" class="summary">Activate (focus) a client.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#grant">:grant <span class='function_args'> <b>(</b>permission, context<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Grant a permission for a client.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#deny">:deny <span class='function_args'> <b>(</b>permission, context<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Deny a permission for a client.</td>
+    </tr>
+    <tr>
       <td class="name" ><a href="#emit_signal">:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
       <td colspan="1" class="summary">Emit a signal.</td>
       <td class="baseclass" >
@@ -886,8 +904,12 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td colspan="2" class="summary">When 2 clients are swapped</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#manage">manage</a></td>
+      <td class="name" ><a href="#request::manage">request::manage</a></td>
       <td colspan="2" class="summary">When a new client appears and gets managed by Awesome.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#request::unmanage">request::unmanage</a></td>
+      <td colspan="2" class="summary">When a client is going away.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#button::press">button::press</a></td>
@@ -918,8 +940,12 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td colspan="2" class="summary">When a client should get activated (focused and/or raised).</td>
     </tr>
     <tr>
+      <td class="name" ><a href="#request::autoactivate">request::autoactivate</a></td>
+      <td colspan="2" class="summary">When an event could lead to the client being activated.</td>
+    </tr>
+    <tr>
       <td class="name" ><a href="#request::geometry">request::geometry</a></td>
-      <td colspan="2" class="summary"></td>
+      <td colspan="2" class="summary">When something request a client geometry to be modified.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#request::tag">request::tag</a></td>
@@ -938,16 +964,16 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td colspan="2" class="summary">Emitted during startup to gather the default client keybindings.</td>
     </tr>
     <tr>
+      <td class="name" ><a href="#request::default_keybindings">request::default_keybindings</a></td>
+      <td colspan="2" class="summary">Sent once when AwesomeWM starts to add default keybindings.</td>
+    </tr>
+    <tr>
       <td class="name" ><a href="#tagged">tagged</a></td>
       <td colspan="2" class="summary">When a client gets tagged.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#unfocus">unfocus</a></td>
       <td colspan="2" class="summary">When a client gets unfocused.</td>
-    </tr>
-    <tr>
-      <td class="name" ><a href="#unmanage">unmanage</a></td>
-      <td colspan="2" class="summary"></td>
     </tr>
     <tr>
       <td class="name" ><a href="#untagged">untagged</a></td>
@@ -978,30 +1004,300 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td colspan="2" class="summary">Emited when a client need to get a titlebar.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#marked">marked</a></td>
-      <td colspan="2" class="summary">The client marked signal (deprecated).</td>
+      <td class="name" ><a href="#request::border">request::border</a></td>
+      <td colspan="2" class="summary">Emited when the border client might need to be update.</td>
+    </tr>
+</table>
+<h2><a href="#Deprecated_signals">Deprecated signals</a></h2>
+<table class="function_list">
+    <tr>
+      <td class="name" ><a href="#manage">manage<i class="deprecated_label"> [deprecated]</i></a></td>
+      <td colspan="2" class="summary">Use <a href="../core_components/client.html#request::manage">request::manage</a>.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#unmarked">unmarked</a></td>
-      <td colspan="2" class="summary">The client unmarked signal (deprecated).</td>
+      <td class="name" ><a href="#unmanage">unmanage<i class="deprecated_label"> [deprecated]</i></a></td>
+      <td colspan="2" class="summary">Use <a href="../core_components/client.html#request::unmanage">request::unmanage</a>.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#marked">marked<i class="deprecated_label"> [deprecated]</i></a></td>
+      <td colspan="2" class="summary">The client marked signal.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#unmarked">unmarked<i class="deprecated_label"> [deprecated]</i></a></td>
+      <td colspan="2" class="summary">The client unmarked signal.</td>
     </tr>
 </table>
 <h2><a href="#Theme_variables">Theme variables</a></h2>
 <table class="function_list">
     <tr>
-      <td class="shortname" ><a href="#beautiful.border_focus">beautiful.border_focus</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td colspan="2" class="summary">The border color when the client is focused.</td>
+      <td class="shortname" ><a href="#beautiful.border_color_floating">beautiful.border_color_floating</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The fallback border color when the client is floating.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#beautiful.border_normal">beautiful.border_normal</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td colspan="2" class="summary">The border color when the client is not focused.</td>
+      <td class="shortname" ><a href="#beautiful.border_color_mazimized">beautiful.border_color_mazimized</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The fallback border color when the client is mazimized.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_active">beautiful.border_color_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the client is active.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_normal">beautiful.border_color_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the client is not active.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_urgent">beautiful.border_color_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the client has the urgent property set.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_new">beautiful.border_color_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the client is not active and new.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_floating_active">beautiful.border_color_floating_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (floating) client is active.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_floating_normal">beautiful.border_color_floating_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (floating) client is not active.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_floating_urgent">beautiful.border_color_floating_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (floating) client has the urgent property set.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_floating_new">beautiful.border_color_floating_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (floating) client is not active and new.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_maximized_active">beautiful.border_color_maximized_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (maximized) client is active.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_maximized_normal">beautiful.border_color_maximized_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (maximized) client is not active.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_maximized_urgent">beautiful.border_color_maximized_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (maximized) client has the urgent property set.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_maximized_new">beautiful.border_color_maximized_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (maximized) client is not active and new.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_fullscreen_active">beautiful.border_color_fullscreen_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (fullscreen) client is active.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_fullscreen_normal">beautiful.border_color_fullscreen_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (fullscreen) client is not active.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_fullscreen_urgent">beautiful.border_color_fullscreen_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (fullscreen) client has the urgent property set.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_fullscreen_new">beautiful.border_color_fullscreen_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the (fullscreen) client is not active and new.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.border_width">beautiful.border_width</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
-      <td colspan="2" class="summary">The client border width.</td>
+      <td colspan="2" class="summary">The fallback border width when nothing else is set.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_floating">beautiful.border_width_floating</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The fallback border width when the client is floating.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_mazimized">beautiful.border_width_mazimized</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The fallback border width when the client is mazimized.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_normal">beautiful.border_width_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the normal clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_active">beautiful.border_width_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the active client.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_urgent">beautiful.border_width_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the urgent clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_new">beautiful.border_width_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the new clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_floating_normal">beautiful.border_width_floating_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the normal floating clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_floating_active">beautiful.border_width_floating_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the active floating client.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_floating_urgent">beautiful.border_width_floating_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the urgent floating clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_floating_new">beautiful.border_width_floating_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the new floating clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_maximized_normal">beautiful.border_width_maximized_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the normal maximized clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_maximized_active">beautiful.border_width_maximized_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the active maximized client.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_maximized_urgent">beautiful.border_width_maximized_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the urgent maximized clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_maximized_new">beautiful.border_width_maximized_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the new maximized clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_fullscreen_normal">beautiful.border_width_fullscreen_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the normal fullscreen clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_fullscreen_active">beautiful.border_width_fullscreen_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the active fullscreen client.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_fullscreen_urgent">beautiful.border_width_fullscreen_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the urgent fullscreen clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_width_fullscreen_new">beautiful.border_width_fullscreen_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td colspan="2" class="summary">The client border width for the new fullscreen clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_normal">beautiful.opacity_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the normal clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_active">beautiful.opacity_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the active client.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_urgent">beautiful.opacity_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the urgent clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_new">beautiful.opacity_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the new clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_floating_normal">beautiful.opacity_floating_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the normal floating clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_floating_active">beautiful.opacity_floating_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the active floating client.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_floating_urgent">beautiful.opacity_floating_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the urgent floating clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_floating_new">beautiful.opacity_floating_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the new floating clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_maximized_normal">beautiful.opacity_maximized_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the normal maximized clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_maximized_active">beautiful.opacity_maximized_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the active maximized client.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_maximized_urgent">beautiful.opacity_maximized_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the urgent maximized clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_maximized_new">beautiful.opacity_maximized_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the new maximized clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_fullscreen_normal">beautiful.opacity_fullscreen_normal</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the normal fullscreen clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_fullscreen_active">beautiful.opacity_fullscreen_active</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the active fullscreen client.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_fullscreen_urgent">beautiful.opacity_fullscreen_urgent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the urgent fullscreen clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.opacity_fullscreen_new">beautiful.opacity_fullscreen_new</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The client opacity for the new fullscreen clients.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_marked">beautiful.border_marked</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The marked clients border color.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.border_marked">beautiful.border_marked</a></td>
@@ -1514,6 +1810,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <a name = "awful.client.swap.global_bydirection"></a>
     <strong>awful.client.swap.global_bydirection <span class='function_args'> <b>(</b>dir[, sel]<b>)</b></span></strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -1536,8 +1833,25 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
+     <br />
+     <center id=button207>
+     <a class="show_more_button" onclick="show_extra('207')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item207 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>activate</td><td>client.swap.global_bydirection</td><td>granted</td><td>When a client could be activated because <a href="../core_components/client.html#awful.client.swap.global_bydirection">awful.client.swap.global_bydirection</a> was called.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -2303,6 +2617,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>border_width</strong>
     <span class="proptype">(<span class='summary_type'>integer</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -2311,33 +2626,44 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
 
 
+     <br />
+     <center id=button232>
+     <a class="show_more_button" onclick="show_extra('232')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item232 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::border_width</code></span>  When the <a href="../core_components/client.html#border_width">border_width</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
     <dt>
     <a name = "border_color"></a>
     <strong>border_color</strong>
-    <span class="proptype">(<span class='summary_type'>pattern</span>)</span>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The client border color.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::border_color</em></li>
-</ul>
-
+    The client border color.
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">pattern</span>
+        <li><span class="parameter">color</span>
          Any string, gradients and patterns will be converted to a
   cairo pattern.
         </li>
@@ -2347,12 +2673,26 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
     <h3>See also:</h3>
     <ul>
-         <a href="../theme_related_libraries/gears.color.html#">gears.color</a>
+         <li><a href="../core_components/client.html#request::border">request::border</a></li>
+         <li><a href="../theme_related_libraries/gears.color.html#">gears.color</a></li>
     </ul>
 
 
+     <br />
+     <center id=button233>
+     <a class="show_more_button" onclick="show_extra('233')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item233 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::border_color</code></span>  When the <a href="../core_components/client.html#border_color">border_color</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2361,6 +2701,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>urgent</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -2376,10 +2717,27 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
 
 
+     <br />
+     <center id=button234>
+     <a class="show_more_button" onclick="show_extra('234')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item234 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::urgent</code></span>  When the <a href="../core_components/client.html#urgent">urgent</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2418,6 +2776,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>opacity</strong>
     <span class="proptype">(<span class='summary_type'>number</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
@@ -2439,10 +2798,27 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
 
 
+     <br />
+     <center id=button236>
+     <a class="show_more_button" onclick="show_extra('236')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item236 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::opacity</code></span>  When the <a href="../core_components/client.html#opacity">opacity</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2525,6 +2901,8 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>fullscreen</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -2538,20 +2916,37 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
   screen[4].clients[1].fullscreen           = true
 </code></pre>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::fullscreen</em></li>
-</ul>
 
 
 
 
 
-
-
+     <br />
+     <center id=button240>
+     <a class="show_more_button" onclick="show_extra('240')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item240 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::fullscreen</code></span>  When the <a href="../core_components/client.html#fullscreen">fullscreen</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>geometry</td><td>fullscreen</td><td>granted</td><td>When the client must be resized because it became (or stop being) fullscreen.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -2560,6 +2955,8 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>maximized</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -2573,20 +2970,41 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
   screen[4].clients[1].fullscreen           = true
 </code></pre>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::maximized</em></li>
-</ul>
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
 
 
-
-
+     <br />
+     <center id=button241>
+     <a class="show_more_button" onclick="show_extra('241')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item241 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::maximized</code></span>  When the <a href="../core_components/client.html#maximized">maximized</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>geometry</td><td>maximized</td><td>granted</td><td>When the client must be resized because it became (or stop being) maximized.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -2595,6 +3013,8 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>maximized_horizontal</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -2608,20 +3028,37 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
   screen[4].clients[1].fullscreen           = true
 </code></pre>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::maximized_horizontal</em></li>
-</ul>
 
 
 
 
 
-
-
+     <br />
+     <center id=button242>
+     <a class="show_more_button" onclick="show_extra('242')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item242 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::maximized_horizontal</code></span>  When the <a href="../core_components/client.html#maximized_horizontal">maximized_horizontal</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>geometry</td><td>maximized_horizontal</td><td>granted</td><td>When the client must be resized because it became (or stop being) maximized horizontally.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -2630,6 +3067,8 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>maximized_vertical</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -2643,20 +3082,37 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
   screen[4].clients[1].fullscreen           = true
 </code></pre>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::maximized_vertical</em></li>
-</ul>
 
 
 
 
 
-
-
+     <br />
+     <center id=button243>
+     <a class="show_more_button" onclick="show_extra('243')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item243 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::maximized_vertical</code></span>  When the <a href="../core_components/client.html#maximized_vertical">maximized_vertical</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>geometry</td><td>maximized_vertical</td><td>granted</td><td>When the client must be resized because it became (or stop being) maximized vertically.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -2665,25 +3121,32 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>transient_for</strong>
     <span class="proptype">(<span class='summary_type'>client</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The client the window is transient for.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::transient_for</em></li>
-</ul>
+    The client the window is transient for.
 
 
 
 
 
 
-
+     <br />
+     <center id=button244>
+     <a class="show_more_button" onclick="show_extra('244')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item244 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::transient_for</code></span>  When the <a href="../core_components/client.html#transient_for">transient_for</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2692,25 +3155,32 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>group_window</strong>
     <span class="proptype">(<span class='summary_type'>client</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>Window identification unique to a group of windows.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::group_window</em></li>
-</ul>
+    Window identification unique to a group of windows.
 
 
 
 
 
 
-
+     <br />
+     <center id=button245>
+     <a class="show_more_button" onclick="show_extra('245')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item245 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::group_window</code></span>  When the <a href="../core_components/client.html#group_window">group_window</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2739,17 +3209,11 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>size_hints</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>A table with size hints of the client.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::size_hints</em></li>
-</ul>
-
+    A table with size hints of the client.
 
 
 
@@ -2760,8 +3224,21 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </ul>
 
 
+     <br />
+     <center id=button247>
+     <a class="show_more_button" onclick="show_extra('247')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item247 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::size_hints</code></span>  When the <a href="../core_components/client.html#size_hints">size_hints</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2770,10 +3247,11 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>motif_wm_hints</strong>
     <span class="proptype">(<span class='summary_type'>table</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The motif WM hints of the client.</p>
+    The motif WM hints of the client.</p>
 
 <p> This is nil if the client has no motif hints. Otherwise, this is a table that
  contains the present properties. Note that awesome provides these properties
@@ -2781,22 +3259,28 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
  only has &ldquo;resize&rdquo; set to true, this means that the window requests to be only
  resizable, but asks for the other functions not to be able. If however both
  &ldquo;resize&rdquo; and &ldquo;all&rdquo; are set, this means that all but the resize function
- should be enabled.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::motif_wm_hints</em></li>
-</ul>
+ should be enabled.
 
 
 
 
 
 
-
+     <br />
+     <center id=button248>
+     <a class="show_more_button" onclick="show_extra('248')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item248 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::motif_wm_hints</code></span>  When the <a href="../core_components/client.html#motif_wm_hints">motif_wm_hints</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2805,25 +3289,32 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>sticky</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>Set the client sticky, i.e.  available on all tags.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::sticky</em></li>
-</ul>
+    Set the client sticky, i.e.  available on all tags.
 
 
 
 
 
 
-
+     <br />
+     <center id=button249>
+     <a class="show_more_button" onclick="show_extra('249')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item249 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::sticky</code></span>  When the <a href="../core_components/client.html#sticky">sticky</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2832,25 +3323,32 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>modal</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>Indicate if the client is modal.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::modal</em></li>
-</ul>
+    Indicate if the client is modal.
 
 
 
 
 
 
-
+     <br />
+     <center id=button250>
+     <a class="show_more_button" onclick="show_extra('250')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item250 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::modal</code></span>  When the <a href="../core_components/client.html#modal">modal</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2859,25 +3357,32 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>focusable</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>True if the client can receive the input focus.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::focusable</em></li>
-</ul>
+    True if the client can receive the input focus.
 
 
 
 
 
 
-
+     <br />
+     <center id=button251>
+     <a class="show_more_button" onclick="show_extra('251')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item251 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::focusable</code></span>  When the <a href="../core_components/client.html#focusable">focusable</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2886,17 +3391,11 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <strong>shape_bounding</strong>
     <span class="proptype">(<span class='summary_type'>surface</span>)</span>
     <span class="baseclass" >
+         &middot 1 signals
     </span>
     </dt>
     <dd>
-    <p>The client&rsquo;s bounding shape as set by awesome as a (native) cairo surface.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-<li><em>property::shape_bounding</em></li>
-</ul>
-
+    The client&rsquo;s bounding shape as set by awesome as a (native) cairo surface.
 
 
 
@@ -2907,8 +3406,21 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </ul>
 
 
+     <br />
+     <center id=button252>
+     <a class="show_more_button" onclick="show_extra('252')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item252 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::shape_bounding</code></span>  When the <a href="../core_components/client.html#shape_bounding">shape_bounding</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -3358,11 +3870,13 @@ awful.rules.add_rule_source(
     <strong>floating</strong>
     <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
-    <p>The client floating state.
- If the client is part of the tiled layout or free floating.</p>
+    <p>The client floating state.</p>
+
+<p> If the client is part of the tiled layout or free floating.</p>
 
 <p> Note that some windows might be floating even if you
  did not set them manually. For example, windows with a type different than
@@ -3377,8 +3891,9 @@ awful.rules.add_rule_source(
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">boolean</span>
-         The floating state
+        <li><span class="parameter">floating</span>
+            <span class="types"><span class="type">boolean</span></span>
+         The floating state.
         </li>
     </ul>
 
@@ -3386,8 +3901,27 @@ awful.rules.add_rule_source(
 
 
 
+     <br />
+     <center id=button266>
+     <a class="show_more_button" onclick="show_extra('266')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item266 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>border</td><td>floating</td><td>granted</td><td>When a border update is required because the client focus status changed.</td></tr>
+          <tr><td>client</td><td>border</td><td>active</td><td>granted</td><td>When a client becomes active and is not floating.</td></tr>
+          <tr><td>client</td><td>border</td><td>inactive</td><td>granted</td><td>When a client stop being active and is not floating.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -3606,6 +4140,100 @@ awful.rules.add_rule_source(
     </span>
 
 </dd>
+    <dt>
+    <a name = "active"></a>
+    <strong>active</strong>
+    <span class="proptype">(<span class='summary_type'>boolean</span>)</span>
+    <span class="baseclass" >
+         &middot 1 permissions
+    </span>
+    </dt>
+    <dd>
+    <p>Return true if the client is active (has focus).</p>
+
+<p> This property is <strong>READ ONLY</strong>. Use <code>c:activate { context = &quot;myreason&quot; }</code>
+ to change the focus.</p>
+
+<p> The reason for this is that directly setting the focus
+ (which can also be done using <code>client.focus = c</code>) will bypass the focus
+ stealing filters. This is easy at first, but as this gets called from more
+ and more places, it quickly become unmanageable. This coding style is
+ recommended for maintainable code:</p>
+
+<pre><code>-- Check if a client has focus:
+if c.active then
+    -- do something
+end
+
+-- Check if there is a active (focused) client:
+if client.focus ~= nil then
+    -- do something
+end
+
+-- Get the active (focused) client:
+local c = client.focus
+
+-- Set the focus:
+c:activate {
+    context       = "myreason",
+    switch_to_tag = true,
+}
+
+-- Get notified when a client gets or loses the focus:
+c:connect_signal("property::active", function(c, is_active)
+    -- do something
+end)
+
+-- Get notified when any client gets or loses the focus:
+client.connect_signal("property::active", function(c, is_active)
+    -- do something
+end)
+
+-- Get notified when any client gets the focus:
+client.connect_signal("focus", function(c)
+    -- do something
+end)
+
+-- Get notified when any client loses the focus:
+client.connect_signal("unfocus", function(c)
+    -- do something
+end)
+</code></pre>
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/client.html#activate">activate</a></li>
+         <li><a href="../core_components/client.html#request::activate">request::activate</a></li>
+         <li><a href="../libraries/awful.permissions.html#awful.permissions.add_activate_filter">awful.permissions.add_activate_filter</a></li>
+    </ul>
+
+
+     <br />
+     <center id=button274>
+     <a class="show_more_button" onclick="show_extra('274')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item274 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>border</td><td>active</td><td>granted</td><td>When a client becomes active.</td></tr>
+          <tr><td>client</td><td>border</td><td>inactive</td><td>granted</td><td>When a client stop being active.</td></tr>
+     </table>
+    </span>
+
+</dd>
 </dl>
     <h2 class="section-header "><a name="Object_methods"></a>Object methods </h2>
 
@@ -3636,7 +4264,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item274 class="hide_extra">
+    <span id=item275 class="hide_extra">
     </span>
 
 </dd>
@@ -3660,7 +4288,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item275 class="hide_extra">
+    <span id=item276 class="hide_extra">
     </span>
 
 </dd>
@@ -3679,7 +4307,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item276 class="hide_extra">
+    <span id=item277 class="hide_extra">
     </span>
 
 </dd>
@@ -3705,7 +4333,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item277 class="hide_extra">
+    <span id=item278 class="hide_extra">
     </span>
 
 </dd>
@@ -3747,7 +4375,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item278 class="hide_extra">
+    <span id=item279 class="hide_extra">
     </span>
 
 </dd>
@@ -3766,7 +4394,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item279 class="hide_extra">
+    <span id=item280 class="hide_extra">
     </span>
 
 </dd>
@@ -3785,7 +4413,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item280 class="hide_extra">
+    <span id=item281 class="hide_extra">
     </span>
 
 </dd>
@@ -3804,7 +4432,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item281 class="hide_extra">
+    <span id=item282 class="hide_extra">
     </span>
 
 </dd>
@@ -3836,7 +4464,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item282 class="hide_extra">
+    <span id=item283 class="hide_extra">
     </span>
 
 </dd>
@@ -3871,7 +4499,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item283 class="hide_extra">
+    <span id=item284 class="hide_extra">
     </span>
 
 </dd>
@@ -3911,7 +4539,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item284 class="hide_extra">
+    <span id=item285 class="hide_extra">
     </span>
 
 </dd>
@@ -3919,6 +4547,7 @@ awful.rules.add_rule_source(
     <a name = "jump_to"></a>
     <strong>:jump_to <span class='function_args'> <b>(</b>merge<b>)</b></span></strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -3940,8 +4569,25 @@ awful.rules.add_rule_source(
 
 
 
+     <br />
+     <center id=button286>
+     <a class="show_more_button" onclick="show_extra('286')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item285 class="hide_extra">
+    <span id=item286 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>activate</td><td>client.jumpto</td><td>granted</td><td>When a client is activated because <code>c:jump_to()</code> is called.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -3973,7 +4619,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item286 class="hide_extra">
+    <span id=item287 class="hide_extra">
     </span>
 
 </dd>
@@ -3999,7 +4645,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item287 class="hide_extra">
+    <span id=item288 class="hide_extra">
     </span>
 
 </dd>
@@ -4025,7 +4671,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item288 class="hide_extra">
+    <span id=item289 class="hide_extra">
     </span>
 
 </dd>
@@ -4051,7 +4697,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item289 class="hide_extra">
+    <span id=item290 class="hide_extra">
     </span>
 
 </dd>
@@ -4097,7 +4743,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item290 class="hide_extra">
+    <span id=item291 class="hide_extra">
     </span>
 
 </dd>
@@ -4105,6 +4751,7 @@ awful.rules.add_rule_source(
     <a name = "move_to_tag"></a>
     <strong>:move_to_tag <span class='function_args'> <b>(</b>target<b>)</b></span></strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -4122,8 +4769,25 @@ awful.rules.add_rule_source(
 
 
 
+     <br />
+     <center id=button292>
+     <a class="show_more_button" onclick="show_extra('292')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item291 class="hide_extra">
+    <span id=item292 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>activate</td><td>client.movetotag</td><td>granted</td><td>When a client could be activated because <code>c:move_to_tag()</code> was called.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -4149,7 +4813,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item292 class="hide_extra">
+    <span id=item293 class="hide_extra">
     </span>
 
 </dd>
@@ -4157,6 +4821,7 @@ awful.rules.add_rule_source(
     <a name = "move_to_screen"></a>
     <strong>:move_to_screen <span class='function_args'> <b>(</b>[s=c.screen.index+1]<b>)</b></span></strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -4180,8 +4845,25 @@ awful.rules.add_rule_source(
     </ul>
 
 
+     <br />
+     <center id=button294>
+     <a class="show_more_button" onclick="show_extra('294')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item293 class="hide_extra">
+    <span id=item294 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>activate</td><td>client.movetoscreen</td><td>granted</td><td>When a client could be activated because <code>c:move_to_screen()</code> was called.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -4204,7 +4886,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item294 class="hide_extra">
+    <span id=item295 class="hide_extra">
     </span>
 
 </dd>
@@ -4237,7 +4919,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item295 class="hide_extra">
+    <span id=item296 class="hide_extra">
     </span>
 
 </dd>
@@ -4269,7 +4951,161 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item296 class="hide_extra">
+    <span id=item297 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "activate"></a>
+    <strong>:activate <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    <p>Activate (focus) a client.</p>
+
+<p> This method is the correct way to focus a client. While
+ <code>client.focus = my_client</code> works and is commonly used in older code, it has
+ some drawbacks. The most obvious one is that it bypasses the activate
+ filters. It also doesn&rsquo;t handle minimized clients well and requires a lot
+ of boilerplate code to make work properly.</p>
+
+<p> The valid <code>args.actions</code> are:</p>
+
+<ul>
+<li><strong>mouse_move</strong>: Move the client when the mouse cursor moves until the
+mouse buttons are release.</li>
+<li><strong>mouse_resize</strong>: Resize the client when the mouse cursor moves until the
+mouse buttons are release.</li>
+<li><strong>mouse_center</strong>: Move the mouse cursor to the center of the client if it
+isn&rsquo;t already within its geometry,</li>
+<li><strong>toggle_minimization</strong>: If the client is already active, minimize it.</li>
+</ul>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">args</span>
+        <ul>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Why was this activate called?
+         (<em>default</em> other)
+        </li>
+        <li><span class="parameter">raise</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Raise the client to the top of its layer.
+         (<em>default</em> true)
+        </li>
+        <li><span class="parameter">force</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Force the activation even for unfocusable
+  clients.
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">switch_to_tags</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">switch_to_tag</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">action</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Once activated, perform an action.
+         (<em>default</em> false)
+        </li>
+        <li><span class="parameter">toggle_minimization</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+         (<em>default</em> false)
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../libraries/awful.permissions.html#awful.permissions.add_activate_filter">awful.permissions.add_activate_filter</a></li>
+         <li><a href="../core_components/client.html#request::activate">request::activate</a></li>
+         <li><a href="../core_components/client.html#active">active</a></li>
+    </ul>
+
+
+
+    <span id=item298 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "grant"></a>
+    <strong>:grant <span class='function_args'> <b>(</b>permission, context<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Grant a permission for a client.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">permission</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The permission name (just the name, no <code>request::</code>).
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The reason why this permission is requested.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.permissions.html#">awful.permissions</a>
+    </ul>
+
+
+
+    <span id=item299 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "deny"></a>
+    <strong>:deny <span class='function_args'> <b>(</b>permission, context<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Deny a permission for a client.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">permission</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The permission name (just the name, no <code>request::</code>).
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The reason why this permission is requested.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.permissions.html#">awful.permissions</a>
+    </ul>
+
+
+
+    <span id=item300 class="hide_extra">
     </span>
 
 </dd>
@@ -4301,7 +5137,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item297 class="hide_extra">
+    <span id=item301 class="hide_extra">
     </span>
 
 </dd>
@@ -4332,7 +5168,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item298 class="hide_extra">
+    <span id=item302 class="hide_extra">
     </span>
 
 </dd>
@@ -4370,7 +5206,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item299 class="hide_extra">
+    <span id=item303 class="hide_extra">
     </span>
 
 </dd>
@@ -4396,7 +5232,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item300 class="hide_extra">
+    <span id=item304 class="hide_extra">
     </span>
 
 </dd>
@@ -4417,7 +5253,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item301 class="hide_extra">
+    <span id=item305 class="hide_extra">
     </span>
 
 </dd>
@@ -4436,7 +5272,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item302 class="hide_extra">
+    <span id=item306 class="hide_extra">
     </span>
 
 </dd>
@@ -4455,7 +5291,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item303 class="hide_extra">
+    <span id=item307 class="hide_extra">
     </span>
 
 </dd>
@@ -4485,26 +5321,115 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item304 class="hide_extra">
+    <span id=item308 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "manage"></a>
-    <strong>manage</strong>
+    <a name = "request::manage"></a>
+    <strong>request::manage</strong>
+    <span class="baseclass" >
+         &middot 1 permissions
+    </span>
+    </dt>
+    <dd>
+    When a new client appears and gets managed by Awesome.</p>
+
+<p> This request should be implemented by code which track the client. It isn&rsquo;t
+ recommended to use this to initialize the client content. This use case is
+ a better fit for <code>ruled.client</code>, which has built-in dependency management.
+ Using this request to mutate the client state will likely conflict with
+ <code>ruled.client</code>.
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+            <span class="types"><span class="type">client</span></span>
+         The client.
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         What created the client. It is currently either &ldquo;new&rdquo;
+  or &ldquo;startup&rdquo;.
+        </li>
+        <li><span class="parameter">hints</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         More metadata (currently empty, it exists for compliance
+  with the other <code>request::</code> signals).
+        </li>
+    </ul>
+
+
+
+
+
+     <br />
+     <center id=button309>
+     <a class="show_more_button" onclick="show_extra('309')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item309 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>border</td><td>added</td><td>granted</td><td>When a new client needs a its initial border settings.</td></tr>
+     </table>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "request::unmanage"></a>
+    <strong>request::unmanage</strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    When a new client appears and gets managed by Awesome.
+    <p>When a client is going away.</p>
+
+<p> Each places which store <a href="../core_components/client.html#">client</a> objects in non-weak table or whose state
+ depend on the current client should answer this request.</p>
+
+<p> The contexts are:</p>
+
+<ul>
+<li><strong>user</strong>: <code>c:unmanage()</code> was called.</li>
+<li><strong>reparented</strong>: The window was reparented to another window. It is no
+longer a stand alone client.</li>
+<li><strong>destroyed</strong>: The window was closed.</li>
+</ul>
+
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+            <span class="types"><span class="type">client</span></span>
+         The client.
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Why was the client unmanaged.
+        </li>
+        <li><span class="parameter">hints</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         More metadata (currently empty, it exists for compliance
+  with the other <code>request::</code> signals).
+        </li>
+    </ul>
 
 
 
 
 
 
-
-    <span id=item305 class="hide_extra">
+    <span id=item310 class="hide_extra">
     </span>
 
 </dd>
@@ -4523,7 +5448,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item306 class="hide_extra">
+    <span id=item311 class="hide_extra">
     </span>
 
 </dd>
@@ -4542,7 +5467,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item307 class="hide_extra">
+    <span id=item312 class="hide_extra">
     </span>
 
 </dd>
@@ -4561,7 +5486,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item308 class="hide_extra">
+    <span id=item313 class="hide_extra">
     </span>
 
 </dd>
@@ -4580,7 +5505,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item309 class="hide_extra">
+    <span id=item314 class="hide_extra">
     </span>
 
 </dd>
@@ -4599,7 +5524,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item310 class="hide_extra">
+    <span id=item315 class="hide_extra">
     </span>
 
 </dd>
@@ -4618,7 +5543,7 @@ awful.rules.add_rule_source(
 
 
 
-    <span id=item311 class="hide_extra">
+    <span id=item316 class="hide_extra">
     </span>
 
 </dd>
@@ -4626,6 +5551,7 @@ awful.rules.add_rule_source(
     <a name = "request::activate"></a>
     <strong>request::activate</strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -4658,9 +5584,71 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 </ul>
 
 
-<p> Default implementation: <a href="../libraries/awful.ewmh.html#awful.ewmh.activate">awful.ewmh.activate</a>.</p>
+<p> Default implementation: <code>awful.ewmh.activate</code>.</p>
 
-<p> To implement focus stealing filters see <a href="../libraries/awful.ewmh.html#awful.ewmh.add_activate_filter">awful.ewmh.add_activate_filter</a>.
+<p> To implement focus stealing filters see <code>awful.ewmh.add_activate_filter</code>.
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The context where this signal was used.
+        </li>
+        <li><span class="parameter">hints</span> A table with additional hints:
+        <ul>
+        <li><span class="parameter">raise</span>
+            <span class="types"><span class="type">boolean</span></span>
+         should the client be raised?
+         (<em>default</em> false)
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+
+
+     <br />
+     <center id=button317>
+     <a class="show_more_button" onclick="show_extra('317')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item317 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>activate</td><td>ewmh</td><td>granted</td><td>When the client asks to be activated.</td></tr>
+     </table>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "request::autoactivate"></a>
+    <strong>request::autoactivate</strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    When an event could lead to the client being activated.</p>
+
+<p> This is an layer &ldquo;on top&rdquo; of <a href="../core_components/client.html#request::activate">request::activate</a> for event which are not
+ actual request for activation/focus, but where &ldquo;it would be nice&rdquo; if the
+ client got the focus. This includes the focus-follow-mouse model and focusing
+ previous clients when the selected tag changes.</p>
+
+<p> This idea is that <a href="../core_components/client.html#request::autoactivate">request::autoactivate</a> will emit <a href="../core_components/client.html#request::activate">request::activate</a>.
+ However it is much easier to replace the handler for <a href="../core_components/client.html#request::autoactivate">request::autoactivate</a>
+ than it is to replace the handler for <a href="../core_components/client.html#request::activate">request::activate</a>. Thus it provides
+ a nice abstraction to simplify handling the focus when switching tags or
+ moving the mouse.
 
     <h3>Arguments:</h3>
     <ul>
@@ -4683,7 +5671,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item312 class="hide_extra">
+    <span id=item318 class="hide_extra">
     </span>
 
 </dd>
@@ -4691,10 +5679,11 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <a name = "request::geometry"></a>
     <strong>request::geometry</strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
-
+    When something request a client geometry to be modified.
 
     <h3>Arguments:</h3>
     <ul>
@@ -4719,8 +5708,26 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
+     <br />
+     <center id=button319>
+     <a class="show_more_button" onclick="show_extra('319')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item313 class="hide_extra">
+    <span id=item319 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>geometry</td><td>client_maximize_horizontal</td><td>granted</td><td>When a client (programmatically) asks for the maximization to be changed.</td></tr>
+          <tr><td>client</td><td>geometry</td><td>client_maximize_vertical</td><td>granted</td><td>When a client (programmatically) asks for the maximization to be changed.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -4739,7 +5746,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item314 class="hide_extra">
+    <span id=item320 class="hide_extra">
     </span>
 
 </dd>
@@ -4758,7 +5765,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item315 class="hide_extra">
+    <span id=item321 class="hide_extra">
     </span>
 
 </dd>
@@ -4789,7 +5796,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item316 class="hide_extra">
+    <span id=item322 class="hide_extra">
     </span>
 
 </dd>
@@ -4820,7 +5827,56 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item317 class="hide_extra">
+    <span id=item323 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "request::default_keybindings"></a>
+    <strong>request::default_keybindings</strong>
+    <span class="baseclass" >
+         &middot 1 permissions
+    </span>
+    </dt>
+    <dd>
+    Sent once when AwesomeWM starts to add default keybindings.</p>
+
+<p> Keybindings can be set directly on clients. Actually, older version of
+ AwesomeWM did that through the rules. However this makes it impossible for
+ auto-configured modules to add their own keybindings. Using the signals,
+ <a href="../sample files/rc.lua.html#">rc.lua</a> or any module can cleanly manage keybindings.
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The context (currently always &ldquo;startup&rdquo;).
+        </li>
+    </ul>
+
+
+
+
+
+     <br />
+     <center id=button324>
+     <a class="show_more_button" onclick="show_extra('324')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item324 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>default_keybindings</td><td>startup</td><td>granted</td><td>Sent when AwesomeWM starts.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -4846,7 +5902,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item318 class="hide_extra">
+    <span id=item325 class="hide_extra">
     </span>
 
 </dd>
@@ -4865,26 +5921,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item319 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "unmanage"></a>
-    <strong>unmanage</strong>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-
-
-
-
-
-
-
-
-    <span id=item320 class="hide_extra">
+    <span id=item326 class="hide_extra">
     </span>
 
 </dd>
@@ -4910,7 +5947,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item321 class="hide_extra">
+    <span id=item327 class="hide_extra">
     </span>
 
 </dd>
@@ -4929,7 +5966,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item322 class="hide_extra">
+    <span id=item328 class="hide_extra">
     </span>
 
 </dd>
@@ -4948,7 +5985,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item323 class="hide_extra">
+    <span id=item329 class="hide_extra">
     </span>
 
 </dd>
@@ -4971,7 +6008,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item324 class="hide_extra">
+    <span id=item330 class="hide_extra">
     </span>
 
 </dd>
@@ -4994,7 +6031,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item325 class="hide_extra">
+    <span id=item331 class="hide_extra">
     </span>
 
 </dd>
@@ -5013,7 +6050,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item326 class="hide_extra">
+    <span id=item332 class="hide_extra">
     </span>
 
 </dd>
@@ -5045,18 +6082,96 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item327 class="hide_extra">
+    <span id=item333 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "request::border"></a>
+    <strong>request::border</strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    <p>Emited when the border client might need to be update.</p>
+
+<p> The context are:</p>
+
+<ul>
+<li><strong>added</strong>: When a new client is created.</li>
+<li><strong>active</strong>: When client gains the focus (or stop being urgent/floating
+but is active).</li>
+<li><strong>inactive</strong>: When client loses the focus (or stop being urgent/floating
+and is not active.</li>
+<li><strong>urgent</strong>: When a client becomes urgent.</li>
+<li><strong>floating</strong>: When the floating or maximization state changes.</li>
+</ul>
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.permissions.html#awful.ewmh.update_border">awful.permissions.update_border</a>
+    </ul>
+
+
+
+    <span id=item334 class="hide_extra">
+    </span>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Deprecated_signals"></a>Deprecated signals</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "manage"></a>
+    <strong>manage<i class="deprecated_label"> [deprecated]</i></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Use <a href="../core_components/client.html#request::manage">request::manage</a>.
+
+
+
+
+
+
+
+    <span id=item335 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "unmanage"></a>
+    <strong>unmanage<i class="deprecated_label"> [deprecated]</i></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Use <a href="../core_components/client.html#request::unmanage">request::unmanage</a>.
+
+
+
+
+
+
+
+    <span id=item336 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "marked"></a>
-    <strong>marked</strong>
+    <strong>marked<i class="deprecated_label"> [deprecated]</i></strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client marked signal (deprecated).
+    The client marked signal.
 
 
 
@@ -5064,18 +6179,18 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item328 class="hide_extra">
+    <span id=item337 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "unmarked"></a>
-    <strong>unmarked</strong>
+    <strong>unmarked<i class="deprecated_label"> [deprecated]</i></strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client unmarked signal (deprecated).
+    The client unmarked signal.
 
 
 
@@ -5083,7 +6198,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item329 class="hide_extra">
+    <span id=item338 class="hide_extra">
     </span>
 
 </dd>
@@ -5092,42 +6207,442 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
     <dl class="function">
     <dt>
-    <a name = "beautiful.border_focus"></a>
-    <strong>beautiful.border_focus</strong>
-    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <a name = "beautiful.border_color_floating"></a>
+    <strong>beautiful.border_color_floating</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The border color when the client is focused.
+    The fallback border color when the client is floating.
 
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/client.html#request::border">request::border</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_floating_active">beautiful.border_color_floating_active</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_floating_normal">beautiful.border_color_floating_normal</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_floating_urgent">beautiful.border_color_floating_urgent</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_floating_new">beautiful.border_color_floating_new</a></li>
+    </ul>
 
 
 
-    <span id=item330 class="hide_extra">
+    <span id=item339 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "beautiful.border_normal"></a>
-    <strong>beautiful.border_normal</strong>
-    <span class="proptype">(<span class='summary_type'>string</span>)</span>
+    <a name = "beautiful.border_color_mazimized"></a>
+    <strong>beautiful.border_color_mazimized</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The border color when the client is not focused.
+    The fallback border color when the client is mazimized.
 
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/client.html#request::border">request::border</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_maximized_active">beautiful.border_color_maximized_active</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_maximized_normal">beautiful.border_color_maximized_normal</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_maximized_urgent">beautiful.border_color_maximized_urgent</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_maximized_new">beautiful.border_color_maximized_new</a></li>
+    </ul>
 
 
 
-    <span id=item331 class="hide_extra">
+    <span id=item340 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_active"></a>
+    <strong>beautiful.border_color_active</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the client is active.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item341 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_normal"></a>
+    <strong>beautiful.border_color_normal</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the client is not active.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item342 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_urgent"></a>
+    <strong>beautiful.border_color_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the client has the urgent property set.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item343 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_new"></a>
+    <strong>beautiful.border_color_new</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the client is not active and new.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item344 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_floating_active"></a>
+    <strong>beautiful.border_color_floating_active</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (floating) client is active.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item345 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_floating_normal"></a>
+    <strong>beautiful.border_color_floating_normal</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (floating) client is not active.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item346 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_floating_urgent"></a>
+    <strong>beautiful.border_color_floating_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (floating) client has the urgent property set.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item347 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_floating_new"></a>
+    <strong>beautiful.border_color_floating_new</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (floating) client is not active and new.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item348 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_maximized_active"></a>
+    <strong>beautiful.border_color_maximized_active</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (maximized) client is active.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item349 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_maximized_normal"></a>
+    <strong>beautiful.border_color_maximized_normal</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (maximized) client is not active.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item350 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_maximized_urgent"></a>
+    <strong>beautiful.border_color_maximized_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (maximized) client has the urgent property set.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item351 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_maximized_new"></a>
+    <strong>beautiful.border_color_maximized_new</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (maximized) client is not active and new.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item352 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_fullscreen_active"></a>
+    <strong>beautiful.border_color_fullscreen_active</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (fullscreen) client is active.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item353 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_fullscreen_normal"></a>
+    <strong>beautiful.border_color_fullscreen_normal</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (fullscreen) client is not active.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item354 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_fullscreen_urgent"></a>
+    <strong>beautiful.border_color_fullscreen_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (fullscreen) client has the urgent property set.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item355 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_fullscreen_new"></a>
+    <strong>beautiful.border_color_fullscreen_new</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the (fullscreen) client is not active and new.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item356 class="hide_extra">
     </span>
 
 </dd>
@@ -5139,7 +6654,898 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     </span>
     </dt>
     <dd>
-    The client border width.
+    The fallback border width when nothing else is set.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/client.html#request::border">request::border</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_floating">beautiful.border_width_floating</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_mazimized">beautiful.border_width_mazimized</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_floating_active">beautiful.border_width_floating_active</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_floating_normal">beautiful.border_width_floating_normal</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_floating_urgent">beautiful.border_width_floating_urgent</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_floating_new">beautiful.border_width_floating_new</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_maximized_active">beautiful.border_width_maximized_active</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_maximized_normal">beautiful.border_width_maximized_normal</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_maximized_urgent">beautiful.border_width_maximized_urgent</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_maximized_new">beautiful.border_width_maximized_new</a></li>
+    </ul>
+
+
+
+    <span id=item357 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_floating"></a>
+    <strong>beautiful.border_width_floating</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The fallback border width when the client is floating.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/client.html#request::border">request::border</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_floating_active">beautiful.border_width_floating_active</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_floating_normal">beautiful.border_width_floating_normal</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_floating_urgent">beautiful.border_width_floating_urgent</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_floating_new">beautiful.border_width_floating_new</a></li>
+    </ul>
+
+
+
+    <span id=item358 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_mazimized"></a>
+    <strong>beautiful.border_width_mazimized</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The fallback border width when the client is mazimized.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/client.html#request::border">request::border</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_maximized_active">beautiful.border_width_maximized_active</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_maximized_normal">beautiful.border_width_maximized_normal</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_maximized_urgent">beautiful.border_width_maximized_urgent</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_maximized_new">beautiful.border_width_maximized_new</a></li>
+    </ul>
+
+
+
+    <span id=item359 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_normal"></a>
+    <strong>beautiful.border_width_normal</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the normal clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item360 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_active"></a>
+    <strong>beautiful.border_width_active</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the active client.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item361 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_urgent"></a>
+    <strong>beautiful.border_width_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the urgent clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item362 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_new"></a>
+    <strong>beautiful.border_width_new</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the new clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item363 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_floating_normal"></a>
+    <strong>beautiful.border_width_floating_normal</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the normal floating clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item364 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_floating_active"></a>
+    <strong>beautiful.border_width_floating_active</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the active floating client.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item365 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_floating_urgent"></a>
+    <strong>beautiful.border_width_floating_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the urgent floating clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item366 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_floating_new"></a>
+    <strong>beautiful.border_width_floating_new</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the new floating clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item367 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_maximized_normal"></a>
+    <strong>beautiful.border_width_maximized_normal</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the normal maximized clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item368 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_maximized_active"></a>
+    <strong>beautiful.border_width_maximized_active</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the active maximized client.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item369 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_maximized_urgent"></a>
+    <strong>beautiful.border_width_maximized_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the urgent maximized clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item370 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_maximized_new"></a>
+    <strong>beautiful.border_width_maximized_new</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the new maximized clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item371 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_fullscreen_normal"></a>
+    <strong>beautiful.border_width_fullscreen_normal</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the normal fullscreen clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item372 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_fullscreen_active"></a>
+    <strong>beautiful.border_width_fullscreen_active</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the active fullscreen client.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item373 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_fullscreen_urgent"></a>
+    <strong>beautiful.border_width_fullscreen_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the urgent fullscreen clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item374 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_width_fullscreen_new"></a>
+    <strong>beautiful.border_width_fullscreen_new</strong>
+    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client border width for the new fullscreen clients.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item375 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_normal"></a>
+    <strong>beautiful.opacity_normal</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the normal clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item376 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_active"></a>
+    <strong>beautiful.opacity_active</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the active client.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item377 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_urgent"></a>
+    <strong>beautiful.opacity_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the urgent clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item378 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_new"></a>
+    <strong>beautiful.opacity_new</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the new clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item379 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_floating_normal"></a>
+    <strong>beautiful.opacity_floating_normal</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the normal floating clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item380 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_floating_active"></a>
+    <strong>beautiful.opacity_floating_active</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the active floating client.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item381 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_floating_urgent"></a>
+    <strong>beautiful.opacity_floating_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the urgent floating clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item382 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_floating_new"></a>
+    <strong>beautiful.opacity_floating_new</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the new floating clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item383 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_maximized_normal"></a>
+    <strong>beautiful.opacity_maximized_normal</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the normal maximized clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item384 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_maximized_active"></a>
+    <strong>beautiful.opacity_maximized_active</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the active maximized client.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item385 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_maximized_urgent"></a>
+    <strong>beautiful.opacity_maximized_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the urgent maximized clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item386 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_maximized_new"></a>
+    <strong>beautiful.opacity_maximized_new</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the new maximized clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item387 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_fullscreen_normal"></a>
+    <strong>beautiful.opacity_fullscreen_normal</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the normal fullscreen clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item388 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_fullscreen_active"></a>
+    <strong>beautiful.opacity_fullscreen_active</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the active fullscreen client.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item389 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_fullscreen_urgent"></a>
+    <strong>beautiful.opacity_fullscreen_urgent</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the urgent fullscreen clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item390 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_fullscreen_new"></a>
+    <strong>beautiful.opacity_fullscreen_new</strong>
+    <span class="proptype">(<span class='summary_type'>number</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the new fullscreen clients.</p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item391 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_marked"></a>
+    <strong>beautiful.border_marked</strong>
+    <span class="proptype">(<span class='summary_type'>color</span>)</span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The marked clients border color.
+ Note that only solid colors are supported.
 
 
 
@@ -5147,7 +7553,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item332 class="hide_extra">
+    <span id=item392 class="hide_extra">
     </span>
 
 </dd>
@@ -5167,7 +7573,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item333 class="hide_extra">
+    <span id=item393 class="hide_extra">
     </span>
 
 </dd>
@@ -5209,7 +7615,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item334 class="hide_extra">
+    <span id=item394 class="hide_extra">
     </span>
 
 </dd>
@@ -5251,7 +7657,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item335 class="hide_extra">
+    <span id=item395 class="hide_extra">
     </span>
 
 </dd>
@@ -5292,7 +7698,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item336 class="hide_extra">
+    <span id=item396 class="hide_extra">
     </span>
 
 </dd>
@@ -5335,7 +7741,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item337 class="hide_extra">
+    <span id=item397 class="hide_extra">
     </span>
 
 </dd>
@@ -5369,7 +7775,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item338 class="hide_extra">
+    <span id=item398 class="hide_extra">
     </span>
 
 </dd>
@@ -5403,7 +7809,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item339 class="hide_extra">
+    <span id=item399 class="hide_extra">
     </span>
 
 </dd>
@@ -5437,7 +7843,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item340 class="hide_extra">
+    <span id=item400 class="hide_extra">
     </span>
 
 </dd>
@@ -5463,7 +7869,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item341 class="hide_extra">
+    <span id=item401 class="hide_extra">
     </span>
 
 </dd>
@@ -5489,7 +7895,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item342 class="hide_extra">
+    <span id=item402 class="hide_extra">
     </span>
 
 </dd>
@@ -5515,7 +7921,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item343 class="hide_extra">
+    <span id=item403 class="hide_extra">
     </span>
 
 </dd>
@@ -5541,7 +7947,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item344 class="hide_extra">
+    <span id=item404 class="hide_extra">
     </span>
 
 </dd>
@@ -5565,7 +7971,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item345 class="hide_extra">
+    <span id=item405 class="hide_extra">
     </span>
 
 </dd>
@@ -5595,7 +8001,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item346 class="hide_extra">
+    <span id=item406 class="hide_extra">
     </span>
 
 </dd>
@@ -5627,7 +8033,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item347 class="hide_extra">
+    <span id=item407 class="hide_extra">
     </span>
 
 </dd>
@@ -5664,7 +8070,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item348 class="hide_extra">
+    <span id=item408 class="hide_extra">
     </span>
 
 </dd>
@@ -5695,7 +8101,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item349 class="hide_extra">
+    <span id=item409 class="hide_extra">
     </span>
 
 </dd>
@@ -5727,7 +8133,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item350 class="hide_extra">
+    <span id=item410 class="hide_extra">
     </span>
 
 </dd>
@@ -5759,7 +8165,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item351 class="hide_extra">
+    <span id=item411 class="hide_extra">
     </span>
 
 </dd>
@@ -5795,7 +8201,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item352 class="hide_extra">
+    <span id=item412 class="hide_extra">
     </span>
 
 </dd>
@@ -5830,7 +8236,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item353 class="hide_extra">
+    <span id=item413 class="hide_extra">
     </span>
 
 </dd>
@@ -5882,7 +8288,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     </ul>
 
 
-    <span id=item354 class="hide_extra">
+    <span id=item414 class="hide_extra">
     </span>
 
 </dd>
@@ -5923,7 +8329,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item355 class="hide_extra">
+    <span id=item415 class="hide_extra">
     </span>
 
 </dd>
@@ -5963,7 +8369,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item356 class="hide_extra">
+    <span id=item416 class="hide_extra">
     </span>
 
 </dd>
@@ -5993,7 +8399,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item357 class="hide_extra">
+    <span id=item417 class="hide_extra">
     </span>
 
 </dd>
@@ -6019,7 +8425,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item358 class="hide_extra">
+    <span id=item418 class="hide_extra">
     </span>
 
 </dd>
@@ -6045,7 +8451,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item359 class="hide_extra">
+    <span id=item419 class="hide_extra">
     </span>
 
 </dd>
@@ -6072,7 +8478,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item360 class="hide_extra">
+    <span id=item420 class="hide_extra">
     </span>
 
 </dd>
@@ -6101,7 +8507,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item361 class="hide_extra">
+    <span id=item421 class="hide_extra">
     </span>
 
 </dd>
@@ -6133,7 +8539,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item362 class="hide_extra">
+    <span id=item422 class="hide_extra">
     </span>
 
 </dd>
@@ -6165,7 +8571,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item363 class="hide_extra">
+    <span id=item423 class="hide_extra">
     </span>
 
 </dd>
@@ -6195,7 +8601,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item364 class="hide_extra">
+    <span id=item424 class="hide_extra">
     </span>
 
 </dd>
@@ -6227,7 +8633,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item365 class="hide_extra">
+    <span id=item425 class="hide_extra">
     </span>
 
 </dd>
@@ -6259,7 +8665,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item366 class="hide_extra">
+    <span id=item426 class="hide_extra">
     </span>
 
 </dd>
@@ -6295,7 +8701,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item367 class="hide_extra">
+    <span id=item427 class="hide_extra">
     </span>
 
 </dd>
@@ -6341,7 +8747,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item368 class="hide_extra">
+    <span id=item428 class="hide_extra">
     </span>
 
 </dd>
@@ -6372,7 +8778,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item369 class="hide_extra">
+    <span id=item429 class="hide_extra">
     </span>
 
 </dd>
@@ -6400,7 +8806,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item370 class="hide_extra">
+    <span id=item430 class="hide_extra">
     </span>
 
 </dd>
@@ -6430,7 +8836,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item371 class="hide_extra">
+    <span id=item431 class="hide_extra">
     </span>
 
 </dd>
@@ -6455,7 +8861,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item372 class="hide_extra">
+    <span id=item432 class="hide_extra">
     </span>
 
 </dd>
@@ -6500,7 +8906,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item373 class="hide_extra">
+    <span id=item433 class="hide_extra">
     </span>
 
 </dd>
@@ -6524,7 +8930,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item374 class="hide_extra">
+    <span id=item434 class="hide_extra">
     </span>
 
 </dd>
@@ -6554,7 +8960,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item375 class="hide_extra">
+    <span id=item435 class="hide_extra">
     </span>
 
 </dd>
@@ -6562,6 +8968,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <a name = "awful.client.focus.byidx"></a>
     <strong>awful.client.focus.byidx (i[, c])</strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -6583,8 +8990,25 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
+     <br />
+     <center id=button436>
+     <a class="show_more_button" onclick="show_extra('436')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item376 class="hide_extra">
+    <span id=item436 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>activate</td><td>client.focus.byidx</td><td>granted</td><td>When <code>awful.focus.byidx</code> is called.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -6617,7 +9041,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item377 class="hide_extra">
+    <span id=item437 class="hide_extra">
     </span>
 
 </dd>
@@ -6643,7 +9067,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item378 class="hide_extra">
+    <span id=item438 class="hide_extra">
     </span>
 
 </dd>
@@ -6686,7 +9110,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item379 class="hide_extra">
+    <span id=item439 class="hide_extra">
     </span>
 
 </dd>
@@ -6694,6 +9118,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <a name = "awful.client.focus.history.previous"></a>
     <strong>awful.client.focus.history.previous ()</strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -6704,8 +9129,25 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
+     <br />
+     <center id=button440>
+     <a class="show_more_button" onclick="show_extra('440')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item380 class="hide_extra">
+    <span id=item440 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>activate</td><td>client.focus.history.previous</td><td>granted</td><td>When <code>awful.focus.history.previous</code> is called.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -6713,6 +9155,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <a name = "awful.client.focus.bydirection"></a>
     <strong>awful.client.focus.bydirection (dir[, c[, stacked=false]])</strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -6741,8 +9184,25 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
+     <br />
+     <center id=button441>
+     <a class="show_more_button" onclick="show_extra('441')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item381 class="hide_extra">
+    <span id=item441 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>activate</td><td>client.focus.bydirection</td><td>granted</td><td>When <code>awful.focus.bydirection</code> is called.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -6750,6 +9210,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <a name = "awful.client.focus.global_bydirection"></a>
     <strong>awful.client.focus.global_bydirection (dir[, c[, stacked=false]])</strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -6776,8 +9237,25 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
+     <br />
+     <center id=button442>
+     <a class="show_more_button" onclick="show_extra('442')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item382 class="hide_extra">
+    <span id=item442 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>activate</td><td>client.focus.global_bydirection</td><td>granted</td><td>When <a href="../core_components/client.html#awful.client.focus.global_bydirection">awful.client.focus.global_bydirection</a> is called.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -6811,7 +9289,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item383 class="hide_extra">
+    <span id=item443 class="hide_extra">
     </span>
 
 </dd>
@@ -6837,7 +9315,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item384 class="hide_extra">
+    <span id=item444 class="hide_extra">
     </span>
 
 </dd>
@@ -6863,7 +9341,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item385 class="hide_extra">
+    <span id=item445 class="hide_extra">
     </span>
 
 </dd>
@@ -6889,7 +9367,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item386 class="hide_extra">
+    <span id=item446 class="hide_extra">
     </span>
 
 </dd>
@@ -6918,7 +9396,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item387 class="hide_extra">
+    <span id=item447 class="hide_extra">
     </span>
 
 </dd>
@@ -6946,7 +9424,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item388 class="hide_extra">
+    <span id=item448 class="hide_extra">
     </span>
 
 </dd>
@@ -6954,6 +9432,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <a name = "awful.urgent.add"></a>
     <strong>awful.urgent.add (c, prop)</strong>
     <span class="baseclass" >
+         &middot 1 permissions
     </span>
     </dt>
     <dd>
@@ -6974,8 +9453,27 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
+     <br />
+     <center id=button449>
+     <a class="show_more_button" onclick="show_extra('449')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item389 class="hide_extra">
+    <span id=item449 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
+          <tr><td>client</td><td>border</td><td>active</td><td>granted</td><td>When a client becomes active and is no longer urgent.</td></tr>
+          <tr><td>client</td><td>border</td><td>inactive</td><td>granted</td><td>When a client stop being active and is no longer urgent.</td></tr>
+          <tr><td>client</td><td>border</td><td>urgent</td><td>granted</td><td>When a client stop becomes urgent.</td></tr>
+     </table>
     </span>
 
 </dd>
@@ -7001,7 +9499,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item390 class="hide_extra">
+    <span id=item450 class="hide_extra">
     </span>
 
 </dd>

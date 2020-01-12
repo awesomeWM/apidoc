@@ -178,9 +178,9 @@
 <h2>Libraries</h2>
 <ul class="nowrap">
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
-  <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
+  <li><a href="../libraries/awful.permissions.html">awful.permissions</a></li>
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
@@ -299,6 +299,14 @@ and <code>awful.buttons</code> objects rather than the lower level <code>key</co
 objects. If you used these low level APIs to add keys and buttons dynamically,
 please migrate your code to the corresponding <code>:append_</code> and <code>:remove_</code>
 client methods.</li>
+<li><a href="../theme_related_libraries/beautiful.html#border_width">beautiful.border_width</a> and <a href="../theme_related_libraries/beautiful.html#border_color">beautiful.border_color</a> are now honored even
+when the part related to borders is removed from <a href="../sample files/rc.lua.html#">rc.lua</a>. Set them
+appropriately in your theme or disconnect the default <code>request::border</code>
+handler.</li>
+<li>The order by which the client rules compute the geometry have changed
+slightly. The border is now applied before the titlebar offset. This should
+not affect most users unless you had mitigated the bug it fixes by adding
+the titlebar offset in your rules.</li>
 </ul>
 
 
@@ -1195,15 +1203,15 @@ previously hard-coded behavior more flexible.</p>
 <p><strong>See:</strong></p>
 
 <ul>
-<li><a href="../libraries/awful.ewmh.html#awful.ewmh.tag">awful.ewmh.tag</a></li>
-<li><a href="../libraries/awful.ewmh.html#awful.ewmh.geometry">awful.ewmh.geometry</a></li>
-<li><a href="../libraries/awful.ewmh.html#awful.ewmh.activate">awful.ewmh.activate</a></li>
-<li><a href="../libraries/awful.ewmh.html#awful.ewmh.urgent">awful.ewmh.urgent</a></li>
+<li><code>awful.ewmh.tag</code></li>
+<li><code>awful.ewmh.geometry</code></li>
+<li><code>awful.ewmh.activate</code></li>
+<li><code>awful.ewmh.urgent</code></li>
 <li>awful.<code>mouse.resize_handler</code></li>
 </ul>
 
 
-<p>The defaults handlers are mostly located in the <a href="../libraries/awful.ewmh.html#">awful.ewmh</a> module and comply
+<p>The defaults handlers are mostly located in the <code>awful.ewmh</code> module and comply
 with what the specification defines.</p>
 
 <h4>The placement API</h4>
@@ -1338,9 +1346,9 @@ itself, now goes through the request filters.</p>
 <p><strong>See:</strong></p>
 
 <ul>
-<li><a href="../libraries/awful.ewmh.html#awful.ewmh.add_activate_filter">awful.ewmh.add_activate_filter</a></li>
-<li><a href="../libraries/awful.ewmh.html#awful.ewmh.remove_activate_filter">awful.ewmh.remove_activate_filter</a></li>
-<li><a href="../libraries/awful.ewmh.html#awful.ewmh.activate">awful.ewmh.activate</a></li>
+<li><code>awful.ewmh.add_activate_filter</code></li>
+<li><code>awful.ewmh.remove_activate_filter</code></li>
+<li><code>awful.ewmh.activate</code></li>
 </ul>
 
 

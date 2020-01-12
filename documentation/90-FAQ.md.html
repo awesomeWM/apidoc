@@ -176,9 +176,9 @@
 <h2>Libraries</h2>
 <ul class="nowrap">
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
-  <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
+  <li><a href="../libraries/awful.permissions.html">awful.permissions</a></li>
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
@@ -607,18 +607,18 @@ awful.key({ modkey }, <span class="string">"q"</span>, <span class="keyword">fun
 
 <h3>Why are new clients urgent by default?</h3>
 
-<p>You can change this by redefining <code>awful.ewmh.activate&copy;</code> in your rc.lua. If
+<p>You can change this by redefining <code>awful.permissions.activate&copy;</code> in your rc.lua. If
 you don&rsquo;t want new clients to be urgent by default put this in your rc.lua:</p>
 
 <pre>
-client.disconnect_signal(<span class="string">"request::activate"</span>, awful.ewmh.activate)
-<span class="keyword">function</span> awful.ewmh.activate(c)
+client.disconnect_signal(<span class="string">"request::activate"</span>, awful.permissions.activate)
+<span class="keyword">function</span> awful.permissions.activate(c)
     <span class="keyword">if</span> c:isvisible() <span class="keyword">then</span>
         client.focus = c
         c:raise()
     <span class="keyword">end</span>
 <span class="keyword">end</span>
-client.connect_signal(<span class="string">"request::activate"</span>, awful.ewmh.activate)
+client.connect_signal(<span class="string">"request::activate"</span>, awful.permissions.activate)
 </pre>
 
 
