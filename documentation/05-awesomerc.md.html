@@ -46,11 +46,12 @@
 <li><a href="#Error_handling">Error handling </a></li>
 <li><a href="#Variable_definitions">Variable definitions </a></li>
 <li><a href="#Menu">Menu </a></li>
+<li><a href="#Tag">Tag </a></li>
 <li><a href="#Wibar">Wibar </a></li>
 <li><a href="#Mouse_bindings">Mouse bindings </a></li>
 <li><a href="#Key_bindings">Key bindings </a></li>
 <li><a href="#Rules">Rules </a></li>
-<li><a href="#Signals">Signals </a></li>
+<li><a href="#Titlebars">Titlebars </a></li>
 </ul>
 
 
@@ -179,9 +180,9 @@
 <h2>Libraries</h2>
 <ul class="nowrap">
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
-  <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
+  <li><a href="../libraries/awful.permissions.html">awful.permissions</a></li>
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
@@ -368,31 +369,6 @@ modkey = <span class="string">"Mod4"</span>
 </pre>
 
 
-<p> &nbsp;
- Table of layouts to cover with awful.layout.inc, order matters.</p>
-
-<pre>
-<span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.layouts">awful.layout.layouts</a></span> = {
-    <span class="backtick"><code>awful.layout.suit.floating</code></span>,
-    <span class="backtick"><code>awful.layout.suit.tile</code></span>,
-    <span class="backtick"><code>awful.layout.suit.tile.left</code></span>,
-    <span class="backtick"><code>awful.layout.suit.tile.bottom</code></span>,
-    <span class="backtick"><code>awful.layout.suit.tile.top</code></span>,
-    <span class="backtick"><code>awful.layout.suit.fair</code></span>,
-    <span class="backtick"><code>awful.layout.suit.fair.horizontal</code></span>,
-    <span class="backtick"><code>awful.layout.suit.spiral</code></span>,
-    <span class="backtick"><code>awful.layout.suit.spiral.dwindle</code></span>,
-    <span class="backtick"><code>awful.layout.suit.max</code></span>,
-    <span class="backtick"><code>awful.layout.suit.max.fullscreen</code></span>,
-    <span class="backtick"><code>awful.layout.suit.magnifier</code></span>,
-    <span class="backtick"><code>awful.layout.suit.corner.nw</code></span>,
-    <span class="comment">-- <code>awful.layout.suit.corner.ne</code>,
-</span>    <span class="comment">-- <code>awful.layout.suit.corner.sw</code>,
-</span>    <span class="comment">-- <code>awful.layout.suit.corner.se</code>,
-</span>}
-</pre>
-
-
 <p><a name="Menu"></a></p>
 
 <h2>Menu</h2>
@@ -426,16 +402,44 @@ mylauncher = <span class="backtick"><a href="../widgets/awful.widget.launcher.ht
 </pre>
 
 
-<p> Keyboard map indicator and switcher</p>
+<p><a name="Tag"></a></p>
+
+<h2>Tag</h2>
+
+<p> &nbsp;
+ Table of layouts to cover with awful.layout.inc, order matters.</p>
 
 <pre>
-mykeyboardlayout = <span class="backtick"><a href="../widgets/awful.widget.keyboardlayout.html#">awful.widget.keyboardlayout</a></span>()
+tag.connect_signal(<span class="string">"request::default_layouts"</span>, <span class="keyword">function</span>()
+    <span class="backtick"><code>awful.layout.append</code></span>_default_layouts({
+        <span class="backtick"><code>awful.layout.suit.floating</code></span>,
+        <span class="backtick"><code>awful.layout.suit.tile</code></span>,
+        <span class="backtick"><code>awful.layout.suit.tile.left</code></span>,
+        <span class="backtick"><code>awful.layout.suit.tile.bottom</code></span>,
+        <span class="backtick"><code>awful.layout.suit.tile.top</code></span>,
+        <span class="backtick"><code>awful.layout.suit.fair</code></span>,
+        <span class="backtick"><code>awful.layout.suit.fair.horizontal</code></span>,
+        <span class="backtick"><code>awful.layout.suit.spiral</code></span>,
+        <span class="backtick"><code>awful.layout.suit.spiral.dwindle</code></span>,
+        <span class="backtick"><code>awful.layout.suit.max</code></span>,
+        <span class="backtick"><code>awful.layout.suit.max.fullscreen</code></span>,
+        <span class="backtick"><code>awful.layout.suit.magnifier</code></span>,
+        <span class="backtick"><code>awful.layout.suit.corner.nw</code></span>,
+    })
+<span class="keyword">end</span>)
 </pre>
 
 
 <p><a name="Wibar"></a></p>
 
 <h2>Wibar</h2>
+
+<p> Keyboard map indicator and switcher</p>
+
+<pre>
+mykeyboardlayout = <span class="backtick"><a href="../widgets/awful.widget.keyboardlayout.html#">awful.widget.keyboardlayout</a></span>()
+</pre>
+
 
 <p> Create a textclock widget</p>
 
@@ -503,28 +507,25 @@ screen.connect_signal(<span class="string">"request::desktop_decoration"</span>,
             <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewprev</code></span>(t.screen) <span class="keyword">end</span>),
         }
     }
+</pre>
 
-    <span class="comment">-- Create a tasklist widget
-</span>    s.mytasklist = <span class="backtick"><a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a></span> {
-        screen  = s,
-        filter  = <span class="backtick"><code>awful.widget.tasklist.filter.currenttags</code></span>,
-        buttons = {
-            <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-                                     <span class="keyword">if</span> c == client.focus <span class="keyword">then</span>
-                                         c.minimized = <span class="keyword">true</span>
-                                     <span class="keyword">else</span>
-                                         c:emit_signal(
-                                             <span class="string">"request::activate"</span>,
-                                             <span class="string">"tasklist"</span>,
-                                             {raise = <span class="keyword">true</span>}
-                                         )
-                                     <span class="keyword">end</span>
-                                 <span class="keyword">end</span>),
-            <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span>() <span class="backtick"><code>awful.menu.client</code></span>_list { theme = { width = <span class="number">250</span> } } <span class="keyword">end</span>),
-            <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>() <span class="backtick"><code>awful.client.focus.byidx</code></span>( <span class="number">1</span>) <span class="keyword">end</span>),
-            <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>() <span class="backtick"><code>awful.client.focus.byidx</code></span>(-<span class="number">1</span>) <span class="keyword">end</span>),
-        }
+
+<p> &nbsp;</p>
+
+<pre>
+<span class="comment">-- Create a tasklist widget
+</span>s.mytasklist = <span class="backtick"><a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a></span> {
+    screen  = s,
+    filter  = <span class="backtick"><code>awful.widget.tasklist.filter.currenttags</code></span>,
+    buttons = {
+        <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
+            c:activate { context = <span class="string">"tasklist"</span>, action = <span class="string">"toggle_minimization"</span> }
+        <span class="keyword">end</span>),
+        <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span>() <span class="backtick"><code>awful.menu.client</code></span>_list { theme = { width = <span class="number">250</span> } } <span class="keyword">end</span>),
+        <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>() <span class="backtick"><code>awful.client.focus.byidx</code></span>( <span class="number">1</span>) <span class="keyword">end</span>),
+        <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>() <span class="backtick"><code>awful.client.focus.byidx</code></span>(-<span class="number">1</span>) <span class="keyword">end</span>),
     }
+}
 </pre>
 
 
@@ -713,9 +714,7 @@ screen.connect_signal(<span class="string">"request::desktop_decoration"</span>,
                   <span class="keyword">local</span> c = <span class="backtick"><code>awful.client.restore</code></span>()
                   <span class="comment">-- Focus restored client
 </span>                  <span class="keyword">if</span> c <span class="keyword">then</span>
-                    c:emit_signal(
-                        <span class="string">"request::activate"</span>, <span class="string">"key.unminimize"</span>, {raise = <span class="keyword">true</span>}
-                    )
+                    c:activate { raise = <span class="keyword">true</span>, context = <span class="string">"key.unminimize"</span> }
                   <span class="keyword">end</span>
               <span class="keyword">end</span>,
               {description = <span class="string">"restore minimized"</span>, group = <span class="string">"client"</span>}),
@@ -822,15 +821,13 @@ screen.connect_signal(<span class="string">"request::desktop_decoration"</span>,
 client.connect_signal(<span class="string">"request::default_mousebindings"</span>, <span class="keyword">function</span>()
     <span class="backtick"><code>awful.mouse.append</code></span>_client_mousebindings({
         <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-            c:emit_signal(<span class="string">"request::activate"</span>, <span class="string">"mouse_click"</span>, {raise = <span class="keyword">true</span>})
+            c:activate { context = <span class="string">"mouse_click"</span> }
         <span class="keyword">end</span>),
         <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-            c:emit_signal(<span class="string">"request::activate"</span>, <span class="string">"mouse_click"</span>, {raise = <span class="keyword">true</span>})
-            <span class="backtick"><code>awful.mouse.client.move</code></span>(c)
+            c:activate { context = <span class="string">"mouse_click"</span>, action = <span class="string">"mouse_move"</span>  }
         <span class="keyword">end</span>),
         <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="keyword">function</span> (c)
-            c:emit_signal(<span class="string">"request::activate"</span>, <span class="string">"mouse_click"</span>, {raise = <span class="keyword">true</span>})
-            <span class="backtick"><code>awful.mouse.client.resize</code></span>(c)
+            c:activate { context = <span class="string">"mouse_click"</span>, action = <span class="string">"mouse_resize"</span>}
         <span class="keyword">end</span>),
     })
 <span class="keyword">end</span>)
@@ -898,7 +895,7 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
 
 <h2>Rules</h2>
 
-<p> Rules to apply to new clients (through the &ldquo;manage&rdquo; signal).
+<p> Rules to apply to new clients.
  &nbsp;</p>
 
 <pre>
@@ -911,9 +908,7 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
 <pre>
 <span class="comment">-- All clients will match this rule.
 </span>{ rule = { },
-  properties = { border_width = <span class="backtick"><code>beautiful.border</code></span>_width,
-                 border_color = <span class="backtick"><code>beautiful.border</code></span>_normal,
-                 focus = <span class="backtick"><code>awful.client.focus.filter</code></span>,
+  properties = { focus = <span class="backtick"><code>awful.client.focus.filter</code></span>,
                  raise = <span class="keyword">true</span>,
                  screen = <span class="backtick"><code>awful.screen.preferred</code></span>,
                  placement = <span class="backtick"><code>awful.placement.no</code></span>_overlap+<span class="backtick"><code>awful.placement.no</code></span>_offscreen
@@ -982,28 +977,9 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
 </pre>
 
 
-<p><a name="Signals"></a></p>
+<p><a name="Titlebars"></a></p>
 
-<h2>Signals</h2>
-
-<p> Signal function to execute when a new client appears.
- &nbsp;</p>
-
-<pre>
-client.connect_signal(<span class="string">"manage"</span>, <span class="keyword">function</span> (c)
-    <span class="comment">-- Set the windows at the slave,
-</span>    <span class="comment">-- i.e. put it at the end of others instead of setting it master.
-</span>    <span class="comment">-- if not awesome.startup then <code>awful.client.setslave</code>(c) end
-</span>
-    <span class="keyword">if</span> awesome.startup
-      <span class="keyword">and</span> <span class="keyword">not</span> c.size_hints.user_position
-      <span class="keyword">and</span> <span class="keyword">not</span> c.size_hints.program_position <span class="keyword">then</span>
-        <span class="comment">-- Prevent clients from being unreachable after screen count changes.
-</span>        <span class="backtick"><code>awful.placement.no</code></span>_offscreen(c)
-    <span class="keyword">end</span>
-<span class="keyword">end</span>)
-</pre>
-
+<h2>Titlebars</h2>
 
 <p> &nbsp;
  Add a titlebar if titlebars_enabled is set to true in the rules.</p>
@@ -1013,12 +989,10 @@ client.connect_signal(<span class="string">"request::titlebars"</span>, <span cl
     <span class="comment">-- buttons for the titlebar
 </span>    <span class="keyword">local</span> buttons = {
         <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span>()
-            c:emit_signal(<span class="string">"request::activate"</span>, <span class="string">"titlebar"</span>, {raise = <span class="keyword">true</span>})
-            <span class="backtick"><code>awful.mouse.client.move</code></span>(c)
+            c:activate { context = <span class="string">"titlebar"</span>, action = <span class="string">"mouse_move"</span>  }
         <span class="keyword">end</span>),
         <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span>()
-            c:emit_signal(<span class="string">"request::activate"</span>, <span class="string">"titlebar"</span>, {raise = <span class="keyword">true</span>})
-            <span class="backtick"><code>awful.mouse.client.resize</code></span>(c)
+            c:activate { context = <span class="string">"titlebar"</span>, action = <span class="string">"mouse_resize"</span>}
         <span class="keyword">end</span>),
     }
 
@@ -1047,23 +1021,6 @@ client.connect_signal(<span class="string">"request::titlebars"</span>, <span cl
         layout = <span class="backtick"><a href="../widget_layouts/wibox.layout.align.html#horizontal">wibox.layout.align.horizontal</a></span>
     }
 <span class="keyword">end</span>)
-</pre>
-
-
-<p> Enable sloppy focus, so that focus follows mouse.</p>
-
-<pre>
-client.connect_signal(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>(c)
-    c:emit_signal(<span class="string">"request::activate"</span>, <span class="string">"mouse_enter"</span>, {raise = <span class="keyword">false</span>})
-<span class="keyword">end</span>)
-</pre>
-
-
-<p> &nbsp;</p>
-
-<pre>
-client.connect_signal(<span class="string">"focus"</span>, <span class="keyword">function</span>(c) c.border_color = <span class="backtick"><code>beautiful.border</code></span>_focus <span class="keyword">end</span>)
-client.connect_signal(<span class="string">"unfocus"</span>, <span class="keyword">function</span>(c) c.border_color = <span class="backtick"><code>beautiful.border</code></span>_normal <span class="keyword">end</span>)
 </pre>
 
 

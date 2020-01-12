@@ -171,9 +171,9 @@
 <h2>Libraries</h2>
 <ul class="nowrap">
   <li><a href="../libraries/awful.completion.html">awful.completion</a></li>
-  <li><a href="../libraries/awful.ewmh.html">awful.ewmh</a></li>
   <li><a href="../libraries/awful.hotkeys_popup.html">awful.hotkeys_popup</a></li>
   <li><a href="../libraries/awful.layout.html">awful.layout</a></li>
+  <li><a href="../libraries/awful.permissions.html">awful.permissions</a></li>
   <li><a href="../libraries/awful.placement.html">awful.placement</a></li>
   <li><a href="../libraries/awful.prompt.html">awful.prompt</a></li>
   <li><a href="../libraries/awful.rules.html">awful.rules</a></li>
@@ -214,8 +214,73 @@
 <div id="content">
 
 <h1>Module: <code>gears.cache</code></h1>
-<p></p>
-<p></p>
+<p>Cache object with data that can be garbage-collected.</p>
+<p><p> Here is an example with a basic cache:</p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre>
+new entry created with value <span class="number">0</span>
+<span class="number">0</span>
+new entry created with value <span class="number">1</span>
+<span class="number">42</span>
+new entry created with value <span class="number">2</span>
+<span class="number">84</span>
+<span class="number">0</span>
+</pre>
+</p>
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">local test_cache = cache.new(function(test)
+    -- let&apos;s just print about what we created
+    print(&apos;new entry created with value &apos; .. test)
+    -- Pretend this is some expensive computation
+    return test * 42
+end)
+-- Populate the cache
+print(test_cache:get(0))
+print(test_cache:get(1))
+print(test_cache:get(2))
+-- no message since it exists
+print(test_cache:get(0))
+
+The example below demonstrates how the garbage collector will clear the
+cache:
+
+
+
+
+*Usage example output**:
+
+   cache object #0 for first
+   cache object #1 for second
+   cache object #0 for first
+   forcing a garbage collect
+   cache object #2 for first
+   cache object #3 for second
+
+</pre></li>
+        <li><pre class="example">local function tostring_for_cache(obj)
+    return obj[1]
+end
+local counter = 0
+local wrapper_cache = gears.cache.new(function(arg)
+    local kind = &apos;cache object #&apos; .. tostring(counter) .. &apos; for &apos; .. tostring(arg)
+    counter = counter + 1
+    return setmetatable({ kind }, { __tostring = tostring_for_cache })
+end)
+print(wrapper_cache:get(&apos;first&apos;))
+print(wrapper_cache:get(&apos;second&apos;))
+-- No new object since it already exists
+print(wrapper_cache:get(&apos;first&apos;))
+print(&apos;forcing a garbage collect&apos;)
+-- The GC can *always* clear the cache
+collectgarbage(&apos;collect&apos;)
+print(wrapper_cache:get(&apos;first&apos;))
+print(wrapper_cache:get(&apos;second&apos;))
+
+</pre></li>
+    </ul>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2015 Uli Schlachter</li>
@@ -272,7 +337,7 @@
 
 
 
-    <span id=item2896 class="hide_extra">
+    <span id=item2961 class="hide_extra">
     </span>
 
 </dd>
@@ -307,7 +372,7 @@
 
 
 
-    <span id=item2897 class="hide_extra">
+    <span id=item2962 class="hide_extra">
     </span>
 
 </dd>
