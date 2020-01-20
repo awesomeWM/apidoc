@@ -64,10 +64,14 @@
 </ul>
 <h2>Input handling</h2>
 <ul class="nowrap">
-  <li><a href="../input handling/awful.button.html">awful.button</a></li>
-  <li><a href="../input handling/awful.key.html">awful.key</a></li>
-  <li><a href="../input handling/awful.keyboard.html">awful.keyboard</a></li>
-  <li><a href="../input handling/mouse.html">mouse</a></li>
+  <li><a href="../input_handling/awful.button.html">awful.button</a></li>
+  <li><a href="../input_handling/awful.key.html">awful.key</a></li>
+  <li><a href="../input_handling/awful.keyboard.html">awful.keyboard</a></li>
+  <li><a href="../input_handling/mouse.html">mouse</a></li>
+</ul>
+<h2>Declarative rules</h2>
+<ul class="nowrap">
+  <li><a href="../declarative_rules/ruled.client.html">ruled.client</a></li>
 </ul>
 <h2>Widgets</h2>
 <ul class="nowrap">
@@ -230,6 +234,8 @@
 </span><span class="keyword">local</span> beautiful = <span class="global">require</span>(<span class="string">"beautiful"</span>)
 <span class="comment">-- Notification library
 </span><span class="keyword">local</span> naughty = <span class="global">require</span>(<span class="string">"naughty"</span>)
+<span class="comment">-- Declarative object management
+</span><span class="keyword">local</span> ruled = <span class="global">require</span>(<span class="string">"ruled"</span>)
 <span class="keyword">local</span> menubar = <span class="global">require</span>(<span class="string">"menubar"</span>)
 <span class="keyword">local</span> hotkeys_popup = <span class="global">require</span>(<span class="string">"awful.hotkeys_popup"</span>)
 <span class="comment">-- Enable hotkeys help widget for VIM and other apps
@@ -640,56 +646,56 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
 </span>
 <span class="comment">-- {{{ Rules
 </span><span class="comment">-- Rules to apply to new clients.
-</span>awful.rules.rules = {
+</span>ruled.client.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
     <span class="comment">-- All clients will match this rule.
-</span>    { rule = { },
-      properties = { focus = awful.client.focus.filter,
-                     raise = <span class="keyword">true</span>,
-                     screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
-     }
-    },
+</span>    ruled.client.append_rule {
+        id         = <span class="string">"global"</span>,
+        rule       = { },
+        properties = {
+            focus     = awful.client.focus.filter,
+            raise     = <span class="keyword">true</span>,
+            screen    = awful.screen.preferred,
+            placement = awful.placement.no_overlap+awful.placement.no_offscreen
+        }
+    }
 
     <span class="comment">-- Floating clients.
-</span>    { rule_any = {
-        instance = {
-          <span class="string">"DTA"</span>,  <span class="comment">-- Firefox addon DownThemAll.
-</span>          <span class="string">"copyq"</span>,  <span class="comment">-- Includes session name in class.
-</span>          <span class="string">"pinentry"</span>,
+</span>    ruled.client.append_rule {
+        id       = <span class="string">"floating"</span>,
+        rule_any = {
+            instance = { <span class="string">"copyq"</span>, <span class="string">"pinentry"</span> },
+            class    = {
+                <span class="string">"Arandr"</span>, <span class="string">"Blueman-manager"</span>, <span class="string">"Gpick"</span>, <span class="string">"Kruler"</span>, <span class="string">"Sxiv"</span>,
+                <span class="string">"Tor Browser"</span>, <span class="string">"Wpa_gui"</span>, <span class="string">"veromix"</span>, <span class="string">"xtightvncviewer"</span>
+            },
+            <span class="comment">-- Note that the name property shown in xprop might be set slightly after creation of the client
+</span>            <span class="comment">-- and the name shown there might not match defined rules here.
+</span>            name    = {
+                <span class="string">"Event Tester"</span>,  <span class="comment">-- xev.
+</span>            },
+            role    = {
+                <span class="string">"AlarmWindow"</span>,    <span class="comment">-- Thunderbird's calendar.
+</span>                <span class="string">"ConfigManager"</span>,  <span class="comment">-- Thunderbird's about:config.
+</span>                <span class="string">"pop-up"</span>,         <span class="comment">-- e.g. Google Chrome's (detached) Developer Tools.
+</span>            }
         },
-        class = {
-          <span class="string">"Arandr"</span>,
-          <span class="string">"Blueman-manager"</span>,
-          <span class="string">"Gpick"</span>,
-          <span class="string">"Kruler"</span>,
-          <span class="string">"MessageWin"</span>,  <span class="comment">-- kalarm.
-</span>          <span class="string">"Sxiv"</span>,
-          <span class="string">"Tor Browser"</span>, <span class="comment">-- Needs a fixed window size to avoid fingerprinting by screen size.
-</span>          <span class="string">"Wpa_gui"</span>,
-          <span class="string">"veromix"</span>,
-          <span class="string">"xtightvncviewer"</span>},
-
-        <span class="comment">-- Note that the name property shown in xprop might be set slightly after creation of the client
-</span>        <span class="comment">-- and the name shown there might not match defined rules here.
-</span>        name = {
-          <span class="string">"Event Tester"</span>,  <span class="comment">-- xev.
-</span>        },
-        role = {
-          <span class="string">"AlarmWindow"</span>,  <span class="comment">-- Thunderbird's calendar.
-</span>          <span class="string">"ConfigManager"</span>,  <span class="comment">-- Thunderbird's about:config.
-</span>          <span class="string">"pop-up"</span>,       <span class="comment">-- e.g. Google Chrome's (detached) Developer Tools.
-</span>        }
-      }, properties = { floating = <span class="keyword">true</span> }},
+        properties = { floating = <span class="keyword">true</span> }
+    }
 
     <span class="comment">-- Add titlebars to normal clients and dialogs
-</span>    { rule_any = {<span class="global">type</span> = { <span class="string">"normal"</span>, <span class="string">"dialog"</span> }
-      }, properties = { titlebars_enabled = <span class="keyword">true</span> }
-    },
+</span>    ruled.client.append_rule {
+        id         = <span class="string">"titlebars"</span>,
+        rule_any   = { <span class="global">type</span> = { <span class="string">"normal"</span>, <span class="string">"dialog"</span> } },
+        properties = { titlebars_enabled = <span class="keyword">true</span>      }
+    }
 
     <span class="comment">-- Set Firefox to always map on the tag named "2" on screen 1.
-</span>    <span class="comment">-- { rule = { class = "Firefox" },
-</span>    <span class="comment">--   properties = { screen = 1, tag = "2" } },
-</span>}
+</span>    <span class="comment">-- ruled.tag.append_rule {
+</span>    <span class="comment">--     rule       = { class = "Firefox"     },
+</span>    <span class="comment">--     properties = { screen = 1, tag = "2" }
+</span>    <span class="comment">-- }
+</span><span class="keyword">end</span>)
+
 <span class="comment">-- }}}
 </span>
 <span class="comment">-- {{{ Titlebars

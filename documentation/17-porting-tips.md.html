@@ -78,10 +78,14 @@
 </ul>
 <h2>Input handling</h2>
 <ul class="nowrap">
-  <li><a href="../input handling/awful.button.html">awful.button</a></li>
-  <li><a href="../input handling/awful.key.html">awful.key</a></li>
-  <li><a href="../input handling/awful.keyboard.html">awful.keyboard</a></li>
-  <li><a href="../input handling/mouse.html">mouse</a></li>
+  <li><a href="../input_handling/awful.button.html">awful.button</a></li>
+  <li><a href="../input_handling/awful.key.html">awful.key</a></li>
+  <li><a href="../input_handling/awful.keyboard.html">awful.keyboard</a></li>
+  <li><a href="../input_handling/mouse.html">mouse</a></li>
+</ul>
+<h2>Declarative rules</h2>
+<ul class="nowrap">
+  <li><a href="../declarative_rules/ruled.client.html">ruled.client</a></li>
 </ul>
 <h2>Widgets</h2>
 <ul class="nowrap">
@@ -382,17 +386,17 @@ they are still supported, but will be removed in the next release.</p>
 +                                                  <span class="backtick"><code>client.focus:move_to_tag</code></span>(t)
 +                                              <span class="keyword">end</span>
 +                                          <span class="keyword">end</span>),
-                     <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="backtick"><code>awful.tag.viewtoggle</code></span>),
--                    <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="backtick"><code>awful.client.toggletag</code></span>),
-+                    <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="keyword">function</span>(t)
+                     <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="backtick"><code>awful.tag.viewtoggle</code></span>),
+-                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="backtick"><code>awful.client.toggletag</code></span>),
++                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="keyword">function</span>(t)
 +                                              <span class="keyword">if</span> client.focus <span class="keyword">then</span>
 +                                                  client.focus:toggle_tag(t)
 +                                              <span class="keyword">end</span>
 +                                          <span class="keyword">end</span>),
--                    <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewnext</code></span>(awful.tag.getscreen(t)) <span class="keyword">end</span>),
--                    <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewprev</code></span>(awful.tag.getscreen(t)) <span class="keyword">end</span>)
-+                    <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewnext</code></span>(t.screen) <span class="keyword">end</span>),
-+                    <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewprev</code></span>(t.screen) <span class="keyword">end</span>)
+-                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewnext</code></span>(awful.tag.getscreen(t)) <span class="keyword">end</span>),
+-                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewprev</code></span>(awful.tag.getscreen(t)) <span class="keyword">end</span>)
++                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewnext</code></span>(t.screen) <span class="keyword">end</span>),
++                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewprev</code></span>(t.screen) <span class="keyword">end</span>)
                      )
 
 -mytasklist.buttons = awful.util.<span class="global">table</span>.join(
@@ -440,10 +444,10 @@ previously removed are replaced by custom screens attributes.</p>
 +    s.mylayoutbox = <span class="backtick"><a href="../widgets/awful.widget.layoutbox.html#">awful.widget.layoutbox</a></span>(s)
 -    mylayoutbox[s]:buttons(<span class="backtick"><code>awful.util.table.join</code></span>(
 +    s.mylayoutbox:buttons(<span class="backtick"><code>awful.util.table.join</code></span>(
-                            <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>( <span class="number">1</span>) <span class="keyword">end</span>),
-                            <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>(-<span class="number">1</span>) <span class="keyword">end</span>),
-                            <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>( <span class="number">1</span>) <span class="keyword">end</span>),
-                            <span class="backtick"><a href="../input handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>(-<span class="number">1</span>) <span class="keyword">end</span>)))
+                            <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>( <span class="number">1</span>) <span class="keyword">end</span>),
+                            <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>(-<span class="number">1</span>) <span class="keyword">end</span>),
+                            <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>( <span class="number">1</span>) <span class="keyword">end</span>),
+                            <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>(-<span class="number">1</span>) <span class="keyword">end</span>)))
      <span class="comment">-- Create a taglist widget
 </span>-    mytaglist[s] = <span class="backtick"><a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a></span>(s, <span class="backtick"><code>awful.widget.taglist.filter.all</code></span>, mytaglist.buttons)
 +    s.mytaglist = <span class="backtick"><a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a></span>(s, <span class="backtick"><code>awful.widget.taglist.filter.all</code></span>, taglist_buttons)
@@ -490,8 +494,8 @@ previously removed are replaced by custom screens attributes.</p>
 
 <pre>
 <span class="comment">-- Standard program
-</span>-    <span class="backtick"><a href="../input handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"Return"</span>, <span class="keyword">function</span> () <span class="backtick"><code>awful.util.spawn</code></span>(terminal) <span class="keyword">end</span>),
-+    <span class="backtick"><a href="../input handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"Return"</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.spawn.html#">awful.spawn</a></span>(terminal) <span class="keyword">end</span>),
+</span>-    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"Return"</span>, <span class="keyword">function</span> () <span class="backtick"><code>awful.util.spawn</code></span>(terminal) <span class="keyword">end</span>),
++    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"Return"</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.spawn.html#">awful.spawn</a></span>(terminal) <span class="keyword">end</span>),
 </pre>
 
 
@@ -528,8 +532,8 @@ optional arguments.</p>
 <p>Another function-to-method API change:</p>
 
 <pre>
--    <span class="backtick"><a href="../input handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"o"</span>,      <span class="backtick"><code>awful.client.movetoscreen</code></span>                        ),
-+    <span class="backtick"><a href="../input handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"o"</span>,      <span class="keyword">function</span> (c) c:<span class="backtick"><code>move_to_screen</code></span>()               <span class="keyword">end</span>),
+-    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"o"</span>,      <span class="backtick"><code>awful.client.movetoscreen</code></span>                        ),
++    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"o"</span>,      <span class="keyword">function</span> (c) c:<span class="backtick"><code>move_to_screen</code></span>()               <span class="keyword">end</span>),
 </pre>
 
 
@@ -544,7 +548,7 @@ functions.</p>
           <span class="comment">-- View tag only.
 </span>          awful.key({ modkey }, <span class="string">"#"</span> .. i + <span class="number">9</span>,
                     <span class="keyword">function</span> ()
- -                        <span class="keyword">local</span> screen = <span class="backtick"><a href="../input handling/mouse.html#screen">mouse.screen</a></span>
+ -                        <span class="keyword">local</span> screen = <span class="backtick"><a href="../input_handling/mouse.html#screen">mouse.screen</a></span>
  -                        <span class="keyword">local</span> tag = <span class="backtick"><code>awful.tag.gettags</code></span>(screen)[i]
  +                        <span class="keyword">local</span> screen = <span class="backtick"><code>awful.screen.focused</code></span>()
  +                        <span class="keyword">local</span> tag = <span class="backtick"><a href="../core_components/screen.html#tags">screen.tags</a></span>[i]
@@ -557,7 +561,7 @@ functions.</p>
 </span> +        <span class="comment">-- Toggle tag display.
 </span>          awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"#"</span> .. i + <span class="number">9</span>,
                     <span class="keyword">function</span> ()
- -                      <span class="keyword">local</span> screen = <span class="backtick"><a href="../input handling/mouse.html#screen">mouse.screen</a></span>
+ -                      <span class="keyword">local</span> screen = <span class="backtick"><a href="../input_handling/mouse.html#screen">mouse.screen</a></span>
  -                      <span class="keyword">local</span> tag = <span class="backtick"><code>awful.tag.gettags</code></span>(screen)[i]
  +                      <span class="keyword">local</span> screen = <span class="backtick"><code>awful.screen.focused</code></span>()
  +                      <span class="keyword">local</span> tag = <span class="backtick"><a href="../core_components/screen.html#tags">screen.tags</a></span>[i]

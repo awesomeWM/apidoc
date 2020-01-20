@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Inputmodule awful.button - awesome API documentation</title>
+    <title>Inputmodule awful.keyboard - awesome API documentation</title>
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
    <script>
      function show_extra(id) {
@@ -43,19 +43,17 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Constructors">Constructors</a></li>
-<li><a href="#Object_properties">Object properties</a></li>
-<li><a href="#Object_methods">Object methods </a></li>
-<li><a href="#Tables">Tables</a></li>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Static_module_functions">Static module functions</a></li>
 </ul>
 
 
 <h2>Input handling</h2>
 <ul class="nowrap">
-  <li><strong>awful.button</strong></li>
-  <li><a href="../input handling/awful.key.html">awful.key</a></li>
-  <li><a href="../input handling/awful.keyboard.html">awful.keyboard</a></li>
-  <li><a href="../input handling/mouse.html">mouse</a></li>
+  <li><a href="../input_handling/awful.button.html">awful.button</a></li>
+  <li><a href="../input_handling/awful.key.html">awful.key</a></li>
+  <li><strong>awful.keyboard</strong></li>
+  <li><a href="../input_handling/mouse.html">mouse</a></li>
 </ul>
 <h2>Core components</h2>
 <ul class="nowrap">
@@ -70,6 +68,10 @@
   <li><a href="../core_components/root.html">root</a></li>
   <li><a href="../core_components/screen.html">screen<span class='listplusign'> and awful.screen</span></a></li>
   <li><a href="../core_components/tag.html">tag<span class='listplusign'> and awful.tag</span></a></li>
+</ul>
+<h2>Declarative rules</h2>
+<ul class="nowrap">
+  <li><a href="../declarative_rules/ruled.client.html">ruled.client</a></li>
 </ul>
 <h2>Widgets</h2>
 <ul class="nowrap">
@@ -215,81 +217,48 @@
 
 <div id="content">
 
-<h1>Module: <code>awful.button</code></h1>
-<p>Create easily new buttons objects ignoring certain modifiers.</p>
+<h1>Module: <code>awful.keyboard</code></h1>
+<p>Utilities related to the keyboard and keybindings.</p>
 <p></p>
     <h3>Info:</h3>
     <ul>
-        <li><strong>Copyright</strong>: 2018 Emmanuel Lepage Vallee,2009 Julien Danjou</li>
-        <li><strong>Author</strong>: Julien Danjou &lt;julien@danjou.info&gt;,Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
+        <li><strong>Copyright</strong>: 2018-2019 Emmanuel Lepage Vallee</li>
+        <li><strong>Author</strong>: Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;</li>
     </ul>
 
 
-<h2><a href="#Constructors">Constructors</a></h2>
+<h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#awful.button">awful.button <span class='function_args'> <b>(</b>mod, button, press, release<b>)</b></span></a></td>
-      <td colspan="2" class="summary">Create a new button to use as binding.</td>
-    </tr>
-    <tr>
-      <td class="name" ><a href="#awful.button">awful.button <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a></td>
-      <td colspan="2" class="summary">Create a new button to use as binding.</td>
+      <td class="name" ><a href="#module.append_global_keybindings">awful.keyboard.append_global_keybindings (keys)</a></td>
+      <td colspan="2" class="summary">Add multiple <a href="../input_handling/awful.key.html#">awful.key</a> based keybindings to the global set.</td>
     </tr>
 </table>
-<h2><a href="#Object_properties">Object properties</a></h2>
+<h2><a href="#Static_module_functions">Static module functions</a></h2>
 <table class="function_list">
     <tr>
-      <td class="shortname" ><a href="#modifiers">modifiers</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>N/A</span></td>
-      <td colspan="2" class="summary">The table of modifier keys.</td>
+      <td class="name" ><a href="#emulate_key_combination"><span class='function_modname'>awful.keyboard.</span>emulate_key_combination <span class='function_args'> <b>(</b>modifiers, key<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Execute a key combination.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#button">button</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
-      <td colspan="2" class="summary">The mouse button identifier.</td>
+      <td class="name" ><a href="#append_global_keybinding"><span class='function_modname'>awful.keyboard.</span>append_global_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Add an <a href="../input_handling/awful.key.html#">awful.key</a> based keybinding to the global set.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#description">description</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td colspan="2" class="summary">The button description.</td>
+      <td class="name" ><a href="#remove_global_keybinding"><span class='function_modname'>awful.keyboard.</span>remove_global_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Remove a keybinding from the global set.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#name">name</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td colspan="2" class="summary">The button name.</td>
+      <td class="name" ><a href="#append_client_keybinding"><span class='function_modname'>awful.keyboard.</span>append_client_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Add an <a href="../input_handling/awful.key.html#">awful.key</a> to the default client keys.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#group">group</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td colspan="2" class="summary">The button group.</td>
+      <td class="name" ><a href="#append_client_keybindings"><span class='function_modname'>awful.keyboard.</span>append_client_keybindings <span class='function_args'> <b>(</b>keys<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Add a <a href="../input_handling/awful.key.html#">awful.key</a>s to the default client keys.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#on_press">on_press</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
-      <td colspan="2" class="summary">The callback when this button is pressed.</td>
-    </tr>
-    <tr>
-      <td class="shortname" ><a href="#on_release">on_release</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
-      <td colspan="2" class="summary">The callback when this button is released.</td>
-    </tr>
-</table>
-<h2><a href="#Object_methods">Object methods </a></h2>
-<table class="function_list">
-    <tr>
-      <td class="name" ><a href="#:trigger">:trigger <span class='function_args'> <b>(</b><b>)</b></span></a></td>
-      <td colspan="2" class="summary">Execute this mousebinding.</td>
-    </tr>
-</table>
-<h2><a href="#Tables">Tables</a></h2>
-<table class="function_list">
-    <tr>
-      <td class="name" ><a href="#ignore_modifiers">ignore_modifiers</a></td>
-      <td colspan="2" class="summary">Modifiers to ignore.</td>
-    </tr>
-    <tr>
-      <td class="name" ><a href="#names">names</a></td>
-      <td colspan="2" class="summary">The mouse buttons names.</td>
+      <td class="name" ><a href="#remove_client_keybinding"><span class='function_modname'>awful.keyboard.</span>remove_client_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Remove a key from the default client keys.</td>
     </tr>
 </table>
 
@@ -297,368 +266,283 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Constructors"></a>Constructors</h2>
-
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    Methods
     <dl class="function">
     <dt>
-    <a name = "awful.button"></a>
-    <strong>awful.button <span class='function_args'> <b>(</b>mod, button, press, release<b>)</b></span></strong>
+    <a name = "module.append_global_keybindings"></a>
+    <strong>awful.keyboard.append_global_keybindings (keys)</strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Create a new button to use as binding.
+    Add multiple <a href="../input_handling/awful.key.html#">awful.key</a> based keybindings to the global set.</p>
+
+<p> A <strong>global</strong> keybinding is one which is always present, even when there is
+ no focused client. If your intent is too add a keybinding which acts on
+ the focused client do <strong>not</strong> use this
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">mod</span>
+        <li><span class="parameter">keys</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A list of modifier keys.  Valid modifiers are:
-  <code>Any</code>, <code>Mod1</code>, Mod2<code>, </code>Mod3<code>, </code>Mod4<code>, </code>Mod5<code>, </code>Shift<code>, </code>Lock<code> and </code>Control`.
-  This argument is (<strong>mandatory</strong>).
-        </li>
-        <li><span class="parameter">button</span>
-            <span class="types"><span class="type">number</span></span>
-         The mouse button (it is recommended to use the
-  <a href="../input handling/awful.button.html#names">awful.button.names</a> constants.
-        </li>
-        <li><span class="parameter">press</span>
-            <span class="types"><span class="type">function</span></span>
-         Callback for when the button is pressed.
-        </li>
-        <li><span class="parameter">release</span>
-            <span class="types"><span class="type">function</span></span>
-         Callback for when the button is released.
+         A table of <a href="../input_handling/awful.key.html#">awful.key</a> objects. Optionally, it can have
+  a <code>group</code> entry. If set, the <code>group</code> property will be set on all <code>awful.keys</code>
+  objects.
         </li>
     </ul>
 
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        An <a href="../input handling/awful.button.html#">awful.button</a> object.
-    </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../input_handling/awful.key.html#">awful.key</a></li>
+         <li><a href="../input_handling/awful.keyboard.html#append_global_keybinding">awful.keyboard.append_global_keybinding</a></li>
+         <li><a href="../input_handling/awful.keyboard.html#remove_global_keybinding">awful.keyboard.remove_global_keybinding</a></li>
+    </ul>
 
 
 
-    <span id=item725 class="hide_extra">
+    <span id=item749 class="hide_extra">
     </span>
 
 </dd>
+</dl>
+    <h2 class="section-header "><a name="Static_module_functions"></a>Static module functions</h2>
 
+    <dl class="function">
     <dt>
-    <a name = "awful.button"></a>
-    <strong>awful.button <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
+    <a name = "emulate_key_combination"></a>
+    <strong><span class='function_modname'>awful.keyboard.</span>emulate_key_combination <span class='function_args'> <b>(</b>modifiers, key<b>)</b></span></strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Create a new button to use as binding.
+    Execute a key combination.</p>
+
+<p> If an awesome keybinding is assigned to the combination, it should be
+ executed.</p>
+
+<p> To limit the chances of accidentally leaving a modifier key locked when
+ calling this function from a keybinding, make sure is attached to the
+ release event and not the press event.
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">args</span>
-        <ul>
         <li><span class="parameter">modifiers</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A list of modifier keys.  Valid modifiers are:
-  <code>Any</code>, <code>Mod1</code>, Mod2<code>, </code>Mod3<code>, </code>Mod4<code>, </code>Mod5<code>, </code>Shift<code>, </code>Lock<code> and </code>Control`.
-  This argument is (<strong>mandatory</strong>).
+         A modified table. Valid modifiers are: <code>Any</code>, <code>Mod1</code>,
+   <code>Mod2</code>, <code>Mod3</code>, <code>Mod4</code>, <code>Mod5</code>, <code>Shift</code>, <code>Lock</code> and <code>Control</code>.
         </li>
-        <li><span class="parameter">button</span>
-            <span class="types"><span class="type">number</span></span>
-         The mouse button (it is recommended to use the
-  <a href="../input handling/awful.button.html#names">awful.button.names</a> constants.
+        <li><span class="parameter">key</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The key.
         </li>
-        <li><span class="parameter">on_press</span>
-            <span class="types"><span class="type">function</span></span>
-         Callback for when the button is pressed.
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/root.html#fake_input">root.fake_input</a>
+    </ul>
+
+
+
+    <span id=item750 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "append_global_keybinding"></a>
+    <strong><span class='function_modname'>awful.keyboard.</span>append_global_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Add an <a href="../input_handling/awful.key.html#">awful.key</a> based keybinding to the global set.</p>
+
+<p> A <strong>global</strong> keybinding is one which is always present, even when there is
+ no focused client. If your intent is too add a keybinding which acts on
+ the focused client do <strong>not</strong> use this.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key</span>
+            <span class="types"><span class="type">awful.key</span></span>
+         The key object.
         </li>
-        <li><span class="parameter">on_release</span>
-            <span class="types"><span class="type">function</span></span>
-         Callback for when the button is released.
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../input_handling/awful.key.html#">awful.key</a></li>
+         <li><a href="../input_handling/awful.keyboard.html#module.append_global_keybindings">awful.keyboard.append_global_keybindings</a></li>
+         <li><a href="../input_handling/awful.keyboard.html#remove_global_keybinding">awful.keyboard.remove_global_keybinding</a></li>
+    </ul>
+
+
+
+    <span id=item751 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "remove_global_keybinding"></a>
+    <strong><span class='function_modname'>awful.keyboard.</span>remove_global_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Remove a keybinding from the global set.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key</span>
+            <span class="types"><span class="type">awful.key</span></span>
+         The key object.
         </li>
-        </li></ul>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../input_handling/awful.key.html#">awful.key</a></li>
+         <li><a href="../input_handling/awful.keyboard.html#append_global_keybinding">awful.keyboard.append_global_keybinding</a></li>
+    </ul>
+
+
+
+    <span id=item752 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "append_client_keybinding"></a>
+    <strong><span class='function_modname'>awful.keyboard.</span>append_client_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></strong>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Add an <a href="../input_handling/awful.key.html#">awful.key</a> to the default client keys.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key</span>
+            <span class="types"><span class="type">awful.key</span></span>
+         The key.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../input_handling/awful.key.html#">awful.key</a></li>
+         <li><a href="../input_handling/awful.keyboard.html#append_client_keybindings">awful.keyboard.append_client_keybindings</a></li>
+    </ul>
+
+
+     <br />
+     <center id=button753>
+     <a class="show_more_button" onclick="show_extra('753')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item753 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>client_keybinding::added</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>key</code></span> <span class="types"><a href="../input_handling/awful.key.html#">awful.key</a></span> The key.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "append_client_keybindings"></a>
+    <strong><span class='function_modname'>awful.keyboard.</span>append_client_keybindings <span class='function_args'> <b>(</b>keys<b>)</b></span></strong>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Add a <a href="../input_handling/awful.key.html#">awful.key</a>s to the default client keys.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">keys</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table containing <a href="../input_handling/awful.key.html#">awful.key</a> objects.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../input_handling/awful.key.html#">awful.key</a></li>
+         <li><a href="../input_handling/awful.keyboard.html#append_client_keybinding">awful.keyboard.append_client_keybinding</a></li>
+    </ul>
+
+
+     <br />
+     <center id=button754>
+     <a class="show_more_button" onclick="show_extra('754')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item754 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>client_keybinding::added</code></span>  </li>
+           <ul>
+             <li><span class="parameter"><code>key</code></span> <span class="types"><a href="../input_handling/awful.key.html#">awful.key</a></span> The key.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "remove_client_keybinding"></a>
+    <strong><span class='function_modname'>awful.keyboard.</span>remove_client_keybinding <span class='function_args'> <b>(</b>key<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Remove a key from the default client keys.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key</span>
+            <span class="types"><span class="type">awful.key</span></span>
+         The key.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        An <a href="../input handling/awful.button.html#">awful.button</a> object.
+           <span class="types"><span class="type">boolean</span></span>
+        True if the key was removed and false if it wasn&rsquo;t found.
     </ol>
 
 
-
-
-
-    <span id=item726 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Object_properties"></a>Object properties</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "modifiers"></a>
-    <strong>modifiers</strong>
-    <span class="proptype">(<span class='summary_type'>N/A</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The table of modifier keys.</p>
-
-<p> A modifier, such as <code>Control</code> are a predetermined set of keys that can be
- used to implement keybindings. Note that this list is fix and cannot be
- extended using random key names, code or characters.</p>
-
-<p> Common modifiers are:</p>
-
-<p> <table class='widget_list' border=1>
-  <tr style='font-weight: bold;'>
-   <th align='center'>Name</th>
-   <th align='center'>Description</th>
-  </tr>
-  <tr><td>Mod1</td><td>Usually called Alt on PCs and Option on Macs</td></tr>
-  <tr><td>Mod4</td><td>Also called Super, Windows and Command ⌘</td></tr>
-  <tr><td>Mod5</td><td>Also called AltGr or ISO Level 3</td></tr>
-  <tr><td>Shift</td><td>Both left and right shift keys</td></tr>
-  <tr><td>Control</td><td>Also called CTRL on some keyboards</td></tr>
- </table></p>
-
-<p> Please note that Awesome ignores the status of &ldquo;Lock&rdquo; and &ldquo;Mod2&rdquo; (Num Lock).
-
-
-
-
-
-
-
-    <span id=item727 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "button"></a>
-    <strong>button</strong>
-    <span class="proptype">(<span class='summary_type'>integer</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The mouse button identifier.</p>
-
-<p> <img src="../images/mouse.svg" alt="Mouse buttons" />
-
-
-
-
-
-
-
-    <span id=item728 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "description"></a>
-    <strong>description</strong>
-    <span class="proptype">(<span class='summary_type'>string</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The button description.
-
-
-
-
-
-
-
-    <span id=item729 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "name"></a>
-    <strong>name</strong>
-    <span class="proptype">(<span class='summary_type'>string</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The button name.
-
-
-
-
-
-
-
-    <span id=item730 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "group"></a>
-    <strong>group</strong>
-    <span class="proptype">(<span class='summary_type'>string</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The button group.
-
-
-
-
-
-
-
-    <span id=item731 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "on_press"></a>
-    <strong>on_press</strong>
-    <span class="proptype">(<span class='summary_type'>function</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The callback when this button is pressed.
-
-
-
-
-
-
-
-    <span id=item732 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "on_release"></a>
-    <strong>on_release</strong>
-    <span class="proptype">(<span class='summary_type'>function</span>)</span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The callback when this button is released.
-
-
-
-
-
-
-
-    <span id=item733 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Object_methods"></a>Object methods </h2>
-
-    <dl class="function">
-    <dt>
-    <a name = ":trigger"></a>
-    <strong>:trigger <span class='function_args'> <b>(</b><b>)</b></span></strong>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Execute this mousebinding.
-
-
-
-
-
-
-
-    <span id=item734 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
-    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "ignore_modifiers"></a>
-    <strong>ignore_modifiers</strong>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Modifiers to ignore.</p>
-
-<p> By default this is initialized as <code>{ &quot;Lock&quot;, &quot;Mod2&quot; }</code>
- so the <code>Caps Lock</code> or <code>Num Lock</code> modifier are not taking into account by awesome
- when pressing keys.
-
-    <h3>Fields:</h3>
+    <h3>See also:</h3>
     <ul>
-        <li><span class="parameter">Lock</span>
-
-        </li>
-        <li><span class="parameter">Mod2</span>
-
-        </li>
+         <a href="../input_handling/awful.keyboard.html#append_client_keybinding">awful.keyboard.append_client_keybinding</a>
     </ul>
 
 
 
-
-
-
-    <span id=item735 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "names"></a>
-    <strong>names</strong>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The mouse buttons names.</p>
-
-<p> It can be used instead of the button ids.
-
-    <h3>Fields:</h3>
-    <ul>
-        <li><span class="parameter">LEFT</span>
-        The left mouse button.
-        </li>
-        <li><span class="parameter">MIDDLE</span>
-        The scrollwheel button.
-        </li>
-        <li><span class="parameter">RIGHT</span>
-        The context menu button.
-        </li>
-        <li><span class="parameter">SCROLL_UP</span>
-        A scroll up increment.
-        </li>
-        <li><span class="parameter">SCROLL_DOWN</span>
-        A scroll down increment.
-        </li>
-    </ul>
-
-
-
-
-
-
-    <span id=item736 class="hide_extra">
+    <span id=item755 class="hide_extra">
     </span>
 
 </dd>
