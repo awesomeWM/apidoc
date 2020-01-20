@@ -83,10 +83,14 @@
 </ul>
 <h2>Input handling</h2>
 <ul class="nowrap">
-  <li><a href="../input handling/awful.button.html">awful.button</a></li>
-  <li><a href="../input handling/awful.key.html">awful.key</a></li>
-  <li><a href="../input handling/awful.keyboard.html">awful.keyboard</a></li>
-  <li><a href="../input handling/mouse.html">mouse</a></li>
+  <li><a href="../input_handling/awful.button.html">awful.button</a></li>
+  <li><a href="../input_handling/awful.key.html">awful.key</a></li>
+  <li><a href="../input_handling/awful.keyboard.html">awful.keyboard</a></li>
+  <li><a href="../input_handling/mouse.html">mouse</a></li>
+</ul>
+<h2>Declarative rules</h2>
+<ul class="nowrap">
+  <li><a href="../declarative_rules/ruled.client.html">ruled.client</a></li>
 </ul>
 <h2>Widgets</h2>
 <ul class="nowrap">
@@ -236,7 +240,7 @@ any other unix shell language syntax</li>
  <code>bash</code>, <code>zsh</code>, <code>busybox sh</code> or <code>Debian ash</code>.</p>
 
 <p> If you wish to open a process in a terminal window, check that your terminal
- emulator supports the common <a href="../libraries/awful.spawn.html#awful.spawn.single_instance">-e</a> option. If it does, then something like
+ emulator supports the common <a href="../libraries/awful.spawn.html#awful.spawn.once">-e</a> option. If it does, then something like
  this should work:</p>
 
 <pre>
@@ -424,7 +428,7 @@ DESKTOP_STARTUP_ID=<span class="string">"something_TIME$(date '+%s')"</span> my_
 
 <p> This should (if the program correctly implements the protocol) result in
  <code>c.startup_id</code> to at least match <code>something</code>.
- This identifier can then be used in <a href="../libraries/awful.rules.html#">awful.rules</a> to configure the client.</p>
+ This identifier can then be used in <a href="../declarative_rules/ruled.client.html#">ruled.client</a> to configure the client.</p>
 
 <p> Awesome can automatically set the <code>DESKTOP_STARTUP_ID</code> variable. This is used
  by <a href="../libraries/awful.spawn.html#">awful.spawn</a> to specify additional rules for the startup. For example:</p>
@@ -451,7 +455,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 <p> This table contains the client properties that are valid when used the
- <code>sn_rules</code> or <code>prop</code> function argument. They are the same as in <a href="../libraries/awful.rules.html#">awful.rules</a>.</p>
+ <code>sn_rules</code> or <code>prop</code> function argument. They are the same as in <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.</p>
 
 <table class='widget_list' border=1>
  <tr>
@@ -480,6 +484,7 @@ awesome-client <span class="string">'awful=require("awful");
    <tr><td><a href='../core_components/client.html#dockable'>dockable</a></td><td>If the client is dockable</td></tr>
    <tr><td><a href='../core_components/client.html#requests_no_titlebar'>requests\_no\_titlebar</a></td><td>If the client requests not to be decorated with a titlebar</td></tr>
    <tr><td><a href='../core_components/client.html#shape'>shape</a></td><td>Set the client shape</td></tr>
+   <tr><td><a href='../core_components/client.html#active'>active</a></td><td>Return true if the client is active (has focus)</td></tr>
    <tr><td><a href='../core_components/client.html#window'>window</a></td><td>The X window id</td></tr>
    <tr><td><a href='../core_components/client.html#name'>name</a></td><td>The client title</td></tr>
    <tr><td><a href='../core_components/client.html#skip_taskbar'>skip\_taskbar</a></td><td>True if the client does not want to be in taskbar</td></tr>
@@ -594,7 +599,7 @@ awesome-client <span class="string">'awful=require("awful");
 <p> Applying properties or running a callback requires the program/client to
  support startup notifications.</p>
 
-<p> See <a href="../libraries/awful.rules.html#awful.rules.execute">awful.rules.execute</a> for more details about the format of <code>sn_rules</code>.
+<p> See <a href="../declarative_rules/ruled.client.html#execute">ruled.client.execute</a> for more details about the format of <code>sn_rules</code>.
 
     <h3>Parameters:</h3>
     <ul>
@@ -636,7 +641,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2818 class="hide_extra">
+    <span id=item2820 class="hide_extra">
     </span>
 
 </dd>
@@ -663,7 +668,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2819 class="hide_extra">
+    <span id=item2821 class="hide_extra">
     </span>
 
 </dd>
@@ -734,7 +739,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2820 class="hide_extra">
+    <span id=item2822 class="hide_extra">
     </span>
 
 </dd>
@@ -797,7 +802,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2821 class="hide_extra">
+    <span id=item2823 class="hide_extra">
     </span>
 
 </dd>
@@ -860,7 +865,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2822 class="hide_extra">
+    <span id=item2824 class="hide_extra">
     </span>
 
 </dd>
@@ -902,7 +907,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2823 class="hide_extra">
+    <span id=item2825 class="hide_extra">
     </span>
 
 </dd>
@@ -922,7 +927,7 @@ awesome-client <span class="string">'awful=require("awful");
  command and rules, you need to specify an UID or only the first one will be
  executed.</p>
 
-<p> The <a href="../libraries/awful.rules.html">rules</a> are standard <a href="../libraries/awful.rules.html#">awful.rules</a>.</p>
+<p> The <a href="../libraries/awful.rules.html">rules</a> are standard <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.</p>
 
 <p> This function depends on the startup notification protocol to be correctly
  implemented by the command. See <a href="../core_components/client.html#startup_id">client.startup_id</a> for more information.
@@ -962,12 +967,12 @@ awesome-client <span class="string">'awful=require("awful");
 
     <h3>See also:</h3>
     <ul>
-         <a href="../libraries/awful.rules.html#">awful.rules</a>
+         <a href="../declarative_rules/ruled.client.html#">ruled.client</a>
     </ul>
 
 
 
-    <span id=item2824 class="hide_extra">
+    <span id=item2826 class="hide_extra">
     </span>
 
 </dd>
@@ -983,7 +988,7 @@ awesome-client <span class="string">'awful=require("awful");
 <p> This is like <a href="../libraries/awful.spawn.html#awful.spawn.once">awful.spawn.once</a>, but will spawn new instances if the previous
  has finished.</p>
 
-<p> The <a href="../libraries/awful.rules.html">rules</a> are standard <a href="../libraries/awful.rules.html#">awful.rules</a>.</p>
+<p> The <a href="../libraries/awful.rules.html">rules</a> are standard <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.</p>
 
 <p> This function depends on the startup notification protocol to be correctly
  implemented by the command. See <a href="../core_components/client.html#startup_id">client.startup_id</a> for more information.
@@ -1026,12 +1031,12 @@ awesome-client <span class="string">'awful=require("awful");
 
     <h3>See also:</h3>
     <ul>
-         <a href="../libraries/awful.rules.html#">awful.rules</a>
+         <a href="../declarative_rules/ruled.client.html#">ruled.client</a>
     </ul>
 
 
 
-    <span id=item2825 class="hide_extra">
+    <span id=item2827 class="hide_extra">
     </span>
 
 </dd>
@@ -1039,7 +1044,7 @@ awesome-client <span class="string">'awful=require("awful");
     <a name = "awful.spawn.raise_or_spawn"></a>
     <strong><span class='function_modname'>awful.spawn.</span>raise_or_spawn <span class='function_args'> <b>(</b>cmd, rules[, matcher[, unique_id[, callback]]]<b>)</b></span></strong>
     <span class="baseclass" >
-         &middot 1 permissions
+         &middot 1 permission
     </span>
     </dt>
     <dd>
@@ -1088,18 +1093,18 @@ awesome-client <span class="string">'awful=require("awful");
 
     <h3>See also:</h3>
     <ul>
-         <a href="../libraries/awful.rules.html#">awful.rules</a>
+         <a href="../declarative_rules/ruled.client.html#">ruled.client</a>
     </ul>
 
 
      <br />
-     <center id=button2826>
-     <a class="show_more_button" onclick="show_extra('2826')">
+     <center id=button2828>
+     <a class="show_more_button" onclick="show_extra('2828')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2826 class="hide_extra">
+    <span id=item2828 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>

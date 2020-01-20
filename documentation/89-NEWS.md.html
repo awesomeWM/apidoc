@@ -84,10 +84,14 @@
 </ul>
 <h2>Input handling</h2>
 <ul class="nowrap">
-  <li><a href="../input handling/awful.button.html">awful.button</a></li>
-  <li><a href="../input handling/awful.key.html">awful.key</a></li>
-  <li><a href="../input handling/awful.keyboard.html">awful.keyboard</a></li>
-  <li><a href="../input handling/mouse.html">mouse</a></li>
+  <li><a href="../input_handling/awful.button.html">awful.button</a></li>
+  <li><a href="../input_handling/awful.key.html">awful.key</a></li>
+  <li><a href="../input_handling/awful.keyboard.html">awful.keyboard</a></li>
+  <li><a href="../input_handling/mouse.html">mouse</a></li>
+</ul>
+<h2>Declarative rules</h2>
+<ul class="nowrap">
+  <li><a href="../declarative_rules/ruled.client.html">ruled.client</a></li>
 </ul>
 <h2>Widgets</h2>
 <ul class="nowrap">
@@ -294,7 +298,7 @@ be simulated with <a href="../widget_layouts/wibox.layout.stack.html#">wibox.lay
 <li><code>naughty.dbus</code> now uses Gio for talking to DBus. This is a first step in the
 deprecation of Awesome&rsquo;s own DBus bindings and could lead to behaviour changes
 on DBus.</li>
-<li>The client <code>keys</code> and <code>buttons</code> property now return <a href="../input handling/awful.key.html#">awful.key</a>
+<li>The client <code>keys</code> and <code>buttons</code> property now return <a href="../input_handling/awful.key.html#">awful.key</a>
 and <code>awful.buttons</code> objects rather than the lower level <code>key</code> and <code>button</code>
 objects. If you used these low level APIs to add keys and buttons dynamically,
 please migrate your code to the corresponding <code>:append_</code> and <code>:remove_</code>
@@ -307,6 +311,9 @@ handler.</li>
 slightly. The border is now applied before the titlebar offset. This should
 not affect most users unless you had mitigated the bug it fixes by adding
 the titlebar offset in your rules.</li>
+<li>Setting <code>awful.rules.rules</code> now append the rules to the existing set.
+Clearing the rules was never officially supported. If you <em>really</em> want the
+old behavior, use <code>awful.rules.rules = {}; awful.rules.rules = my_new_rules</code>.</li>
 </ul>
 
 
@@ -386,12 +393,12 @@ worth speding some time to fix their config.</p>
 
 <h3>Extendable <a href="../libraries/awful.rules.html#">awful.rules</a> providers and better <a href="../libraries/awful.spawn.html#">awful.spawn</a> functions</h3>
 
-<p>There is two new functions called <a href="../libraries/awful.rules.html#awful.rules.add_rule_source">awful.rules.add_rule_source</a> and
-<a href="../libraries/awful.rules.html#awful.rules.remove_rule_source">awful.rules.remove_rule_source</a>. They allow to create a dependency graph
+<p>There is two new functions called <code>awful.rules.add_rule_source</code> and
+<code>awful.rules.remove_rule_source</code>. They allow to create a dependency graph
 for where a rule comes from and which provider has the priority when setting it.</p>
 
 <p>Previously, there were the normal properties,
-<a href="../libraries/awful.rules.html#high_priority_properties">awful.rules.high_priority_properties</a> and <a href="../libraries/awful.rules.html#delayed_properties">awful.rules.delayed_properties</a>.
+<code>awful.rules.high_priority_properties</code> and <code>awful.rules.delayed_properties</code>.
 This didn&rsquo;t scale and could not represent all corner cases. Those table still
 exist and are still honored, but there is now a system that can handle the full
 complexity of the property priority graph.</p>
@@ -488,7 +495,7 @@ completely.</li>
 <li>The new default <a href="../sample files/rc.lua.html#">rc.lua</a> uses <code>request::activate</code> to set the focus. This
 fixes many corner case such as unfocusable clients getting the focus.</li>
 <li>Calling <a href="../libraries/awful.spawn.html#">awful.spawn</a> with a set of properties is now more reliable.</li>
-<li><a href="../input handling/awful.key.html#execute">awful.key.execute</a> is now much more reliable.</li>
+<li><a href="../input_handling/awful.key.html#execute">awful.key.execute</a> is now much more reliable.</li>
 </ul>
 
 
@@ -844,7 +851,7 @@ to be attached.  This includes:</p>
 <p><strong>See:</strong></p>
 
 <ul>
-<li><a href="../input handling/mouse.html#">mouse</a></li>
+<li><a href="../input_handling/mouse.html#">mouse</a></li>
 <li><a href="../core_components/client.html#">client</a> <code>request::geometry</code></li>
 </ul>
 
@@ -989,9 +996,9 @@ arrays. This can be used by modules to add extra functionalities or to avoid
 boilerplate code in callbacks.</p>
 
 <ul>
-<li><a href="../libraries/awful.rules.html#high_priority_properties">awful.rules.high_priority_properties</a>: before most other rules are executed.</li>
-<li><a href="../libraries/awful.rules.html#extra_properties">awful.rules.extra_properties</a>: together with normal rules.</li>
-<li><a href="../libraries/awful.rules.html#delayed_properties">awful.rules.delayed_properties</a>: after most other rules, but before <code>focus</code>.</li>
+<li><code>awful.rules.high_priority_properties</code>: before most other rules are executed.</li>
+<li><code>awful.rules.extra_properties</code>: together with normal rules.</li>
+<li><code>awful.rules.delayed_properties</code>: after most other rules, but before <code>focus</code>.</li>
 </ul>
 
 
@@ -1228,7 +1235,7 @@ of view this API allows for rich floating window management using
 <ul>
 <li><a href="../core_components/client.html#">client</a>s</li>
 <li><a href="../popups_and_bars/wibox.html#">wibox</a>es</li>
-<li>the <a href="../input handling/mouse.html#">mouse</a></li>
+<li>the <a href="../input_handling/mouse.html#">mouse</a></li>
 <li>anything with a <code>:geometry()</code> method</li>
 </ul>
 
@@ -1261,7 +1268,7 @@ fixed.
 a volatile one during the wibox drawing. This allows for better introspection
 into the widget tree.
 This model is now exposed through the <code>mouse::enter</code>, <code>mouse::press</code>,
-<a href="../input handling/mouse.html#current_widget">mouse.current_widget</a> and other APIs. This tree model also includes various
+<a href="../input_handling/mouse.html#current_widget">mouse.current_widget</a> and other APIs. This tree model also includes various
 matrices to convert positions from the screen coordinates to the one of the
 widgets (think of scaling and rotations).</p>
 
@@ -1597,7 +1604,7 @@ undertaking in 4.0 to make the API coherent and well documented.</p>
 <li>awful.<code>client.property.set</code></li>
 <li>awful.<a href="../core_components/client.html#get_transient_for_matching">client.get_transient_for_matching</a></li>
 <li>awful.<a href="../core_components/client.html#is_transient_for">client.is_transient_for</a></li>
-<li>awful.<a href="../input handling/mouse.html#awful.mouse.client_under_pointer">mouse.client_under_pointer</a></li>
+<li>awful.<a href="../input_handling/mouse.html#awful.mouse.client_under_pointer">mouse.client_under_pointer</a></li>
 <li>awful.<code>mouse.client.dragtotag.border</code></li>
 <li>awful.<code>mouse.client.corner</code></li>
 <li>awful.<a href="../core_components/screen.html#awful.screen.getdistance_sq">screen.getdistance_sq</a></li>
