@@ -43,7 +43,6 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
 <li><a href="#Static_module_functions">Static module functions</a></li>
 </ul>
 
@@ -229,13 +228,6 @@
     </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
-    <tr>
-      <td class="name" ><a href="#gears.geometry.rectangle.are_equal"><span class='function_modname'>gears.geometry.</span>rectangle.are_equal (a, b)</a></td>
-      <td colspan="2" class="summary">Return true if the area are exactly identical.</td>
-    </tr>
-</table>
 <h2><a href="#Static_module_functions">Static module functions</a></h2>
 <table class="function_list">
     <tr>
@@ -253,6 +245,14 @@
     <tr>
       <td class="name" ><a href="#gears.geometry.rectangle.get_in_direction"><span class='function_modname'>gears.geometry.</span>rectangle.get_in_direction <span class='function_args'> <b>(</b>dir, recttbl, cur<b>)</b></span></a></td>
       <td colspan="2" class="summary">Get the nearest rectangle in the given direction.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#gears.geometry.rectangle.are_equal"><span class='function_modname'>gears.geometry.</span>rectangle.are_equal <span class='function_args'> <b>(</b>a, b<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Return true if the area are exactly identical.</td>
+    </tr>
+    <tr>
+      <td class="name" ><a href="#gears.geometry.rectangle.is_inside"><span class='function_modname'>gears.geometry.</span>rectangle.is_inside <span class='function_args'> <b>(</b>a, b<b>)</b></span></a></td>
+      <td colspan="2" class="summary">Return if rectangle <code>a</code> is within rectangle <code>b</code>.</td>
     </tr>
     <tr>
       <td class="name" ><a href="#gears.geometry.rectangle.area_intersect_area"><span class='function_modname'>gears.geometry.</span>rectangle.area_intersect_area <span class='function_args'> <b>(</b>a, b<b>)</b></span></a></td>
@@ -273,48 +273,6 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-    Methods
-    <dl class="function">
-    <dt>
-    <a name = "gears.geometry.rectangle.are_equal"></a>
-    <strong><span class='function_modname'>gears.geometry.</span>rectangle.are_equal (a, b)</strong>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Return true if the area are exactly identical.</p>
-
-<p> The areas are table with a <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code> keys.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">a</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The area.
-        </li>
-        <li><span class="parameter">b</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The other area.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-        If the areas are identical.
-    </ol>
-
-
-
-
-
-    <span id=item2603 class="hide_extra">
-    </span>
-
-</dd>
-</dl>
     <h2 class="section-header "><a name="Static_module_functions"></a>Static module functions</h2>
 
     <dl class="function">
@@ -369,7 +327,7 @@
 
 
 
-    <span id=item2604 class="hide_extra">
+    <span id=item2603 class="hide_extra">
     </span>
 
 </dd>
@@ -408,7 +366,7 @@
 
 
 
-    <span id=item2605 class="hide_extra">
+    <span id=item2604 class="hide_extra">
     </span>
 
 </dd>
@@ -451,7 +409,7 @@
 
 
 
-    <span id=item2606 class="hide_extra">
+    <span id=item2605 class="hide_extra">
     </span>
 
 </dd>
@@ -491,7 +449,89 @@
 
 
 
+    <span id=item2606 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "gears.geometry.rectangle.are_equal"></a>
+    <strong><span class='function_modname'>gears.geometry.</span>rectangle.are_equal <span class='function_args'> <b>(</b>a, b<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Return true if the area are exactly identical.</p>
+
+<p> The areas are table with a <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code> keys.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The area.
+        </li>
+        <li><span class="parameter">b</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The other area.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the areas are identical.
+    </ol>
+
+
+
+
+
     <span id=item2607 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "gears.geometry.rectangle.is_inside"></a>
+    <strong><span class='function_modname'>gears.geometry.</span>rectangle.is_inside <span class='function_args'> <b>(</b>a, b<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Return if rectangle <code>a</code> is within rectangle <code>b</code>.</p>
+
+<p> This includes the edges. 100% of <code>a</code> area has to be within <code>b</code> for this
+ function to return true. If you wish to know if any part of <code>a</code> intersect
+ with <code>b</code>, use <a href="../utility_libraries/gears.geometry.html#gears.geometry.rectangle.get_intersection">gears.geometry.rectangle.get_intersection</a>.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The smaller area.
+        </li>
+        <li><span class="parameter">b</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         The larger area.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        If the areas are identical.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../utility_libraries/gears.geometry.html#gears.geometry.rectangle.get_intersection">gears.geometry.rectangle.get_intersection</a>
+    </ul>
+
+
+
+    <span id=item2608 class="hide_extra">
     </span>
 
 </dd>
@@ -507,9 +547,11 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">a</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The area.
         </li>
         <li><span class="parameter">b</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The other area.
         </li>
     </ul>
@@ -524,7 +566,7 @@
 
 
 
-    <span id=item2608 class="hide_extra">
+    <span id=item2609 class="hide_extra">
     </span>
 
 </dd>
@@ -587,10 +629,14 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../utility_libraries/gears.geometry.html#gears.geometry.rectangle.is_inside">gears.geometry.rectangle.is_inside</a>
+    </ul>
 
 
 
-    <span id=item2609 class="hide_extra">
+    <span id=item2610 class="hide_extra">
     </span>
 
 </dd>
@@ -641,7 +687,7 @@
 
 
 
-    <span id=item2610 class="hide_extra">
+    <span id=item2611 class="hide_extra">
     </span>
 
 </dd>
