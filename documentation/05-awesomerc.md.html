@@ -65,6 +65,7 @@
   <li><strong>Default configuration file documentation</strong></li>
   <li><a href="../documentation/06-appearance.md.html">Change Awesome appearance</a></li>
   <li><a href="../documentation/07-my-first-awesome.md.html">My first Awesome</a></li>
+  <li><a href="../documentation/09-options.md.html">Startup options</a></li>
   <li><a href="../documentation/16-using-cairo.md.html">Using Cairo and LGI</a></li>
   <li><a href="../documentation/17-porting-tips.md.html">Tips for upgrading your configuration</a></li>
   <li><a href="../documentation/89-NEWS.md.html">NEWS</a></li>
@@ -228,7 +229,8 @@
 
 <p>This document explains the default <a href="../sample files/rc.lua.html#">rc.lua</a> file provided by Awesome.</p>
 
-<p> If LuaRocks is installed, make sure that packages installed through it are
+<p> awesome_mode: api-level=4:screen=on
+ If LuaRocks is installed, make sure that packages installed through it are
  found (e.g. lgi). If LuaRocks is not installed, do nothing.</p>
 
 <pre>
@@ -1029,6 +1031,15 @@ client.connect_signal(<span class="string">"request::titlebars"</span>, <span cl
         },
         layout = <span class="backtick"><a href="../widget_layouts/wibox.layout.align.html#horizontal">wibox.layout.align.horizontal</a></span>
     }
+<span class="keyword">end</span>)
+</pre>
+
+
+<p> Enable sloppy focus, so that focus follows mouse.</p>
+
+<pre>
+client.connect_signal(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>(c)
+    c:activate { context = <span class="string">"mouse_enter"</span>, raise = <span class="keyword">false</span> }
 <span class="keyword">end</span>)
 </pre>
 
