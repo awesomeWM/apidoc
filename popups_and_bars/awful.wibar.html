@@ -223,8 +223,63 @@
 
 <h1>Module: <code>awful.wibar</code></h1>
 <p>Wibox module for awful.</p>
-<p> This module allows you to easily create wibox and attach them to the edge of
+<p><p> This module allows you to easily create wibox and attach them to the edge of
  a screen.</p>
+
+<p><img src="../images/AUTOGEN_awful_wibar_default.svg" alt="Usage example" /></p>
+
+<pre>
+<span class="keyword">local</span> wb = awful.wibar { position = <span class="string">'top'</span> }
+wb:setup {
+    layout = wibox.layout.align.horizontal,
+    {
+        mytaglist,
+        layout = wibox.layout.fixed.horizontal,
+    },
+    mytasklist,
+    {
+        layout = wibox.layout.fixed.horizontal,
+        mykeyboardlayout,
+        mytextclock,
+    },
+}
+</pre>
+
+
+<p> You can even have vertical bars too.</p>
+
+<p><img src="../images/AUTOGEN_awful_wibar_left.svg" alt="Usage example" /></p>
+
+<pre>
+<span class="keyword">local</span> wb = awful.wibar { position = <span class="string">'left'</span> }
+wb:setup {
+    layout = wibox.layout.align.vertical,
+    {
+        <span class="comment">-- Rotate the widgets with the container
+</span>        {
+            mytaglist,
+            direction = <span class="string">'west'</span>,
+            widget = wibox.container.rotate
+        },
+        layout = wibox.layout.fixed.vertical,
+    },
+    mytasklist,
+    {
+        layout = wibox.layout.fixed.vertical,
+        {
+            <span class="comment">-- Rotate the widgets with the container
+</span>            {
+                mykeyboardlayout,
+                mytextclock,
+                layout = wibox.layout.fixed.horizontal
+            },
+            direction = <span class="string">'west'</span>,
+            widget = wibox.container.rotate
+        }
+    },
+}
+</pre>
+</p>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: 2016 Emmanuel Lepage Vallee</li>
