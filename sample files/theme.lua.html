@@ -72,6 +72,7 @@
 <h2>Declarative rules</h2>
 <ul class="nowrap">
   <li><a href="../declarative_rules/ruled.client.html">ruled.client</a></li>
+  <li><a href="../declarative_rules/ruled.notifications.html">ruled.notifications</a></li>
 </ul>
 <h2>Widgets</h2>
 <ul class="nowrap">
@@ -242,6 +243,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. <span class="string">
 </span>
 <span class="keyword">local</span> theme_assets = <span class="global">require</span>(<span class="string">"<code>beautiful.theme</code>_assets"</span>)
 <span class="keyword">local</span> xresources = <span class="global">require</span>(<span class="string">"<code>beautiful.xresources</code>"</span>)
+<span class="keyword">local</span> rnotification = <span class="global">require</span>(<span class="string">"ruled.notification"</span>)
 <span class="keyword">local</span> dpi = xresources.apply_dpi
 
 <span class="keyword">local</span> gfs = <span class="global">require</span>(<span class="string">"<a href="../utility_libraries/gears.filesystem.html#">gears.filesystem</a>"</span>)
@@ -363,6 +365,14 @@ theme.layout_cornerse = themes_path..<span class="string">"default/layouts/corne
 <span class="comment">-- Define the icon theme for application icons. If not set then the icons
 </span><span class="comment">-- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 </span>theme.icon_theme = <span class="keyword">nil</span>
+
+<span class="comment">-- Set different colors for urgent notifications.
+</span>rnotification.connect_signal(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
+    rnotification.append_rule {
+        rule       = { urgency = <span class="string">'critical'</span> },
+        properties = { bg = <span class="string">'#ff0000'</span>, fg = <span class="string">'#ffffff'</span> }
+    }
+<span class="keyword">end</span>)
 
 <span class="keyword">return</span> theme
 
