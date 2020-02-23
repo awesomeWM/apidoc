@@ -43,6 +43,7 @@
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Functions">Functions</a></li>
 <li><a href="#Static_module_functions">Static module functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
 <li><a href="#Signals">Signals</a></li>
@@ -96,6 +97,7 @@
 <h2>Declarative rules</h2>
 <ul class="nowrap">
   <li><a href="../declarative_rules/ruled.client.html">ruled.client</a></li>
+  <li><a href="../declarative_rules/ruled.notifications.html">ruled.notifications</a></li>
 </ul>
 <h2>Widgets</h2>
 <ul class="nowrap">
@@ -234,20 +236,23 @@
     </ul>
 
 
-<h2><a href="#Static_module_functions">Static module functions</a></h2>
+<h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
     <tr>
-      <td class="name" ><a href="#connect_signal"><span class='function_modname'>naughty.</span>connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
-      <td colspan="2" class="summary">Connect a global signal on the notification engine.</td>
+      <td class="name" ><a href="#connect_signal"><span class='function_modname'>naughty.</span>connect_signal (name, func)</a></td>
+      <td colspan="2" class="summary">Connect a global signal on the module.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#emit_signal"><span class='function_modname'>naughty.</span>emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></a></td>
-      <td colspan="2" class="summary">Emit a notification signal.</td>
+      <td class="name" ><a href="#emit_signal">emit_signal (name, ...)</a></td>
+      <td colspan="2" class="summary">Emit a module signal.</td>
     </tr>
     <tr>
-      <td class="name" ><a href="#disconnect_signal"><span class='function_modname'>naughty.</span>disconnect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></a></td>
+      <td class="name" ><a href="#disconnect_signal"><span class='function_modname'>naughty.</span>disconnect_signal (name, func)</a></td>
       <td colspan="2" class="summary">Disconnect a signal from a source.</td>
     </tr>
+</table>
+<h2><a href="#Static_module_functions">Static module functions</a></h2>
+<table class="function_list">
     <tr>
       <td class="name" ><a href="#destroy_all_notifications"><span class='function_modname'>naughty.</span>destroy_all_notifications <span class='function_args'> <b>(</b>screens, reason<b>)</b></span></a></td>
       <td colspan="2" class="summary">Destroy all notifications on given screens.</td>
@@ -400,22 +405,22 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Static_module_functions"></a>Static module functions</h2>
-
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    Methods
     <dl class="function">
     <dt>
     <a name = "connect_signal"></a>
-    <strong><span class='function_modname'>naughty.</span>connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
+    <strong><span class='function_modname'>naughty.</span>connect_signal (name, func)</strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Connect a global signal on the notification engine.</p>
+    Connect a global signal on the module.</p>
 
 <p> Functions connected to this signal source will be executed when any
- notification object emits the signal.</p>
+ module object emits the signal.</p>
 
-<p> It is also used for some generic notification signals such as
+<p> It is also used for some generic module signals such as
  <a href="../libraries/naughty.html#request::display">request::display</a>.
 
     <h3>Parameters:</h3>
@@ -435,24 +440,24 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">naughty.connect_signal(<span class="string">"added"</span>, <span class="keyword">function</span>(notif)
+        <pre class="example">naughty.connect_signal(\"added\", <span class="keyword">function</span>(notif)
    <span class="comment">-- do something
 </span><span class="keyword">end</span>)</pre>
     </ul>
 
 
-    <span id=item2934 class="hide_extra">
+    <span id=item2958 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "emit_signal"></a>
-    <strong><span class='function_modname'>naughty.</span>emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
+    <strong>emit_signal (name, ...)</strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Emit a notification signal.
+    Emit a module signal.
 
     <h3>Parameters:</h3>
     <ul>
@@ -470,13 +475,13 @@
 
 
 
-    <span id=item2935 class="hide_extra">
+    <span id=item2959 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "disconnect_signal"></a>
-    <strong><span class='function_modname'>naughty.</span>disconnect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
+    <strong><span class='function_modname'>naughty.</span>disconnect_signal (name, func)</strong>
     <span class="baseclass" >
     </span>
     </dt>
@@ -506,10 +511,14 @@
 
 
 
-    <span id=item2936 class="hide_extra">
+    <span id=item2960 class="hide_extra">
     </span>
 
 </dd>
+</dl>
+    <h2 class="section-header "><a name="Static_module_functions"></a>Static module functions</h2>
+
+    <dl class="function">
     <dt>
     <a name = "destroy_all_notifications"></a>
     <strong><span class='function_modname'>naughty.</span>destroy_all_notifications <span class='function_args'> <b>(</b>screens, reason<b>)</b></span></strong>
@@ -549,7 +558,7 @@
 
 
 
-    <span id=item2937 class="hide_extra">
+    <span id=item2961 class="hide_extra">
     </span>
 
 </dd>
@@ -579,7 +588,7 @@
 
 
 
-    <span id=item2938 class="hide_extra">
+    <span id=item2962 class="hide_extra">
     </span>
 
 </dd>
@@ -608,13 +617,13 @@
 
 
      <br />
-     <center id=button2939>
-     <a class="show_more_button" onclick="show_extra('2939')">
+     <center id=button2963>
+     <a class="show_more_button" onclick="show_extra('2963')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2939 class="hide_extra">
+    <span id=item2963 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../libraries/naughty.html#added">added</a></span>  </li>
@@ -651,13 +660,13 @@
 
 
      <br />
-     <center id=button2940>
-     <a class="show_more_button" onclick="show_extra('2940')">
+     <center id=button2964>
+     <a class="show_more_button" onclick="show_extra('2964')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2940 class="hide_extra">
+    <span id=item2964 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::expiration_paused</code></span>  When the <a href="../libraries/naughty.html#expiration_paused">expiration_paused</a> value changes.</li>
@@ -695,13 +704,13 @@
 
 
      <br />
-     <center id=button2941>
-     <a class="show_more_button" onclick="show_extra('2941')">
+     <center id=button2965>
+     <a class="show_more_button" onclick="show_extra('2965')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2941 class="hide_extra">
+    <span id=item2965 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::active</code></span>  When the <a href="../libraries/naughty.html#active">active</a> value changes.</li>
@@ -728,7 +737,7 @@
 
 
 
-    <span id=item2942 class="hide_extra">
+    <span id=item2966 class="hide_extra">
     </span>
 
 </dd>
@@ -752,13 +761,13 @@
 
 
      <br />
-     <center id=button2943>
-     <a class="show_more_button" onclick="show_extra('2943')">
+     <center id=button2967>
+     <a class="show_more_button" onclick="show_extra('2967')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2943 class="hide_extra">
+    <span id=item2967 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::auto_reset_timeout</code></span>  When the <a href="../libraries/naughty.html#auto_reset_timeout">auto_reset_timeout</a> value changes.</li>
@@ -791,13 +800,13 @@
 
 
      <br />
-     <center id=button2944>
-     <a class="show_more_button" onclick="show_extra('2944')">
+     <center id=button2968>
+     <a class="show_more_button" onclick="show_extra('2968')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2944 class="hide_extra">
+    <span id=item2968 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::image_animations_enabled</code></span>  When the <a href="../libraries/naughty.html#image_animations_enabled">image_animations_enabled</a> value changes.</li>
@@ -836,13 +845,13 @@
 
 
      <br />
-     <center id=button2945>
-     <a class="show_more_button" onclick="show_extra('2945')">
+     <center id=button2969>
+     <a class="show_more_button" onclick="show_extra('2969')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2945 class="hide_extra">
+    <span id=item2969 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::persistence_enabled</code></span>  When the <a href="../libraries/naughty.html#persistence_enabled">persistence_enabled</a> value changes.</li>
@@ -885,7 +894,7 @@
 
 
 
-    <span id=item2946 class="hide_extra">
+    <span id=item2970 class="hide_extra">
     </span>
 
 </dd>
@@ -911,7 +920,7 @@
 
 
 
-    <span id=item2947 class="hide_extra">
+    <span id=item2971 class="hide_extra">
     </span>
 
 </dd>
@@ -937,7 +946,7 @@
 
 
 
-    <span id=item2948 class="hide_extra">
+    <span id=item2972 class="hide_extra">
     </span>
 
 </dd>
@@ -963,6 +972,10 @@ end)
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The <a href="../core_components/naughty.notification.html#">naughty.notification</a> object.
         </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Why is the signal sent.
+        </li>
         <li><span class="parameter">args</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Any arguments passed to the <a href="../libraries/naughty.html#notify">naughty.notify</a> function,
@@ -975,7 +988,7 @@ end)
 
 
 
-    <span id=item2949 class="hide_extra">
+    <span id=item2973 class="hide_extra">
     </span>
 
 </dd>
@@ -994,6 +1007,10 @@ end)
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          The <a href="../core_components/naughty.notification.html#">naughty.notification</a> object.
         </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Why is the signal sent.
+        </li>
         <li><span class="parameter">args</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
          Any arguments passed to the <a href="../libraries/naughty.html#notify">naughty.notify</a> function,
@@ -1006,7 +1023,7 @@ end)
 
 
 
-    <span id=item2950 class="hide_extra">
+    <span id=item2974 class="hide_extra">
     </span>
 
 </dd>
@@ -1042,7 +1059,7 @@ end)
 
 
 
-    <span id=item2951 class="hide_extra">
+    <span id=item2975 class="hide_extra">
     </span>
 
 </dd>
@@ -1073,7 +1090,7 @@ end)
 
 
 
-    <span id=item2952 class="hide_extra">
+    <span id=item2976 class="hide_extra">
     </span>
 
 </dd>
@@ -1098,7 +1115,7 @@ end)
 
 
 
-    <span id=item2953 class="hide_extra">
+    <span id=item2977 class="hide_extra">
     </span>
 
 </dd>
@@ -1123,7 +1140,7 @@ end)
 
 
 
-    <span id=item2954 class="hide_extra">
+    <span id=item2978 class="hide_extra">
     </span>
 
 </dd>
@@ -1144,7 +1161,7 @@ end)
 
 
 
-    <span id=item2955 class="hide_extra">
+    <span id=item2979 class="hide_extra">
     </span>
 
 </dd>
@@ -1165,7 +1182,7 @@ end)
 
 
 
-    <span id=item2956 class="hide_extra">
+    <span id=item2980 class="hide_extra">
     </span>
 
 </dd>
@@ -1186,7 +1203,7 @@ end)
 
 
 
-    <span id=item2957 class="hide_extra">
+    <span id=item2981 class="hide_extra">
     </span>
 
 </dd>
@@ -1224,7 +1241,7 @@ end)
 
 
 
-    <span id=item2958 class="hide_extra">
+    <span id=item2982 class="hide_extra">
     </span>
 
 </dd>
@@ -1254,7 +1271,7 @@ end)
 
 
 
-    <span id=item2959 class="hide_extra">
+    <span id=item2983 class="hide_extra">
     </span>
 
 </dd>
@@ -1286,7 +1303,7 @@ end)
 
 
 
-    <span id=item2960 class="hide_extra">
+    <span id=item2984 class="hide_extra">
     </span>
 
 </dd>
@@ -1328,7 +1345,7 @@ end)
 
 
 
-    <span id=item2961 class="hide_extra">
+    <span id=item2985 class="hide_extra">
     </span>
 
 </dd>
@@ -1511,7 +1528,7 @@ end)
     </ul>
 
 
-    <span id=item2962 class="hide_extra">
+    <span id=item2986 class="hide_extra">
     </span>
 
 </dd>
@@ -1583,7 +1600,7 @@ end)
 
 
 
-    <span id=item2963 class="hide_extra">
+    <span id=item2987 class="hide_extra">
     </span>
 
 </dd>
@@ -1647,7 +1664,7 @@ end)
 
 
 
-    <span id=item2964 class="hide_extra">
+    <span id=item2988 class="hide_extra">
     </span>
 
 </dd>
@@ -1704,7 +1721,7 @@ end)
 
 
 
-    <span id=item2965 class="hide_extra">
+    <span id=item2989 class="hide_extra">
     </span>
 
 </dd>
@@ -1748,7 +1765,7 @@ end)
 
 
 
-    <span id=item2966 class="hide_extra">
+    <span id=item2990 class="hide_extra">
     </span>
 
 </dd>
@@ -1787,7 +1804,7 @@ end)
 
 
 
-    <span id=item2967 class="hide_extra">
+    <span id=item2991 class="hide_extra">
     </span>
 
 </dd>

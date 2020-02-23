@@ -52,6 +52,7 @@
 <li><a href="#Key_bindings">Key bindings </a></li>
 <li><a href="#Rules">Rules </a></li>
 <li><a href="#Titlebars">Titlebars </a></li>
+<li><a href="#Notifications">Notifications </a></li>
 </ul>
 
 
@@ -95,6 +96,7 @@
 <h2>Declarative rules</h2>
 <ul class="nowrap">
   <li><a href="../declarative_rules/ruled.client.html">ruled.client</a></li>
+  <li><a href="../declarative_rules/ruled.notifications.html">ruled.notifications</a></li>
 </ul>
 <h2>Widgets</h2>
 <ul class="nowrap">
@@ -1031,6 +1033,29 @@ client.connect_signal(<span class="string">"request::titlebars"</span>, <span cl
         },
         layout = <span class="backtick"><a href="../widget_layouts/wibox.layout.align.html#horizontal">wibox.layout.align.horizontal</a></span>
     }
+<span class="keyword">end</span>)
+</pre>
+
+
+<p><a name="Notifications"></a></p>
+
+<h2>Notifications</h2>
+
+<pre>
+
+ruled.notification.connect_signal(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
+    <span class="comment">-- All notifications will match this rule.
+</span>    ruled.notification.append_rule {
+        rule       = { },
+        properties = {
+            screen           = <span class="backtick"><code>awful.screen.preferred</code></span>,
+            implicit_timeout = <span class="number">5</span>,
+        }
+    }
+<span class="keyword">end</span>)
+
+<span class="backtick"><code>naughty.connect</code></span>_signal(<span class="string">"request::display"</span>, <span class="keyword">function</span>(n)
+    <span class="backtick"><a href="../popups_and_bars/naughty.layout.box.html#">naughty.layout.box</a></span> { notification = n }
 <span class="keyword">end</span>)
 </pre>
 
