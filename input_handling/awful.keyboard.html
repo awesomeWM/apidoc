@@ -282,6 +282,13 @@
       </td>
       <td colspan="2" class="summary">Remove a key from the default client keys.</td>
     </tr>
+    <tr>
+      <td class="name" >
+        <a href="#get_key_name"><span class='function_modname'>awful.keyboard.</span>get_key_name <span class='function_args'> <b>(</b><b>)</b></span></a>
+        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;(string, nil) <i>or</i> (string, nil)</span></span>
+      </td>
+      <td colspan="2" class="summary">Get X11 keysym and a one-character representation from an Awesome keycode.</td>
+    </tr>
 </table>
 
 <br/>
@@ -571,6 +578,55 @@
 
 
     <span id=item759 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "get_key_name"></a>
+    <strong><span class='function_modname'>awful.keyboard.</span>get_key_name <span class='function_args'> <b>(</b><b>)</b></span></strong>
+    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;(string, nil) <i>or</i> (string, nil)</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Get X11 keysym and a one-character representation from an Awesome keycode.</p>
+
+<p> A &ldquo;one-character representation&rdquo; is a single UTF-8 representing the typical
+ output from that keysym in a text editor (e.g. &ldquo; &rdquo; for space, &ldquo;ñ&rdquo; for
+ n_tilde, &ldquo;Ā&rdquo; for A_macron). It usually matches the main engraving of the key
+ for level-0 symbols (but lowercase).</p>
+
+<p> Keycodes may be given in a string in any valid format for <a href="../input_handling/awful.key.html#">awful.key</a>:
+ &ldquo;#&rdquo; + keycode, the symkey name and the UTF-8 representation will all work.</p>
+
+<p> If no suitable keysym is found, or a malformed keycode is given as an
+ argument, this function will return (nil, nil)
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        keysym The keysym name</li>
+        <li>
+           <span class="types"><span class="type">nil</span></span>
+        keysym If no valid keysym is found</li>
+    </ol>
+     <h3>Or</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+        printsymbol The xkb_keysym_to_utf8 result</li>
+        <li>
+           <span class="types"><span class="type">nil</span></span>
+        printsymbol If the keysym has no printable representation.</li>
+    </ol>
+
+
+
+
+
+    <span id=item760 class="hide_extra">
     </span>
 
 </dd>
