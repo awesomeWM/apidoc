@@ -2508,6 +2508,29 @@ end
     <dd>
     <p>Set the number of master windows.</p>
 
+<p><img src="../images/AUTOGEN_sequences_tag_master_count.svg" alt="Usage example" /></p>
+
+<pre><code> -- Create a tag with master count of 1 and tag with count of 2
+ awful.tag.add('Master 1', {
+     screen   = screen[1],
+     layout   = awful.layout.suit.tile,
+     master_count = 1,
+ })
+
+ awful.tag.add('Master 2', {
+     screen   = screen[1],
+     layout   = awful.layout.suit.tile,
+     master_count = 2,
+ })
+
+ -- Add some clients.
+ for _, t in ipairs(screen[1].tags) do
+     for _ = 1, 5 do
+         awful.spawn('xterm', {tag = t})
+     end
+ end
+</code></pre>
+
 <p> <strong>Signal:</strong></p>
 
 <ul>
