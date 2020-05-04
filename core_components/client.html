@@ -1223,14 +1223,24 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 <h2><a href="#Theme_variables">Theme variables</a></h2>
 <table class="function_list">
     <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_marked">beautiful.border_color_marked</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The border color when the client is marked.</td>
+    </tr>
+    <tr>
       <td class="shortname" ><a href="#beautiful.border_color_floating">beautiful.border_color_floating</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
       <td colspan="2" class="summary">The fallback border color when the client is floating.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#beautiful.border_color_mazimized">beautiful.border_color_mazimized</a></td>
+      <td class="shortname" ><a href="#beautiful.border_color_maximized">beautiful.border_color_maximized</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td colspan="2" class="summary">The fallback border color when the client is mazimized.</td>
+      <td colspan="2" class="summary">The fallback border color when the client is maximized.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#beautiful.border_color_fullscreen">beautiful.border_color_fullscreen</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The fallback border color when the client is fullscreen.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.border_color_active">beautiful.border_color_active</a></td>
@@ -1323,9 +1333,9 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td colspan="2" class="summary">The fallback border width when the client is floating.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#beautiful.border_width_mazimized">beautiful.border_width_mazimized</a></td>
+      <td class="shortname" ><a href="#beautiful.border_width_maximized">beautiful.border_width_maximized</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
-      <td colspan="2" class="summary">The fallback border width when the client is mazimized.</td>
+      <td colspan="2" class="summary">The fallback border width when the client is maximized.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.border_width_normal">beautiful.border_width_normal</a></td>
@@ -1486,16 +1496,6 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td class="shortname" ><a href="#beautiful.opacity_fullscreen_new">beautiful.opacity_fullscreen_new</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
       <td colspan="2" class="summary">The client opacity for the new fullscreen clients.</td>
-    </tr>
-    <tr>
-      <td class="shortname" ><a href="#beautiful.border_marked">beautiful.border_marked</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td colspan="2" class="summary">The marked clients border color.</td>
-    </tr>
-    <tr>
-      <td class="shortname" ><a href="#beautiful.border_marked">beautiful.border_marked</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td colspan="2" class="summary">The border color when the client is focused.</td>
     </tr>
 </table>
 <h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
@@ -7538,6 +7538,32 @@ and is not active.</li>
 
     <dl class="function">
     <dt>
+    <a name = "beautiful.border_color_marked"></a>
+    <strong>beautiful.border_color_marked</strong>
+    <span class="proptype"><span class='summary_type'>color</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color when the client is marked.
+ It has priority over the rest of beautiful border color properties.
+ Note that only solid colors are supported.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item340 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "beautiful.border_color_floating"></a>
     <strong>beautiful.border_color_floating</strong>
     <span class="proptype"><span class='summary_type'>color</span></span>
@@ -7561,19 +7587,19 @@ and is not active.</li>
 
 
 
-    <span id=item340 class="hide_extra">
+    <span id=item341 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "beautiful.border_color_mazimized"></a>
-    <strong>beautiful.border_color_mazimized</strong>
+    <a name = "beautiful.border_color_maximized"></a>
+    <strong>beautiful.border_color_maximized</strong>
     <span class="proptype"><span class='summary_type'>color</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The fallback border color when the client is mazimized.
+    The fallback border color when the client is maximized.
 
 
 
@@ -7589,7 +7615,35 @@ and is not active.</li>
 
 
 
-    <span id=item341 class="hide_extra">
+    <span id=item342 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.border_color_fullscreen"></a>
+    <strong>beautiful.border_color_fullscreen</strong>
+    <span class="proptype"><span class='summary_type'>color</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The fallback border color when the client is fullscreen.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/client.html#request::border">request::border</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_fullscreen_active">beautiful.border_color_fullscreen_active</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_fullscreen_normal">beautiful.border_color_fullscreen_normal</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_fullscreen_urgent">beautiful.border_color_fullscreen_urgent</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_color_fullscreen_new">beautiful.border_color_fullscreen_new</a></li>
+    </ul>
+
+
+
+    <span id=item343 class="hide_extra">
     </span>
 
 </dd>
@@ -7613,7 +7667,7 @@ and is not active.</li>
 
 
 
-    <span id=item342 class="hide_extra">
+    <span id=item344 class="hide_extra">
     </span>
 
 </dd>
@@ -7637,7 +7691,7 @@ and is not active.</li>
 
 
 
-    <span id=item343 class="hide_extra">
+    <span id=item345 class="hide_extra">
     </span>
 
 </dd>
@@ -7661,7 +7715,7 @@ and is not active.</li>
 
 
 
-    <span id=item344 class="hide_extra">
+    <span id=item346 class="hide_extra">
     </span>
 
 </dd>
@@ -7685,7 +7739,7 @@ and is not active.</li>
 
 
 
-    <span id=item345 class="hide_extra">
+    <span id=item347 class="hide_extra">
     </span>
 
 </dd>
@@ -7709,7 +7763,7 @@ and is not active.</li>
 
 
 
-    <span id=item346 class="hide_extra">
+    <span id=item348 class="hide_extra">
     </span>
 
 </dd>
@@ -7733,7 +7787,7 @@ and is not active.</li>
 
 
 
-    <span id=item347 class="hide_extra">
+    <span id=item349 class="hide_extra">
     </span>
 
 </dd>
@@ -7757,7 +7811,7 @@ and is not active.</li>
 
 
 
-    <span id=item348 class="hide_extra">
+    <span id=item350 class="hide_extra">
     </span>
 
 </dd>
@@ -7781,7 +7835,7 @@ and is not active.</li>
 
 
 
-    <span id=item349 class="hide_extra">
+    <span id=item351 class="hide_extra">
     </span>
 
 </dd>
@@ -7805,7 +7859,7 @@ and is not active.</li>
 
 
 
-    <span id=item350 class="hide_extra">
+    <span id=item352 class="hide_extra">
     </span>
 
 </dd>
@@ -7829,7 +7883,7 @@ and is not active.</li>
 
 
 
-    <span id=item351 class="hide_extra">
+    <span id=item353 class="hide_extra">
     </span>
 
 </dd>
@@ -7853,7 +7907,7 @@ and is not active.</li>
 
 
 
-    <span id=item352 class="hide_extra">
+    <span id=item354 class="hide_extra">
     </span>
 
 </dd>
@@ -7877,7 +7931,7 @@ and is not active.</li>
 
 
 
-    <span id=item353 class="hide_extra">
+    <span id=item355 class="hide_extra">
     </span>
 
 </dd>
@@ -7901,7 +7955,7 @@ and is not active.</li>
 
 
 
-    <span id=item354 class="hide_extra">
+    <span id=item356 class="hide_extra">
     </span>
 
 </dd>
@@ -7925,7 +7979,7 @@ and is not active.</li>
 
 
 
-    <span id=item355 class="hide_extra">
+    <span id=item357 class="hide_extra">
     </span>
 
 </dd>
@@ -7949,7 +8003,7 @@ and is not active.</li>
 
 
 
-    <span id=item356 class="hide_extra">
+    <span id=item358 class="hide_extra">
     </span>
 
 </dd>
@@ -7973,7 +8027,7 @@ and is not active.</li>
 
 
 
-    <span id=item357 class="hide_extra">
+    <span id=item359 class="hide_extra">
     </span>
 
 </dd>
@@ -7994,7 +8048,7 @@ and is not active.</li>
     <ul>
          <li><a href="../core_components/client.html#request::border">request::border</a></li>
          <li><a href="../core_components/client.html#beautiful.border_width_floating">beautiful.border_width_floating</a></li>
-         <li><a href="../core_components/client.html#beautiful.border_width_mazimized">beautiful.border_width_mazimized</a></li>
+         <li><a href="../core_components/client.html#beautiful.border_width_maximized">beautiful.border_width_maximized</a></li>
          <li><a href="../core_components/client.html#beautiful.border_width_floating_active">beautiful.border_width_floating_active</a></li>
          <li><a href="../core_components/client.html#beautiful.border_width_floating_normal">beautiful.border_width_floating_normal</a></li>
          <li><a href="../core_components/client.html#beautiful.border_width_floating_urgent">beautiful.border_width_floating_urgent</a></li>
@@ -8007,7 +8061,7 @@ and is not active.</li>
 
 
 
-    <span id=item358 class="hide_extra">
+    <span id=item360 class="hide_extra">
     </span>
 
 </dd>
@@ -8035,19 +8089,19 @@ and is not active.</li>
 
 
 
-    <span id=item359 class="hide_extra">
+    <span id=item361 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "beautiful.border_width_mazimized"></a>
-    <strong>beautiful.border_width_mazimized</strong>
+    <a name = "beautiful.border_width_maximized"></a>
+    <strong>beautiful.border_width_maximized</strong>
     <span class="proptype"><span class='summary_type'>integer</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The fallback border width when the client is mazimized.
+    The fallback border width when the client is maximized.
 
 
 
@@ -8063,7 +8117,7 @@ and is not active.</li>
 
 
 
-    <span id=item360 class="hide_extra">
+    <span id=item362 class="hide_extra">
     </span>
 
 </dd>
@@ -8087,7 +8141,7 @@ and is not active.</li>
 
 
 
-    <span id=item361 class="hide_extra">
+    <span id=item363 class="hide_extra">
     </span>
 
 </dd>
@@ -8111,7 +8165,7 @@ and is not active.</li>
 
 
 
-    <span id=item362 class="hide_extra">
+    <span id=item364 class="hide_extra">
     </span>
 
 </dd>
@@ -8135,7 +8189,7 @@ and is not active.</li>
 
 
 
-    <span id=item363 class="hide_extra">
+    <span id=item365 class="hide_extra">
     </span>
 
 </dd>
@@ -8159,7 +8213,7 @@ and is not active.</li>
 
 
 
-    <span id=item364 class="hide_extra">
+    <span id=item366 class="hide_extra">
     </span>
 
 </dd>
@@ -8183,7 +8237,7 @@ and is not active.</li>
 
 
 
-    <span id=item365 class="hide_extra">
+    <span id=item367 class="hide_extra">
     </span>
 
 </dd>
@@ -8207,7 +8261,7 @@ and is not active.</li>
 
 
 
-    <span id=item366 class="hide_extra">
+    <span id=item368 class="hide_extra">
     </span>
 
 </dd>
@@ -8231,7 +8285,7 @@ and is not active.</li>
 
 
 
-    <span id=item367 class="hide_extra">
+    <span id=item369 class="hide_extra">
     </span>
 
 </dd>
@@ -8255,7 +8309,7 @@ and is not active.</li>
 
 
 
-    <span id=item368 class="hide_extra">
+    <span id=item370 class="hide_extra">
     </span>
 
 </dd>
@@ -8279,7 +8333,7 @@ and is not active.</li>
 
 
 
-    <span id=item369 class="hide_extra">
+    <span id=item371 class="hide_extra">
     </span>
 
 </dd>
@@ -8303,7 +8357,7 @@ and is not active.</li>
 
 
 
-    <span id=item370 class="hide_extra">
+    <span id=item372 class="hide_extra">
     </span>
 
 </dd>
@@ -8327,7 +8381,7 @@ and is not active.</li>
 
 
 
-    <span id=item371 class="hide_extra">
+    <span id=item373 class="hide_extra">
     </span>
 
 </dd>
@@ -8351,7 +8405,7 @@ and is not active.</li>
 
 
 
-    <span id=item372 class="hide_extra">
+    <span id=item374 class="hide_extra">
     </span>
 
 </dd>
@@ -8375,7 +8429,7 @@ and is not active.</li>
 
 
 
-    <span id=item373 class="hide_extra">
+    <span id=item375 class="hide_extra">
     </span>
 
 </dd>
@@ -8399,7 +8453,7 @@ and is not active.</li>
 
 
 
-    <span id=item374 class="hide_extra">
+    <span id=item376 class="hide_extra">
     </span>
 
 </dd>
@@ -8423,7 +8477,7 @@ and is not active.</li>
 
 
 
-    <span id=item375 class="hide_extra">
+    <span id=item377 class="hide_extra">
     </span>
 
 </dd>
@@ -8447,7 +8501,7 @@ and is not active.</li>
 
 
 
-    <span id=item376 class="hide_extra">
+    <span id=item378 class="hide_extra">
     </span>
 
 </dd>
@@ -8473,7 +8527,7 @@ and is not active.</li>
 
 
 
-    <span id=item377 class="hide_extra">
+    <span id=item379 class="hide_extra">
     </span>
 
 </dd>
@@ -8499,7 +8553,7 @@ and is not active.</li>
 
 
 
-    <span id=item378 class="hide_extra">
+    <span id=item380 class="hide_extra">
     </span>
 
 </dd>
@@ -8525,7 +8579,7 @@ and is not active.</li>
 
 
 
-    <span id=item379 class="hide_extra">
+    <span id=item381 class="hide_extra">
     </span>
 
 </dd>
@@ -8551,7 +8605,7 @@ and is not active.</li>
 
 
 
-    <span id=item380 class="hide_extra">
+    <span id=item382 class="hide_extra">
     </span>
 
 </dd>
@@ -8577,7 +8631,7 @@ and is not active.</li>
 
 
 
-    <span id=item381 class="hide_extra">
+    <span id=item383 class="hide_extra">
     </span>
 
 </dd>
@@ -8603,7 +8657,7 @@ and is not active.</li>
 
 
 
-    <span id=item382 class="hide_extra">
+    <span id=item384 class="hide_extra">
     </span>
 
 </dd>
@@ -8629,7 +8683,7 @@ and is not active.</li>
 
 
 
-    <span id=item383 class="hide_extra">
+    <span id=item385 class="hide_extra">
     </span>
 
 </dd>
@@ -8655,7 +8709,7 @@ and is not active.</li>
 
 
 
-    <span id=item384 class="hide_extra">
+    <span id=item386 class="hide_extra">
     </span>
 
 </dd>
@@ -8681,7 +8735,7 @@ and is not active.</li>
 
 
 
-    <span id=item385 class="hide_extra">
+    <span id=item387 class="hide_extra">
     </span>
 
 </dd>
@@ -8707,7 +8761,7 @@ and is not active.</li>
 
 
 
-    <span id=item386 class="hide_extra">
+    <span id=item388 class="hide_extra">
     </span>
 
 </dd>
@@ -8733,7 +8787,7 @@ and is not active.</li>
 
 
 
-    <span id=item387 class="hide_extra">
+    <span id=item389 class="hide_extra">
     </span>
 
 </dd>
@@ -8759,7 +8813,7 @@ and is not active.</li>
 
 
 
-    <span id=item388 class="hide_extra">
+    <span id=item390 class="hide_extra">
     </span>
 
 </dd>
@@ -8785,7 +8839,7 @@ and is not active.</li>
 
 
 
-    <span id=item389 class="hide_extra">
+    <span id=item391 class="hide_extra">
     </span>
 
 </dd>
@@ -8811,7 +8865,7 @@ and is not active.</li>
 
 
 
-    <span id=item390 class="hide_extra">
+    <span id=item392 class="hide_extra">
     </span>
 
 </dd>
@@ -8837,7 +8891,7 @@ and is not active.</li>
 
 
 
-    <span id=item391 class="hide_extra">
+    <span id=item393 class="hide_extra">
     </span>
 
 </dd>
@@ -8860,47 +8914,6 @@ and is not active.</li>
     <ul>
          <a href="../core_components/client.html#request::border">request::border</a>
     </ul>
-
-
-
-    <span id=item392 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "beautiful.border_marked"></a>
-    <strong>beautiful.border_marked</strong>
-    <span class="proptype"><span class='summary_type'>color</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The marked clients border color.
- Note that only solid colors are supported.
-
-
-
-
-
-
-
-    <span id=item393 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "beautiful.border_marked"></a>
-    <strong>beautiful.border_marked</strong>
-    <span class="proptype"><span class='summary_type'>string</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The border color when the client is focused.
-
-
-
-
 
 
 
