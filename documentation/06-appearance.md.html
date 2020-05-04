@@ -233,7 +233,6 @@
  <th align='center'>Name</th>
  <th align='center'>Description</th>
 </tr>
-  <tr><td><a href='../libraries/awful.client.html#beautiful.border_marked'>border_marked</a></td><td>The border color when the client is focused</td></tr>
   <tr><td><a href='../popups_and_bars/awful.hotkeys_popup.widget.html#beautiful.hotkeys_bg'>hotkeys_bg</a></td><td>Hotkeys widget background color</td></tr>
   <tr><td><a href='../popups_and_bars/awful.hotkeys_popup.widget.html#beautiful.hotkeys_fg'>hotkeys_fg</a></td><td>Hotkeys widget foreground color</td></tr>
   <tr><td><a href='../popups_and_bars/awful.hotkeys_popup.widget.html#beautiful.hotkeys_border_width'>hotkeys_border_width</a></td><td>Hotkeys widget border width</td></tr>
@@ -621,8 +620,10 @@
   <tr><td><a href='../widgets/wibox.widget.systray.html#beautiful.bg_systray'>bg_systray</a></td><td>The systray background color</td></tr>
   <tr><td><a href='../widgets/wibox.widget.systray.html#beautiful.systray_icon_spacing'>systray_icon_spacing</a></td><td>The systray icon spacing</td></tr>
   <tr><td><a href='../widgets/wibox.widget.textbox.html#beautiful.font'>font</a></td><td>The textbox font</td></tr>
+  <tr><td><a href='../core_components/client.html#beautiful.border_color_marked'>border_color_marked</a></td><td>The border color when the client is marked</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.border_color_floating'>border_color_floating</a></td><td>The fallback border color when the client is floating</td></tr>
-  <tr><td><a href='../core_components/client.html#beautiful.border_color_mazimized'>border_color_mazimized</a></td><td>The fallback border color when the client is mazimized</td></tr>
+  <tr><td><a href='../core_components/client.html#beautiful.border_color_maximized'>border_color_maximized</a></td><td>The fallback border color when the client is maximized</td></tr>
+  <tr><td><a href='../core_components/client.html#beautiful.border_color_fullscreen'>border_color_fullscreen</a></td><td>The fallback border color when the client is fullscreen</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.border_color_active'>border_color_active</a></td><td>The border color when the client is active</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.border_color_normal'>border_color_normal</a></td><td>The border color when the client is not active</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.border_color_urgent'>border_color_urgent</a></td><td>The border color when the client has the urgent property set</td></tr>
@@ -641,7 +642,7 @@
   <tr><td><a href='../core_components/client.html#beautiful.border_color_fullscreen_new'>border_color_fullscreen_new</a></td><td>The border color when the (fullscreen) client is not active and new</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.border_width'>border_width</a></td><td>The fallback border width when nothing else is set</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.border_width_floating'>border_width_floating</a></td><td>The fallback border width when the client is floating</td></tr>
-  <tr><td><a href='../core_components/client.html#beautiful.border_width_mazimized'>border_width_mazimized</a></td><td>The fallback border width when the client is mazimized</td></tr>
+  <tr><td><a href='../core_components/client.html#beautiful.border_width_maximized'>border_width_maximized</a></td><td>The fallback border width when the client is maximized</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.border_width_normal'>border_width_normal</a></td><td>The client border width for the normal clients</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.border_width_active'>border_width_active</a></td><td>The client border width for the active client</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.border_width_urgent'>border_width_urgent</a></td><td>The client border width for the urgent clients</td></tr>
@@ -674,7 +675,6 @@
   <tr><td><a href='../core_components/client.html#beautiful.opacity_fullscreen_active'>opacity_fullscreen_active</a></td><td>The client opacity for the active fullscreen client</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.opacity_fullscreen_urgent'>opacity_fullscreen_urgent</a></td><td>The client opacity for the urgent fullscreen clients</td></tr>
   <tr><td><a href='../core_components/client.html#beautiful.opacity_fullscreen_new'>opacity_fullscreen_new</a></td><td>The client opacity for the new fullscreen clients</td></tr>
-  <tr><td><a href='../core_components/client.html#beautiful.border_marked'>border_marked</a></td><td>The marked clients border color</td></tr>
 </table></p>
 
 <p><a name="Sample_theme_file"></a></p>
@@ -685,7 +685,6 @@
 <span class="keyword">local</span> theme = {}
 
 <span class="comment">-- Default variables
-</span><span class="comment">-- theme.border_marked = nil
 </span><span class="comment">-- theme.bg_normal = nil
 </span><span class="comment">-- theme.fg_normal = nil
 </span><span class="comment">-- theme.useless_gap = nil
@@ -711,8 +710,10 @@
 </span><span class="comment">-- theme.fg_normal = nil
 </span><span class="comment">-- theme.bg_systray = nil
 </span><span class="comment">-- theme.font = nil
+</span><span class="comment">-- theme.border_color_marked = nil
 </span><span class="comment">-- theme.border_color_floating = nil
-</span><span class="comment">-- theme.border_color_mazimized = nil
+</span><span class="comment">-- theme.border_color_maximized = nil
+</span><span class="comment">-- theme.border_color_fullscreen = nil
 </span><span class="comment">-- theme.border_color_active = nil
 </span><span class="comment">-- theme.border_color_normal = nil
 </span><span class="comment">-- theme.border_color_urgent = nil
@@ -731,7 +732,7 @@
 </span><span class="comment">-- theme.border_color_fullscreen_new = nil
 </span><span class="comment">-- theme.border_width = nil
 </span><span class="comment">-- theme.border_width_floating = nil
-</span><span class="comment">-- theme.border_width_mazimized = nil
+</span><span class="comment">-- theme.border_width_maximized = nil
 </span><span class="comment">-- theme.border_width_normal = nil
 </span><span class="comment">-- theme.border_width_active = nil
 </span><span class="comment">-- theme.border_width_urgent = nil
@@ -748,7 +749,6 @@
 </span><span class="comment">-- theme.border_width_fullscreen_active = nil
 </span><span class="comment">-- theme.border_width_fullscreen_urgent = nil
 </span><span class="comment">-- theme.border_width_fullscreen_new = nil
-</span><span class="comment">-- theme.border_marked = nil
 </span>
 <span class="comment">-- arcchart
 </span><span class="comment">-- theme.arcchart_border_color = nil
