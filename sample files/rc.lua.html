@@ -582,6 +582,18 @@ awful.keyboard.append_global_keybindings({
                 <span class="keyword">end</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>,
+    },
+    awful.key {
+        modifiers   = { modkey },
+        keygroup    = <span class="string">"numpad"</span>,
+        description = <span class="string">"select layout directly"</span>,
+        group       = <span class="string">"layout"</span>,
+        on_press    = <span class="keyword">function</span> (index)
+            <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+            <span class="keyword">if</span> t <span class="keyword">then</span>
+                t.layout = t.layouts[index] <span class="keyword">or</span> t.layout
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>,
     }
 })
 
