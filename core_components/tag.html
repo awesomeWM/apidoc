@@ -763,6 +763,13 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     </tr>
     <tr>
       <td class="name" >
+        <a href="#clear">:clear <span class='function_named_args'><b>{</b>[args]<b>}</b></span></a>
+        <span class="summarytype"></span>
+      </td>
+      <td colspan="2" class="summary">Remove all tagged clients.</td>
+    </tr>
+    <tr>
+      <td class="name" >
         <a href="#delete">:delete <span class='function_args'> <b>(</b>[fallback_tag=awful.tag.find_fallback()[, force=false]]<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
       </td>
@@ -837,6 +844,12 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
         <a href="#untagged">untagged</a>
       </td>
       <td colspan="2" class="summary">When a client gets untagged with this tag.</td>
+    </tr>
+    <tr>
+      <td class="name" >
+        <a href="#cleared">cleared</a>
+      </td>
+      <td colspan="2" class="summary">When all clients are removed from the tag.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -2704,6 +2717,67 @@ end
 
 </dd>
     <dt>
+    <a name = "clear"></a>
+    <strong>:clear <span class='function_named_args'><b>{</b>[args]<b>}</b></span></strong>
+    <span class="proptype"></span>
+    <span class="baseclass" >
+         &middot 2 signals
+    </span>
+    </dt>
+    <dd>
+    Remove all tagged clients.</p>
+
+<p><img src="../images/AUTOGEN_sequences_tag_clear.svg" alt="Usage example" /></p>
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ 'one', 'two' }, screen[1], some_layouts)
+
+ -- Call :clear() on the first tag.
+ screen[1].tags[1]:clear{}
+</code></pre>
+
+<p> end)
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">args</span> The arguments.
+        <ul>
+        <li><span class="parameter">fallback_tag</span>
+            <span class="types"><span class="type">tag</span></span>
+         A fallback tag.
+        </li>
+        <li><span class="parameter">allow_untagged</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Allow the untagged clients to remain untagged.
+         (<em>default</em> false)
+        </li>
+        </li></ul>
+    </ul>
+
+
+
+
+
+     <br />
+     <center id=button677>
+     <a class="show_more_button" onclick="show_extra('677')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item677 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><a href="../core_components/tag.html#cleared">cleared</a></span>  After all clients have been untagged.</li>
+          <li><span class="parameter"><a href="../core_components/tag.html#untagged">untagged</a></span>  For each currently tagged clients.</li>
+           <ul>
+             <li><span class="parameter"><code>c</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The untagged client.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
     <a name = "delete"></a>
     <strong>:delete <span class='function_args'> <b>(</b>[fallback_tag=awful.tag.find_fallback()[, force=false]]<b>)</b></span></strong>
     <span class="proptype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
@@ -2761,7 +2835,7 @@ end
 
 
 
-    <span id=item677 class="hide_extra">
+    <span id=item678 class="hide_extra">
     </span>
 
 </dd>
@@ -2798,7 +2872,7 @@ end
 
 
 
-    <span id=item678 class="hide_extra">
+    <span id=item679 class="hide_extra">
     </span>
 
 </dd>
@@ -2831,7 +2905,7 @@ end
 
 
 
-    <span id=item679 class="hide_extra">
+    <span id=item680 class="hide_extra">
     </span>
 
 </dd>
@@ -2863,7 +2937,7 @@ end
 
 
 
-    <span id=item680 class="hide_extra">
+    <span id=item681 class="hide_extra">
     </span>
 
 </dd>
@@ -2902,7 +2976,7 @@ end
 
 
 
-    <span id=item681 class="hide_extra">
+    <span id=item682 class="hide_extra">
     </span>
 
 </dd>
@@ -2933,13 +3007,13 @@ end
 
 
      <br />
-     <center id=button682>
-     <a class="show_more_button" onclick="show_extra('682')">
+     <center id=button683>
+     <a class="show_more_button" onclick="show_extra('683')">
       Click to display more
      </a>
      </center>
 
-    <span id=item682 class="hide_extra">
+    <span id=item683 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -2988,13 +3062,13 @@ end
 
 
      <br />
-     <center id=button683>
-     <a class="show_more_button" onclick="show_extra('683')">
+     <center id=button684>
+     <a class="show_more_button" onclick="show_extra('684')">
       Click to display more
      </a>
      </center>
 
-    <span id=item683 class="hide_extra">
+    <span id=item684 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -3038,7 +3112,7 @@ end
 
 
 
-    <span id=item684 class="hide_extra">
+    <span id=item685 class="hide_extra">
     </span>
 
 </dd>
@@ -3064,7 +3138,7 @@ end
 
 
 
-    <span id=item685 class="hide_extra">
+    <span id=item686 class="hide_extra">
     </span>
 
 </dd>
@@ -3090,7 +3164,30 @@ end
 
 
 
-    <span id=item686 class="hide_extra">
+    <span id=item687 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "cleared"></a>
+    <strong>cleared</strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    When all clients are removed from the tag.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/tag.html#clear">clear</a>
+    </ul>
+
+
+
+    <span id=item688 class="hide_extra">
     </span>
 
 </dd>
@@ -3113,7 +3210,7 @@ end
 
 
 
-    <span id=item687 class="hide_extra">
+    <span id=item689 class="hide_extra">
     </span>
 
 </dd>
@@ -3136,7 +3233,7 @@ end
 
 
 
-    <span id=item688 class="hide_extra">
+    <span id=item690 class="hide_extra">
     </span>
 
 </dd>
@@ -3167,7 +3264,7 @@ end
 
 
 
-    <span id=item689 class="hide_extra">
+    <span id=item691 class="hide_extra">
     </span>
 
 </dd>
@@ -3189,7 +3286,7 @@ end
 
 
 
-    <span id=item690 class="hide_extra">
+    <span id=item692 class="hide_extra">
     </span>
 
 </dd>
@@ -3224,7 +3321,7 @@ end
 
 
 
-    <span id=item691 class="hide_extra">
+    <span id=item693 class="hide_extra">
     </span>
 
 </dd>
@@ -3255,7 +3352,7 @@ end
 
 
 
-    <span id=item692 class="hide_extra">
+    <span id=item694 class="hide_extra">
     </span>
 
 </dd>
@@ -3286,7 +3383,7 @@ end
 
 
 
-    <span id=item693 class="hide_extra">
+    <span id=item695 class="hide_extra">
     </span>
 
 </dd>
@@ -3325,7 +3422,7 @@ end
 
 
 
-    <span id=item694 class="hide_extra">
+    <span id=item696 class="hide_extra">
     </span>
 
 </dd>
@@ -3355,7 +3452,7 @@ end
 
 
 
-    <span id=item695 class="hide_extra">
+    <span id=item697 class="hide_extra">
     </span>
 
 </dd>
@@ -3385,7 +3482,7 @@ end
 
 
 
-    <span id=item696 class="hide_extra">
+    <span id=item698 class="hide_extra">
     </span>
 
 </dd>
@@ -3422,7 +3519,7 @@ end
 
 
 
-    <span id=item697 class="hide_extra">
+    <span id=item699 class="hide_extra">
     </span>
 
 </dd>
@@ -3454,7 +3551,7 @@ end
 
 
 
-    <span id=item698 class="hide_extra">
+    <span id=item700 class="hide_extra">
     </span>
 
 </dd>
@@ -3495,7 +3592,7 @@ end
 
 
 
-    <span id=item699 class="hide_extra">
+    <span id=item701 class="hide_extra">
     </span>
 
 </dd>
@@ -3530,7 +3627,7 @@ end
 
 
 
-    <span id=item700 class="hide_extra">
+    <span id=item702 class="hide_extra">
     </span>
 
 </dd>
@@ -3562,7 +3659,7 @@ end
 
 
 
-    <span id=item701 class="hide_extra">
+    <span id=item703 class="hide_extra">
     </span>
 
 </dd>
@@ -3597,7 +3694,7 @@ end
 
 
 
-    <span id=item702 class="hide_extra">
+    <span id=item704 class="hide_extra">
     </span>
 
 </dd>
@@ -3631,7 +3728,7 @@ end
 
 
 
-    <span id=item703 class="hide_extra">
+    <span id=item705 class="hide_extra">
     </span>
 
 </dd>
@@ -3660,7 +3757,7 @@ end
 
 
 
-    <span id=item704 class="hide_extra">
+    <span id=item706 class="hide_extra">
     </span>
 
 </dd>
@@ -3693,7 +3790,7 @@ end
 
 
 
-    <span id=item705 class="hide_extra">
+    <span id=item707 class="hide_extra">
     </span>
 
 </dd>
@@ -3724,7 +3821,7 @@ end
 
 
 
-    <span id=item706 class="hide_extra">
+    <span id=item708 class="hide_extra">
     </span>
 
 </dd>
@@ -3761,7 +3858,7 @@ end
 
 
 
-    <span id=item707 class="hide_extra">
+    <span id=item709 class="hide_extra">
     </span>
 
 </dd>
@@ -3794,7 +3891,7 @@ end
 
 
 
-    <span id=item708 class="hide_extra">
+    <span id=item710 class="hide_extra">
     </span>
 
 </dd>
@@ -3829,7 +3926,7 @@ end
 
 
 
-    <span id=item709 class="hide_extra">
+    <span id=item711 class="hide_extra">
     </span>
 
 </dd>
@@ -3861,7 +3958,7 @@ end
 
 
 
-    <span id=item710 class="hide_extra">
+    <span id=item712 class="hide_extra">
     </span>
 
 </dd>
@@ -3899,7 +3996,7 @@ end
 
 
 
-    <span id=item711 class="hide_extra">
+    <span id=item713 class="hide_extra">
     </span>
 
 </dd>
@@ -3936,7 +4033,7 @@ end
 
 
 
-    <span id=item712 class="hide_extra">
+    <span id=item714 class="hide_extra">
     </span>
 
 </dd>
@@ -3975,7 +4072,7 @@ end
 
 
 
-    <span id=item713 class="hide_extra">
+    <span id=item715 class="hide_extra">
     </span>
 
 </dd>
@@ -4008,7 +4105,7 @@ end
 
 
 
-    <span id=item714 class="hide_extra">
+    <span id=item716 class="hide_extra">
     </span>
 
 </dd>
@@ -4038,7 +4135,7 @@ end
 
 
 
-    <span id=item715 class="hide_extra">
+    <span id=item717 class="hide_extra">
     </span>
 
 </dd>
@@ -4070,7 +4167,7 @@ end
 
 
 
-    <span id=item716 class="hide_extra">
+    <span id=item718 class="hide_extra">
     </span>
 
 </dd>
@@ -4099,7 +4196,7 @@ end
 
 
 
-    <span id=item717 class="hide_extra">
+    <span id=item719 class="hide_extra">
     </span>
 
 </dd>
@@ -4131,7 +4228,7 @@ end
 
 
 
-    <span id=item718 class="hide_extra">
+    <span id=item720 class="hide_extra">
     </span>
 
 </dd>
@@ -4161,7 +4258,7 @@ end
 
 
 
-    <span id=item719 class="hide_extra">
+    <span id=item721 class="hide_extra">
     </span>
 
 </dd>
@@ -4195,7 +4292,7 @@ end
 
 
 
-    <span id=item720 class="hide_extra">
+    <span id=item722 class="hide_extra">
     </span>
 
 </dd>
@@ -4225,7 +4322,7 @@ end
 
 
 
-    <span id=item721 class="hide_extra">
+    <span id=item723 class="hide_extra">
     </span>
 
 </dd>
@@ -4258,7 +4355,7 @@ end
 
 
 
-    <span id=item722 class="hide_extra">
+    <span id=item724 class="hide_extra">
     </span>
 
 </dd>
@@ -4295,7 +4392,7 @@ end
 
 
 
-    <span id=item723 class="hide_extra">
+    <span id=item725 class="hide_extra">
     </span>
 
 </dd>
@@ -4330,7 +4427,7 @@ end
 
 
 
-    <span id=item724 class="hide_extra">
+    <span id=item726 class="hide_extra">
     </span>
 
 </dd>
@@ -4355,7 +4452,7 @@ end
 
 
 
-    <span id=item725 class="hide_extra">
+    <span id=item727 class="hide_extra">
     </span>
 
 </dd>
@@ -4379,7 +4476,7 @@ end
 
 
 
-    <span id=item726 class="hide_extra">
+    <span id=item728 class="hide_extra">
     </span>
 
 </dd>
@@ -4423,7 +4520,7 @@ end
 
 
 
-    <span id=item727 class="hide_extra">
+    <span id=item729 class="hide_extra">
     </span>
 
 </dd>
