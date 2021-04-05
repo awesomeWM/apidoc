@@ -31,6 +31,8 @@
 <div id="main">
 
 
+
+
 <!-- Menu -->
 
 <div id="navigation">
@@ -62,12 +64,14 @@
   <li><a href="../documentation/00-authors.md.html">Authors</a></li>
   <li><strong>Readme</strong></li>
   <li><a href="../documentation/02-contributing.md.html">Contributing</a></li>
-  <li><a href="../documentation/03-declarative-layout.md.html">The AwesomeWM widget system</a></li>
+  <li><a href="../documentation/03-declarative-layout.md.html">The Widget system</a></li>
   <li><a href="../documentation/04-new-widgets.md.html">Creating new widget</a></li>
   <li><a href="../documentation/05-awesomerc.md.html">Default configuration file documentation</a></li>
   <li><a href="../documentation/06-appearance.md.html">Change Awesome appearance</a></li>
   <li><a href="../documentation/07-my-first-awesome.md.html">My first Awesome</a></li>
+  <li><a href="../documentation/08-client-layout-system.md.html">The AwesomeWM client layout system</a></li>
   <li><a href="../documentation/09-options.md.html">Startup options</a></li>
+  <li><a href="../documentation/10-building-and-testing.md.html">Building and Testing</a></li>
   <li><a href="../documentation/16-using-cairo.md.html">Using Cairo and LGI</a></li>
   <li><a href="../documentation/17-porting-tips.md.html">Tips for upgrading your configuration</a></li>
   <li><a href="../documentation/89-NEWS.md.html">NEWS</a></li>
@@ -240,23 +244,25 @@
 
 <h2>Building and installation</h2>
 
-<p>After extracting the dist tarball, run:</p>
+<p>After extracting the dist tarball or cloning the repository, run:</p>
 
 <pre>
 make
+sudo make install
 </pre>
 
 
-<p>This will create a build directory, run <code>cmake</code> in it and build Awesome.</p>
+<p>This will</p>
 
-<p>After building is finished, you can either install via <code>make install</code>:</p>
+<ol>
+<li>create a build directory at <code>./build</code>,</li>
+<li>run <code>cmake</code>,</li>
+<li>build Awesome and</li>
+<li>install it to the default prefix path <code>/usr/local</code>.</li>
+</ol>
 
-<pre>
-make install  # you might need root permissions
-</pre>
 
-
-<p>or by auto-generating a .deb or .rpm package, for easy removal later on:</p>
+<p>Alternatively to the above, you can generate a <code>.deb</code> or <code>.rpm</code> package, for easy installation management:</p>
 
 <pre>
 make <span class="global">package</span>
@@ -267,95 +273,31 @@ sudo rpm -Uvh awesome-x.y.z.rpm
 </pre>
 
 
-<p>NOTE: Awesome uses <a href="https://cmake.org"><code>cmake</code></a> to build. In case you want to
-pass arguments to <code>cmake</code>, please use the <code>CMAKE_ARGS</code> environment variable. For
-instance:</p>
+<h3>Advanced options and testing</h3>
 
-<pre>
-CMAKE_ARGS=<span class="string">"-DCMAKE_INSTALL_PREFIX=/opt/awesome"</span> make
-</pre>
-
+<p>A full list of dependencies, more advanced build options, as well as instructions on how to use the test suite can be found <a href="https://awesomewm.org/apidoc/10-building-and-testing.md.html">here</a>.</p>
 
 <h3>Installing current git master as a package receipts</h3>
 
 <h4>Arch Linux AUR</h4>
 
-<pre><code> sudo pacman -S --needed base-devel git
- git clone https://aur.archlinux.org/awesome-git.git
- cd awesome-git
- makepkg -fsri
-</code></pre>
+<pre>
+sudo pacman -S <span class="comment">--needed base-devel git
+</span>git clone https://aur.archlinux.org/awesome-git.git
+cd awesome-git
+makepkg -fsri
+</pre>
+
 
 <h4>Debian-based</h4>
 
-<pre><code> sudo apt build-dep awesome
- git clone https://github.com/awesomewm/awesome
- cd awesome
- make package
- sudo apt install *.deb
-</code></pre>
-
-<h3>Build dependencies</h3>
-
-<p>Awesome has the following dependencies (besides a more-or-less standard POSIX
-environment):</p>
-
-<ul>
-<li><a href="https://cmake.org">CMake >= 3.0.0</a></li>
-<li><a href="https://www.lua.org">Lua >= 5.1.0</a> or <a href="http://luajit.org">LuaJIT</a></li>
-<li><a href="https://github.com/pavouk/lgi">LGI >= 0.8.0</a></li>
-<li><a href="https://www.x.org/archive//individual/proto/">xproto >= 7.0.15</a></li>
-<li><a href="https://xcb.freedesktop.org/">libxcb >= 1.6</a> with support for the RandR, XTest, Xinerama, SHAPE and
-XKB extensions</li>
-<li><a href="https://xcb.freedesktop.org/">libxcb-cursor</a></li>
-<li><a href="https://xcb.freedesktop.org/">libxcb-util >= 0.3.8</a></li>
-<li><a href="https://xcb.freedesktop.org/">libxcb-keysyms >= 0.3.4</a></li>
-<li><a href="https://xcb.freedesktop.org/">libxcb-icccm >= 0.3.8</a></li>
-<li><a href="https://xcb.freedesktop.org/">libxcb-xfixes</a></li>
-<li><a href="https://github.com/Airblader/xcb-util-xrm">xcb-util-xrm >= 1.0</a></li>
-<li><a href="http://xkbcommon.org/">libxkbcommon</a> with X11 support enabled</li>
-<li><a href="https://www.freedesktop.org/wiki/Software/startup-notification/">libstartup-notification >=
-0.10</a></li>
-<li><a href="https://www.cairographics.org/">cairo</a> with support for XCB and GObject
-introspection</li>
-<li><a href="http://www.pango.org/">Pango</a> with support for Cairo and GObject
-introspection</li>
-<li><a href="https://wiki.gnome.org/Projects/GLib">GLib >= 2.40</a> with support for GObject
-introspection</li>
-<li><a href="https://developer.gnome.org/gio/stable/">GIO</a> with support for GObject
-introspection</li>
-<li><a href="https://wiki.gnome.org/Projects/GdkPixbuf">GdkPixbuf</a></li>
-<li>libX11 with xcb support</li>
-<li><a href="http://www.imagemagick.org/script/index.php">Imagemagick&rsquo;s convert utility</a></li>
-<li><a href="https://github.com/devnev/libxdg-basedir">libxdg-basedir >= 1.0.0</a></li>
-</ul>
-
-
-<p>Additionally, the following optional dependencies exist:</p>
-
-<ul>
-<li><a href="https://www.freedesktop.org/wiki/Software/dbus/">DBus</a> for DBus integration
-and the <code>awesome-client</code> utility</li>
-<li><a href="https://asciidoctor.org/">asciidoctor</a> for generating man pages</li>
-<li><a href="http://www.gzip.org/">gzip</a> for compressing man pages</li>
-<li><a href="https://stevedonovan.github.io/ldoc/">ldoc >= 1.4.5</a> for generating the
-documentation</li>
-<li><a href="https://olivinelabs.com/busted/">busted</a> for running unit tests</li>
-<li><a href="https://github.com/mpeterv/luacheck">luacheck</a> for static code analysis</li>
-<li><a href="https://keplerproject.github.io/luacov/">LuaCov</a> for collecting code coverage
-information</li>
-<li>libexecinfo on systems where libc does not provide <code>backtrace_symbols()</code> to
-generate slightly better backtraces on crashes</li>
-<li><code>Xephyr</code> or <code>Xvfb</code> for running integration tests</li>
-<li><a href="https://www.gtk.org/">GTK+ >= 3.10</a> for <code>./themes/gtk/</code></li>
-<li><a href="https://gitlab.freedesktop.org/xorg/lib/libxcb-errors">xcb-errors</a> for
-pretty-printing of X11 errors</li>
-<li><a href="https://wiki.gnome.org/action/show/Projects/LibRsvg">libRSVG</a> for displaying
-SVG files without scaling artifacts</li>
-<li><a href="http://tripie.sweb.cz/utils/wmctrl">wmctrl</a> for testing WM interactions
-with external actions</li>
-<li><a href="https://invisible-island.net/xterm/">xterm</a> for various test cases</li>
-</ul>
+<pre>
+sudo apt build-dep awesome
+git clone https://github.com/awesomewm/awesome
+cd awesome
+make <span class="global">package</span>
+sudo apt install *.deb
+</pre>
 
 
 <p><a name="Running_Awesome"></a></p>
@@ -412,11 +354,9 @@ DISPLAY=:<span class="number">2</span> gdb awesome
 
 <p>Then in <code>gdb</code> set any arguments and run it:</p>
 
-<pre>
-(gdb) set args <span class="comment">--replace
-</span>(gdb) run
-</pre>
-
+<pre><code> (gdb) set args --replace
+ (gdb) run
+</code></pre>
 
 <p><a name="Asking_questions"></a></p>
 
