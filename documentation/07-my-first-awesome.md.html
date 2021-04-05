@@ -31,6 +31,8 @@
 <div id="main">
 
 
+
+
 <!-- Menu -->
 
 <div id="navigation">
@@ -59,12 +61,14 @@
   <li><a href="../documentation/00-authors.md.html">Authors</a></li>
   <li><a href="../documentation/01-readme.md.html">Readme</a></li>
   <li><a href="../documentation/02-contributing.md.html">Contributing</a></li>
-  <li><a href="../documentation/03-declarative-layout.md.html">The AwesomeWM widget system</a></li>
+  <li><a href="../documentation/03-declarative-layout.md.html">The Widget system</a></li>
   <li><a href="../documentation/04-new-widgets.md.html">Creating new widget</a></li>
   <li><a href="../documentation/05-awesomerc.md.html">Default configuration file documentation</a></li>
   <li><a href="../documentation/06-appearance.md.html">Change Awesome appearance</a></li>
   <li><strong>My first Awesome</strong></li>
+  <li><a href="../documentation/08-client-layout-system.md.html">The AwesomeWM client layout system</a></li>
   <li><a href="../documentation/09-options.md.html">Startup options</a></li>
+  <li><a href="../documentation/10-building-and-testing.md.html">Building and Testing</a></li>
   <li><a href="../documentation/16-using-cairo.md.html">Using Cairo and LGI</a></li>
   <li><a href="../documentation/17-porting-tips.md.html">Tips for upgrading your configuration</a></li>
   <li><a href="../documentation/89-NEWS.md.html">NEWS</a></li>
@@ -254,10 +258,10 @@ have not opened any programs. On the top right you see the time/date and a
 symbol showing the current layout. You can also click on the symbol to change
 the active layout.</p>
 
-<p>One of the big advantages of Awesome over other tiling window managers is its good
-mouse support. Awesome can act as a full floating window manager (almost like
-openbox) if you want. For this basic tutorial we will mainly focus on keyboard
-control, so let&rsquo;s learn some key bindings now.</p>
+<p>One of the big advantages of Awesome over other tiling window managers is its
+good mouse support. Awesome can act as a full floating window manager (almost
+like openbox) if you want. For this basic tutorial we will mainly focus on
+keyboard control, so let&rsquo;s learn some key bindings now.</p>
 
 <p>Let&rsquo;s open a terminal: press <em>Mod4+Enter</em>. Mod4 is your &ldquo;Windows key&rdquo;, the key
 between Ctrl and Alt. You can change the modkey if you want, but we&rsquo;ll get to
@@ -296,23 +300,21 @@ overview now also provides a cheat sheet for controlling Vim.</p>
 
 <h2>Change the theme</h2>
 
-<p>Awesome has four themes you can choose from: <em>default</em>, <em>sky</em>, <em>xresources</em>, and
-<em>zenburn</em>.</p>
+<p>Awesome has four builtin themes you can choose from: <em>default</em>, <em>sky</em>,
+<em>xresources</em>, and <em>zenburn</em>.</p>
 
-<p>To change the theme, open your rc.lua and edit this line near the beginning of
-the file:</p>
+<p>To change the theme, open your <a href="../sample files/rc.lua.html#">rc.lua</a>, find this line near the beginning of
+the file, and change <code>default</code> to one of the other values mentioned:</p>
 
 <pre>
 beautiful.init(gears.filesystem.get_themes_dir() .. <span class="string">"default/theme.lua"</span>)
 </pre>
 
 
-<p>For this tutorial we will stick with the default theme.</p>
-
-<p>Now we will customize the theme. Copy
-<code>/usr/share/awesome/themes/default/theme.lua</code> to <code>~/.config/awesome/</code> and change
-the above line in your theme like this (remember to replace <code>USER</code> with your
-user name):</p>
+<p>However, for this tutorial we will copy and customize the default theme.
+Copy <code>/usr/share/awesome/themes/default/theme.lua</code> to <code>~/.config/awesome/</code>
+and change the line shown above in <a href="../sample files/rc.lua.html#">rc.lua</a> like this. Make sure to replace
+<code>USER</code> with your user name.</p>
 
 <pre>
 beautiful.init(<span class="string">"/home/USER/.config/awesome/theme.lua"</span>)
@@ -329,7 +331,9 @@ theme.wallpaper = themes_path..<span class="string">"default/background.png"</sp
 </pre>
 
 
-<p>The default uses a path relative to <code>themes_path</code> by using the <code>..</code> operator to join two strings together. To just set it to an absolute path for example, you could do:</p>
+<p>The default uses a path relative to <code>themes_path</code> by using the <code>..</code> operator to
+join two strings together. To just set it to an absolute path for example,
+you could do:</p>
 
 <pre>
 theme.wallpaper = <span class="string">"/usr/share/backgrounds/my-awesome-wallpaper.png"</span>
