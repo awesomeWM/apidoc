@@ -228,7 +228,78 @@
 
 <h1>Module: <code>wibox.widget.textclock</code></h1>
 <p>Text clock widget.</p>
-<p></p>
+<p> The <a href="../widgets/wibox.widget.textclock.html#">wibox.widget.textclock</a> widget is part of the Awesome WM&rsquo;s widget
+ system (see <a href="../documentation/03-declarative-layout.md.html#">03-declarative-layout.md</a>).</p>
+
+<p> This widget displays a text clock formatted by the
+ <a href="https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format">GLib Date Time format</a>
+ and <a href="https://developer.gnome.org/glib/stable/glib-GTimeZone.html#g-time-zone-new">GTimeZone</a>.</p>
+
+<p> The <a href="../widgets/wibox.widget.textclock.html#">wibox.widget.textclock</a> inherits from <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a>. It means
+ that, once created, the user will receive a derivated instance of
+ <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a> associated with a private <a href="../core_components/gears.timer.html#">gears.timer</a> to manage
+ timed updates of the displayed clock.</p>
+
+<h2> Use a <a href="../widgets/wibox.widget.textclock.html#">wibox.widget.textclock</a></h2>
+
+<p><img src="../images/AUTOGEN_wibox_widget_defaults_textclock.svg" alt="Usage example" /></p>
+
+<pre>
+<span class="keyword">local</span> my_textclock = wibox.widget.textclock(<span class="string">'%a %b %d, %H:%M'</span>)
+</pre>
+
+
+<p> Alternatively, you can declare the <a href="../widgets/wibox.widget.textclock.html#wibox.widget.textclock">textclock</a> widget using the
+ declarative pattern (Both codes are strictly equivalent):</p>
+
+<pre>
+<span class="keyword">local</span> my_textclock = wibox.widget {
+    format = <span class="string">'%a %b %d, %H:%M'</span>,
+    widget = wibox.widget.textclock
+}
+</pre>
+
+
+<h2> The GLib DateTime format</h2>
+
+<p> The time displayed by the textclock widget can be formated by the GLib
+ DateTime format.</p>
+
+<p> Here is a short list with commonly used format specifiers (extracted from
+ the Glib API references):</p>
+
+<table class='widget_list' border=1>
+ <tr>
+   <th align='center'>Format</th>
+   <th align='center'>Description</th>
+ </tr>
+   <tr><td>%a</td><td>The abbreviated weekday name according to the current locale</td></tr>
+   <tr><td>%A</td><td>the full weekday name according to the current locale</td></tr>
+   <tr><td>%b</td><td>The abbreviated month name according to the current locale</td></tr>
+   <tr><td>%B</td><td>The full month name according to the current locale</td></tr>
+   <tr><td>%d</td><td>The day of the month as a decimal number (range 01 to 31)</td></tr>
+   <tr><td>%e</td><td>The day of the month as a decimal number (range 1 to 31)</td></tr>
+   <tr><td>%F</td><td>Equivalent to %Y-%m-%d (the ISO 8601 date format)</td></tr>
+   <tr><td>%H</td><td>The hour as a decimal number using a 24-hour clock (range 00 to 23)</td></tr>
+   <tr><td>%I</td><td>The hour as a decimal number using a 12-hour clock (range 01 to 12)</td></tr>
+   <tr><td>%k</td><td>The hour (24-hour clock) as a decimal number (range 0 to 23); single digits are preceded by a blank</td></tr>
+   <tr><td>%l</td><td>The hour (12-hour clock) as a decimal number (range 1 to 12); single digits are preceded by a blank</td></tr>
+   <tr><td>%m</td><td>The month as a decimal number (range 01 to 12)</td></tr>
+   <tr><td>%M</td><td>The minute as a decimal number (range 00 to 59)</td></tr>
+   <tr><td>%p</td><td>Either \"AM\" or \"PM\" according to the given time value, or the corresponding strings for the current locale. Noon is treated as \"PM\" and midnight as \"AM\".</td></tr>
+   <tr><td>%P</td><td>Like %p but lowercase: \"am\" or \"pm\" or a corresponding string for the current locale</td></tr>
+   <tr><td>%r</td><td>The time in a.m. or p.m. notation</td></tr>
+   <tr><td>%R</td><td>The time in 24-hour notation (%H:%M)</td></tr>
+   <tr><td>%S</td><td>The second as a decimal number (range 00 to 60)</td></tr>
+   <tr><td>%T</td><td>The time in 24-hour notation with seconds (%H:%M:%S)</td></tr>
+   <tr><td>%y</td><td>The year as a decimal number without the century</td></tr>
+   <tr><td>%Y</td><td>The year as a decimal number including the century</td></tr>
+   <tr><td>%%</td><td>A literal % character</td></tr>
+ </table>
+
+
+<p> You can read more on the GLib DateTime format in the
+ <a href="https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format">GLib documentation</a>.</p>
     <div class="extra-header">
   <div class="extra-header__section">
     <h3>Class Hierarchy</h3>
