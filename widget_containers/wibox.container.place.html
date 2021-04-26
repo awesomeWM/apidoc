@@ -65,6 +65,7 @@
   <li><a href="../widget_containers/wibox.container.radialprogressbar.html">wibox.container.radialprogressbar</a></li>
   <li><a href="../widget_containers/wibox.container.rotate.html">wibox.container.rotate</a></li>
   <li><a href="../widget_containers/wibox.container.scroll.html">wibox.container.scroll</a></li>
+  <li><a href="../widget_containers/wibox.container.tile.html">wibox.container.tile</a></li>
 </ul>
 <h2>Core components</h2>
 <ul class="nowrap">
@@ -554,7 +555,7 @@
 
 
 
-    <span id=item1506 class="hide_extra">
+    <span id=item1507 class="hide_extra">
     </span>
 
 </dd>
@@ -585,7 +586,7 @@
 
 
 
-    <span id=item1507 class="hide_extra">
+    <span id=item1508 class="hide_extra">
     </span>
 
 </dd>
@@ -598,7 +599,7 @@
     </span>
     </dt>
     <dd>
-    <p>The vertical alignment.</p>
+    The vertical alignment.</p>
 
 <p> Possible values are:</p>
 
@@ -609,19 +610,40 @@
 </ul>
 
 
+<p><img src="../images/AUTOGEN_wibox_container_place_valign.svg" alt="Usage example" />
 
 
 
 
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, i <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'top'</span>, <span class="string">'center'</span>, <span class="string">'bottom'</span>} <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.widget {
+        {
+            {
+                image         = beautiful.awesome_icon,
+                forced_height = <span class="number">30</span>,
+                forced_width  = <span class="number">30</span>,
+                widget        = wibox.widget.imagebox
+            },
+            valign = i,
+            widget = wibox.container.place
+        },
+        bg     = beautiful.bg_normal,
+        widget = wibox.container.background
+    }
+<span class="keyword">end</span></pre>
+    </ul>
 
      <br />
-     <center id=button1508>
-     <a class="show_more_button" onclick="show_extra('1508')">
+     <center id=button1509>
+     <a class="show_more_button" onclick="show_extra('1509')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1508 class="hide_extra">
+    <span id=item1509 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::valign</code></span>  When the <a href="../widget_containers/wibox.container.place.html#valign">valign</a> value changes.</li>
@@ -642,7 +664,7 @@
     </span>
     </dt>
     <dd>
-    <p>The horizontal alignment.</p>
+    The horizontal alignment.</p>
 
 <p> Possible values are:</p>
 
@@ -653,19 +675,40 @@
 </ul>
 
 
+<p><img src="../images/AUTOGEN_wibox_container_place_halign.svg" alt="Usage example" />
 
 
 
 
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, i <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'left'</span>, <span class="string">'center'</span>, <span class="string">'right'</span>} <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.widget {
+        {
+            {
+                image         = beautiful.awesome_icon,
+                forced_height = <span class="number">30</span>,
+                forced_width  = <span class="number">30</span>,
+                widget        = wibox.widget.imagebox
+            },
+            halign = i,
+            widget = wibox.container.place
+        },
+        bg     = beautiful.bg_normal,
+        widget = wibox.container.background
+    }
+<span class="keyword">end</span></pre>
+    </ul>
 
      <br />
-     <center id=button1509>
-     <a class="show_more_button" onclick="show_extra('1509')">
+     <center id=button1510>
+     <a class="show_more_button" onclick="show_extra('1510')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1509 class="hide_extra">
+    <span id=item1510 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::halign</code></span>  When the <a href="../widget_containers/wibox.container.place.html#halign">halign</a> value changes.</li>
@@ -694,13 +737,13 @@
 
 
      <br />
-     <center id=button1510>
-     <a class="show_more_button" onclick="show_extra('1510')">
+     <center id=button1511>
+     <a class="show_more_button" onclick="show_extra('1511')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1510 class="hide_extra">
+    <span id=item1511 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::fill_vertical</code></span>  When the <a href="../widget_containers/wibox.container.place.html#fill_vertical">fill_vertical</a> value changes.</li>
@@ -729,13 +772,13 @@
 
 
      <br />
-     <center id=button1511>
-     <a class="show_more_button" onclick="show_extra('1511')">
+     <center id=button1512>
+     <a class="show_more_button" onclick="show_extra('1512')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1511 class="hide_extra">
+    <span id=item1512 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::fill_horizontal</code></span>  When the <a href="../widget_containers/wibox.container.place.html#fill_horizontal">fill_horizontal</a> value changes.</li>
@@ -756,21 +799,42 @@
     </span>
     </dt>
     <dd>
-    Stretch the contained widget so it takes all the vertical space.
+    Stretch the contained widget so it takes all the vertical space.</p>
+
+<p><img src="../images/AUTOGEN_wibox_container_place_content_fill_vertical.svg" alt="Usage example" />
 
 
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, i <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="keyword">true</span>, <span class="keyword">false</span>} <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.widget {
+        {
+            {
+                image         = beautiful.awesome_icon,
+                forced_height = <span class="number">30</span>,
+                forced_width  = <span class="number">30</span>,
+                widget        = wibox.widget.imagebox
+            },
+            bg     = <span class="string">'#ff0000'</span>,
+            widget = wibox.container.background
+        },
+        content_fill_vertical = i,
+        widget = wibox.container.place
+    }
+<span class="keyword">end</span></pre>
+    </ul>
 
      <br />
-     <center id=button1512>
-     <a class="show_more_button" onclick="show_extra('1512')">
+     <center id=button1513>
+     <a class="show_more_button" onclick="show_extra('1513')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1512 class="hide_extra">
+    <span id=item1513 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::content_fill_vertical</code></span>  When the <a href="../widget_containers/wibox.container.place.html#content_fill_vertical">content_fill_vertical</a> value changes.</li>
@@ -791,21 +855,42 @@
     </span>
     </dt>
     <dd>
-    Stretch the contained widget so it takes all the horizontal space.
+    Stretch the contained widget so it takes all the horizontal space.</p>
+
+<p><img src="../images/AUTOGEN_wibox_container_place_content_fill_horizontal.svg" alt="Usage example" />
 
 
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, i <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="keyword">true</span>, <span class="keyword">false</span>} <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.widget {
+        {
+            {
+                image         = beautiful.awesome_icon,
+                forced_height = <span class="number">30</span>,
+                forced_width  = <span class="number">30</span>,
+                widget        = wibox.widget.imagebox
+            },
+            bg     = <span class="string">'#ff0000'</span>,
+            widget = wibox.container.background
+        },
+        content_fill_horizontal = i,
+        widget = wibox.container.place
+    }
+<span class="keyword">end</span></pre>
+    </ul>
 
      <br />
-     <center id=button1513>
-     <a class="show_more_button" onclick="show_extra('1513')">
+     <center id=button1514>
+     <a class="show_more_button" onclick="show_extra('1514')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1513 class="hide_extra">
+    <span id=item1514 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::content_fill_horizontal</code></span>  When the <a href="../widget_containers/wibox.container.place.html#content_fill_horizontal">content_fill_horizontal</a> value changes.</li>
@@ -841,7 +926,7 @@
 
 
 
-    <span id=item862 class="hide_extra">
+    <span id=item863 class="hide_extra">
     </span>
 
 </dd>
@@ -873,7 +958,7 @@
 
 
 
-    <span id=item863 class="hide_extra">
+    <span id=item864 class="hide_extra">
     </span>
 
 </dd>
@@ -901,7 +986,7 @@
 
 
 
-    <span id=item864 class="hide_extra">
+    <span id=item865 class="hide_extra">
     </span>
 
 </dd>
@@ -929,7 +1014,7 @@
 
 
 
-    <span id=item865 class="hide_extra">
+    <span id=item866 class="hide_extra">
     </span>
 
 </dd>
@@ -958,7 +1043,7 @@
 
 
 
-    <span id=item866 class="hide_extra">
+    <span id=item867 class="hide_extra">
     </span>
 
 </dd>
@@ -979,7 +1064,7 @@
 
 
 
-    <span id=item867 class="hide_extra">
+    <span id=item868 class="hide_extra">
     </span>
 
 </dd>
@@ -1006,7 +1091,7 @@
 
 
 
-    <span id=item868 class="hide_extra">
+    <span id=item869 class="hide_extra">
     </span>
 
 </dd>
@@ -1030,7 +1115,7 @@
 
 
 
-    <span id=item1514 class="hide_extra">
+    <span id=item1515 class="hide_extra">
     </span>
 
 </dd>
@@ -1058,7 +1143,7 @@
 
 
 
-    <span id=item869 class="hide_extra">
+    <span id=item870 class="hide_extra">
     </span>
 
 </dd>
@@ -1107,7 +1192,7 @@ forwarded for some time, similar to the first case.</li>
 
 
 
-    <span id=item870 class="hide_extra">
+    <span id=item871 class="hide_extra">
     </span>
 
 </dd>
@@ -1159,7 +1244,7 @@ forwarded for some time, similar to the first case.</li>
 
 
 
-    <span id=item871 class="hide_extra">
+    <span id=item872 class="hide_extra">
     </span>
 
 </dd>
@@ -1216,7 +1301,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     </ul>
 
 
-    <span id=item872 class="hide_extra">
+    <span id=item873 class="hide_extra">
     </span>
 
 </dd>
@@ -1254,7 +1339,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item873 class="hide_extra">
+    <span id=item874 class="hide_extra">
     </span>
 
 </dd>
@@ -1286,7 +1371,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item874 class="hide_extra">
+    <span id=item875 class="hide_extra">
     </span>
 
 </dd>
@@ -1319,7 +1404,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item875 class="hide_extra">
+    <span id=item876 class="hide_extra">
     </span>
 
 </dd>
@@ -1350,7 +1435,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item876 class="hide_extra">
+    <span id=item877 class="hide_extra">
     </span>
 
 </dd>
@@ -1377,7 +1462,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item877 class="hide_extra">
+    <span id=item878 class="hide_extra">
     </span>
 
 </dd>
@@ -1474,7 +1559,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item878 class="hide_extra">
+    <span id=item879 class="hide_extra">
     </span>
 
 </dd>
@@ -1571,7 +1656,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item879 class="hide_extra">
+    <span id=item880 class="hide_extra">
     </span>
 
 </dd>
@@ -1650,7 +1735,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item880 class="hide_extra">
+    <span id=item881 class="hide_extra">
     </span>
 
 </dd>
@@ -1729,7 +1814,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item881 class="hide_extra">
+    <span id=item882 class="hide_extra">
     </span>
 
 </dd>
