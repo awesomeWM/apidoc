@@ -324,6 +324,54 @@ awful.widget.button {
       </td>
     </tr>
     <tr>
+      <td class="shortname" ><a href="#horizontal_fit_policy">horizontal_fit_policy</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="1" class="summary">Set the horizontal fit policy.</td>
+      <td class="baseclass" nowrap>
+        Inherited from wibox.widget.imagebox
+      </td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#vertical_fit_policy">vertical_fit_policy</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="1" class="summary">Set the vertical fit policy.</td>
+      <td class="baseclass" nowrap>
+        Inherited from wibox.widget.imagebox
+      </td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#valign">valign</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="1" class="summary">The vertical alignment.</td>
+      <td class="baseclass" nowrap>
+        Inherited from wibox.widget.imagebox
+      </td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#halign">halign</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="1" class="summary">The horizontal alignment.</td>
+      <td class="baseclass" nowrap>
+        Inherited from wibox.widget.imagebox
+      </td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#max_scaling_factor">max_scaling_factor</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="1" class="summary">The maximum scaling factor.</td>
+      <td class="baseclass" nowrap>
+        Inherited from wibox.widget.imagebox
+      </td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#scaling_quality">scaling_quality</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="1" class="summary">Set the scaling aligorithm.</td>
+      <td class="baseclass" nowrap>
+        Inherited from wibox.widget.imagebox
+      </td>
+    </tr>
+    <tr>
       <td class="shortname" ><a href="#wibox.widget.base.children">children</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
       <td colspan="1" class="summary">Get or set the children elements.</td>
@@ -630,7 +678,9 @@ awful.widget.button {
     <dd>
     Set a clip shape for this imagebox.
  A clip shape define an area where the content is displayed and one where it
- is trimmed.
+ is trimmed.</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_clip_shape.svg" alt="Usage example" />
 
     <h3>Type constraints:</h3>
     <ul>
@@ -648,6 +698,27 @@ awful.widget.button {
          <li><a href="../widgets/wibox.widget.imagebox.html#set_clip_shape">set_clip_shape</a></li>
     </ul>
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, resize <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="keyword">true</span>, <span class="keyword">false</span>} <span class="keyword">do</span>
+    <span class="keyword">for</span> idx, shape <span class="keyword">in</span> <span class="global">ipairs</span> {gears.shape.circle, gears.shape.squircle, gears.shape.rounded_rect} <span class="keyword">do</span>
+        <span class="keyword">local</span> w = wibox.widget {
+            {
+                {
+                    image         = beautiful.awesome_icon,
+                    forced_height = <span class="number">32</span>,
+                    forced_width  = <span class="number">32</span>,
+                    clip_shape    = shape,
+                    resize        = resize,
+                    widget        = wibox.widget.imagebox
+                },
+                widget = wibox.container.place
+            },
+            widget = wibox.container.background
+        }
+    <span class="keyword">end</span>
+<span class="keyword">end</span></pre>
+    </ul>
 
      <br />
      <center id=button861>
@@ -707,6 +778,402 @@ awful.widget.button {
 
 </dd>
     <dt>
+    <a name = "horizontal_fit_policy"></a>
+    <strong>horizontal_fit_policy</strong>
+    <span class="proptype"><span class='summary_type'>string</span></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget.imagebox
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Set the horizontal fit policy.</p>
+
+<p> Values are:</p>
+
+<ul>
+<li><strong>auto</strong>: Honor the <code>resize</code> varible and preserve the aspect ratio (default).</li>
+<li><strong>none</strong>: Do not resize at all.</li>
+<li><strong>fit</strong>: Resize to the widget width.</li>
+</ul>
+
+
+<p> Here is the result for a 22x32 image:</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_horizontal_fit_policy.svg" alt="Usage example" />
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../widgets/wibox.widget.imagebox.html#vertical_fit_policy">vertical_fit_policy</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#resize">resize</a></li>
+    </ul>
+
+
+     <br />
+     <center id=button863>
+     <a class="show_more_button" onclick="show_extra('863')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item863 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::horizontal_fit_policy</code></span>  When the <code>horizontal_fit_policy</code> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>horizontal_fit_policy</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "vertical_fit_policy"></a>
+    <strong>vertical_fit_policy</strong>
+    <span class="proptype"><span class='summary_type'>string</span></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget.imagebox
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Set the vertical fit policy.
+ Values are:</p>
+
+<ul>
+<li><strong>auto</strong>: Honor the <code>resize</code> varible and preserve the aspect ratio (default).</li>
+<li><strong>none</strong>: Do not resize at all.</li>
+<li><strong>fit</strong>: Resize to the widget height.</li>
+</ul>
+
+
+<p> Here is the result for a 32x22 image:</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_vertical_fit_policy.svg" alt="Usage example" />
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../widgets/wibox.widget.imagebox.html#horizontal_fit_policy">horizontal_fit_policy</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#resize">resize</a></li>
+    </ul>
+
+
+     <br />
+     <center id=button864>
+     <a class="show_more_button" onclick="show_extra('864')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item864 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::vertical_fit_policy</code></span>  When the <code>vertical_fit_policy</code> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>horizontal_fit_policy</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "valign"></a>
+    <strong>valign</strong>
+    <span class="proptype"><span class='summary_type'>string</span></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget.imagebox
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    The vertical alignment.</p>
+
+<p> Possible values are:</p>
+
+<ul>
+<li><em>top</em></li>
+<li><em>center</em> (default)</li>
+<li><em>bottom</em></li>
+</ul>
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_valign.svg" alt="Usage example" />
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../widget_containers/wibox.container.place.html#">wibox.container.place</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#halign">halign</a></li>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, resize <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="keyword">true</span>, <span class="keyword">false</span>} <span class="keyword">do</span>
+    <span class="keyword">for</span> _, valign <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'top'</span>, <span class="string">'center'</span>, <span class="string">'bottom'</span>} <span class="keyword">do</span>
+        <span class="keyword">local</span> w = wibox.widget {
+            {
+                {
+                    image         = beautiful.awesome_icon,
+                    forced_height = <span class="number">32</span>,
+                    forced_width  = <span class="number">32</span>,
+                    valign        = valign,
+                    resize        = resize,
+                    widget        = wibox.widget.imagebox
+                },
+                bg     = beautiful.bg_normal,
+                widget = wibox.container.background
+            },
+            widget = wibox.container.place
+        }
+    <span class="keyword">end</span>
+<span class="keyword">end</span></pre>
+    </ul>
+
+     <br />
+     <center id=button865>
+     <a class="show_more_button" onclick="show_extra('865')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item865 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::valign</code></span>  When the <code>valign</code> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>avlign</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "halign"></a>
+    <strong>halign</strong>
+    <span class="proptype"><span class='summary_type'>string</span></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget.imagebox
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    The horizontal alignment.</p>
+
+<p> Possible values are:</p>
+
+<ul>
+<li><em>left</em></li>
+<li><em>center</em> (default)</li>
+<li><em>right</em></li>
+</ul>
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_halign.svg" alt="Usage example" />
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../widget_containers/wibox.container.place.html#">wibox.container.place</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#valign">valign</a></li>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, resize <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="keyword">true</span>, <span class="keyword">false</span>} <span class="keyword">do</span>
+    <span class="keyword">for</span> _, halign <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'left'</span>, <span class="string">'center'</span>, <span class="string">'right'</span>} <span class="keyword">do</span>
+        <span class="keyword">local</span> w = wibox.widget {
+            {
+                {
+                    image         = beautiful.awesome_icon,
+                    forced_height = <span class="number">32</span>,
+                    forced_width  = <span class="number">32</span>,
+                    halign        = halign,
+                    resize        = resize,
+                    widget        = wibox.widget.imagebox
+                },
+                bg     = beautiful.bg_normal,
+                widget = wibox.container.background
+            },
+            widget = wibox.container.place
+        }
+    <span class="keyword">end</span>
+<span class="keyword">end</span></pre>
+    </ul>
+
+     <br />
+     <center id=button866>
+     <a class="show_more_button" onclick="show_extra('866')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item866 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::halign</code></span>  When the <code>halign</code> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>halign</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "max_scaling_factor"></a>
+    <strong>max_scaling_factor</strong>
+    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget.imagebox
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    The maximum scaling factor.</p>
+
+<p> If an image is scaled too much, it gets very blurry. This
+ property allows to limit the scaling. Use the <code>valign</code> and
+ <code>halign</code> to control how the image will be aligned.</p>
+
+<p> In the example below, the original size is 22x22</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_max_scaling_factor.svg" alt="Usage example" />
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../widgets/wibox.widget.imagebox.html#valign">valign</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#halign">halign</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#scaling_quality">scaling_quality</a></li>
+    </ul>
+
+
+     <br />
+     <center id=button867>
+     <a class="show_more_button" onclick="show_extra('867')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item867 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::max_scaling_factor</code></span>  When the <code>max_scaling_factor</code> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>max_scaling_factor</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "scaling_quality"></a>
+    <strong>scaling_quality</strong>
+    <span class="proptype"><span class='summary_type'>string</span></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.widget.imagebox
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Set the scaling aligorithm.</p>
+
+<p> Depending on how the image is used, what is the &ldquo;correct&rdquo; way to
+ scale can change. For example, upscaling a pixel art image should
+ not make it blurry. However, scaling up a photo should not make it
+ blocky.</p>
+
+<table class='widget_list' border=1>
+ <tr style='font-weight: bold;'>
+  <th align='center'>Value</th>
+  <th align='center'>Description</th>
+ </tr>
+ <tr><td>fast</td><td>A high-performance filter</td></tr>
+ <tr><td>good</td><td>A reasonable-performance filter</td></tr>
+ <tr><td>best</td><td>The highest-quality available</td></tr>
+ <tr><td>nearest</td><td>Nearest-neighbor filtering (blocky)</td></tr>
+ <tr><td>bilinear</td><td>Linear interpolation in two dimensions</td></tr>
+</table>
+
+
+<p> The image used in the example below has a resolution of 32x22 and is intentionally
+ blocky to highlight the difference. It is zoomed by a factor of 3.</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_scaling_quality.svg" alt="Usage example" />
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">scaling_quality</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         Either <code>fast</code>, <code>good</code>, <code>best</code>, <code>nearest</code> or <code>bilinear</code>.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../widgets/wibox.widget.imagebox.html#resize">resize</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#horizontal_fit_policy">horizontal_fit_policy</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#vertical_fit_policy">vertical_fit_policy</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#max_scaling_factor">max_scaling_factor</a></li>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, quality <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'fast'</span>, <span class="string">'good'</span>, <span class="string">'best'</span>, <span class="string">'nearest'</span>, <span class="string">'bilinear'</span>} <span class="keyword">do</span>
+   <span class="keyword">local</span> w = wibox.widget {
+       {
+           {
+               image           = img,
+               forced_height   = <span class="number">64</span>,
+               forced_width    = <span class="number">96</span>,
+               scaling_quality = quality,
+               widget          = wibox.widget.imagebox
+           },
+           widget = wibox.container.place
+       },
+       widget = wibox.container.background
+   }
+<span class="keyword">end</span></pre>
+    </ul>
+
+     <br />
+     <center id=button868>
+     <a class="show_more_button" onclick="show_extra('868')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item868 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::scaling_quality</code></span>  When the <code>scaling_quality</code> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>scaling_quality</code></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
     <a name = "wibox.widget.base.children"></a>
     <strong>children</strong>
     <span class="proptype"><span class='summary_type'>table</span></span>
@@ -730,7 +1197,7 @@ awful.widget.button {
 
 
 
-    <span id=item863 class="hide_extra">
+    <span id=item869 class="hide_extra">
     </span>
 
 </dd>
@@ -762,7 +1229,7 @@ awful.widget.button {
 
 
 
-    <span id=item864 class="hide_extra">
+    <span id=item870 class="hide_extra">
     </span>
 
 </dd>
@@ -790,7 +1257,7 @@ awful.widget.button {
 
 
 
-    <span id=item865 class="hide_extra">
+    <span id=item871 class="hide_extra">
     </span>
 
 </dd>
@@ -818,7 +1285,7 @@ awful.widget.button {
 
 
 
-    <span id=item866 class="hide_extra">
+    <span id=item872 class="hide_extra">
     </span>
 
 </dd>
@@ -847,7 +1314,7 @@ awful.widget.button {
 
 
 
-    <span id=item867 class="hide_extra">
+    <span id=item873 class="hide_extra">
     </span>
 
 </dd>
@@ -868,7 +1335,7 @@ awful.widget.button {
 
 
 
-    <span id=item868 class="hide_extra">
+    <span id=item874 class="hide_extra">
     </span>
 
 </dd>
@@ -895,7 +1362,7 @@ awful.widget.button {
 
 
 
-    <span id=item869 class="hide_extra">
+    <span id=item875 class="hide_extra">
     </span>
 
 </dd>
@@ -927,7 +1394,7 @@ awful.widget.button {
 
 
 
-    <span id=item870 class="hide_extra">
+    <span id=item876 class="hide_extra">
     </span>
 
 </dd>
@@ -976,7 +1443,7 @@ forwarded for some time, similar to the first case.</li>
 
 
 
-    <span id=item871 class="hide_extra">
+    <span id=item877 class="hide_extra">
     </span>
 
 </dd>
@@ -1028,7 +1495,7 @@ forwarded for some time, similar to the first case.</li>
 
 
 
-    <span id=item872 class="hide_extra">
+    <span id=item878 class="hide_extra">
     </span>
 
 </dd>
@@ -1085,7 +1552,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     </ul>
 
 
-    <span id=item873 class="hide_extra">
+    <span id=item879 class="hide_extra">
     </span>
 
 </dd>
@@ -1123,7 +1590,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item874 class="hide_extra">
+    <span id=item880 class="hide_extra">
     </span>
 
 </dd>
@@ -1155,7 +1622,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item875 class="hide_extra">
+    <span id=item881 class="hide_extra">
     </span>
 
 </dd>
@@ -1188,7 +1655,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item876 class="hide_extra">
+    <span id=item882 class="hide_extra">
     </span>
 
 </dd>
@@ -1219,7 +1686,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item877 class="hide_extra">
+    <span id=item883 class="hide_extra">
     </span>
 
 </dd>
@@ -1246,7 +1713,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item878 class="hide_extra">
+    <span id=item884 class="hide_extra">
     </span>
 
 </dd>
@@ -1343,7 +1810,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item879 class="hide_extra">
+    <span id=item885 class="hide_extra">
     </span>
 
 </dd>
@@ -1440,7 +1907,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item880 class="hide_extra">
+    <span id=item886 class="hide_extra">
     </span>
 
 </dd>
@@ -1519,7 +1986,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item881 class="hide_extra">
+    <span id=item887 class="hide_extra">
     </span>
 
 </dd>
@@ -1598,7 +2065,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item882 class="hide_extra">
+    <span id=item888 class="hide_extra">
     </span>
 
 </dd>
