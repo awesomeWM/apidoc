@@ -47,6 +47,7 @@
 <ul>
 <li><a href="#Constructors">Constructors</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
+<li><a href="#Deprecated_object_properties">Deprecated object properties</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
 <li><a href="#Theme_variables">Theme variables</a></li>
 <li><a href="#Signals">Signals</a></li>
@@ -317,19 +318,34 @@
       <td colspan="2" class="summary">Set the graph background color.</td>
     </tr>
     <tr>
+      <td class="shortname" ><a href="#group_colors">group_colors</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
+      <td colspan="2" class="summary">Set the colors for data groups.</td>
+    </tr>
+    <tr>
       <td class="shortname" ><a href="#max_value">max_value</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td colspan="2" class="summary">Set the maximum value the graph should handle.</td>
+      <td colspan="2" class="summary">The maximum value the graph should handle.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#min_value">min_value</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td colspan="2" class="summary">The minimum value.</td>
+      <td colspan="2" class="summary">The minimum value the graph should handle.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#scale">scale</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
       <td colspan="2" class="summary">Set the graph to automatically scale its values.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#clamp_bars">clamp_bars</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td colspan="2" class="summary">Clamp graph bars to keep them inside the widget for out-of-range values.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#baseline_value">baseline_value</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">The value corresponding to the starting point of graph bars.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#step_width">step_width</a></td>
@@ -352,19 +368,19 @@
       <td colspan="2" class="summary">Set the graph to draw stacks.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#stack_colors">stack_colors</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td colspan="2" class="summary">Set the graph stacking colors.</td>
+      <td class="shortname" ><a href="#nan_indication">nan_indication</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td colspan="2" class="summary">Display NaN indication.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#height">height</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td colspan="2" class="summary">Set the graph height.</td>
+      <td class="shortname" ><a href="#nan_color">nan_color</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>gears.color</span></td>
+      <td colspan="2" class="summary">The color of NaN indication.</td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#width">width</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td colspan="2" class="summary">Set the graph width.</td>
+      <td class="shortname" ><a href="#capacity">capacity</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer <i>or</i> nil</span></td>
+      <td colspan="2" class="summary">Set the graph capacity.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#wibox.widget.base.children">children</a></td>
@@ -423,14 +439,46 @@
       </td>
     </tr>
 </table>
+<h2><a href="#Deprecated_object_properties">Deprecated object properties</a></h2>
+<table class="function_list">
+    <tr>
+      <td class="shortname" ><a href="#height">height</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">Set the graph height.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#width">width</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td colspan="2" class="summary">Set the graph width.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#stack_colors">stack_colors</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
+      <td colspan="2" class="summary">Set the colors for data groups.</td>
+    </tr>
+</table>
 <h2><a href="#Object_methods">Object methods </a></h2>
 <table class="function_list">
     <tr>
       <td class="name" >
-        <a href="#add_value">:add_value <span class='function_args'> <b>(</b>value[, group]<b>)</b></span></a>
+        <a href="#pick_data_group_color">:pick_data_group_color <span class='function_args'> <b>(</b>group_idx<b>)</b></span></a>
+        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;gears.color</span></span>
+      </td>
+      <td colspan="2" class="summary">Determine the color to paint a data group with.</td>
+    </tr>
+    <tr>
+      <td class="name" >
+        <a href="#compute_drawn_values_num">:compute_drawn_values_num <span class='function_args'> <b>(</b>usable_width<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">Add a value to the graph</td>
+      <td colspan="2" class="summary">Determine how many values should be drawn for a given widget width.</td>
+    </tr>
+    <tr>
+      <td class="name" >
+        <a href="#add_value">:add_value <span class='function_args'> <b>(</b>[value=NaN[, group=1]]<b>)</b></span></a>
+        <span class="summarytype"></span>
+      </td>
+      <td colspan="2" class="summary">Add a value to the graph.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -514,14 +562,15 @@
 <h2><a href="#Theme_variables">Theme variables</a></h2>
 <table class="function_list">
     <tr>
+      <td class="shortname" ><a href="#beautiful.graph_fg">beautiful.graph_fg</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
+      <td colspan="2" class="summary">The graph foreground color
+ Used, when the <a href="../widgets/wibox.widget.graph.html#color">color</a> property isn&rsquo;t set.</td>
+    </tr>
+    <tr>
       <td class="shortname" ><a href="#beautiful.graph_bg">beautiful.graph_bg</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
       <td colspan="2" class="summary">The graph background color.</td>
-    </tr>
-    <tr>
-      <td class="shortname" ><a href="#beautiful.graph_fg">beautiful.graph_fg</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
-      <td colspan="2" class="summary">The graph foreground color.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#beautiful.graph_border_color">beautiful.graph_border_color</a></td>
@@ -607,8 +656,7 @@
     <ul>
         <li><span class="parameter">args</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Standard widget() arguments. You should add width and height
- key to set graph geometry.
+         Standard widget() arguments.
         </li>
     </ul>
 
@@ -656,7 +704,7 @@
     <ul>
         <pre class="example"><span class="keyword">for</span> _, width <span class="keyword">in</span> <span class="global">ipairs</span> { <span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">10</span> } <span class="keyword">do</span>
     wibox.widget {
-        max_value     = <span class="number">30</span>,
+        border_width  = width,
         border_color  = beautiful.border_color,
         widget        = wibox.widget.graph,
     }
@@ -694,8 +742,6 @@
     <dd>
     Set the graph border color.</p>
 
-<p> If the value is nil, no border will be drawn.</p>
-
 <p><img src="../images/AUTOGEN_wibox_widget_graph_border_color.svg" alt="Usage example" />
 
     <h3>Type constraints:</h3>
@@ -717,7 +763,7 @@
     <ul>
         <pre class="example"><span class="keyword">for</span> _, color <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'#ff0000'</span>, <span class="string">'#00ff00'</span>, <span class="string">'#0000ff'</span>, <span class="string">'#ff00ff'</span> } <span class="keyword">do</span>
     wibox.widget {
-        max_value     = <span class="number">29</span>,
+        border_width  = <span class="number">2</span>,
         border_color  = color,
         widget        = wibox.widget.graph,
     }
@@ -763,6 +809,8 @@
     <dd>
     Set the graph foreground color.</p>
 
+<p> This color is used, when <a href="../widgets/wibox.widget.graph.html#group_colors">group_colors</a> isn&rsquo;t set.</p>
+
 <p><img src="../images/AUTOGEN_wibox_widget_graph_color.svg" alt="Usage example" />
 
     <h3>Type constraints:</h3>
@@ -784,7 +832,6 @@
     <ul>
         <pre class="example"><span class="keyword">for</span> _, color <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'#ff0000'</span>, <span class="string">'#00ff00'</span>, <span class="string">'#0000ff'</span>, <span class="string">'#ff00ff'</span> } <span class="keyword">do</span>
     wibox.widget {
-        max_value = <span class="number">29</span>,
         color     = color,
         widget    = wibox.widget.graph,
     }
@@ -851,9 +898,8 @@
     <ul>
         <pre class="example"><span class="keyword">for</span> _, color <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'#ff0000'</span>, <span class="string">'#00ff00'</span>, <span class="string">'#0000ff'</span>, <span class="string">'#ff00ff'</span> } <span class="keyword">do</span>
     wibox.widget {
-        max_value        = <span class="number">29</span>,
         background_color = color,
-        widget        = wibox.widget.graph,
+        widget           = wibox.widget.graph,
     }
  <span class="keyword">end</span></pre>
     </ul>
@@ -886,6 +932,82 @@
 
 </dd>
     <dt>
+    <a name = "group_colors"></a>
+    <strong>group_colors</strong>
+    <span class="proptype"><span class='summary_type'>table</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Set the colors for data groups.</p>
+
+<p> Colors in this table are used to paint respective data groups.
+ When this property is unset (default), the <a href="../widgets/wibox.widget.graph.html#color">color</a> property is used
+ instead for all data groups.
+ When this property is set, but there&rsquo;s no color for a data group in it
+ (i.e. <a href="../widgets/wibox.widget.graph.html#group_colors">group_colors</a>[group] is nil or false), then the respective
+ data group is disabled, i.e. not drawn.</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_graph_stacked_group_disable.svg" alt="Usage example" />
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">colors</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with colors for data groups.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../theme_related_libraries/gears.color.html#">gears.color</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> colors_normal = {
+    <span class="string">'#ff0000'</span>,
+    <span class="string">'#00ff00'</span>, <span class="comment">-- the data group is green
+</span>    <span class="string">'#0000ff'</span>
+}
+<span class="keyword">local</span> colors_transparent = {
+    <span class="string">'#ff0000'</span>,
+    <span class="string">'#00000000'</span>, <span class="comment">-- the data group is transparent
+</span>    <span class="string">'#0000ff'</span>
+}
+<span class="keyword">local</span> colors_disabled = {
+    <span class="string">'#ff0000'</span>,
+    <span class="keyword">nil</span>, <span class="comment">-- the data group is disabled
+</span>    <span class="string">'#0000ff'</span>
+}
+
+wibox.widget {
+    stack         = <span class="keyword">true</span>,
+    group_colors  = colors_normal,
+    widget        = wibox.widget.graph,
+}
+
+wibox.widget {
+    stack         = <span class="keyword">true</span>,
+    group_colors  = colors_transparent,
+    widget        = wibox.widget.graph,
+}
+
+wibox.widget {
+    stack         = <span class="keyword">true</span>,
+    group_colors  = colors_disabled,
+    widget        = wibox.widget.graph,
+} </pre>
+    </ul>
+
+
+    <span id=item1321 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "max_value"></a>
     <strong>max_value</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
@@ -894,7 +1016,12 @@
     </span>
     </dt>
     <dd>
-    Set the maximum value the graph should handle.</p>
+    The maximum value the graph should handle.</p>
+
+<p> This value corresponds to the top of the graph.
+ If <a href="../widgets/wibox.widget.graph.html#scale">scale</a> is also set, the graph never scales up below this value, but it
+ automatically scales down to make all data fit.
+ If <a href="../widgets/wibox.widget.graph.html#scale">scale</a> and <a href="../widgets/wibox.widget.graph.html#max_value">max_value</a> are unset, <a href="../widgets/wibox.widget.graph.html#max_value">max_value</a> defaults to 1.</p>
 
 <p><img src="../images/AUTOGEN_wibox_widget_graph_max_value.svg" alt="Usage example" />
 
@@ -912,20 +1039,17 @@
 wibox.widget {
     max_value = <span class="number">10</span>,
     widget    = wibox.widget.graph,
-}
-
-If <span class="string">"scale"</span> is also set, the graph never scales up below this value, but it
-automatically scales down to make all data fit.</pre>
+}</pre>
     </ul>
 
      <br />
-     <center id=button1321>
-     <a class="show_more_button" onclick="show_extra('1321')">
+     <center id=button1322>
+     <a class="show_more_button" onclick="show_extra('1322')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1321 class="hide_extra">
+    <span id=item1322 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::max_value</code></span>  When the <a href="../widgets/wibox.widget.graph.html#max_value">max_value</a> value changes.</li>
@@ -946,7 +1070,12 @@ automatically scales down to make all data fit.</pre>
     </span>
     </dt>
     <dd>
-    The minimum value.</p>
+    The minimum value the graph should handle.</p>
+
+<p> This value corresponds to the bottom of the graph.
+ If <a href="../widgets/wibox.widget.graph.html#scale">scale</a> is also set, the graph never scales up above this value, but it
+ automatically scales down to make all data fit.
+ If <a href="../widgets/wibox.widget.graph.html#scale">scale</a> and <a href="../widgets/wibox.widget.graph.html#min_value">min_value</a> are unset, <a href="../widgets/wibox.widget.graph.html#min_value">min_value</a> defaults to 0.</p>
 
 <p><img src="../images/AUTOGEN_wibox_widget_graph_min_value.svg" alt="Usage example" />
 
@@ -965,20 +1094,17 @@ wibox.widget {
     min_value = <span class="number">10</span>,
     max_value = <span class="number">30</span>,
     widget    = wibox.widget.graph,
-}
-
-Note that the min_value is <span class="keyword">not</span> supported when used along with the stack
-property.</pre>
+}</pre>
     </ul>
 
      <br />
-     <center id=button1322>
-     <a class="show_more_button" onclick="show_extra('1322')">
+     <center id=button1323>
+     <a class="show_more_button" onclick="show_extra('1323')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1322 class="hide_extra">
+    <span id=item1323 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::min_value</code></span>  When the <a href="../widgets/wibox.widget.graph.html#min_value">min_value</a> value changes.</li>
@@ -1001,6 +1127,14 @@ property.</pre>
     <dd>
     Set the graph to automatically scale its values.  Default is false.</p>
 
+<p> If this property is set to true, the graph calculates
+ effective <a href="../widgets/wibox.widget.graph.html#min_value">min_value</a> and <a href="../widgets/wibox.widget.graph.html#max_value">max_value</a> based on the displayed data,
+ so that all data fits on screen. The properties themselves aren&rsquo;t changed,
+ but the graph is drawn as though <a href="../widgets/wibox.widget.graph.html#min_value">min_value</a>(<a href="../widgets/wibox.widget.graph.html#max_value">max_value</a>) were equal to
+ the minimum(maximum) value among itself and the currently drawn values.
+ If <a href="../widgets/wibox.widget.graph.html#min_value">min_value</a>(<a href="../widgets/wibox.widget.graph.html#max_value">max_value</a>) is unset, then only the drawn values
+ are considered in this calculation.</p>
+
 <p><img src="../images/AUTOGEN_wibox_widget_graph_scale1.svg" alt="Usage example" />
 
 
@@ -1021,19 +1155,144 @@ wibox.widget {
     </ul>
 
      <br />
-     <center id=button1323>
-     <a class="show_more_button" onclick="show_extra('1323')">
+     <center id=button1324>
+     <a class="show_more_button" onclick="show_extra('1324')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1323 class="hide_extra">
+    <span id=item1324 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::scale</code></span>  When the <a href="../widgets/wibox.widget.graph.html#scale">scale</a> value changes.</li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#">wibox.widget.graph</a></span> The object which changed (useful when connecting many object to the same callback).</li>
              <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#scale">scale</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "clamp_bars"></a>
+    <strong>clamp_bars</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Clamp graph bars to keep them inside the widget for out-of-range values.</p>
+
+<p> Drawing values outside the [<a href="../widgets/wibox.widget.graph.html#min_value">min_value</a>, <a href="../widgets/wibox.widget.graph.html#max_value">max_value</a>] range leads to
+ bar shapes that exceed physical widget dimensions.
+ Most of the time this doesn&rsquo;t matter, because bar shapes are rectangles
+ and bar heights aren&rsquo;t large enough to trigger errors in the drawing system.
+ However for some shapes and values it does make a difference and leads
+ to visibly different and/or invalid result.</p>
+
+<p> When this property is set to true (the default), the graph clamps
+ bars' heights to keep them within the graph.</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_graph_clamp_bars.svg" alt="Usage example" />
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">wibox.widget {
+    clamp_bars    = <span class="keyword">false</span>,
+    step_width    = <span class="number">9</span>,
+    step_spacing  = <span class="number">1</span>,
+    step_shape    = gears.shape.arrow,
+    widget        = wibox.widget.graph,
+}
+
+wibox.widget {
+    <span class="comment">--clamp_bars    = true, --default
+</span>    step_width    = <span class="number">9</span>,
+    step_spacing  = <span class="number">1</span>,
+    step_shape    = gears.shape.arrow,
+    widget        = wibox.widget.graph,
+} </pre>
+    </ul>
+
+     <br />
+     <center id=button1325>
+     <a class="show_more_button" onclick="show_extra('1325')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1325 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::clamp_bars</code></span>  When the <a href="../widgets/wibox.widget.graph.html#clamp_bars">clamp_bars</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#">wibox.widget.graph</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#clamp_bars">clamp_bars</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "baseline_value"></a>
+    <strong>baseline_value</strong>
+    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    The value corresponding to the starting point of graph bars.  Default is 0.</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_graph_baseline_value.svg" alt="Usage example" />
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">wibox.widget {
+    <span class="comment">--baseline_value = 0, --default
+</span>    min_value      = -<span class="number">5</span>,
+    max_value      = <span class="number">5</span>,
+    widget         = wibox.widget.graph,
+}
+
+wibox.widget {
+    baseline_value = <span class="number">5</span>,
+    min_value      = -<span class="number">5</span>,
+    max_value      = <span class="number">5</span>,
+    widget         = wibox.widget.graph,
+}
+
+wibox.widget {
+    baseline_value = -<span class="number">2.5</span>,
+    min_value      = -<span class="number">5</span>,
+    max_value      = <span class="number">5</span>,
+    widget         = wibox.widget.graph,
+} </pre>
+    </ul>
+
+     <br />
+     <center id=button1326>
+     <a class="show_more_button" onclick="show_extra('1326')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1326 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::baseline_value</code></span>  When the <a href="../widgets/wibox.widget.graph.html#baseline_value">baseline_value</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#">wibox.widget.graph</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#baseline_value">baseline_value</a></span> The new value affected to the property.</li>
            </ul>
      </ul>
     </span>
@@ -1049,8 +1308,6 @@ wibox.widget {
     </dt>
     <dd>
     Set the width or the individual steps.</p>
-
-<p> Note that it isn&rsquo;t supported when used along with stacked graphs.</p>
 
 <p><img src="../images/AUTOGEN_wibox_widget_graph_step.svg" alt="Usage example" />
 
@@ -1073,13 +1330,13 @@ wibox.widget {
     </ul>
 
      <br />
-     <center id=button1324>
-     <a class="show_more_button" onclick="show_extra('1324')">
+     <center id=button1327>
+     <a class="show_more_button" onclick="show_extra('1327')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1324 class="hide_extra">
+    <span id=item1327 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::step_width</code></span>  When the <a href="../widgets/wibox.widget.graph.html#step_width">step_width</a> value changes.</li>
@@ -1102,8 +1359,6 @@ wibox.widget {
     <dd>
     Set the spacing between the steps.</p>
 
-<p> Note that it isn&rsquo;t supported when used along with stacked graphs.</p>
-
 <p><img src="../images/AUTOGEN_wibox_widget_graph_step_spacing.svg" alt="Usage example" />
 
 
@@ -1114,7 +1369,6 @@ wibox.widget {
     <ul>
         <pre class="example"><span class="keyword">for</span> _, spacing <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">10</span>} <span class="keyword">do</span>
     wibox.widget {
-        max_value    = <span class="number">29</span>,
         step_spacing = spacing,
         widget       = wibox.widget.graph,
     }
@@ -1122,13 +1376,13 @@ wibox.widget {
     </ul>
 
      <br />
-     <center id=button1325>
-     <a class="show_more_button" onclick="show_extra('1325')">
+     <center id=button1328>
+     <a class="show_more_button" onclick="show_extra('1328')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1325 class="hide_extra">
+    <span id=item1328 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::step_spacing</code></span>  When the <a href="../widgets/wibox.widget.graph.html#step_spacing">step_spacing</a> value changes.</li>
@@ -1181,13 +1435,13 @@ wibox.widget {
     </ul>
 
      <br />
-     <center id=button1326>
-     <a class="show_more_button" onclick="show_extra('1326')">
+     <center id=button1329>
+     <a class="show_more_button" onclick="show_extra('1329')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1326 class="hide_extra">
+    <span id=item1329 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::step_shape</code></span>  When the <a href="../widgets/wibox.widget.graph.html#step_shape">step_shape</a> value changes.</li>
@@ -1210,7 +1464,12 @@ wibox.widget {
     <dd>
     Set the graph to draw stacks.  Default is false.</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_graph_stacked.svg" alt="Usage example" />
+<p> When set to true, bars of each successive data group are drawn on top of
+ bars of previous groups, instead of the baseline.
+ This necessitates all data values to be non-negative.
+ Negative values, if present, will trigger <a href="../widgets/wibox.widget.graph.html#nan_color">NaN indication</a>.</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_graph_normal_vs_stacked.svg" alt="Usage example" />
 
 
 
@@ -1223,23 +1482,37 @@ wibox.widget {
     <span class="string">'#00ff00'</span>,
     <span class="string">'#0000ff'</span>
 }
+<span class="keyword">local</span> thin_arrow_shape = <span class="keyword">function</span>(cr, width, height)
+    gears.shape.arrow(cr, width, height, <span class="keyword">nil</span>, <span class="number">1</span>, <span class="global">math</span>.max(<span class="number">0</span>, height-<span class="number">4</span>))
+<span class="keyword">end</span>
 
 wibox.widget {
-    max_value     = <span class="number">29</span>,
-    stack         = <span class="keyword">true</span>,
-    stack_colors  = colors,
+    <span class="comment">--stack         = false, --default
+</span>    group_colors  = colors,
+    step_width    = <span class="number">5</span>,
+    step_spacing  = <span class="number">1</span>,
+    step_shape    = thin_arrow_shape,
     widget        = wibox.widget.graph,
-}</pre>
+}
+
+wibox.widget {
+    stack         = <span class="keyword">true</span>,
+    group_colors  = colors,
+    step_width    = <span class="number">5</span>,
+    step_spacing  = <span class="number">1</span>,
+    step_shape    = thin_arrow_shape,
+    widget        = wibox.widget.graph,
+} </pre>
     </ul>
 
      <br />
-     <center id=button1327>
-     <a class="show_more_button" onclick="show_extra('1327')">
+     <center id=button1330>
+     <a class="show_more_button" onclick="show_extra('1330')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1327 class="hide_extra">
+    <span id=item1330 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::stack</code></span>  When the <a href="../widgets/wibox.widget.graph.html#stack">stack</a> value changes.</li>
@@ -1252,89 +1525,197 @@ wibox.widget {
 
 </dd>
     <dt>
-    <a name = "stack_colors"></a>
-    <strong>stack_colors</strong>
-    <span class="proptype"><span class='summary_type'>table</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Set the graph stacking colors.  Order matters.
-
-    <h3>Type constraints:</h3>
-    <ul>
-        <li><span class="parameter">stack_colors</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         A table with stacking colors.
-        </li>
-    </ul>
-
-
-
-
-
-
-    <span id=item1328 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "height"></a>
-    <strong>height</strong>
-    <span class="proptype"><span class='summary_type'>number</span></span>
+    <a name = "nan_indication"></a>
+    <strong>nan_indication</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
     <span class="baseclass" >
          &middot 1 signal
     </span>
     </dt>
     <dd>
-    Set the graph height.
+    Display NaN indication.  Default is true.</p>
 
-    <h3>Type constraints:</h3>
+<p> When the data contains <a href="https://en.wikipedia.org/wiki/NaN">NaN</a> values,
+ and <a href="../widgets/wibox.widget.graph.html#nan_indication">nan_indication</a> is set, the corresponding area,
+ where the value bar should have been drawn, is filled
+ with the <a href="../widgets/wibox.widget.graph.html#nan_color">nan_color</a> from top to bottom.
+ The painting is done after all other data is rendered,
+ to make sure that it won&rsquo;t be overpainted and go unnoticed.</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_graph_nan_color.svg" alt="Usage example" />
+
+
+
+
+
+    <h3>Usage:</h3>
     <ul>
-        <li><span class="parameter">height</span>
-            <span class="types"><span class="type">number</span></span>
-         The height to set.
-        </li>
+        <pre class="example"><span class="keyword">local</span> data = {
+    -<span class="number">5</span>, -<span class="number">4</span>, <span class="number">0</span>/<span class="number">0</span>, -<span class="number">2</span>, -<span class="number">1</span>, <span class="number">0</span>/<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>/<span class="number">0</span>, <span class="number">5</span>,
+}
+
+wibox.widget {
+    <span class="comment">-- nan_indication = true, -- default
+</span>    <span class="comment">-- default nan_color
+</span>    step_width    = <span class="number">9</span>,
+    step_spacing  = <span class="number">1</span>,
+    widget        = wibox.widget.graph,
+}
+
+wibox.widget {
+    <span class="comment">-- nan_indication = true, -- default
+</span>    nan_color     = <span class="string">'#ff00007f'</span>,
+    step_width    = <span class="number">9</span>,
+    step_spacing  = <span class="number">1</span>,
+    widget        = wibox.widget.graph,
+}
+
+wibox.widget {
+    nan_indication = <span class="keyword">false</span>,
+    step_width     = <span class="number">9</span>,
+    step_spacing   = <span class="number">1</span>,
+    widget         = wibox.widget.graph,
+} </pre>
     </ul>
 
-
-
-
-
      <br />
-     <center id=button1329>
-     <a class="show_more_button" onclick="show_extra('1329')">
+     <center id=button1331>
+     <a class="show_more_button" onclick="show_extra('1331')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1329 class="hide_extra">
+    <span id=item1331 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
-          <li><span class="parameter"><code>property::height</code></span>  When the <a href="../widgets/wibox.widget.graph.html#height">height</a> value changes.</li>
+          <li><span class="parameter"><code>property::nan_indication</code></span>  When the <a href="../widgets/wibox.widget.graph.html#nan_indication">nan_indication</a> value changes.</li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#">wibox.widget.graph</a></span> The object which changed (useful when connecting many object to the same callback).</li>
-             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#height">height</a></span> The new value affected to the property.</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#nan_indication">nan_indication</a></span> The new value affected to the property.</li>
            </ul>
      </ul>
     </span>
 
 </dd>
     <dt>
-    <a name = "width"></a>
-    <strong>width</strong>
-    <span class="proptype"><span class='summary_type'>number</span></span>
+    <a name = "nan_color"></a>
+    <strong>nan_color</strong>
+    <span class="proptype"><span class='summary_type'>gears.color</span></span>
     <span class="baseclass" >
          &middot 1 signal
     </span>
     </dt>
     <dd>
-    Set the graph width.
+    The color of NaN indication.</p>
+
+<p> The color used when <a href="../widgets/wibox.widget.graph.html#nan_indication">nan_indication</a> is set.
+ Defaults to a yellow-black diagonal stripes pattern.</p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_graph_stacked_nan.svg" alt="Usage example" />
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">number</span>
-         width The width to set.
+        <li><span class="parameter">nan_color</span>
+            <span class="types"><span class="type">gears.color</span></span>
+         The color of NaN indication.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../theme_related_libraries/gears.color.html#">gears.color</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="comment">-- The red and blue data groups are constant,
+</span><span class="comment">-- but the green data group is a sine,
+</span><span class="comment">-- which, when it becomes negative,
+</span><span class="comment">-- triggers NaN indication in a stacked graph.
+</span><span class="keyword">local</span> colors = {
+    <span class="string">'#ff0000'</span>,
+    <span class="string">'#00ff00'</span>,
+    <span class="string">'#0000ff'</span>
+}
+
+wibox.widget {
+    <span class="comment">--default nan_color
+</span>    stack        = <span class="keyword">true</span>,
+    group_colors = colors,
+    step_width   = <span class="number">1</span>,
+    step_spacing = <span class="number">1</span>,
+    widget       = wibox.widget.graph,
+}
+
+wibox.widget {
+    nan_color    = <span class="string">'#ff00ff7f'</span>,
+    stack        = <span class="keyword">true</span>,
+    group_colors = colors,
+    step_width   = <span class="number">1</span>,
+    step_spacing = <span class="number">1</span>,
+    widget       = wibox.widget.graph,
+}
+
+wibox.widget {
+    nan_indication = <span class="keyword">false</span>,
+    stack          = <span class="keyword">true</span>,
+    group_colors   = colors,
+    step_width     = <span class="number">1</span>,
+    step_spacing   = <span class="number">1</span>,
+    widget         = wibox.widget.graph,
+} </pre>
+    </ul>
+
+     <br />
+     <center id=button1332>
+     <a class="show_more_button" onclick="show_extra('1332')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1332 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::nan_color</code></span>  When the <a href="../widgets/wibox.widget.graph.html#nan_color">nan_color</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#">wibox.widget.graph</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#nan_color">nan_color</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "capacity"></a>
+    <strong>capacity</strong>
+    <span class="proptype"><span class='summary_type'>integer <i>or</i> nil</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Set the graph capacity.</p>
+
+<p> Since the typical uses of the graph widget imply that <a href="../widgets/wibox.widget.graph.html#add_value">add_value</a> will be
+ called an indefinite number of times, the widget needs a way to know, when
+ to start discarding old values from the backing array.</p>
+
+<p> When <a href="../widgets/wibox.widget.graph.html#capacity">capacity</a> is set, it defines the maximum number of values to keep in
+ each data group.</p>
+
+<p> When <a href="../widgets/wibox.widget.graph.html#capacity">capacity</a> is unset (default), the number is determined heuristically,
+ which is sufficient most of the time, unless the widget gets resized
+ too much too fast.
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">capacity</span>
+            <span class="types"><span class="type">integer</span> or <span class="type">nil</span></span>
+         The maximum number of values to keep
+ per data group (<code>nil</code> for automatic guess).
+         (<em>default</em> nil)
         </li>
     </ul>
 
@@ -1343,19 +1724,19 @@ wibox.widget {
 
 
      <br />
-     <center id=button1330>
-     <a class="show_more_button" onclick="show_extra('1330')">
+     <center id=button1333>
+     <a class="show_more_button" onclick="show_extra('1333')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1330 class="hide_extra">
+    <span id=item1333 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
-          <li><span class="parameter"><code>property::width</code></span>  When the <a href="../widgets/wibox.widget.graph.html#width">width</a> value changes.</li>
+          <li><span class="parameter"><code>property::capacity</code></span>  When the <a href="../widgets/wibox.widget.graph.html#capacity">capacity</a> value changes.</li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#">wibox.widget.graph</a></span> The object which changed (useful when connecting many object to the same callback).</li>
-             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>number</code></span> The new value affected to the property.</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#capacity">capacity</a></span> The new value affected to the property.</li>
            </ul>
      </ul>
     </span>
@@ -1555,29 +1936,201 @@ wibox.widget {
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Deprecated_object_properties"></a>Deprecated object properties</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "height"></a>
+    <strong>height</strong>
+    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Set the graph height.</p>
+
+<p> This property is deprecated.  Use a <a href="../widget_containers/wibox.container.constraint.html#">wibox.container.constraint</a> widget or
+ <code>forced_height</code>.
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+         The height to set.
+        </li>
+    </ul>
+
+
+
+
+
+     <br />
+     <center id=button1334>
+     <a class="show_more_button" onclick="show_extra('1334')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1334 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::height</code></span>  When the <a href="../widgets/wibox.widget.graph.html#height">height</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#">wibox.widget.graph</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#height">height</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "width"></a>
+    <strong>width</strong>
+    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Set the graph width.</p>
+
+<p> This property is deprecated.  Use a <a href="../widget_containers/wibox.container.constraint.html#">wibox.container.constraint</a> widget or
+ <code>forced_width</code>.
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+         The width to set.
+        </li>
+    </ul>
+
+
+
+
+
+     <br />
+     <center id=button1335>
+     <a class="show_more_button" onclick="show_extra('1335')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1335 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::width</code></span>  When the <a href="../widgets/wibox.widget.graph.html#width">width</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#">wibox.widget.graph</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.graph.html#width">width</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "stack_colors"></a>
+    <strong>stack_colors</strong>
+    <span class="proptype"><span class='summary_type'>table</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Set the colors for data groups.</p>
+
+<p> This property is deprecated. Use <a href="../widgets/wibox.widget.graph.html#group_colors">group_colors</a> instead.
+
+    <h3>Type constraints:</h3>
+    <ul>
+        <li><span class="parameter">colors</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+         A table with colors for data groups.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../widgets/wibox.widget.graph.html#group_colors">group_colors</a>
+    </ul>
+
+
+
+    <span id=item1336 class="hide_extra">
+    </span>
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Object_methods"></a>Object methods </h2>
 
     <dl class="function">
     <dt>
-    <a name = "add_value"></a>
-    <strong>:add_value <span class='function_args'> <b>(</b>value[, group]<b>)</b></span></strong>
+    <a name = "pick_data_group_color"></a>
+    <strong>:pick_data_group_color <span class='function_args'> <b>(</b>group_idx<b>)</b></span></strong>
+    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;gears.color</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Determine the color to paint a data group with.</p>
+
+<p> The graph uses this method to choose a color for a given data group.
+ The default implementation uses a color from the <a href="../widgets/wibox.widget.graph.html#group_colors">group_colors</a> table,
+ if present, otherwise it falls back to <a href="../widgets/wibox.widget.graph.html#color">color</a>, then
+ <a href="../widgets/wibox.widget.graph.html#beautiful.graph_fg">beautiful.graph_fg</a> and finally to color red (#ff0000).
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">group_idx</span>
+            <span class="types"><span class="type">number</span></span>
+         The index of the data group.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">gears.color</span></span>
+        The color to paint the data group&rsquo;s values with.
+    </ol>
+
+
+
+
+
+    <span id=item1337 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "compute_drawn_values_num"></a>
+    <strong>:compute_drawn_values_num <span class='function_args'> <b>(</b>usable_width<b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Add a value to the graph
+    Determine how many values should be drawn for a given widget width.</p>
+
+<p> The graph uses this method to determine the upper bound on the
+ number of values that will be drawn from each data group. This affects,
+ among other things, how many values will be considered for autoscaling,
+ when <a href="../widgets/wibox.widget.graph.html#scale">scale</a> is true, and, indirectly, how many values will be kept in
+ the backing array, when <a href="../widgets/wibox.widget.graph.html#capacity">capacity</a> is unset.</p>
+
+<p> The default implementation computes the minimum number that is enough
+ to completely cover the given width with <a href="../widgets/wibox.widget.graph.html#step_width">step_width</a> + <a href="../widgets/wibox.widget.graph.html#step_spacing">step_spacing</a>
+ intervals. The graph calls this method on every redraw and the width
+ passed is the width of the value drawing area, i.e the graph borders
+ are subtracted (2*<a href="../widgets/wibox.widget.graph.html#border_width">border_width</a>).
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">value</span>
+        <li><span class="parameter">usable_width</span>
             <span class="types"><span class="type">number</span></span>
-         The value to be added to the graph
-        </li>
-        <li><span class="parameter">group</span>
-            <span class="types"><span class="type">number</span></span>
-         The stack color group index.
-         (<em>optional</em>)
+
         </li>
     </ul>
 
@@ -1586,7 +2139,52 @@ wibox.widget {
 
 
 
-    <span id=item1331 class="hide_extra">
+    <span id=item1338 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "add_value"></a>
+    <strong>:add_value <span class='function_args'> <b>(</b>[value=NaN[, group=1]]<b>)</b></span></strong>
+    <span class="proptype"></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Add a value to the graph.</p>
+
+<p> The graph widget keeps its values grouped in <em>data groups</em>. Each data group
+ is drawn with its own set of bars, starting with the latest value
+ in the data group at the left edge of the graph.</p>
+
+<p> Simply calling this method with a particular data group index is the only
+ thing necessary and sufficient for creating a data group.
+ Any natural integer as a group number is ok, but the user is advised to keep
+ the group numbers low and consecutive for performance reasons.</p>
+
+<p> There are no constraints on the value parameter, other than it should
+ be a number.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+            <span class="types"><span class="type">number</span></span>
+         The value to be added to a graph&rsquo;s data group.
+         (<em>default</em> NaN)
+        </li>
+        <li><span class="parameter">group</span>
+            <span class="types"><span class="type">integer</span></span>
+         The index of the data group.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item1339 class="hide_extra">
     </span>
 
 </dd>
@@ -1598,7 +2196,9 @@ wibox.widget {
     </span>
     </dt>
     <dd>
-    Clear the graph.
+    Clear the graph.</p>
+
+<p> Removes all values from all data groups.
 
 
 
@@ -1606,7 +2206,7 @@ wibox.widget {
 
 
 
-    <span id=item1332 class="hide_extra">
+    <span id=item1340 class="hide_extra">
     </span>
 
 </dd>
@@ -1904,6 +2504,27 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
     <dl class="function">
     <dt>
+    <a name = "beautiful.graph_fg"></a>
+    <strong>beautiful.graph_fg</strong>
+    <span class="proptype"><span class='summary_type'>color</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The graph foreground color
+ Used, when the <a href="../widgets/wibox.widget.graph.html#color">color</a> property isn&rsquo;t set.
+
+
+
+
+
+
+
+    <span id=item1341 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "beautiful.graph_bg"></a>
     <strong>beautiful.graph_bg</strong>
     <span class="proptype"><span class='summary_type'>color</span></span>
@@ -1912,6 +2533,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     </dt>
     <dd>
     The graph background color.
+ Used, when the <a href="../widgets/wibox.widget.graph.html#background_color">background_color</a> property isn&rsquo;t set.
 
 
 
@@ -1919,27 +2541,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item1333 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "beautiful.graph_fg"></a>
-    <strong>beautiful.graph_fg</strong>
-    <span class="proptype"><span class='summary_type'>color</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The graph foreground color.
-
-
-
-
-
-
-
-    <span id=item1334 class="hide_extra">
+    <span id=item1342 class="hide_extra">
     </span>
 
 </dd>
@@ -1952,6 +2554,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     </dt>
     <dd>
     The graph border color.
+ Used, when the <a href="../widgets/wibox.widget.graph.html#border_color">border_color</a> property isn&rsquo;t set.
 
 
 
@@ -1959,7 +2562,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item1335 class="hide_extra">
+    <span id=item1343 class="hide_extra">
     </span>
 
 </dd>
