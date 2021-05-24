@@ -966,7 +966,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
         <a href="#to_selected_tags">:to_selected_tags <span class='function_args'> <b>(</b><b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">Tag a client with the set of current tags.</td>
+      <td colspan="2" class="summary">Find suitable tags for newly created clients.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -3321,14 +3321,18 @@ cr:paint()
       c.border_color = &lsquo;#ff00ff&rsquo;</p>
 
 <p> Note that setting this directly will override and disable all related theme
- variables.
+ variables.</p>
+
+<p> Setting a transparent color (e.g. to implement dynamic borders without size
+ changes) is supported, but requires the color to be set to <code>#00000000</code>
+ specifically. Other RGB colors with an alpha of <code>0</code> won&rsquo;t work.
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">border_color</span>
             <span class="types"><span class="type">color</span></span>
-         Any string, gradients and patterns will be converted to a
-  cairo pattern.
+         Any string, gradient or pattern definition that
+  can be converted to a cairo pattern.
         </li>
     </ul>
 
@@ -6377,7 +6381,28 @@ end)
     </span>
     </dt>
     <dd>
-    Tag a client with the set of current tags.
+    Find suitable tags for newly created clients.</p>
+
+<p> In most cases, the functionality you&rsquo;re actually looking for as a user will
+ either be</p>
+
+<pre><code>c:tags(c.screen.selected_tags)
+</code></pre>
+
+<p> or</p>
+
+<pre><code>local s = awful.screen.focused()
+c:move_to_screen(s)
+c:tags(s.selected_tags)
+</code></pre>
+
+<p> Despite its naming, this is primarily used to tag newly created clients.
+ As such, this method has no effect when applied to a client that already has
+ tags assigned (except for emitting <code>property::tag</code>).</p>
+
+<p> Additionally, while it is a rare case, if the client&rsquo;s screen has no selected
+ tags at the point of calling this method, it will fall back to the screen&rsquo;s
+ full set of tags.
 
 
 
@@ -10071,15 +10096,18 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    Change window factor of a client.
+    Change window factor of a client.</p>
+
+<p> This will emit <code>property::windowfact</code> on the specific tag object
+ <code>c.screen.selected_tag</code>.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">add</span>
             <span class="types"><span class="type">number</span></span>
-         Amount to increase/decrease the client&rsquo;s window factor.
+         Amount to increase/decrease the client&rsquo;s window factor by.
    Should be between <code>-current_window_factor</code> and something close to
-   infinite.  The normalisation then ensures that the sum of all factors is 1.
+   infinite. Normalisation then ensures that the sum of all factors is 1.
         </li>
         <li><span class="parameter">c</span>
             <span class="types"><span class="type">client</span></span>
