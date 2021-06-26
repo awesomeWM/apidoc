@@ -310,13 +310,13 @@ top_titlebar : setup {
       <td class="name" >
         <a href="#awful.titlebar">awful.titlebar <span class='function_args'> <b>(</b>c[, args={}]<b>)</b></span></a>
       </td>
-      <td colspan="2" class="summary">Get a client&rsquo;s titlebar.</td>
+      <td colspan="2" class="summary">Create a new titlebar for the given client.</td>
     </tr>
     <tr>
       <td class="name" >
         <a href="#awful.titlebar.widget.titlewidget"><span class='function_modname'>awful.titlebar.</span>widget.titlewidget <span class='function_args'> <b>(</b>c<b>)</b></span></a>
       </td>
-      <td colspan="2" class="summary">Create a new titlewidget.</td>
+      <td colspan="2" class="summary">Create a new title widget.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -371,24 +371,24 @@ top_titlebar : setup {
 <table class="function_list">
     <tr>
       <td class="name" >
-        <a href="#show"><span class='function_modname'>awful.titlebar.</span>show <span class='function_args'> <b>(</b>c[, position]<b>)</b></span></a>
+        <a href="#show"><span class='function_modname'>awful.titlebar.</span>show <span class='function_args'> <b>(</b>c[, position="top"]<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">Show a client&rsquo;s titlebar.</td>
+      <td colspan="2" class="summary">Show the client&rsquo;s titlebar.</td>
     </tr>
     <tr>
       <td class="name" >
-        <a href="#hide"><span class='function_modname'>awful.titlebar.</span>hide <span class='function_args'> <b>(</b>c[, position]<b>)</b></span></a>
+        <a href="#hide"><span class='function_modname'>awful.titlebar.</span>hide <span class='function_args'> <b>(</b>c[, position="top"]<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">Hide a client&rsquo;s titlebar.</td>
+      <td colspan="2" class="summary">Hide the client&rsquo;s titlebar.</td>
     </tr>
     <tr>
       <td class="name" >
-        <a href="#toggle"><span class='function_modname'>awful.titlebar.</span>toggle <span class='function_args'> <b>(</b>c[, position]<b>)</b></span></a>
+        <a href="#toggle"><span class='function_modname'>awful.titlebar.</span>toggle <span class='function_args'> <b>(</b>c[, position="top"]<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">Toggle a client&rsquo;s titlebar, hiding it if it is visible, otherwise showing it.</td>
+      <td colspan="2" class="summary">Toggle the client&rsquo;s titlebar, hiding it if it is visible, otherwise showing it.</td>
     </tr>
 </table>
 <h2><a href="#Object_methods">Object methods </a></h2>
@@ -817,71 +817,96 @@ top_titlebar : setup {
     </span>
     </dt>
     <dd>
-    Get a client&rsquo;s titlebar.
+    <p>Create a new titlebar for the given client.</p>
+
+<p> Every client can hold up to four titlebars, one for each side (i.e. each
+ value of <code>args.position</code>).</p>
+
+<p> If this constructor is called again with the same
+ values for the client (<code>c</code>) and the titlebar position (<code>args.position</code>),
+ the previous titlebar will be removed and replaced by the new one.</p>
+
+<p><img src="../images/AUTOGEN_awful_titlebar_constructor.svg" alt="Usage example" /></p>
+
+<pre><code> -- Create default titlebar
+ awful.titlebar(c)
+ -- Create titlebar on the client's bottom edge
+ awful.titlebar(c, { position = 'bottom' })
+ -- Create titlebar with inverted colors
+ awful.titlebar(c, { bg_normal = beautiful.fg_normal, fg_normal = beautiful.bg_normal })
+</code></pre>
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">c</span>
             <span class="types"><span class="type">client</span></span>
-         The client for which a titlebar is wanted.
+         The client the titlebar will be attached to.
         </li>
         <li><span class="parameter">args</span> A table with extra arguments for the titlebar.
         <ul>
         <li><span class="parameter">size</span>
             <span class="types"><span class="type">number</span></span>
-         The height of the titlebar.
+         The size of the titlebar. Will
+   be interpreted as <code>height</code> for horizontal titlebars or as <code>width</code> for
+   vertical titlebars.
          (<em>default</em> font.height*1.5)
         </li>
         <li><span class="parameter">position</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-        &ldquo; values are <code>top</code>,
- <code>left</code>, <code>right</code> and <code>bottom</code>.
-         (<em>default</em> top)
+         Possible values are <code>&quot;top&quot;</code>,
+ <code>&quot;left&quot;</code>, <code>&quot;right&quot;</code> and <code>&quot;bottom&quot;</code>.
+         (<em>default</em> "top")
         </li>
         <li><span class="parameter">bg_normal</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-         (<em>default</em> top)
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">bg_focus</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-         (<em>default</em> top)
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">bgimage_normal</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-         (<em>default</em> top)
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">bgimage_focus</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-         (<em>default</em> top)
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">fg_normal</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-         (<em>default</em> top)
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">fg_focus</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-         (<em>default</em> top)
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">font</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
 
-         (<em>default</em> top)
+         (<em>optional</em>)
         </li>
         </li></ul>
     </ul>
 
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/wibox.drawable.html#">wibox.drawable</a></span>
+        The newly created titlebar object.
+    </ol>
 
 
 
 
 
-    <span id=item1785 class="hide_extra">
+    <span id=item1784 class="hide_extra">
     </span>
 
 </dd>
@@ -892,7 +917,9 @@ top_titlebar : setup {
     </span>
     </dt>
     <dd>
-    Create a new titlewidget.  A title widget displays the name of a client.
+    Create a new title widget.</p>
+
+<p> A title widget displays the name of a client.
  Please note that this returns a textbox and all of textbox' API is available.
  This way, you can e.g. modify the font that is used.
 
@@ -913,7 +940,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1786 class="hide_extra">
+    <span id=item1785 class="hide_extra">
     </span>
 
 </dd>
@@ -924,7 +951,9 @@ top_titlebar : setup {
     </span>
     </dt>
     <dd>
-    Create a new icon widget.  An icon widget displays the icon of a client.
+    Create a new icon widget.</p>
+
+<p> An icon widget displays the icon of a client.
  Please note that this returns an imagebox and all of the imagebox' API is
  available. This way, you can e.g. disallow resizes.
 
@@ -945,7 +974,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1787 class="hide_extra">
+    <span id=item1786 class="hide_extra">
     </span>
 
 </dd>
@@ -956,12 +985,14 @@ top_titlebar : setup {
     </span>
     </dt>
     <dd>
-    Create a new button widget.  A button widget displays an image and reacts to
+    Create a new button widget.</p>
+
+<p> A button widget displays an image and reacts to
  mouse clicks. Please note that the caller has to make sure that this widget
- gets redrawn when needed by calling the returned widget&rsquo;s update() function.
+ gets redrawn when needed by calling the returned widget&rsquo;s <code>:update()</code> method.
  The selector function should return a value describing a state. If the value
- is a boolean, either &ldquo;active&rdquo; or &ldquo;inactive&rdquo; are used. The actual image is
- then found in the theme as &ldquo;titlebar<em>[name]</em>button<em>[normal/focus]</em>[state]&rdquo;.
+ is a boolean, either <code>&quot;active&quot;</code> or <code>&quot;inactive&quot;</code> are used. The actual image is
+ then found in the theme as <code>titlebar_[name]_button_[normal/focus]_[state]</code>.
  If that value does not exist, the focused state is ignored for the next try.
 
     <h3>Parameters:</h3>
@@ -992,7 +1023,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1788 class="hide_extra">
+    <span id=item1787 class="hide_extra">
     </span>
 
 </dd>
@@ -1017,7 +1048,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1789 class="hide_extra">
+    <span id=item1788 class="hide_extra">
     </span>
 
 </dd>
@@ -1042,7 +1073,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1790 class="hide_extra">
+    <span id=item1789 class="hide_extra">
     </span>
 
 </dd>
@@ -1067,7 +1098,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1791 class="hide_extra">
+    <span id=item1790 class="hide_extra">
     </span>
 
 </dd>
@@ -1092,7 +1123,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1792 class="hide_extra">
+    <span id=item1791 class="hide_extra">
     </span>
 
 </dd>
@@ -1117,7 +1148,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1793 class="hide_extra">
+    <span id=item1792 class="hide_extra">
     </span>
 
 </dd>
@@ -1142,7 +1173,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1794 class="hide_extra">
+    <span id=item1793 class="hide_extra">
     </span>
 
 </dd>
@@ -1152,14 +1183,14 @@ top_titlebar : setup {
     <dl class="function">
     <dt>
     <a name = "show"></a>
-    <strong><span class='function_modname'>awful.titlebar.</span>show <span class='function_args'> <b>(</b>c[, position]<b>)</b></span></strong>
+    <strong><span class='function_modname'>awful.titlebar.</span>show <span class='function_args'> <b>(</b>c[, position="top"]<b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
          &middot 1 permission
     </span>
     </dt>
     <dd>
-    Show a client&rsquo;s titlebar.
+    Show the client&rsquo;s titlebar.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1167,9 +1198,10 @@ top_titlebar : setup {
          The client whose titlebar is modified
         </li>
         <li><span class="parameter">position</span>
-         The position of the titlebar. Must be one of &ldquo;left&rdquo;,
-   &ldquo;right&rdquo;, &ldquo;top&rdquo;, &ldquo;bottom&rdquo;. Default is &ldquo;top&rdquo;.
-         (<em>optional</em>)
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The position of the titlebar. Must be one of <code>&quot;left&quot;</code>,
+   <code>&quot;right&quot;</code>, <code>&quot;top&quot;</code>, <code>&quot;bottom&quot;</code>.
+         (<em>default</em> "top")
         </li>
     </ul>
 
@@ -1178,13 +1210,13 @@ top_titlebar : setup {
 
 
      <br />
-     <center id=button1795>
-     <a class="show_more_button" onclick="show_extra('1795')">
+     <center id=button1794>
+     <a class="show_more_button" onclick="show_extra('1794')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1795 class="hide_extra">
+    <span id=item1794 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -1201,13 +1233,13 @@ top_titlebar : setup {
 </dd>
     <dt>
     <a name = "hide"></a>
-    <strong><span class='function_modname'>awful.titlebar.</span>hide <span class='function_args'> <b>(</b>c[, position]<b>)</b></span></strong>
+    <strong><span class='function_modname'>awful.titlebar.</span>hide <span class='function_args'> <b>(</b>c[, position="top"]<b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Hide a client&rsquo;s titlebar.
+    Hide the client&rsquo;s titlebar.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1215,9 +1247,10 @@ top_titlebar : setup {
          The client whose titlebar is modified
         </li>
         <li><span class="parameter">position</span>
-         The position of the titlebar. Must be one of &ldquo;left&rdquo;,
-   &ldquo;right&rdquo;, &ldquo;top&rdquo;, &ldquo;bottom&rdquo;. Default is &ldquo;top&rdquo;.
-         (<em>optional</em>)
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The position of the titlebar. Must be one of <code>&quot;left&quot;</code>,
+   <code>&quot;right&quot;</code>, <code>&quot;top&quot;</code>, <code>&quot;bottom&quot;</code>.
+         (<em>default</em> "top")
         </li>
     </ul>
 
@@ -1226,20 +1259,20 @@ top_titlebar : setup {
 
 
 
-    <span id=item1796 class="hide_extra">
+    <span id=item1795 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "toggle"></a>
-    <strong><span class='function_modname'>awful.titlebar.</span>toggle <span class='function_args'> <b>(</b>c[, position]<b>)</b></span></strong>
+    <strong><span class='function_modname'>awful.titlebar.</span>toggle <span class='function_args'> <b>(</b>c[, position="top"]<b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
          &middot 1 permission
     </span>
     </dt>
     <dd>
-    Toggle a client&rsquo;s titlebar, hiding it if it is visible, otherwise showing it.
+    Toggle the client&rsquo;s titlebar, hiding it if it is visible, otherwise showing it.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1247,9 +1280,10 @@ top_titlebar : setup {
          The client whose titlebar is modified
         </li>
         <li><span class="parameter">position</span>
-         The position of the titlebar. Must be one of &ldquo;left&rdquo;,
-   &ldquo;right&rdquo;, &ldquo;top&rdquo;, &ldquo;bottom&rdquo;. Default is &ldquo;top&rdquo;.
-         (<em>optional</em>)
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         The position of the titlebar. Must be one of <code>&quot;left&quot;</code>,
+   <code>&quot;right&quot;</code>, <code>&quot;top&quot;</code>, <code>&quot;bottom&quot;</code>.
+         (<em>default</em> "top")
         </li>
     </ul>
 
@@ -1258,13 +1292,13 @@ top_titlebar : setup {
 
 
      <br />
-     <center id=button1797>
-     <a class="show_more_button" onclick="show_extra('1797')">
+     <center id=button1796>
+     <a class="show_more_button" onclick="show_extra('1796')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1797 class="hide_extra">
+    <span id=item1796 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -1306,7 +1340,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1798 class="hide_extra">
+    <span id=item1797 class="hide_extra">
     </span>
 
 </dd>
@@ -1334,7 +1368,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1799 class="hide_extra">
+    <span id=item1798 class="hide_extra">
     </span>
 
 </dd>
@@ -1358,7 +1392,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1800 class="hide_extra">
+    <span id=item1799 class="hide_extra">
     </span>
 
 </dd>
@@ -1382,7 +1416,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1801 class="hide_extra">
+    <span id=item1800 class="hide_extra">
     </span>
 
 </dd>
@@ -1406,7 +1440,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1802 class="hide_extra">
+    <span id=item1801 class="hide_extra">
     </span>
 
 </dd>
@@ -1430,7 +1464,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1803 class="hide_extra">
+    <span id=item1802 class="hide_extra">
     </span>
 
 </dd>
@@ -1454,7 +1488,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1804 class="hide_extra">
+    <span id=item1803 class="hide_extra">
     </span>
 
 </dd>
@@ -1478,7 +1512,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1805 class="hide_extra">
+    <span id=item1804 class="hide_extra">
     </span>
 
 </dd>
@@ -1502,7 +1536,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1806 class="hide_extra">
+    <span id=item1805 class="hide_extra">
     </span>
 
 </dd>
@@ -1526,7 +1560,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1807 class="hide_extra">
+    <span id=item1806 class="hide_extra">
     </span>
 
 </dd>
@@ -1550,7 +1584,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1808 class="hide_extra">
+    <span id=item1807 class="hide_extra">
     </span>
 
 </dd>
@@ -1574,7 +1608,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1809 class="hide_extra">
+    <span id=item1808 class="hide_extra">
     </span>
 
 </dd>
@@ -1598,7 +1632,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1810 class="hide_extra">
+    <span id=item1809 class="hide_extra">
     </span>
 
 </dd>
@@ -1622,7 +1656,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1811 class="hide_extra">
+    <span id=item1810 class="hide_extra">
     </span>
 
 </dd>
@@ -1646,7 +1680,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1812 class="hide_extra">
+    <span id=item1811 class="hide_extra">
     </span>
 
 </dd>
@@ -1670,7 +1704,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1813 class="hide_extra">
+    <span id=item1812 class="hide_extra">
     </span>
 
 </dd>
@@ -1694,7 +1728,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1814 class="hide_extra">
+    <span id=item1813 class="hide_extra">
     </span>
 
 </dd>
@@ -1718,7 +1752,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1815 class="hide_extra">
+    <span id=item1814 class="hide_extra">
     </span>
 
 </dd>
@@ -1742,7 +1776,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1816 class="hide_extra">
+    <span id=item1815 class="hide_extra">
     </span>
 
 </dd>
@@ -1766,7 +1800,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1817 class="hide_extra">
+    <span id=item1816 class="hide_extra">
     </span>
 
 </dd>
@@ -1790,7 +1824,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1818 class="hide_extra">
+    <span id=item1817 class="hide_extra">
     </span>
 
 </dd>
@@ -1814,7 +1848,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1819 class="hide_extra">
+    <span id=item1818 class="hide_extra">
     </span>
 
 </dd>
@@ -1838,7 +1872,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1820 class="hide_extra">
+    <span id=item1819 class="hide_extra">
     </span>
 
 </dd>
@@ -1862,7 +1896,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1821 class="hide_extra">
+    <span id=item1820 class="hide_extra">
     </span>
 
 </dd>
@@ -1886,7 +1920,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1822 class="hide_extra">
+    <span id=item1821 class="hide_extra">
     </span>
 
 </dd>
@@ -1910,7 +1944,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1823 class="hide_extra">
+    <span id=item1822 class="hide_extra">
     </span>
 
 </dd>
@@ -1934,7 +1968,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1824 class="hide_extra">
+    <span id=item1823 class="hide_extra">
     </span>
 
 </dd>
@@ -1958,7 +1992,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1825 class="hide_extra">
+    <span id=item1824 class="hide_extra">
     </span>
 
 </dd>
@@ -1982,7 +2016,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1826 class="hide_extra">
+    <span id=item1825 class="hide_extra">
     </span>
 
 </dd>
@@ -2006,7 +2040,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1827 class="hide_extra">
+    <span id=item1826 class="hide_extra">
     </span>
 
 </dd>
@@ -2030,7 +2064,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1828 class="hide_extra">
+    <span id=item1827 class="hide_extra">
     </span>
 
 </dd>
@@ -2054,7 +2088,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1829 class="hide_extra">
+    <span id=item1828 class="hide_extra">
     </span>
 
 </dd>
@@ -2078,7 +2112,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1830 class="hide_extra">
+    <span id=item1829 class="hide_extra">
     </span>
 
 </dd>
@@ -2102,7 +2136,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1831 class="hide_extra">
+    <span id=item1830 class="hide_extra">
     </span>
 
 </dd>
@@ -2126,7 +2160,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1832 class="hide_extra">
+    <span id=item1831 class="hide_extra">
     </span>
 
 </dd>
@@ -2150,7 +2184,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1833 class="hide_extra">
+    <span id=item1832 class="hide_extra">
     </span>
 
 </dd>
@@ -2174,7 +2208,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1834 class="hide_extra">
+    <span id=item1833 class="hide_extra">
     </span>
 
 </dd>
@@ -2198,7 +2232,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1835 class="hide_extra">
+    <span id=item1834 class="hide_extra">
     </span>
 
 </dd>
@@ -2222,7 +2256,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1836 class="hide_extra">
+    <span id=item1835 class="hide_extra">
     </span>
 
 </dd>
@@ -2246,7 +2280,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1837 class="hide_extra">
+    <span id=item1836 class="hide_extra">
     </span>
 
 </dd>
@@ -2270,7 +2304,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1838 class="hide_extra">
+    <span id=item1837 class="hide_extra">
     </span>
 
 </dd>
@@ -2294,7 +2328,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1839 class="hide_extra">
+    <span id=item1838 class="hide_extra">
     </span>
 
 </dd>
@@ -2318,7 +2352,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1840 class="hide_extra">
+    <span id=item1839 class="hide_extra">
     </span>
 
 </dd>
@@ -2342,7 +2376,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1841 class="hide_extra">
+    <span id=item1840 class="hide_extra">
     </span>
 
 </dd>
@@ -2366,7 +2400,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1842 class="hide_extra">
+    <span id=item1841 class="hide_extra">
     </span>
 
 </dd>
@@ -2390,7 +2424,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1843 class="hide_extra">
+    <span id=item1842 class="hide_extra">
     </span>
 
 </dd>
@@ -2414,7 +2448,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1844 class="hide_extra">
+    <span id=item1843 class="hide_extra">
     </span>
 
 </dd>
@@ -2438,7 +2472,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1845 class="hide_extra">
+    <span id=item1844 class="hide_extra">
     </span>
 
 </dd>
@@ -2462,7 +2496,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1846 class="hide_extra">
+    <span id=item1845 class="hide_extra">
     </span>
 
 </dd>
@@ -2486,7 +2520,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1847 class="hide_extra">
+    <span id=item1846 class="hide_extra">
     </span>
 
 </dd>
@@ -2510,7 +2544,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1848 class="hide_extra">
+    <span id=item1847 class="hide_extra">
     </span>
 
 </dd>
@@ -2534,7 +2568,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1849 class="hide_extra">
+    <span id=item1848 class="hide_extra">
     </span>
 
 </dd>
@@ -2558,7 +2592,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1850 class="hide_extra">
+    <span id=item1849 class="hide_extra">
     </span>
 
 </dd>
@@ -2582,7 +2616,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1851 class="hide_extra">
+    <span id=item1850 class="hide_extra">
     </span>
 
 </dd>
@@ -2606,7 +2640,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1852 class="hide_extra">
+    <span id=item1851 class="hide_extra">
     </span>
 
 </dd>
@@ -2630,7 +2664,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1853 class="hide_extra">
+    <span id=item1852 class="hide_extra">
     </span>
 
 </dd>
@@ -2654,7 +2688,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1854 class="hide_extra">
+    <span id=item1853 class="hide_extra">
     </span>
 
 </dd>
@@ -2678,7 +2712,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1855 class="hide_extra">
+    <span id=item1854 class="hide_extra">
     </span>
 
 </dd>
@@ -2702,7 +2736,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1856 class="hide_extra">
+    <span id=item1855 class="hide_extra">
     </span>
 
 </dd>
@@ -2726,7 +2760,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1857 class="hide_extra">
+    <span id=item1856 class="hide_extra">
     </span>
 
 </dd>
@@ -2750,7 +2784,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1858 class="hide_extra">
+    <span id=item1857 class="hide_extra">
     </span>
 
 </dd>
@@ -2774,7 +2808,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1859 class="hide_extra">
+    <span id=item1858 class="hide_extra">
     </span>
 
 </dd>
@@ -2798,7 +2832,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1860 class="hide_extra">
+    <span id=item1859 class="hide_extra">
     </span>
 
 </dd>
@@ -2822,7 +2856,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1861 class="hide_extra">
+    <span id=item1860 class="hide_extra">
     </span>
 
 </dd>
@@ -2846,7 +2880,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1862 class="hide_extra">
+    <span id=item1861 class="hide_extra">
     </span>
 
 </dd>
@@ -2870,7 +2904,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1863 class="hide_extra">
+    <span id=item1862 class="hide_extra">
     </span>
 
 </dd>
@@ -2894,7 +2928,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1864 class="hide_extra">
+    <span id=item1863 class="hide_extra">
     </span>
 
 </dd>
@@ -2918,7 +2952,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1865 class="hide_extra">
+    <span id=item1864 class="hide_extra">
     </span>
 
 </dd>
@@ -2942,7 +2976,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1866 class="hide_extra">
+    <span id=item1865 class="hide_extra">
     </span>
 
 </dd>
@@ -2966,7 +3000,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1867 class="hide_extra">
+    <span id=item1866 class="hide_extra">
     </span>
 
 </dd>
@@ -2990,7 +3024,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1868 class="hide_extra">
+    <span id=item1867 class="hide_extra">
     </span>
 
 </dd>
@@ -3014,7 +3048,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1869 class="hide_extra">
+    <span id=item1868 class="hide_extra">
     </span>
 
 </dd>
@@ -3038,7 +3072,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1870 class="hide_extra">
+    <span id=item1869 class="hide_extra">
     </span>
 
 </dd>
@@ -3062,7 +3096,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1871 class="hide_extra">
+    <span id=item1870 class="hide_extra">
     </span>
 
 </dd>
@@ -3086,7 +3120,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1872 class="hide_extra">
+    <span id=item1871 class="hide_extra">
     </span>
 
 </dd>
@@ -3110,7 +3144,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1873 class="hide_extra">
+    <span id=item1872 class="hide_extra">
     </span>
 
 </dd>
@@ -3134,7 +3168,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1874 class="hide_extra">
+    <span id=item1873 class="hide_extra">
     </span>
 
 </dd>
@@ -3158,7 +3192,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1875 class="hide_extra">
+    <span id=item1874 class="hide_extra">
     </span>
 
 </dd>
@@ -3182,7 +3216,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1876 class="hide_extra">
+    <span id=item1875 class="hide_extra">
     </span>
 
 </dd>
@@ -3202,7 +3236,7 @@ top_titlebar : setup {
 
 
 
-    <span id=item1877 class="hide_extra">
+    <span id=item1876 class="hide_extra">
     </span>
 
 </dd>

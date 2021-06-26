@@ -259,10 +259,10 @@ end
     </tr>
     <tr>
       <td class="name" >
-        <a href="#crush"><span class='function_modname'>gears.table.</span>crush <span class='function_args'> <b>(</b>t, set[, raw=false]<b>)</b></span></a>
+        <a href="#crush"><span class='function_modname'>gears.table.</span>crush <span class='function_args'> <b>(</b>target, source[, raw=false]<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
       </td>
-      <td colspan="2" class="summary">Override elements in the first table by the one in the second.</td>
+      <td colspan="2" class="summary">Override elements in the target table with values from the source table.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -343,10 +343,10 @@ end
     </tr>
     <tr>
       <td class="name" >
-        <a href="#merge"><span class='function_modname'>gears.table.</span>merge <span class='function_args'> <b>(</b>t, set<b>)</b></span></a>
+        <a href="#merge"><span class='function_modname'>gears.table.</span>merge <span class='function_args'> <b>(</b>target, source<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
       </td>
-      <td colspan="2" class="summary">Merge items from one table to another one.</td>
+      <td colspan="2" class="summary">Merge items from the source table into the target table.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -401,35 +401,39 @@ end
 
 
 
-    <span id=item2116 class="hide_extra">
+    <span id=item2115 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "crush"></a>
-    <strong><span class='function_modname'>gears.table.</span>crush <span class='function_args'> <b>(</b>t, set[, raw=false]<b>)</b></span></strong>
+    <strong><span class='function_modname'>gears.table.</span>crush <span class='function_args'> <b>(</b>target, source[, raw=false]<b>)</b></span></strong>
     <span class="proptype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Override elements in the first table by the one in the second.</p>
+    Override elements in the target table with values from the source table.</p>
 
 <p> Note that this method doesn&rsquo;t copy entries found in <code>__index</code>.
+ Nested tables are copied by reference and not recursed into.
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">t</span>
+        <li><span class="parameter">target</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         the table to be overriden
+         The target table. Values from <code>source</code> will be copied
+   into this table.
         </li>
-        <li><span class="parameter">set</span>
+        <li><span class="parameter">source</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         the table used to override members of <code>t</code>
+         The source table. Its values will be copied into
+   <code>target</code>.
         </li>
         <li><span class="parameter">raw</span>
             <span class="types"><span class="type">bool</span></span>
-         Use rawset (avoid the metatable)
+         If <code>true</code>, values will be assigned with <a href="https://www.lua.org/manual/5.2/manual.html#pdf-rawset">rawset</a>.
+   This will bypass metamethods on <code>target</code>.
          (<em>default</em> false)
         </li>
     </ul>
@@ -438,14 +442,14 @@ end
     <ol>
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        t (for convenience)
+        The target table.
     </ol>
 
 
 
 
 
-    <span id=item2117 class="hide_extra">
+    <span id=item2116 class="hide_extra">
     </span>
 
 </dd>
@@ -483,7 +487,7 @@ end
 
 
 
-    <span id=item2118 class="hide_extra">
+    <span id=item2117 class="hide_extra">
     </span>
 
 </dd>
@@ -525,7 +529,7 @@ end
 
 
 
-    <span id=item2119 class="hide_extra">
+    <span id=item2118 class="hide_extra">
     </span>
 
 </dd>
@@ -575,7 +579,7 @@ end
 
 
 
-    <span id=item2120 class="hide_extra">
+    <span id=item2119 class="hide_extra">
     </span>
 
 </dd>
@@ -618,7 +622,7 @@ end
 
 
 
-    <span id=item2121 class="hide_extra">
+    <span id=item2120 class="hide_extra">
     </span>
 
 </dd>
@@ -651,7 +655,7 @@ end
 
 
 
-    <span id=item2122 class="hide_extra">
+    <span id=item2121 class="hide_extra">
     </span>
 
 </dd>
@@ -694,7 +698,7 @@ end
     </ul>
 
 
-    <span id=item2123 class="hide_extra">
+    <span id=item2122 class="hide_extra">
     </span>
 
 </dd>
@@ -731,7 +735,7 @@ end
 
 
 
-    <span id=item2124 class="hide_extra">
+    <span id=item2123 class="hide_extra">
     </span>
 
 </dd>
@@ -764,7 +768,7 @@ end
 
 
 
-    <span id=item2125 class="hide_extra">
+    <span id=item2124 class="hide_extra">
     </span>
 
 </dd>
@@ -786,7 +790,8 @@ end
         </li>
         <li><span class="parameter">deep</span>
             <span class="types"><span class="type">bool</span></span>
-         Create a deep clone?
+         If <code>true</code>, recurse into nested tables to create
+   a deep clone.
          (<em>default</em> true)
         </li>
     </ul>
@@ -802,7 +807,7 @@ end
 
 
 
-    <span id=item2126 class="hide_extra">
+    <span id=item2125 class="hide_extra">
     </span>
 
 </dd>
@@ -862,7 +867,7 @@ end
 
 
 
-    <span id=item2127 class="hide_extra">
+    <span id=item2126 class="hide_extra">
     </span>
 
 </dd>
@@ -909,29 +914,35 @@ end
 
 
 
-    <span id=item2128 class="hide_extra">
+    <span id=item2127 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "merge"></a>
-    <strong><span class='function_modname'>gears.table.</span>merge <span class='function_args'> <b>(</b>t, set<b>)</b></span></strong>
+    <strong><span class='function_modname'>gears.table.</span>merge <span class='function_args'> <b>(</b>target, source<b>)</b></span></strong>
     <span class="proptype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Merge items from one table to another one.
+    Merge items from the source table into the target table.</p>
+
+<p> Note that this only considers the array part of <code>source</code> (same semantics
+ as <a href="https://www.lua.org/manual/5.2/manual.html#pdf-ipairs">ipairs</a>).
+ Nested tables are copied by reference and not recursed into.
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">t</span>
+        <li><span class="parameter">target</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The container table
+         The target table. Values from <code>source</code> will be copied
+   into this table.
         </li>
-        <li><span class="parameter">set</span>
+        <li><span class="parameter">source</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The mixin table.
+         The source table. Its values will be copied into
+   <code>target</code>.
         </li>
     </ul>
 
@@ -939,14 +950,14 @@ end
     <ol>
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        (for convenience).
+        The target table.
     </ol>
 
 
 
 
 
-    <span id=item2129 class="hide_extra">
+    <span id=item2128 class="hide_extra">
     </span>
 
 </dd>
@@ -1021,7 +1032,7 @@ end
     </ul>
 
 
-    <span id=item2130 class="hide_extra">
+    <span id=item2129 class="hide_extra">
     </span>
 
 </dd>
@@ -1035,7 +1046,7 @@ end
     <dd>
     Map a function to a table.</p>
 
-<p> The function is applied to each value on the table, returning a modified
+<p> The function is applied to each value in the table, returning a modified
  table.
 
     <h3>Parameters:</h3>
@@ -1061,7 +1072,7 @@ end
 
 
 
-    <span id=item2131 class="hide_extra">
+    <span id=item2130 class="hide_extra">
     </span>
 
 </dd>
