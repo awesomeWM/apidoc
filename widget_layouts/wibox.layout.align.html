@@ -227,7 +227,26 @@
 <div id="content">
 
 <h1>Module: <code>wibox.layout.align</code></h1>
-<p></p>
+<p>The <code>align</code> layout has three slots for child widgets.</p>
+<p> On its main axis, it
+ will use as much space as is available to it and distribute that to its child
+ widgets by stretching or shrinking them based on the chosen <a href="../widget_layouts/wibox.layout.align.html#expand">expand</a>
+ strategy.
+ On its secondary axis, the biggest child widget determines the size of the
+ layout, but smaller widgets will not be stretched to match it.</p>
+
+<p> In its default configuration, the layout will give the first and third
+ widgets only the minimum space they ask for and it aligns them to the outer
+ edges. The remaining space between them is made available to the widget in
+ slot two.</p>
+
+<p> This layout is most commonly used to split content into left/top, center and
+ right/bottom sections. As such, it is usually seen as the root layout in
+ <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a>.</p>
+
+<p> You may also fill just one or two of the widget slots, the <a href="../widget_layouts/wibox.layout.align.html#expand">expand</a> algorithm
+ will adjust accordingly.</p>
+
 <p><img src="../images/AUTOGEN_wibox_layout_defaults_align.svg" alt="Usage example" /></p>
     <h3>Usage:</h3>
     <ul>
@@ -304,22 +323,22 @@
     <tr>
       <td class="shortname" ><a href="#first">first</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>widget</span></td>
-      <td colspan="2" class="summary">Set the layout&rsquo;s first widget.</td>
+      <td colspan="2" class="summary">The widget in slot one.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#second">second</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>widget</span></td>
-      <td colspan="2" class="summary">Set the layout&rsquo;s second widget.</td>
+      <td colspan="2" class="summary">The widget in slot two.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#third">third</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>widget</span></td>
-      <td colspan="2" class="summary">Set the layout&rsquo;s third widget.</td>
+      <td colspan="2" class="summary">The widget in slot three.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#expand">expand</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td colspan="2" class="summary">Set the expand mode which determines how sub widgets expand to take up
+      <td colspan="2" class="summary">Set the expand mode, which determines how child widgets expand to take up
  unused space.</td>
     </tr>
     <tr>
@@ -386,7 +405,7 @@
         <a href="#set">:set <span class='function_args'> <b>(</b>index, widget2<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;boolean</span></span>
       </td>
-      <td colspan="2" class="summary">Set a widget at a specific index, replace the current one.</td>
+      <td colspan="2" class="summary">Set a widget at a specific index, replacing the current one.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -560,26 +579,28 @@
     </span>
     </dt>
     <dd>
-    Returns a new horizontal align layout.  An align layout can display up to
- three widgets. The widget set via :set_left() is left-aligned. :set_right()
- sets a widget which will be right-aligned. The remaining space between those
- two will be given to the widget set via :set_middle().
+    Returns a new horizontal align layout.</p>
+
+<p> The three widget slots are aligned left, center and right.</p>
+
+<p> Additionally, this creates the aliases <code>set_left</code>, <code>set_middle</code> and
+ <code>set_right</code> to assign <a href="../widget_layouts/wibox.layout.align.html#first">first</a>, <a href="../widget_layouts/wibox.layout.align.html#second">second</a> and <a href="../widget_layouts/wibox.layout.align.html#third">third</a> respectively.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">left</span>
             <span class="types"><span class="type">widget</span></span>
-         Widget to be put to the left.
+         Widget to be put in slot one.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">middle</span>
             <span class="types"><span class="type">widget</span></span>
-         Widget to be put to the middle.
+         Widget to be put in slot two.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">right</span>
             <span class="types"><span class="type">widget</span></span>
-         Widget to be put to the right.
+         Widget to be put in slot three.
          (<em>optional</em>)
         </li>
     </ul>
@@ -600,26 +621,28 @@
     </span>
     </dt>
     <dd>
-    Returns a new vertical align layout.  An align layout can display up to
- three widgets. The widget set via :set_top() is top-aligned. :set_bottom()
- sets a widget which will be bottom-aligned. The remaining space between those
- two will be given to the widget set via :set_middle().
+    Returns a new vertical align layout.</p>
+
+<p> The three widget slots are aligned top, center and bottom.</p>
+
+<p> Additionally, this creates the aliases <code>set_top</code>, <code>set_middle</code> and
+ <code>set_bottom</code> to assign <a href="../widget_layouts/wibox.layout.align.html#first">first</a>, <a href="../widget_layouts/wibox.layout.align.html#second">second</a> and <a href="../widget_layouts/wibox.layout.align.html#third">third</a> respectively.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">top</span>
             <span class="types"><span class="type">widget</span></span>
-         Widget to be put to the top.
+         Widget to be put in slot one.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">middle</span>
             <span class="types"><span class="type">widget</span></span>
-         Widget to be put to the middle.
+         Widget to be put in slot two.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">bottom</span>
             <span class="types"><span class="type">widget</span></span>
-         Widget to be put to the right.
+         Widget to be put in slot three.
          (<em>optional</em>)
         </li>
     </ul>
@@ -646,8 +669,9 @@
     </span>
     </dt>
     <dd>
-    Set the layout&rsquo;s first widget.
- This is the widget that is at the left/top
+    The widget in slot one.</p>
+
+<p> This is the widget that is at the left/top.
 
 
 
@@ -682,7 +706,9 @@
     </span>
     </dt>
     <dd>
-    Set the layout&rsquo;s second widget.  This is the centered one.
+    The widget in slot two.</p>
+
+<p> This is the centered one.
 
 
 
@@ -717,8 +743,9 @@
     </span>
     </dt>
     <dd>
-    Set the layout&rsquo;s third widget.
- This is the widget that is at the right/bottom
+    The widget in slot three.</p>
+
+<p> This is the widget that is at the right/bottom.
 
 
 
@@ -752,30 +779,34 @@
     </span>
     </dt>
     <dd>
-    <p>Set the expand mode which determines how sub widgets expand to take up
+    Set the expand mode, which determines how child widgets expand to take up
  unused space.</p>
 
 <p> The following values are valid:</p>
 
 <ul>
-<li>&ldquo;inside&rdquo; - Default option. Size of outside widgets is determined using
-their fit function. Second, middle, or center widget expands to fill
-remaining space.</li>
-<li>&ldquo;outside&rdquo; - Center widget is sized using its fit function and placed in
-the center of the allowed space. Outside widgets expand (or contract) to
-fill remaining space on their side.</li>
-<li>&ldquo;none&rdquo; - All widgets are sized using their fit function, drawn to only the
-returned space, or remaining space, whichever is smaller. Center widget
-gets priority.</li>
+<li><code>&quot;inside&quot;</code>: The widgets in slot one and three are set to their minimal
+required size. The widget in slot two is then given the remaining space.
+This is the default behaviour.</li>
+<li><code>&quot;outside&quot;</code>: The widget in slot two is set to its minimal required size and
+placed in the center of the space available to the layout. The other
+widgets are then given the remaining space on either side.
+If the center widget requires all available space, the outer widgets are
+not drawn at all.</li>
+<li><code>&quot;none&quot;</code>: All widgets are given their minimal required size or the
+remaining space, whichever is smaller. The center widget gets priority.</li>
 </ul>
 
+
+<p> Attempting to set any other value than one of those three will fall back to
+ <code>&quot;inside&quot;</code>.
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">mode</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
          How to use unused space.
-         (<em>default</em> inside)
+         (<em>default</em> "inside")
         </li>
     </ul>
 
@@ -994,7 +1025,7 @@ gets priority.</li>
     </span>
     </dt>
     <dd>
-    Set a widget at a specific index, replace the current one.
+    Set a widget at a specific index, replacing the current one.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1004,7 +1035,7 @@ gets priority.</li>
         </li>
         <li><span class="parameter">widget2</span>
             <span class="types"><span class="type">widget</span></span>
-         The widget to take the place of the first one
+         The widget to replace the previous one with
         </li>
     </ul>
 
@@ -1012,7 +1043,8 @@ gets priority.</li>
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
@@ -1031,7 +1063,7 @@ gets priority.</li>
           <li><span class="parameter"><code>widget::replaced</code></span>  </li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The layout.</li>
-             <li><span class="parameter"><code>widget</code></span> <span class="types"><code>widget</code></span> index The inserted widget.</li>
+             <li><span class="parameter"><code>widget</code></span> <span class="types"><code>widget</code></span> The inserted widget.</li>
              <li><span class="parameter"><code>previous</code></span> <span class="types"><code>widget</code></span> The previous widget.</li>
              <li><span class="parameter"><code>index</code></span> <span class="types"><code>number</code></span> The replaced index.</li>
            </ul>
@@ -1048,10 +1080,7 @@ gets priority.</li>
     </span>
     </dt>
     <dd>
-    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.</p>
-
-<p> <strong>Signal:</strong> widget::replaced The argument is the new widget and the old one
- and the index.
+    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1065,7 +1094,8 @@ gets priority.</li>
         </li>
         <li><span class="parameter">recursive</span>
             <span class="types"><span class="type">boolean</span></span>
-         Dig in all compatible layouts to find the widget.
+         Recurse into all compatible layouts to
+   find the widget.
          (<em>default</em> false)
         </li>
     </ul>
@@ -1074,7 +1104,8 @@ gets priority.</li>
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
@@ -1128,7 +1159,8 @@ gets priority.</li>
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
@@ -1147,8 +1179,8 @@ gets priority.</li>
           <li><span class="parameter"><code>widget::swapped</code></span>  </li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The layout.</li>
-             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> index The first widget.</li>
-             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> index The second widget.</li>
+             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> The first widget.</li>
+             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> The second widget.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The first index.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The second index.</li>
            </ul>
@@ -1165,10 +1197,12 @@ gets priority.</li>
     </span>
     </dt>
     <dd>
-    Swap 2 widgets in a layout.
- If widget1 is present multiple time, only the first instance is swapped
- <strong>Signal:</strong> widget::swapped The arguments are both widgets and both (new) indexes.
- if the layouts not the same, then only <code>widget::replaced</code> will be emitted.
+    Swap 2 widgets in a layout.</p>
+
+<p> If <code>widget1</code> is present multiple time, only the first instance is swapped.</p>
+
+<p> Calls <a href="../widget_layouts/wibox.layout.align.html#set">set</a> internally, so the signal <code>widget::replaced</code> is emitted for both
+ widgets as well.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1182,7 +1216,8 @@ gets priority.</li>
         </li>
         <li><span class="parameter">recursive</span>
             <span class="types"><span class="type">boolean</span></span>
-         Dig in all compatible layouts to find the widget.
+         Recurse into all compatible layouts to
+   find the widget.
          (<em>default</em> false)
         </li>
     </ul>
@@ -1191,10 +1226,15 @@ gets priority.</li>
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../widget_layouts/wibox.layout.align.html#set">set</a>
+    </ul>
 
 
      <br />
@@ -1210,8 +1250,8 @@ gets priority.</li>
           <li><span class="parameter"><code>widget::swapped</code></span>  </li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The layout.</li>
-             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> index The first widget.</li>
-             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> index The second widget.</li>
+             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> The first widget.</li>
+             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> The second widget.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The first index.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The second index.</li>
            </ul>

@@ -227,7 +227,21 @@
 <div id="content">
 
 <h1>Module: <code>wibox.layout.flex</code></h1>
-<p></p>
+<p>A <code>flex</code> layout may be initialized with any number of child widgets, and
+ during runtime widgets may be added and removed dynamically.</p>
+<p> On the main axis, the layout will divide the available space evenly between
+ all child widgets, without any regard to how much space these widgets might
+ be asking for.</p>
+
+<p> Just like <a href="../widget_layouts/wibox.layout.fixed.html#">wibox.layout.fixed</a>, <code>flex</code> allows adding spacing between the
+ widgets, either as an ofset via <a href="../widget_layouts/wibox.layout.flex.html#spacing">spacing</a> or with a
+ <a href="../widget_layouts/wibox.layout.flex.html#spacing_widget">spacing_widget</a>.</p>
+
+<p> On its secondary axis, the layout&rsquo;s size is determined by the largest child
+ widget. Smaller child widgets are then placed with the same size.
+ Therefore, child widgets may ignore their <code>forced_width</code> or <code>forced_height</code>
+ properties for vertical and horizontal layouts respectively.</p>
+
 <p><img src="../images/AUTOGEN_wibox_layout_defaults_flex.svg" alt="Usage example" /></p>
     <h3>Usage:</h3>
     <ul>
@@ -297,13 +311,13 @@
       <td class="name" >
         <a href="#horizontal"><span class='function_modname'>wibox.layout.flex.</span>horizontal <span class='function_args'> <b>(</b>...<b>)</b></span></a>
       </td>
-      <td colspan="2" class="summary">Returns a new horizontal flex layout.</td>
+      <td colspan="2" class="summary">Creates and returns a new horizontal flex layout.</td>
     </tr>
     <tr>
       <td class="name" >
         <a href="#vertical"><span class='function_modname'>wibox.layout.flex.</span>vertical <span class='function_args'> <b>(</b>...<b>)</b></span></a>
       </td>
-      <td colspan="2" class="summary">Returns a new vertical flex layout.</td>
+      <td colspan="2" class="summary">Creates and returns a new vertical flex layout.</td>
     </tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
@@ -311,12 +325,12 @@
     <tr>
       <td class="shortname" ><a href="#spacing_widget">spacing_widget</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>widget</span></td>
-      <td colspan="2" class="summary">The widget used to fill the spacing between the layout elements.</td>
+      <td colspan="2" class="summary">A widget to insert as a separator between child widgets.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#spacing">spacing</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td colspan="2" class="summary">Add spacing between each layout widgets.</td>
+      <td colspan="2" class="summary">The amount of space inserted between the child widgets.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#max_widget_size">max_widget_size</a></td>
@@ -415,7 +429,7 @@
         <a href="#set">:set <span class='function_args'> <b>(</b>index, widget2<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;boolean</span></span>
       </td>
-      <td colspan="2" class="summary">Set a widget at a specific index, replace the current one.</td>
+      <td colspan="2" class="summary">Set a widget at a specific index, replacing the current one.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -589,10 +603,7 @@
     </span>
     </dt>
     <dd>
-    Returns a new horizontal flex layout.</p>
-
-<p> A flex layout shares the available space.
- equally among all widgets. Widgets can be added via <code>:add(widget)</code>.
+    Creates and returns a new horizontal flex layout.
 
     <h3>Parameters:</h3>
     <ul>
@@ -618,10 +629,7 @@
     </span>
     </dt>
     <dd>
-    Returns a new vertical flex layout.</p>
-
-<p> A flex layout shares the available space
- equally among all widgets. Widgets can be added via <code>:add(widget)</code>.
+    Creates and returns a new vertical flex layout.
 
     <h3>Parameters:</h3>
     <ul>
@@ -653,9 +661,13 @@
     </span>
     </dt>
     <dd>
-    The widget used to fill the spacing between the layout elements.</p>
+    A widget to insert as a separator between child widgets.</p>
 
-<p> By default, no widget is used.</p>
+<p> If this property is a valid widget and <a href="../widget_layouts/wibox.layout.flex.html#spacing">spacing</a> is greater than <code>0</code>, a
+ copy of this widget is inserted between each child widget, with its size in
+ the layout&rsquo;s main direction determined by <a href="../widget_layouts/wibox.layout.flex.html#spacing">spacing</a>.</p>
+
+<p> By default no widget is used and any <a href="../widget_layouts/wibox.layout.flex.html#spacing">spacing</a> is applied as an empty offset.</p>
 
 <p><img src="../images/AUTOGEN_wibox_layout_flex_spacing_widget.svg" alt="Usage example" />
 
@@ -734,7 +746,9 @@
     </span>
     </dt>
     <dd>
-    Add spacing between each layout widgets.</p>
+    The amount of space inserted between the child widgets.</p>
+
+<p> If a <a href="../widget_layouts/wibox.layout.flex.html#spacing_widget">spacing_widget</a> is defined, this value is used for its size.</p>
 
 <p><img src="../images/AUTOGEN_wibox_layout_flex_spacing.svg" alt="Usage example" />
 
@@ -1156,8 +1170,8 @@
      <ul>
           <li><span class="parameter"><code>widget::inserted</code></span>  </li>
            <ul>
-             <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The fixed layout.</li>
-             <li><span class="parameter"><code>widget</code></span> <span class="types"><code>widget</code></span> index The inserted widget.</li>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The layout.</li>
+             <li><span class="parameter"><code>widget</code></span> <span class="types"><code>widget</code></span> The inserted widget.</li>
              <li><span class="parameter"><code>count</code></span> <span class="types"><code>number</code></span> The widget count.</li>
            </ul>
      </ul>
@@ -1173,7 +1187,7 @@
     </span>
     </dt>
     <dd>
-    Set a widget at a specific index, replace the current one.
+    Set a widget at a specific index, replacing the current one.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1183,7 +1197,7 @@
         </li>
         <li><span class="parameter">widget2</span>
             <span class="types"><span class="type">widget</span></span>
-         The widget to take the place of the first one
+         The widget to replace the previous one with
         </li>
     </ul>
 
@@ -1191,7 +1205,8 @@
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
@@ -1210,7 +1225,7 @@
           <li><span class="parameter"><code>widget::replaced</code></span>  </li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The layout.</li>
-             <li><span class="parameter"><code>widget</code></span> <span class="types"><code>widget</code></span> index The inserted widget.</li>
+             <li><span class="parameter"><code>widget</code></span> <span class="types"><code>widget</code></span> The inserted widget.</li>
              <li><span class="parameter"><code>previous</code></span> <span class="types"><code>widget</code></span> The previous widget.</li>
              <li><span class="parameter"><code>index</code></span> <span class="types"><code>number</code></span> The replaced index.</li>
            </ul>
@@ -1227,10 +1242,7 @@
     </span>
     </dt>
     <dd>
-    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.</p>
-
-<p> <strong>Signal:</strong> widget::replaced The argument is the new widget and the old one
- and the index.
+    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1244,7 +1256,8 @@
         </li>
         <li><span class="parameter">recursive</span>
             <span class="types"><span class="type">boolean</span></span>
-         Dig in all compatible layouts to find the widget.
+         Recurse into all compatible layouts to
+   find the widget.
          (<em>default</em> false)
         </li>
     </ul>
@@ -1253,7 +1266,8 @@
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
@@ -1307,7 +1321,8 @@
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
@@ -1326,8 +1341,8 @@
           <li><span class="parameter"><code>widget::swapped</code></span>  </li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The layout.</li>
-             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> index The first widget.</li>
-             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> index The second widget.</li>
+             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> The first widget.</li>
+             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> The second widget.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The first index.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The second index.</li>
            </ul>
@@ -1344,10 +1359,12 @@
     </span>
     </dt>
     <dd>
-    Swap 2 widgets in a layout.
- If widget1 is present multiple time, only the first instance is swapped
- <strong>Signal:</strong> widget::swapped The arguments are both widgets and both (new) indexes.
- if the layouts not the same, then only <code>widget::replaced</code> will be emitted.
+    Swap 2 widgets in a layout.</p>
+
+<p> If <code>widget1</code> is present multiple time, only the first instance is swapped.</p>
+
+<p> Calls <a href="../widget_layouts/wibox.layout.flex.html#set">set</a> internally, so the signal <code>widget::replaced</code> is emitted for both
+ widgets as well.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1361,7 +1378,8 @@
         </li>
         <li><span class="parameter">recursive</span>
             <span class="types"><span class="type">boolean</span></span>
-         Dig in all compatible layouts to find the widget.
+         Recurse into all compatible layouts to
+   find the widget.
          (<em>default</em> false)
         </li>
     </ul>
@@ -1370,10 +1388,15 @@
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../widget_layouts/wibox.layout.flex.html#set">set</a>
+    </ul>
 
 
      <br />
@@ -1389,8 +1412,8 @@
           <li><span class="parameter"><code>widget::swapped</code></span>  </li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The layout.</li>
-             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> index The first widget.</li>
-             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> index The second widget.</li>
+             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> The first widget.</li>
+             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> The second widget.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The first index.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The second index.</li>
            </ul>
