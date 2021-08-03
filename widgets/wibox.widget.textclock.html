@@ -399,7 +399,7 @@
     <tr>
       <td class="shortname" ><a href="#ellipsize">ellipsize</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
-      <td colspan="1" class="summary">Set a textbox ellipsize mode.</td>
+      <td colspan="1" class="summary">Set the text ellipsize mode.</td>
       <td class="baseclass" nowrap>
         Inherited from wibox.widget.textbox
       </td>
@@ -936,29 +936,58 @@
     </span>
     </dt>
     <dd>
-    <p>Set a textbox ellipsize mode.</p>
+    Set the text ellipsize mode.</p>
 
 <p> Valid values are:</p>
 
 <ul>
-<li><strong>start</strong></li>
-<li><strong>middle</strong></li>
-<li><strong>end</strong></li>
+<li><code>&quot;start&quot;</code></li>
+<li><code>&quot;middle&quot;</code></li>
+<li><code>&quot;end&quot;</code></li>
+<li><code>&quot;none&quot;</code></li>
 </ul>
 
+
+<p> See Pango for additional details:
+ <a href="https://docs.gtk.org/Pango/method.Layout.set_ellipsize.html">Layout.set_ellipsize</a></p>
+
+<p><img src="../images/AUTOGEN_wibox_widget_textbox_ellipsize.svg" alt="Usage example" />
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">mode</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         Where should long lines be shortened? &ldquo;start&rdquo;, &ldquo;middle&rdquo;
-  or &ldquo;end&rdquo;.
+         The ellipsize mode.
         </li>
     </ul>
 
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">widget{
+    text = <span class="string">'This is a very long text, that cannot be displayed fully.'</span>,
+    ellipsize = <span class="string">'start'</span>,
+    widget = wibox.widget.textbox,
+},
+widget{
+    text = <span class="string">'This is a very long text, that cannot be displayed fully.'</span>,
+    ellipsize = <span class="string">'end'</span>,
+    widget = wibox.widget.textbox,
+},
+widget{
+    text = <span class="string">'This is a very long text, that cannot be displayed fully.'</span>,
+    ellipsize = <span class="string">'middle'</span>,
+    widget = wibox.widget.textbox,
+},
+widget{
+    text = <span class="string">'This is a very long text, that cannot be displayed fully.'</span>,
+    ellipsize = <span class="string">'none'</span>,
+    valign = <span class="string">'top'</span>,
+    widget = wibox.widget.textbox,
+}</pre>
+    </ul>
 
      <br />
      <center id=button1439>

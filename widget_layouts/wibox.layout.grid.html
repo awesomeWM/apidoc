@@ -594,7 +594,7 @@ l:add_widget_at(lorem, <span class="number">1</span>, <span class="number">1</sp
         <a href="#set">:set <span class='function_args'> <b>(</b>index, widget2<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;boolean</span></span>
       </td>
-      <td colspan="2" class="summary">Set a widget at a specific index, replace the current one.</td>
+      <td colspan="2" class="summary">Set a widget at a specific index, replacing the current one.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -2143,7 +2143,7 @@ l:add(...)
     </span>
     </dt>
     <dd>
-    Set a widget at a specific index, replace the current one.
+    Set a widget at a specific index, replacing the current one.
 
     <h3>Parameters:</h3>
     <ul>
@@ -2153,7 +2153,7 @@ l:add(...)
         </li>
         <li><span class="parameter">widget2</span>
             <span class="types"><span class="type">widget</span></span>
-         The widget to take the place of the first one
+         The widget to replace the previous one with
         </li>
     </ul>
 
@@ -2161,7 +2161,8 @@ l:add(...)
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
@@ -2180,7 +2181,7 @@ l:add(...)
           <li><span class="parameter"><code>widget::replaced</code></span>  </li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The layout.</li>
-             <li><span class="parameter"><code>widget</code></span> <span class="types"><code>widget</code></span> index The inserted widget.</li>
+             <li><span class="parameter"><code>widget</code></span> <span class="types"><code>widget</code></span> The inserted widget.</li>
              <li><span class="parameter"><code>previous</code></span> <span class="types"><code>widget</code></span> The previous widget.</li>
              <li><span class="parameter"><code>index</code></span> <span class="types"><code>number</code></span> The replaced index.</li>
            </ul>
@@ -2197,10 +2198,7 @@ l:add(...)
     </span>
     </dt>
     <dd>
-    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.</p>
-
-<p> <strong>Signal:</strong> widget::replaced The argument is the new widget and the old one
- and the index.
+    Replace the first instance of <code>widget</code> in the layout with <code>widget2</code>.
 
     <h3>Parameters:</h3>
     <ul>
@@ -2214,7 +2212,8 @@ l:add(...)
         </li>
         <li><span class="parameter">recursive</span>
             <span class="types"><span class="type">boolean</span></span>
-         Dig in all compatible layouts to find the widget.
+         Recurse into all compatible layouts to
+   find the widget.
          (<em>default</em> false)
         </li>
     </ul>
@@ -2223,7 +2222,8 @@ l:add(...)
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
@@ -2277,7 +2277,8 @@ l:add(...)
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
@@ -2296,8 +2297,8 @@ l:add(...)
           <li><span class="parameter"><code>widget::swapped</code></span>  </li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The layout.</li>
-             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> index The first widget.</li>
-             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> index The second widget.</li>
+             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> The first widget.</li>
+             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> The second widget.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The first index.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The second index.</li>
            </ul>
@@ -2314,10 +2315,12 @@ l:add(...)
     </span>
     </dt>
     <dd>
-    Swap 2 widgets in a layout.
- If widget1 is present multiple time, only the first instance is swapped
- <strong>Signal:</strong> widget::swapped The arguments are both widgets and both (new) indexes.
- if the layouts not the same, then only <code>widget::replaced</code> will be emitted.
+    Swap 2 widgets in a layout.</p>
+
+<p> If <code>widget1</code> is present multiple time, only the first instance is swapped.</p>
+
+<p> Calls <a href="../widget_layouts/wibox.layout.grid.html#set">set</a> internally, so the signal <code>widget::replaced</code> is emitted for both
+ widgets as well.
 
     <h3>Parameters:</h3>
     <ul>
@@ -2331,7 +2334,8 @@ l:add(...)
         </li>
         <li><span class="parameter">recursive</span>
             <span class="types"><span class="type">boolean</span></span>
-         Dig in all compatible layouts to find the widget.
+         Recurse into all compatible layouts to
+   find the widget.
          (<em>default</em> false)
         </li>
     </ul>
@@ -2340,10 +2344,15 @@ l:add(...)
     <ol>
 
            <span class="types"><span class="type">boolean</span></span>
-        If the operation is successful
+        Returns <code>true</code> if the widget was replaced successfully,
+   <code>false</code> otherwise.
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../widget_layouts/wibox.layout.grid.html#set">set</a>
+    </ul>
 
 
      <br />
@@ -2359,8 +2368,8 @@ l:add(...)
           <li><span class="parameter"><code>widget::swapped</code></span>  </li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><code>widget</code></span> The layout.</li>
-             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> index The first widget.</li>
-             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> index The second widget.</li>
+             <li><span class="parameter"><code>widget1</code></span> <span class="types"><code>widget</code></span> The first widget.</li>
+             <li><span class="parameter"><code>widget2</code></span> <span class="types"><code>widget</code></span> The second widget.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The first index.</li>
              <li><span class="parameter"><code>index1</code></span> <span class="types"><code>number</code></span> The second index.</li>
            </ul>

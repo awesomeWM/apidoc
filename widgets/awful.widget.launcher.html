@@ -678,10 +678,10 @@ wb:setup {
 <p> It can can be any of the following:</p>
 
 <ul>
-<li>A <a href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> : Interpreted as the path to an image file,</li>
-<li>A cairo image surface : Directly used as is,</li>
-<li>An rsvg handle object : Directly used as is,</li>
-<li><code>nil</code> : Unset the image.</li>
+<li>A <a href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a>: Interpreted as a path to an image file</li>
+<li>A cairo image surface: Directly used as-is</li>
+<li>A librsvg handle object: Directly used as-is</li>
+<li><code>nil</code>: Unset the image.</li>
 </ul>
 
 
@@ -695,10 +695,6 @@ wb:setup {
 
 
 
-    <h3>See also:</h3>
-    <ul>
-         <a href="../widgets/wibox.widget.imagebox.html#set_image">set_image</a>
-    </ul>
 
 
      <br />
@@ -729,9 +725,10 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Set a clip shape for this imagebox.
- A clip shape define an area where the content is displayed and one where it
- is trimmed.</p>
+    Set a clip shape for this imagebox.</p>
+
+<p> A clip shape defines an area and dimension to which the content should be
+ trimmed.</p>
 
 <p><img src="../images/AUTOGEN_wibox_widget_imagebox_clip_shape.svg" alt="Usage example" />
 
@@ -747,8 +744,7 @@ wb:setup {
 
     <h3>See also:</h3>
     <ul>
-         <li><a href="../theme_related_libraries/gears.shape.html#">gears.shape</a></li>
-         <li><a href="../widgets/wibox.widget.imagebox.html#set_clip_shape">set_clip_shape</a></li>
+         <a href="../theme_related_libraries/gears.shape.html#">gears.shape</a>
     </ul>
 
     <h3>Usage:</h3>
@@ -842,12 +838,13 @@ wb:setup {
     <dd>
     Set the horizontal fit policy.</p>
 
-<p> Values are:</p>
+<p> Valid values are:</p>
 
 <ul>
-<li><strong>auto</strong>: Honor the <code>resize</code> varible and preserve the aspect ratio (default).</li>
-<li><strong>none</strong>: Do not resize at all.</li>
-<li><strong>fit</strong>: Resize to the widget width.</li>
+<li><code>&quot;auto&quot;</code>: Honor the <code>resize</code> variable and preserve the aspect ratio.
+This is the default behaviour.</li>
+<li><code>&quot;none&quot;</code>: Do not resize at all.</li>
+<li><code>&quot;fit&quot;</code>: Resize to the widget width.</li>
 </ul>
 
 
@@ -894,13 +891,15 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Set the vertical fit policy.
- Values are:</p>
+    Set the vertical fit policy.</p>
+
+<p> Valid values are:</p>
 
 <ul>
-<li><strong>auto</strong>: Honor the <code>resize</code> varible and preserve the aspect ratio (default).</li>
-<li><strong>none</strong>: Do not resize at all.</li>
-<li><strong>fit</strong>: Resize to the widget height.</li>
+<li><code>&quot;auto&quot;</code>: Honor the <code>resize</code> varible and preserve the aspect ratio.
+This is the default behaviour.</li>
+<li><code>&quot;none&quot;</code>: Do not resize at all.</li>
+<li><code>&quot;fit&quot;</code>: Resize to the widget height.</li>
 </ul>
 
 
@@ -952,9 +951,9 @@ wb:setup {
 <p> Possible values are:</p>
 
 <ul>
-<li><em>top</em></li>
-<li><em>center</em> (default)</li>
-<li><em>bottom</em></li>
+<li><code>&quot;top&quot;</code></li>
+<li><code>&quot;center&quot;</code> (default)</li>
+<li><code>&quot;bottom&quot;</code></li>
 </ul>
 
 
@@ -1005,7 +1004,7 @@ wb:setup {
           <li><span class="parameter"><code>property::valign</code></span>  When the <code>valign</code> value changes.</li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
-             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>avlign</code></span> The new value affected to the property.</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>valign</code></span> The new value affected to the property.</li>
            </ul>
      </ul>
     </span>
@@ -1026,9 +1025,9 @@ wb:setup {
 <p> Possible values are:</p>
 
 <ul>
-<li><em>left</em></li>
-<li><em>center</em> (default)</li>
-<li><em>right</em></li>
+<li><code>&quot;left&quot;</code></li>
+<li><code>&quot;center&quot;</code> (default)</li>
+<li><code>&quot;right&quot;</code></li>
 </ul>
 
 
@@ -1098,8 +1097,9 @@ wb:setup {
     The maximum scaling factor.</p>
 
 <p> If an image is scaled too much, it gets very blurry. This
- property allows to limit the scaling. Use the <code>valign</code> and
- <code>halign</code> to control how the image will be aligned.</p>
+ property allows to limit the scaling.
+ Use the properties <code>valign</code> and <code>halign</code> to control how the image will be
+ aligned.</p>
 
 <p> In the example below, the original size is 22x22</p>
 
@@ -1165,8 +1165,9 @@ wb:setup {
 </table>
 
 
-<p> The image used in the example below has a resolution of 32x22 and is intentionally
- blocky to highlight the difference. It is zoomed by a factor of 3.</p>
+<p> The image used in the example below has a resolution of 32x22 and is
+ intentionally blocky to highlight the difference.
+ It is zoomed by a factor of 3.</p>
 
 <p><img src="../images/AUTOGEN_wibox_widget_imagebox_scaling_quality.svg" alt="Usage example" />
 
@@ -1174,7 +1175,8 @@ wb:setup {
     <ul>
         <li><span class="parameter">scaling_quality</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         Either <code>fast</code>, <code>good</code>, <code>best</code>, <code>nearest</code> or <code>bilinear</code>.
+         Either <code>&quot;fast&quot;</code>, <code>&quot;good&quot;</code>, <code>&quot;best&quot;</code>,
+   <code>&quot;nearest&quot;</code> or <code>&quot;bilinear&quot;</code>.
         </li>
     </ul>
 
