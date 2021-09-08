@@ -269,8 +269,7 @@ Do <strong>not</strong> use such functions and prefer <a href="../libraries/awfu
 fast enough and won&rsquo;t impact the main event loop iteration time, you are wrong.
 <em>Every</em> calls to <a href="https://www.lua.org/manual/5.2/manual.html#pdf-io.open">io.open</a> are impacted by the system <code>iowait</code> queue and can
 spend hundreds of milliseconds blocked <em>before</em> being executed. Note that
-some common widget or probe libraries such as
-<a href="https://github.com/Mic92/vicious">Vicious</a> do not follow this
+some common widget or probe libraries do not follow this
 advice currently and are known to cause input lag on some systems (but not all).</p>
 
 <p>In both case, a warning like:</p>
