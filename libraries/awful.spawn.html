@@ -156,6 +156,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -225,35 +226,37 @@
 
 <h1>Module: <code>awful.spawn</code></h1>
 <p>Spawning of programs.</p>
-<p><p> This module provides methods to start programs and supports startup
+<p>
+
+
+<p> This module provides methods to start programs and supports startup
  notifications, which allows for callbacks and applying properties to the
  program after it has been launched.  This requires currently that the
  applicaton supports them.</p>
 
-<h2> Frequently asked questions</h2>
+<h1> Frequently asked questions</h1>
 
 <p> <strong>Rules of thumb when a shell is needed</strong>:</p>
 
 <ul>
-<li>A shell is required when the commands contain <code>&amp;&amp;</code>, <code>;</code>, <code>||</code>, <code>&amp;</code> or
-any other unix shell language syntax</li>
-<li>When shell variables are defined as part of the command</li>
-<li>When the command is a shell alias</li>
+    <li>A shell is required when the commands contain <code>&amp;&amp;</code>, <code>;</code>, <code>||</code>, <code>&amp;</code> or
+    any other unix shell language syntax</li>
+    <li>When shell variables are defined as part of the command</li>
+    <li>When the command is a shell alias</li>
 </ul>
-
 
 <p> Note that a shell is <strong>not</strong> a terminal emulator. A terminal emulator is
  something like XTerm, Gnome-terminal or Konsole. A shell is something like
  <code>bash</code>, <code>zsh</code>, <code>busybox sh</code> or <code>Debian ash</code>.</p>
 
 <p> If you wish to open a process in a terminal window, check that your terminal
- emulator supports the common <a href="../libraries/awful.spawn.html#awful.spawn.single_instance">-e</a> option. If it does, then something like
+ emulator supports the common <a href="../libraries/awful.spawn.html#awful.spawn.once">-e</a> option. If it does, then something like
  this should work:</p>
+
 
 <pre>
 awful.spawn(terminal..<span class="string">" -e my_command"</span>)
 </pre>
-
 
 <p> Note that some terminals, such as rxvt-unicode (urxvt) support full commands
  using quotes, while other terminal emulators require to use quoting.</p>
@@ -278,7 +281,7 @@ awful.spawn(terminal..<span class="string">" -e my_command"</span>)
 <p> <strong>Understanding blocking versus asynchronous execution</strong>:</p>
 
 <p> Awesome is single threaded, it means only one thing is executed at any time.
- But Awesome isn&rsquo;t doomed to be slow. It may not have multiple threads, but
+ But Awesome isn't doomed to be slow. It may not have multiple threads, but
  it has something called coroutine and also has callbacks. This means things
  that take time to execute can still do so in the background (using C threads
  or external process + sockets). When they are done, they can notify the
@@ -286,12 +289,13 @@ awful.spawn(terminal..<span class="string">" -e my_command"</span>)
 
 <p> If you want to update the text of a <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a> with the output
  of a shell command, you should use the <a href="../libraries/awful.spawn.html#awful.spawn.easy_async_with_shell">awful.spawn.easy_async_with_shell</a>
- command. It is strongly recommanded not to use <a href="https://www.lua.org/manual/5.2/manual.html#pdf-io.popen">io.popen</a> is explained in the
- &ldquo;Getting a command&rsquo;s output&rdquo; section. Asynchronous execution is at first a
+ command. It is strongly recommanded not to use <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> is explained in the
+ "Getting a command's output" section. Asynchronous execution is at first a
  bit tricky to understand if you never used that before. The example below
  should demonstrate how it works.</p>
 
-<p> If we do (but <em>really</em>, don&rsquo;t do that):</p>
+<p> If we do (but <em>really</em>, don't do that):</p>
+
 
 <pre>
 <span class="comment">-- **NEVER, EVER, DO THIS**: your computer will freeze
@@ -299,8 +303,8 @@ awful.spawn(terminal..<span class="string">" -e my_command"</span>)
 mylabel.text = <span class="global">io</span>.popen(<span class="string">"cat /tmp/foo.txt"</span>):read(<span class="string">"*all"</span>)
 </pre>
 
-
 <p> The label will display <code>foo</code>. But If we do:</p>
+
 
 <pre>
 <span class="comment">-- Don't do this, it wont work.
@@ -309,14 +313,14 @@ mylabel.text = <span class="global">io</span>.popen(<span class="string">"cat /t
 mylabel.text = <span class="global">io</span>.popen(<span class="string">"cat /tmp/foo.txt"</span>):read(<span class="string">"*all"</span>)
 </pre>
 
-
 <p> Then the label will be <strong>empty</strong>. <a href="../libraries/awful.spawn.html#">awful.spawn</a> and <a href="../libraries/awful.spawn.html#awful.spawn.with_shell">awful.spawn.with_shell</a>
- will <strong>not</strong> block and thus the <a href="https://www.lua.org/manual/5.2/manual.html#pdf-io.popen">io.popen</a> will be executed before
+ will <strong>not</strong> block and thus the <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> will be executed before
  <code>sleep 1</code> finishes. This is why we have async functions to execute shell
  commands. There are many variants with difference characteristics and
  complexity. <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">awful.spawn.easy_async</a> is the most common as it is good enough
- for the general &ldquo;I want to execute a command and do something with the
- output when it finishes&rdquo;.</p>
+ for the general "I want to execute a command and do something with the
+ output when it finishes".</p>
+
 
 <pre>
 <span class="comment">-- This is the correct way
@@ -329,15 +333,14 @@ awful.spawn.easy_async_with_shell(command, <span class="keyword">function</span>
 <span class="keyword">end</span>)
 </pre>
 
-
 <p> In this variant, Awesome will not block. Again, like other spawn, you
  cannot add code outside of the callback function to use the result of the
  command. The code will be executed before the command is finished so the
  result wont yet be available.</p>
 
-<p> <strong>Getting a command&rsquo;s output</strong>:</p>
+<p> <strong>Getting a command's output</strong>:</p>
 
-<p> First, do <strong>not</strong> use <a href="https://www.lua.org/manual/5.2/manual.html#pdf-io.popen">io.popen</a> <strong>ever</strong>. It is synchronous. Synchronous
+<p> First, do <strong>not</strong> use <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> <strong>ever</strong>. It is synchronous. Synchronous
  functions <strong>block everything</strong> until they are done. All visual applications
  lock (as Awesome no longer responds), you will probably lose some keyboard
  and mouse events and will have higher latency when playing games. This is
@@ -350,6 +353,7 @@ awful.spawn.easy_async_with_shell(command, <span class="keyword">function</span>
 <p> This modules provides <a href="../libraries/awful.spawn.html#awful.spawn.with_line_callback">with_line_callback</a> and <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">easy_async</a> for convenience.
  First, lets add this bash command to <a href="../sample files/rc.lua.html#">rc.lua</a>:</p>
 
+
 <pre>
 <span class="keyword">local</span> noisy = <span class="string">[[bash -c '
   for I in $(seq 1 5); do
@@ -360,7 +364,6 @@ awful.spawn.easy_async_with_shell(command, <span class="keyword">function</span>
 ']]</span>
 </pre>
 
-
 <p> It prints a bunch of junk on the standard output (<em>stdout</em>) and error
  (<em>stderr</em>) streams. This command would block Awesome for 10 seconds if it
  were executed synchronously, but will not block it at all using the
@@ -368,6 +371,7 @@ awful.spawn.easy_async_with_shell(command, <span class="keyword">function</span>
 
 <p> <a href="../libraries/awful.spawn.html#awful.spawn.with_line_callback">with_line_callback</a> will execute the callbacks every time a new line is
  printed by the command:</p>
+
 
 <pre>
 awful.spawn.with_line_callback(noisy, {
@@ -380,15 +384,14 @@ awful.spawn.with_line_callback(noisy, {
 })
 </pre>
 
-
 <p> If only the full output is needed, then <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">easy_async</a> is the right choice:</p>
+
 
 <pre>
 awful.spawn.easy_async(noisy, <span class="keyword">function</span>(stdout, stderr, reason, exit_code)
     naughty.notification { message = stdout }
 <span class="keyword">end</span>)
 </pre>
-
 
 <p> <strong>Default applications</strong>:</p>
 
@@ -398,10 +401,10 @@ awful.spawn.easy_async(noisy, <span class="keyword">function</span>(stdout, stde
  specification. The <code>xdg-utils</code> package provided by most distributions
  includes the <code>xdg-open</code> command:</p>
 
+
 <pre>
 awful.spawn({<span class="string">"xdg-open"</span>, <span class="string">"/path/to/file"</span>})
 </pre>
-
 
 <p> Awesome <strong>does not</strong> manage, modify or otherwise influence the database
  for default applications. For information about how to do this, consult the
@@ -411,7 +414,7 @@ awful.spawn({<span class="string">"xdg-open"</span>, <span class="string">"/path
  <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html">Desktop Entry</a>
  specification.</p>
 
-<h2> Spawning applications with specific properties</h2>
+<h1> Spawning applications with specific properties</h1>
 
 <p> <strong>The startup notification protocol</strong>:</p>
 
@@ -422,16 +425,16 @@ awful.spawn({<span class="string">"xdg-open"</span>, <span class="string">"/path
 
 <p> Awesome has support for the various events that are part of the protocol, but
  the most useful is the identifier, usually identified by its <code>SNID</code> acronym in
- the documentation. It isn&rsquo;t usually necessary to even know it exists, as it
+ the documentation. It isn't usually necessary to even know it exists, as it
  is all done automatically. However, if more control is required, the
  identifier can be specified by an environment variable called
  <code>DESKTOP_STARTUP_ID</code>. For example, let us consider execution of the following
  command:</p>
 
+
 <pre>
 DESKTOP_STARTUP_ID=<span class="string">"something_TIME$(date '+%s')"</span> my_command
 </pre>
-
 
 <p> This should (if the program correctly implements the protocol) result in
  <code>c.startup_id</code> to at least match <code>something</code>.
@@ -439,6 +442,7 @@ DESKTOP_STARTUP_ID=<span class="string">"something_TIME$(date '+%s')"</span> my_
 
 <p> Awesome can automatically set the <code>DESKTOP_STARTUP_ID</code> variable. This is used
  by <a href="../libraries/awful.spawn.html#">awful.spawn</a> to specify additional rules for the startup. For example:</p>
+
 
 <pre>
 awful.spawn(<span class="string">"urxvt -e maxima -name CALCULATOR"</span>, {
@@ -448,8 +452,8 @@ awful.spawn(<span class="string">"urxvt -e maxima -name CALCULATOR"</span>, {
 })
 </pre>
 
-
 <p> This can also be used from the command line:</p>
+
 
 <pre>
 awesome-client <span class="string">'awful=require("awful");
@@ -460,9 +464,9 @@ awesome-client <span class="string">'awful=require("awful");
   })'</span>
 </pre>
 
-
 <p> This table contains the client properties that are valid when used the
  <code>sn_rules</code> or <code>prop</code> function argument. They are the same as in <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.</p>
+
 
 <table class='widget_list' border=1>
  <tr>
@@ -539,6 +543,7 @@ awesome-client <span class="string">'awful=require("awful");
    <tr><td><a href='../core_components/client.html#buttons'>buttons</a></td><td>Get or set mouse buttons bindings for a client</td></tr>
    <tr><td><a href='../core_components/client.html#keys'>keys</a></td><td>Get or set keys bindings for a client</td></tr>
  </table>
+
 </p>
     <div class="extra-header">
 
@@ -643,7 +648,7 @@ awesome-client <span class="string">'awful=require("awful");
     </span>
     </dt>
     <dd>
-    Spawn a program, and optionally apply properties and/or run a callback.</p>
+    Spawn a program, and optionally apply properties and/or run a callback. </p>
 
 <p> Applying properties or running a callback requires the program/client to
  support startup notifications.</p>
@@ -653,11 +658,11 @@ awesome-client <span class="string">'awful=require("awful");
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The command.
         </li>
         <li><span class="parameter">sn_rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">boolean</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">boolean</span></span>
          A table of properties to be applied
    after startup; <code>false</code> to disable startup notifications.
          (<em>default</em> true)
@@ -675,14 +680,14 @@ awesome-client <span class="string">'awful=require("awful");
            <span class="types"><span class="type">integer</span></span>
         The forked PID.</li>
         <li>
-           <span class="types">optional <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types">optional <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
         The startup notification ID, if <code>sn</code> is not false, or
    a <code>callback</code> is provided.</li>
     </ol>
      <h3>Or</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
         Error message.
     </ol>
 
@@ -690,7 +695,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2309 class="hide_extra">
+    <span id=item2337 class="hide_extra">
     </span>
 
 </dd>
@@ -708,7 +713,7 @@ awesome-client <span class="string">'awful=require("awful");
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The command.
         </li>
     </ul>
@@ -718,7 +723,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2310 class="hide_extra">
+    <span id=item2338 class="hide_extra">
     </span>
 
 </dd>
@@ -735,7 +740,7 @@ awesome-client <span class="string">'awful=require("awful");
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The command.
         </li>
         <li><span class="parameter">callbacks</span> Table containing callbacks that should be invoked on
@@ -764,9 +769,9 @@ awesome-client <span class="string">'awful=require("awful");
          Function to call when the spawned
    process exits. This function gets the exit reason and code as its
    arguments.
-   The reason can be &ldquo;exit&rdquo; or &ldquo;signal&rdquo;.
-   For &ldquo;exit&rdquo;, the second argument is the exit code.
-   For &ldquo;signal&rdquo;, the second argument is the signal causing process
+   The reason can be "exit" or "signal".
+   For "exit", the second argument is the exit code.
+   For "signal", the second argument is the signal causing process
    termination.
          (<em>optional</em>)
         </li>
@@ -782,7 +787,7 @@ awesome-client <span class="string">'awful=require("awful");
      <h3>Or</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
         Error message.
     </ol>
 
@@ -790,7 +795,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2311 class="hide_extra">
+    <span id=item2339 class="hide_extra">
     </span>
 
 </dd>
@@ -808,27 +813,30 @@ awesome-client <span class="string">'awful=require("awful");
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The command.
         </li>
         <li><span class="parameter">callback</span> Function with the following arguments
         <ul>
         <li><span class="parameter">stdout</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Output on stdout.
         </li>
         <li><span class="parameter">stderr</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Output on stderr.
         </li>
         <li><span class="parameter">exitreason</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         Exit reason (&ldquo;exit&rdquo; or &ldquo;signal&rdquo;).
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         Exit reason ("exit" or "signal").
         </li>
         <li><span class="parameter">exitcode</span>
             <span class="types"><span class="type">integer</span></span>
-         Exit code (exit code or signal number,
-     depending on &ldquo;exitreason&rdquo;).
+
+<p> Exit code (exit code or signal number,</p>
+<pre><code> depending on "exitreason").
+</code></pre>
+
         </li>
         </li></ul>
     </ul>
@@ -842,7 +850,7 @@ awesome-client <span class="string">'awful=require("awful");
      <h3>Or</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
         Error message.
     </ol>
 
@@ -854,7 +862,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2312 class="hide_extra">
+    <span id=item2340 class="hide_extra">
     </span>
 
 </dd>
@@ -872,27 +880,30 @@ awesome-client <span class="string">'awful=require("awful");
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The command.
         </li>
         <li><span class="parameter">callback</span> Function with the following arguments
         <ul>
         <li><span class="parameter">stdout</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Output on stdout.
         </li>
         <li><span class="parameter">stderr</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Output on stderr.
         </li>
         <li><span class="parameter">exitreason</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         Exit reason (&ldquo;exit&rdquo; or &ldquo;signal&rdquo;).
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         Exit reason ("exit" or "signal").
         </li>
         <li><span class="parameter">exitcode</span>
             <span class="types"><span class="type">integer</span></span>
-         Exit code (exit code or signal number,
-     depending on &ldquo;exitreason&rdquo;).
+
+<p> Exit code (exit code or signal number,</p>
+<pre><code> depending on "exitreason").
+</code></pre>
+
         </li>
         </li></ul>
     </ul>
@@ -906,7 +917,7 @@ awesome-client <span class="string">'awful=require("awful");
      <h3>Or</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
         Error message.
     </ol>
 
@@ -918,7 +929,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2313 class="hide_extra">
+    <span id=item2341 class="hide_extra">
     </span>
 
 </dd>
@@ -961,7 +972,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2314 class="hide_extra">
+    <span id=item2342 class="hide_extra">
     </span>
 
 </dd>
@@ -973,7 +984,7 @@ awesome-client <span class="string">'awful=require("awful");
     </span>
     </dt>
     <dd>
-    Spawn a command if it has not been spawned before.</p>
+    Spawn a command if it has not been spawned before. </p>
 
 <p> This function tries its best to preserve the state across <code>awesome.restart()</code>.</p>
 
@@ -991,11 +1002,11 @@ awesome-client <span class="string">'awful=require("awful");
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The command.
         </li>
         <li><span class="parameter">rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The properties that need to be applied to the client.
          (<em>optional</em>)
         </li>
@@ -1006,8 +1017,8 @@ awesome-client <span class="string">'awful=require("awful");
          (<em>optional</em>)
         </li>
         <li><span class="parameter">unique_id</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         A string to identify the client so it isn&rsquo;t executed
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         A string to identify the client so it isn't executed
   multiple time.
          (<em>optional</em>)
         </li>
@@ -1027,7 +1038,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2315 class="hide_extra">
+    <span id=item2343 class="hide_extra">
     </span>
 
 </dd>
@@ -1039,7 +1050,7 @@ awesome-client <span class="string">'awful=require("awful");
     </span>
     </dt>
     <dd>
-    Spawn a command if an instance is not already running.</p>
+    Spawn a command if an instance is not already running. </p>
 
 <p> This is like <a href="../libraries/awful.spawn.html#awful.spawn.once">awful.spawn.once</a>, but will spawn new instances if the previous
  has finished.</p>
@@ -1056,11 +1067,11 @@ awesome-client <span class="string">'awful=require("awful");
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The command.
         </li>
         <li><span class="parameter">rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The properties that need to be applied to the client.
          (<em>optional</em>)
         </li>
@@ -1071,8 +1082,8 @@ awesome-client <span class="string">'awful=require("awful");
          (<em>optional</em>)
         </li>
         <li><span class="parameter">unique_id</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         A string to identify the client so it isn&rsquo;t executed
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         A string to identify the client so it isn't executed
   multiple time.
          (<em>optional</em>)
         </li>
@@ -1092,7 +1103,7 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2316 class="hide_extra">
+    <span id=item2344 class="hide_extra">
     </span>
 
 </dd>
@@ -1105,7 +1116,7 @@ awesome-client <span class="string">'awful=require("awful");
     </span>
     </dt>
     <dd>
-    Raise a client if it exists or spawn a new one then raise it.</p>
+    Raise a client if it exists or spawn a new one then raise it. </p>
 
 <p> This function depends on the startup notification protocol to be correctly
  implemented by the command. See <a href="../core_components/client.html#startup_id">client.startup_id</a> for more information.
@@ -1114,11 +1125,11 @@ awesome-client <span class="string">'awful=require("awful");
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The command.
         </li>
         <li><span class="parameter">rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The properties that need to be applied to the client.
         </li>
         <li><span class="parameter">matcher</span>
@@ -1128,8 +1139,8 @@ awesome-client <span class="string">'awful=require("awful");
          (<em>optional</em>)
         </li>
         <li><span class="parameter">unique_id</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         A string to identify the client so it isn&rsquo;t executed
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         A string to identify the client so it isn't executed
   multiple time.
          (<em>optional</em>)
         </li>
@@ -1155,13 +1166,13 @@ awesome-client <span class="string">'awful=require("awful");
 
 
      <br />
-     <center id=button2317>
-     <a class="show_more_button" onclick="show_extra('2317')">
+     <center id=button2345>
+     <a class="show_more_button" onclick="show_extra('2345')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2317 class="hide_extra">
+    <span id=item2345 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>

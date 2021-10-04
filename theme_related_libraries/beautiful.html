@@ -145,6 +145,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -228,7 +229,9 @@
 
 <h1>Module: <code>beautiful</code></h1>
 <p>Theme library.</p>
-<p></p>
+<p>
+
+</p>
     <div class="extra-header">
 
 
@@ -456,7 +459,7 @@
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Key-value table with the following structure:
  <table class='widget_list' border=1>
  <tr style='font-weight: bold;'> <th align='center'>Result key</th> <th align='center'>StyleContext key</th> <th align='center'>StyleContext fallback #1</th> <th align='center'>StyleContext fallback #2</th> <th align='center'>GTK Widget fallback</th> </tr>
@@ -506,7 +509,7 @@
 
 
 
-    <span id=item2139 class="hide_extra">
+    <span id=item2167 class="hide_extra">
     </span>
 
 </dd>
@@ -518,14 +521,14 @@
     </span>
     </dt>
     <dd>
-    Get a font description.</p>
+    Get a font description. </p>
 
 <p> See https://developer.gnome.org/pango/stable/pango-Fonts.html#PangoFontDescription.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">lgi.Pango.FontDescription</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">lgi.Pango.FontDescription</span></span>
          The name of the font.
         </li>
     </ul>
@@ -535,13 +538,15 @@
 
            <span class="types"><span class="type">lgi.Pango.FontDescription</span></span>
 
+
+
     </ol>
 
 
 
 
 
-    <span id=item2140 class="hide_extra">
+    <span id=item2168 class="hide_extra">
     </span>
 
 </dd>
@@ -553,19 +558,19 @@
     </span>
     </dt>
     <dd>
-    Get a new font with merged attributes, based on another one.</p>
+    Get a new font with merged attributes, based on another one. </p>
 
 <p> See https://developer.gnome.org/pango/stable/pango-Fonts.html#pango-font-description-from-string.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">Pango.FontDescription</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">Pango.FontDescription</span></span>
          The base font.
         </li>
         <li><span class="parameter">merge</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         Attributes that should be merged, e.g. &ldquo;bold&rdquo;.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         Attributes that should be merged, e.g. "bold".
         </li>
     </ul>
 
@@ -574,13 +579,15 @@
 
            <span class="types"><span class="type">lgi.Pango.FontDescription</span></span>
 
+
+
     </ol>
 
 
 
 
 
-    <span id=item2141 class="hide_extra">
+    <span id=item2169 class="hide_extra">
     </span>
 
 </dd>
@@ -606,7 +613,7 @@
 
 
 
-    <span id=item2142 class="hide_extra">
+    <span id=item2170 class="hide_extra">
     </span>
 
 </dd>
@@ -618,7 +625,8 @@
     </span>
     </dt>
     <dd>
-    <p>Function that initializes the theme settings.  Should be run at the
+
+<p>Function that initializes the theme settings.  Should be run at the
  beginning of the awesome configuration file (normally rc.lua).</p>
 
 <p> Example usages:</p>
@@ -630,9 +638,9 @@ beautiful.init({font = 'Monospace Bold 10'})
 beautiful.init("&lt;path&gt;/theme.lua")
 </code></pre>
 
-<p> Example &ldquo;<path>/theme.lua&rdquo; (see <a href="../documentation/05-awesomerc.md.html#Variable_definitions">05-awesomerc.md:Variable_definitions</a>):</p>
+<p> Example "<path>/theme.lua" (see <a href="../documentation/05-awesomerc.md.html#Variable_definitions">05-awesomerc.md:Variable_definitions</a>):</p>
 
-<pre><code>theme = setmetatable({}, { __index = function() error("May not access theme before beautiful.init()") end })
+<pre><code>theme = {}
     theme.font = 'Monospace Bold 10'
 return theme
 </code></pre>
@@ -645,10 +653,12 @@ if not beautiful.init("&lt;path&gt;/theme.lua") then
 end
 </code></pre>
 
+
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">config</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The theme to load. It can be either the path to
    the theme file (which should return a table) or directly a table
    containing all the theme values.
@@ -666,7 +676,7 @@ end
 
 
 
-    <span id=item2143 class="hide_extra">
+    <span id=item2171 class="hide_extra">
     </span>
 
 </dd>
@@ -684,7 +694,7 @@ end
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The current theme table.
     </ol>
 
@@ -692,7 +702,7 @@ end
 
 
 
-    <span id=item2144 class="hide_extra">
+    <span id=item2172 class="hide_extra">
     </span>
 
 </dd>
@@ -728,7 +738,7 @@ end
 
 
 
-    <span id=item2145 class="hide_extra">
+    <span id=item2173 class="hide_extra">
     </span>
 
 </dd>
@@ -764,7 +774,7 @@ end
 
 
 
-    <span id=item2146 class="hide_extra">
+    <span id=item2174 class="hide_extra">
     </span>
 
 </dd>
@@ -806,7 +816,7 @@ end
 
 
 
-    <span id=item2147 class="hide_extra">
+    <span id=item2175 class="hide_extra">
     </span>
 
 </dd>
@@ -848,7 +858,7 @@ end
 
 
 
-    <span id=item2148 class="hide_extra">
+    <span id=item2176 class="hide_extra">
     </span>
 
 </dd>
@@ -888,7 +898,7 @@ end
 
 
 
-    <span id=item2149 class="hide_extra">
+    <span id=item2177 class="hide_extra">
     </span>
 
 </dd>
@@ -932,7 +942,7 @@ end
 
 
 
-    <span id=item2150 class="hide_extra">
+    <span id=item2178 class="hide_extra">
     </span>
 
 </dd>
@@ -949,7 +959,7 @@ end
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">theme</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Beautiful theme table.
         </li>
         <li><span class="parameter">color</span>
@@ -957,15 +967,15 @@ end
          Icons' color.
         </li>
         <li><span class="parameter">state</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          <code>&quot;normal&quot;</code> or <code>&quot;focus&quot;</code>.
         </li>
         <li><span class="parameter">postfix</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          <code>nil</code>, <code>&quot;hover&quot;</code> or <code>&quot;press&quot;</code>.
         </li>
         <li><span class="parameter">toggle_state</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          <code>nil</code>, <code>&quot;active&quot;</code> or <code>&quot;inactive&quot;</code>.
         </li>
     </ul>
@@ -973,7 +983,7 @@ end
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         Beautiful theme table with the images recolored.
     </ol>
 
@@ -981,7 +991,7 @@ end
 
 
 
-    <span id=item2151 class="hide_extra">
+    <span id=item2179 class="hide_extra">
     </span>
 
 </dd>
@@ -998,7 +1008,7 @@ end
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">theme</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Beautiful theme table
         </li>
         <li><span class="parameter">color</span>
@@ -1010,7 +1020,7 @@ end
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         Beautiful theme table with the images recolored.
     </ol>
 
@@ -1018,7 +1028,7 @@ end
 
 
 
-    <span id=item2152 class="hide_extra">
+    <span id=item2180 class="hide_extra">
     </span>
 
 </dd>
@@ -1036,15 +1046,15 @@ end
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        Color table with keys &lsquo;background&rsquo;, &lsquo;foreground&rsquo; and &lsquo;color0&rsquo;..&lsquo;color15&rsquo;.
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        Color table with keys 'background', 'foreground' and 'color0'..'color15'.
     </ol>
 
 
 
 
 
-    <span id=item2153 class="hide_extra">
+    <span id=item2181 class="hide_extra">
     </span>
 
 </dd>
@@ -1076,7 +1086,7 @@ end
 
 
 
-    <span id=item2154 class="hide_extra">
+    <span id=item2182 class="hide_extra">
     </span>
 
 </dd>
@@ -1114,7 +1124,7 @@ end
 
 
 
-    <span id=item2155 class="hide_extra">
+    <span id=item2183 class="hide_extra">
     </span>
 
 </dd>
@@ -1138,7 +1148,7 @@ end
 
 
 
-    <span id=item2156 class="hide_extra">
+    <span id=item2184 class="hide_extra">
     </span>
 
 </dd>
@@ -1158,7 +1168,7 @@ end
 
 
 
-    <span id=item2157 class="hide_extra">
+    <span id=item2185 class="hide_extra">
     </span>
 
 </dd>
@@ -1178,7 +1188,7 @@ end
 
 
 
-    <span id=item2158 class="hide_extra">
+    <span id=item2186 class="hide_extra">
     </span>
 
 </dd>
@@ -1198,7 +1208,7 @@ end
 
 
 
-    <span id=item2159 class="hide_extra">
+    <span id=item2187 class="hide_extra">
     </span>
 
 </dd>
@@ -1218,7 +1228,7 @@ end
 
 
 
-    <span id=item2160 class="hide_extra">
+    <span id=item2188 class="hide_extra">
     </span>
 
 </dd>
@@ -1238,7 +1248,7 @@ end
 
 
 
-    <span id=item2161 class="hide_extra">
+    <span id=item2189 class="hide_extra">
     </span>
 
 </dd>
@@ -1259,7 +1269,7 @@ end
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">theme</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Beautiful theme table
         </li>
         <li><span class="parameter">color</span>
@@ -1271,7 +1281,7 @@ end
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         Beautiful theme table with the images recolored.
     </ol>
 
@@ -1279,7 +1289,7 @@ end
 
 
 
-    <span id=item2162 class="hide_extra">
+    <span id=item2190 class="hide_extra">
     </span>
 
 </dd>
@@ -1296,7 +1306,7 @@ end
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">theme</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Beautiful theme table
         </li>
         <li><span class="parameter">color</span>
@@ -1308,7 +1318,7 @@ end
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         Beautiful theme table with the images recolored.
     </ol>
 
@@ -1316,7 +1326,7 @@ end
 
 
 
-    <span id=item2163 class="hide_extra">
+    <span id=item2191 class="hide_extra">
     </span>
 
 </dd>
@@ -1327,7 +1337,7 @@ end
     </span>
     </dt>
     <dd>
-    Get global or per-screen DPI value falling back to xrdb.</p>
+    Get global or per-screen DPI value falling back to xrdb. </p>
 
 <p> This function is deprecated. Use <code>s.dpi</code> and avoid getting the DPI without
  a screen.
@@ -1352,7 +1362,7 @@ end
 
 
 
-    <span id=item2164 class="hide_extra">
+    <span id=item2192 class="hide_extra">
     </span>
 
 </dd>
@@ -1376,7 +1386,7 @@ end
 
 
 
-    <span id=item2165 class="hide_extra">
+    <span id=item2193 class="hide_extra">
     </span>
 
 </dd>

@@ -141,6 +141,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -230,9 +231,16 @@
 
 <h1>Module: <code>awful.widget.layoutlist</code></h1>
 <p>Display the available client layouts for a screen.</p>
-<p><p> This is what the layoutlist looks like by default with a vertical layout:</p>
+<p>
 
-<p><img src="../images/AUTOGEN_awful_widget_layoutlist_default.svg" alt="Usage example" /></p>
+
+<p> This is what the layoutlist looks like by default with a vertical layout:</p>
+
+
+
+<p><img src="../images/AUTOGEN_awful_widget_layoutlist_default.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 awful.popup {
@@ -246,11 +254,14 @@ awful.popup {
 }
 </pre>
 
-
 <p> In the second example, it is shown how to create a popup in the center of
  the screen:</p>
 
-<p><img src="../images/AUTOGEN_awful_widget_layoutlist_popup.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_awful_widget_layoutlist_popup.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 <span class="keyword">local</span> ll = awful.widget.layoutlist {
@@ -298,29 +309,32 @@ awful.popup {
     start_callback = <span class="keyword">function</span>() layout_popup.visible = <span class="keyword">true</span>  <span class="keyword">end</span>,
     stop_callback  = <span class="keyword">function</span>() layout_popup.visible = <span class="keyword">false</span> <span class="keyword">end</span>,
     export_keybindings = <span class="keyword">true</span>,
-    release_event = <span class="string">'release'</span>,
-    stop_key = {<span class="string">'Escape'</span>, <span class="string">'Super_L'</span>, <span class="string">'Super_R'</span>},
+    release_event = <span class="string">"release"</span>,
+    stop_key = {<span class="string">"Escape"</span>, <span class="string">"Super_L"</span>, <span class="string">"Super_R"</span>},
     keybindings = {
-        {{ modkey          } , <span class="string">' '</span> , <span class="keyword">function</span>()
+        {{ modkey          } , <span class="string">" "</span> , <span class="keyword">function</span>()
             awful.layout.set(gears.<span class="global">table</span>.cycle_value(ll.layouts, ll.current_layout, <span class="number">1</span>))
         <span class="keyword">end</span>},
-        {{ modkey, <span class="string">'Shift'</span> } , <span class="string">' '</span> , <span class="keyword">function</span>()
+        {{ modkey, <span class="string">"Shift"</span> } , <span class="string">" "</span> , <span class="keyword">function</span>()
             awful.layout.set(gears.<span class="global">table</span>.cycle_value(ll.layouts, ll.current_layout, -<span class="number">1</span>), <span class="keyword">nil</span>)
         <span class="keyword">end</span>},
     }
 }
 </pre>
 
+<p> This example extends 'awful.widget.layoutbox' to show a layout list popup:</p>
 
-<p> This example extends &lsquo;awful.widget.layoutbox&rsquo; to show a layout list popup:</p>
 
-<p><img src="../images/AUTOGEN_awful_widget_layoutlist_bar.svg" alt="Usage example" /></p>
+
+<p><img src="../images/AUTOGEN_awful_widget_layoutlist_bar.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 <span class="comment">-- Normally you would use your existing bars, but for this example, we add one
 </span><span class="keyword">local</span> lb = awful.widget.layoutbox(screen[<span class="number">1</span>])
 <span class="keyword">local</span> l = wibox.layout.align.horizontal(<span class="keyword">nil</span>, lb, <span class="keyword">nil</span>)
-l.expand = <span class="string">'outside'</span>
+l.expand = <span class="string">"outside"</span>
 awful.wibar { widget = l }
 
 <span class="keyword">local</span> p = awful.popup {
@@ -354,7 +368,7 @@ awful.wibar { widget = l }
         margins = <span class="number">4</span>,
         widget  = wibox.container.margin,
     },
-    preferred_anchors = <span class="string">'middle'</span>,
+    preferred_anchors = <span class="string">"middle"</span>,
     border_color      = beautiful.border_color,
     border_width      = beautiful.border_width,
     shape             = gears.shape.infobubble,
@@ -362,10 +376,13 @@ awful.wibar { widget = l }
 p:bind_to_widget(lb)
 </pre>
 
-
 <p> This example shows how to add a layout subset to the default wibar:</p>
 
-<p><img src="../images/AUTOGEN_awful_widget_layoutlist_wibar.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_awful_widget_layoutlist_wibar.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 wb:setup {
@@ -397,6 +414,7 @@ wb:setup {
     },
 }
 </pre>
+
 </p>
     <div class="extra-header">
   <div class="extra-header__section">
@@ -806,6 +824,8 @@ wb:setup {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
+
+
         <ul>
         <li><span class="parameter">layout</span>
             <span class="types"><span class="type">widget</span></span>
@@ -813,7 +833,7 @@ wb:setup {
   layout).
         </li>
         <li><span class="parameter">buttons</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The list of <code>awful.buttons</code>.
          (<em>default</em> nil)
         </li>
@@ -824,7 +844,7 @@ wb:setup {
          (<em>default</em> awful.widget.layoutlist.source.for_screen)
         </li>
         <li><span class="parameter">widget_template</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A custom widget to be used for each action.
          (<em>optional</em>)
         </li>
@@ -834,77 +854,107 @@ wb:setup {
          (<em>default</em> ascreen.focused())
         </li>
         <li><span class="parameter">buttons</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The list of <code>awful.buttons</code>.
          (<em>default</em> nil)
         </li>
         <li><span class="parameter">style</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Extra look and feel parameters
          (<em>default</em> {})
         </li>
         <li><span class="parameter">style.disable_icon</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.disable_name</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.fg_normal</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
 
         </li>
         <li><span class="parameter">style.bg_normal</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
 
         </li>
         <li><span class="parameter">style.fg_selected</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
 
         </li>
         <li><span class="parameter">style.bg_selected</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
 
         </li>
         <li><span class="parameter">style.font</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.font_selected</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.align</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          <em>left</em>, <em>right</em> or <em>center</em>
         </li>
         <li><span class="parameter">style.spacing</span>
             <span class="types"><span class="type">number</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.shape</span>
             <span class="types"><span class="type">gears.shape</span></span>
+
+
 
         </li>
         <li><span class="parameter">style.shape_border_width</span>
             <span class="types"><span class="type">number</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.shape_border_color</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
 
         </li>
         <li><span class="parameter">style.shape_selected</span>
             <span class="types"><span class="type">gears.shape</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.shape_border_width_selected</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
 
         </li>
         <li><span class="parameter">style.shape_border_color_selected</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span>
+
+
 
         </li>
         </li></ul>
@@ -921,7 +971,7 @@ wb:setup {
 
 
 
-    <span id=item945 class="hide_extra">
+    <span id=item951 class="hide_extra">
     </span>
 
 </dd>
@@ -953,13 +1003,13 @@ wb:setup {
 
 
      <br />
-     <center id=button946>
-     <a class="show_more_button" onclick="show_extra('946')">
+     <center id=button952>
+     <a class="show_more_button" onclick="show_extra('952')">
       Click to display more
      </a>
      </center>
 
-    <span id=item946 class="hide_extra">
+    <span id=item952 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::base_layout</code></span>  When the <a href="../widgets/awful.widget.layoutlist.html#base_layout">base_layout</a> value changes.</li>
@@ -988,19 +1038,19 @@ wb:setup {
 
 
      <br />
-     <center id=button947>
-     <a class="show_more_button" onclick="show_extra('947')">
+     <center id=button953>
+     <a class="show_more_button" onclick="show_extra('953')">
       Click to display more
      </a>
      </center>
 
-    <span id=item947 class="hide_extra">
+    <span id=item953 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::widget_template</code></span>  When the <a href="../widgets/awful.widget.layoutlist.html#widget_template">widget_template</a> value changes.</li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/awful.widget.layoutlist.html#">awful.widget.layoutlist</a></span> The object which changed (useful when connecting many object to the same callback).</li>
-             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span> The new value affected to the property.</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span> The new value affected to the property.</li>
            </ul>
      </ul>
     </span>
@@ -1022,7 +1072,7 @@ wb:setup {
 
 
 
-    <span id=item948 class="hide_extra">
+    <span id=item954 class="hide_extra">
     </span>
 
 </dd>
@@ -1042,7 +1092,7 @@ wb:setup {
 
 
 
-    <span id=item949 class="hide_extra">
+    <span id=item955 class="hide_extra">
     </span>
 
 </dd>
@@ -1062,7 +1112,7 @@ wb:setup {
 
 
 
-    <span id=item950 class="hide_extra">
+    <span id=item956 class="hide_extra">
     </span>
 
 </dd>
@@ -1074,7 +1124,8 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    <p>The layoutlist buttons.</p>
+
+<p>The layoutlist buttons. </p>
 
 <p> The default is:</p>
 
@@ -1089,7 +1140,9 @@ wb:setup {
 
 
 
-    <span id=item951 class="hide_extra">
+
+
+    <span id=item957 class="hide_extra">
     </span>
 
 </dd>
@@ -1109,7 +1162,7 @@ wb:setup {
 
 
 
-    <span id=item952 class="hide_extra">
+    <span id=item958 class="hide_extra">
     </span>
 
 </dd>
@@ -1129,7 +1182,7 @@ wb:setup {
 
 
 
-    <span id=item953 class="hide_extra">
+    <span id=item959 class="hide_extra">
     </span>
 
 </dd>
@@ -1147,7 +1200,7 @@ wb:setup {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The children.
         </li>
     </ul>
@@ -1157,7 +1210,7 @@ wb:setup {
 
 
 
-    <span id=item868 class="hide_extra">
+    <span id=item874 class="hide_extra">
     </span>
 
 </dd>
@@ -1179,7 +1232,7 @@ wb:setup {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The children.
         </li>
     </ul>
@@ -1189,7 +1242,7 @@ wb:setup {
 
 
 
-    <span id=item869 class="hide_extra">
+    <span id=item875 class="hide_extra">
     </span>
 
 </dd>
@@ -1217,7 +1270,7 @@ wb:setup {
 
 
 
-    <span id=item870 class="hide_extra">
+    <span id=item876 class="hide_extra">
     </span>
 
 </dd>
@@ -1245,7 +1298,7 @@ wb:setup {
 
 
 
-    <span id=item871 class="hide_extra">
+    <span id=item877 class="hide_extra">
     </span>
 
 </dd>
@@ -1274,7 +1327,7 @@ wb:setup {
 
 
 
-    <span id=item872 class="hide_extra">
+    <span id=item878 class="hide_extra">
     </span>
 
 </dd>
@@ -1295,7 +1348,7 @@ wb:setup {
 
 
 
-    <span id=item873 class="hide_extra">
+    <span id=item879 class="hide_extra">
     </span>
 
 </dd>
@@ -1308,7 +1361,7 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    The widget buttons.</p>
+    The widget buttons. </p>
 
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
@@ -1322,7 +1375,7 @@ wb:setup {
 
 
 
-    <span id=item874 class="hide_extra">
+    <span id=item880 class="hide_extra">
     </span>
 
 </dd>
@@ -1350,7 +1403,7 @@ wb:setup {
 
 
 
-    <span id=item954 class="hide_extra">
+    <span id=item960 class="hide_extra">
     </span>
 
 </dd>
@@ -1374,7 +1427,7 @@ wb:setup {
 
 
 
-    <span id=item955 class="hide_extra">
+    <span id=item961 class="hide_extra">
     </span>
 
 </dd>
@@ -1398,7 +1451,7 @@ wb:setup {
 
 
 
-    <span id=item956 class="hide_extra">
+    <span id=item962 class="hide_extra">
     </span>
 
 </dd>
@@ -1422,7 +1475,7 @@ wb:setup {
 
 
 
-    <span id=item957 class="hide_extra">
+    <span id=item963 class="hide_extra">
     </span>
 
 </dd>
@@ -1442,7 +1495,7 @@ wb:setup {
 
 
 
-    <span id=item958 class="hide_extra">
+    <span id=item964 class="hide_extra">
     </span>
 
 </dd>
@@ -1462,7 +1515,7 @@ wb:setup {
 
 
 
-    <span id=item959 class="hide_extra">
+    <span id=item965 class="hide_extra">
     </span>
 
 </dd>
@@ -1482,7 +1535,7 @@ wb:setup {
 
 
 
-    <span id=item960 class="hide_extra">
+    <span id=item966 class="hide_extra">
     </span>
 
 </dd>
@@ -1499,7 +1552,7 @@ wb:setup {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">align</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          <em>left</em>, <em>right</em> or <em>center</em>
          (<em>default</em> left)
         </li>
@@ -1510,7 +1563,7 @@ wb:setup {
 
 
 
-    <span id=item961 class="hide_extra">
+    <span id=item967 class="hide_extra">
     </span>
 
 </dd>
@@ -1530,7 +1583,7 @@ wb:setup {
 
 
 
-    <span id=item962 class="hide_extra">
+    <span id=item968 class="hide_extra">
     </span>
 
 </dd>
@@ -1558,7 +1611,7 @@ wb:setup {
 
 
 
-    <span id=item963 class="hide_extra">
+    <span id=item969 class="hide_extra">
     </span>
 
 </dd>
@@ -1578,7 +1631,7 @@ wb:setup {
 
 
 
-    <span id=item964 class="hide_extra">
+    <span id=item970 class="hide_extra">
     </span>
 
 </dd>
@@ -1598,7 +1651,7 @@ wb:setup {
 
 
 
-    <span id=item965 class="hide_extra">
+    <span id=item971 class="hide_extra">
     </span>
 
 </dd>
@@ -1622,7 +1675,7 @@ wb:setup {
 
 
 
-    <span id=item966 class="hide_extra">
+    <span id=item972 class="hide_extra">
     </span>
 
 </dd>
@@ -1642,7 +1695,7 @@ wb:setup {
 
 
 
-    <span id=item967 class="hide_extra">
+    <span id=item973 class="hide_extra">
     </span>
 
 </dd>
@@ -1662,7 +1715,7 @@ wb:setup {
 
 
 
-    <span id=item968 class="hide_extra">
+    <span id=item974 class="hide_extra">
     </span>
 
 </dd>
@@ -1686,7 +1739,7 @@ wb:setup {
 
 
 
-    <span id=item969 class="hide_extra">
+    <span id=item975 class="hide_extra">
     </span>
 
 </dd>
@@ -1715,7 +1768,7 @@ wb:setup {
 
 
 
-    <span id=item970 class="hide_extra">
+    <span id=item976 class="hide_extra">
     </span>
 
 </dd>
@@ -1734,7 +1787,7 @@ wb:setup {
 
 
 
-    <span id=item971 class="hide_extra">
+    <span id=item977 class="hide_extra">
     </span>
 
 </dd>
@@ -1757,7 +1810,7 @@ wb:setup {
 
 
 
-    <span id=item972 class="hide_extra">
+    <span id=item978 class="hide_extra">
     </span>
 
 </dd>
@@ -1789,7 +1842,7 @@ wb:setup {
 
 
 
-    <span id=item875 class="hide_extra">
+    <span id=item881 class="hide_extra">
     </span>
 
 </dd>
@@ -1802,8 +1855,9 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    <p>Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal.</p>
+
+<p>Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal. </p>
 
 <p> This is useful to track signals when there is a dynamic set of containers
    and layouts wrapping the widget.</p>
@@ -1811,21 +1865,24 @@ wb:setup {
 <p> Note that this function has some flaws:</p>
 
 <ol>
-<li>The signal is only forwarded once the widget tree has been built. This
-happens after all currently scheduled functions have been executed.
-Therefore, it will not start to work right away.</li>
-<li>In case the widget is present multiple times in a single widget tree,
-this function will also forward the signal multiple times (once per upward
-tree path).</li>
-<li>If the widget is removed from the widget tree, the signal is still
-forwarded for some time, similar to the first case.</li>
+    <li>The signal is only forwarded once the widget tree has been built. This
+    happens after all currently scheduled functions have been executed.
+    Therefore, it will not start to work right away.</li>
+    <li>In case the widget is present multiple times in a single widget tree,
+    this function will also forward the signal multiple times (once per upward
+    tree path).</li>
+    <li>If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.</li>
 </ol>
+
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">signal_name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">...</span>
@@ -1838,7 +1895,7 @@ forwarded for some time, similar to the first case.</li>
 
 
 
-    <span id=item876 class="hide_extra">
+    <span id=item882 class="hide_extra">
     </span>
 
 </dd>
@@ -1868,7 +1925,7 @@ forwarded for some time, similar to the first case.</li>
         <li><span class="parameter">...</span>
             <span class="types"><span class="type">widget</span></span>
          Additional widgets to add at the end of the
-   sub-widgets hierarchy &ldquo;path&rdquo;.
+   sub-widgets hierarchy "path".
          (<em>optional</em>)
         </li>
     </ul>
@@ -1882,15 +1939,15 @@ forwarded for some time, similar to the first case.</li>
            <span class="types"><span class="type">widget</span></span>
         The parent widget.</li>
         <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        The hierarchy path between &ldquo;self&rdquo; and &ldquo;widget&rdquo;.</li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        The hierarchy path between "self" and "widget".</li>
     </ol>
 
 
 
 
 
-    <span id=item877 class="hide_extra">
+    <span id=item883 class="hide_extra">
     </span>
 
 </dd>
@@ -1903,7 +1960,11 @@ forwarded for some time, similar to the first case.</li>
     </span>
     </dt>
     <dd>
-    <p>Connect to a signal.</p>
+
+<p>Connect to a signal. </p>
+
+
+
 
 <p><strong>Usage example output</strong>:</p>
 
@@ -1911,10 +1972,13 @@ forwarded for some time, similar to the first case.</li>
 In slot [obj]   foo bar 42
 </code></pre>
 
+
+
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1931,23 +1995,23 @@ In slot [obj]   foo bar 42
         <pre class="example"><span class="keyword">local</span> o = gears.object{}
 <span class="comment">-- Function can be attached to signals
 </span><span class="keyword">local</span> <span class="keyword">function</span> slot(obj, a, b, c)
-    <span class="global">print</span>(<span class="string">'In slot'</span>, obj, a, b, c)
+    <span class="global">print</span>(<span class="string">"In slot"</span>, obj, a, b, c)
 <span class="keyword">end</span>
-o:connect_signal(<span class="string">'my_signal'</span>, slot)
+o:connect_signal(<span class="string">"my_signal"</span>, slot)
 <span class="comment">-- Emitting can be done without arguments. In that case, the object will be
 </span><span class="comment">-- implicitly added as an argument.
-</span>o:emit_signal <span class="string">'my_signal'</span>
+</span>o:emit_signal <span class="string">"my_signal"</span>
 <span class="comment">-- It is also possible to add as many random arguments are required.
-</span>o:emit_signal(<span class="string">'my_signal'</span>, <span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="number">42</span>)
+</span>o:emit_signal(<span class="string">"my_signal"</span>, <span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="number">42</span>)
 <span class="comment">-- Finally, to allow the object to be garbage collected (the memory freed), it
 </span><span class="comment">-- is necessary to disconnect the signal or use <code>weak_connect_signal</code>
-</span>o:disconnect_signal(<span class="string">'my_signal'</span>, slot)
+</span>o:disconnect_signal(<span class="string">"my_signal"</span>, slot)
 <span class="comment">-- This time, the <code>slot</code> wont be called as it is no longer connected.
-</span>o:emit_signal <span class="string">'my_signal'</span></pre>
+</span>o:emit_signal <span class="string">"my_signal"</span></pre>
     </ul>
 
 
-    <span id=item878 class="hide_extra">
+    <span id=item884 class="hide_extra">
     </span>
 
 </dd>
@@ -1960,7 +2024,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.</p>
+    Connect to a signal weakly. </p>
 
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
@@ -1971,7 +2035,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1985,7 +2049,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item879 class="hide_extra">
+    <span id=item885 class="hide_extra">
     </span>
 
 </dd>
@@ -2003,7 +2067,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -2017,7 +2081,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item880 class="hide_extra">
+    <span id=item886 class="hide_extra">
     </span>
 
 </dd>
@@ -2035,7 +2099,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">...</span>
@@ -2050,7 +2114,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item881 class="hide_extra">
+    <span id=item887 class="hide_extra">
     </span>
 
 </dd>
@@ -2081,7 +2145,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item882 class="hide_extra">
+    <span id=item888 class="hide_extra">
     </span>
 
 </dd>
@@ -2108,7 +2172,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item883 class="hide_extra">
+    <span id=item889 class="hide_extra">
     </span>
 
 </dd>
@@ -2125,7 +2189,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">lx</span>
@@ -2143,7 +2207,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
          The button number.
         </li>
         <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -2161,7 +2225,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -2205,7 +2269,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item884 class="hide_extra">
+    <span id=item890 class="hide_extra">
     </span>
 
 </dd>
@@ -2222,7 +2286,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">lx</span>
@@ -2240,7 +2304,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
          The button number.
         </li>
         <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -2258,7 +2322,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -2302,7 +2366,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item885 class="hide_extra">
+    <span id=item891 class="hide_extra">
     </span>
 
 </dd>
@@ -2319,7 +2383,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -2337,7 +2401,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -2381,7 +2445,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item886 class="hide_extra">
+    <span id=item892 class="hide_extra">
     </span>
 
 </dd>
@@ -2398,7 +2462,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -2416,7 +2480,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -2460,7 +2524,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item887 class="hide_extra">
+    <span id=item893 class="hide_extra">
     </span>
 
 </dd>

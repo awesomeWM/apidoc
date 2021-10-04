@@ -140,6 +140,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -229,25 +230,32 @@
 
 <h1>Module: <code>naughty.list.actions</code></h1>
 <p>Manage a notification action list.</p>
-<p><p> A notification action is a &ldquo;button&rdquo; that will trigger an action on the sender
- process. <code>notify-send</code> doesn&rsquo;t support actions, but <code>libnotify</code> based
+<p>
+
+
+<p> A notification action is a "button" that will trigger an action on the sender
+ process. <code>notify-send</code> doesn't support actions, but <code>libnotify</code> based
  applications do.</p>
 
-<p><img src="../images/AUTOGEN_wibox_nwidget_actionlist_simple.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_wibox_nwidget_actionlist_simple.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 <span class="keyword">local</span> notif = naughty.notification {
-    title   = <span class="string">'A notification'</span>,
-    message = <span class="string">'This notification has actions!'</span>,
+    title   = <span class="string">"A notification"</span>,
+    message = <span class="string">"This notification has actions!"</span>,
     actions = {
         naughty.action {
-            name = <span class="string">'Accept'</span>,
+            name = <span class="string">"Accept"</span>,
         },
         naughty.action {
-            name = <span class="string">'Refuse'</span>,
+            name = <span class="string">"Refuse"</span>,
         },
         naughty.action {
-            name = <span class="string">'Ignore'</span>,
+            name = <span class="string">"Ignore"</span>,
         },
     }
 }
@@ -258,10 +266,14 @@ wibox.widget {
 }
 </pre>
 
-
 <p> This example has a custom vertical widget template:</p>
 
-<p><img src="../images/AUTOGEN_wibox_nwidget_actionlist_fancy.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_wibox_nwidget_actionlist_fancy.svg" alt="Usage example"/></p>
+
+
+
 
 <pre>
 wibox.widget {
@@ -269,7 +281,7 @@ wibox.widget {
     base_layout = wibox.widget {
         spacing        = <span class="number">3</span>,
         spacing_widget = wibox.widget {
-            orientation = <span class="string">'horizontal'</span>,
+            orientation = <span class="string">"horizontal"</span>,
             widget      = wibox.widget.separator,
         },
         layout         = wibox.layout.fixed.vertical
@@ -278,7 +290,7 @@ wibox.widget {
         {
             {
                 {
-                    id     = <span class="string">'text_role'</span>,
+                    id     = <span class="string">"text_role"</span>,
                     widget = wibox.widget.textbox
                 },
                 widget = wibox.container.place
@@ -296,10 +308,14 @@ wibox.widget {
 }
 </pre>
 
-
 <p> This example has a horizontal widget template and icons:</p>
 
-<p><img src="../images/AUTOGEN_wibox_nwidget_actionlist_fancy_icons.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_wibox_nwidget_actionlist_fancy_icons.svg" alt="Usage example"/></p>
+
+
+
 
 <pre>
 wibox.widget {
@@ -307,7 +323,7 @@ wibox.widget {
     base_layout = wibox.widget {
         spacing        = <span class="number">3</span>,
         spacing_widget = wibox.widget {
-            orientation = <span class="string">'vertical'</span>,
+            orientation = <span class="string">"vertical"</span>,
             widget      = wibox.widget.separator,
         },
         layout         = wibox.layout.flex.horizontal
@@ -316,19 +332,19 @@ wibox.widget {
         {
             {
                 {
-                    id            = <span class="string">'icon_role'</span>,
+                    id            = <span class="string">"icon_role"</span>,
                     forced_height = <span class="number">16</span>,
                     forced_width  = <span class="number">16</span>,
                     widget        = wibox.widget.imagebox
                 },
                 {
-                    id     = <span class="string">'text_role'</span>,
+                    id     = <span class="string">"text_role"</span>,
                     widget = wibox.widget.textbox
                 },
                 spacing = <span class="number">5</span>,
                 layout = wibox.layout.fixed.horizontal
             },
-            id = <span class="string">'background_role'</span>,
+            id = <span class="string">"background_role"</span>,
             widget             = wibox.container.background,
         },
         margins = <span class="number">4</span>,
@@ -338,12 +354,16 @@ wibox.widget {
 }
 </pre>
 
-
 <p> This example uses the theme/style variables instead of the template. This is
  less flexible, but easier to put in the theme file. Note that each style
  variable has a <a href="../theme_related_libraries/beautiful.html#">beautiful</a> equivalent.</p>
 
-<p><img src="../images/AUTOGEN_wibox_nwidget_actionlist_style.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_wibox_nwidget_actionlist_style.svg" alt="Usage example"/></p>
+
+
+
 
 <pre>
 wibox.widget {
@@ -351,7 +371,7 @@ wibox.widget {
     base_layout = wibox.widget {
         spacing        = <span class="number">3</span>,
         spacing_widget = wibox.widget {
-            orientation = <span class="string">'vertical'</span>,
+            orientation = <span class="string">"vertical"</span>,
             widget      = wibox.widget.separator,
         },
         layout         = wibox.layout.flex.horizontal
@@ -365,15 +385,16 @@ wibox.widget {
         shape_border_width_selected  = <span class="number">4</span>,
         icon_size_normal             = <span class="number">16</span>,
         icon_size_selected           = <span class="number">24</span>,
-        shape_border_color_normal    = <span class="string">'#0000ff'</span>,
-        shape_border_color_selected  = <span class="string">'#ff0000'</span>,
-        bg_normal                    = <span class="string">'#ffff00'</span>,
-        bg_selected                  = <span class="string">'#00ff00'</span>,
+        shape_border_color_normal    = <span class="string">"#0000ff"</span>,
+        shape_border_color_selected  = <span class="string">"#ff0000"</span>,
+        bg_normal                    = <span class="string">"#ffff00"</span>,
+        bg_selected                  = <span class="string">"#00ff00"</span>,
     },
     forced_height = beautiful.get_font_height(beautiful.font) * <span class="number">2.5</span>,
     widget = naughty.list.actions,
 }
 </pre>
+
 </p>
     <div class="extra-header">
 
@@ -724,6 +745,8 @@ wibox.widget {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
+
+
         <ul>
         <li><span class="parameter">notification</span>
             <span class="types"><span class="type">naughty.notification</span></span>
@@ -734,72 +757,102 @@ wibox.widget {
          The action layout.
         </li>
         <li><span class="parameter">style</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Override the beautiful values.
         </li>
         <li><span class="parameter">style.underline_normal</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.underline_selected</span>
             <span class="types"><span class="type">boolean</span></span>
+
+
 
         </li>
         <li><span class="parameter">style.shape_normal</span>
             <span class="types"><span class="type">gears.shape</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.shape_selected</span>
             <span class="types"><span class="type">gears.shape</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.shape_border_color_normal</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.shape_border_color_selected</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.shape_border_width_normal</span>
             <span class="types"><span class="type">number</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.shape_border_width_selected</span>
             <span class="types"><span class="type">number</span></span>
+
+
 
         </li>
         <li><span class="parameter">style.icon_size</span>
             <span class="types"><span class="type">number</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.bg_normal</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.bg_selected</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.fg_normal</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.fg_selected</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.bgimage_normal</span>
-            <span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.bgimage_selected</span>
-            <span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         </li></ul>
         <li><span class="parameter">widget_template</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A custom widget to be used for each action.
          (<em>optional</em>)
         </li>
@@ -816,7 +869,7 @@ wibox.widget {
 
 
 
-    <span id=item1132 class="hide_extra">
+    <span id=item1138 class="hide_extra">
     </span>
 
 </dd>
@@ -845,13 +898,13 @@ wibox.widget {
 
 
      <br />
-     <center id=button1133>
-     <a class="show_more_button" onclick="show_extra('1133')">
+     <center id=button1139>
+     <a class="show_more_button" onclick="show_extra('1139')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1133 class="hide_extra">
+    <span id=item1139 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::notification</code></span>  When the <a href="../widgets/naughty.list.actions.html#notification">notification</a> value changes.</li>
@@ -886,13 +939,13 @@ wibox.widget {
 
 
      <br />
-     <center id=button1134>
-     <a class="show_more_button" onclick="show_extra('1134')">
+     <center id=button1140>
+     <a class="show_more_button" onclick="show_extra('1140')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1134 class="hide_extra">
+    <span id=item1140 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::base_layout</code></span>  When the <a href="../widgets/naughty.list.actions.html#base_layout">base_layout</a> value changes.</li>
@@ -921,13 +974,13 @@ wibox.widget {
 
 
      <br />
-     <center id=button1135>
-     <a class="show_more_button" onclick="show_extra('1135')">
+     <center id=button1141>
+     <a class="show_more_button" onclick="show_extra('1141')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1135 class="hide_extra">
+    <span id=item1141 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::widget_template</code></span>  When the <a href="../widgets/naughty.list.actions.html#widget_template">widget_template</a> value changes.</li>
@@ -957,13 +1010,13 @@ wibox.widget {
 
 
      <br />
-     <center id=button1136>
-     <a class="show_more_button" onclick="show_extra('1136')">
+     <center id=button1142>
+     <a class="show_more_button" onclick="show_extra('1142')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1136 class="hide_extra">
+    <span id=item1142 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::style</code></span>  When the <a href="../widgets/naughty.list.actions.html#style">style</a> value changes.</li>
@@ -978,7 +1031,7 @@ wibox.widget {
            <th>Theme variable</th>
            <th>Usage</th>
          </tr>
-          <tr><td><a href="../theme_related_libraries/beautiful.html#font">beautiful.font</a></td><td>Fallback when the <code>font</code> property isn&rsquo;t set.</td></tr>
+          <tr><td><a href="../theme_related_libraries/beautiful.html#font">beautiful.font</a></td><td>Fallback when the <code>font</code> property isn't set.</td></tr>
           <tr><td><a href="../widgets/naughty.list.actions.html#beautiful.notification_action_underline_normal">beautiful.notification_action_underline_normal</a></td><td>Fallback.</td></tr>
           <tr><td><a href="../widgets/naughty.list.actions.html#beautiful.notification_action_underline_selected">beautiful.notification_action_underline_selected</a></td><td>Fallback.</td></tr>
           <tr><td><a href="../widgets/naughty.list.actions.html#beautiful.notification_action_icon_only">beautiful.notification_action_icon_only</a></td><td>Fallback.</td></tr>
@@ -1015,7 +1068,7 @@ wibox.widget {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The children.
         </li>
     </ul>
@@ -1025,7 +1078,7 @@ wibox.widget {
 
 
 
-    <span id=item1137 class="hide_extra">
+    <span id=item1143 class="hide_extra">
     </span>
 
 </dd>
@@ -1046,7 +1099,7 @@ wibox.widget {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The children.
         </li>
     </ul>
@@ -1056,7 +1109,7 @@ wibox.widget {
 
 
 
-    <span id=item1138 class="hide_extra">
+    <span id=item1144 class="hide_extra">
     </span>
 
 </dd>
@@ -1084,7 +1137,7 @@ wibox.widget {
 
 
 
-    <span id=item1139 class="hide_extra">
+    <span id=item1145 class="hide_extra">
     </span>
 
 </dd>
@@ -1112,7 +1165,7 @@ wibox.widget {
 
 
 
-    <span id=item1140 class="hide_extra">
+    <span id=item1146 class="hide_extra">
     </span>
 
 </dd>
@@ -1141,7 +1194,7 @@ wibox.widget {
 
 
 
-    <span id=item1141 class="hide_extra">
+    <span id=item1147 class="hide_extra">
     </span>
 
 </dd>
@@ -1162,7 +1215,7 @@ wibox.widget {
 
 
 
-    <span id=item1142 class="hide_extra">
+    <span id=item1148 class="hide_extra">
     </span>
 
 </dd>
@@ -1175,7 +1228,7 @@ wibox.widget {
     </span>
     </dt>
     <dd>
-    The widget buttons.</p>
+    The widget buttons. </p>
 
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
@@ -1189,7 +1242,7 @@ wibox.widget {
 
 
 
-    <span id=item1143 class="hide_extra">
+    <span id=item1149 class="hide_extra">
     </span>
 
 </dd>
@@ -1221,7 +1274,7 @@ wibox.widget {
 
 
 
-    <span id=item1144 class="hide_extra">
+    <span id=item1150 class="hide_extra">
     </span>
 
 </dd>
@@ -1249,7 +1302,7 @@ wibox.widget {
 
 
 
-    <span id=item1145 class="hide_extra">
+    <span id=item1151 class="hide_extra">
     </span>
 
 </dd>
@@ -1269,7 +1322,9 @@ wibox.widget {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">signal_name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">...</span>
@@ -1282,7 +1337,7 @@ wibox.widget {
 
 
 
-    <span id=item1146 class="hide_extra">
+    <span id=item1152 class="hide_extra">
     </span>
 
 </dd>
@@ -1300,7 +1355,7 @@ wibox.widget {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">...</span>
@@ -1315,7 +1370,7 @@ wibox.widget {
 
 
 
-    <span id=item1147 class="hide_extra">
+    <span id=item1153 class="hide_extra">
     </span>
 
 </dd>
@@ -1333,7 +1388,7 @@ wibox.widget {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1347,7 +1402,7 @@ wibox.widget {
 
 
 
-    <span id=item1148 class="hide_extra">
+    <span id=item1154 class="hide_extra">
     </span>
 
 </dd>
@@ -1360,7 +1415,7 @@ wibox.widget {
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.</p>
+    Connect to a signal weakly. </p>
 
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.</p>
@@ -1372,7 +1427,7 @@ wibox.widget {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1386,7 +1441,7 @@ wibox.widget {
 
 
 
-    <span id=item1149 class="hide_extra">
+    <span id=item1155 class="hide_extra">
     </span>
 
 </dd>
@@ -1417,7 +1472,7 @@ wibox.widget {
 
 
 
-    <span id=item1150 class="hide_extra">
+    <span id=item1156 class="hide_extra">
     </span>
 
 </dd>
@@ -1444,7 +1499,7 @@ wibox.widget {
 
 
 
-    <span id=item1151 class="hide_extra">
+    <span id=item1157 class="hide_extra">
     </span>
 
 </dd>
@@ -1461,7 +1516,7 @@ wibox.widget {
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">lx</span>
@@ -1479,7 +1534,7 @@ wibox.widget {
          The button number.
         </li>
         <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1497,7 +1552,7 @@ wibox.widget {
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1541,7 +1596,7 @@ wibox.widget {
 
 
 
-    <span id=item1152 class="hide_extra">
+    <span id=item1158 class="hide_extra">
     </span>
 
 </dd>
@@ -1558,7 +1613,7 @@ wibox.widget {
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">lx</span>
@@ -1576,7 +1631,7 @@ wibox.widget {
          The button number.
         </li>
         <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1594,7 +1649,7 @@ wibox.widget {
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1638,7 +1693,7 @@ wibox.widget {
 
 
 
-    <span id=item1153 class="hide_extra">
+    <span id=item1159 class="hide_extra">
     </span>
 
 </dd>
@@ -1655,7 +1710,7 @@ wibox.widget {
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1673,7 +1728,7 @@ wibox.widget {
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1717,7 +1772,7 @@ wibox.widget {
 
 
 
-    <span id=item1154 class="hide_extra">
+    <span id=item1160 class="hide_extra">
     </span>
 
 </dd>
@@ -1734,7 +1789,7 @@ wibox.widget {
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1752,7 +1807,7 @@ wibox.widget {
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1796,7 +1851,7 @@ wibox.widget {
 
 
 
-    <span id=item1155 class="hide_extra">
+    <span id=item1161 class="hide_extra">
     </span>
 
 </dd>
@@ -1820,7 +1875,7 @@ wibox.widget {
 
 
 
-    <span id=item1156 class="hide_extra">
+    <span id=item1162 class="hide_extra">
     </span>
 
 </dd>
@@ -1840,7 +1895,7 @@ wibox.widget {
 
 
 
-    <span id=item1157 class="hide_extra">
+    <span id=item1163 class="hide_extra">
     </span>
 
 </dd>
@@ -1860,7 +1915,7 @@ wibox.widget {
 
 
 
-    <span id=item1158 class="hide_extra">
+    <span id=item1164 class="hide_extra">
     </span>
 
 </dd>
@@ -1880,7 +1935,7 @@ wibox.widget {
 
 
 
-    <span id=item1159 class="hide_extra">
+    <span id=item1165 class="hide_extra">
     </span>
 
 </dd>
@@ -1904,7 +1959,7 @@ wibox.widget {
 
 
 
-    <span id=item1160 class="hide_extra">
+    <span id=item1166 class="hide_extra">
     </span>
 
 </dd>
@@ -1928,7 +1983,7 @@ wibox.widget {
 
 
 
-    <span id=item1161 class="hide_extra">
+    <span id=item1167 class="hide_extra">
     </span>
 
 </dd>
@@ -1952,7 +2007,7 @@ wibox.widget {
 
 
 
-    <span id=item1162 class="hide_extra">
+    <span id=item1168 class="hide_extra">
     </span>
 
 </dd>
@@ -1976,7 +2031,7 @@ wibox.widget {
 
 
 
-    <span id=item1163 class="hide_extra">
+    <span id=item1169 class="hide_extra">
     </span>
 
 </dd>
@@ -1996,7 +2051,7 @@ wibox.widget {
 
 
 
-    <span id=item1164 class="hide_extra">
+    <span id=item1170 class="hide_extra">
     </span>
 
 </dd>
@@ -2016,7 +2071,7 @@ wibox.widget {
 
 
 
-    <span id=item1165 class="hide_extra">
+    <span id=item1171 class="hide_extra">
     </span>
 
 </dd>
@@ -2036,7 +2091,7 @@ wibox.widget {
 
 
 
-    <span id=item1166 class="hide_extra">
+    <span id=item1172 class="hide_extra">
     </span>
 
 </dd>
@@ -2056,7 +2111,7 @@ wibox.widget {
 
 
 
-    <span id=item1167 class="hide_extra">
+    <span id=item1173 class="hide_extra">
     </span>
 
 </dd>
@@ -2080,7 +2135,7 @@ wibox.widget {
 
 
 
-    <span id=item1168 class="hide_extra">
+    <span id=item1174 class="hide_extra">
     </span>
 
 </dd>
@@ -2104,7 +2159,7 @@ wibox.widget {
 
 
 
-    <span id=item1169 class="hide_extra">
+    <span id=item1175 class="hide_extra">
     </span>
 
 </dd>
@@ -2128,7 +2183,7 @@ wibox.widget {
 
 
 
-    <span id=item1170 class="hide_extra">
+    <span id=item1176 class="hide_extra">
     </span>
 
 </dd>
@@ -2152,7 +2207,7 @@ wibox.widget {
 
 
 
-    <span id=item1171 class="hide_extra">
+    <span id=item1177 class="hide_extra">
     </span>
 
 </dd>
@@ -2176,7 +2231,7 @@ wibox.widget {
 
 
 
-    <span id=item1172 class="hide_extra">
+    <span id=item1178 class="hide_extra">
     </span>
 
 </dd>
@@ -2200,7 +2255,7 @@ wibox.widget {
 
 
 
-    <span id=item1173 class="hide_extra">
+    <span id=item1179 class="hide_extra">
     </span>
 
 </dd>

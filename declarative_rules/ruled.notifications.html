@@ -139,6 +139,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -228,51 +229,61 @@
 
 <h1>Module: <code>ruled.notifications</code></h1>
 <p>Rules for notifications.</p>
-<p><p><img src="../images/AUTOGEN_wibox_nwidget_rules_urgency.svg" alt="Usage example" /></p>
+<p>
+
+
+
+
+<p><img src="../images/AUTOGEN_wibox_nwidget_rules_urgency.svg" alt="Usage example"/></p>
+
+
 
 <pre>
-ruled.notification.connect_signal(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
+ruled.notification.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
     <span class="comment">-- Add a red background for urgent notifications.
 </span>    ruled.notification.append_rule {
-        rule       = { urgency = <span class="string">'critical'</span> },
-        properties = { bg = <span class="string">'#ff0000'</span>, fg = <span class="string">'#ffffff'</span>, timeout = <span class="number">0</span> }
+        rule       = { urgency = <span class="string">"critical"</span> },
+        properties = { bg = <span class="string">"#ff0000"</span>, fg = <span class="string">"#ffffff"</span>, timeout = <span class="number">0</span> }
     }
 
     <span class="comment">-- Or green background for normal ones.
 </span>    ruled.notification.append_rule {
-        rule       = { urgency = <span class="string">'normal'</span> },
-        properties = { bg      = <span class="string">'#00ff00'</span>, fg = <span class="string">'#000000'</span>}
+        rule       = { urgency = <span class="string">"normal"</span> },
+        properties = { bg      = <span class="string">"#00ff00"</span>, fg = <span class="string">"#000000"</span>}
     }
 <span class="keyword">end</span>)
 
 <span class="comment">-- Create a normal notification.
 </span>naughty.notification {
-    title   = <span class="string">'A notification 1'</span>,
-    message = <span class="string">'This is very informative'</span>,
+    title   = <span class="string">"A notification 1"</span>,
+    message = <span class="string">"This is very informative"</span>,
     icon    = beautiful.awesome_icon,
-    urgency = <span class="string">'normal'</span>,
+    urgency = <span class="string">"normal"</span>,
 }
 
 <span class="comment">-- Create a normal notification.
 </span>naughty.notification {
-    title   = <span class="string">'A notification 2'</span>,
-    message = <span class="string">'This is very informative'</span>,
+    title   = <span class="string">"A notification 2"</span>,
+    message = <span class="string">"This is very informative"</span>,
     icon    = beautiful.awesome_icon,
-    urgency = <span class="string">'critical'</span>,
+    urgency = <span class="string">"critical"</span>,
 }
 </pre>
-
 
 <p> In this example, we setup a different widget template for some music
  notifications:</p>
 
-<p><img src="../images/AUTOGEN_wibox_nwidget_rules_widget_template.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_wibox_nwidget_rules_widget_template.svg" alt="Usage example"/></p>
+
+
 
 <pre>
-ruled.notification.connect_signal(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
+ruled.notification.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
     <span class="comment">-- Add a red background for urgent notifications.
 </span>    ruled.notification.append_rule {
-        rule       = { app_name = <span class="string">'mdp'</span> },
+        rule       = { app_name = <span class="string">"mdp"</span> },
         properties = {
             widget_template = {
                 {
@@ -281,33 +292,33 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
                             {
                                 naughty.widget.icon,
                                 forced_height = <span class="number">48</span>,
-                                halign        = <span class="string">'center'</span>,
-                                valign        = <span class="string">'center'</span>,
+                                halign        = <span class="string">"center"</span>,
+                                valign        = <span class="string">"center"</span>,
                                 widget        = wibox.container.place
                             },
                             {
-                                align  = <span class="string">'center'</span>,
+                                align  = <span class="string">"center"</span>,
                                 widget = naughty.widget.title,
                             },
                             {
-                                align  = <span class="string">'center'</span>,
+                                align  = <span class="string">"center"</span>,
                                 widget = naughty.widget.message,
                             },
                             {
-                                orientation   = <span class="string">'horizontal'</span>,
+                                orientation   = <span class="string">"horizontal"</span>,
                                 widget        = wibox.widget.separator,
                                 forced_height = <span class="number">1</span>,
                             },
                             {
                                 <span class="keyword">nil</span>,
                                 {
-                                    wibox.widget.textbox <span class="string">'⏪'</span>,
-                                    wibox.widget.textbox <span class="string">'⏸'</span>,
-                                    wibox.widget.textbox <span class="string">'⏩'</span>,
+                                    wibox.widget.textbox <span class="string">"⏪"</span>,
+                                    wibox.widget.textbox <span class="string">"⏸"</span>,
+                                    wibox.widget.textbox <span class="string">"⏩"</span>,
                                     spacing = <span class="number">20</span>,
                                     layout  = wibox.layout.fixed.horizontal,
                                 },
-                                expand = <span class="string">'outside'</span>,
+                                expand = <span class="string">"outside"</span>,
                                 <span class="keyword">nil</span>,
                                 layout = wibox.layout.align.horizontal,
                             },
@@ -317,43 +328,46 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
                         margins = beautiful.notification_margin,
                         widget  = wibox.container.margin,
                     },
-                    id     = <span class="string">'background_role'</span>,
+                    id     = <span class="string">"background_role"</span>,
                     widget = naughty.container.background,
                 },
-                strategy = <span class="string">'max'</span>,
+                strategy = <span class="string">"max"</span>,
                 width    = <span class="number">160</span>,
                 widget   = wibox.container.constraint,
             }
         }
     }
 <span class="keyword">end</span>)
-naughty.connect_signal(<span class="string">'request::display'</span>, <span class="keyword">function</span>(n)
+naughty.connect_signal(<span class="string">"request::display"</span>, <span class="keyword">function</span>(n)
     naughty.layout.box { notification = n }
 <span class="keyword">end</span>)
     icon      = beautiful.awesome_icon,
 </pre>
 
-
 <p> In this example, we add action to a notification that originally lacked
  them:</p>
 
-<p><img src="../images/AUTOGEN_wibox_nwidget_rules_add_actions.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_wibox_nwidget_rules_add_actions.svg" alt="Usage example"/></p>
+
+
 
 <pre>
-ruled.notification.connect_signal(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
+ruled.notification.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
     <span class="comment">-- Add a red background for urgent notifications.
 </span>    ruled.notification.append_rule {
         rule       = { }, <span class="comment">-- Match everything.
 </span>        properties = {
             append_actions = {
                naughty.action {
-                   name = <span class="string">'Snooze (5m)'</span>,
+                   name = <span class="string">"Snooze (5m)"</span>,
                },
                naughty.action {
-                   name = <span class="string">'Snooze (15m)'</span>,
+                   name = <span class="string">"Snooze (15m)"</span>,
                },
                naughty.action {
-                   name = <span class="string">'Snooze (1h)'</span>,
+                   name = <span class="string">"Snooze (1h)"</span>,
                },
             },
         }
@@ -362,19 +376,19 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 <span class="comment">-- Create a normal notification.
 </span>naughty.notification {
-    title   = <span class="string">'A notification'</span>,
-    message = <span class="string">'This is very informative'</span>,
+    title   = <span class="string">"A notification"</span>,
+    message = <span class="string">"This is very informative"</span>,
     icon    = beautiful.awesome_icon,
     actions = {
-        naughty.action { name = <span class="string">'Existing 1'</span> },
-        naughty.action { name = <span class="string">'Existing 2'</span> },
+        naughty.action { name = <span class="string">"Existing 1"</span> },
+        naughty.action { name = <span class="string">"Existing 2"</span> },
     }
 }
 </pre>
 
-
 <p> Here is a list of all properties available in the <a href="../declarative_rules/ruled.notifications.html#properties">properties</a> section of
  a rule:</p>
+
 
 <table class='widget_list' border=1>
  <tr>
@@ -418,6 +432,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
    <tr><td><a href='../core_components/notification.html#app_name'>app\_name</a></td><td>The application name specified by the notification</td></tr>
    <tr><td><a href='../core_components/notification.html#widget_template'>widget\_template</a></td><td>The widget template used to represent the notification</td></tr>
  </table>
+
 </p>
     <div class="extra-header">
 
@@ -520,7 +535,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     <tr>
       <td class="shortname" ><a href="#rule_every">rule_every</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td colspan="2" class="summary">Matches when one of every \&ldquo;category\&rdquo; of components match.</td>
+      <td colspan="2" class="summary">Matches when one of every \"category\" of components match.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#rule_lesser">rule_lesser</a></td>
@@ -548,7 +563,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     <tr>
       <td class="shortname" ><a href="#implicit_timeout">implicit_timeout</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td colspan="2" class="summary">Set a fallback timeout when the notification doesn&rsquo;t have an explicit timeout.</td>
+      <td colspan="2" class="summary">Set a fallback timeout when the notification doesn't have an explicit timeout.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#never_timeout">never_timeout</a></td>
@@ -595,7 +610,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The source name.
         </li>
     </ul>
@@ -611,7 +626,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item836 class="hide_extra">
+    <span id=item837 class="hide_extra">
     </span>
 
 </dd>
@@ -623,10 +638,10 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     </span>
     </dt>
     <dd>
-    Apply the tag rules to a client.</p>
+    Apply the tag rules to a client. </p>
 
 <p> This is useful when it is necessary to apply rules after a tag has been
- created. Many workflows can make use of &ldquo;blank&rdquo; tags which wont match any
+ created. Many workflows can make use of "blank" tags which wont match any
  rules until later.
 
     <h3>Parameters:</h3>
@@ -642,7 +657,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item837 class="hide_extra">
+    <span id=item838 class="hide_extra">
     </span>
 
 </dd>
@@ -659,7 +674,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">rule</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A valid rule.
         </li>
     </ul>
@@ -669,7 +684,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item838 class="hide_extra">
+    <span id=item839 class="hide_extra">
     </span>
 
 </dd>
@@ -686,7 +701,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">rule</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with rules.
         </li>
     </ul>
@@ -696,7 +711,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item839 class="hide_extra">
+    <span id=item840 class="hide_extra">
     </span>
 
 </dd>
@@ -713,7 +728,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">rule</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A valid rule.
         </li>
     </ul>
@@ -723,7 +738,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item840 class="hide_extra">
+    <span id=item841 class="hide_extra">
     </span>
 
 </dd>
@@ -735,7 +750,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     </span>
     </dt>
     <dd>
-    Add a new rule source.</p>
+    Add a new rule source. </p>
 
 <p> A rule source is a provider called when a client initially request tags. It
  allows to configure, select or create a tag (or many) to be attached to the
@@ -744,7 +759,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The provider name. It must be unique.
         </li>
         <li><span class="parameter">callback</span> The callback that is called to produce properties.
@@ -754,24 +769,24 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
          The client
         </li>
         <li><span class="parameter">properties</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current properties. The callback should
   add to and overwrite properties in this table
         </li>
         <li><span class="parameter">callbacks</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table of all callbacks scheduled to be
   executed after the main properties are applied.
         </li>
         </li></ul>
         <li><span class="parameter">depends_on</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A list of names of sources this source depends on
   (sources that must be executed <em>before</em> <code>name</code>.
          (<em>default</em> {})
         </li>
         <li><span class="parameter">precede</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A list of names of sources this source have a
   priority over.
          (<em>default</em> {})
@@ -789,7 +804,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item841 class="hide_extra">
+    <span id=item842 class="hide_extra">
     </span>
 
 </dd>
@@ -817,7 +832,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item842 class="hide_extra">
+    <span id=item843 class="hide_extra">
     </span>
 
 </dd>
@@ -841,7 +856,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item843 class="hide_extra">
+    <span id=item844 class="hide_extra">
     </span>
 
 </dd>
@@ -866,7 +881,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item844 class="hide_extra">
+    <span id=item845 class="hide_extra">
     </span>
 
 </dd>
@@ -891,7 +906,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item845 class="hide_extra">
+    <span id=item846 class="hide_extra">
     </span>
 
 </dd>
@@ -916,7 +931,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item846 class="hide_extra">
+    <span id=item847 class="hide_extra">
     </span>
 
 </dd>
@@ -941,7 +956,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item847 class="hide_extra">
+    <span id=item848 class="hide_extra">
     </span>
 
 </dd>
@@ -953,34 +968,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     </span>
     </dt>
     <dd>
-    Matches when one of every \&ldquo;category\&rdquo; of components match.
-
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <li><a href="../declarative_rules/ruled.notifications.html#rule">rule</a></li>
-         <li><a href="../declarative_rules/ruled.notifications.html#except">except</a></li>
-    </ul>
-
-
-
-    <span id=item848 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "rule_lesser"></a>
-    <strong>rule_lesser</strong>
-    <span class="proptype"><span class='summary_type'>table</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    A table whose content will be compared to the target object current properties.</p>
-
-<p> The comparison will be made using the lesser (<code>&lt;</code>) operator.
+    Matches when one of every \"category\" of components match.
 
 
 
@@ -998,16 +986,16 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 </dd>
     <dt>
-    <a name = "rule_greater"></a>
-    <strong>rule_greater</strong>
+    <a name = "rule_lesser"></a>
+    <strong>rule_lesser</strong>
     <span class="proptype"><span class='summary_type'>table</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    A table whose content will be compared to the target object current properties.</p>
+    A table whose content will be compared to the target object current properties. </p>
 
-<p> The comparison will be made using the greater (<code>&gt;</code>) operator.
+<p> The comparison will be made using the lesser (<code>&lt;</code>) operator.
 
 
 
@@ -1025,6 +1013,33 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 </dd>
     <dt>
+    <a name = "rule_greater"></a>
+    <strong>rule_greater</strong>
+    <span class="proptype"><span class='summary_type'>table</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    A table whose content will be compared to the target object current properties. </p>
+
+<p> The comparison will be made using the greater (<code>&gt;</code>) operator.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../declarative_rules/ruled.notifications.html#rule">rule</a></li>
+         <li><a href="../declarative_rules/ruled.notifications.html#except">except</a></li>
+    </ul>
+
+
+
+    <span id=item851 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "id"></a>
     <strong>id</strong>
     <span class="proptype"><span class='summary_type'>table <i>or</i> string <i>or</i> number <i>or</i> function</span></span>
@@ -1032,7 +1047,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     </span>
     </dt>
     <dd>
-    An identifier for this rule.</p>
+    An identifier for this rule. </p>
 
 <p> It can be anything. It will be compared with the <code>==</code> operator. Strings are
  highly recommended.</p>
@@ -1047,7 +1062,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item851 class="hide_extra">
+    <span id=item852 class="hide_extra">
     </span>
 
 </dd>
@@ -1063,7 +1078,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     </span>
     </dt>
     <dd>
-    Append some actions to a notification.</p>
+    Append some actions to a notification. </p>
 
 <p> Using <code>actions</code> directly is destructive since it will override existing
  actions.
@@ -1074,7 +1089,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item852 class="hide_extra">
+    <span id=item853 class="hide_extra">
     </span>
 
 </dd>
@@ -1086,7 +1101,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     </span>
     </dt>
     <dd>
-    Set a fallback timeout when the notification doesn&rsquo;t have an explicit timeout.</p>
+    Set a fallback timeout when the notification doesn't have an explicit timeout. </p>
 
 <p> The value is in seconds. If none is specified, the default is 5 seconds. If
  the notification specifies its own timeout, this property will be skipped.
@@ -1097,7 +1112,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item853 class="hide_extra">
+    <span id=item854 class="hide_extra">
     </span>
 
 </dd>
@@ -1117,7 +1132,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 
-    <span id=item854 class="hide_extra">
+    <span id=item855 class="hide_extra">
     </span>
 
 </dd>
@@ -1133,7 +1148,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     </span>
     </dt>
     <dd>
-    The notification is attached to the focused client.</p>
+    The notification is attached to the focused client. </p>
 
 <p> This is useful, along with other matching properties and the <code>ignore</code>
  notification property, to prevent focused application from spamming with
@@ -1147,13 +1162,13 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     <ul>
         <pre class="example"><span class="comment">-- Note that the the message is matched as a pattern.
 </span>ruled.notification.append_rule {
-    rule       = { message = <span class="string">'I am SPAM'</span>, has_focus = <span class="keyword">true</span> },
+    rule       = { message = <span class="string">"I am SPAM"</span>, has_focus = <span class="keyword">true</span> },
     properties = { ignore  = <span class="keyword">true</span>}
 }</pre>
     </ul>
 
 
-    <span id=item855 class="hide_extra">
+    <span id=item856 class="hide_extra">
     </span>
 
 </dd>
@@ -1178,7 +1193,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     <h3>Usage:</h3>
     <ul>
         <pre class="example">ruled.notification.append_rule {
-    rule       = { has_class = <span class="string">'amarok'</span> },
+    rule       = { has_class = <span class="string">"amarok"</span> },
     properties = {
         widget_template = my_music_widget_template,
         actions         = get_mpris_actions(),
@@ -1187,7 +1202,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     </ul>
 
 
-    <span id=item856 class="hide_extra">
+    <span id=item857 class="hide_extra">
     </span>
 
 </dd>
@@ -1212,7 +1227,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     <h3>Usage:</h3>
     <ul>
         <pre class="example">ruled.notification.append_rule {
-    rule       = { has_instance = <span class="string">'amarok'</span> },
+    rule       = { has_instance = <span class="string">"amarok"</span> },
     properties = {
         widget_template = my_music_widget_template,
         actions         = get_mpris_actions(),
@@ -1221,7 +1236,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     </ul>
 
 
-    <span id=item857 class="hide_extra">
+    <span id=item858 class="hide_extra">
     </span>
 
 </dd>

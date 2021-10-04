@@ -144,6 +144,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -245,12 +246,11 @@
 <span class="string">"radial:50,50,10:55,55,30:0,#ff0000:0.5,#00ff00:1,#0000ff"</span>
 </pre>
 
-
 <p> The above will call <a href="../theme_related_libraries/gears.color.html#create_radial_pattern">create_radial_pattern</a> with the provided string, after
  stripping the <code>radial:</code> prefix.</p>
 
 <p> Alternatively, patterns can be specified via tables. In this case, the
- table&rsquo;s &lsquo;type&rsquo; member specifies the type. For example:</p>
+ table's 'type' member specifies the type. For example:</p>
 
 <pre>
 {
@@ -260,7 +260,6 @@
   stops = { { <span class="number">0</span>, <span class="string">"#ff0000"</span> }, { <span class="number">0.5</span>, <span class="string">"#00ff00"</span> }, { <span class="number">1</span>, <span class="string">"#0000ff"</span> } }
 }
 </pre>
-
 
 <p> Any argument that cannot be understood is passed to <a href="../theme_related_libraries/gears.color.html#create_solid_pattern">create_solid_pattern</a>.</p>
 
@@ -409,7 +408,7 @@
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         4 values representing color in RGBA format (each of them in
  [0, 1] range) or nil if input is incorrect.
     </ol>
@@ -423,7 +422,7 @@
     </ul>
 
 
-    <span id=item2166 class="hide_extra">
+    <span id=item2194 class="hide_extra">
     </span>
 
 </dd>
@@ -454,7 +453,7 @@
 
 
 
-    <span id=item2167 class="hide_extra">
+    <span id=item2195 class="hide_extra">
     </span>
 
 </dd>
@@ -485,7 +484,7 @@
 
 
 
-    <span id=item2168 class="hide_extra">
+    <span id=item2196 class="hide_extra">
     </span>
 
 </dd>
@@ -500,16 +499,17 @@
     Create a linear pattern object.
  The pattern is created from a string. This string should have the following
  form: <code>&quot;x0, y0:x1, y1:&lt;stops&gt;&quot;</code>
- Alternatively, the pattern can be specified as a table:
-    { type = &ldquo;linear&rdquo;, from = { x0, y0 }, to = { x1, y1 },
-      stops = { <stops> } }
- <code>x0,y0</code> and <code>x1,y1</code> are the start and stop point of the pattern.
+ Alternatively, the pattern can be specified as a table:</p>
+<pre><code>{ type = "linear", from = { x0, y0 }, to = { x1, y1 },
+  stops = { &lt;stops&gt; } }
+</code></pre>
+<p> <code>x0,y0</code> and <code>x1,y1</code> are the start and stop point of the pattern.
  For the explanation of <code>&lt;stops&gt;</code>, see <code>color.create_pattern</code>.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">arg</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The argument describing the pattern.
         </li>
     </ul>
@@ -524,7 +524,7 @@
 
 
 
-    <span id=item2169 class="hide_extra">
+    <span id=item2197 class="hide_extra">
     </span>
 
 </dd>
@@ -539,17 +539,18 @@
     Create a radial pattern object.
  The pattern is created from a string. This string should have the following
  form: <code>&quot;x0, y0, r0:x1, y1, r1:&lt;stops&gt;&quot;</code>
- Alternatively, the pattern can be specified as a table:
-    { type = &ldquo;radial&rdquo;, from = { x0, y0, r0 }, to = { x1, y1, r1 },
-      stops = { <stops> } }
- <code>x0,y0</code> and <code>x1,y1</code> are the start and stop point of the pattern.
+ Alternatively, the pattern can be specified as a table:</p>
+<pre><code>{ type = "radial", from = { x0, y0, r0 }, to = { x1, y1, r1 },
+  stops = { &lt;stops&gt; } }
+</code></pre>
+<p> <code>x0,y0</code> and <code>x1,y1</code> are the start and stop point of the pattern.
  <code>r0</code> and <code>r1</code> are the radii of the start / stop circle.
  For the explanation of <code>&lt;stops&gt;</code>, see <code>color.create_pattern</code>.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">arg</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The argument describing the pattern
         </li>
     </ul>
@@ -564,7 +565,7 @@
 
 
 
-    <span id=item2170 class="hide_extra">
+    <span id=item2198 class="hide_extra">
     </span>
 
 </dd>
@@ -604,7 +605,7 @@
 
 
 
-    <span id=item2171 class="hide_extra">
+    <span id=item2199 class="hide_extra">
     </span>
 
 </dd>
@@ -628,7 +629,7 @@
 
 
 
-    <span id=item2172 class="hide_extra">
+    <span id=item2200 class="hide_extra">
     </span>
 
 </dd>
@@ -642,7 +643,7 @@
     <dd>
     Check if a pattern is opaque.
  A pattern is transparent if the background on which it gets drawn (with
- operator OVER) doesn&rsquo;t influence the visual result.
+ operator OVER) doesn't influence the visual result.
 
     <h3>Parameters:</h3>
     <ul>
@@ -661,7 +662,7 @@
 
 
 
-    <span id=item2173 class="hide_extra">
+    <span id=item2201 class="hide_extra">
     </span>
 
 </dd>
@@ -695,7 +696,7 @@
 
 
 
-    <span id=item2174 class="hide_extra">
+    <span id=item2202 class="hide_extra">
     </span>
 
 </dd>
@@ -715,7 +716,7 @@
          The color to check.
         </li>
         <li><span class="parameter">fallback</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The color to return if the first is invalid. (default: black)
         </li>
     </ul>
@@ -723,7 +724,7 @@
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
         color if it is valid, else fallback.
     </ol>
 
@@ -731,7 +732,7 @@
 
 
 
-    <span id=item2175 class="hide_extra">
+    <span id=item2203 class="hide_extra">
     </span>
 
 </dd>
@@ -752,14 +753,22 @@
     <ul>
         <li><span class="parameter">solid</span>
 
+
+
         </li>
         <li><span class="parameter">png</span>
+
+
 
         </li>
         <li><span class="parameter">linear</span>
 
+
+
         </li>
         <li><span class="parameter">radial</span>
+
+
 
         </li>
     </ul>
@@ -769,7 +778,7 @@
 
 
 
-    <span id=item2176 class="hide_extra">
+    <span id=item2204 class="hide_extra">
     </span>
 
 </dd>
@@ -793,7 +802,7 @@
 
 
 
-    <span id=item2177 class="hide_extra">
+    <span id=item2205 class="hide_extra">
     </span>
 
 </dd>

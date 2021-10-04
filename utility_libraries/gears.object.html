@@ -153,6 +153,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -283,7 +284,7 @@
         <a href="#modulename"><span class='function_modname'>gears.object.</span>modulename <span class='function_args'> <b>(</b>[level=2]<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;string</span></span>
       </td>
-      <td colspan="2" class="summary">Helper function to get the module name out of <a href="https://www.lua.org/manual/5.2/manual.html#pdf-debug.getinfo">debug.getinfo</a>.</td>
+      <td colspan="2" class="summary">Helper function to get the module name out of <a href="https://www.lua.org/manual/5.3/manual.html#pdf-debug.getinfo">debug.getinfo</a>.</td>
     </tr>
 </table>
 <h2><a href="#Object_methods">Object methods </a></h2>
@@ -341,11 +342,15 @@
     </span>
     </dt>
     <dd>
-    <p>Returns a new object.  You can call <code>:emit_signal()</code>, <code>:disconnect_signal()</code>
+
+<p>Returns a new object.  You can call <code>:emit_signal()</code>, <code>:disconnect_signal()</code>
   and <code>:connect_signal()</code> on the resulting object.</p>
 
 <p> Note that <code>args.enable_auto_signals</code> is only supported when
  <code>args.enable_properties</code> is true.</p>
+
+
+
 
 <p><strong>Usage example output</strong>:</p>
 
@@ -360,6 +365,9 @@ In the connection handler!  a cow
 a cow
 </code></pre>
 
+
+
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span> The arguments
@@ -371,12 +379,14 @@ a cow
         </li>
         <li><span class="parameter">enable_auto_signals</span>
             <span class="types"><span class="type">boolean</span></span>
-         Generate &ldquo;property::xxxx&rdquo; signals
+         Generate "property::xxxx" signals
    when an unknown property is set.
          (<em>default</em> false)
         </li>
         <li><span class="parameter">class</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
 
          (<em>default</em> nil)
         </li>
@@ -386,7 +396,7 @@ a cow
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A new object
     </ol>
 
@@ -399,19 +409,19 @@ a cow
 </span><span class="comment">-- object.
 </span><span class="keyword">local</span> class = {}
 <span class="keyword">function</span> class:get_foo()
-    <span class="global">print</span>(<span class="string">'In get foo'</span>, self._foo <span class="keyword">or</span> <span class="string">'bar'</span>)
-    <span class="keyword">return</span> self._foo <span class="keyword">or</span> <span class="string">'bar'</span>
+    <span class="global">print</span>(<span class="string">"In get foo"</span>, self._foo <span class="keyword">or</span> <span class="string">"bar"</span>)
+    <span class="keyword">return</span> self._foo <span class="keyword">or</span> <span class="string">"bar"</span>
 <span class="keyword">end</span>
 <span class="keyword">function</span> class:set_foo(value)
-    <span class="global">print</span>(<span class="string">'In set foo'</span>, value)
+    <span class="global">print</span>(<span class="string">"In set foo"</span>, value)
     <span class="comment">-- In case it is necessary to bypass the object property system, use
-</span>    <span class="comment">-- <a href="https://www.lua.org/manual/5.2/manual.html#pdf-rawset">rawset</a>
-</span>    <span class="global">rawset</span>(self, <span class="string">'_foo'</span>, value)
+</span>    <span class="comment">-- <a href="https://www.lua.org/manual/5.3/manual.html#pdf-rawset">rawset</a>
+</span>    <span class="global">rawset</span>(self, <span class="string">"_foo"</span>, value)
     <span class="comment">-- When using custom accessors, the signals need to be handled manually
-</span>    self:emit_signal(<span class="string">'property::foo'</span>, value)
+</span>    self:emit_signal(<span class="string">"property::foo"</span>, value)
 <span class="keyword">end</span>
 <span class="keyword">function</span> class:method(a, b, c)
-    <span class="global">print</span>(<span class="string">'In a method'</span>, a, b, c)
+    <span class="global">print</span>(<span class="string">"In a method"</span>, a, b, c)
 <span class="keyword">end</span>
 <span class="keyword">local</span> o = gears.object {
     class               = class,
@@ -423,17 +433,17 @@ o.foo = <span class="number">42</span>
 <span class="global">print</span>(o.foo)
 o:method(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)
 <span class="comment">-- Random properties can also be added, the signal will be emitted automatically.
-</span>o:connect_signal(<span class="string">'property::something'</span>, <span class="keyword">function</span>(obj, value)
+</span>o:connect_signal(<span class="string">"property::something"</span>, <span class="keyword">function</span>(obj, value)
     <span class="global">assert</span>(obj == o)
-    <span class="global">print</span>(<span class="string">'In the connection handler!'</span>, value)
+    <span class="global">print</span>(<span class="string">"In the connection handler!"</span>, value)
 <span class="keyword">end</span>)
 <span class="global">print</span>(o.something)
-o.something = <span class="string">'a cow'</span>
+o.something = <span class="string">"a cow"</span>
 <span class="global">print</span>(o.something)</pre>
     </ul>
 
 
-    <span id=item2096 class="hide_extra">
+    <span id=item2124 class="hide_extra">
     </span>
 
 </dd>
@@ -453,7 +463,7 @@ o.something = <span class="string">'a cow'</span>
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The signal name.
         </li>
         <li><span class="parameter">...</span>
@@ -466,7 +476,7 @@ o.something = <span class="string">'a cow'</span>
 
 
 
-    <span id=item2097 class="hide_extra">
+    <span id=item2125 class="hide_extra">
     </span>
 
 </dd>
@@ -482,7 +492,7 @@ o.something = <span class="string">'a cow'</span>
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">func</span>
@@ -502,7 +512,7 @@ o.something = <span class="string">'a cow'</span>
 
 
 
-    <span id=item2098 class="hide_extra">
+    <span id=item2126 class="hide_extra">
     </span>
 
 </dd>
@@ -518,7 +528,7 @@ o.something = <span class="string">'a cow'</span>
     </span>
     </dt>
     <dd>
-    Helper function to get the module name out of <a href="https://www.lua.org/manual/5.2/manual.html#pdf-debug.getinfo">debug.getinfo</a>.
+    Helper function to get the module name out of <a href="https://www.lua.org/manual/5.3/manual.html#pdf-debug.getinfo">debug.getinfo</a>.
 
     <h3>Parameters:</h3>
     <ul>
@@ -533,8 +543,8 @@ o.something = <span class="string">'a cow'</span>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-        The module name, e.g. &ldquo;wibox.container.background&rdquo;.
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+        The module name, e.g. "wibox.container.background".
     </ol>
 
 
@@ -549,7 +559,7 @@ mt.__tostring = <span class="keyword">function</span>(o)
     </ul>
 
 
-    <span id=item2099 class="hide_extra">
+    <span id=item2127 class="hide_extra">
     </span>
 
 </dd>
@@ -565,7 +575,11 @@ mt.__tostring = <span class="keyword">function</span>(o)
     </span>
     </dt>
     <dd>
-    <p>Connect to a signal.</p>
+
+<p>Connect to a signal. </p>
+
+
+
 
 <p><strong>Usage example output</strong>:</p>
 
@@ -573,10 +587,13 @@ mt.__tostring = <span class="keyword">function</span>(o)
 In slot [obj]   foo bar 42
 </code></pre>
 
+
+
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -593,23 +610,23 @@ In slot [obj]   foo bar 42
         <pre class="example"><span class="keyword">local</span> o = gears.object{}
 <span class="comment">-- Function can be attached to signals
 </span><span class="keyword">local</span> <span class="keyword">function</span> slot(obj, a, b, c)
-    <span class="global">print</span>(<span class="string">'In slot'</span>, obj, a, b, c)
+    <span class="global">print</span>(<span class="string">"In slot"</span>, obj, a, b, c)
 <span class="keyword">end</span>
-o:connect_signal(<span class="string">'my_signal'</span>, slot)
+o:connect_signal(<span class="string">"my_signal"</span>, slot)
 <span class="comment">-- Emitting can be done without arguments. In that case, the object will be
 </span><span class="comment">-- implicitly added as an argument.
-</span>o:emit_signal <span class="string">'my_signal'</span>
+</span>o:emit_signal <span class="string">"my_signal"</span>
 <span class="comment">-- It is also possible to add as many random arguments are required.
-</span>o:emit_signal(<span class="string">'my_signal'</span>, <span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="number">42</span>)
+</span>o:emit_signal(<span class="string">"my_signal"</span>, <span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="number">42</span>)
 <span class="comment">-- Finally, to allow the object to be garbage collected (the memory freed), it
 </span><span class="comment">-- is necessary to disconnect the signal or use <a href="../utility_libraries/gears.object.html#weak_connect_signal">weak_connect_signal</a>
-</span>o:disconnect_signal(<span class="string">'my_signal'</span>, slot)
+</span>o:disconnect_signal(<span class="string">"my_signal"</span>, slot)
 <span class="comment">-- This time, the <code>slot</code> wont be called as it is no longer connected.
-</span>o:emit_signal <span class="string">'my_signal'</span></pre>
+</span>o:emit_signal <span class="string">"my_signal"</span></pre>
     </ul>
 
 
-    <span id=item878 class="hide_extra">
+    <span id=item884 class="hide_extra">
     </span>
 
 </dd>
@@ -621,7 +638,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.</p>
+    Connect to a signal weakly. </p>
 
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
@@ -632,7 +649,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -646,7 +663,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item879 class="hide_extra">
+    <span id=item885 class="hide_extra">
     </span>
 
 </dd>
@@ -663,7 +680,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -677,7 +694,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item880 class="hide_extra">
+    <span id=item886 class="hide_extra">
     </span>
 
 </dd>
@@ -694,7 +711,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">...</span>
@@ -709,7 +726,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item881 class="hide_extra">
+    <span id=item887 class="hide_extra">
     </span>
 
 </dd>
@@ -724,21 +741,23 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     </span>
     </dt>
     <dd>
-    <p>Add the missing properties handler to a CAPI object such as client/tag/screen.
+
+<p>Add the missing properties handler to a CAPI object such as client/tag/screen.
  Valid args:</p>
 
 <ul>
-<li><strong>getter</strong>: A smart getter (handle property getter itself)</li>
-<li><strong>getter_fallback</strong>: A dumb getter method (don&rsquo;t handle individual property getter)</li>
-<li><strong>getter_class</strong>: A module with individual property getter/setter</li>
-<li><strong>getter_prefix</strong>: A special getter prefix (like &ldquo;get&rdquo; or &ldquo;get_&rdquo; (default))</li>
-<li><strong>setter</strong>: A smart setter (handle property setter itself)</li>
-<li><strong>setter_fallback</strong>: A dumb setter method (don&rsquo;t handle individual property setter)</li>
-<li><strong>setter_class</strong>: A module with individual property getter/setter</li>
-<li><strong>setter_prefix</strong>: A special setter prefix (like &ldquo;set&rdquo; or &ldquo;set_&rdquo; (default))</li>
-<li><strong>auto_emit</strong>: Emit &ldquo;property::___&rdquo; automatically (default: false). This is
-  ignored when setter_fallback is set or a setter is found</li>
+    <li><strong>getter</strong>: A smart getter (handle property getter itself)</li>
+    <li><strong>getter_fallback</strong>: A dumb getter method (don't handle individual property getter)</li>
+    <li><strong>getter_class</strong>: A module with individual property getter/setter</li>
+    <li><strong>getter_prefix</strong>: A special getter prefix (like "get" or "get_" (default))</li>
+    <li><strong>setter</strong>: A smart setter (handle property setter itself)</li>
+    <li><strong>setter_fallback</strong>: A dumb setter method (don't handle individual property setter)</li>
+    <li><strong>setter_class</strong>: A module with individual property getter/setter</li>
+    <li><strong>setter_prefix</strong>: A special setter prefix (like "set" or "set_" (default))</li>
+    <li><strong>auto_emit</strong>: Emit "property::__<em>" automatically (default: false). This is
+     ignored when setter</em>fallback is set or a setter is found</li>
 </ul>
+
 
 
     <h3>Parameters:</h3>
@@ -747,7 +766,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
          A standard luaobject derived object
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A set of accessors configuration parameters
          (<em>default</em> {})
         </li>
@@ -758,7 +777,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item2100 class="hide_extra">
+    <span id=item2128 class="hide_extra">
     </span>
 
 </dd>

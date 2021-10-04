@@ -139,6 +139,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -228,12 +229,15 @@
 
 <h1>Module: <code>awful.widget.watch</code></h1>
 <p>Watch widget.</p>
-<p><p> Here is an example of simple temperature widget which will update each 15
+<p>
+
+<p> Here is an example of simple temperature widget which will update each 15
  seconds implemented in two different ways.
  The first, simpler one, will just display the return command output
  (so output is stripped by shell commands).
  In the other example <code>sensors</code> returns to the widget its full output
- and it&rsquo;s trimmed in the widget callback function:</p>
+ and it's trimmed in the widget callback function:</p>
+
 
 <pre>
 <span class="number">211</span>             mytextclock,
@@ -252,18 +256,21 @@
 <span class="number">224</span>             s.mylayoutbox,
 </pre>
 
-
-<p> <img src="../images/awful_widget_watch.png" alt="Example screenshot" /></p>
+<p> <img src="../images/awful_widget_watch.png" alt="Example screenshot"/></p>
 
 <p> Here is the most basic usage:</p>
 
-<p>DOC_HIDE &ndash;DOC_GEN_IMAGE</p>
 
-<p><img src="../images/AUTOGEN_wibox_awidget_defaults_watch.svg" alt="Usage example" /></p>
+<p>DOC<em>HIDE --DOC</em>GEN_IMAGE</p>
+
+<p><img src="../images/AUTOGEN_wibox_awidget_defaults_watch.svg" alt="Usage example"/></p>
+
+
 
 <pre>
-awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | grep Hello<span class="string">''</span>, <span class="number">15</span>)
+awful.widget.watch(<span class="string">'bash -c "echo Hello world! | grep Hello"'</span>, <span class="number">15</span>)
 </pre>
+
 </p>
     <div class="extra-header">
 
@@ -497,7 +504,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">command</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The command.
         </li>
         <li><span class="parameter">timeout</span>
@@ -506,34 +513,37 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
  will be updated.
          (<em>default</em> 5)
         </li>
-        <li><span class="parameter">callback</span> The function that will be called after
+        <li><span class="parameter">callback</span>
+<p> The function that will be called after
  the command output will be received. it is shown in the textbox.
- Defaults to:
-     function(widget, stdout, stderr, exitreason, exitcode)
-         widget:set_text(stdout)
-     end
+ Defaults to:</p>
+<pre><code> function(widget, stdout, stderr, exitreason, exitcode)
+     widget:set_text(stdout)
+ end
+</code></pre>
+
         <ul>
         <li><span class="parameter">widget</span>
          Base widget instance.
         </li>
         <li><span class="parameter">stdout</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Output on stdout.
         </li>
         <li><span class="parameter">stderr</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Output on stderr.
         </li>
         <li><span class="parameter">exitreason</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Exit Reason.
- The reason can be &ldquo;exit&rdquo; or &ldquo;signal&rdquo;.
+ The reason can be "exit" or "signal".
         </li>
         <li><span class="parameter">exitcode</span>
             <span class="types"><span class="type">integer</span></span>
          Exit code.
- For &ldquo;exit&rdquo; reason it&rsquo;s the exit code.
- For &ldquo;signal&rdquo; reason — the signal causing process termination.
+ For "exit" reason it's the exit code.
+ For "signal" reason — the signal causing process termination.
         </li>
         </li></ul>
         <li><span class="parameter">base_widget</span>
@@ -554,7 +564,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1112 class="hide_extra">
+    <span id=item1118 class="hide_extra">
     </span>
 
 </dd>
@@ -576,7 +586,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The children.
         </li>
     </ul>
@@ -586,7 +596,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1113 class="hide_extra">
+    <span id=item1119 class="hide_extra">
     </span>
 
 </dd>
@@ -607,7 +617,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The children.
         </li>
     </ul>
@@ -617,7 +627,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1114 class="hide_extra">
+    <span id=item1120 class="hide_extra">
     </span>
 
 </dd>
@@ -645,7 +655,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1115 class="hide_extra">
+    <span id=item1121 class="hide_extra">
     </span>
 
 </dd>
@@ -673,7 +683,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1116 class="hide_extra">
+    <span id=item1122 class="hide_extra">
     </span>
 
 </dd>
@@ -702,7 +712,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1117 class="hide_extra">
+    <span id=item1123 class="hide_extra">
     </span>
 
 </dd>
@@ -723,7 +733,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1118 class="hide_extra">
+    <span id=item1124 class="hide_extra">
     </span>
 
 </dd>
@@ -736,7 +746,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     </span>
     </dt>
     <dd>
-    The widget buttons.</p>
+    The widget buttons. </p>
 
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
@@ -750,7 +760,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1119 class="hide_extra">
+    <span id=item1125 class="hide_extra">
     </span>
 
 </dd>
@@ -782,7 +792,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1120 class="hide_extra">
+    <span id=item1126 class="hide_extra">
     </span>
 
 </dd>
@@ -810,7 +820,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1121 class="hide_extra">
+    <span id=item1127 class="hide_extra">
     </span>
 
 </dd>
@@ -830,7 +840,9 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">signal_name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">...</span>
@@ -843,7 +855,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1122 class="hide_extra">
+    <span id=item1128 class="hide_extra">
     </span>
 
 </dd>
@@ -861,7 +873,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">...</span>
@@ -876,7 +888,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1123 class="hide_extra">
+    <span id=item1129 class="hide_extra">
     </span>
 
 </dd>
@@ -894,7 +906,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -908,7 +920,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1124 class="hide_extra">
+    <span id=item1130 class="hide_extra">
     </span>
 
 </dd>
@@ -921,7 +933,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.</p>
+    Connect to a signal weakly. </p>
 
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.</p>
@@ -933,7 +945,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -947,7 +959,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1125 class="hide_extra">
+    <span id=item1131 class="hide_extra">
     </span>
 
 </dd>
@@ -978,7 +990,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1126 class="hide_extra">
+    <span id=item1132 class="hide_extra">
     </span>
 
 </dd>
@@ -1005,7 +1017,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1127 class="hide_extra">
+    <span id=item1133 class="hide_extra">
     </span>
 
 </dd>
@@ -1022,7 +1034,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">lx</span>
@@ -1040,7 +1052,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
          The button number.
         </li>
         <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1058,7 +1070,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1102,7 +1114,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1128 class="hide_extra">
+    <span id=item1134 class="hide_extra">
     </span>
 
 </dd>
@@ -1119,7 +1131,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">lx</span>
@@ -1137,7 +1149,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
          The button number.
         </li>
         <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1155,7 +1167,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1199,7 +1211,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1129 class="hide_extra">
+    <span id=item1135 class="hide_extra">
     </span>
 
 </dd>
@@ -1216,7 +1228,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1234,7 +1246,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1278,7 +1290,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1130 class="hide_extra">
+    <span id=item1136 class="hide_extra">
     </span>
 
 </dd>
@@ -1295,7 +1307,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1313,7 +1325,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1357,7 +1369,7 @@ awful.widget.watch(<span class="string">'bash -c '</span>echo Hello world! | gre
 
 
 
-    <span id=item1131 class="hide_extra">
+    <span id=item1137 class="hide_extra">
     </span>
 
 </dd>

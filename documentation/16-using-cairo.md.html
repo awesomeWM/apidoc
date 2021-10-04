@@ -155,6 +155,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -224,93 +225,92 @@
 
 <div id="content">
 
-    <h1>Using Cairo and LGI</h1>
+
+<h1>Using Cairo and LGI</h1>
 
 <p>The interface of Awesome is mostly based on a library called LGI. It provides
 access to C libraries such as GTK, GLib, Cairo, Pango, PangoCairo and RSVG using
-Lua code without having to write actual &ldquo;glue&rdquo; C code.</p>
+Lua code without having to write actual "glue" C code.</p>
 
 <p>This is done using the GObject-introspection framework. The main advantage is
 the time saved and large number of features exposed for free. The downside is
 the lack of proper Lua centric documentation and examples. Some examples can be
-found in <a href="https://github.com/pavouk/lgi/tree/master/docs">LGI&rsquo;s own documentation</a>,
+found in <a href="https://github.com/pavouk/lgi/tree/master/docs">LGI's own documentation</a>,
 but this does not directly explain how to use a concrete API.
 Using other APIs requires some trial and error, and can be even impossible if
 the introspection data is missing or inaccurate.
 Using low-level APIs directly can easily cause crashes.
-It is the programmer&rsquo;s responsibility to properly check return and error
+It is the programmer's responsibility to properly check return and error
 values.</p>
 
 <p><a name="Using_LGI_in_Awesome"></a></p>
-
 <h2>Using LGI in Awesome</h2>
 
 <p>GObject and Gnome centric libraries tend to use the common C practice of
 emulating namespaces using underscores in function names.
 LGI exposes a proper namespace based API. For example, if the C function is:</p>
 
+
 <pre>
 cairo_image_surface_create()
 </pre>
 
-
 <p>Then the LGI equivalent is:</p>
+
 
 <pre>
 lgi.cairo.ImageSurface.create()
 </pre>
 
-
 <p>The same goes for enums:</p>
+
 
 <pre>
 CAIRO_FORMAT_ARGB32
 </pre>
 
-
 <p>becomes:</p>
+
 
 <pre>
 lgi.cairo.Format.ARGB32
 </pre>
 
-
 <p>LGI is also object oriented while the C API is function based. When those
-functions take the &ldquo;class&rdquo; &ldquo;object&rdquo;, then this:</p>
+functions take the "class" "object", then this:</p>
+
 
 <pre>
 cairo_line_to(cr, x, y)
 </pre>
 
-
 <p>can be expressed as:</p>
+
 
 <pre>
 cr:line_to(x, y)
 </pre>
 
-
 <p>It is however important to note some inconsistencies. For example, Cairo is
 called <code>lgi.cairo</code> while GLib is called <code>lgi.GLib</code>. Figuring this out will
 require some experimenting. The best way to do this without actually
-reloading Awesome is to open the <code>lua</code> command in a terminal and use <a href="https://www.lua.org/manual/5.2/manual.html#pdf-print">print</a>:</p>
+reloading Awesome is to open the <code>lua</code> command in a terminal and use <a href="https://www.lua.org/manual/5.3/manual.html#pdf-print">print</a>:</p>
+
 
 <pre>
 <span class="global">print</span>(<span class="string">"This will print a table address:"</span>, <span class="global">require</span>(<span class="string">"lgi"</span>).cairo)
 <span class="global">print</span>(<span class="string">"This will print an error:"</span>, <span class="global">require</span>(<span class="string">"lgi"</span>).Cairo)
 </pre>
 
-
-<p>It is recommended to avoid using <a href="https://www.lua.org/manual/5.2/manual.html#pdf-require">require</a> always when using a function, but
+<p>It is recommended to avoid using <a href="https://www.lua.org/manual/5.3/manual.html#pdf-require">require</a> always when using a function, but
 include the libraries at the top of your <a href="../sample files/rc.lua.html#">rc.lua</a> or Lua module instead:</p>
+
 
 <pre>
 <span class="keyword">local</span> cairo = <span class="global">require</span>(<span class="string">"lgi"</span>).cairo
 </pre>
 
-
 <p><a name="The_Cairo_API"></a></p>
-
 <h2>The Cairo API</h2>
 
 <p>Cairo is a 2D graphic library used by Awesome, Gnome and XFCE. It allows to
@@ -326,14 +326,13 @@ feature.</p>
 of surfaces including:</p>
 
 <ul>
-<li>Color images with transparency (<code>ARGB32</code>) or without (<code>RGB24</code>)</li>
-<li>Monochrome image surfaces with transparency (<code>A8</code>) or without (<code>A1</code>)</li>
-<li>SVG vectorial surfaces</li>
-<li>Native (XCB) surfaces</li>
-<li>Framebuffers and other less interesting ones (from the point of
-view of Awesome)</li>
+    <li>Color images with transparency (<code>ARGB32</code>) or without (<code>RGB24</code>)</li>
+    <li>Monochrome image surfaces with transparency (<code>A8</code>) or without (<code>A1</code>)</li>
+    <li>SVG vectorial surfaces</li>
+    <li>Native (XCB) surfaces</li>
+    <li>Framebuffers and other less interesting ones (from the point of
+    view of Awesome)</li>
 </ul>
-
 
 <p>For more details see <a href="https://cairographics.org/manual/cairo-Image-Surfaces.html">Surfaces</a>.</p>
 
@@ -354,22 +353,21 @@ may not be closed (a shape).</p>
 The current path is extended until it is used and reset (see next section).
 Until then nothing will be drawn to the surface.  For example:</p>
 
+
 <pre>
 cr:rectangle(<span class="number">0</span> , <span class="number">0</span> , <span class="number">10</span>, <span class="number">10</span>)
 cr:rectangle(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>)
 </pre>
-
 
 <p>will not do anything until the operation is applied to the context.</p>
 
 <p>For more details, read:</p>
 
 <ul>
-<li><a href="http://cairographics.org/manual/cairo-Paths.html">Path</a></li>
-<li><a href="http://cairographics.org/manual/cairo-cairo-t.html">Context</a></li>
-<li><a href="http://cairographics.org/manual/cairo-Transformations.html">Transformation</a></li>
+    <li><a href="http://cairographics.org/manual/cairo-Paths.html">Path</a></li>
+    <li><a href="http://cairographics.org/manual/cairo-cairo-t.html">Context</a></li>
+    <li><a href="http://cairographics.org/manual/cairo-Transformations.html">Transformation</a></li>
 </ul>
-
 
 <p>A context also holds a transformation matrix (see <a href="../classes/gears.matrix.html#">gears.matrix</a>), which is
 used when applying an operation.</p>
@@ -379,14 +377,13 @@ used when applying an operation.</p>
 <p>Multiple operations can be done with the paths. The most common are:</p>
 
 <ul>
-<li><em>fill</em>: Fill the path with the current source.</li>
-<li><em>stroke</em>: Paint the path outline with the current source.</li>
-<li><em>mask</em>: Use the current source as an alpha mask while painting with the
-current operator.</li>
-<li><em>clip</em>: Crop the surface&rsquo;s workarea so nothing outside of the clip will be
-affected by all following operations.</li>
+    <li><em>fill</em>: Fill the path with the current source.</li>
+    <li><em>stroke</em>: Paint the path outline with the current source.</li>
+    <li><em>mask</em>: Use the current source as an alpha mask while painting with the
+    current operator.</li>
+    <li><em>clip</em>: Crop the surface's workarea so nothing outside of the clip will be
+    affected by all following operations.</li>
 </ul>
-
 
 <p><strong>Operators</strong>:</p>
 
@@ -405,6 +402,7 @@ information and examples on how widgets work.</p>
 
 <p>It is also possible to create surfaces manually. See <a href="../libraries/gears.surface.html#">gears.surface</a> for
 some examples. Here is the most simple example you can get:</p>
+
 
 <pre>
 <span class="comment">-- Create a surface
@@ -425,13 +423,14 @@ some examples. Here is the most simple example you can get:</p>
 </span>cr:fill()
 </pre>
 
-
 <p>This can then be used as <code>bgimage</code> for a <a href="../popups_and_bars/wibox.html#">wibox</a>, <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a> or
 <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>:</p>
+
 
 <pre>
 screen.primary.mywibox.bgimage = img
 </pre>
+
 
 
 </div> <!-- id="content" -->
