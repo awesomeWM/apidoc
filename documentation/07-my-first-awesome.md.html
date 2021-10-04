@@ -161,6 +161,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -230,21 +231,21 @@
 
 <div id="content">
 
-    <h1>My first Awesome</h1>
+
+<h1>My first Awesome</h1>
 
 <p>This little tutorial is for people who never used a tiling window manager before
-and don&rsquo;t have fancy hacking skills. We will explore the awesome world of
+and don't have fancy hacking skills. We will explore the awesome world of
 Awesome step by step and finally come up with a working desktop, providing some
 basic knowledge on how to configure Awesome in the process. We will start with
 the default <a href="../sample files/rc.lua.html#">rc.lua</a> that comes with Awesome, play around a little and try to
-make it more beautiful and useful with widgets. For this tutorial you don&rsquo;t need
+make it more beautiful and useful with widgets. For this tutorial you don't need
 any programming skills besides using a text editor.</p>
 
 <p><a name="Explore_Awesome"></a></p>
-
 <h2>Explore Awesome</h2>
 
-<p>I will assume that you properly installed Awesome through your distribution&rsquo;s
+<p>I will assume that you properly installed Awesome through your distribution's
 package manager or compiled it from source. You should now add <code>exec awesome</code> to
 your <code>~/.xinitrc</code>. As already mentioned, Awesome provides a default config file
 which will be our starting point. You will usually find this <a href="../sample files/rc.lua.html#">rc.lua</a> file in
@@ -262,10 +263,10 @@ the active layout.</p>
 <p>One of the big advantages of Awesome over other tiling window managers is its
 good mouse support. Awesome can act as a full floating window manager (almost
 like openbox) if you want. For this basic tutorial we will mainly focus on
-keyboard control, so let&rsquo;s learn some key bindings now.</p>
+keyboard control, so let's learn some key bindings now.</p>
 
-<p>Let&rsquo;s open a terminal: press <em>Mod4+Enter</em>. Mod4 is your &ldquo;Windows key&rdquo;, the key
-between Ctrl and Alt. You can change the modkey if you want, but we&rsquo;ll get to
+<p>Let's open a terminal: press <em>Mod4+Enter</em>. Mod4 is your "Windows key", the key
+between Ctrl and Alt. You can change the modkey if you want, but we'll get to
 that later. An <code>xterm</code> window will pop up. You can of course use your favourite
 terminal if you like. Again, more on that later. Now press <em>Mod4+Shift+c</em> to
 close the terminal. This is the command which lets you close any application.
@@ -288,7 +289,7 @@ and <em>Mod4+Right</em> moves to the next tag in the specified direction.</p>
 <p>Use <em>Mod4+k</em> and <em>Mod4+j</em> to change your focused client - moving your mouse will
 also do that.</p>
 
-<p><em>Mod4+Shift+q</em> quits Awesome, but don&rsquo;t do that now.</p>
+<p><em>Mod4+Shift+q</em> quits Awesome, but don't do that now.</p>
 
 <p>For an overview of all key bindings, press <em>Mod4+s</em>. Pressing any key closes
 this overview again.</p>
@@ -298,64 +299,62 @@ this overview again.</p>
 overview now also provides a cheat sheet for controlling Vim.</p>
 
 <p><a name="Change_the_theme"></a></p>
-
 <h2>Change the theme</h2>
 
 <p>Awesome has multiple builtin themes you can choose from:</p>
 
 <ul>
-<li><em>default</em></li>
-<li><em>gtk</em></li>
-<li><em>sky</em></li>
-<li><em>xresources</em></li>
-<li><em>zenburn</em></li>
+    <li><em>default</em></li>
+    <li><em>gtk</em></li>
+    <li><em>sky</em></li>
+    <li><em>xresources</em></li>
+    <li><em>zenburn</em></li>
 </ul>
-
 
 <p>To change the theme, open your <a href="../sample files/rc.lua.html#">rc.lua</a>, find this line near the beginning of
 the file, and change <code>default</code> to one of the other values mentioned:</p>
 
+
 <pre>
 beautiful.init(gears.filesystem.get_themes_dir() .. <span class="string">"default/theme.lua"</span>)
 </pre>
-
 
 <p>However, for this tutorial we will copy and customize the default theme.
 Copy <code>/usr/share/awesome/themes/default/theme.lua</code> to <code>~/.config/awesome/</code>
 and change the line shown above in <a href="../sample files/rc.lua.html#">rc.lua</a> like this. Make sure to replace
 <code>USER</code> with your user name.</p>
 
+
 <pre>
 beautiful.init(<span class="string">"/home/USER/.config/awesome/theme.lua"</span>)
 </pre>
-
 
 <h3>Change the background image</h3>
 
 <p>Your desktop background image is handled in your theme file. To change it, edit
 this line in your theme file:</p>
 
+
 <pre>
 theme.wallpaper = themes_path..<span class="string">"default/background.png"</span>
 </pre>
-
 
 <p>The default uses a path relative to <code>themes_path</code> by using the <code>..</code> operator to
 join two strings together. To just set it to an absolute path for example,
 you could do:</p>
 
+
 <pre>
 theme.wallpaper = <span class="string">"/usr/share/backgrounds/my-awesome-wallpaper.png"</span>
 </pre>
 
-
 <p><a name="Personalize_your_layouts"></a></p>
-
 <h2>Personalize your layouts</h2>
 
 <p>To optimize our workflow, we now want to give names to our tags and set the
 specific tiling or floating mode for each of them.
 Open your <a href="../sample files/rc.lua.html#">rc.lua</a> and find the layouts section. It should look like this:</p>
+
 
 <pre>
 awful.layout.layouts = {
@@ -378,30 +377,29 @@ awful.layout.layouts = {
 </span>}
 </pre>
 
-
-<p>These are all possible tiling and floating layouts Awesome has. If you don&rsquo;t
-find all of them useful, you can comment some of them out by adding &ldquo;&ndash;&rdquo;
+<p>These are all possible tiling and floating layouts Awesome has. If you don't
+find all of them useful, you can comment some of them out by adding "--"
 to the beginning of the line. Awesome already comes with three layouts which are
 not used in the default config, as you can see above.</p>
 
 <p><a name="Personalize_your_tags"></a></p>
-
 <h2>Personalize your tags</h2>
 
 <p>Next, we want to name our tags. This is the default tag creation with numbers
 from 1 to 9:</p>
+
 
 <pre>
 <span class="comment">-- Each screen has its own tag table.
 </span>awful.tag({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, awful.layout.layouts[<span class="number">1</span>])
 </pre>
 
-
 <p>Now we want to change the tag names and assign a specific layout to each of
 them. By default, each tag has a floating layout (the first entry in the
 <code>layouts</code> table). To change this, we define a specific layout for each tag.</p>
 
 <p>Replace the above with this code:</p>
+
 
 <pre>
 <span class="comment">-- Each screen has its own tag table.
@@ -412,15 +410,14 @@ them. By default, each tag has a floating layout (the first entry in the
 awful.tag(names, s, layouts)
 </pre>
 
-
 <p>We use <code>layouts</code> to set the layout for each tag. Edit this as you like.</p>
 
 <p><a name="Some_global_settings"></a></p>
-
 <h2>Some global settings</h2>
 
 <p>While we are at it, we can also change the default terminal, editor and assign
 the modkey to a different key:</p>
+
 
 <pre>
 terminal = <span class="string">"xterm"</span>
@@ -429,12 +426,10 @@ editor = <span class="global">os</span>.getenv(<span class="string">"EDITOR"</sp
 modkey = <span class="string">"Mod4"</span>
 </pre>
 
-
 <p>Change these settings to your liking. They are pretty self-explanatory and
 well-documented in the comments.</p>
 
 <p><a name="Wrapping_up"></a></p>
-
 <h2>Wrapping up</h2>
 
 <p>Save your <a href="../sample files/rc.lua.html#">rc.lua</a> and restart awesome (<em>Mod4+Ctrl+r</em>). Now the modifications
@@ -445,34 +440,34 @@ yourself some trouble by using <code>Xephyr</code> to test your changes.</p>
 
 <p>Open a terminal and run the following command:</p>
 
+
 <pre>
 Xephyr :<span class="number">5</span> &amp; sleep <span class="number">1</span> ; DISPLAY=:<span class="number">5</span> awesome
 </pre>
 
-
 <p>A new window will appear and a new awesome instance runs inside of it.</p>
 
 <p><a name="Add_widgets"></a></p>
-
 <h2>Add widgets</h2>
 
 <p>Before the following line:</p>
+
 
 <pre>
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 </pre>
 
-
 <p>Add this to create a new widget:</p>
+
 
 <pre>
 praisewidget = wibox.widget.textbox()
 praisewidget.text = <span class="string">"You are great!"</span>
 </pre>
 
-
 <p>The widget still needs to be added to a wibar. For this, find the definition of
 your wibar and change it as follows:</p>
+
 
 <pre>
 { <span class="comment">-- Left widgets
@@ -484,16 +479,15 @@ your wibar and change it as follows:</p>
 },
 </pre>
 
-
 <p>This gives you a basic idea on how to add a widget. For an overview of available
 widgets and how to arrange them, please read <a href="../documentation/03-declarative-layout.md.html#">03-declarative-layout.md</a>.</p>
 
 <p><a name="Further_reading"></a></p>
-
 <h2>Further reading</h2>
 
 <p>To learn more about the individual parts of the default configuration file,
 please look at <a href="../documentation/05-awesomerc.md.html#">05-awesomerc.md</a>.</p>
+
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->

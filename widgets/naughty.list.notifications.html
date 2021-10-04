@@ -141,6 +141,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -230,12 +231,15 @@
 
 <h1>Module: <code>naughty.list.notifications</code></h1>
 <p>Get a list of all currently active notifications.</p>
-<p><img src="../images/AUTOGEN_awful_notification_notificationlist_bottombar.svg" alt="Usage example" /></p>
+<p><img src="../images/AUTOGEN_awful_notification_notificationlist_bottombar.svg" alt="Usage example"/></p>
+
+
+
 
 <pre>
 <span class="comment">-- This awful.wibar will be placed at the bottom and contain the notifications.
 </span><span class="keyword">local</span> notif_wb = awful.wibar {
-    position = <span class="string">'bottom'</span>,
+    position = <span class="string">"bottom"</span>,
     height   = <span class="number">48</span>,
     visible  = #naughty.active &gt; <span class="number">0</span>,
 }
@@ -245,7 +249,7 @@ notif_wb:setup {
     {
         base_layout = wibox.widget {
             spacing_widget = wibox.widget {
-                orientation = <span class="string">'vertical'</span>,
+                orientation = <span class="string">"vertical"</span>,
                 span_ratio  = <span class="number">0.5</span>,
                 widget      = wibox.widget.separator,
             },
@@ -264,7 +268,7 @@ notif_wb:setup {
                             <span class="comment">-- Adding the <a href="../libraries/wibox.widget.html#">wibox.widget</a> allows to share a
 </span>                            <span class="comment">-- single instance for all spacers.
 </span>                            spacing_widget = wibox.widget {
-                                orientation = <span class="string">'vertical'</span>,
+                                orientation = <span class="string">"vertical"</span>,
                                 span_ratio  = <span class="number">0.9</span>,
                                 widget      = wibox.widget.separator,
                             },
@@ -287,9 +291,9 @@ notif_wb:setup {
     <span class="comment">-- Add a button to dismiss all notifications, because why not.
 </span>    {
         {
-            text   = <span class="string">'Dismiss all'</span>,
-            align  = <span class="string">'center'</span>,
-            valign = <span class="string">'center'</span>,
+            text   = <span class="string">"Dismiss all"</span>,
+            align  = <span class="string">"center"</span>,
+            valign = <span class="string">"center"</span>,
             widget = wibox.widget.textbox
         },
         buttons = gears.<span class="global">table</span>.join(
@@ -305,13 +309,12 @@ notif_wb:setup {
 }
 
 <span class="comment">-- We don't want to have that bar all the time, only when there is content.
-</span>naughty.connect_signal(<span class="string">'property::active'</span>, <span class="keyword">function</span>()
+</span>naughty.connect_signal(<span class="string">"property::active"</span>, <span class="keyword">function</span>()
     notif_wb.visible = #naughty.active &gt; <span class="number">0</span>
 <span class="keyword">end</span>)
 </pre>
 
-
-<p> require(&lsquo;gears.timer&rsquo;).run_delayed_calls_now()</p>
+<p> require("gears.timer").run<em>delayed</em>calls_now()</p>
     <div class="extra-header">
 
 
@@ -661,6 +664,8 @@ notif_wb:setup {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
+
+
         <ul>
         <li><span class="parameter">base_layout</span>
             <span class="types"><span class="type">widget</span></span>
@@ -671,63 +676,89 @@ notif_wb:setup {
          The list filter.
         </li>
         <li><span class="parameter">style</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Override the beautiful values.
         </li>
         <li><span class="parameter">style.shape_normal</span>
             <span class="types"><span class="type">gears.shape</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.shape_selected</span>
             <span class="types"><span class="type">gears.shape</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.shape_border_color_normal</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.shape_border_color_selected</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.shape_border_width_normal</span>
             <span class="types"><span class="type">number</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.shape_border_width_selected</span>
             <span class="types"><span class="type">number</span></span>
+
+
 
         </li>
         <li><span class="parameter">style.icon_size</span>
             <span class="types"><span class="type">number</span></span>
 
+
+
         </li>
         <li><span class="parameter">style.bg_normal</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.bg_selected</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.fg_normal</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.fg_selected</span>
-            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.bgimage_normal</span>
-            <span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">style.bgimage_selected</span>
-            <span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">widget_template</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A custom widget to be used for each
   notifications.
          (<em>optional</em>)
@@ -746,7 +777,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1174 class="hide_extra">
+    <span id=item1180 class="hide_extra">
     </span>
 
 </dd>
@@ -775,13 +806,13 @@ notif_wb:setup {
 
 
      <br />
-     <center id=button1175>
-     <a class="show_more_button" onclick="show_extra('1175')">
+     <center id=button1181>
+     <a class="show_more_button" onclick="show_extra('1181')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1175 class="hide_extra">
+    <span id=item1181 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::notification</code></span>  When the <a href="../widgets/naughty.list.notifications.html#notification">notification</a> value changes.</li>
@@ -803,7 +834,7 @@ notif_wb:setup {
     </span>
     </dt>
     <dd>
-    A <code>wibox.layout</code> to be used to place the entries.</p>
+    A <code>wibox.layout</code> to be used to place the entries. </p>
 
 <p> If no layout is specified, a <a href="../widget_layouts/wibox.layout.fixed.html#vertical">wibox.layout.fixed.vertical</a> will be created
  automatically.
@@ -822,13 +853,13 @@ notif_wb:setup {
 
 
      <br />
-     <center id=button1176>
-     <a class="show_more_button" onclick="show_extra('1176')">
+     <center id=button1182>
+     <a class="show_more_button" onclick="show_extra('1182')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1176 class="hide_extra">
+    <span id=item1182 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::base_layout</code></span>  When the <a href="../widgets/naughty.list.notifications.html#base_layout">base_layout</a> value changes.</li>
@@ -865,13 +896,13 @@ notif_wb:setup {
 
 
      <br />
-     <center id=button1177>
-     <a class="show_more_button" onclick="show_extra('1177')">
+     <center id=button1183>
+     <a class="show_more_button" onclick="show_extra('1183')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1177 class="hide_extra">
+    <span id=item1183 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::widget_template</code></span>  When the <a href="../widgets/naughty.list.notifications.html#widget_template">widget_template</a> value changes.</li>
@@ -901,13 +932,13 @@ notif_wb:setup {
 
 
      <br />
-     <center id=button1178>
-     <a class="show_more_button" onclick="show_extra('1178')">
+     <center id=button1184>
+     <a class="show_more_button" onclick="show_extra('1184')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1178 class="hide_extra">
+    <span id=item1184 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::style</code></span>  When the <a href="../widgets/naughty.list.notifications.html#style">style</a> value changes.</li>
@@ -957,13 +988,13 @@ notif_wb:setup {
 
 
      <br />
-     <center id=button1179>
-     <a class="show_more_button" onclick="show_extra('1179')">
+     <center id=button1185>
+     <a class="show_more_button" onclick="show_extra('1185')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1179 class="hide_extra">
+    <span id=item1185 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::filter</code></span>  When the <a href="../widgets/naughty.list.notifications.html#filter">filter</a> value changes.</li>
@@ -989,7 +1020,7 @@ notif_wb:setup {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The children.
         </li>
     </ul>
@@ -999,7 +1030,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1180 class="hide_extra">
+    <span id=item1186 class="hide_extra">
     </span>
 
 </dd>
@@ -1020,7 +1051,7 @@ notif_wb:setup {
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The children.
         </li>
     </ul>
@@ -1030,7 +1061,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1181 class="hide_extra">
+    <span id=item1187 class="hide_extra">
     </span>
 
 </dd>
@@ -1058,7 +1089,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1182 class="hide_extra">
+    <span id=item1188 class="hide_extra">
     </span>
 
 </dd>
@@ -1086,7 +1117,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1183 class="hide_extra">
+    <span id=item1189 class="hide_extra">
     </span>
 
 </dd>
@@ -1115,7 +1146,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1184 class="hide_extra">
+    <span id=item1190 class="hide_extra">
     </span>
 
 </dd>
@@ -1136,7 +1167,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1185 class="hide_extra">
+    <span id=item1191 class="hide_extra">
     </span>
 
 </dd>
@@ -1149,7 +1180,7 @@ notif_wb:setup {
     </span>
     </dt>
     <dd>
-    The widget buttons.</p>
+    The widget buttons. </p>
 
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
@@ -1163,7 +1194,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1186 class="hide_extra">
+    <span id=item1192 class="hide_extra">
     </span>
 
 </dd>
@@ -1195,7 +1226,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1187 class="hide_extra">
+    <span id=item1193 class="hide_extra">
     </span>
 
 </dd>
@@ -1223,7 +1254,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1188 class="hide_extra">
+    <span id=item1194 class="hide_extra">
     </span>
 
 </dd>
@@ -1243,7 +1274,9 @@ notif_wb:setup {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">signal_name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">...</span>
@@ -1256,7 +1289,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1189 class="hide_extra">
+    <span id=item1195 class="hide_extra">
     </span>
 
 </dd>
@@ -1274,7 +1307,7 @@ notif_wb:setup {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">...</span>
@@ -1289,7 +1322,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1190 class="hide_extra">
+    <span id=item1196 class="hide_extra">
     </span>
 
 </dd>
@@ -1307,7 +1340,7 @@ notif_wb:setup {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1321,7 +1354,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1191 class="hide_extra">
+    <span id=item1197 class="hide_extra">
     </span>
 
 </dd>
@@ -1334,7 +1367,7 @@ notif_wb:setup {
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.</p>
+    Connect to a signal weakly. </p>
 
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.</p>
@@ -1346,7 +1379,7 @@ notif_wb:setup {
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1360,7 +1393,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1192 class="hide_extra">
+    <span id=item1198 class="hide_extra">
     </span>
 
 </dd>
@@ -1391,7 +1424,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1193 class="hide_extra">
+    <span id=item1199 class="hide_extra">
     </span>
 
 </dd>
@@ -1418,7 +1451,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1194 class="hide_extra">
+    <span id=item1200 class="hide_extra">
     </span>
 
 </dd>
@@ -1435,7 +1468,7 @@ notif_wb:setup {
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">lx</span>
@@ -1453,7 +1486,7 @@ notif_wb:setup {
          The button number.
         </li>
         <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1471,7 +1504,7 @@ notif_wb:setup {
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1515,7 +1548,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1195 class="hide_extra">
+    <span id=item1201 class="hide_extra">
     </span>
 
 </dd>
@@ -1532,7 +1565,7 @@ notif_wb:setup {
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">lx</span>
@@ -1550,7 +1583,7 @@ notif_wb:setup {
          The button number.
         </li>
         <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1568,7 +1601,7 @@ notif_wb:setup {
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1612,7 +1645,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1196 class="hide_extra">
+    <span id=item1202 class="hide_extra">
     </span>
 
 </dd>
@@ -1629,7 +1662,7 @@ notif_wb:setup {
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1647,7 +1680,7 @@ notif_wb:setup {
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1691,7 +1724,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1197 class="hide_extra">
+    <span id=item1203 class="hide_extra">
     </span>
 
 </dd>
@@ -1708,7 +1741,7 @@ notif_wb:setup {
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1726,7 +1759,7 @@ notif_wb:setup {
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1770,7 +1803,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1198 class="hide_extra">
+    <span id=item1204 class="hide_extra">
     </span>
 
 </dd>
@@ -1798,7 +1831,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1199 class="hide_extra">
+    <span id=item1205 class="hide_extra">
     </span>
 
 </dd>
@@ -1822,7 +1855,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1200 class="hide_extra">
+    <span id=item1206 class="hide_extra">
     </span>
 
 </dd>
@@ -1846,7 +1879,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1201 class="hide_extra">
+    <span id=item1207 class="hide_extra">
     </span>
 
 </dd>
@@ -1870,7 +1903,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1202 class="hide_extra">
+    <span id=item1208 class="hide_extra">
     </span>
 
 </dd>
@@ -1890,7 +1923,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1203 class="hide_extra">
+    <span id=item1209 class="hide_extra">
     </span>
 
 </dd>
@@ -1910,7 +1943,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1204 class="hide_extra">
+    <span id=item1210 class="hide_extra">
     </span>
 
 </dd>
@@ -1930,7 +1963,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1205 class="hide_extra">
+    <span id=item1211 class="hide_extra">
     </span>
 
 </dd>
@@ -1950,7 +1983,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1206 class="hide_extra">
+    <span id=item1212 class="hide_extra">
     </span>
 
 </dd>
@@ -1974,7 +2007,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1207 class="hide_extra">
+    <span id=item1213 class="hide_extra">
     </span>
 
 </dd>
@@ -1998,7 +2031,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1208 class="hide_extra">
+    <span id=item1214 class="hide_extra">
     </span>
 
 </dd>
@@ -2022,7 +2055,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1209 class="hide_extra">
+    <span id=item1215 class="hide_extra">
     </span>
 
 </dd>
@@ -2046,7 +2079,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1210 class="hide_extra">
+    <span id=item1216 class="hide_extra">
     </span>
 
 </dd>
@@ -2070,7 +2103,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1211 class="hide_extra">
+    <span id=item1217 class="hide_extra">
     </span>
 
 </dd>
@@ -2094,7 +2127,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1212 class="hide_extra">
+    <span id=item1218 class="hide_extra">
     </span>
 
 </dd>
@@ -2123,7 +2156,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1213 class="hide_extra">
+    <span id=item1219 class="hide_extra">
     </span>
 
 </dd>
@@ -2134,12 +2167,15 @@ notif_wb:setup {
     </span>
     </dt>
     <dd>
-    <p>Only get the most recent notification(s).</p>
+
+<p>Only get the most recent notification(s). </p>
 
 <p> To set the count, the function needs to be wrapped:</p>
 
 <pre><code>filter = function(n) return naughty.list.notifications.filter.most_recent(n, 3) end
 </code></pre>
+
+
 
     <ul>
         <li><span class="parameter">n</span>
@@ -2158,7 +2194,7 @@ notif_wb:setup {
 
 
 
-    <span id=item1214 class="hide_extra">
+    <span id=item1220 class="hide_extra">
     </span>
 
 </dd>
