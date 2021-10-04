@@ -59,6 +59,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><strong>awful.widget.calendar_popup</strong></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -228,7 +229,10 @@
 
 <h1>Module: <code>awful.widget.calendar_popup</code></h1>
 <p>A calendar popup wibox.</p>
-<p><p> Display a month or year calendar popup using <code>calendar_popup.month</code> or <code>calendar_popup.year</code>.
+<p>
+
+
+<p> Display a month or year calendar popup using <code>calendar_popup.month</code> or <code>calendar_popup.year</code>.
  The calendar style can be tweaked by providing tables of style properties at creation:
  <code>style_year</code>, <code>style_month</code>, <code>style_yearheader</code>, <code>style_header</code>,
  <code>style_weekday</code>, <code>style_weeknumber</code>, <code>style_normal</code>, <code>style_focus</code> (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>).</p>
@@ -239,19 +243,24 @@
  <code>opacity</code> and <code>bg</code> apply to the wibox itself, they are mainly useful to manage opacity
  by setting <code>opacity</code> for the false opacity or setting <code>bg=&quot;#00000000&quot;</code> for compositor opacity.
  The <a href="../core_components/screen.html#">screen</a> argument forces the display of the wibox to this screen (instead of the focused screen by default).
- The <code>position</code> argument is a two-characters string describing the screen alignment &ldquo;[vertical][horizontal]&rdquo;,
- e.g. &ldquo;cc&rdquo;, &ldquo;tr&rdquo;, &ldquo;bl&rdquo;, &hellip;</p>
+ The <code>position</code> argument is a two-characters string describing the screen alignment "[vertical][horizontal]",
+ e.g. "cc", "tr", "bl", ...</p>
 
 <p> The wibox visibility can be changed calling the <a href="../popups_and_bars/awful.widget.calendar_popup.html#toggle">toggle</a> method.
  The <a href="../popups_and_bars/awful.widget.calendar_popup.html#attach">attach</a> method adds mouse bindings to an existing widget in order to toggle the display of the wibox.</p>
 
-<p><img src="../images/AUTOGEN_awful_widget_calendar_popup_default.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_awful_widget_calendar_popup_default.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 <span class="keyword">local</span> month_calendar = awful.widget.calendar_popup.month()
-month_calendar:attach( mytextclock, <span class="string">'tr'</span> )
+month_calendar:attach( mytextclock, <span class="string">"tr"</span> )
 month_calendar:toggle()
 </pre>
+
 </p>
     <div class="extra-header">
 
@@ -351,22 +360,27 @@ month_calendar:toggle()
     </span>
     </dt>
     <dd>
-    <p>A month calendar wibox.</p>
+
+<p>A month calendar wibox. </p>
 
 <p> It is highly customizable using the same options as for the widgets.
  The options are set once and for all at creation, though.</p>
+
+
 
 <pre><code>local mytextclock = wibox.widget.textclock()
 local month_calendar = awful.widget.calendar_popup.month()
 month_calendar:attach( mytextclock, "tr" )
 </code></pre>
 
+
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span> Properties of the widget
         <ul>
         <li><span class="parameter">position</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Two-character position of the calendar in the screen
         </li>
         <li><span class="parameter">screen</span>
@@ -378,11 +392,11 @@ month_calendar:attach( mytextclock, "tr" )
          Wibox opacity
         </li>
         <li><span class="parameter">bg</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Wibox background color
         </li>
         <li><span class="parameter">font</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Calendar font
         </li>
         <li><span class="parameter">spacing</span>
@@ -406,27 +420,27 @@ month_calendar:attach( mytextclock, "tr" )
          Format the weekdays with three characters instead of two
         </li>
         <li><span class="parameter">style_month</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Container style for the month calendar (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_header</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the month calendar header (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_weekday</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the weekday cells (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_weeknumber</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the weeknumber cells (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_normal</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the normal day cells (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_focus</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the current day cell (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         </li></ul>
@@ -443,7 +457,7 @@ month_calendar:attach( mytextclock, "tr" )
 
 
 
-    <span id=item1991 class="hide_extra">
+    <span id=item2019 class="hide_extra">
     </span>
 
 </dd>
@@ -454,21 +468,26 @@ month_calendar:attach( mytextclock, "tr" )
     </span>
     </dt>
     <dd>
-    <p>A year calendar wibox.</p>
+
+<p>A year calendar wibox. </p>
 
 <p> It is highly customizable using the same options as for the widgets.
  The options are set once and for all at creation, though.</p>
 
+
+
 <pre><code>globalkeys = gears.table.join(globalkeys, awful.key(
         { modkey, "Control" }, "c",  function () year_calendar:toggle() end))
 </code></pre>
+
+
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span> Properties of the widget
         <ul>
         <li><span class="parameter">position</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Two-character position of the calendar in the screen
         </li>
         <li><span class="parameter">screen</span>
@@ -480,11 +499,11 @@ month_calendar:attach( mytextclock, "tr" )
          Wibox opacity
         </li>
         <li><span class="parameter">bg</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Wibox background color
         </li>
         <li><span class="parameter">font</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Calendar font
         </li>
         <li><span class="parameter">spacing</span>
@@ -508,36 +527,36 @@ month_calendar:attach( mytextclock, "tr" )
          Format the weekdays with three characters instead of two
         </li>
         <li><span class="parameter">style_year</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Container style for the year calendar (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_month</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Container style for the month calendar (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>).
  This field can also be called <code>style_monthheader</code>.
         </li>
         <li><span class="parameter">style_yearheader</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the year calendar header (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_header</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the month calendar header (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_weekday</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the weekday cells (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_weeknumber</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the weeknumber cells (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_normal</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the normal day cells (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         <li><span class="parameter">style_focus</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Cell style for the current day cell (see <a href="../popups_and_bars/awful.widget.calendar_popup.html#cell_properties">cell_properties</a>)
         </li>
         </li></ul>
@@ -554,7 +573,7 @@ month_calendar:attach( mytextclock, "tr" )
 
 
 
-    <span id=item1992 class="hide_extra">
+    <span id=item2020 class="hide_extra">
     </span>
 
 </dd>
@@ -579,7 +598,7 @@ month_calendar:attach( mytextclock, "tr" )
          Offset with respect to current month or year
         </li>
         <li><span class="parameter">position</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Two-character position of the calendar in the screen
         </li>
         <li><span class="parameter">screen</span>
@@ -599,7 +618,7 @@ month_calendar:attach( mytextclock, "tr" )
 
 
 
-    <span id=item1993 class="hide_extra">
+    <span id=item2021 class="hide_extra">
     </span>
 
 </dd>
@@ -619,7 +638,7 @@ month_calendar:attach( mytextclock, "tr" )
 
 
 
-    <span id=item1994 class="hide_extra">
+    <span id=item2022 class="hide_extra">
     </span>
 
 </dd>
@@ -631,12 +650,15 @@ month_calendar:attach( mytextclock, "tr" )
     </span>
     </dt>
     <dd>
-    <p>Attach the calendar to a widget to display at a specific position.</p>
+
+<p>Attach the calendar to a widget to display at a specific position. </p>
 
 <pre><code>local mytextclock = wibox.widget.textclock()
 local month_calendar = awful.widget.calendar_popup.month()
 month_calendar:attach(mytextclock, 'tr')
 </code></pre>
+
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -644,7 +666,7 @@ month_calendar:attach(mytextclock, 'tr')
          Widget to attach the calendar
         </li>
         <li><span class="parameter">position</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Two characters string defining the position on the screen
          (<em>default</em> "tr")
         </li>
@@ -669,7 +691,7 @@ month_calendar:attach(mytextclock, 'tr')
 
 
 
-    <span id=item1995 class="hide_extra">
+    <span id=item2023 class="hide_extra">
     </span>
 
 </dd>
@@ -685,7 +707,7 @@ month_calendar:attach(mytextclock, 'tr')
     </span>
     </dt>
     <dd>
-    The generic calendar style table.</p>
+    The generic calendar style table. </p>
 
 <p> Each table property can also be defined by <code>beautiful.calendar_[flag]_[property]=val</code>.
 
@@ -702,7 +724,7 @@ month_calendar:attach(mytextclock, 'tr')
 
 
 
-    <span id=item1996 class="hide_extra">
+    <span id=item2024 class="hide_extra">
     </span>
 
 </dd>
@@ -752,7 +774,7 @@ month_calendar:attach(mytextclock, 'tr')
 
 
 
-    <span id=item1997 class="hide_extra">
+    <span id=item2025 class="hide_extra">
     </span>
 
 </dd>
@@ -798,7 +820,7 @@ month_calendar:attach(mytextclock, 'tr')
 
 
 
-    <span id=item1998 class="hide_extra">
+    <span id=item2026 class="hide_extra">
     </span>
 
 </dd>

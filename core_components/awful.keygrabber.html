@@ -143,6 +143,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -245,32 +246,36 @@
 
 <p> The transactional keybindings are keybindings that start with a normal
  keybindings, but only end when a (mod)key is released. In the classic
- &ldquo;Alt+Tab&rdquo; transaction, first pressing &ldquo;Alt+Tab&rdquo; will display a popup listing
- all windows (clients). This popup will only disappear when &ldquo;Alt&rdquo; is released.</p>
+ "Alt+Tab" transaction, first pressing "Alt+Tab" will display a popup listing
+ all windows (clients). This popup will only disappear when "Alt" is released.</p>
+
+
+
+
+
 
 <pre>
 awful.keygrabber {
     keybindings = {
         awful.key {
-            modifiers = {<span class="string">'Mod1'</span>},
-            key       = <span class="string">'Tab'</span>,
+            modifiers = {<span class="string">"Mod1"</span>},
+            key       = <span class="string">"Tab"</span>,
             on_press  = awful.client.focus.history.select_previous
         },
         awful.key {
-            modifiers = {<span class="string">'Mod1'</span>, <span class="string">'Shift'</span>},
-            key       = <span class="string">'Tab'</span>,
+            modifiers = {<span class="string">"Mod1"</span>, <span class="string">"Shift"</span>},
+            key       = <span class="string">"Tab"</span>,
             on_press  = awful.client.focus.history.select_next
         },
     },
     <span class="comment">-- Note that it is using the key name and not the modifier name.
-</span>    stop_key           = <span class="string">'Mod1'</span>,
-    stop_event         = <span class="string">'release'</span>,
+</span>    stop_key           = <span class="string">"Mod1"</span>,
+    stop_event         = <span class="string">"release"</span>,
     start_callback     = awful.client.focus.history.disable_tracking,
     stop_callback      = awful.client.focus.history.enable_tracking,
     export_keybindings = <span class="keyword">true</span>,
 }
 </pre>
-
 
 <p> In that example, because <a href="../core_components/awful.keygrabber.html#export_keybindings">export_keybindings</a> is set to <code>true</code>, pressing
  <code>alt+tab</code> or <code>alt+shift+tab</code> will start the transaction even if the
@@ -280,36 +285,41 @@ awful.keygrabber {
 
 <p> VI-like modal keybindings are trigerred by a key, like <code>Escape</code>, followed by
  either a number, an adjective (or noun) and closed by a verb. For example
- <code>&lt;Escape&gt;+2+t+f</code> could mean &ldquo;focus (f) the second (2) tag (t)&rdquo;.
- <code>&lt;Escape&gt;+2+h+t+f</code> would &ldquo;focus (f) two (2) tags (t) to the right (h)&rdquo;.</p>
+ <code>&lt;Escape&gt;+2+t+f</code> could mean "focus (f) the second (2) tag (t)".
+ <code>&lt;Escape&gt;+2+h+t+f</code> would "focus (f) two (2) tags (t) to the right (h)".</p>
 
 <p> Here is a basic implementation of such a system. Note that the action
  functions themselves are not implemented to keep the example size and
  complexity to a minimum. The implementation is just if/elseif of all action
  and the code can be found in the normal <a href="../sample files/rc.lua.html#">rc.lua</a> keybindings section:</p>
 
+
+
+
+
+
 <pre>
 <span class="keyword">local</span> map, actions = {
     verbs = {
-        m = <span class="string">'move'</span> , f = <span class="string">'focus'</span> , d = <span class="string">'delete'</span> , a = <span class="string">'append'</span>,
-        w = <span class="string">'swap'</span> , p = <span class="string">'print'</span> , n = <span class="string">'new'</span>    ,
+        m = <span class="string">"move"</span> , f = <span class="string">"focus"</span> , d = <span class="string">"delete"</span> , a = <span class="string">"append"</span>,
+        w = <span class="string">"swap"</span> , p = <span class="string">"print"</span> , n = <span class="string">"new"</span>    ,
     },
-    adjectives = { h = <span class="string">'left'</span>  , j = <span class="string">'down'</span> , k = <span class="string">'up'</span>    , l = <span class="string">'right'</span> , },
-    nouns      = { c = <span class="string">'client'</span>, t = <span class="string">'tag'</span>  , s = <span class="string">'screen'</span>, y = <span class="string">'layout'</span>, },
+    adjectives = { h = <span class="string">"left"</span>  , j = <span class="string">"down"</span> , k = <span class="string">"up"</span>    , l = <span class="string">"right"</span> , },
+    nouns      = { c = <span class="string">"client"</span>, t = <span class="string">"tag"</span>  , s = <span class="string">"screen"</span>, y = <span class="string">"layout"</span>, },
 }, {}
 
-<span class="keyword">function</span> actions.client(action, adj) <span class="global">print</span>(<span class="string">'IN CLIENT!'</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
-</span><span class="keyword">function</span> actions.tag   (action, adj) <span class="global">print</span>(<span class="string">'IN TAG!'</span>   ) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
-</span><span class="keyword">function</span> actions.screen(action, adj) <span class="global">print</span>(<span class="string">'IN SCREEN!'</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
-</span><span class="keyword">function</span> actions.layout(action, adj) <span class="global">print</span>(<span class="string">'IN LAYOUT!'</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
+<span class="keyword">function</span> actions.client(action, adj) <span class="global">print</span>(<span class="string">"IN CLIENT!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
+</span><span class="keyword">function</span> actions.tag   (action, adj) <span class="global">print</span>(<span class="string">"IN TAG!"</span>   ) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
+</span><span class="keyword">function</span> actions.screen(action, adj) <span class="global">print</span>(<span class="string">"IN SCREEN!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
+</span><span class="keyword">function</span> actions.layout(action, adj) <span class="global">print</span>(<span class="string">"IN LAYOUT!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
 </span>
 <span class="keyword">local</span> <span class="keyword">function</span> parse(_, stop_key, _, sequence)
-    <span class="keyword">local</span> parsed, count = { verbs = <span class="string">''</span>, adjectives = <span class="string">''</span>, nouns = <span class="string">''</span>, }, <span class="string">''</span>
+    <span class="keyword">local</span> parsed, count = { verbs = <span class="string">""</span>, adjectives = <span class="string">""</span>, nouns = <span class="string">""</span>, }, <span class="string">""</span>
     sequence = sequence..stop_key
 
     <span class="keyword">for</span> i=<span class="number">1</span>, #sequence <span class="keyword">do</span>
         <span class="keyword">local</span> char = sequence:sub(i,i)
-        <span class="keyword">if</span> char &gt;= <span class="string">'0'</span> <span class="keyword">and</span> char &lt;= <span class="string">'9'</span> <span class="keyword">then</span>
+        <span class="keyword">if</span> char &gt;= <span class="string">"0"</span> <span class="keyword">and</span> char &lt;= <span class="string">"9"</span> <span class="keyword">then</span>
             count = count .. char
         <span class="keyword">else</span>
             <span class="keyword">for</span> kind <span class="keyword">in</span> <span class="global">pairs</span>(parsed) <span class="keyword">do</span>
@@ -318,8 +328,8 @@ awful.keygrabber {
         <span class="keyword">end</span>
     <span class="keyword">end</span>
 
-    <span class="keyword">if</span> parsed.nouns == <span class="string">''</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
-    <span class="keyword">for</span> _=<span class="number">1</span>, count == <span class="string">''</span> <span class="keyword">and</span> <span class="number">1</span> <span class="keyword">or</span> <span class="global">tonumber</span>(count) <span class="keyword">do</span>
+    <span class="keyword">if</span> parsed.nouns == <span class="string">""</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
+    <span class="keyword">for</span> _=<span class="number">1</span>, count == <span class="string">""</span> <span class="keyword">and</span> <span class="number">1</span> <span class="keyword">or</span> <span class="global">tonumber</span>(count) <span class="keyword">do</span>
         actions[parsed.nouns](parsed.verbs, parsed.adjectives)
     <span class="keyword">end</span>
 <span class="keyword">end</span>
@@ -328,17 +338,17 @@ awful.keygrabber {
     stop_callback = parse,
     stop_key   = gears.<span class="global">table</span>.keys(map.verbs),
     root_keybindings = {
-        awful.key({<span class="string">'Mod4'</span>}, <span class="string">'v'</span>)
+        awful.key({<span class="string">"Mod4"</span>}, <span class="string">"v"</span>)
     },
 }
 </pre>
 
-
 <h2> Using signals</h2>
 
 <p> When the keygrabber is running, it will emit signals on each event. The
- format is &ldquo;key_name&rdquo;..&ldquo;::&rdquo;..&ldquo;pressed_or_released&rdquo;. For example, to attach
+ format is "key<em>name".."::".."pressed</em>or_released". For example, to attach
  a callback to <code>Escape</code> being pressed, do:</p>
+
 
 <pre>
 mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span class="keyword">function</span>(self, modifiers, modset)
@@ -346,11 +356,10 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 <span class="keyword">end</span>)
 </pre>
 
-
 <p> The <code>self</code> argument is the keygrabber instance. The <code>modifiers</code> is a list of
  all the currently pressed modifiers and the <code>modset</code> is the same table, but
  with the modifiers as keys instead of value. It allow to save time by
- checking <code>if modset.Mod4 then &hellip; end</code> instead of looping into the <code>modifiers</code>
+ checking <code>if modset.Mod4 then ... end</code> instead of looping into the <code>modifiers</code>
  table or using <a href="../utility_libraries/gears.table.html#">gears.table</a>.</p>
     <div class="extra-header">
 
@@ -612,7 +621,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    A wrapper around the keygrabber to make it easier to add keybindings.</p>
+    A wrapper around the keygrabber to make it easier to add keybindings. </p>
 
 <p> This is similar to the <a href="../libraries/awful.prompt.html#">awful.prompt</a>, but without an actual widget. It can
  be used to implement custom transactions such as alt+tab or keyboard menu
@@ -625,19 +634,21 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
+
+
         <ul>
         <li><span class="parameter">stop_event</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         Release event (&ldquo;press&rdquo; or &ldquo;release&rdquo;)
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         Release event ("press" or "release")
          (<em>default</em> "press")
         </li>
         <li><span class="parameter">stop_key</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The key that has to be kept pressed.
          (<em>default</em> nil)
         </li>
         <li><span class="parameter">keybindings</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          All keybindings.
         </li>
         <li><span class="parameter">timeout</span>
@@ -654,36 +665,46 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
         <li><span class="parameter">start_callback</span>
             <span class="types"><span class="type">function</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">stop_callback</span>
             <span class="types"><span class="type">function</span></span>
+
+
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">timeout_callback</span>
             <span class="types"><span class="type">function</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">keypressed_callback</span>
             <span class="types"><span class="type">function</span></span>
+
+
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">keyreleased_callback</span>
             <span class="types"><span class="type">function</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">allowed_keys</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">nil</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
          A table with all keys that
   <strong>wont</strong> stop the keygrabber.
          (<em>default</em> nil)
         </li>
         <li><span class="parameter">root_keybindings</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The root (global) keybindings.
          (<em>optional</em>)
         </li>
@@ -711,7 +732,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <span id=item175 class="hide_extra">
+    <span id=item176 class="hide_extra">
     </span>
 
 </dd>
@@ -732,38 +753,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The signal name.
-        </li>
-        <li><span class="parameter">callback</span>
-            <span class="types"><span class="type">function</span></span>
-         The callback.
-        </li>
-    </ul>
-
-
-
-
-
-
-    <span id=item176 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "disconnect_signal"></a>
-    <strong><span class='function_modname'>awful.keygrabber.</span>disconnect_signal <span class='function_args'> <b>(</b>name, callback<b>)</b></span></strong>
-    <span class="proptype"></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Disconnect to a signal for all keygrabbers at once.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The signal name.
         </li>
         <li><span class="parameter">callback</span>
@@ -782,6 +772,37 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 </dd>
     <dt>
+    <a name = "disconnect_signal"></a>
+    <strong><span class='function_modname'>awful.keygrabber.</span>disconnect_signal <span class='function_args'> <b>(</b>name, callback<b>)</b></span></strong>
+    <span class="proptype"></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Disconnect to a signal for all keygrabbers at once.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The signal name.
+        </li>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item178 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "emit_signal"></a>
     <strong><span class='function_modname'>awful.keygrabber.</span>emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
     <span class="proptype"></span>
@@ -789,16 +810,16 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    Emit a signal on the keygrabber module itself.</p>
+    Emit a signal on the keygrabber module itself. </p>
 
-<p> Warning, usually don&rsquo;t use this directly, use
- <code>my_keygrabber:emit_signal(name, &hellip;)</code>. This function works on the whole
+<p> Warning, usually don't use this directly, use
+ <code>my_keygrabber:emit_signal(name, ...)</code>. This function works on the whole
  keygrabber module, not one of its instance.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The signal name.
         </li>
         <li><span class="parameter">...</span>
@@ -811,7 +832,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <span id=item178 class="hide_extra">
+    <span id=item179 class="hide_extra">
     </span>
 
 </dd>
@@ -844,13 +865,13 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     autostart      = <span class="keyword">true</span>,
     timeout        = <span class="number">1</span>, <span class="comment">-- second
 </span>    timeout_callback  = <span class="keyword">function</span>()
-        <span class="global">print</span>(<span class="string">'The keygrabber has expired'</span>)
+        <span class="global">print</span>(<span class="string">"The keygrabber has expired"</span>)
     <span class="keyword">end</span>,
 }</pre>
     </ul>
 
 
-    <span id=item179 class="hide_extra">
+    <span id=item180 class="hide_extra">
     </span>
 
 </dd>
@@ -862,7 +883,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    The key on which the keygrabber listen to terminate itself.</p>
+    The key on which the keygrabber listen to terminate itself. </p>
 
 <p> When this is set, the running keygrabber will quit when [one of] the stop
  key event occurs.</p>
@@ -874,6 +895,10 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
  is released.</p>
 
 <p> It can also be a table containing many keys (as values).</p>
+
+
+
+
 
 <p> Please note that modkeys are not accepted as <a href="../core_components/awful.keygrabber.html#stop_key">stop_key</a>s. You have to use
  their corresponding key names such as <code>Control_L</code>.
@@ -895,7 +920,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <span id=item180 class="hide_extra">
+    <span id=item181 class="hide_extra">
     </span>
 
 </dd>
@@ -907,14 +932,16 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    <p>The event on which the keygrabbing will be terminated.</p>
+
+<p>The event on which the keygrabbing will be terminated. </p>
 
 <p> the valid values are:</p>
 
 <ul>
-<li>&ldquo;press&rdquo; (default)</li>
-<li>&ldquo;release&rdquo;</li>
+    <li>"press" (default)</li>
+    <li>"release"</li>
 </ul>
+
 
 
 
@@ -927,7 +954,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <span id=item181 class="hide_extra">
+    <span id=item182 class="hide_extra">
     </span>
 
 </dd>
@@ -939,7 +966,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    Whether or not to execute the key press/release callbacks when keybindings are called.</p>
+    Whether or not to execute the key press/release callbacks when keybindings are called. </p>
 
 <p> When this property is set to false, the <a href="../core_components/awful.keygrabber.html#keyreleased_callback">keyreleased_callback</a> and
  <a href="../core_components/awful.keygrabber.html#keypressed_callback">keypressed_callback</a> callbacks will be executed even when the event was
@@ -959,7 +986,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <span id=item182 class="hide_extra">
+    <span id=item183 class="hide_extra">
     </span>
 
 </dd>
@@ -983,7 +1010,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <span id=item183 class="hide_extra">
+    <span id=item184 class="hide_extra">
     </span>
 
 </dd>
@@ -995,12 +1022,12 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    Export all keygrabber keybindings as root (global) keybindings.</p>
+    Export all keygrabber keybindings as root (global) keybindings. </p>
 
 <p> When this is enabled, calling all of the keygrabber object <code>keybinding</code>s will
  will create root <a href="../input_handling/awful.key.html#">awful.key</a> and will automatically starts the grabbing.</p>
 
-<p> Use this with caution. If many keygrabber or &ldquo;real&rdquo; root keybindings are set
+<p> Use this with caution. If many keygrabber or "real" root keybindings are set
  on the same key combination, they are all executed and there is almost no
  safe way to undo that. Make sure the <a href="../core_components/awful.keygrabber.html#awful.keygrabber">keygrabber</a> that use this option
  have a single instance.
@@ -1011,7 +1038,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
 
 
-    <span id=item184 class="hide_extra">
+    <span id=item185 class="hide_extra">
     </span>
 
 </dd>
@@ -1023,11 +1050,15 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    <p>The root (global) keybinding to start this keygrabber.</p>
+
+<p>The root (global) keybinding to start this keygrabber. </p>
 
 <p> Instead of adding an entry to <a href="../core_components/root.html#keys">root.keys</a> or <a href="../sample files/rc.lua.html#">rc.lua</a> <code>globalkeys</code> section,
  this property can be used to take care of everything. This way, it becomes
  easier to package modules using keygrabbers.</p>
+
+
+
 
 <p><strong>Usage example output</strong>:</p>
 
@@ -1036,6 +1067,9 @@ A key was pressed:  a   with    0   modifier!
 A key was pressed:  i   with    1   modifier!
 Called again!
 </code></pre>
+
+
+
 
 
 
@@ -1052,51 +1086,51 @@ Called again!
     mask_modkeys = <span class="keyword">true</span>,
     root_keybindings = {
         awful.key {
-            modifiers = {<span class="string">'Mod4'</span>},
-            key       = <span class="string">'i'</span>,
+            modifiers = {<span class="string">"Mod4"</span>},
+            key       = <span class="string">"i"</span>,
             on_press  = <span class="keyword">function</span>(self)
-                <span class="global">print</span>(<span class="string">'Is now active!'</span>, self)
+                <span class="global">print</span>(<span class="string">"Is now active!"</span>, self)
             <span class="keyword">end</span>
         },
     },
     keybindings = {
         awful.key {
-            modifiers = {<span class="string">'Mod4'</span>, <span class="string">'Shift'</span>},
-            key       = <span class="string">'i'</span>,
+            modifiers = {<span class="string">"Mod4"</span>, <span class="string">"Shift"</span>},
+            key       = <span class="string">"i"</span>,
             on_press  = <span class="keyword">function</span>(self)
-                <span class="global">print</span>(<span class="string">'Called again!'</span>)
+                <span class="global">print</span>(<span class="string">"Called again!"</span>)
                 self:stop()
             <span class="keyword">end</span>
         },
     },
     keypressed_callback  = <span class="keyword">function</span>(_, modifiers, key)
-        <span class="global">print</span>(<span class="string">'A key was pressed:'</span>, key, <span class="string">'with'</span>, #modifiers, <span class="string">'modifier!'</span>)
+        <span class="global">print</span>(<span class="string">"A key was pressed:"</span>, key, <span class="string">"with"</span>, #modifiers, <span class="string">"modifier!"</span>)
     <span class="keyword">end</span>,
 }
 
 <span class="comment">-- The following will **NOT** trigger the keygrabbing because it isn't exported
 </span><span class="comment">-- to the root (global) keys. Adding <a href="../core_components/awful.keygrabber.html#export_keybindings">export_keybindings</a> would solve that
-</span>root._execute_keybinding({<span class="string">'Mod4'</span>, <span class="string">'Shift'</span>}, <span class="string">'i'</span>)
+</span>root._execute_keybinding({<span class="string">"Mod4"</span>, <span class="string">"Shift"</span>}, <span class="string">"i"</span>)
 <span class="global">assert</span>(#keybinding_works == <span class="number">0</span>)
 
 <span class="comment">-- But this will start the keygrabber because it is part of the root_keybindings
-</span>root._execute_keybinding({<span class="string">'Mod4'</span>}, <span class="string">'i'</span>)
+</span>root._execute_keybinding({<span class="string">"Mod4"</span>}, <span class="string">"i"</span>)
 
 <span class="comment">-- Note that that keygrabber is running, all callbacks should work:
-</span>root.fake_input(<span class="string">'key_press'</span>  , <span class="string">'a'</span>)
-root.fake_input(<span class="string">'key_release'</span>  , <span class="string">'a'</span>)
+</span>root.fake_input(<span class="string">"key_press"</span>  , <span class="string">"a"</span>)
+root.fake_input(<span class="string">"key_release"</span>  , <span class="string">"a"</span>)
 
 <span class="comment">-- Calling the root keybindings now wont work because they are not part of
 </span><span class="comment">-- the keygrabber internal (own) keybindings, so <a href="../core_components/awful.keygrabber.html#keypressed_callback">keypressed_callback</a> will
 </span><span class="comment">-- be called.
-</span>root._execute_keybinding({<span class="string">'Mod4'</span>}, <span class="string">'i'</span>)
+</span>root._execute_keybinding({<span class="string">"Mod4"</span>}, <span class="string">"i"</span>)
 
 <span class="comment">-- Now the keygrabber own keybindings will work
-</span>root._execute_keybinding({<span class="string">'Mod4'</span>, <span class="string">'Shift'</span>}, <span class="string">'i'</span>)</pre>
+</span>root._execute_keybinding({<span class="string">"Mod4"</span>, <span class="string">"Shift"</span>}, <span class="string">"i"</span>)</pre>
     </ul>
 
 
-    <span id=item185 class="hide_extra">
+    <span id=item186 class="hide_extra">
     </span>
 
 </dd>
@@ -1108,7 +1142,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    The keybindings associated with this keygrabber.</p>
+    The keybindings associated with this keygrabber. </p>
 
 <p> This property contains a table of <a href="../input_handling/awful.key.html#">awful.key</a> objects.
 
@@ -1124,7 +1158,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <span id=item186 class="hide_extra">
+    <span id=item187 class="hide_extra">
     </span>
 
 </dd>
@@ -1136,7 +1170,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    If any key is pressed that is not in this list, the keygrabber is stopped.</p>
+    If any key is pressed that is not in this list, the keygrabber is stopped. </p>
 
 <p> When defined, this property allows to define an implicit way to release the
  keygrabber. It helps save some boilerplate code in the handler callbacks.</p>
@@ -1148,7 +1182,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">allowed_keys</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">nil</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
          The list of keys.
          (<em>default</em> nil)
         </li>
@@ -1161,12 +1195,12 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <ul>
         <pre class="example">awful.keygrabber {
     autostart      = <span class="keyword">true</span>,
-    allowed_keys   = {<span class="string">'a'</span>, <span class="string">'w'</span>, <span class="string">'e'</span>, <span class="string">'s'</span>, <span class="string">'o'</span>, <span class="string">'m'</span>, <span class="string">'e'</span>},
+    allowed_keys   = {<span class="string">"a"</span>, <span class="string">"w"</span>, <span class="string">"e"</span>, <span class="string">"s"</span>, <span class="string">"o"</span>, <span class="string">"m"</span>, <span class="string">"e"</span>},
 }</pre>
     </ul>
 
 
-    <span id=item187 class="hide_extra">
+    <span id=item188 class="hide_extra">
     </span>
 
 </dd>
@@ -1178,7 +1212,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    The sequence of keys recorded since the start of the keygrabber.</p>
+    The sequence of keys recorded since the start of the keygrabber. </p>
 
 <p> In this example, the <a href="../core_components/awful.keygrabber.html#stop_callback">stop_callback</a> is used to retrieve the final key
  sequence.</p>
@@ -1194,15 +1228,15 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <ul>
         <pre class="example">awful.keygrabber {
     autostart      = <span class="keyword">true</span>,
-    stop_key       = <span class="string">'Return'</span>,
+    stop_key       = <span class="string">"Return"</span>,
     stop_callback  = <span class="keyword">function</span>(_, _, _, sequence)
-        naughty.notification {message=<span class="string">'The keys were:'</span>..sequence}
+        naughty.notification {message=<span class="string">"The keys were:"</span>..sequence}
     <span class="keyword">end</span>,
 }</pre>
     </ul>
 
 
-    <span id=item188 class="hide_extra">
+    <span id=item189 class="hide_extra">
     </span>
 
 </dd>
@@ -1219,7 +1253,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    Start the keygrabber.</p>
+    Start the keygrabber. </p>
 
 <p> Note that only a single keygrabber can be started at any one time. If another
  keygrabber (or this one) is currently running. This method returns false.
@@ -1236,13 +1270,13 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
      <br />
-     <center id=button189>
-     <a class="show_more_button" onclick="show_extra('189')">
+     <center id=button190>
+     <a class="show_more_button" onclick="show_extra('190')">
       Click to display more
      </a>
      </center>
 
-    <span id=item189 class="hide_extra">
+    <span id=item190 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../core_components/awful.keygrabber.html#started">started</a></span>  </li>
@@ -1260,7 +1294,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    Stop the keygrabber.</p>
+    Stop the keygrabber. </p>
 
 <p> Also stops any <a href="../core_components/awful.keygrabber.html#timeout">timeout</a>.
 
@@ -1270,13 +1304,13 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
      <br />
-     <center id=button190>
-     <a class="show_more_button" onclick="show_extra('190')">
+     <center id=button191>
+     <a class="show_more_button" onclick="show_extra('191')">
       Click to display more
      </a>
      </center>
 
-    <span id=item190 class="hide_extra">
+    <span id=item191 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../core_components/awful.keygrabber.html#stopped">stopped</a></span>  </li>
@@ -1293,7 +1327,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    Add a keybinding to this keygrabber.</p>
+    Add a keybinding to this keygrabber. </p>
 
 <p> Those keybindings will automatically start the keygrabbing when hit.
 
@@ -1310,7 +1344,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <span id=item191 class="hide_extra">
+    <span id=item192 class="hide_extra">
     </span>
 
 </dd>
@@ -1328,7 +1362,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">...</span>
@@ -1343,7 +1377,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <span id=item192 class="hide_extra">
+    <span id=item193 class="hide_extra">
     </span>
 
 </dd>
@@ -1361,46 +1395,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The name of the signal.
-        </li>
-        <li><span class="parameter">func</span>
-            <span class="types"><span class="type">function</span></span>
-         The callback to call when the signal is emitted.
-        </li>
-    </ul>
-
-
-
-
-
-
-    <span id=item193 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "weak_connect_signal"></a>
-    <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="proptype"></span>
-    <span class="baseclass" >
-    &middot;&nbsp;Inherited from gears.object
-    </span>
-    </dt>
-    <dd>
-    Connect to a signal weakly.</p>
-
-<p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.</p>
-
-<p> <strong>Warning:</strong>
- Only use this function if you really, really, really know what you
- are doing.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1415,6 +1410,45 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
     <span id=item194 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "weak_connect_signal"></a>
+    <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
+    <span class="proptype"></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
+    </dt>
+    <dd>
+    Connect to a signal weakly. </p>
+
+<p> This allows the callback function to be garbage collected and
+ automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
+ Only use this function if you really, really, really know what you
+ are doing.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item195 class="hide_extra">
     </span>
 
 </dd>
@@ -1437,7 +1471,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <span id=item195 class="hide_extra">
+    <span id=item196 class="hide_extra">
     </span>
 
 </dd>
@@ -1456,7 +1490,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <span id=item196 class="hide_extra">
+    <span id=item197 class="hide_extra">
     </span>
 
 </dd>
@@ -1475,7 +1509,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <span id=item197 class="hide_extra">
+    <span id=item198 class="hide_extra">
     </span>
 
 </dd>
@@ -1490,7 +1524,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    Stop grabbing the keyboard for the provided callback.</p>
+    Stop grabbing the keyboard for the provided callback. </p>
 
 <p> When no callback is given, the last grabber gets removed (last one added to
  the stack).
@@ -1508,7 +1542,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <span id=item198 class="hide_extra">
+    <span id=item199 class="hide_extra">
     </span>
 
 </dd>
@@ -1519,7 +1553,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    A lower level API to interact with the keygrabber directly.</p>
+    A lower level API to interact with the keygrabber directly. </p>
 
 <p> Grab keyboard input and read pressed keys, calling the least callback
  function from the stack at each keypress, until the stack is empty.</p>
@@ -1530,11 +1564,10 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 <p> The callback function receives three arguments:</p>
 
 <ul>
-<li>a table containing modifiers keys</li>
-<li>a string with the pressed key</li>
-<li>a string with either &ldquo;press&rdquo; or &ldquo;release&rdquo; to indicate the event type.</li>
+    <li>a table containing modifiers keys</li>
+    <li>a string with the pressed key</li>
+    <li>a string with either "press" or "release" to indicate the event type.</li>
 </ul>
-
 
 <p> Here is the content of the modifier table:</p>
 
@@ -1590,7 +1623,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </ul>
 
 
-    <span id=item199 class="hide_extra">
+    <span id=item200 class="hide_extra">
     </span>
 
 </dd>
@@ -1620,7 +1653,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <span id=item200 class="hide_extra">
+    <span id=item201 class="hide_extra">
     </span>
 
 </dd>
@@ -1636,15 +1669,15 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current transaction object.
         </li>
         <li><span class="parameter">stop_key</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The key(s) that stop the keygrabbing (if any)
         </li>
         <li><span class="parameter">stop_mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers key (if any)
         </li>
         <li><span class="parameter">sequence</span>
@@ -1669,7 +1702,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </ul>
 
 
-    <span id=item201 class="hide_extra">
+    <span id=item202 class="hide_extra">
     </span>
 
 </dd>
@@ -1680,7 +1713,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    The function called when the keygrabber stops because of a <a href="../core_components/awful.keygrabber.html#timeout">timeout</a>.</p>
+    The function called when the keygrabber stops because of a <a href="../core_components/awful.keygrabber.html#timeout">timeout</a>. </p>
 
 <p> Note that the <a href="../core_components/awful.keygrabber.html#stop_callback">stop_callback</a> is also called when the keygrabbers timeout.
 
@@ -1694,7 +1727,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <span id=item202 class="hide_extra">
+    <span id=item203 class="hide_extra">
     </span>
 
 </dd>
@@ -1711,20 +1744,20 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current transaction object.
         </li>
         <li><span class="parameter">mod</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The current modifiers (like &ldquo;Control&rdquo; or &ldquo;Shift&rdquo;).
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         The current modifiers (like "Control" or "Shift").
         </li>
         <li><span class="parameter">key</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The key name.
         </li>
         <li><span class="parameter">event</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The event (&ldquo;press&rdquo; or &ldquo;release&rdquo;).
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The event ("press" or "release").
         </li>
     </ul>
 
@@ -1739,7 +1772,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </ul>
 
 
-    <span id=item203 class="hide_extra">
+    <span id=item204 class="hide_extra">
     </span>
 
 </dd>
@@ -1756,20 +1789,20 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current transaction object.
         </li>
         <li><span class="parameter">mod</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The current modifiers (like &ldquo;Control&rdquo; or &ldquo;Shift&rdquo;).
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         The current modifiers (like "Control" or "Shift").
         </li>
         <li><span class="parameter">key</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The key name.
         </li>
         <li><span class="parameter">event</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The event (&ldquo;press&rdquo; or &ldquo;release&rdquo;)
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The event ("press" or "release")
         </li>
     </ul>
 
@@ -1784,7 +1817,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </ul>
 
 
-    <span id=item204 class="hide_extra">
+    <span id=item205 class="hide_extra">
     </span>
 
 </dd>
@@ -1801,7 +1834,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    The current (running) instance of this keygrabber.</p>
+    The current (running) instance of this keygrabber. </p>
 
 <p> The keygrabber instance is created when the keygrabber starts. It is an object
  mirroring this keygrabber object, but where extra properties can be added. It
@@ -1814,13 +1847,13 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
      <br />
-     <center id=button205>
-     <a class="show_more_button" onclick="show_extra('205')">
+     <center id=button206>
+     <a class="show_more_button" onclick="show_extra('206')">
       Click to display more
      </a>
      </center>
 
-    <span id=item205 class="hide_extra">
+    <span id=item206 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../core_components/awful.keygrabber.html#property::current_instance">property::current_instance</a></span>  </li>
@@ -1844,7 +1877,7 @@ root.fake_input(<span class="string">'key_release'</span>  , <span class="string
 
 
 
-    <span id=item206 class="hide_extra">
+    <span id=item207 class="hide_extra">
     </span>
 
 </dd>

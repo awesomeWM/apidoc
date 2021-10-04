@@ -142,6 +142,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -225,7 +226,10 @@
 
 <h1>Module: <code>gears.shape</code></h1>
 <p>Module dedicated to gather common shape painters.</p>
-<p><p> It add the concept of &ldquo;shape&rdquo; to Awesome. A shape can be applied to a
+<p>
+
+
+<p> It add the concept of "shape" to Awesome. A shape can be applied to a
  background, a margin, a mask or a drawable shape bounding.</p>
 
 <p> The functions exposed by this module always take a cairo context as first
@@ -241,8 +245,9 @@
  in another function calling <code>cr:rotate()</code> (or any other transformation
  matrix).</p>
 
-<p> To specialize a shape where the API doesn&rsquo;t allows extra arguments to be
+<p> To specialize a shape where the API doesn't allows extra arguments to be
  passed, it is possible to wrap the shape function like:</p>
+
 
 <pre>
 <span class="keyword">local</span> new_shape = <span class="keyword">function</span>(cr, width, height)
@@ -250,20 +255,19 @@
 <span class="keyword">end</span>
 </pre>
 
-
 <p> Many elements can be shaped. This include:</p>
 
 <ul>
-<li><a href="../core_components/client.html#">client</a>s (see <a href="../libraries/gears.surface.html#apply_shape_bounding">gears.surface.apply_shape_bounding</a>)</li>
-<li><a href="../popups_and_bars/wibox.html#">wibox</a>es (see <a href="../popups_and_bars/wibox.html#shape">wibox.shape</a>)</li>
-<li>All widgets (see <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>)</li>
-<li>The progressbar (see <a href="../widgets/wibox.widget.progressbar.html#bar_shape">wibox.widget.progressbar.bar_shape</a>)</li>
-<li>The graph (see <a href="../widgets/wibox.widget.graph.html#step_shape">wibox.widget.graph.step_shape</a>)</li>
-<li>The checkboxes (see <a href="../widgets/wibox.widget.checkbox.html#check_shape">wibox.widget.checkbox.check_shape</a>)</li>
-<li>Images (see <a href="../widgets/wibox.widget.imagebox.html#clip_shape">wibox.widget.imagebox.clip_shape</a>)</li>
-<li>The taglist tags (see <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a>)</li>
-<li>The tasklist clients (see <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a>)</li>
-<li>The tooltips (see <a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a>)</li>
+    <li><a href="../core_components/client.html#">client</a>s (see <a href="../libraries/gears.surface.html#apply_shape_bounding">gears.surface.apply_shape_bounding</a>)</li>
+    <li><a href="../popups_and_bars/wibox.html#">wibox</a>es (see <a href="../popups_and_bars/wibox.html#shape">wibox.shape</a>)</li>
+    <li>All widgets (see <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>)</li>
+    <li>The progressbar (see <a href="../widgets/wibox.widget.progressbar.html#bar_shape">wibox.widget.progressbar.bar_shape</a>)</li>
+    <li>The graph (see <a href="../widgets/wibox.widget.graph.html#step_shape">wibox.widget.graph.step_shape</a>)</li>
+    <li>The checkboxes (see <a href="../widgets/wibox.widget.checkbox.html#check_shape">wibox.widget.checkbox.check_shape</a>)</li>
+    <li>Images (see <a href="../widgets/wibox.widget.imagebox.html#clip_shape">wibox.widget.imagebox.clip_shape</a>)</li>
+    <li>The taglist tags (see <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a>)</li>
+    <li>The tasklist clients (see <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a>)</li>
+    <li>The tooltips (see <a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a>)</li>
 </ul>
 </p>
     <div class="extra-header">
@@ -294,7 +298,7 @@
         <a href="#partial_squircle"><span class='function_modname'>gears.shape.</span>partial_squircle <span class='function_args'> <b>(</b>cr, width, height, tl, tr, br, bl, rate, delta<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">Add a squircle shape with only some of the corner are &ldquo;circled&rdquo; to the current path.</td>
+      <td colspan="2" class="summary">Add a squircle shape with only some of the corner are "circled" to the current path.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -461,11 +465,13 @@
     </span>
     </dt>
     <dd>
-    Add a squircle shape with only some of the corner are &ldquo;circled&rdquo; to the current path.
+    Add a squircle shape with only some of the corner are "circled" to the current path.
  The squircle is not exactly as the definition.
- It will expand to the shape&rsquo;s width and height, kinda like an ellipse</p>
+ It will expand to the shape's width and height, kinda like an ellipse</p>
 
-<p><img src="../images/AUTOGEN_gears_shape_partial_squircle.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_partial_squircle.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -498,11 +504,11 @@
         </li>
         <li><span class="parameter">rate</span>
             <span class="types"><span class="type">number</span></span>
-         The &ldquo;squareness&rdquo; of the squircle, should be greater than 1
+         The "squareness" of the squircle, should be greater than 1
         </li>
         <li><span class="parameter">delta</span>
             <span class="types"><span class="type">number</span></span>
-         The &ldquo;smoothness&rdquo; of the shape, delta must be greater than 0.01 and will be reset to 0.01 if not
+         The "smoothness" of the shape, delta must be greater than 0.01 and will be reset to 0.01 if not
         </li>
     </ul>
 
@@ -517,7 +523,7 @@ shape.partial_squircle(cr, <span class="number">70</span>, <span class="number">
     </ul>
 
 
-    <span id=item2178 class="hide_extra">
+    <span id=item2206 class="hide_extra">
     </span>
 
 </dd>
@@ -532,7 +538,9 @@ shape.partial_squircle(cr, <span class="number">70</span>, <span class="number">
     Add a squircle shape to the current path.
  This will behave the same as <a href="../theme_related_libraries/gears.shape.html#partial_squircle">partial_squircle</a></p>
 
-<p><img src="../images/AUTOGEN_gears_shape_squircle.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_squircle.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -549,11 +557,11 @@ shape.partial_squircle(cr, <span class="number">70</span>, <span class="number">
         </li>
         <li><span class="parameter">rate</span>
             <span class="types"><span class="type">number</span></span>
-         The &ldquo;squareness&rdquo; of the squircle, should be greater than 1
+         The "squareness" of the squircle, should be greater than 1
         </li>
         <li><span class="parameter">delta</span>
             <span class="types"><span class="type">number</span></span>
-         The &ldquo;smoothness&rdquo; of the shape, delta must be greater than 0.01 and will be reset to 0.01 if not
+         The "smoothness" of the shape, delta must be greater than 0.01 and will be reset to 0.01 if not
         </li>
     </ul>
 
@@ -568,7 +576,7 @@ shape.squircle(cr, <span class="number">70</span>, <span class="number">70</span
     </ul>
 
 
-    <span id=item2179 class="hide_extra">
+    <span id=item2207 class="hide_extra">
     </span>
 
 </dd>
@@ -583,7 +591,9 @@ shape.squircle(cr, <span class="number">70</span>, <span class="number">70</span
     Add a star shape to the current path.
  The star size will be the minimum of the given width and weight</p>
 
-<p><img src="../images/AUTOGEN_gears_shape_star.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_star.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -617,7 +627,7 @@ shape.transform(shape.star) : translate(<span class="number">70</span>/<span cla
     </ul>
 
 
-    <span id=item2180 class="hide_extra">
+    <span id=item2208 class="hide_extra">
     </span>
 
 </dd>
@@ -632,7 +642,9 @@ shape.transform(shape.star) : translate(<span class="number">70</span>/<span cla
     Add a rounded rectangle to the current path.
  Note: If the radius is bigger than either half side, it will be reduced.</p>
 
-<p><img src="../images/AUTOGEN_gears_shape_rounded_rect.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_rounded_rect.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -664,7 +676,7 @@ shape.transform(shape.rounded_rect) : translate(<span class="number">0</span>,<s
     </ul>
 
 
-    <span id=item2181 class="hide_extra">
+    <span id=item2209 class="hide_extra">
     </span>
 
 </dd>
@@ -676,9 +688,11 @@ shape.transform(shape.rounded_rect) : translate(<span class="number">0</span>,<s
     </span>
     </dt>
     <dd>
-    Add a rectangle delimited by 2 180 degree arcs to the path.</p>
+    Add a rectangle delimited by 2 180 degree arcs to the path. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_rounded_bar.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_rounded_bar.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -704,7 +718,7 @@ shape.rounded_bar(cr, <span class="number">70</span>, <span class="number">20</s
     </ul>
 
 
-    <span id=item2182 class="hide_extra">
+    <span id=item2210 class="hide_extra">
     </span>
 
 </dd>
@@ -716,9 +730,11 @@ shape.rounded_bar(cr, <span class="number">70</span>, <span class="number">20</s
     </span>
     </dt>
     <dd>
-    A rounded rect with only some of the corners rounded.</p>
+    A rounded rect with only some of the corners rounded. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_partially_rounded_rect.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_partially_rounded_rect.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -766,7 +782,7 @@ shape.partially_rounded_rect(cr, <span class="number">70</span>, <span class="nu
     </ul>
 
 
-    <span id=item2183 class="hide_extra">
+    <span id=item2211 class="hide_extra">
     </span>
 
 </dd>
@@ -778,9 +794,11 @@ shape.partially_rounded_rect(cr, <span class="number">70</span>, <span class="nu
     </span>
     </dt>
     <dd>
-    A rounded rectangle with a triangle at the top.</p>
+    A rounded rectangle with a triangle at the top. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_infobubble.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_infobubble.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -825,7 +843,7 @@ shape.transform(shape.infobubble)
     </ul>
 
 
-    <span id=item2184 class="hide_extra">
+    <span id=item2212 class="hide_extra">
     </span>
 
 </dd>
@@ -837,9 +855,11 @@ shape.transform(shape.infobubble)
     </span>
     </dt>
     <dd>
-    A rectangle terminated by an arrow.</p>
+    A rectangle terminated by an arrow. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_rectangular_tag.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_rectangular_tag.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -872,7 +892,7 @@ shape.transform(shape.rectangular_tag) : translate(<span class="number">0</span>
     </ul>
 
 
-    <span id=item2185 class="hide_extra">
+    <span id=item2213 class="hide_extra">
     </span>
 
 </dd>
@@ -884,9 +904,11 @@ shape.transform(shape.rectangular_tag) : translate(<span class="number">0</span>
     </span>
     </dt>
     <dd>
-    A simple arrow shape.</p>
+    A simple arrow shape. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_arrow.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_arrow.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -929,7 +951,7 @@ shape.transform(shape.arrow) : rotate_at(<span class="number">35</span>,<span cl
     </ul>
 
 
-    <span id=item2186 class="hide_extra">
+    <span id=item2214 class="hide_extra">
     </span>
 
 </dd>
@@ -941,9 +963,11 @@ shape.transform(shape.arrow) : rotate_at(<span class="number">35</span>,<span cl
     </span>
     </dt>
     <dd>
-    A squeezed hexagon filling the rectangle.</p>
+    A squeezed hexagon filling the rectangle. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_hexagon.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_hexagon.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -971,7 +995,7 @@ shape.transform(shape.hexagon) : rotate_at(<span class="number">35</span>,<span 
     </ul>
 
 
-    <span id=item2187 class="hide_extra">
+    <span id=item2215 class="hide_extra">
     </span>
 
 </dd>
@@ -983,9 +1007,11 @@ shape.transform(shape.hexagon) : rotate_at(<span class="number">35</span>,<span 
     </span>
     </dt>
     <dd>
-    Double arrow popularized by the vim-powerline module.</p>
+    Double arrow popularized by the vim-powerline module. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_powerline.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_powerline.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1018,7 +1044,7 @@ shape.transform(shape.powerline) : translate(<span class="number">0</span>, <spa
     </ul>
 
 
-    <span id=item2188 class="hide_extra">
+    <span id=item2216 class="hide_extra">
     </span>
 
 </dd>
@@ -1030,9 +1056,11 @@ shape.transform(shape.powerline) : translate(<span class="number">0</span>, <spa
     </span>
     </dt>
     <dd>
-    An isosceles triangle.</p>
+    An isosceles triangle. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_isosceles_triangle.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_isosceles_triangle.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1060,7 +1088,7 @@ shape.transform(shape.isosceles_triangle) : rotate_at(<span class="number">35</s
     </ul>
 
 
-    <span id=item2189 class="hide_extra">
+    <span id=item2217 class="hide_extra">
     </span>
 
 </dd>
@@ -1072,9 +1100,11 @@ shape.transform(shape.isosceles_triangle) : rotate_at(<span class="number">35</s
     </span>
     </dt>
     <dd>
-    A cross (<strong>+</strong>) symbol.</p>
+    A cross (<strong>+</strong>) symbol. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_cross.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_cross.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1107,7 +1137,7 @@ shape.transform(shape.cross) : scale(<span class="number">0.5</span>, <span clas
     </ul>
 
 
-    <span id=item2190 class="hide_extra">
+    <span id=item2218 class="hide_extra">
     </span>
 
 </dd>
@@ -1119,9 +1149,11 @@ shape.transform(shape.cross) : scale(<span class="number">0.5</span>, <span clas
     </span>
     </dt>
     <dd>
-    A similar shape to the <a href="../theme_related_libraries/gears.shape.html#rounded_rect">rounded_rect</a>, but with sharp corners.</p>
+    A similar shape to the <a href="../theme_related_libraries/gears.shape.html#rounded_rect">rounded_rect</a>, but with sharp corners. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_octogon.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_octogon.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1139,6 +1171,8 @@ shape.transform(shape.cross) : scale(<span class="number">0.5</span>, <span clas
         <li><span class="parameter">corner_radius</span>
             <span class="types"><span class="type">number</span></span>
 
+
+
         </li>
     </ul>
 
@@ -1153,7 +1187,7 @@ shape.transform(shape.octogon) : translate(<span class="number">0</span>, <span 
     </ul>
 
 
-    <span id=item2191 class="hide_extra">
+    <span id=item2219 class="hide_extra">
     </span>
 
 </dd>
@@ -1165,9 +1199,11 @@ shape.transform(shape.octogon) : translate(<span class="number">0</span>, <span 
     </span>
     </dt>
     <dd>
-    A circle shape.</p>
+    A circle shape. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_circle.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_circle.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1200,7 +1236,7 @@ shape.transform(shape.circle) : scale(<span class="number">0.5</span>, <span cla
     </ul>
 
 
-    <span id=item2192 class="hide_extra">
+    <span id=item2220 class="hide_extra">
     </span>
 
 </dd>
@@ -1212,9 +1248,11 @@ shape.transform(shape.circle) : scale(<span class="number">0.5</span>, <span cla
     </span>
     </dt>
     <dd>
-    A simple rectangle.</p>
+    A simple rectangle. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_rectangle.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_rectangle.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1242,7 +1280,7 @@ shape.transform(shape.rectangle) : scale(<span class="number">0.5</span>, <span 
     </ul>
 
 
-    <span id=item2193 class="hide_extra">
+    <span id=item2221 class="hide_extra">
     </span>
 
 </dd>
@@ -1255,9 +1293,11 @@ shape.transform(shape.rectangle) : scale(<span class="number">0.5</span>, <span 
     </dt>
     <dd>
     A diagonal parallelogram with the bottom left corner at x=0 and top right
- at x=width.</p>
+ at x=width. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_parallelogram.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_parallelogram.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1290,7 +1330,7 @@ shape.transform(shape.parallelogram) : scale(<span class="number">0.5</span>, <s
     </ul>
 
 
-    <span id=item2194 class="hide_extra">
+    <span id=item2222 class="hide_extra">
     </span>
 
 </dd>
@@ -1302,9 +1342,11 @@ shape.transform(shape.parallelogram) : scale(<span class="number">0.5</span>, <s
     </span>
     </dt>
     <dd>
-    A losange.</p>
+    A losange. </p>
 
-<p><img src="../images/AUTOGEN_gears_shape_losange.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_losange.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1332,7 +1374,7 @@ shape.transform(shape.losange) : scale(<span class="number">0.5</span>, <span cl
     </ul>
 
 
-    <span id=item2195 class="hide_extra">
+    <span id=item2223 class="hide_extra">
     </span>
 
 </dd>
@@ -1344,11 +1386,13 @@ shape.transform(shape.losange) : scale(<span class="number">0.5</span>, <span cl
     </span>
     </dt>
     <dd>
-    A pie.</p>
+    A pie. </p>
 
 <p> The pie center is the center of the area.</p>
 
-<p><img src="../images/AUTOGEN_gears_shape_pie.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_pie.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1391,7 +1435,7 @@ shape.pie(cr,<span class="number">70</span>,<span class="number">70</span>, <spa
     </ul>
 
 
-    <span id=item2196 class="hide_extra">
+    <span id=item2224 class="hide_extra">
     </span>
 
 </dd>
@@ -1403,11 +1447,13 @@ shape.pie(cr,<span class="number">70</span>,<span class="number">70</span>, <spa
     </span>
     </dt>
     <dd>
-    A rounded arc.</p>
+    A rounded arc. </p>
 
 <p> The pie center is the center of the area.</p>
 
-<p><img src="../images/AUTOGEN_gears_shape_arc.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_arc.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1460,7 +1506,7 @@ shape.arc(cr,<span class="number">70</span>,<span class="number">70</span>, <spa
     </ul>
 
 
-    <span id=item2197 class="hide_extra">
+    <span id=item2225 class="hide_extra">
     </span>
 
 </dd>
@@ -1475,10 +1521,12 @@ shape.arc(cr,<span class="number">70</span>,<span class="number">70</span>, <spa
     A partial rounded bar.  How much of the rounded bar is visible depends on
  the given percentage value.</p>
 
-<p> Note that this shape is not closed and thus filling it doesn&rsquo;t make much
+<p> Note that this shape is not closed and thus filling it doesn't make much
  sense.</p>
 
-<p><img src="../images/AUTOGEN_gears_shape_radial_progress.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_gears_shape_radial_progress.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1514,7 +1562,7 @@ shape.radial_progress(cr, <span class="number">70</span>, <span class="number">2
     </ul>
 
 
-    <span id=item2198 class="hide_extra">
+    <span id=item2226 class="hide_extra">
     </span>
 
 </dd>
@@ -1551,7 +1599,7 @@ shape.radial_progress(cr, <span class="number">70</span>, <span class="number">2
     </ul>
 
 
-    <span id=item2199 class="hide_extra">
+    <span id=item2227 class="hide_extra">
     </span>
 
 </dd>

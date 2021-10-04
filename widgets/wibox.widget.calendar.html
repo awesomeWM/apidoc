@@ -138,6 +138,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -239,14 +240,16 @@
 
 <p> Cell and container styles can be overridden using the <a href="../widgets/wibox.widget.calendar.html#fn_embed">fn_embed</a> callback function
  which is called before adding the widgets to the layouts. The <a href="../widgets/wibox.widget.calendar.html#fn_embed">fn_embed</a> function
- takes three arguments, the original widget, the flag (<a href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> used to identified the widget)
- and the date (<a href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a>).
+ takes three arguments, the original widget, the flag (<a href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> used to identified the widget)
+ and the date (<a href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a>).
  It returns another widget, embedding (and modifying) the original widget.</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_defaults_calendar.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_defaults_calendar.svg" alt="Usage example"/></p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">local cal = wibox.widget.calendar.month(os.date(&apos;*t&apos;))
+        <pre class="example">local cal = wibox.widget.calendar.month(os.date(&quot;*t&quot;))
 </pre>
     </ul>
     <div class="extra-header">
@@ -376,12 +379,14 @@
     </span>
     </dt>
     <dd>
-    A month calendar widget.</p>
+    A month calendar widget. </p>
 
 <p> A calendar widget is a grid containing the calendar for one month.
  If the day is specified in the date, its cell is highlighted.</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_calendar_month.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_calendar_month.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -401,7 +406,7 @@
         </li>
         </li></ul>
         <li><span class="parameter">font</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Font of the calendar
          (<em>default</em> "Monospace 10")
         </li>
@@ -418,7 +423,7 @@
 
 
 
-    <span id=item1279 class="hide_extra">
+    <span id=item1285 class="hide_extra">
     </span>
 
 </dd>
@@ -429,11 +434,13 @@
     </span>
     </dt>
     <dd>
-    A year calendar widget.</p>
+    A year calendar widget. </p>
 
 <p> A calendar widget is a grid containing the calendar for one year.</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_calendar_year.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_calendar_year.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -453,7 +460,7 @@
         </li>
         </li></ul>
         <li><span class="parameter">font</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Font of the calendar
          (<em>default</em> "Monospace 10")
         </li>
@@ -471,8 +478,8 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> cal = wibox.widget {
-    date         = <span class="global">os</span>.date(<span class="string">'*t'</span>),
-    font         = <span class="string">'Monospace 8'</span>,
+    date         = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+    font         = <span class="string">"Monospace 8"</span>,
     spacing      = <span class="number">2</span>,
     week_numbers = <span class="keyword">false</span>,
     start_sunday = <span class="keyword">false</span>,
@@ -481,7 +488,7 @@
     </ul>
 
 
-    <span id=item1280 class="hide_extra">
+    <span id=item1286 class="hide_extra">
     </span>
 
 </dd>
@@ -497,7 +504,7 @@
     </span>
     </dt>
     <dd>
-    The calendar date.</p>
+    The calendar date. </p>
 
 <p> A table representing the date {day=[number|nil], month=[number|nil], year=[number]}.</p>
 
@@ -516,7 +523,7 @@
 
 
 
-    <span id=item1281 class="hide_extra">
+    <span id=item1287 class="hide_extra">
     </span>
 
 </dd>
@@ -528,11 +535,12 @@
     </span>
     </dt>
     <dd>
-    The calendar font.</p>
+    The calendar font. </p>
 
 <p> Choose a monospace font for a better rendering.</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_calendar_font.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_wibox_widget_calendar_font.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
@@ -548,11 +556,11 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> cal = wibox.widget.calendar.month(
-    <span class="global">os</span>.date(<span class="string">'*t'</span>), <span class="string">'sans 12'</span>)</pre>
+    <span class="global">os</span>.date(<span class="string">"*t"</span>), <span class="string">"sans 12"</span>)</pre>
     </ul>
 
 
-    <span id=item1282 class="hide_extra">
+    <span id=item1288 class="hide_extra">
     </span>
 
 </dd>
@@ -564,7 +572,7 @@
     </span>
     </dt>
     <dd>
-    The calendar spacing.</p>
+    The calendar spacing. </p>
 
 <p> The spacing between cells in the month.
  The spacing between months in a year calendar is twice this value.
@@ -582,7 +590,7 @@
 
 
 
-    <span id=item1283 class="hide_extra">
+    <span id=item1289 class="hide_extra">
     </span>
 
 </dd>
@@ -594,9 +602,11 @@
     </span>
     </dt>
     <dd>
-    Display the calendar week numbers.</p>
+    Display the calendar week numbers. </p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_calendar_week_numbers.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_calendar_week_numbers.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
@@ -612,15 +622,15 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> cal = wibox.widget {
-    date         = <span class="global">os</span>.date(<span class="string">'*t'</span>),
-    font         = <span class="string">'Monospace 10'</span>,
+    date         = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+    font         = <span class="string">"Monospace 10"</span>,
     week_numbers = <span class="keyword">true</span>,
     widget       = wibox.widget.calendar.month
 }</pre>
     </ul>
 
 
-    <span id=item1284 class="hide_extra">
+    <span id=item1290 class="hide_extra">
     </span>
 
 </dd>
@@ -632,9 +642,11 @@
     </span>
     </dt>
     <dd>
-    Start the week on Sunday.</p>
+    Start the week on Sunday. </p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_calendar_start_sunday.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_calendar_start_sunday.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
@@ -650,15 +662,15 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> cal = wibox.widget {
-    date         = <span class="global">os</span>.date(<span class="string">'*t'</span>),
-    font         = <span class="string">'Monospace 10'</span>,
+    date         = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+    font         = <span class="string">"Monospace 10"</span>,
     start_sunday = <span class="keyword">true</span>,
     widget       = wibox.widget.calendar.month
 }</pre>
     </ul>
 
 
-    <span id=item1285 class="hide_extra">
+    <span id=item1291 class="hide_extra">
     </span>
 
 </dd>
@@ -670,9 +682,9 @@
     </span>
     </dt>
     <dd>
-    Format the weekdays with three characters instead of two</p>
+    Format the weekdays with three characters instead of two </p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_calendar_long_weekdays.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_wibox_widget_calendar_long_weekdays.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
@@ -688,15 +700,15 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> cal = wibox.widget {
-    date          = <span class="global">os</span>.date(<span class="string">'*t'</span>),
-    font          = <span class="string">'Monospace 10'</span>,
+    date          = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+    font          = <span class="string">"Monospace 10"</span>,
     long_weekdays = <span class="keyword">true</span>,
     widget        = wibox.widget.calendar.month
 }</pre>
     </ul>
 
 
-    <span id=item1286 class="hide_extra">
+    <span id=item1292 class="hide_extra">
     </span>
 
 </dd>
@@ -708,16 +720,18 @@
     </span>
     </dt>
     <dd>
-    The widget encapsulating function.</p>
+    The widget encapsulating function. </p>
 
-<p> Function that takes a widget, flag (<a href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a>) and date (<a href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a>) as argument
+<p> Function that takes a widget, flag (<a href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a>) and date (<a href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a>) as argument
  and returns a widget encapsulating the input widget.</p>
 
 <p> Default value: function (widget, flag, date) return widget end</p>
 
 <p> It is used to add a container to the grid layout and to the cells:</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_calendar_fn_embed_cell.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_calendar_fn_embed_cell.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
@@ -745,27 +759,27 @@
     <span class="keyword">end</span>
 <span class="keyword">end</span>
 styles.month   = { padding      = <span class="number">5</span>,
-                   bg_color     = <span class="string">'#555555'</span>,
+                   bg_color     = <span class="string">"#555555"</span>,
                    border_width = <span class="number">2</span>,
                    shape        = rounded_shape(<span class="number">10</span>)
 }
 styles.normal  = { shape    = rounded_shape(<span class="number">5</span>) }
-styles.focus   = { fg_color = <span class="string">'#000000'</span>,
-                   bg_color = <span class="string">'#ff9800'</span>,
+styles.focus   = { fg_color = <span class="string">"#000000"</span>,
+                   bg_color = <span class="string">"#ff9800"</span>,
                    markup   = <span class="keyword">function</span>(t) <span class="keyword">return</span> <span class="string">'&lt;b&gt;'</span> .. t .. <span class="string">'&lt;/b&gt;'</span> <span class="keyword">end</span>,
                    shape    = rounded_shape(<span class="number">5</span>, <span class="keyword">true</span>)
 }
-styles.header  = { fg_color = <span class="string">'#de5e1e'</span>,
+styles.header  = { fg_color = <span class="string">"#de5e1e"</span>,
                    markup   = <span class="keyword">function</span>(t) <span class="keyword">return</span> <span class="string">'&lt;b&gt;'</span> .. t .. <span class="string">'&lt;/b&gt;'</span> <span class="keyword">end</span>,
                    shape    = rounded_shape(<span class="number">10</span>)
 }
-styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
+styles.weekday = { fg_color = <span class="string">"#7788af"</span>,
                    markup   = <span class="keyword">function</span>(t) <span class="keyword">return</span> <span class="string">'&lt;b&gt;'</span> .. t .. <span class="string">'&lt;/b&gt;'</span> <span class="keyword">end</span>,
                    shape    = rounded_shape(<span class="number">5</span>)
 }
 <span class="keyword">local</span> <span class="keyword">function</span> decorate_cell(widget, flag, date)
-    <span class="keyword">if</span> flag==<span class="string">'monthheader'</span> <span class="keyword">and</span> <span class="keyword">not</span> styles.monthheader <span class="keyword">then</span>
-        flag = <span class="string">'header'</span>
+    <span class="keyword">if</span> flag==<span class="string">"monthheader"</span> <span class="keyword">and</span> <span class="keyword">not</span> styles.monthheader <span class="keyword">then</span>
+        flag = <span class="string">"header"</span>
     <span class="keyword">end</span>
     <span class="keyword">local</span> props = styles[flag] <span class="keyword">or</span> {}
     <span class="keyword">if</span> props.markup <span class="keyword">and</span> widget.get_text <span class="keyword">and</span> widget.set_markup <span class="keyword">then</span>
@@ -773,8 +787,8 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
     <span class="keyword">end</span>
     <span class="comment">-- Change bg color for weekends
 </span>    <span class="keyword">local</span> d = {year=date.year, month=(date.month <span class="keyword">or</span> <span class="number">1</span>), day=(date.day <span class="keyword">or</span> <span class="number">1</span>)}
-    <span class="keyword">local</span> weekday = <span class="global">tonumber</span>(<span class="global">os</span>.date(<span class="string">'%w'</span>, <span class="global">os</span>.time(d)))
-    <span class="keyword">local</span> default_bg = (weekday==<span class="number">0</span> <span class="keyword">or</span> weekday==<span class="number">6</span>) <span class="keyword">and</span> <span class="string">'#232323'</span> <span class="keyword">or</span> <span class="string">'#383838'</span>
+    <span class="keyword">local</span> weekday = <span class="global">tonumber</span>(<span class="global">os</span>.date(<span class="string">"%w"</span>, <span class="global">os</span>.time(d)))
+    <span class="keyword">local</span> default_bg = (weekday==<span class="number">0</span> <span class="keyword">or</span> weekday==<span class="number">6</span>) <span class="keyword">and</span> <span class="string">"#232323"</span> <span class="keyword">or</span> <span class="string">"#383838"</span>
     <span class="keyword">local</span> ret = wibox.widget {
         {
             widget,
@@ -782,23 +796,23 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
             widget  = wibox.container.margin
         },
         shape        = props.shape,
-        border_color = props.border_color <span class="keyword">or</span> <span class="string">'#b9214f'</span>,
+        border_color = props.border_color <span class="keyword">or</span> <span class="string">"#b9214f"</span>,
         border_width = props.border_width <span class="keyword">or</span> <span class="number">0</span>,
-        fg           = props.fg_color <span class="keyword">or</span> <span class="string">'#999999'</span>,
+        fg           = props.fg_color <span class="keyword">or</span> <span class="string">"#999999"</span>,
         bg           = props.bg_color <span class="keyword">or</span> default_bg,
         widget       = wibox.container.background
     }
     <span class="keyword">return</span> ret
 <span class="keyword">end</span>
 <span class="keyword">local</span> cal = wibox.widget {
-    date     = <span class="global">os</span>.date(<span class="string">'*t'</span>),
+    date     = <span class="global">os</span>.date(<span class="string">"*t"</span>),
     fn_embed = decorate_cell,
     widget   = wibox.widget.calendar.month
 }</pre>
     </ul>
 
 
-    <span id=item1287 class="hide_extra">
+    <span id=item1293 class="hide_extra">
     </span>
 
 </dd>
@@ -810,9 +824,9 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
     </span>
     </dt>
     <dd>
-    Allow cells to have flexible height</p>
+    Allow cells to have flexible height </p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_calendar_flex_height.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_wibox_widget_calendar_flex_height.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
@@ -828,15 +842,15 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> cal = wibox.widget {
-    date        = <span class="global">os</span>.date(<span class="string">'*t'</span>),
-    font        = <span class="string">'Monospace 10'</span>,
+    date        = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+    font        = <span class="string">"Monospace 10"</span>,
     flex_height = <span class="keyword">true</span>,
     widget      = wibox.widget.calendar.month
 }</pre>
     </ul>
 
 
-    <span id=item1288 class="hide_extra">
+    <span id=item1294 class="hide_extra">
     </span>
 
 </dd>
@@ -857,7 +871,7 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">font</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Font of the calendar
         </li>
     </ul>
@@ -867,7 +881,7 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <span id=item1289 class="hide_extra">
+    <span id=item1295 class="hide_extra">
     </span>
 
 </dd>
@@ -894,7 +908,7 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <span id=item1290 class="hide_extra">
+    <span id=item1296 class="hide_extra">
     </span>
 
 </dd>
@@ -920,7 +934,7 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <span id=item1291 class="hide_extra">
+    <span id=item1297 class="hide_extra">
     </span>
 
 </dd>
@@ -946,7 +960,7 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <span id=item1292 class="hide_extra">
+    <span id=item1298 class="hide_extra">
     </span>
 
 </dd>
@@ -972,7 +986,7 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <span id=item1293 class="hide_extra">
+    <span id=item1299 class="hide_extra">
     </span>
 
 </dd>
@@ -999,7 +1013,7 @@ styles.weekday = { fg_color = <span class="string">'#7788af'</span>,
 
 
 
-    <span id=item1294 class="hide_extra">
+    <span id=item1300 class="hide_extra">
     </span>
 
 </dd>

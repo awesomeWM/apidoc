@@ -156,6 +156,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -229,10 +230,10 @@
  conventions. This allow:</p>
 
 <ul>
-<li>To use them in various other module as
-<a href="https://en.wikipedia.org/wiki/Visitor_pattern">visitor objects</a></li>
-<li>Turn each function into an API with various common customization parameters.</li>
-<li>Re-use the same functions for the <a href="../input_handling/mouse.html#">mouse</a>, <a href="../core_components/client.html#">client</a>s, <a href="../core_components/screen.html#">screen</a>s and <a href="../popups_and_bars/wibox.html#">wibox</a>es</li>
+    <li>To use them in various other module as
+    <a href="https://en.wikipedia.org/wiki/Visitor_pattern">visitor objects</a></li>
+    <li>Turn each function into an API with various common customization parameters.</li>
+    <li>Re-use the same functions for the <a href="../input_handling/mouse.html#">mouse</a>, <a href="../core_components/client.html#">client</a>s, <a href="../core_components/screen.html#">screen</a>s and <a href="../popups_and_bars/wibox.html#">wibox</a>es</li>
 </ul>
 
 
@@ -240,26 +241,30 @@
 
 <p> It is possible to compose placement function using the <code>+</code> or <code>*</code> operator:</p>
 
-<p><img src="../images/AUTOGEN_awful_placement_compose.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_awful_placement_compose.svg" alt="Usage example"/></p>
+
+
 
 <pre>
-<span class="comment">-- 'right' will be replaced by 'left'
+<span class="comment">-- "right" will be replaced by "left"
 </span><span class="keyword">local</span> f = (awful.placement.right + awful.placement.left)
 f(client.focus)
 </pre>
 
+<p><img src="../images/AUTOGEN_awful_placement_compose2.svg" alt="Usage example"/></p>
 
-<p><img src="../images/AUTOGEN_awful_placement_compose2.svg" alt="Usage example" /></p>
+
 
 <pre>
-<span class="comment">-- Simulate Windows 7 'edge snap' (also called aero snap) feature
-</span><span class="keyword">local</span> axis = <span class="string">'vertically'</span>
+<span class="comment">-- Simulate Windows 7 "edge snap" (also called aero snap) feature
+</span><span class="keyword">local</span> axis = <span class="string">"vertically"</span>
 <span class="keyword">local</span> f = awful.placement.scale
     + awful.placement.left
-    + (axis <span class="keyword">and</span> awful.placement[<span class="string">'maximize_'</span>..axis] <span class="keyword">or</span> <span class="keyword">nil</span>)
+    + (axis <span class="keyword">and</span> awful.placement[<span class="string">"maximize_"</span>..axis] <span class="keyword">or</span> <span class="keyword">nil</span>)
 <span class="keyword">local</span> geo = f(client.focus, {honor_workarea=<span class="keyword">true</span>, to_percent = <span class="number">0.5</span>})
 </pre>
-
 
 <p> <h3>Common arguments</h3></p>
 
@@ -357,7 +362,7 @@ f(client.focus)
         <a href="#awful.placement.no_overlap"><span class='function_modname'>awful.placement.</span>no_overlap <span class='function_args'> <b>(</b>c[, args={}]<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
       </td>
-      <td colspan="2" class="summary">Place the client where there&rsquo;s place available with minimum overlap.</td>
+      <td colspan="2" class="summary">Place the client where there's place available with minimum overlap.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -565,22 +570,27 @@ f(client.focus)
     </span>
     </dt>
     <dd>
-    <p>Move a drawable to the closest corner of the parent geometry (such as the
- screen).</p>
+
+<p>Move a drawable to the closest corner of the parent geometry (such as the
+ screen). </p>
 
 <p> Valid arguments include the common ones and:</p>
 
 <ul>
-<li><strong>include_sides</strong>: Also include the left, right, top and bottom positions</li>
+    <li><strong>include_sides</strong>: Also include the left, right, top and bottom positions</li>
 </ul>
 
 
-<p><img src="../images/AUTOGEN_awful_placement_closest_mouse.svg" alt="Usage example" /></p>
+
+<p><img src="../images/AUTOGEN_awful_placement_closest_mouse.svg" alt="Usage example"/></p>
 
 <p><strong>Usage example output</strong>:</p>
 
 <pre><code>Closest corner: top_left
 </code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -591,7 +601,7 @@ f(client.focus)
          (<em>default</em> client.focus)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The arguments
          (<em>default</em> {})
         </li>
@@ -600,10 +610,10 @@ f(client.focus)
     <h3>Returns:</h3>
     <ol>
         <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry</li>
         <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
         The corner name.</li>
     </ol>
 
@@ -619,11 +629,11 @@ f(client.focus)
     {coords=<span class="keyword">function</span>() <span class="keyword">return</span> {x = <span class="number">100</span>, y=<span class="number">100</span>} <span class="keyword">end</span>},
     {include_sides = <span class="keyword">true</span>, bounding_rect = {x=<span class="number">0</span>, y=<span class="number">0</span>, width=<span class="number">200</span>, height=<span class="number">200</span>}}
 )
-<span class="global">print</span>(<span class="string">'Closest corner:'</span>, corner)</pre>
+<span class="global">print</span>(<span class="string">"Closest corner:"</span>, corner)</pre>
     </ul>
 
 
-    <span id=item2267 class="hide_extra">
+    <span id=item2295 class="hide_extra">
     </span>
 
 </dd>
@@ -635,15 +645,20 @@ f(client.focus)
     </span>
     </dt>
     <dd>
-    <p>Place the client so no part of it will be outside the screen (workarea).</p>
 
-<p><img src="../images/AUTOGEN_awful_placement_no_offscreen.svg" alt="Usage example" /></p>
+<p>Place the client so no part of it will be outside the screen (workarea). </p>
+
+
+<p><img src="../images/AUTOGEN_awful_placement_no_offscreen.svg" alt="Usage example"/></p>
 
 <p><strong>Usage example output</strong>:</p>
 
 <pre><code>Before: x=-30, y=-30, width=100, height=100
 After:  x=50, y=50, width=100, height=100
 </code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -664,7 +679,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new client geometry.
     </ol>
 
@@ -676,7 +691,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2268 class="hide_extra">
+    <span id=item2296 class="hide_extra">
     </span>
 
 </dd>
@@ -688,9 +703,10 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Place the client where there&rsquo;s place available with minimum overlap.</p>
+    Place the client where there's place available with minimum overlap. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_no_overlap.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_awful_placement_no_overlap.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -698,7 +714,7 @@ After:  x=50, y=50, width=100, height=100
          The client.
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -707,7 +723,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -720,7 +736,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2269 class="hide_extra">
+    <span id=item2297 class="hide_extra">
     </span>
 
 </dd>
@@ -732,9 +748,10 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Place the client under the mouse.</p>
+    Place the client under the mouse. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_under_mouse.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_awful_placement_under_mouse.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -743,7 +760,7 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -752,7 +769,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -764,7 +781,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2270 class="hide_extra">
+    <span id=item2298 class="hide_extra">
     </span>
 
 </dd>
@@ -776,12 +793,13 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Place the client next to the mouse.</p>
+    Place the client next to the mouse. </p>
 
 <p> It will place <code>c</code> next to the mouse pointer, trying the following positions
  in this order: right, left, above and below.</p>
 
-<p><img src="../images/AUTOGEN_awful_placement_next_to_mouse.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_awful_placement_next_to_mouse.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -790,7 +808,7 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -799,7 +817,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -811,7 +829,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2271 class="hide_extra">
+    <span id=item2299 class="hide_extra">
     </span>
 
 </dd>
@@ -823,17 +841,18 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Resize the drawable to the cursor.</p>
+    Resize the drawable to the cursor. </p>
 
 <p> Valid args:</p>
 
 <ul>
-<li><em>axis</em>: The axis (vertical or horizontal). If none is
- specified, then the drawable will be resized on both axis.</li>
+    <li><em>axis</em>: The axis (vertical or horizontal). If none is
+    specified, then the drawable will be resized on both axis.</li>
 </ul>
 
 
-<p><img src="../images/AUTOGEN_awful_placement_resize_to_mouse.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_awful_placement_resize_to_mouse.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -842,7 +861,7 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -851,7 +870,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -859,7 +878,7 @@ After:  x=50, y=50, width=100, height=100
 
 
 
-    <span id=item2272 class="hide_extra">
+    <span id=item2300 class="hide_extra">
     </span>
 
 </dd>
@@ -871,26 +890,27 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Move the drawable (client or wibox) <code>d</code> to a screen position or side.</p>
+    Move the drawable (client or wibox) <code>d</code> to a screen position or side. </p>
 
 <p> Supported args.positions are:</p>
 
 <ul>
-<li>top_left</li>
-<li>top_right</li>
-<li>bottom_left</li>
-<li>bottom_right</li>
-<li>left</li>
-<li>right</li>
-<li>top</li>
-<li>bottom</li>
-<li>centered</li>
-<li>center_vertical</li>
-<li>center_horizontal</li>
+    <li>top_left</li>
+    <li>top_right</li>
+    <li>bottom_left</li>
+    <li>bottom_right</li>
+    <li>left</li>
+    <li>right</li>
+    <li>top</li>
+    <li>bottom</li>
+    <li>centered</li>
+    <li>center_vertical</li>
+    <li>center_horizontal</li>
 </ul>
 
 
-<p><img src="../images/AUTOGEN_awful_placement_align.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_awful_placement_align.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -899,7 +919,7 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -908,7 +928,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -916,7 +936,7 @@ After:  x=50, y=50, width=100, height=100
 
 
 
-    <span id=item2273 class="hide_extra">
+    <span id=item2301 class="hide_extra">
     </span>
 
 </dd>
@@ -928,9 +948,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the top left of the parent area.</p>
+    Align a client to the top left of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_top_left.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_top_left.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -939,8 +959,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -948,7 +968,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -960,7 +980,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2274 class="hide_extra">
+    <span id=item2302 class="hide_extra">
     </span>
 
 </dd>
@@ -972,9 +992,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the top right of the parent area.</p>
+    Align a client to the top right of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_top_right.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_top_right.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -983,8 +1003,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -992,7 +1012,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1004,7 +1024,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2275 class="hide_extra">
+    <span id=item2303 class="hide_extra">
     </span>
 
 </dd>
@@ -1016,9 +1036,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the bottom left of the parent area.</p>
+    Align a client to the bottom left of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_bottom_left.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_bottom_left.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1027,8 +1047,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1036,7 +1056,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1048,7 +1068,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2276 class="hide_extra">
+    <span id=item2304 class="hide_extra">
     </span>
 
 </dd>
@@ -1060,9 +1080,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the bottom right of the parent area.</p>
+    Align a client to the bottom right of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_bottom_right.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_bottom_right.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1071,8 +1091,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1080,7 +1100,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1092,7 +1112,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2277 class="hide_extra">
+    <span id=item2305 class="hide_extra">
     </span>
 
 </dd>
@@ -1104,9 +1124,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the left of the parent area.</p>
+    Align a client to the left of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_left.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_left.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1115,8 +1135,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1124,7 +1144,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1136,7 +1156,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2278 class="hide_extra">
+    <span id=item2306 class="hide_extra">
     </span>
 
 </dd>
@@ -1148,9 +1168,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the right of the parent area.</p>
+    Align a client to the right of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_right.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_right.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1159,8 +1179,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1168,7 +1188,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1180,7 +1200,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2279 class="hide_extra">
+    <span id=item2307 class="hide_extra">
     </span>
 
 </dd>
@@ -1192,9 +1212,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the top of the parent area.</p>
+    Align a client to the top of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_top.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_top.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1203,8 +1223,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1212,7 +1232,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1225,7 +1245,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2280 class="hide_extra">
+    <span id=item2308 class="hide_extra">
     </span>
 
 </dd>
@@ -1237,9 +1257,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the bottom of the parent area.</p>
+    Align a client to the bottom of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_bottom.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_bottom.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1248,8 +1268,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1257,7 +1277,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1269,7 +1289,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2281 class="hide_extra">
+    <span id=item2309 class="hide_extra">
     </span>
 
 </dd>
@@ -1281,9 +1301,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the center of the parent area.</p>
+    Align a client to the center of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_centered.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_centered.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1292,8 +1312,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1301,7 +1321,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1313,7 +1333,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2282 class="hide_extra">
+    <span id=item2310 class="hide_extra">
     </span>
 
 </dd>
@@ -1325,9 +1345,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the vertical center of the parent area.</p>
+    Align a client to the vertical center of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_center_vertical.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_center_vertical.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1336,8 +1356,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1351,7 +1371,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2283 class="hide_extra">
+    <span id=item2311 class="hide_extra">
     </span>
 
 </dd>
@@ -1363,9 +1383,9 @@ After:  x=50, y=50, width=100, height=100
     </span>
     </dt>
     <dd>
-    Align a client to the horizontal center left of the parent area.</p>
+    Align a client to the horizontal center left of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_center_horizontal.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_center_horizontal.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1374,8 +1394,8 @@ After:  x=50, y=50, width=100, height=100
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1383,7 +1403,7 @@ After:  x=50, y=50, width=100, height=100
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1395,7 +1415,7 @@ After:  x=50, y=50, width=100, height=100
     </ul>
 
 
-    <span id=item2284 class="hide_extra">
+    <span id=item2312 class="hide_extra">
     </span>
 
 </dd>
@@ -1411,12 +1431,13 @@ After:  x=50, y=50, width=100, height=100
  Valid args:</p>
 
 <ul>
-<li><strong>direction</strong>: The stretch direction (<em>left</em>, <em>right</em>, <em>up</em>, <em>down</em>) or
-a table with multiple directions.</li>
+    <li><strong>direction</strong>: The stretch direction (<em>left</em>, <em>right</em>, <em>up</em>, <em>down</em>) or
+    a table with multiple directions.</li>
 </ul>
 
 
-<p><img src="../images/AUTOGEN_awful_placement_stretch.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_awful_placement_stretch.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1426,7 +1447,7 @@ a table with multiple directions.</li>
          (<em>default</em> client.focus)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The arguments
          (<em>default</em> {})
         </li>
@@ -1435,7 +1456,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1443,7 +1464,7 @@ a table with multiple directions.</li>
 
 
 
-    <span id=item2285 class="hide_extra">
+    <span id=item2313 class="hide_extra">
     </span>
 
 </dd>
@@ -1455,9 +1476,9 @@ a table with multiple directions.</li>
     </span>
     </dt>
     <dd>
-    Stretch the drawable to the left of the parent area.</p>
+    Stretch the drawable to the left of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_stretch_left.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_stretch_left.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1466,7 +1487,7 @@ a table with multiple directions.</li>
          A drawable (like <a href="../core_components/client.html#">client</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -1475,7 +1496,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1487,7 +1508,7 @@ a table with multiple directions.</li>
     </ul>
 
 
-    <span id=item2286 class="hide_extra">
+    <span id=item2314 class="hide_extra">
     </span>
 
 </dd>
@@ -1499,9 +1520,9 @@ a table with multiple directions.</li>
     </span>
     </dt>
     <dd>
-    Stretch the drawable to the right of the parent area.</p>
+    Stretch the drawable to the right of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_stretch_right.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_stretch_right.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1510,7 +1531,7 @@ a table with multiple directions.</li>
          A drawable (like <a href="../core_components/client.html#">client</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -1519,7 +1540,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1531,7 +1552,7 @@ a table with multiple directions.</li>
     </ul>
 
 
-    <span id=item2287 class="hide_extra">
+    <span id=item2315 class="hide_extra">
     </span>
 
 </dd>
@@ -1543,9 +1564,9 @@ a table with multiple directions.</li>
     </span>
     </dt>
     <dd>
-    Stretch the drawable to the top of the parent area.</p>
+    Stretch the drawable to the top of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_stretch_up.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_stretch_up.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1554,7 +1575,7 @@ a table with multiple directions.</li>
          A drawable (like <a href="../core_components/client.html#">client</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -1563,7 +1584,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1575,7 +1596,7 @@ a table with multiple directions.</li>
     </ul>
 
 
-    <span id=item2288 class="hide_extra">
+    <span id=item2316 class="hide_extra">
     </span>
 
 </dd>
@@ -1587,9 +1608,9 @@ a table with multiple directions.</li>
     </span>
     </dt>
     <dd>
-    Stretch the drawable to the bottom of the parent area.</p>
+    Stretch the drawable to the bottom of the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_stretch_down.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_stretch_down.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1598,7 +1619,7 @@ a table with multiple directions.</li>
          A drawable (like <a href="../core_components/client.html#">client</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -1607,7 +1628,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1619,7 +1640,7 @@ a table with multiple directions.</li>
     </ul>
 
 
-    <span id=item2289 class="hide_extra">
+    <span id=item2317 class="hide_extra">
     </span>
 
 </dd>
@@ -1635,12 +1656,13 @@ a table with multiple directions.</li>
  Valid args:</p>
 
 <ul>
-<li><em>axis</em>:The axis (vertical or horizontal). If none is
- specified, then the drawable will be maximized on both axis.</li>
+    <li><em>axis</em>:The axis (vertical or horizontal). If none is
+    specified, then the drawable will be maximized on both axis.</li>
 </ul>
 
 
-<p><img src="../images/AUTOGEN_awful_placement_maximize.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_awful_placement_maximize.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1650,7 +1672,7 @@ a table with multiple directions.</li>
          (<em>default</em> client.focus)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The arguments
          (<em>default</em> {})
         </li>
@@ -1659,7 +1681,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1667,7 +1689,7 @@ a table with multiple directions.</li>
 
 
 
-    <span id=item2290 class="hide_extra">
+    <span id=item2318 class="hide_extra">
     </span>
 
 </dd>
@@ -1679,9 +1701,9 @@ a table with multiple directions.</li>
     </span>
     </dt>
     <dd>
-    Vetically maximize the drawable in the parent area.</p>
+    Vetically maximize the drawable in the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_maximize_vertically.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_maximize_vertically.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1690,8 +1712,8 @@ a table with multiple directions.</li>
          A drawable (like <a href="../core_components/client.html#">client</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1705,7 +1727,7 @@ a table with multiple directions.</li>
     </ul>
 
 
-    <span id=item2291 class="hide_extra">
+    <span id=item2319 class="hide_extra">
     </span>
 
 </dd>
@@ -1717,9 +1739,9 @@ a table with multiple directions.</li>
     </span>
     </dt>
     <dd>
-    Horizontally maximize the drawable in the parent area.</p>
+    Horizontally maximize the drawable in the parent area. </p>
 
-<p><img src="../images/AUTOGEN_awful_placement_maximize_horizontally.svg" alt="Usage example" />
+<p><img src="../images/AUTOGEN_awful_placement_maximize_horizontally.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1728,8 +1750,8 @@ a table with multiple directions.</li>
          A drawable (like <a href="../core_components/client.html#">client</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         Other arguments')
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         Other arguments")
          (<em>default</em> {})
         </li>
     </ul>
@@ -1743,7 +1765,7 @@ a table with multiple directions.</li>
     </ul>
 
 
-    <span id=item2292 class="hide_extra">
+    <span id=item2320 class="hide_extra">
     </span>
 
 </dd>
@@ -1755,7 +1777,7 @@ a table with multiple directions.</li>
     </span>
     </dt>
     <dd>
-    Scale the drawable by either a relative or absolute percent.</p>
+    Scale the drawable by either a relative or absolute percent. </p>
 
 <p> Valid args:</p>
 
@@ -1763,7 +1785,7 @@ a table with multiple directions.</li>
   the parent geometry.
  <strong>by_percent</strong> : A number between 0 and 1. It represent a percent related to
   the current size.
- <strong>direction</strong>: Nothing or &ldquo;left&rdquo;, &ldquo;right&rdquo;, &ldquo;up&rdquo;, &ldquo;down&rdquo;.
+ <strong>direction</strong>: Nothing or "left", "right", "up", "down".
 
     <h3>Parameters:</h3>
     <ul>
@@ -1773,7 +1795,7 @@ a table with multiple directions.</li>
          (<em>default</em> client.focus)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The arguments
          (<em>default</em> {})
         </li>
@@ -1782,7 +1804,7 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1790,7 +1812,7 @@ a table with multiple directions.</li>
 
 
 
-    <span id=item2293 class="hide_extra">
+    <span id=item2321 class="hide_extra">
     </span>
 
 </dd>
@@ -1802,13 +1824,13 @@ a table with multiple directions.</li>
     </span>
     </dt>
     <dd>
-    Move a drawable to a relative position next to another one.</p>
+    Move a drawable to a relative position next to another one. </p>
 
 <p> This placement function offers two additional settings to align the drawable
  alongside the parent geometry. The first one, the position, sets the side
  relative to the parent. The second one, the anchor, set the alignment within
  the side selected by the <code>preferred_positions</code>. Both settings are tables of
- priorities. The first available slot will be used. If there isn&rsquo;t enough
+ priorities. The first available slot will be used. If there isn't enough
  space, then it will fallback to the next until it is possible to fit the
  drawable. This is meant to avoid going offscreen.</p>
 
@@ -1820,16 +1842,17 @@ a table with multiple directions.</li>
 <p> The <code>args.preferred_anchors</code> are:</p>
 
 <ul>
-<li>&ldquo;front&rdquo;: The closest to the origin (0,0)</li>
-<li>&ldquo;middle&rdquo;: Centered aligned with the parent</li>
-<li>&ldquo;back&rdquo;: The opposite side compared to <code>front</code></li>
+    <li>"front": The closest to the origin (0,0)</li>
+    <li>"middle": Centered aligned with the parent</li>
+    <li>"back": The opposite side compared to <code>front</code></li>
 </ul>
-
 
 <p> In that case, if there is room on the top of the geometry, then it will have
  priority, followed by all the others, in order.</p>
 
-<p><img src="../images/AUTOGEN_awful_placement_next_to.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_awful_placement_next_to.svg" alt="Usage example"/>
 
     <h3>Parameters:</h3>
     <ul>
@@ -1838,21 +1861,23 @@ a table with multiple directions.</li>
          A wibox or client
         </li>
         <li><span class="parameter">args</span>
+
+
         <ul>
         <li><span class="parameter">mode</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The mode
         </li>
         <li><span class="parameter">preferred_positions</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The preferred positions (in order)
         </li>
         <li><span class="parameter">preferred_anchors</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The preferred anchor(s) (in order)
         </li>
         <li><span class="parameter">geometry</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          A geometry inside the other drawable
         </li>
         </li></ul>
@@ -1861,22 +1886,22 @@ a table with multiple directions.</li>
     <h3>Returns:</h3>
     <ol>
         <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry</li>
         <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-        The choosen position (&ldquo;left&rdquo;, &ldquo;right&rdquo;, &ldquo;top&rdquo; or &ldquo;bottom&rdquo;)</li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+        The choosen position ("left", "right", "top" or "bottom")</li>
         <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-        The choosen anchor (&ldquo;front&rdquo;, &ldquo;middle&rdquo; or &ldquo;back&rdquo;)</li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+        The choosen anchor ("front", "middle" or "back")</li>
     </ol>
 
 
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">for</span> _, pos <span class="keyword">in</span> <span class="global">ipairs</span>{<span class="string">'left'</span>, <span class="string">'right'</span>, <span class="string">'top'</span>, <span class="string">'bottom'</span>} <span class="keyword">do</span>
-    <span class="keyword">for</span> _, anchor <span class="keyword">in</span> <span class="global">ipairs</span>{<span class="string">'front'</span>, <span class="string">'middle'</span>, <span class="string">'back'</span>} <span class="keyword">do</span>
+        <pre class="example"><span class="keyword">for</span> _, pos <span class="keyword">in</span> <span class="global">ipairs</span>{<span class="string">"left"</span>, <span class="string">"right"</span>, <span class="string">"top"</span>, <span class="string">"bottom"</span>} <span class="keyword">do</span>
+    <span class="keyword">for</span> _, anchor <span class="keyword">in</span> <span class="global">ipairs</span>{<span class="string">"front"</span>, <span class="string">"middle"</span>, <span class="string">"back"</span>} <span class="keyword">do</span>
         awful.placement.next_to(
             client.focus,
             {
@@ -1898,7 +1923,7 @@ source object from. The valid values are:
     </ul>
 
 
-    <span id=item2294 class="hide_extra">
+    <span id=item2322 class="hide_extra">
     </span>
 
 </dd>
@@ -1920,7 +1945,7 @@ source object from. The valid values are:
          (<em>default</em> client.focus)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The arguments
          (<em>default</em> {})
         </li>
@@ -1937,7 +1962,7 @@ source object from. The valid values are:
 
 
 
-    <span id=item2295 class="hide_extra">
+    <span id=item2323 class="hide_extra">
     </span>
 
 </dd>
@@ -1949,9 +1974,11 @@ source object from. The valid values are:
     </span>
     </dt>
     <dd>
-    <p>Skip all preceeding results of placement pipeline for fullscreen clients.</p>
 
-<p><img src="../images/AUTOGEN_awful_placement_skip_fullscreen.svg" alt="Usage example" /></p>
+<p>Skip all preceeding results of placement pipeline for fullscreen clients. </p>
+
+
+<p><img src="../images/AUTOGEN_awful_placement_skip_fullscreen.svg" alt="Usage example"/></p>
 
 <p><strong>Usage example output</strong>:</p>
 
@@ -1963,6 +1990,9 @@ Before: x=0, y=0, width=320, height=240
 After:  x=0, y=0, width=320, height=240
 </code></pre>
 
+
+
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">d</span>
@@ -1970,7 +2000,7 @@ After:  x=0, y=0, width=320, height=240
          A drawable (like <a href="../core_components/client.html#">client</a>, <a href="../input_handling/mouse.html#">mouse</a> or <a href="../popups_and_bars/wibox.html#">wibox</a>)
         </li>
         <li><span class="parameter">args</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Other arguments
          (<em>default</em> {})
         </li>
@@ -1979,7 +2009,7 @@ After:  x=0, y=0, width=320, height=240
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The new geometry
     </ol>
 
@@ -1995,7 +2025,7 @@ f(c, {honor_workarea=<span class="keyword">true</span>, })</pre>
     </ul>
 
 
-    <span id=item2296 class="hide_extra">
+    <span id=item2324 class="hide_extra">
     </span>
 
 </dd>

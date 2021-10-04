@@ -143,6 +143,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -235,14 +236,15 @@
 <p> Screen objects can be added and removed over time. To get a callback for all
  current and future screens, use <a href="../core_components/screen.html#awful.screen.connect_for_each_screen">awful.screen.connect_for_each_screen</a>:</p>
 
+
 <pre>
 awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     <span class="comment">-- do something
 </span><span class="keyword">end</span>)
 </pre>
 
-
 <p> It is also possible loop over all current screens using:</p>
+
 
 <pre>
 <span class="keyword">for</span> s <span class="keyword">in</span> screen <span class="keyword">do</span>
@@ -250,91 +252,90 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
 </span><span class="keyword">end</span>
 </pre>
 
-
 <p> Most basic Awesome objects also have a screen property, see <a href="../input_handling/mouse.html#screen">mouse.screen</a>
  <a href="../core_components/client.html#screen">client.screen</a>, <a href="../popups_and_bars/wibox.html#screen">wibox.screen</a> and <a href="../core_components/tag.html#screen">tag.screen</a>.</p>
 
 <p> Furthermore to the classes described here, one can also use signals as
  described in <a href="../classes/signals.html#">signals</a>.</p>
 
-<p> <img src="../images/AUTOGEN_uml_nav_tables_screen.svg" alt="Usage example" /></p>
 
-<h2> Core components relationship</h2>
 
+<p> <img src="../images/AUTOGEN_uml_nav_tables_screen.svg" alt="Usage example"/></p>
+<h1> Core components relationship</h1>
 <p> <table><tr>
- <td valign='top'><table class='widget_list' border=1>
-   <colgroup span='3'></colgroup>
+ <td valign="top"><table class='widget_list' border=1>
+   <colgroup span="3"></colgroup>
   <tr><th align='center' colspan=3 scope=colgroup>Acquire other objects from a screen</th></tr>
-  <tr style='font-weight: bold
- '>
+  <tr style='font-weight: bold;'>
    <th align='center'>Class</th>
    <th align='center'></th>
    <th align='center'>Property</th>
   </tr>
  <tr>
    <td>tag</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_screen1.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_screen1.svg"></td>
    <td>s.tags</td>
   </tr>
  <tr>
    <td>tag</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_screen2.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_screen2.svg"></td>
    <td>s.selected_tag</td>
   </tr>
  <tr>
    <td>tag</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_screen3.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_screen3.svg"></td>
    <td>s.selected_tags</td>
   </tr>
  <tr>
    <td>client</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_screen4.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_screen4.svg"></td>
    <td>s.clients</td>
   </tr>
  <tr>
    <td>client</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_screen5.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_screen5.svg"></td>
    <td>s.hidden_clients</td>
   </tr>
  <tr>
    <td>client</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_screen6.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_screen6.svg"></td>
    <td>s.tiled_clients</td>
   </tr>
  </table></td>
- <td valign='top'><table class='widget_list' border=1>
-   <colgroup span='3'></colgroup>
+ <td valign="top"><table class='widget_list' border=1>
+   <colgroup span="3"></colgroup>
   <tr><th align='center' colspan=3 scope=colgroup>Acquire a screen from other objects</th></tr>
-  <tr style='font-weight: bold
- '>
+  <tr style='font-weight: bold;'>
    <th align='center'>Class</th>
    <th align='center'></th>
    <th align='center'>Property</th>
   </tr>
  <tr>
    <td>tag</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_screen7.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_screen7.svg"></td>
    <td>t.screen</td>
   </tr>
  <tr>
    <td>client</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_screen8.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_screen8.svg"></td>
    <td>c.screen</td>
   </tr>
  <tr>
    <td>naughty.notification</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_screen9.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_screen9.svg"></td>
    <td>n.screen</td>
   </tr>
  </table></td>
  </tr><tr>
-   <td colspan=2 style='color:#00000044'>
+   <td colspan=2 style="color:#00000044">
    <b>Legend:</b> <i>c</i>: a client object, <i>t</i>: a tag object,
    <i>s</i>: a screen object, <i>k</i>: an awful.key object,
    <i>b</i>: a awful.button object, <i>n</i>: a naughty.notification object
    </td>
   </tr>
  </table></p>
+
+<p> </p>
     <div class="extra-header">
 
 
@@ -470,7 +471,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
         <a href="#awful.screen.disconnect_for_each_screen">awful.screen.disconnect_for_each_screen <span class='function_args'> <b>(</b>func<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">Undo the effect of connect_for_each_screen.</td>
+      <td colspan="2" class="summary">Undo the effect of connect<em>for</em>each_screen.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -702,7 +703,9 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
       <td class="name" >
         <a href="#primary_changed">primary_changed</a>
       </td>
-      <td colspan="2" class="summary"></td>
+      <td colspan="2" class="summary">
+
+</td>
     </tr>
     <tr>
       <td class="name" >
@@ -840,7 +843,7 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     </span>
     </dt>
     <dd>
-    Add a fake screen.</p>
+    Add a fake screen. </p>
 
 <p> To vertically split the first screen in 2 equal parts, use:</p>
 
@@ -883,7 +886,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item568 class="hide_extra">
+    <span id=item569 class="hide_extra">
     </span>
 
 </dd>
@@ -912,7 +915,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item569 class="hide_extra">
+    <span id=item570 class="hide_extra">
     </span>
 
 </dd>
@@ -938,7 +941,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </ul>
 
 
-    <span id=item570 class="hide_extra">
+    <span id=item571 class="hide_extra">
     </span>
 
 </dd>
@@ -963,7 +966,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item571 class="hide_extra">
+    <span id=item572 class="hide_extra">
     </span>
 
 </dd>
@@ -980,7 +983,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -994,7 +997,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item572 class="hide_extra">
+    <span id=item573 class="hide_extra">
     </span>
 
 </dd>
@@ -1011,7 +1014,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">...</span>
@@ -1026,7 +1029,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item573 class="hide_extra">
+    <span id=item574 class="hide_extra">
     </span>
 
 </dd>
@@ -1043,7 +1046,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1057,7 +1060,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item574 class="hide_extra">
+    <span id=item575 class="hide_extra">
     </span>
 
 </dd>
@@ -1069,7 +1072,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Return the screen index corresponding to the given (pixel) coordinates.</p>
+    Return the screen index corresponding to the given (pixel) coordinates. </p>
 
 <p> The number returned can be used as an index into the global
  <a href="../core_components/screen.html#">screen</a> table/object.
@@ -1097,7 +1100,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item575 class="hide_extra">
+    <span id=item576 class="hide_extra">
     </span>
 
 </dd>
@@ -1110,7 +1113,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Move the focus to a screen.</p>
+    Move the focus to a screen. </p>
 
 <p> This moves the mouse pointer to the last known position on the new screen,
  or keeps its position relative to the current focused screen.
@@ -1128,13 +1131,13 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
      <br />
-     <center id=button576>
-     <a class="show_more_button" onclick="show_extra('576')">
+     <center id=button577>
+     <a class="show_more_button" onclick="show_extra('577')">
       Click to display more
      </a>
      </center>
 
-    <span id=item576 class="hide_extra">
+    <span id=item577 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -1157,7 +1160,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Move the focus to a screen in a specific direction.</p>
+    Move the focus to a screen in a specific direction. </p>
 
 <p> This moves the mouse pointer to the last known position on the new screen,
  or keeps its position relative to the current focused screen.
@@ -1165,7 +1168,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">dir</span>
-         The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
+         The direction, can be either "up", "down", "left" or "right".
         </li>
         <li><span class="parameter">_screen</span>
          Screen.
@@ -1177,7 +1180,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item577 class="hide_extra">
+    <span id=item578 class="hide_extra">
     </span>
 
 </dd>
@@ -1206,7 +1209,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item578 class="hide_extra">
+    <span id=item579 class="hide_extra">
     </span>
 
 </dd>
@@ -1218,7 +1221,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Get the preferred screen in the context of a client.</p>
+    Get the preferred screen in the context of a client. </p>
 
 <p> This is exactly the same as <a href="../core_components/screen.html#awful.screen.focused">awful.screen.focused</a> except that it avoids
  clients being moved when Awesome is restarted.
@@ -1244,7 +1247,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item579 class="hide_extra">
+    <span id=item580 class="hide_extra">
     </span>
 
 </dd>
@@ -1256,7 +1259,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Get the focused screen.</p>
+    Get the focused screen. </p>
 
 <p> It is possible to set <a href="../core_components/screen.html#awful.screen.default_focused_args">awful.screen.default_focused_args</a> to override the
  default settings.
@@ -1264,6 +1267,8 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
+
+
         <ul>
         <li><span class="parameter">client</span>
             <span class="types"><span class="type">boolean</span></span>
@@ -1291,7 +1296,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item580 class="hide_extra">
+    <span id=item581 class="hide_extra">
     </span>
 
 </dd>
@@ -1303,9 +1308,9 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Get a placement bounding geometry.</p>
+    Get a placement bounding geometry. </p>
 
-<p> This method computes the different variants of the &ldquo;usable&rdquo; screen geometry.
+<p> This method computes the different variants of the "usable" screen geometry.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1313,16 +1318,16 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
         <ul>
         <li><span class="parameter">honor_padding</span>
             <span class="types"><span class="type">boolean</span></span>
-         Whether to honor the screen&rsquo;s padding.
+         Whether to honor the screen's padding.
          (<em>default</em> false)
         </li>
         <li><span class="parameter">honor_workarea</span>
             <span class="types"><span class="type">boolean</span></span>
-         Whether to honor the screen&rsquo;s workarea.
+         Whether to honor the screen's workarea.
          (<em>default</em> false)
         </li>
         <li><span class="parameter">margins</span>
-            <span class="types"><span class="type">int</span> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><span class="type">int</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Apply some margins on the output.
    This can either be a number or a table with <em>left</em>, <em>right</em>, <em>top</em>
    and <em>bottom</em> keys.
@@ -1330,7 +1335,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
         </li>
         <li><span class="parameter">tag</span>
             <span class="types"><span class="type">tag</span></span>
-         Use this tag&rsquo;s screen.
+         Use this tag's screen.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">parent</span>
@@ -1339,7 +1344,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
          (<em>optional</em>)
         </li>
         <li><span class="parameter">bounding_rect</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A bounding rectangle. This parameter is
    incompatible with <code>honor_workarea</code>.
          (<em>optional</em>)
@@ -1350,7 +1355,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with <em>x</em>, <em>y</em>, <em>width</em> and <em>height</em>.
     </ol>
 
@@ -1368,7 +1373,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </ul>
 
 
-    <span id=item581 class="hide_extra">
+    <span id=item582 class="hide_extra">
     </span>
 
 </dd>
@@ -1398,7 +1403,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item582 class="hide_extra">
+    <span id=item583 class="hide_extra">
     </span>
 
 </dd>
@@ -1410,7 +1415,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Undo the effect of connect_for_each_screen.
+    Undo the effect of connect<em>for</em>each_screen.
 
     <h3>Parameters:</h3>
     <ul>
@@ -1425,7 +1430,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item583 class="hide_extra">
+    <span id=item584 class="hide_extra">
     </span>
 
 </dd>
@@ -1437,7 +1442,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Enable the automatic calculation of the screen DPI (experimental).</p>
+    Enable the automatic calculation of the screen DPI (experimental). </p>
 
 <p> This will cause many elements such as the font and some widgets to be scaled
  so they look the same (physical) size on different devices with different
@@ -1470,7 +1475,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item584 class="hide_extra">
+    <span id=item585 class="hide_extra">
     </span>
 
 </dd>
@@ -1486,18 +1491,19 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    The screen coordinates.</p>
+    The screen coordinates. </p>
 
 <p> <strong>Signal:</strong></p>
 
 <ul>
-<li><em>property::geometry</em></li>
+    <li><em>property::geometry</em></li>
 </ul>
-
 
 <p> <strong>Immutable:</strong> true</p>
 
-<p> <img src="../images/AUTOGEN_screen_geometry.svg" alt="Usage example" />
+
+
+<p> <img src="../images/AUTOGEN_screen_geometry.svg" alt="Usage example"/>
 
 
 
@@ -1505,7 +1511,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 
 
 
-    <span id=item585 class="hide_extra">
+    <span id=item586 class="hide_extra">
     </span>
 
 </dd>
@@ -1517,16 +1523,15 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    The internal screen number.</p>
+    The internal screen number. </p>
 
 <ul>
-<li>The indeces are a continuous sequence from 1 to <code>screen.count()</code>.</li>
-<li>It is <strong>NOT</strong> related to the actual screen position relative to each
-other.</li>
-<li>1 is <strong>NOT</strong> necessarily the primary screen.</li>
-<li>When screens are added and removed indices <strong>CAN</strong> change.</li>
+    <li>The indeces are a continuous sequence from 1 to <code>screen.count()</code>.</li>
+    <li>It is <strong>NOT</strong> related to the actual screen position relative to each
+    other.</li>
+    <li>1 is <strong>NOT</strong> necessarily the primary screen.</li>
+    <li>When screens are added and removed indices <strong>CAN</strong> change.</li>
 </ul>
-
 
 <p> If you really want to keep an array of screens you should use something
  along:</p>
@@ -1559,7 +1564,7 @@ other.</li>
 
 
 
-    <span id=item586 class="hide_extra">
+    <span id=item587 class="hide_extra">
     </span>
 
 </dd>
@@ -1571,7 +1576,8 @@ other.</li>
     </span>
     </dt>
     <dd>
-    <p>The screen workarea.</p>
+
+<p>The screen workarea. </p>
 
 <p> The workarea is a subsection of the screen where clients can be placed. It
  usually excludes the toolbars (see <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a>) and dockable clients
@@ -1582,11 +1588,14 @@ other.</li>
 <p> <strong>Signal:</strong></p>
 
 <ul>
-<li><em>property::workarea</em></li>
+    <li><em>property::workarea</em></li>
 </ul>
 
 
-<p> <img src="../images/AUTOGEN_screen_workarea.svg" alt="Usage example" /></p>
+
+<p> <img src="../images/AUTOGEN_screen_workarea.svg" alt="Usage example"/></p>
+
+
 
 <pre><code>  -- With a padding, the tiled clients wont use 20px at the top and bottom
   -- and 40px on the left and right.
@@ -1599,10 +1608,12 @@ other.</li>
 
   -- This will shift the workarea by 24px at the top.
   local wibar = awful.wibar {
-      position = 'top',
+      position = "top",
       height   = 24,
   }
 </code></pre>
+
+
 
 
 
@@ -1614,7 +1625,7 @@ other.</li>
 
 
 
-    <span id=item587 class="hide_extra">
+    <span id=item588 class="hide_extra">
     </span>
 
 </dd>
@@ -1626,13 +1637,15 @@ other.</li>
     </span>
     </dt>
     <dd>
-    The area where clients can be tiled.</p>
+    The area where clients can be tiled. </p>
 
 <p> This property holds the (read only) area where clients can be tiled. Use
  the <a href="../core_components/screen.html#padding">padding</a> property, <a href="../popups_and_bars/wibox.html#struts">wibox.struts</a> and <a href="../core_components/client.html#struts">client.struts</a> to modify this
  area.</p>
 
-<p><img src="../images/AUTOGEN_screen_tiling_area.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_screen_tiling_area.svg" alt="Usage example"/>
 
 
 
@@ -1645,7 +1658,7 @@ other.</li>
 
 
 
-    <span id=item588 class="hide_extra">
+    <span id=item589 class="hide_extra">
     </span>
 
 </dd>
@@ -1658,18 +1671,22 @@ other.</li>
     </span>
     </dt>
     <dd>
-    <p>The screen padding.</p>
 
-<p> This adds a &ldquo;buffer&rdquo; section on each side of the screen.</p>
+<p>The screen padding. </p>
+
+<p> This adds a "buffer" section on each side of the screen.</p>
 
 <p> <strong>Signal:</strong></p>
 
 <ul>
-<li><em>property::padding</em></li>
+    <li><em>property::padding</em></li>
 </ul>
 
 
-<p><img src="../images/AUTOGEN_screen_padding.svg" alt="Usage example" /></p>
+
+<p><img src="../images/AUTOGEN_screen_padding.svg" alt="Usage example"/></p>
+
+
 
 <pre><code> -- With a padding, the tiled clients wont use 20px at the top and bottom
  -- and 40px on the left and right.
@@ -1686,14 +1703,16 @@ other.</li>
 
 
 
+
+
      <br />
-     <center id=button589>
-     <a class="show_more_button" onclick="show_extra('589')">
+     <center id=button590>
+     <a class="show_more_button" onclick="show_extra('590')">
       Click to display more
      </a>
      </center>
 
-    <span id=item589 class="hide_extra">
+    <span id=item590 class="hide_extra">
      <h3>Consumed theme variables:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -1713,7 +1732,7 @@ other.</li>
     </span>
     </dt>
     <dd>
-    A list of outputs for this screen with their size in mm.</p>
+    A list of outputs for this screen with their size in mm. </p>
 
 <p> Please note that the table content may vary. In some case, it might also be
  empty.</p>
@@ -1728,9 +1747,8 @@ end
 <p> <strong>Signal:</strong></p>
 
 <ul>
-<li><em>property::outputs</em></li>
+    <li><em>property::outputs</em></li>
 </ul>
-
 
 <p> <strong>Immutable:</strong> true
 
@@ -1740,7 +1758,7 @@ end
 
 
 
-    <span id=item590 class="hide_extra">
+    <span id=item591 class="hide_extra">
     </span>
 
 </dd>
@@ -1752,7 +1770,7 @@ end
     </span>
     </dt>
     <dd>
-    The list of visible clients for the screen.</p>
+    The list of visible clients for the screen. </p>
 
 <p> Minimized and unmanaged clients are not included in this list as they are
  technically not on the screen.</p>
@@ -1781,7 +1799,7 @@ end
 
 
 
-    <span id=item591 class="hide_extra">
+    <span id=item592 class="hide_extra">
     </span>
 
 </dd>
@@ -1793,7 +1811,7 @@ end
     </span>
     </dt>
     <dd>
-    Get the list of clients assigned to the screen but not currently visible.</p>
+    Get the list of clients assigned to the screen but not currently visible. </p>
 
 <p> This includes minimized clients and clients on hidden tags.
 
@@ -1815,7 +1833,7 @@ end
 
 
 
-    <span id=item592 class="hide_extra">
+    <span id=item593 class="hide_extra">
     </span>
 
 </dd>
@@ -1847,7 +1865,7 @@ end
 
 
 
-    <span id=item593 class="hide_extra">
+    <span id=item594 class="hide_extra">
     </span>
 
 </dd>
@@ -1859,18 +1877,19 @@ end
     </span>
     </dt>
     <dd>
-    Tiled clients for the screen.</p>
+    Tiled clients for the screen. </p>
 
 <p> Same as <a href="../core_components/screen.html#clients">clients</a>, but excluding:</p>
 
 <ul>
-<li>fullscreen clients</li>
-<li>maximized clients</li>
-<li>floating clients</li>
+    <li>fullscreen clients</li>
+    <li>maximized clients</li>
+    <li>floating clients</li>
 </ul>
 
 
-<p><img src="../images/AUTOGEN_screen_tiled_clients.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_screen_tiled_clients.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
@@ -1884,7 +1903,7 @@ end
 
 
 
-    <span id=item594 class="hide_extra">
+    <span id=item595 class="hide_extra">
     </span>
 
 </dd>
@@ -1896,7 +1915,7 @@ end
     </span>
     </dt>
     <dd>
-    A list of all tags on the screen.</p>
+    A list of all tags on the screen. </p>
 
 <p> This property is read only, use <a href="../core_components/tag.html#screen">tag.screen</a>, <code>awful.tag.add</code>,
  <code>awful.tag.new</code> or <code>t:delete()</code> to alter this list.
@@ -1907,7 +1926,7 @@ end
 
 
 
-    <span id=item595 class="hide_extra">
+    <span id=item596 class="hide_extra">
     </span>
 
 </dd>
@@ -1932,7 +1951,7 @@ end
 
 
 
-    <span id=item596 class="hide_extra">
+    <span id=item597 class="hide_extra">
     </span>
 
 </dd>
@@ -1957,7 +1976,7 @@ end
 
 
 
-    <span id=item597 class="hide_extra">
+    <span id=item598 class="hide_extra">
     </span>
 
 </dd>
@@ -1969,12 +1988,12 @@ end
     </span>
     </dt>
     <dd>
-    The number of pixels per inch of the screen.</p>
+    The number of pixels per inch of the screen. </p>
 
 <p> The default DPI comes from the X11 server. In most case, it will be 96. If
  <code>autodpi</code> is set to <code>true</code> on the screen, it will use the least dense dpi
  from the screen outputs. Most of the time, screens only have a single output,
- however it will have two (or more) when &ldquo;clone mode&rdquo; is used (eg, when a
+ however it will have two (or more) when "clone mode" is used (eg, when a
  screen is duplicated on a projector).
 
     <h3>Type constraints:</h3>
@@ -1989,7 +2008,7 @@ end
 
 
 
-    <span id=item598 class="hide_extra">
+    <span id=item599 class="hide_extra">
     </span>
 
 </dd>
@@ -2015,7 +2034,7 @@ end
 
 
 
-    <span id=item599 class="hide_extra">
+    <span id=item600 class="hide_extra">
     </span>
 
 </dd>
@@ -2041,7 +2060,7 @@ end
 
 
 
-    <span id=item600 class="hide_extra">
+    <span id=item601 class="hide_extra">
     </span>
 
 </dd>
@@ -2053,7 +2072,7 @@ end
     </span>
     </dt>
     <dd>
-    The preferred DPI from all of the (physical) outputs.</p>
+    The preferred DPI from all of the (physical) outputs. </p>
 
 <p> This is computed by normalizing all output to fill the area, then picking
  the lowest of the resulting virtual DPIs.
@@ -2070,7 +2089,7 @@ end
 
 
 
-    <span id=item601 class="hide_extra">
+    <span id=item602 class="hide_extra">
     </span>
 
 </dd>
@@ -2090,7 +2109,7 @@ end
 
 
 
-    <span id=item602 class="hide_extra">
+    <span id=item603 class="hide_extra">
     </span>
 
 </dd>
@@ -2110,7 +2129,7 @@ end
 
 
 
-    <span id=item603 class="hide_extra">
+    <span id=item604 class="hide_extra">
     </span>
 
 </dd>
@@ -2130,7 +2149,7 @@ end
 
 
 
-    <span id=item604 class="hide_extra">
+    <span id=item605 class="hide_extra">
     </span>
 
 </dd>
@@ -2150,7 +2169,7 @@ end
 
 
 
-    <span id=item605 class="hide_extra">
+    <span id=item606 class="hide_extra">
     </span>
 
 </dd>
@@ -2166,9 +2185,12 @@ end
     </span>
     </dt>
     <dd>
-    Remove a screen.</p>
+    Remove a screen. </p>
 
-<p> <img src="../images/AUTOGEN_sequences_screen_fake_remove.svg" alt="Usage example" />
+
+
+<p> <img src="../images/AUTOGEN_sequences_screen_fake_remove.svg" alt="Usage example"/>
+
 
 
 
@@ -2180,7 +2202,7 @@ end
     </ul>
 
 
-    <span id=item606 class="hide_extra">
+    <span id=item607 class="hide_extra">
     </span>
 
 </dd>
@@ -2192,12 +2214,15 @@ end
     </span>
     </dt>
     <dd>
-    Resize a screen.</p>
+    Resize a screen. </p>
 
 <p> Calling this will resize the screen even if it no longer matches the viewport
  size.</p>
 
-<p> <img src="../images/AUTOGEN_sequences_screen_fake_resize.svg" alt="Usage example" />
+
+
+<p> <img src="../images/AUTOGEN_sequences_screen_fake_resize.svg" alt="Usage example"/>
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -2228,7 +2253,7 @@ end
     </ul>
 
 
-    <span id=item607 class="hide_extra">
+    <span id=item608 class="hide_extra">
     </span>
 
 </dd>
@@ -2240,9 +2265,12 @@ end
     </span>
     </dt>
     <dd>
-    Swap a screen with another one in global screen list.</p>
+    Swap a screen with another one in global screen list. </p>
 
-<p> <img src="../images/AUTOGEN_sequences_screen_swap.svg" alt="Usage example" />
+
+
+<p> <img src="../images/AUTOGEN_sequences_screen_swap.svg" alt="Usage example"/>
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -2261,7 +2289,7 @@ end
     </ul>
 
 
-    <span id=item608 class="hide_extra">
+    <span id=item609 class="hide_extra">
     </span>
 
 </dd>
@@ -2298,7 +2326,7 @@ end
 
 
 
-    <span id=item609 class="hide_extra">
+    <span id=item610 class="hide_extra">
     </span>
 
 </dd>
@@ -2310,7 +2338,7 @@ end
     </span>
     </dt>
     <dd>
-    Get the next screen in a specific direction.</p>
+    Get the next screen in a specific direction. </p>
 
 <p> This gets the next screen relative to this one in
  the specified direction.
@@ -2321,7 +2349,7 @@ end
          Screen.
         </li>
         <li><span class="parameter">dir</span>
-         The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
+         The direction, can be either "up", "down", "left" or "right".
         </li>
     </ul>
 
@@ -2330,7 +2358,7 @@ end
 
 
 
-    <span id=item610 class="hide_extra">
+    <span id=item611 class="hide_extra">
     </span>
 
 </dd>
@@ -2342,7 +2370,7 @@ end
     </span>
     </dt>
     <dd>
-    Get the list of visible clients for the screen.</p>
+    Get the list of visible clients for the screen. </p>
 
 <p> This is used by <a href="../core_components/screen.html#clients">screen.clients</a> internally (with <code>stacked=true</code>).
 
@@ -2358,7 +2386,7 @@ end
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The clients list.
     </ol>
 
@@ -2366,7 +2394,7 @@ end
 
 
 
-    <span id=item611 class="hide_extra">
+    <span id=item612 class="hide_extra">
     </span>
 
 </dd>
@@ -2378,7 +2406,7 @@ end
     </span>
     </dt>
     <dd>
-    Get all clients assigned to the screen.</p>
+    Get all clients assigned to the screen. </p>
 
 <p> This is used by <a href="../core_components/screen.html#all_clients">all_clients</a> internally (with <code>stacked=true</code>).
 
@@ -2394,7 +2422,7 @@ end
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The clients list.
     </ol>
 
@@ -2402,7 +2430,7 @@ end
 
 
 
-    <span id=item612 class="hide_extra">
+    <span id=item613 class="hide_extra">
     </span>
 
 </dd>
@@ -2414,7 +2442,7 @@ end
     </span>
     </dt>
     <dd>
-    Get tiled clients for the screen.</p>
+    Get tiled clients for the screen. </p>
 
 <p> This is used by <code>tiles_clients</code> internally (with <code>stacked=true</code>).
 
@@ -2430,7 +2458,7 @@ end
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The clients list.
     </ol>
 
@@ -2438,7 +2466,7 @@ end
 
 
 
-    <span id=item613 class="hide_extra">
+    <span id=item614 class="hide_extra">
     </span>
 
 </dd>
@@ -2450,34 +2478,43 @@ end
     </span>
     </dt>
     <dd>
-    <p>Split the screen into multiple screens.</p>
+
+<p>Split the screen into multiple screens. </p>
 
 <p> This is useful to turn ultrawide monitors into something more useful without
  fancy client layouts:</p>
 
-<p><img src="../images/AUTOGEN_awful_screen_split1.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_awful_screen_split1.svg" alt="Usage example"/></p>
+
 
 <pre><code> screen[1]:split({1/5, 3/5, 1/5})
 </code></pre>
 
-<p> It can also be used to turn a vertical &ldquo;side&rdquo; screen into 2 smaller screens:</p>
+<p> It can also be used to turn a vertical "side" screen into 2 smaller screens:</p>
 
-<p><img src="../images/AUTOGEN_awful_screen_split2.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_awful_screen_split2.svg" alt="Usage example"/></p>
+
 
 <pre><code> screen[1]:split()
 </code></pre>
 
+
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">ratios</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The different ratios to split into. If none is
   provided, it is split in half.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">mode</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         Either &ldquo;vertical&rdquo; or &ldquo;horizontal&rdquo;. If none is
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         Either "vertical" or "horizontal". If none is
   specified, it will split along the longest axis.
          (<em>optional</em>)
         </li>
@@ -2488,7 +2525,7 @@ end
 
 
 
-    <span id=item614 class="hide_extra">
+    <span id=item615 class="hide_extra">
     </span>
 
 </dd>
@@ -2506,7 +2543,7 @@ end
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">...</span>
@@ -2521,7 +2558,7 @@ end
 
 
 
-    <span id=item615 class="hide_extra">
+    <span id=item616 class="hide_extra">
     </span>
 
 </dd>
@@ -2539,46 +2576,7 @@ end
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The name of the signal.
-        </li>
-        <li><span class="parameter">func</span>
-            <span class="types"><span class="type">function</span></span>
-         The callback to call when the signal is emitted.
-        </li>
-    </ul>
-
-
-
-
-
-
-    <span id=item616 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "weak_connect_signal"></a>
-    <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="proptype"></span>
-    <span class="baseclass" >
-    &middot;&nbsp;Inherited from gears.object
-    </span>
-    </dt>
-    <dd>
-    Connect to a signal weakly.</p>
-
-<p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.</p>
-
-<p> <strong>Warning:</strong>
- Only use this function if you really, really, really know what you
- are doing.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -2596,6 +2594,45 @@ end
     </span>
 
 </dd>
+    <dt>
+    <a name = "weak_connect_signal"></a>
+    <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
+    <span class="proptype"></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
+    </dt>
+    <dd>
+    Connect to a signal weakly. </p>
+
+<p> This allows the callback function to be garbage collected and
+ automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
+ Only use this function if you really, really, really know what you
+ are doing.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item618 class="hide_extra">
+    </span>
+
+</dd>
 </dl>
     <h2 class="section-header "><a name="Signals"></a>Signals</h2>
 
@@ -2607,7 +2644,7 @@ end
     </span>
     </dt>
     <dd>
-    AwesomeWM is about to scan for existing screens.</p>
+    AwesomeWM is about to scan for existing screens. </p>
 
 <p> Connect to this signal when code needs to be executed after the Lua context
  is initialized and modules are loaded, but before screens are added.</p>
@@ -2629,7 +2666,7 @@ end
 
 
 
-    <span id=item618 class="hide_extra">
+    <span id=item619 class="hide_extra">
     </span>
 
 </dd>
@@ -2640,7 +2677,7 @@ end
     </span>
     </dt>
     <dd>
-    AwesomeWM is done scanning for screens.</p>
+    AwesomeWM is done scanning for screens. </p>
 
 <p> Connect to this signal to execute code after the screens have been created,
  but before the clients are added. This signal can also be used to split
@@ -2661,7 +2698,7 @@ end
 
 
 
-    <span id=item619 class="hide_extra">
+    <span id=item620 class="hide_extra">
     </span>
 
 </dd>
@@ -2680,7 +2717,9 @@ end
 
 
 
-    <span id=item620 class="hide_extra">
+
+
+    <span id=item621 class="hide_extra">
     </span>
 
 </dd>
@@ -2699,7 +2738,7 @@ end
 
 
 
-    <span id=item621 class="hide_extra">
+    <span id=item622 class="hide_extra">
     </span>
 
 </dd>
@@ -2719,13 +2758,13 @@ end
 
 
      <br />
-     <center id=button622>
-     <a class="show_more_button" onclick="show_extra('622')">
+     <center id=button623>
+     <a class="show_more_button" onclick="show_extra('623')">
       Click to display more
      </a>
      </center>
 
-    <span id=item622 class="hide_extra">
+    <span id=item623 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -2755,7 +2794,7 @@ end
 
 
 
-    <span id=item623 class="hide_extra">
+    <span id=item624 class="hide_extra">
     </span>
 
 </dd>
@@ -2785,7 +2824,7 @@ end
 
 
 
-    <span id=item624 class="hide_extra">
+    <span id=item625 class="hide_extra">
     </span>
 
 </dd>
@@ -2796,7 +2835,8 @@ end
     </span>
     </dt>
     <dd>
-    <p>This signal is emitted when the list of physical screen viewport changes.</p>
+
+<p>This signal is emitted when the list of physical screen viewport changes. </p>
 
 <p> Each viewport in the list corresponds to a <strong>physical</strong> screen rectangle, which
  is <strong>not</strong> the <a href="../core_components/screen.html#property::viewports">viewports</a> property of the <a href="../core_components/screen.html#">screen</a> objects.</p>
@@ -2804,18 +2844,19 @@ end
 <p> Each entry in the <a href="../core_components/screen.html#property::viewports">viewports</a> entry has the following keys:</p>
 
 <ul>
-<li><a href="../core_components/screen.html#geometry">geometry</a> <em>(table)</em>: A table with an <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code> keys.</li>
-<li><a href="../core_components/screen.html#outputs">outputs</a> <em>(table)</em>: All outputs sharing this viewport.</li>
-<li><a href="../core_components/screen.html#maximum_dpi">maximum_dpi</a> <em>(number)</em>: The DPI of the most dense output.</li>
-<li><a href="../core_components/screen.html#minimum_dpi">minimum_dpi</a> <em>(number)</em>: The DPI of the least dense output.</li>
-<li><a href="../core_components/screen.html#preferred_dpi">preferred_dpi</a> <em>(number)</em>: The optimal DPI.</li>
+    <li><a href="../core_components/screen.html#geometry">geometry</a> <em>(table)</em>: A table with an <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code> keys.</li>
+    <li><a href="../core_components/screen.html#outputs">outputs</a> <em>(table)</em>: All outputs sharing this viewport.</li>
+    <li><a href="../core_components/screen.html#maximum_dpi">maximum_dpi</a> <em>(number)</em>: The DPI of the most dense output.</li>
+    <li><a href="../core_components/screen.html#minimum_dpi">minimum_dpi</a> <em>(number)</em>: The DPI of the least dense output.</li>
+    <li><a href="../core_components/screen.html#preferred_dpi">preferred_dpi</a> <em>(number)</em>: The optimal DPI.</li>
 </ul>
+
 
 
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">viewports</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table containing all physical viewports.
         </li>
     </ul>
@@ -2829,7 +2870,7 @@ end
 
 
 
-    <span id=item625 class="hide_extra">
+    <span id=item626 class="hide_extra">
     </span>
 
 </dd>
@@ -2841,7 +2882,7 @@ end
     </span>
     </dt>
     <dd>
-    Emitted when a new screen is added.</p>
+    Emitted when a new screen is added. </p>
 
 <p> The handler(s) of this signal are responsible of adding elements such as
  bars, docks or other elements to a screen. The signal is emitted when a
@@ -2852,57 +2893,7 @@ end
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The context.
-        </li>
-    </ul>
-
-
-
-
-
-     <br />
-     <center id=button626>
-     <a class="show_more_button" onclick="show_extra('626')">
-      Click to display more
-     </a>
-     </center>
-
-    <span id=item626 class="hide_extra">
-     <h3>Requested actions or permissions:</h3>
-     <table class='widget_list' border=1>
-         <tr style='font-weight: bold;'>
-           <th>Class</th>
-           <th>Permission</th>
-           <th>Context</th>
-           <th>Default</th>
-           <th>Description</th>
-         </tr>
-          <tr><td>screen</td><td>wallpaper</td><td>added</td><td>granted</td><td>When the decorations needs to be added to a new screen.</td></tr>
-     </table>
-    </span>
-
-</dd>
-    <dt>
-    <a name = "request::wallpaper"></a>
-    <strong>request::wallpaper</strong>
-    <span class="baseclass" >
-         &middot 3 permissions
-    </span>
-    </dt>
-    <dd>
-    Emitted when a new screen needs a wallpaper.</p>
-
-<p> The handler(s) of this signal are responsible to set the wallpaper. The
- signal is emitted when a screen is added (including at startup), when its
- DPI changes or when its geometry changes.</p>
-
-<p> The only default implementation is the one provided by <a href="../sample files/rc.lua.html#">rc.lua</a>.
-
-    <h3>Arguments:</h3>
-    <ul>
-        <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The context.
         </li>
     </ul>
@@ -2928,6 +2919,56 @@ end
            <th>Default</th>
            <th>Description</th>
          </tr>
+          <tr><td>screen</td><td>wallpaper</td><td>added</td><td>granted</td><td>When the decorations needs to be added to a new screen.</td></tr>
+     </table>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "request::wallpaper"></a>
+    <strong>request::wallpaper</strong>
+    <span class="baseclass" >
+         &middot 3 permissions
+    </span>
+    </dt>
+    <dd>
+    Emitted when a new screen needs a wallpaper. </p>
+
+<p> The handler(s) of this signal are responsible to set the wallpaper. The
+ signal is emitted when a screen is added (including at startup), when its
+ DPI changes or when its geometry changes.</p>
+
+<p> The only default implementation is the one provided by <a href="../sample files/rc.lua.html#">rc.lua</a>.
+
+    <h3>Arguments:</h3>
+    <ul>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The context.
+        </li>
+    </ul>
+
+
+
+
+
+     <br />
+     <center id=button628>
+     <a class="show_more_button" onclick="show_extra('628')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item628 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
           <tr><td>screen</td><td>wallpaper</td><td>added</td><td>granted</td><td>When the wallpaper needs to be added to a new screen.</td></tr>
           <tr><td>screen</td><td>wallpaper</td><td>geometry</td><td>granted</td><td>When the wallpaper needs to be updated because the resolution changed.</td></tr>
           <tr><td>screen</td><td>wallpaper</td><td>dpi</td><td>granted</td><td>When the wallpaper needs to be updated because the DPI changed.</td></tr>
@@ -2942,10 +2983,11 @@ end
     </span>
     </dt>
     <dd>
-    <p>When a new (physical) screen area has been added.</p>
 
-<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.
- Please also note that this doesn&rsquo;t mean it will appear when a screen is
+<p>When a new (physical) screen area has been added. </p>
+
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.
+ Please also note that this doesn't mean it will appear when a screen is
  physically plugged. Depending on the configuration a tool like <code>arandr</code> or
  the <code>xrandr</code> command is needed.</p>
 
@@ -2958,17 +3000,21 @@ end
 )
 </code></pre>
 
+
+
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">viewport</span>
+
+
         <ul>
         <li><span class="parameter">geometry</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code>
   keys.
         </li>
         <li><span class="parameter">outputs</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with the monitor name and possibly the
   <code>mm_width</code> and <code>mm_height</code> values if they are available.
         </li>
@@ -2994,9 +3040,11 @@ end
         </li>
         </li></ul>
         <li><span class="parameter">args</span>
+
+
         <ul>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Why was this signal sent.
         </li>
         </li></ul>
@@ -3012,7 +3060,7 @@ end
 
 
 
-    <span id=item628 class="hide_extra">
+    <span id=item629 class="hide_extra">
     </span>
 
 </dd>
@@ -3023,9 +3071,10 @@ end
     </span>
     </dt>
     <dd>
-    <p>When a physical monitor viewport has been removed.</p>
 
-<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.</p>
+<p>When a physical monitor viewport has been removed. </p>
+
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.</p>
 
 <p> If you replace the default handler, it is up to you to find the screen(s)
  associated with this viewport.</p>
@@ -3037,17 +3086,21 @@ end
 )
 </code></pre>
 
+
+
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">viewport</span>
+
+
         <ul>
         <li><span class="parameter">geometry</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code>
   keys.
         </li>
         <li><span class="parameter">outputs</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with the monitor name and possibly the
   <code>mm_width</code> and <code>mm_height</code> values if they are available.
         </li>
@@ -3072,9 +3125,11 @@ end
         </li>
         </li></ul>
         <li><span class="parameter">args</span>
+
+
         <ul>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Why was this signal sent.
         </li>
         </li></ul>
@@ -3089,7 +3144,7 @@ end
 
 
 
-    <span id=item629 class="hide_extra">
+    <span id=item630 class="hide_extra">
     </span>
 
 </dd>
@@ -3100,12 +3155,13 @@ end
     </span>
     </dt>
     <dd>
-    <p>When a physical viewport resolution has changed or it has been replaced.</p>
 
-<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.</p>
+<p>When a physical viewport resolution has changed or it has been replaced. </p>
+
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.</p>
 
 <p> Note that given the viewports are not the same, the <code>id</code> wont be the same.
- Also note that if multiple new viewports fit within a single &ldquo;old&rdquo; viewport,
+ Also note that if multiple new viewports fit within a single "old" viewport,
  the resized screen will be the one with the largest total overlapping
  viewport (<code>intersection.width*intersection.height</code>), regardless of the
  outputs names.</p>
@@ -3117,17 +3173,21 @@ end
 )
 </code></pre>
 
+
+
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">old_viewport</span>
+
+
         <ul>
         <li><span class="parameter">geometry</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with <code>x</code>, <code>y</code>, <code>width</code> and
   <code>height</code> keys.
         </li>
         <li><span class="parameter">outputs</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with the monitor name and
   possibly the <code>mm_width</code> and <code>mm_height</code> values if they are available.
         </li>
@@ -3153,14 +3213,16 @@ end
         </li>
         </li></ul>
         <li><span class="parameter">new_viewport</span>
+
+
         <ul>
         <li><span class="parameter">geometry</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with <code>x</code>, <code>y</code>, <code>width</code> and
   <code>height</code> keys.
         </li>
         <li><span class="parameter">outputs</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with the monitor name and
   possibly the
   <code>mm_width</code> and <code>mm_height</code> values if they are available.
@@ -3186,9 +3248,11 @@ end
         </li>
         </li></ul>
         <li><span class="parameter">args</span>
+
+
         <ul>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Why was this signal sent.
         </li>
         </li></ul>
@@ -3203,7 +3267,7 @@ end
 
 
 
-    <span id=item630 class="hide_extra">
+    <span id=item631 class="hide_extra">
     </span>
 
 </dd>
@@ -3222,7 +3286,7 @@ end
 
 
 
-    <span id=item631 class="hide_extra">
+    <span id=item632 class="hide_extra">
     </span>
 
 </dd>
@@ -3237,9 +3301,9 @@ end
     </span>
     </dt>
     <dd>
-    Default handler for <a href="../core_components/screen.html#request::create">request::create</a>.</p>
+    Default handler for <a href="../core_components/screen.html#request::create">request::create</a>. </p>
 
-<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.</p>
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.</p>
 
 <p> A simplified implementation looks like:</p>
 
@@ -3264,7 +3328,7 @@ end
 
 
 
-    <span id=item632 class="hide_extra">
+    <span id=item633 class="hide_extra">
     </span>
 
 </dd>
@@ -3275,9 +3339,10 @@ end
     </span>
     </dt>
     <dd>
-    <p>Default handler for <a href="../core_components/screen.html#request::remove">request::remove</a>.</p>
 
-<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.</p>
+<p>Default handler for <a href="../core_components/screen.html#request::remove">request::remove</a>. </p>
+
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.</p>
 
 <p> A simplified version of the logic is:</p>
 
@@ -3295,6 +3360,8 @@ end
 
 
 
+
+
     <h3>See also:</h3>
     <ul>
          <a href="../core_components/screen.html#request::remove">request::remove</a>
@@ -3302,7 +3369,7 @@ end
 
 
 
-    <span id=item633 class="hide_extra">
+    <span id=item634 class="hide_extra">
     </span>
 
 </dd>
@@ -3313,9 +3380,10 @@ end
     </span>
     </dt>
     <dd>
-    <p>Default handler for <a href="../core_components/screen.html#request::resize">request::resize</a>.</p>
 
-<p> Important: This only exists when Awesome is started with <code>&ndash;screen off</code>.</p>
+<p>Default handler for <a href="../core_components/screen.html#request::resize">request::resize</a>. </p>
+
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.</p>
 
 <p> A simplified version of the logic is:</p>
 
@@ -3335,6 +3403,8 @@ end
 
 
 
+
+
     <h3>See also:</h3>
     <ul>
          <a href="../core_components/screen.html#request::resize">request::resize</a>
@@ -3342,7 +3412,7 @@ end
 
 
 
-    <span id=item634 class="hide_extra">
+    <span id=item635 class="hide_extra">
     </span>
 
 </dd>
@@ -3386,7 +3456,7 @@ end
 
 
 
-    <span id=item635 class="hide_extra">
+    <span id=item636 class="hide_extra">
     </span>
 
 </dd>
@@ -3405,8 +3475,8 @@ end
          The screen object to change the padding on
         </li>
         <li><span class="parameter">padding</span>
-         The padding, a table with &lsquo;top&rsquo;, &lsquo;left&rsquo;, &lsquo;right&rsquo; and/or
- &lsquo;bottom&rsquo; or a number value to apply set the same padding on all sides. Can be
+         The padding, a table with 'top', 'left', 'right' and/or
+ 'bottom' or a number value to apply set the same padding on all sides. Can be
   nil if you only want to retrieve padding
          (<em>default</em> nil)
         </li>
@@ -3415,7 +3485,7 @@ end
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with left, right, top and bottom number values.
     </ol>
 
@@ -3427,7 +3497,7 @@ end
 
 
 
-    <span id=item636 class="hide_extra">
+    <span id=item637 class="hide_extra">
     </span>
 
 </dd>
@@ -3451,7 +3521,7 @@ end
 
 
 
-    <span id=item637 class="hide_extra">
+    <span id=item638 class="hide_extra">
     </span>
 
 </dd>
@@ -3463,7 +3533,7 @@ end
     </span>
     </dt>
     <dd>
-    If <a href="../core_components/screen.html#">screen</a> objects are created automatically when new viewports are detected.</p>
+    If <a href="../core_components/screen.html#">screen</a> objects are created automatically when new viewports are detected. </p>
 
 <p> Be very, very careful when setting this to false. You might end up with
  no screens. This is <strong>not</strong> supported. Always connect to the <a href="../core_components/screen.html#scanned">scanned</a>
@@ -3479,7 +3549,7 @@ end
 
 
 
-    <span id=item638 class="hide_extra">
+    <span id=item639 class="hide_extra">
     </span>
 
 </dd>
@@ -3499,7 +3569,7 @@ end
 
 
 
-    <span id=item639 class="hide_extra">
+    <span id=item640 class="hide_extra">
     </span>
 
 </dd>
