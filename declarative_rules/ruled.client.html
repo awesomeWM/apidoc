@@ -140,6 +140,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -236,16 +237,19 @@
  to add random properties that will be later accessible as <code>c.property_name</code>
  (where <code>c</code> is a valid client object)</p>
 
-<h2> Syntax</h2>
-
+<h1> Syntax</h1>
 <p> You should fill this table with your rule and properties to apply.
  For example, if you want to set xterm maximized at startup, you can add:</p>
 
-<p><img src="../images/AUTOGEN_sequences_client_rules_maximized.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_sequences_client_rules_maximized.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 ruled.client.append_rule {
-    rule = { class = <span class="string">'xterm'</span> },
+    rule = { class = <span class="string">"xterm"</span> },
     properties = {
         maximized_vertical   = <span class="keyword">true</span>,
         maximized_horizontal = <span class="keyword">true</span>
@@ -253,17 +257,20 @@ ruled.client.append_rule {
 }
 
 <span class="comment">-- Spawn xterm
-</span>awful.spawn(<span class="string">'xterm'</span>)
+</span>awful.spawn(<span class="string">"xterm"</span>)
 </pre>
-
 
 <p> If you want to set mplayer floating at startup, you can add:</p>
 
-<p><img src="../images/AUTOGEN_sequences_client_rules_floating.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_sequences_client_rules_floating.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 ruled.client.append_rule {
-    rule = { class = <span class="string">'mplayer'</span> },
+    rule = { class = <span class="string">"mplayer"</span> },
     properties = {
         floating  = <span class="keyword">true</span>,
         placement = awful.placement.centered,
@@ -274,24 +281,27 @@ ruled.client.append_rule {
 
 <span class="comment">-- Spawn xterm
 </span><span class="keyword">for</span> _=<span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
-    awful.spawn(<span class="string">'xterm'</span>)
+    awful.spawn(<span class="string">"xterm"</span>)
 <span class="keyword">end</span>
 
 <span class="comment">-- Spawn mplayer
-</span>awful.spawn(<span class="string">'mplayer'</span>)
+</span>awful.spawn(<span class="string">"mplayer"</span>)
 </pre>
 
-
 <p> If you want to put Firefox on a specific tag at startup. It is possible to
- specify the tag with it&rsquo;s object or by name:</p>
+ specify the tag with it's object or by name:</p>
 
-<p><img src="../images/AUTOGEN_sequences_client_rules_tags.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_sequences_client_rules_tags.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 <span class="comment">-- Select tag by object reference:
 </span>ruled.client.append_rule {
     rule_any    = {
-        class = {<span class="string">'firefox'</span>}
+        class = {<span class="string">"firefox"</span>}
     },
     properties = {
         tag = screen[<span class="number">1</span>].tags[<span class="number">3</span>],
@@ -301,22 +311,25 @@ ruled.client.append_rule {
 <span class="comment">-- Select tag by name:
 </span>ruled.client.append_rule {
     rule_any    = {
-        class = {<span class="string">'thunderbird'</span>}
+        class = {<span class="string">"thunderbird"</span>}
     },
     properties = {
-        tag = <span class="string">'five'</span>,
+        tag = <span class="string">"five"</span>,
     },
 }
 
 <span class="comment">-- Spawn firefox and thunderbird
-</span>awful.spawn(<span class="string">'firefox'</span>)
-awful.spawn(<span class="string">'thunderbird'</span>)
+</span>awful.spawn(<span class="string">"firefox"</span>)
+awful.spawn(<span class="string">"thunderbird"</span>)
 </pre>
-
 
 <p> If you want to put Thunderbird on a specific screen at startup, use:</p>
 
-<p><img src="../images/AUTOGEN_sequences_client_rules_screens.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_sequences_client_rules_screens.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 mouse.coords {x = <span class="number">2500</span>, y = <span class="number">100</span> }
@@ -324,7 +337,7 @@ mouse.coords {x = <span class="number">2500</span>, y = <span class="number">100
 <span class="comment">-- Screen by IDs:
 </span>ruled.client.append_rule {
     rule_any    = {
-        class = {<span class="string">'firefox'</span>}
+        class = {<span class="string">"firefox"</span>}
     },
     properties = {
         screen = <span class="number">2</span>,
@@ -334,7 +347,7 @@ mouse.coords {x = <span class="number">2500</span>, y = <span class="number">100
 <span class="comment">-- Screen by object:
 </span>ruled.client.append_rule {
     rule_any    = {
-        class = {<span class="string">'thunderbird'</span>}
+        class = {<span class="string">"thunderbird"</span>}
     },
     properties = {
         screen = mouse.screen,
@@ -344,29 +357,32 @@ mouse.coords {x = <span class="number">2500</span>, y = <span class="number">100
 <span class="comment">-- Screen by output name:
 </span>ruled.client.append_rule {
     rule_any    = {
-        class = {<span class="string">'xterm'</span>}
+        class = {<span class="string">"xterm"</span>}
     },
     properties = {
-        screen = <span class="string">'LVDS1'</span>,
+        screen = <span class="string">"LVDS1"</span>,
     },
 }
 
 <span class="comment">-- Spawn firefox, thunderbird and xterm
-</span>awful.spawn(<span class="string">'firefox'</span>)
-awful.spawn(<span class="string">'thunderbird'</span>)
-awful.spawn(<span class="string">'xterm'</span>)
+</span>awful.spawn(<span class="string">"firefox"</span>)
+awful.spawn(<span class="string">"thunderbird"</span>)
+awful.spawn(<span class="string">"xterm"</span>)
 </pre>
-
 
 <p> If you want to put Emacs on a specific tag at startup, and immediately switch
  to that tag you can add:</p>
 
-<p><img src="../images/AUTOGEN_sequences_client_rules_switch_to_tags.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_sequences_client_rules_switch_to_tags.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 <span class="comment">-- Select tag by object reference:
 </span>ruled.client.append_rule {
-    rule = { class = <span class="string">'firefox'</span> },
+    rule = { class = <span class="string">"firefox"</span> },
     properties = {
         tag            = screen[<span class="number">1</span>].tags[<span class="number">4</span>],
         switch_to_tags = <span class="keyword">true</span>
@@ -374,13 +390,13 @@ awful.spawn(<span class="string">'xterm'</span>)
 }
 
 <span class="comment">-- Spawn firefox
-</span>awful.spawn(<span class="string">'firefox'</span>)
+</span>awful.spawn(<span class="string">"firefox"</span>)
 </pre>
-
 
 <p> If you want to apply a custom callback to execute when a rule matched,
  for example to pause playing music from mpd when you start dosbox, you
  can add:</p>
+
 
 <pre>
 { rule = { class = <span class="string">"dosbox"</span> },
@@ -389,28 +405,28 @@ awful.spawn(<span class="string">'xterm'</span>)
   <span class="keyword">end</span> }
 </pre>
 
-
-<p> Note that all &ldquo;rule&rdquo; entries need to match. If any of the entry does not
- match, the rule won&rsquo;t be applied.</p>
+<p> Note that all "rule" entries need to match. If any of the entry does not
+ match, the rule won't be applied.</p>
 
 <p> If a client matches multiple rules, they are applied in the order they are
  put in this global rules table. If the value of a rule is a string, then the
  match function is used to determine if the client matches the rule.</p>
 
 <p> If the value of a property is a function, that function gets called and
- function&rsquo;s return value is used for the property.</p>
+ function's return value is used for the property.</p>
 
 <p> To match multiple clients to a rule one need to use slightly different
  syntax:</p>
+
 
 <pre>
 { rule_any = { class = { <span class="string">"MPlayer"</span>, <span class="string">"Nitrogen"</span> }, instance = { <span class="string">"xterm"</span> } },
   properties = { floating = <span class="keyword">true</span> } }
 </pre>
 
-
 <p> To match multiple clients with an exception one can couple <code>rules.except</code> or
  <code>rules.except_any</code> with the rules:</p>
+
 
 <pre>
 { rule = { class = <span class="string">"Firefox"</span> },
@@ -429,15 +445,14 @@ awful.spawn(<span class="string">'xterm'</span>)
 }
 </pre>
 
-
 <p> Note that all rules can have an <a href="../declarative_rules/ruled.client.html#id">id</a> field. This can then be used to find
  the rule. For example, it can be used in <a href="../declarative_rules/ruled.client.html#module.remove_rule">remove_rule</a> instead of the table.</p>
 
-<h2> Flowchart</h2>
+<h1> Flowchart</h1>
 
-<p> <img src="../images/client_rules.svg" alt="Client rules" /></p>
+<p> <img src="../images/client_rules.svg" alt="Client rules"/></p>
 
-<h2> Applicable client properties</h2>
+<h1> Applicable client properties</h1>
 
 <p> The table below holds the list of default client properties along with
  some extra properties that are specific to the rules. Note that any property
@@ -607,7 +622,7 @@ awful.spawn(<span class="string">'xterm'</span>)
     <tr>
       <td class="shortname" ><a href="#rule_every">rule_every</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td colspan="2" class="summary">Matches when one of every \&ldquo;category\&rdquo; of components match.</td>
+      <td colspan="2" class="summary">Matches when one of every \"category\" of components match.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#rule_lesser">rule_lesser</a></td>
@@ -666,7 +681,7 @@ awful.spawn(<span class="string">'xterm'</span>)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">rule</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A valid rule.
         </li>
     </ul>
@@ -676,7 +691,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item808 class="hide_extra">
+    <span id=item809 class="hide_extra">
     </span>
 
 </dd>
@@ -692,7 +707,7 @@ awful.spawn(<span class="string">'xterm'</span>)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with rules.
         </li>
     </ul>
@@ -702,7 +717,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item809 class="hide_extra">
+    <span id=item810 class="hide_extra">
     </span>
 
 </dd>
@@ -718,7 +733,7 @@ awful.spawn(<span class="string">'xterm'</span>)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">rule</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          A valid rule or a name passed in the <a href="../declarative_rules/ruled.client.html#id">id</a> value
   when calling <a href="../declarative_rules/ruled.client.html#module.append_rule">append_rule</a>.
         </li>
@@ -729,7 +744,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item810 class="hide_extra">
+    <span id=item811 class="hide_extra">
     </span>
 
 </dd>
@@ -754,7 +769,7 @@ awful.spawn(<span class="string">'xterm'</span>)
          The client.
         </li>
         <li><span class="parameter">rule</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The rule to check.
         </li>
     </ul>
@@ -770,7 +785,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item811 class="hide_extra">
+    <span id=item812 class="hide_extra">
     </span>
 
 </dd>
@@ -791,7 +806,7 @@ awful.spawn(<span class="string">'xterm'</span>)
          The client.
         </li>
         <li><span class="parameter">rule</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The rule to check.
         </li>
     </ul>
@@ -807,7 +822,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item812 class="hide_extra">
+    <span id=item813 class="hide_extra">
     </span>
 
 </dd>
@@ -828,7 +843,7 @@ awful.spawn(<span class="string">'xterm'</span>)
          The client.
         </li>
         <li><span class="parameter">entry</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Rule entry (with keys <a href="../declarative_rules/ruled.client.html#rule">rule</a>, <a href="../declarative_rules/ruled.client.html#rule_any">rule_any</a>, <a href="../declarative_rules/ruled.client.html#except">except</a> and/or
    <a href="../declarative_rules/ruled.client.html#except_any">except_any</a>).
         </li>
@@ -839,13 +854,15 @@ awful.spawn(<span class="string">'xterm'</span>)
 
            <span class="types"><span class="type">bool</span></span>
 
+
+
     </ol>
 
 
 
 
 
-    <span id=item813 class="hide_extra">
+    <span id=item814 class="hide_extra">
     </span>
 
 </dd>
@@ -866,16 +883,16 @@ awful.spawn(<span class="string">'xterm'</span>)
          The client.
         </li>
         <li><span class="parameter">_rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-         The rules to check. List with &ldquo;rule&rdquo;, &ldquo;rule_any&rdquo;, &ldquo;except&rdquo; and
-   &ldquo;except_any&rdquo; keys.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+         The rules to check. List with "rule", "rule<em>any", "except" and
+   "except</em>any" keys.
         </li>
     </ul>
 
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         The list of matched rules.
     </ol>
 
@@ -883,7 +900,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item814 class="hide_extra">
+    <span id=item815 class="hide_extra">
     </span>
 
 </dd>
@@ -904,7 +921,7 @@ awful.spawn(<span class="string">'xterm'</span>)
          The client.
         </li>
         <li><span class="parameter">_rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The rules to check. List of tables with <a href="../declarative_rules/ruled.client.html#rule">rule</a>, <a href="../declarative_rules/ruled.client.html#rule_any">rule_any</a>,
    <a href="../declarative_rules/ruled.client.html#except">except</a> and <a href="../declarative_rules/ruled.client.html#except_any">except_any</a> keys.
         </li>
@@ -921,7 +938,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item815 class="hide_extra">
+    <span id=item816 class="hide_extra">
     </span>
 
 </dd>
@@ -938,7 +955,7 @@ awful.spawn(<span class="string">'xterm'</span>)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The source name.
         </li>
     </ul>
@@ -954,7 +971,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item816 class="hide_extra">
+    <span id=item817 class="hide_extra">
     </span>
 
 </dd>
@@ -981,7 +998,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item817 class="hide_extra">
+    <span id=item818 class="hide_extra">
     </span>
 
 </dd>
@@ -993,17 +1010,16 @@ awful.spawn(<span class="string">'xterm'</span>)
     </span>
     </dt>
     <dd>
-    Add a new rule source.</p>
+    Add a new rule source. </p>
 
 <p> A rule source is a provider called when a client is managed (started). It
  allows to configure the client by providing properties that should be applied.
  By default, Awesome provides 2 sources:</p>
 
 <ul>
-<li><a href="../libraries/awful.rules.html#">awful.rules</a>: A declarative matcher</li>
-<li><a href="../libraries/awful.spawn.html#">awful.spawn</a>: Launch clients with pre-defined properties</li>
+    <li><a href="../libraries/awful.rules.html#">awful.rules</a>: A declarative matcher</li>
+    <li><a href="../libraries/awful.spawn.html#">awful.spawn</a>: Launch clients with pre-defined properties</li>
 </ul>
-
 
 <p> It is possible to register new callbacks to modify the properties table
  before it is applied. Each provider is executed sequentially and modifies the
@@ -1026,7 +1042,7 @@ awful.spawn(<span class="string">'xterm'</span>)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The provider name. It must be unique.
         </li>
         <li><span class="parameter">callback</span> The callback that is called to produce properties.
@@ -1036,24 +1052,24 @@ awful.spawn(<span class="string">'xterm'</span>)
          The client
         </li>
         <li><span class="parameter">properties</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current properties. The callback should
   add to and overwrite properties in this table
         </li>
         <li><span class="parameter">callbacks</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table of all callbacks scheduled to be
   executed after the main properties are applied.
         </li>
         </li></ul>
         <li><span class="parameter">depends_on</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A list of names of sources this source depends on
   (sources that must be executed <em>before</em> <code>name</code>.
          (<em>default</em> {})
         </li>
         <li><span class="parameter">precede</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A list of names of sources this source have a
   priority over.
          (<em>default</em> {})
@@ -1071,7 +1087,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item818 class="hide_extra">
+    <span id=item819 class="hide_extra">
     </span>
 
 </dd>
@@ -1093,11 +1109,11 @@ awful.spawn(<span class="string">'xterm'</span>)
          The client.
         </li>
         <li><span class="parameter">props</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Properties to apply.
         </li>
         <li><span class="parameter">callbacks</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Callbacks to apply.
          (<em>optional</em>)
         </li>
@@ -1108,13 +1124,13 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
      <br />
-     <center id=button819>
-     <a class="show_more_button" onclick="show_extra('819')">
+     <center id=button820>
+     <a class="show_more_button" onclick="show_extra('820')">
       Click to display more
      </a>
      </center>
 
-    <span id=item819 class="hide_extra">
+    <span id=item820 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -1140,7 +1156,7 @@ awful.spawn(<span class="string">'xterm'</span>)
     </span>
     </dt>
     <dd>
-    The default <a href="../declarative_rules/ruled.client.html#">ruled.client</a> source.</p>
+    The default <a href="../declarative_rules/ruled.client.html#">ruled.client</a> source. </p>
 
 <p> It is called <a href="../libraries/awful.rules.html#">awful.rules</a> for historical reasons.</p>
 
@@ -1154,7 +1170,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item820 class="hide_extra">
+    <span id=item821 class="hide_extra">
     </span>
 
 </dd>
@@ -1165,12 +1181,13 @@ awful.spawn(<span class="string">'xterm'</span>)
     </span>
     </dt>
     <dd>
-    <p>The rule source for clients spawned by <a href="../libraries/awful.spawn.html#">awful.spawn</a>.</p>
+
+<p>The rule source for clients spawned by <a href="../libraries/awful.spawn.html#">awful.spawn</a>. </p>
 
 <p> <strong>Has priority over:</strong></p>
 
 <ul>
-<li><a href="../libraries/awful.rules.html#">awful.rules</a></li>
+    <li><a href="../libraries/awful.rules.html#">awful.rules</a></li>
 </ul>
 
 
@@ -1180,7 +1197,8 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item821 class="hide_extra">
+
+    <span id=item822 class="hide_extra">
     </span>
 
 </dd>
@@ -1191,19 +1209,19 @@ awful.spawn(<span class="string">'xterm'</span>)
     </span>
     </dt>
     <dd>
-    <p>The rule source for clients spawned by <a href="../libraries/awful.spawn.html#awful.spawn.once">awful.spawn.once</a> and <code>single_instance</code>.</p>
+
+<p>The rule source for clients spawned by <a href="../libraries/awful.spawn.html#awful.spawn.once">awful.spawn.once</a> and <code>single_instance</code>. </p>
 
 <p> <strong>Has priority over:</strong></p>
 
 <ul>
-<li><a href="../libraries/awful.rules.html#">awful.rules</a></li>
+    <li><a href="../libraries/awful.rules.html#">awful.rules</a></li>
 </ul>
-
 
 <p> <strong>Depends on:</strong></p>
 
 <ul>
-<li><a href="../libraries/awful.spawn.html#">awful.spawn</a></li>
+    <li><a href="../libraries/awful.spawn.html#">awful.spawn</a></li>
 </ul>
 
 
@@ -1213,7 +1231,8 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item822 class="hide_extra">
+
+    <span id=item823 class="hide_extra">
     </span>
 
 </dd>
@@ -1241,7 +1260,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item823 class="hide_extra">
+    <span id=item824 class="hide_extra">
     </span>
 
 </dd>
@@ -1265,7 +1284,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item824 class="hide_extra">
+    <span id=item825 class="hide_extra">
     </span>
 
 </dd>
@@ -1290,7 +1309,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item825 class="hide_extra">
+    <span id=item826 class="hide_extra">
     </span>
 
 </dd>
@@ -1315,7 +1334,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item826 class="hide_extra">
+    <span id=item827 class="hide_extra">
     </span>
 
 </dd>
@@ -1340,7 +1359,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item827 class="hide_extra">
+    <span id=item828 class="hide_extra">
     </span>
 
 </dd>
@@ -1365,7 +1384,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item828 class="hide_extra">
+    <span id=item829 class="hide_extra">
     </span>
 
 </dd>
@@ -1377,34 +1396,7 @@ awful.spawn(<span class="string">'xterm'</span>)
     </span>
     </dt>
     <dd>
-    Matches when one of every \&ldquo;category\&rdquo; of components match.
-
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <li><a href="../declarative_rules/ruled.client.html#rule">rule</a></li>
-         <li><a href="../declarative_rules/ruled.client.html#except">except</a></li>
-    </ul>
-
-
-
-    <span id=item829 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "rule_lesser"></a>
-    <strong>rule_lesser</strong>
-    <span class="proptype"><span class='summary_type'>table</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    A table whose content will be compared to the target object current properties.</p>
-
-<p> The comparison will be made using the lesser (<code>&lt;</code>) operator.
+    Matches when one of every \"category\" of components match.
 
 
 
@@ -1422,16 +1414,16 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 </dd>
     <dt>
-    <a name = "rule_greater"></a>
-    <strong>rule_greater</strong>
+    <a name = "rule_lesser"></a>
+    <strong>rule_lesser</strong>
     <span class="proptype"><span class='summary_type'>table</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    A table whose content will be compared to the target object current properties.</p>
+    A table whose content will be compared to the target object current properties. </p>
 
-<p> The comparison will be made using the greater (<code>&gt;</code>) operator.
+<p> The comparison will be made using the lesser (<code>&lt;</code>) operator.
 
 
 
@@ -1449,6 +1441,33 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 </dd>
     <dt>
+    <a name = "rule_greater"></a>
+    <strong>rule_greater</strong>
+    <span class="proptype"><span class='summary_type'>table</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    A table whose content will be compared to the target object current properties. </p>
+
+<p> The comparison will be made using the greater (<code>&gt;</code>) operator.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../declarative_rules/ruled.client.html#rule">rule</a></li>
+         <li><a href="../declarative_rules/ruled.client.html#except">except</a></li>
+    </ul>
+
+
+
+    <span id=item832 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "id"></a>
     <strong>id</strong>
     <span class="proptype"><span class='summary_type'>table <i>or</i> string <i>or</i> number <i>or</i> function</span></span>
@@ -1456,7 +1475,7 @@ awful.spawn(<span class="string">'xterm'</span>)
     </span>
     </dt>
     <dd>
-    An identifier for this rule.</p>
+    An identifier for this rule. </p>
 
 <p> It can be anything. It will be compared with the <code>==</code> operator. Strings are
  highly recommended.</p>
@@ -1471,7 +1490,7 @@ awful.spawn(<span class="string">'xterm'</span>)
 
 
 
-    <span id=item832 class="hide_extra">
+    <span id=item833 class="hide_extra">
     </span>
 
 </dd>
@@ -1486,7 +1505,8 @@ awful.spawn(<span class="string">'xterm'</span>)
     </span>
     </dt>
     <dd>
-    <p>Extra rules properties.</p>
+
+<p>Extra rules properties. </p>
 
 <p> These properties are used in the rules only and are not sent to the client
  afterward.</p>
@@ -1501,8 +1521,8 @@ end
 <p> By default, the table has the following functions:</p>
 
 <ul>
-<li>geometry</li>
-<li>placement</li>
+    <li>geometry</li>
+    <li>placement</li>
 </ul>
 
 
@@ -1512,7 +1532,8 @@ end
 
 
 
-    <span id=item833 class="hide_extra">
+
+    <span id=item834 class="hide_extra">
     </span>
 
 </dd>
@@ -1523,7 +1544,8 @@ end
     </span>
     </dt>
     <dd>
-    <p>Extra high priority properties.</p>
+
+<p>Extra high priority properties. </p>
 
 <p> Some properties, such as anything related to tags, geometry or focus, will
  cause a race condition if set in the main property section. This is why
@@ -1539,8 +1561,8 @@ end
 <p> By default, the table has the following functions:</p>
 
 <ul>
-<li>tag</li>
-<li>new_tag</li>
+    <li>tag</li>
+    <li>new_tag</li>
 </ul>
 
 
@@ -1550,7 +1572,8 @@ end
 
 
 
-    <span id=item834 class="hide_extra">
+
+    <span id=item835 class="hide_extra">
     </span>
 
 </dd>
@@ -1570,7 +1593,7 @@ end
 
 
 
-    <span id=item835 class="hide_extra">
+    <span id=item836 class="hide_extra">
     </span>
 
 </dd>

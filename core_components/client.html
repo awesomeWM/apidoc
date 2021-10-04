@@ -149,6 +149,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -244,16 +245,16 @@
  command line applications).
  Clients are usually grouped by classes.
  A class is the name used by X11 to help the window manager distinguish
- between windows and write rules for them.  A client&rsquo;s behavior is also
+ between windows and write rules for them.  A client's behavior is also
  defined by its <a href="../core_components/client.html#type">type</a> and <a href="../core_components/client.html#size_hints">size_hints</a> properties.
  See the <code>xprop</code> command line application to query properties for a client.</p>
 
-<p> <img src="../images/client_geo.svg" alt="Client geometry" /></p>
+<p> <img src="../images/client_geo.svg" alt="Client geometry"/></p>
 
-<p> The client&rsquo;s <code>:geometry()</code> function returns a table with <em>x</em>, <em>y</em>, <em>width</em>
+<p> The client's <code>:geometry()</code> function returns a table with <em>x</em>, <em>y</em>, <em>width</em>
  and <em>height</em>.  The area returned <strong>excludes the border width</strong>.
- All clients also have a <a href="../core_components/client.html#shape_bounding">shape_bounding</a> and <a href="../core_components/client.html#shape_clip">shape_clip</a> used to &ldquo;crop&rdquo; the
- client&rsquo;s content.
+ All clients also have a <a href="../core_components/client.html#shape_bounding">shape_bounding</a> and <a href="../core_components/client.html#shape_clip">shape_clip</a> used to "crop" the
+ client's content.
  Finally, each clients can have titlebars (see <a href="../popups_and_bars/awful.titlebar.html#">awful.titlebar</a>).</p>
 
 <p> Additionally to the classes described here, one can also use signals as
@@ -267,6 +268,7 @@
  context.
  To get the currently focused client:</p>
 
+
 <pre>
 <span class="keyword">local</span> c = client.focus
 <span class="keyword">if</span> c <span class="keyword">then</span>
@@ -274,8 +276,8 @@
 </span><span class="keyword">end</span>
 </pre>
 
-
 <p> To get a list of all clients, use <a href="../core_components/client.html#get">client:get</a>:</p>
+
 
 <pre>
 <span class="keyword">for</span> _, c <span class="keyword">in</span> <span class="global">ipairs</span>(client.get()) <span class="keyword">do</span>
@@ -283,8 +285,8 @@
 </span><span class="keyword">end</span>
 </pre>
 
-
 <p> To execute a callback when a new client is added, use the <a href="../core_components/client.html#manage">manage</a> signal:</p>
+
 
 <pre>
 client.connect_signal(<span class="string">"request::manage"</span>, <span class="keyword">function</span>(c)
@@ -292,8 +294,8 @@ client.connect_signal(<span class="string">"request::manage"</span>, <span class
 </span><span class="keyword">end</span>)
 </pre>
 
-
 <p> To be notified when a property of a client changed:</p>
+
 
 <pre>
 client.connect_signal(<span class="string">"property::name"</span>, <span class="keyword">function</span>(c)
@@ -301,8 +303,8 @@ client.connect_signal(<span class="string">"property::name"</span>, <span class=
 </span><span class="keyword">end</span>)
 </pre>
 
-
 <p> To be notified when a property of a specific client <code>c</code> changed:</p>
+
 
 <pre>
 c:connect_signal(<span class="string">"property::name"</span>, <span class="keyword">function</span>()
@@ -310,88 +312,87 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 </span><span class="keyword">end</span>)
 </pre>
 
-
 <p> To get all the clients for a screen use either <a href="../core_components/screen.html#clients">screen.clients</a> or
  <a href="../core_components/screen.html#tiled_clients">screen.tiled_clients</a>.</p>
 
-<p> <img src="../images/AUTOGEN_uml_nav_tables_client.svg" alt="Usage example" /></p>
 
-<h2> Core components relationship</h2>
 
+<p> <img src="../images/AUTOGEN_uml_nav_tables_client.svg" alt="Usage example"/></p>
+<h1> Core components relationship</h1>
 <p> <table><tr>
- <td valign='top'><table class='widget_list' border=1>
-   <colgroup span='3'></colgroup>
+ <td valign="top"><table class='widget_list' border=1>
+   <colgroup span="3"></colgroup>
   <tr><th align='center' colspan=3 scope=colgroup>Acquire other objects from a client</th></tr>
-  <tr style='font-weight: bold
- '>
+  <tr style='font-weight: bold;'>
    <th align='center'>Class</th>
    <th align='center'></th>
    <th align='center'>Property</th>
   </tr>
  <tr>
    <td>tag</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_client1.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_client1.svg"></td>
    <td>c.tags</td>
   </tr>
  <tr>
    <td>screen</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_client2.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_client2.svg"></td>
    <td>c.screen</td>
   </tr>
  <tr>
    <td>awful.key</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_client3.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_client3.svg"></td>
    <td>c:keys()</td>
   </tr>
  <tr>
    <td>awful.button</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_client4.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_client4.svg"></td>
    <td>c:buttons()</td>
   </tr>
  </table></td>
- <td valign='top'><table class='widget_list' border=1>
-   <colgroup span='3'></colgroup>
+ <td valign="top"><table class='widget_list' border=1>
+   <colgroup span="3"></colgroup>
   <tr><th align='center' colspan=3 scope=colgroup>Acquire a client from other objects</th></tr>
-  <tr style='font-weight: bold
- '>
+  <tr style='font-weight: bold;'>
    <th align='center'>Class</th>
    <th align='center'></th>
    <th align='center'>Property</th>
   </tr>
  <tr>
    <td>tag</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_client5.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_client5.svg"></td>
    <td>t:clients()</td>
   </tr>
  <tr>
    <td>screen</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_client6.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_client6.svg"></td>
    <td>s.clients</td>
   </tr>
  <tr>
    <td>screen</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_client7.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_client7.svg"></td>
    <td>s.hidden_clients</td>
   </tr>
  <tr>
    <td>screen</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_client8.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_client8.svg"></td>
    <td>s.tiled_clients</td>
   </tr>
  <tr>
    <td>mouse</td>
-   <td><img src='../images/AUTOGEN_uml_nav_tables_client9.svg'></td>
+   <td><img src="../images/AUTOGEN_uml_nav_tables_client9.svg"></td>
    <td>mouse.current_client</td>
   </tr>
  </table></td>
  </tr><tr>
-   <td colspan=2 style='color:#00000044'>
+   <td colspan=2 style="color:#00000044">
    <b>Legend:</b> <i>c</i>: a client object, <i>t</i>: a tag object,
    <i>s</i>: a screen object, <i>k</i>: an awful.key object,
    <i>b</i>: a awful.button object, <i>n</i>: a naughty.notification object
    </td>
   </tr>
  </table></p>
+
+<p> </p>
     <div class="extra-header">
 
 
@@ -713,27 +714,27 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <tr>
       <td class="shortname" ><a href="#shape_bounding">shape_bounding</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>surface</span></td>
-      <td colspan="2" class="summary">The client&rsquo;s bounding shape as set by awesome as a (native) cairo surface.</td>
+      <td colspan="2" class="summary">The client's bounding shape as set by awesome as a (native) cairo surface.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#shape_clip">shape_clip</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>surface</span></td>
-      <td colspan="2" class="summary">The client&rsquo;s clip shape as set by awesome as a (native) cairo surface.</td>
+      <td colspan="2" class="summary">The client's clip shape as set by awesome as a (native) cairo surface.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#shape_input">shape_input</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>surface</span></td>
-      <td colspan="2" class="summary">The client&rsquo;s input shape as set by awesome as a (native) cairo surface.</td>
+      <td colspan="2" class="summary">The client's input shape as set by awesome as a (native) cairo surface.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#client_shape_bounding">client_shape_bounding</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>surface</span></td>
-      <td colspan="2" class="summary">The client&rsquo;s bounding shape as set by the program as a (native) cairo surface.</td>
+      <td colspan="2" class="summary">The client's bounding shape as set by the program as a (native) cairo surface.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#client_shape_clip">client_shape_clip</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>surface</span></td>
-      <td colspan="2" class="summary">The client&rsquo;s clip shape as set by the program as a (native) cairo surface.</td>
+      <td colspan="2" class="summary">The client's clip shape as set by the program as a (native) cairo surface.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#startup_id">startup_id</a></td>
@@ -903,7 +904,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
         <a href="#get_icon">:get_icon <span class='function_args'> <b>(</b>index<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;surface</span></span>
       </td>
-      <td colspan="2" class="summary">Get the client&rsquo;s n-th icon.</td>
+      <td colspan="2" class="summary">Get the client's n-th icon.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -1132,7 +1133,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td class="name" >
         <a href="#request::geometry">request::geometry</a>
       </td>
-      <td colspan="2" class="summary">Emitted when something request a client&rsquo;s geometry to be modified.</td>
+      <td colspan="2" class="summary">Emitted when something request a client's geometry to be modified.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -1144,7 +1145,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td class="name" >
         <a href="#request::urgent">request::urgent</a>
       </td>
-      <td colspan="2" class="summary">Emitted when any client&rsquo;s <a href="../core_components/client.html#urgent">urgent</a> property changes.</td>
+      <td colspan="2" class="summary">Emitted when any client's <a href="../core_components/client.html#urgent">urgent</a> property changes.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -1562,13 +1563,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td class="name" >
         <a href="#awful.client.mark">awful.client.mark<i class="deprecated_label"> [deprecated]</i></a>
       </td>
-      <td colspan="2" class="summary">Mark a client, and then call &lsquo;marked&rsquo; hook.</td>
+      <td colspan="2" class="summary">Mark a client, and then call 'marked' hook.</td>
     </tr>
     <tr>
       <td class="name" >
         <a href="#awful.client.unmark">awful.client.unmark<i class="deprecated_label"> [deprecated]</i></a>
       </td>
-      <td colspan="2" class="summary">Unmark a client and then call &lsquo;unmarked&rsquo; hook.</td>
+      <td colspan="2" class="summary">Unmark a client and then call 'unmarked' hook.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -1610,19 +1611,19 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td class="name" >
         <a href="#awful.client.floating.toggle">awful.client.floating.toggle<i class="deprecated_label"> [deprecated]</i></a>
       </td>
-      <td colspan="2" class="summary">Toggle the floating state of a client between &lsquo;auto&rsquo; and &lsquo;true&rsquo;.</td>
+      <td colspan="2" class="summary">Toggle the floating state of a client between 'auto' and 'true'.</td>
     </tr>
     <tr>
       <td class="name" >
         <a href="#awful.client.dockable.get">awful.client.dockable.get<i class="deprecated_label"> [deprecated]</i></a>
       </td>
-      <td colspan="2" class="summary">Get a client&rsquo;s dockable state.</td>
+      <td colspan="2" class="summary">Get a client's dockable state.</td>
     </tr>
     <tr>
       <td class="name" >
         <a href="#awful.client.dockable.set">awful.client.dockable.set<i class="deprecated_label"> [deprecated]</i></a>
       </td>
-      <td colspan="2" class="summary">Set a client&rsquo;s dockable state, overriding auto-detection.</td>
+      <td colspan="2" class="summary">Set a client's dockable state, overriding auto-detection.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -1679,7 +1680,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td class="name" >
         <a href="#awful.client.idx">awful.client.idx</a>
       </td>
-      <td colspan="2" class="summary">Calculate a client&rsquo;s column number, index in that column, and
+      <td colspan="2" class="summary">Calculate a client's column number, index in that column, and
  number of visible clients in this column.</td>
     </tr>
     <tr>
@@ -1822,25 +1823,25 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
       <td class="name" >
         <a href="#awful.client.shape.get_transformed">awful.client.shape.get_transformed (c, shape_name)</a>
       </td>
-      <td colspan="2" class="summary">Get one of a client&rsquo;s shapes and transform it to include window decorations.</td>
+      <td colspan="2" class="summary">Get one of a client's shapes and transform it to include window decorations.</td>
     </tr>
     <tr>
       <td class="name" >
         <a href="#awful.client.shape.update.all">awful.client.shape.update.all (c)</a>
       </td>
-      <td colspan="2" class="summary">Update all of a client&rsquo;s shapes from the shapes the client set itself.</td>
+      <td colspan="2" class="summary">Update all of a client's shapes from the shapes the client set itself.</td>
     </tr>
     <tr>
       <td class="name" >
         <a href="#awful.client.shape.update.bounding">awful.client.shape.update.bounding (c)</a>
       </td>
-      <td colspan="2" class="summary">Update a client&rsquo;s bounding shape from the shape the client set itself.</td>
+      <td colspan="2" class="summary">Update a client's bounding shape from the shape the client set itself.</td>
     </tr>
     <tr>
       <td class="name" >
         <a href="#awful.client.shape.update.clip">awful.client.shape.update.clip (c)</a>
       </td>
-      <td colspan="2" class="summary">Update a client&rsquo;s clip shape from the shape the client set itself.</td>
+      <td colspan="2" class="summary">Update a client's clip shape from the shape the client set itself.</td>
     </tr>
 </table>
 <h2><a href="#lib_awful_client_urgent_Functions">lib.awful.client.urgent Functions</a></h2>
@@ -1900,7 +1901,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item207 class="hide_extra">
+    <span id=item208 class="hide_extra">
     </span>
 
 </dd>
@@ -1932,7 +1933,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with clients.
     </ol>
 
@@ -1946,7 +1947,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </ul>
 
 
-    <span id=item208 class="hide_extra">
+    <span id=item209 class="hide_extra">
     </span>
 
 </dd>
@@ -1963,7 +1964,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1977,7 +1978,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item209 class="hide_extra">
+    <span id=item210 class="hide_extra">
     </span>
 
 </dd>
@@ -1994,7 +1995,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">...</span>
@@ -2009,7 +2010,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item210 class="hide_extra">
+    <span id=item211 class="hide_extra">
     </span>
 
 </dd>
@@ -2026,7 +2027,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -2040,7 +2041,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item211 class="hide_extra">
+    <span id=item212 class="hide_extra">
     </span>
 
 </dd>
@@ -2091,7 +2092,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </ul>
 
 
-    <span id=item212 class="hide_extra">
+    <span id=item213 class="hide_extra">
     </span>
 
 </dd>
@@ -2108,8 +2109,8 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">dir</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The direction, can be either "up", "down", "left" or "right".
         </li>
         <li><span class="parameter">c</span>
             <span class="types"><span class="type">client</span></span>
@@ -2136,7 +2137,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item213 class="hide_extra">
+    <span id=item214 class="hide_extra">
     </span>
 
 </dd>
@@ -2149,15 +2150,15 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    Swap a client with another client in the given direction.</p>
+    Swap a client with another client in the given direction. </p>
 
 <p> Swaps across screens.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">dir</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The direction, can be either "up", "down", "left" or "right".
         </li>
         <li><span class="parameter">sel</span>
             <span class="types"><span class="type">client</span></span>
@@ -2179,13 +2180,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button214>
-     <a class="show_more_button" onclick="show_extra('214')">
+     <center id=button215>
+     <a class="show_more_button" onclick="show_extra('215')">
       Click to display more
      </a>
      </center>
 
-    <span id=item214 class="hide_extra">
+    <span id=item215 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -2236,7 +2237,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item215 class="hide_extra">
+    <span id=item216 class="hide_extra">
     </span>
 
 </dd>
@@ -2248,7 +2249,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    Cycle through the clients to change the focus.</p>
+    Cycle through the clients to change the focus. </p>
 
 <p> This will swap the client from one position to the next
  in the layout.
@@ -2284,7 +2285,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item216 class="hide_extra">
+    <span id=item217 class="hide_extra">
     </span>
 
 </dd>
@@ -2317,7 +2318,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item217 class="hide_extra">
+    <span id=item218 class="hide_extra">
     </span>
 
 </dd>
@@ -2334,13 +2335,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">prop</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The property name.
         </li>
         <li><span class="parameter">kind</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The type (used for register_xproperty).
-   One of &ldquo;string&rdquo;, &ldquo;number&rdquo; or &ldquo;boolean&rdquo;.
+   One of "string", "number" or "boolean".
         </li>
     </ul>
 
@@ -2349,7 +2350,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item218 class="hide_extra">
+    <span id=item219 class="hide_extra">
     </span>
 
 </dd>
@@ -2361,7 +2362,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    Returns an iterator to cycle through clients.</p>
+    Returns an iterator to cycle through clients. </p>
 
 <p> Starting from the client in focus or the given index, all clients that match
  a given criteria.
@@ -2399,7 +2400,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </ul>
 
 
-    <span id=item219 class="hide_extra">
+    <span id=item220 class="hide_extra">
     </span>
 
 </dd>
@@ -2411,7 +2412,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    Disable history tracking.</p>
+    Disable history tracking. </p>
 
 <p> See <a href="../core_components/client.html#awful.client.focus.history.enable_tracking">awful.client.focus.history.enable_tracking</a> to enable it again.
 
@@ -2428,7 +2429,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item220 class="hide_extra">
+    <span id=item221 class="hide_extra">
     </span>
 
 </dd>
@@ -2440,7 +2441,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    Enable history tracking.</p>
+    Enable history tracking. </p>
 
 <p> This is the default, but can be disabled
  through <a href="../core_components/client.html#awful.client.focus.history.disable_tracking">awful.client.focus.history.disable_tracking</a>.
@@ -2457,7 +2458,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item221 class="hide_extra">
+    <span id=item222 class="hide_extra">
     </span>
 
 </dd>
@@ -2486,7 +2487,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
 
-    <span id=item222 class="hide_extra">
+    <span id=item223 class="hide_extra">
     </span>
 
 </dd>
@@ -2503,7 +2504,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    The X window id.</p>
+    The X window id. </p>
 
 <p> This is rarely useful, but some DBus protocols will
  have this ID in their API, so it can be useful when
@@ -2515,13 +2516,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button223>
-     <a class="show_more_button" onclick="show_extra('223')">
+     <center id=button224>
+     <a class="show_more_button" onclick="show_extra('224')">
       Click to display more
      </a>
      </center>
 
-    <span id=item223 class="hide_extra">
+    <span id=item224 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::window</code></span>  When the <a href="../core_components/client.html#window">window</a> value changes.</li>
@@ -2541,7 +2542,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    The client title.</p>
+    The client title. </p>
 
 <p> This is the text which will be shown in <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a>
  and <code>awful.titlebar.widget.titlewidget</code>.
@@ -2557,13 +2558,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button224>
-     <a class="show_more_button" onclick="show_extra('224')">
+     <center id=button225>
+     <a class="show_more_button" onclick="show_extra('225')">
       Click to display more
      </a>
      </center>
 
-    <span id=item224 class="hide_extra">
+    <span id=item225 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::name</code></span>  When the <a href="../core_components/client.html#name">name</a> value changes.</li>
@@ -2583,7 +2584,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    True if the client does not want to be in taskbar.</p>
+    True if the client does not want to be in taskbar. </p>
 
 <p> Some clients, like docked bars or some <a href="../core_components/client.html#sticky">sticky</a> clients
  such as wallpaper sensors like Conky have no value in
@@ -2603,13 +2604,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button225>
-     <a class="show_more_button" onclick="show_extra('225')">
+     <center id=button226>
+     <a class="show_more_button" onclick="show_extra('226')">
       Click to display more
      </a>
      </center>
 
-    <span id=item225 class="hide_extra">
+    <span id=item226 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::skip_taskbar</code></span>  When the <a href="../core_components/client.html#skip_taskbar">skip_taskbar</a> value changes.</li>
@@ -2629,7 +2630,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    The window type.</p>
+    The window type. </p>
 
 <p> This is useful in, among other places, the <a href="../declarative_rules/ruled.client.html#">ruled.client</a> rules to apply
  different properties depending on the client types. It is also used
@@ -2672,13 +2673,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button226>
-     <a class="show_more_button" onclick="show_extra('226')">
+     <center id=button227>
+     <a class="show_more_button" onclick="show_extra('227')">
       Click to display more
      </a>
      </center>
 
-    <span id=item226 class="hide_extra">
+    <span id=item227 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::type</code></span>  When the <a href="../core_components/client.html#type">type</a> value changes.</li>
@@ -2698,11 +2699,11 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    The client class.</p>
+    The client class. </p>
 
 <p> A class usually maps to the application name. It is useful in, among other
  places, the rules to apply different properties to different clients. It
- is also useful, along with <a href="../core_components/client.html#instance">instance</a>, to implement &ldquo;windows counter&rdquo;
+ is also useful, along with <a href="../core_components/client.html#instance">instance</a>, to implement "windows counter"
  used in many popular docks and Alt-Tab like popups.</p>
 
 <p> To get a client class from the command line, use the command:</p>
@@ -2731,13 +2732,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button227>
-     <a class="show_more_button" onclick="show_extra('227')">
+     <center id=button228>
+     <a class="show_more_button" onclick="show_extra('228')">
       Click to display more
      </a>
      </center>
 
-    <span id=item227 class="hide_extra">
+    <span id=item228 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::class</code></span>  When the <a href="../core_components/client.html#class">class</a> value changes.</li>
@@ -2757,7 +2758,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    The client instance.</p>
+    The client instance. </p>
 
 <p> The <a href="../core_components/client.html#instance">instance</a> is a subtype of the <a href="../core_components/client.html#class">class</a>. Each <a href="../core_components/client.html#class">class</a> can have
  multiple instances. This is useful in the <a href="../declarative_rules/ruled.client.html#">ruled.client</a> rules to
@@ -2787,13 +2788,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button228>
-     <a class="show_more_button" onclick="show_extra('228')">
+     <center id=button229>
+     <a class="show_more_button" onclick="show_extra('229')">
       Click to display more
      </a>
      </center>
 
-    <span id=item228 class="hide_extra">
+    <span id=item229 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::instance</code></span>  When the <a href="../core_components/client.html#instance">instance</a> value changes.</li>
@@ -2813,7 +2814,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    The client PID, if available.</p>
+    The client PID, if available. </p>
 
 <p> This will never change.
 
@@ -2823,13 +2824,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button229>
-     <a class="show_more_button" onclick="show_extra('229')">
+     <center id=button230>
+     <a class="show_more_button" onclick="show_extra('230')">
       Click to display more
      </a>
      </center>
 
-    <span id=item229 class="hide_extra">
+    <span id=item230 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::pid</code></span>  When the <a href="../core_components/client.html#pid">pid</a> value changes.</li>
@@ -2862,13 +2863,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button230>
-     <a class="show_more_button" onclick="show_extra('230')">
+     <center id=button231>
+     <a class="show_more_button" onclick="show_extra('231')">
       Click to display more
      </a>
      </center>
 
-    <span id=item230 class="hide_extra">
+    <span id=item231 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::role</code></span>  When the <a href="../core_components/client.html#role">role</a> value changes.</li>
@@ -2888,10 +2889,10 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    The machine the client is running on.</p>
+    The machine the client is running on. </p>
 
-<p> X11 windows can &ldquo;live&rdquo; in one computer but be shown
- in another one. This is called &ldquo;network transparency&rdquo;
+<p> X11 windows can "live" in one computer but be shown
+ in another one. This is called "network transparency"
  and is either used directly by allowing remote windows
  using the <code>xhosts</code> command or using proxies such as
  <code>ssh -X</code> or <code>ssh -Y</code>.</p>
@@ -2906,13 +2907,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button231>
-     <a class="show_more_button" onclick="show_extra('231')">
+     <center id=button232>
+     <a class="show_more_button" onclick="show_extra('232')">
       Click to display more
      </a>
      </center>
 
-    <span id=item231 class="hide_extra">
+    <span id=item232 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::machine</code></span>  When the <a href="../core_components/client.html#machine">machine</a> value changes.</li>
@@ -2940,13 +2941,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
 
      <br />
-     <center id=button232>
-     <a class="show_more_button" onclick="show_extra('232')">
+     <center id=button233>
+     <a class="show_more_button" onclick="show_extra('233')">
       Click to display more
      </a>
      </center>
 
-    <span id=item232 class="hide_extra">
+    <span id=item233 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::icon_name</code></span>  When the <a href="../core_components/client.html#icon_name">icon_name</a> value changes.</li>
@@ -2966,12 +2967,13 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </span>
     </dt>
     <dd>
-    <p>The client icon as a surface.</p>
+
+<p>The client icon as a surface. </p>
 
 <p> This property holds the client icon closest to the size configured via
  <a href="../core_components/awesome.html#set_preferred_icon_size">awesome.set_preferred_icon_size</a>.</p>
 
-<p> It is not a path or a &ldquo;real&rdquo; file. Rather, it is already a bitmap surface.</p>
+<p> It is not a path or a "real" file. Rather, it is already a bitmap surface.</p>
 
 <p> Typically you would want to use <a href="../widgets/awful.widget.clienticon.html#">awful.widget.clienticon</a> to get this as a
  widget.</p>
@@ -2991,6 +2993,8 @@ cr:paint()
 
 
 
+
+
     <h3>See also:</h3>
     <ul>
          <a href="../widgets/awful.widget.clienticon.html#">awful.widget.clienticon</a>
@@ -3002,13 +3006,13 @@ cr:paint()
     </ul>
 
      <br />
-     <center id=button233>
-     <a class="show_more_button" onclick="show_extra('233')">
+     <center id=button234>
+     <a class="show_more_button" onclick="show_extra('234')">
       Click to display more
      </a>
      </center>
 
-    <span id=item233 class="hide_extra">
+    <span id=item234 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::icon</code></span>  When the <a href="../core_components/client.html#icon">icon</a> value changes.</li>
@@ -3028,7 +3032,8 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    <p>The available sizes of client icons.  This is a table where each entry
+
+<p>The available sizes of client icons.  This is a table where each entry
  contains the width and height of an icon.</p>
 
 <p> Example:</p>
@@ -3043,6 +3048,8 @@ cr:paint()
 
 
 
+
+
     <h3>See also:</h3>
     <ul>
          <li><a href="../widgets/awful.widget.clienticon.html#">awful.widget.clienticon</a></li>
@@ -3051,13 +3058,13 @@ cr:paint()
 
 
      <br />
-     <center id=button234>
-     <a class="show_more_button" onclick="show_extra('234')">
+     <center id=button235>
+     <a class="show_more_button" onclick="show_extra('235')">
       Click to display more
      </a>
      </center>
 
-    <span id=item234 class="hide_extra">
+    <span id=item235 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::icon_sizes</code></span>  When the <a href="../core_components/client.html#icon_sizes">icon_sizes</a> value changes.</li>
@@ -3077,7 +3084,8 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    <p>Client screen.</p>
+
+<p>Client screen. </p>
 
 <p> The <a href="../core_components/screen.html#">screen</a> corresponds to the top-left corner of the window.</p>
 
@@ -3085,18 +3093,24 @@ cr:paint()
  does not natively allow clients to be in multiple locations at
  once. Changing the screen directly will affect the tags and may
  cause several other changes to the state in order to ensure that
- a client&rsquo;s position and its screen are consistent.</p>
+ a client's position and its screen are consistent.</p>
 
-<p> <img src="../images/AUTOGEN_sequences_client_screen.svg" alt="Usage example" /></p>
+
+
+<p> <img src="../images/AUTOGEN_sequences_client_screen.svg" alt="Usage example"/></p>
+
+
 
 <pre><code>  -- Move the mouse to screen 3
   mouse.coords {x = 1800, y = 100 }
 
   -- Spawn a client on screen #3
-  awful.spawn('firefox')
+  awful.spawn("firefox")
 
   client.get()[1].screen = screen[2]
 </code></pre>
+
+
 
 
 
@@ -3108,13 +3122,13 @@ cr:paint()
 
 
      <br />
-     <center id=button235>
-     <a class="show_more_button" onclick="show_extra('235')">
+     <center id=button236>
+     <a class="show_more_button" onclick="show_extra('236')">
       Click to display more
      </a>
      </center>
 
-    <span id=item235 class="hide_extra">
+    <span id=item236 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::screen</code></span>  When the <a href="../core_components/screen.html#">screen</a> value changes.</li>
@@ -3147,13 +3161,13 @@ cr:paint()
 
 
      <br />
-     <center id=button236>
-     <a class="show_more_button" onclick="show_extra('236')">
+     <center id=button237>
+     <a class="show_more_button" onclick="show_extra('237')">
       Click to display more
      </a>
      </center>
 
-    <span id=item236 class="hide_extra">
+    <span id=item237 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::hidden</code></span>  When the <a href="../core_components/client.html#hidden">hidden</a> value changes.</li>
@@ -3186,13 +3200,13 @@ cr:paint()
 
 
      <br />
-     <center id=button237>
-     <a class="show_more_button" onclick="show_extra('237')">
+     <center id=button238>
+     <a class="show_more_button" onclick="show_extra('238')">
       Click to display more
      </a>
      </center>
 
-    <span id=item237 class="hide_extra">
+    <span id=item238 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::minimized</code></span>  When the <a href="../core_components/client.html#minimized">minimized</a> value changes.</li>
@@ -3230,13 +3244,13 @@ cr:paint()
 
 
      <br />
-     <center id=button238>
-     <a class="show_more_button" onclick="show_extra('238')">
+     <center id=button239>
+     <a class="show_more_button" onclick="show_extra('239')">
       Click to display more
      </a>
      </center>
 
-    <span id=item238 class="hide_extra">
+    <span id=item239 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::size_hints_honor</code></span>  When the <a href="../core_components/client.html#size_hints_honor">size_hints_honor</a> value changes.</li>
@@ -3271,13 +3285,13 @@ cr:paint()
 
 
      <br />
-     <center id=button239>
-     <a class="show_more_button" onclick="show_extra('239')">
+     <center id=button240>
+     <a class="show_more_button" onclick="show_extra('240')">
       Click to display more
      </a>
      </center>
 
-    <span id=item239 class="hide_extra">
+    <span id=item240 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::border_width</code></span>  When the <a href="../core_components/client.html#border_width">border_width</a> value changes.</li>
@@ -3326,19 +3340,23 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    The client border color.</p>
+    The client border color. </p>
 
-<p> <img src="../images/AUTOGEN_awful_client_border_width.svg" alt="Usage example" /></p>
 
-<p>  local beautiful = require(&lsquo;beautiful&rsquo;)
-      c.border_color = &lsquo;#ff00ff&rsquo;</p>
+
+<p> <img src="../images/AUTOGEN_awful_client_border_width.svg" alt="Usage example"/></p>
+
+
+<p>  local beautiful = require("beautiful")</p>
+<pre><code>  c.border_color = "#ff00ff"
+</code></pre>
 
 <p> Note that setting this directly will override and disable all related theme
  variables.</p>
 
 <p> Setting a transparent color (e.g. to implement dynamic borders without size
  changes) is supported, but requires the color to be set to <code>#00000000</code>
- specifically. Other RGB colors with an alpha of <code>0</code> won&rsquo;t work.
+ specifically. Other RGB colors with an alpha of <code>0</code> won't work.
 
     <h3>Type constraints:</h3>
     <ul>
@@ -3361,13 +3379,13 @@ cr:paint()
 
 
      <br />
-     <center id=button240>
-     <a class="show_more_button" onclick="show_extra('240')">
+     <center id=button241>
+     <a class="show_more_button" onclick="show_extra('241')">
       Click to display more
      </a>
      </center>
 
-    <span id=item240 class="hide_extra">
+    <span id=item241 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::border_color</code></span>  When the <a href="../core_components/client.html#border_color">border_color</a> value changes.</li>
@@ -3383,7 +3401,7 @@ cr:paint()
          </tr>
           <tr><td><a href="../core_components/client.html#beautiful.border_color_marked">beautiful.border_color_marked</a></td><td>The fallback color when the client is marked.</td></tr>
           <tr><td><a href="../core_components/client.html#beautiful.border_color_active">beautiful.border_color_active</a></td><td>The fallback color when the client is active (focused).</td></tr>
-          <tr><td><a href="../core_components/client.html#beautiful.border_color_normal">beautiful.border_color_normal</a></td><td>The fallback color when the client isn&rsquo;t active/floating/new/urgent/maximized/floating/fullscreen.</td></tr>
+          <tr><td><a href="../core_components/client.html#beautiful.border_color_normal">beautiful.border_color_normal</a></td><td>The fallback color when the client isn't active/floating/new/urgent/maximized/floating/fullscreen.</td></tr>
           <tr><td><a href="../core_components/client.html#beautiful.border_color_new">beautiful.border_color_new</a></td><td>The fallback color when the client is new.</td></tr>
           <tr><td><a href="../core_components/client.html#beautiful.border_color_urgent">beautiful.border_color_urgent</a></td><td>The fallback color when the client is urgent.</td></tr>
           <tr><td><a href="../core_components/client.html#beautiful.border_color_floating">beautiful.border_color_floating</a></td><td>The fallback color when the client is floating and the other colors are not set.</td></tr>
@@ -3427,13 +3445,13 @@ cr:paint()
 
 
      <br />
-     <center id=button241>
-     <a class="show_more_button" onclick="show_extra('241')">
+     <center id=button242>
+     <a class="show_more_button" onclick="show_extra('242')">
       Click to display more
      </a>
      </center>
 
-    <span id=item241 class="hide_extra">
+    <span id=item242 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::urgent</code></span>  When the <a href="../core_components/client.html#urgent">urgent</a> value changes.</li>
@@ -3467,7 +3485,7 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    A cairo surface for the client window content.</p>
+    A cairo surface for the client window content. </p>
 
 <p> To get the screenshot, use:</p>
 
@@ -3480,10 +3498,10 @@ cr:paint()
 </code></pre>
 
 <p> Please note that this only creates a new cairo surface
- referring to the client&rsquo;s content. This means that
- changes to the client&rsquo;s content may or may not become
+ referring to the client's content. This means that
+ changes to the client's content may or may not become
  visible in the returned surface. If you want to take a
- screenshot, a copy of the surface&rsquo;s content needs to
+ screenshot, a copy of the surface's content needs to
  be taken. Note that the content of parts of a window
  that are currently not visible are undefined.</p>
 
@@ -3502,7 +3520,7 @@ cr:paint()
 
 
 
-    <span id=item242 class="hide_extra">
+    <span id=item243 class="hide_extra">
     </span>
 
 </dd>
@@ -3534,13 +3552,13 @@ cr:paint()
 
 
      <br />
-     <center id=button243>
-     <a class="show_more_button" onclick="show_extra('243')">
+     <center id=button244>
+     <a class="show_more_button" onclick="show_extra('244')">
       Click to display more
      </a>
      </center>
 
-    <span id=item243 class="hide_extra">
+    <span id=item244 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::opacity</code></span>  When the <a href="../core_components/client.html#opacity">opacity</a> value changes.</li>
@@ -3573,13 +3591,13 @@ cr:paint()
 
 
      <br />
-     <center id=button244>
-     <a class="show_more_button" onclick="show_extra('244')">
+     <center id=button245>
+     <a class="show_more_button" onclick="show_extra('245')">
       Click to display more
      </a>
      </center>
 
-    <span id=item244 class="hide_extra">
+    <span id=item245 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::ontop</code></span>  When the <a href="../core_components/client.html#ontop">ontop</a> value changes.</li>
@@ -3612,13 +3630,13 @@ cr:paint()
 
 
      <br />
-     <center id=button245>
-     <a class="show_more_button" onclick="show_extra('245')">
+     <center id=button246>
+     <a class="show_more_button" onclick="show_extra('246')">
       Click to display more
      </a>
      </center>
 
-    <span id=item245 class="hide_extra">
+    <span id=item246 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::above</code></span>  When the <a href="../core_components/client.html#above">above</a> value changes.</li>
@@ -3651,13 +3669,13 @@ cr:paint()
 
 
      <br />
-     <center id=button246>
-     <a class="show_more_button" onclick="show_extra('246')">
+     <center id=button247>
+     <a class="show_more_button" onclick="show_extra('247')">
       Click to display more
      </a>
      </center>
 
-    <span id=item246 class="hide_extra">
+    <span id=item247 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::below</code></span>  When the <a href="../core_components/client.html#below">below</a> value changes.</li>
@@ -3678,15 +3696,21 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    <p>The client is fullscreen or not.</p>
 
-<p> <img src="../images/AUTOGEN_sequences_client_fullscreen.svg" alt="Usage example" /></p>
+<p>The client is fullscreen or not. </p>
+
+
+
+<p> <img src="../images/AUTOGEN_sequences_client_fullscreen.svg" alt="Usage example"/></p>
+
 
 <pre><code>  screen[1].clients[1].maximized            = true
   screen[2].clients[1].maximized_vertical   = true
   screen[3].clients[1].maximized_horizontal = true
   screen[4].clients[1].fullscreen           = true
 </code></pre>
+
+
 
 
 
@@ -3702,13 +3726,13 @@ cr:paint()
 
 
      <br />
-     <center id=button247>
-     <a class="show_more_button" onclick="show_extra('247')">
+     <center id=button248>
+     <a class="show_more_button" onclick="show_extra('248')">
       Click to display more
      </a>
      </center>
 
-    <span id=item247 class="hide_extra">
+    <span id=item248 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::fullscreen</code></span>  When the <a href="../core_components/client.html#fullscreen">fullscreen</a> value changes.</li>
@@ -3740,15 +3764,21 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    <p>The client is maximized (horizontally and vertically) or not.</p>
 
-<p> <img src="../images/AUTOGEN_sequences_client_maximized.svg" alt="Usage example" /></p>
+<p>The client is maximized (horizontally and vertically) or not. </p>
+
+
+
+<p> <img src="../images/AUTOGEN_sequences_client_maximized.svg" alt="Usage example"/></p>
+
 
 <pre><code>  screen[1].clients[1].maximized            = true
   screen[2].clients[1].maximized_vertical   = true
   screen[3].clients[1].maximized_horizontal = true
   screen[4].clients[1].fullscreen           = true
 </code></pre>
+
+
 
 
 
@@ -3765,13 +3795,13 @@ cr:paint()
 
 
      <br />
-     <center id=button248>
-     <a class="show_more_button" onclick="show_extra('248')">
+     <center id=button249>
+     <a class="show_more_button" onclick="show_extra('249')">
       Click to display more
      </a>
      </center>
 
-    <span id=item248 class="hide_extra">
+    <span id=item249 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::maximized</code></span>  When the <a href="../core_components/client.html#maximized">maximized</a> value changes.</li>
@@ -3803,15 +3833,21 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    <p>The client is maximized horizontally or not.</p>
 
-<p> <img src="../images/AUTOGEN_sequences_client_maximized_horizontal.svg" alt="Usage example" /></p>
+<p>The client is maximized horizontally or not. </p>
+
+
+
+<p> <img src="../images/AUTOGEN_sequences_client_maximized_horizontal.svg" alt="Usage example"/></p>
+
 
 <pre><code>  screen[1].clients[1].maximized            = true
   screen[2].clients[1].maximized_vertical   = true
   screen[3].clients[1].maximized_horizontal = true
   screen[4].clients[1].fullscreen           = true
 </code></pre>
+
+
 
 
 
@@ -3827,13 +3863,13 @@ cr:paint()
 
 
      <br />
-     <center id=button249>
-     <a class="show_more_button" onclick="show_extra('249')">
+     <center id=button250>
+     <a class="show_more_button" onclick="show_extra('250')">
       Click to display more
      </a>
      </center>
 
-    <span id=item249 class="hide_extra">
+    <span id=item250 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::maximized_horizontal</code></span>  When the <a href="../core_components/client.html#maximized_horizontal">maximized_horizontal</a> value changes.</li>
@@ -3865,15 +3901,21 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    <p>The client is maximized vertically or not.</p>
 
-<p> <img src="../images/AUTOGEN_sequences_client_maximized_vertical.svg" alt="Usage example" /></p>
+<p>The client is maximized vertically or not. </p>
+
+
+
+<p> <img src="../images/AUTOGEN_sequences_client_maximized_vertical.svg" alt="Usage example"/></p>
+
 
 <pre><code>  screen[1].clients[1].maximized            = true
   screen[2].clients[1].maximized_vertical   = true
   screen[3].clients[1].maximized_horizontal = true
   screen[4].clients[1].fullscreen           = true
 </code></pre>
+
+
 
 
 
@@ -3889,13 +3931,13 @@ cr:paint()
 
 
      <br />
-     <center id=button250>
-     <a class="show_more_button" onclick="show_extra('250')">
+     <center id=button251>
+     <a class="show_more_button" onclick="show_extra('251')">
       Click to display more
      </a>
      </center>
 
-    <span id=item250 class="hide_extra">
+    <span id=item251 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::maximized_vertical</code></span>  When the <a href="../core_components/client.html#maximized_vertical">maximized_vertical</a> value changes.</li>
@@ -3926,17 +3968,17 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    The client the window is transient for.</p>
+    The client the window is transient for. </p>
 
-<p> A transient window is a client that &ldquo;belongs&rdquo; to another
+<p> A transient window is a client that "belongs" to another
  client. If the client is also <a href="../core_components/client.html#modal">modal</a>, then  the parent client
  cannot be focused while the child client exists.
- This is common for &ldquo;Save as&rdquo; dialogs or other dialogs where it
- is not possible to modify the content of the &ldquo;parent&rdquo; client
+ This is common for "Save as" dialogs or other dialogs where it
+ is not possible to modify the content of the "parent" client
  while the dialog is open.</p>
 
 <p> However, <a href="../core_components/client.html#modal">modal</a> is not a requirement for using the <a href="../core_components/client.html#transient_for">transient_for</a>
- concept. &ldquo;Tools&rdquo; such as popup palette in canvas-and-palettes
+ concept. "Tools" such as popup palette in canvas-and-palettes
  applications can belong to each other without being modal.
 
 
@@ -3952,13 +3994,13 @@ cr:paint()
 
 
      <br />
-     <center id=button251>
-     <a class="show_more_button" onclick="show_extra('251')">
+     <center id=button252>
+     <a class="show_more_button" onclick="show_extra('252')">
       Click to display more
      </a>
      </center>
 
-    <span id=item251 class="hide_extra">
+    <span id=item252 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::transient_for</code></span>  When the <a href="../core_components/client.html#transient_for">transient_for</a> value changes.</li>
@@ -3978,7 +4020,7 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    Window identification unique to a group of windows.</p>
+    Window identification unique to a group of windows. </p>
 
 <p> This is the ID of the group window, not a client object.
  The group window is most likely not a visible client, but
@@ -3994,13 +4036,13 @@ cr:paint()
 
 
      <br />
-     <center id=button252>
-     <a class="show_more_button" onclick="show_extra('252')">
+     <center id=button253>
+     <a class="show_more_button" onclick="show_extra('253')">
       Click to display more
      </a>
      </center>
 
-    <span id=item252 class="hide_extra">
+    <span id=item253 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::group_window</code></span>  When the <a href="../core_components/client.html#group_window">group_window</a> value changes.</li>
@@ -4020,7 +4062,7 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    Identification unique to windows spawned by the same command.</p>
+    Identification unique to windows spawned by the same command. </p>
 
 <p> This is the ID of the group window, not a client object.
 
@@ -4036,13 +4078,13 @@ cr:paint()
 
 
      <br />
-     <center id=button253>
-     <a class="show_more_button" onclick="show_extra('253')">
+     <center id=button254>
+     <a class="show_more_button" onclick="show_extra('254')">
       Click to display more
      </a>
      </center>
 
-    <span id=item253 class="hide_extra">
+    <span id=item254 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::leader_window</code></span>  When the <a href="../core_components/client.html#leader_window">leader_window</a> value changes.</li>
@@ -4062,7 +4104,7 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    A table with size hints of the client.</p>
+    A table with size hints of the client. </p>
 
 <p> For details on the meaning of the fields, refer to ICCCM § 4.1.2.3
  <code>WM_NORMAL_HINTS</code>.</p>
@@ -4078,21 +4120,21 @@ cr:paint()
         <li><span class="parameter">hints</span> The hints.
         <ul>
         <li><span class="parameter">user_position</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">nil</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
          A table with <a href="../core_components/client.html#x">x</a> and <a href="../core_components/client.html#y">y</a> keys. It
   contains the preferred position of the client. This is set when the
   position has been modified by the user. See <code>program_position</code>.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">program_position</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">nil</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
          A table with <a href="../core_components/client.html#x">x</a> and <a href="../core_components/client.html#y">y</a> keys. It
   contains the preferred position of the client. This is set when the
   application itself requests a specific position. See <code>user_position</code>.
          (<em>optional</em>)
         </li>
         <li><span class="parameter">user_size</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">nil</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
          A table with <a href="../core_components/client.html#width">width</a> and <a href="../core_components/client.html#height">height</a>. This
   contains the client preferred size when it has previously been set by
   the user. See <code>program_size</code> for the equivalent when the applications
@@ -4100,7 +4142,7 @@ cr:paint()
          (<em>optional</em>)
         </li>
         <li><span class="parameter">program_size</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a> or <span class="type">nil</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
          A table with <a href="../core_components/client.html#width">width</a> and <a href="../core_components/client.html#height">height</a>. This
   contains the client preferred size as specified by the application.
          (<em>optional</em>)
@@ -4140,7 +4182,7 @@ cr:paint()
          (<em>optional</em>)
         </li>
         <li><span class="parameter">win_gravity</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a> or <span class="type">nil</span></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">nil</span></span>
          The client <code>gravity</code> defines the corder
    from which the size is computed. For most clients, it is <code>north_west</code>, which
    corresponds to the top-left of the window. This will affect how the client
@@ -4150,30 +4192,42 @@ cr:paint()
         <li><span class="parameter">min_aspect_num</span>
             <span class="types"><span class="type">integer</span> or <span class="type">nil</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">min_aspect_den</span>
             <span class="types"><span class="type">integer</span> or <span class="type">nil</span></span>
+
+
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">max_aspect_num</span>
             <span class="types"><span class="type">integer</span> or <span class="type">nil</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">max_aspect_den</span>
             <span class="types"><span class="type">integer</span> or <span class="type">nil</span></span>
+
+
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">base_width</span>
             <span class="types"><span class="type">integer</span> or <span class="type">nil</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">base_height</span>
             <span class="types"><span class="type">integer</span> or <span class="type">nil</span></span>
+
+
 
          (<em>optional</em>)
         </li>
@@ -4190,13 +4244,13 @@ cr:paint()
 
 
      <br />
-     <center id=button254>
-     <a class="show_more_button" onclick="show_extra('254')">
+     <center id=button255>
+     <a class="show_more_button" onclick="show_extra('255')">
       Click to display more
      </a>
      </center>
 
-    <span id=item254 class="hide_extra">
+    <span id=item255 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::size_hints</code></span>  When the <a href="../core_components/client.html#size_hints">size_hints</a> value changes.</li>
@@ -4216,14 +4270,14 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    The motif WM hints of the client.</p>
+    The motif WM hints of the client. </p>
 
 <p> This is nil if the client has no motif hints. Otherwise, this is a table that
  contains the present properties. Note that awesome provides these properties
  as-is and does not interpret them for you. For example, if the function table
- only has &ldquo;resize&rdquo; set to true, this means that the window requests to be only
+ only has "resize" set to true, this means that the window requests to be only
  resizable, but asks for the other functions not to be able. If however both
- &ldquo;resize&rdquo; and &ldquo;all&rdquo; are set, this means that all but the resize function
+ "resize" and "all" are set, this means that all but the resize function
  should be enabled.
 
     <h3>Type constraints:</h3>
@@ -4233,70 +4287,96 @@ cr:paint()
         <li><span class="parameter">functions.all</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">functions.resize</span>
             <span class="types"><span class="type">boolean</span></span>
+
+
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">functions.move</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">functions.minimize</span>
             <span class="types"><span class="type">boolean</span></span>
+
+
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">functions.maximize</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">functions.close</span>
             <span class="types"><span class="type">boolean</span></span>
+
+
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">decorations.all</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">decorations.border</span>
             <span class="types"><span class="type">boolean</span></span>
+
+
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">decorations.resizeh</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">decorations.title</span>
             <span class="types"><span class="type">boolean</span></span>
+
+
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">decorations.menu</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">decorations.minimize</span>
             <span class="types"><span class="type">boolean</span></span>
+
+
 
          (<em>optional</em>)
         </li>
         <li><span class="parameter">decorations.maximize</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
          (<em>optional</em>)
         </li>
         <li><span class="parameter">input_mode</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          This is either <code>modeless</code>,
   <code>primary_application_modal</code>, <code>system_modal</code>,
   <code>full_application_modal</code> or <code>unknown</code>.
@@ -4304,6 +4384,8 @@ cr:paint()
         </li>
         <li><span class="parameter">status.tearoff_window</span>
             <span class="types"><span class="type">boolean</span></span>
+
+
 
          (<em>optional</em>)
         </li>
@@ -4315,13 +4397,13 @@ cr:paint()
 
 
      <br />
-     <center id=button255>
-     <a class="show_more_button" onclick="show_extra('255')">
+     <center id=button256>
+     <a class="show_more_button" onclick="show_extra('256')">
       Click to display more
      </a>
      </center>
 
-    <span id=item255 class="hide_extra">
+    <span id=item256 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::motif_wm_hints</code></span>  When the <a href="../core_components/client.html#motif_wm_hints">motif_wm_hints</a> value changes.</li>
@@ -4341,20 +4423,26 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    <p>Set the client sticky, i.e.  available on all tags.</p>
+
+<p>Set the client sticky, i.e.  available on all tags.</p>
 
 <p> Please note that AwesomeWM implements <a href="../core_components/client.html#sticky">sticky</a> clients
  per screens rather than globally like some other
  implementations.</p>
 
-<p> <img src="../images/AUTOGEN_sequences_client_sticky.svg" alt="Usage example" /></p>
+
+
+<p> <img src="../images/AUTOGEN_sequences_client_sticky.svg" alt="Usage example"/></p>
+
 
 <pre><code>  -- Add a client.
-  awful.spawn('xterm')
+  awful.spawn("xterm")
 
   -- Set sticky = true
   screen[1].clients[1].sticky = true
 </code></pre>
+
+
 
 
 
@@ -4366,13 +4454,13 @@ cr:paint()
 
 
      <br />
-     <center id=button256>
-     <a class="show_more_button" onclick="show_extra('256')">
+     <center id=button257>
+     <a class="show_more_button" onclick="show_extra('257')">
       Click to display more
      </a>
      </center>
 
-    <span id=item256 class="hide_extra">
+    <span id=item257 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::sticky</code></span>  When the <a href="../core_components/client.html#sticky">sticky</a> value changes.</li>
@@ -4392,18 +4480,18 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    Indicate if the client is modal.</p>
+    Indicate if the client is modal. </p>
 
-<p> A transient window is a client that &ldquo;belongs&rdquo; to another
+<p> A transient window is a client that "belongs" to another
  client. If the client is also <a href="../core_components/client.html#modal">modal</a>, then it always has
  to be on top of the other window <em>and</em> the parent client
  cannot be focused while the child client exists.
- This is common for &ldquo;Save as&rdquo; dialogs or other dialogs where
- is not possible to modify the content of the &ldquo;parent&rdquo; client
+ This is common for "Save as" dialogs or other dialogs where
+ is not possible to modify the content of the "parent" client
  while the dialog is open.</p>
 
 <p> However, <a href="../core_components/client.html#modal">modal</a> is not a requirement for using the <a href="../core_components/client.html#transient_for">transient_for</a>
- concept. &ldquo;Tools&rdquo; such as popup palette in canvas-and-palettes
+ concept. "Tools" such as popup palette in canvas-and-palettes
  applications can belong to each other without being modal.
 
 
@@ -4416,13 +4504,13 @@ cr:paint()
 
 
      <br />
-     <center id=button257>
-     <a class="show_more_button" onclick="show_extra('257')">
+     <center id=button258>
+     <a class="show_more_button" onclick="show_extra('258')">
       Click to display more
      </a>
      </center>
 
-    <span id=item257 class="hide_extra">
+    <span id=item258 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::modal</code></span>  When the <a href="../core_components/client.html#modal">modal</a> value changes.</li>
@@ -4442,7 +4530,7 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    True if the client can receive the input focus.</p>
+    True if the client can receive the input focus. </p>
 
 <p> The client will not get focused even when the user
  click on it.
@@ -4460,13 +4548,13 @@ cr:paint()
 
 
      <br />
-     <center id=button258>
-     <a class="show_more_button" onclick="show_extra('258')">
+     <center id=button259>
+     <a class="show_more_button" onclick="show_extra('259')">
       Click to display more
      </a>
      </center>
 
-    <span id=item258 class="hide_extra">
+    <span id=item259 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::focusable</code></span>  When the <a href="../core_components/client.html#focusable">focusable</a> value changes.</li>
@@ -4486,7 +4574,7 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    The client&rsquo;s bounding shape as set by awesome as a (native) cairo surface.</p>
+    The client's bounding shape as set by awesome as a (native) cairo surface. </p>
 
 <p> The bounding shape is the outer shape of the client. It is outside of the
  border.</p>
@@ -4513,13 +4601,13 @@ cr:paint()
 
 
      <br />
-     <center id=button259>
-     <a class="show_more_button" onclick="show_extra('259')">
+     <center id=button260>
+     <a class="show_more_button" onclick="show_extra('260')">
       Click to display more
      </a>
      </center>
 
-    <span id=item259 class="hide_extra">
+    <span id=item260 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::shape_bounding</code></span>  When the <a href="../core_components/client.html#shape_bounding">shape_bounding</a> value changes.</li>
@@ -4539,7 +4627,7 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    The client&rsquo;s clip shape as set by awesome as a (native) cairo surface.</p>
+    The client's clip shape as set by awesome as a (native) cairo surface. </p>
 
 <p> The shape_clip is the shape of the client <em>content</em>. It is <em>inside</em> the
  border.
@@ -4561,13 +4649,13 @@ cr:paint()
 
 
      <br />
-     <center id=button260>
-     <a class="show_more_button" onclick="show_extra('260')">
+     <center id=button261>
+     <a class="show_more_button" onclick="show_extra('261')">
       Click to display more
      </a>
      </center>
 
-    <span id=item260 class="hide_extra">
+    <span id=item261 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::shape_clip</code></span>  When the <a href="../core_components/client.html#shape_clip">shape_clip</a> value changes.</li>
@@ -4587,7 +4675,7 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    The client&rsquo;s input shape as set by awesome as a (native) cairo surface.</p>
+    The client's input shape as set by awesome as a (native) cairo surface. </p>
 
 <p> The input shape is the shape where mouse input will be passed to the
  client rather than propagated below it.
@@ -4609,13 +4697,13 @@ cr:paint()
 
 
      <br />
-     <center id=button261>
-     <a class="show_more_button" onclick="show_extra('261')">
+     <center id=button262>
+     <a class="show_more_button" onclick="show_extra('262')">
       Click to display more
      </a>
      </center>
 
-    <span id=item261 class="hide_extra">
+    <span id=item262 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::shape_input</code></span>  When the <a href="../core_components/client.html#shape_input">shape_input</a> value changes.</li>
@@ -4635,7 +4723,7 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    The client&rsquo;s bounding shape as set by the program as a (native) cairo surface.
+    The client's bounding shape as set by the program as a (native) cairo surface.
 
 
 
@@ -4654,13 +4742,13 @@ cr:paint()
 
 
      <br />
-     <center id=button262>
-     <a class="show_more_button" onclick="show_extra('262')">
+     <center id=button263>
+     <a class="show_more_button" onclick="show_extra('263')">
       Click to display more
      </a>
      </center>
 
-    <span id=item262 class="hide_extra">
+    <span id=item263 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::client_shape_bounding</code></span>  When the <a href="../core_components/client.html#client_shape_bounding">client_shape_bounding</a> value changes.</li>
@@ -4680,7 +4768,7 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    The client&rsquo;s clip shape as set by the program as a (native) cairo surface.
+    The client's clip shape as set by the program as a (native) cairo surface.
 
 
 
@@ -4699,13 +4787,13 @@ cr:paint()
 
 
      <br />
-     <center id=button263>
-     <a class="show_more_button" onclick="show_extra('263')">
+     <center id=button264>
+     <a class="show_more_button" onclick="show_extra('264')">
       Click to display more
      </a>
      </center>
 
-    <span id=item263 class="hide_extra">
+    <span id=item264 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::client_shape_clip</code></span>  When the <a href="../core_components/client.html#client_shape_clip">client_shape_clip</a> value changes.</li>
@@ -4725,7 +4813,8 @@ cr:paint()
     </span>
     </dt>
     <dd>
-    <p>The FreeDesktop StartId.</p>
+
+<p>The FreeDesktop StartId. </p>
 
 <p> When a client is spawned (like using a terminal or <a href="../libraries/awful.spawn.html#">awful.spawn</a>, a startup
  notification identifier is created. When the client is created, this
@@ -4736,7 +4825,7 @@ cr:paint()
  loading and also to attach some properties to the newly created client (like
  a <a href="../core_components/tag.html#">tag</a> or <a href="../core_components/client.html#floating">floating</a> state).</p>
 
-<p> Some applications, like <code>xterm</code>, don&rsquo;t support startup notification. While
+<p> Some applications, like <code>xterm</code>, don't support startup notification. While
  not perfect, the addition the following code to <a href="../sample files/rc.lua.html#">rc.lua</a> will mitigate the
  issue. Please note that this code is Linux specific.</p>
 
@@ -4782,6 +4871,8 @@ ruled.client.add_rule_source(
 
 
 
+
+
     <h3>See also:</h3>
     <ul>
          <a href="../libraries/awful.spawn.html#">awful.spawn</a>
@@ -4789,13 +4880,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button264>
-     <a class="show_more_button" onclick="show_extra('264')">
+     <center id=button265>
+     <a class="show_more_button" onclick="show_extra('265')">
       Click to display more
      </a>
      </center>
 
-    <span id=item264 class="hide_extra">
+    <span id=item265 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::startup_id</code></span>  When the <a href="../core_components/client.html#startup_id">startup_id</a> value changes.</li>
@@ -4815,12 +4906,15 @@ ruled.client.add_rule_source(
     </span>
     </dt>
     <dd>
-    <p>If the client that this object refers to is still managed by awesome.</p>
+
+<p>If the client that this object refers to is still managed by awesome. </p>
 
 <p> To avoid errors, use:</p>
 
 <pre><code>local is_valid = pcall(function() return c.valid end) and c.valid
 </code></pre>
+
+
 
 
 
@@ -4832,13 +4926,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button265>
-     <a class="show_more_button" onclick="show_extra('265')">
+     <center id=button266>
+     <a class="show_more_button" onclick="show_extra('266')">
       Click to display more
      </a>
      </center>
 
-    <span id=item265 class="hide_extra">
+    <span id=item266 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::valid</code></span>  When the <a href="../core_components/client.html#valid">valid</a> value changes.</li>
@@ -4858,7 +4952,7 @@ ruled.client.add_rule_source(
     </span>
     </dt>
     <dd>
-    The first tag of the client.</p>
+    The first tag of the client. </p>
 
 <p> Optimized form of <code>c:tags()[1]</code>. Not every workflow uses the
  ability to set multiple tags to a client. It is often enough
@@ -4874,13 +4968,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button266>
-     <a class="show_more_button" onclick="show_extra('266')">
+     <center id=button267>
+     <a class="show_more_button" onclick="show_extra('267')">
       Click to display more
      </a>
      </center>
 
-    <span id=item266 class="hide_extra">
+    <span id=item267 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::first_tag</code></span>  When the <a href="../core_components/client.html#first_tag">first_tag</a> value changes.</li>
@@ -4912,13 +5006,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button267>
-     <a class="show_more_button" onclick="show_extra('267')">
+     <center id=button268>
+     <a class="show_more_button" onclick="show_extra('268')">
       Click to display more
      </a>
      </center>
 
-    <span id=item267 class="hide_extra">
+    <span id=item268 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::buttons</code></span>  When the <a href="../core_components/client.html#buttons">buttons</a> value changes.</li>
@@ -4950,13 +5044,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button268>
-     <a class="show_more_button" onclick="show_extra('268')">
+     <center id=button269>
+     <a class="show_more_button" onclick="show_extra('269')">
       Click to display more
      </a>
      </center>
 
-    <span id=item268 class="hide_extra">
+    <span id=item269 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::keys</code></span>  When the <a href="../core_components/client.html#keys">keys</a> value changes.</li>
@@ -4984,13 +5078,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button269>
-     <a class="show_more_button" onclick="show_extra('269')">
+     <center id=button270>
+     <a class="show_more_button" onclick="show_extra('270')">
       Click to display more
      </a>
      </center>
 
-    <span id=item269 class="hide_extra">
+    <span id=item270 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../core_components/client.html#marked">marked</a></span>  (for legacy reasons, use <code>property::marked</code>)</li>
@@ -5009,7 +5103,7 @@ ruled.client.add_rule_source(
     </span>
     </dt>
     <dd>
-    Return if a client has a fixed size or not.</p>
+    Return if a client has a fixed size or not. </p>
 
 <p> This property is read only.
 
@@ -5032,13 +5126,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button270>
-     <a class="show_more_button" onclick="show_extra('270')">
+     <center id=button271>
+     <a class="show_more_button" onclick="show_extra('271')">
       Click to display more
      </a>
      </center>
 
-    <span id=item270 class="hide_extra">
+    <span id=item271 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::is_fixed</code></span>  When the <a href="../core_components/client.html#is_fixed">is_fixed</a> value changes.</li>
@@ -5057,7 +5151,7 @@ ruled.client.add_rule_source(
     </span>
     </dt>
     <dd>
-    Is the client immobilized horizontally?</p>
+    Is the client immobilized horizontally? </p>
 
 <p> Does the client have a fixed horizontal position and width, i.e. is it
  fullscreen, maximized, or horizontally maximized?</p>
@@ -5084,7 +5178,7 @@ ruled.client.add_rule_source(
 
 
 
-    <span id=item271 class="hide_extra">
+    <span id=item272 class="hide_extra">
     </span>
 
 </dd>
@@ -5096,7 +5190,7 @@ ruled.client.add_rule_source(
     </span>
     </dt>
     <dd>
-    Is the client immobilized vertically?</p>
+    Is the client immobilized vertically? </p>
 
 <p> Does the client have a fixed vertical position and width, i.e. is it
  fullscreen, maximized, or vertically maximized?</p>
@@ -5123,7 +5217,7 @@ ruled.client.add_rule_source(
 
 
 
-    <span id=item272 class="hide_extra">
+    <span id=item273 class="hide_extra">
     </span>
 
 </dd>
@@ -5137,7 +5231,7 @@ ruled.client.add_rule_source(
     </span>
     </dt>
     <dd>
-    The client floating state.</p>
+    The client floating state. </p>
 
 <p> If the client is part of the tiled layout or free floating.</p>
 
@@ -5158,13 +5252,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button273>
-     <a class="show_more_button" onclick="show_extra('273')">
+     <center id=button274>
+     <a class="show_more_button" onclick="show_extra('274')">
       Click to display more
      </a>
      </center>
 
-    <span id=item273 class="hide_extra">
+    <span id=item274 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::floating</code></span>  When the <a href="../core_components/client.html#floating">floating</a> value changes.</li>
@@ -5205,18 +5299,18 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button274>
-     <a class="show_more_button" onclick="show_extra('274')">
+     <center id=button275>
+     <a class="show_more_button" onclick="show_extra('275')">
       Click to display more
      </a>
      </center>
 
-    <span id=item274 class="hide_extra">
+    <span id=item275 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::geometry</code></span>  </li>
            <ul>
-             <li><span class="parameter"><code>geo</code></span> <span class="types"><a href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span> The geometry (with <a href="../core_components/client.html#x">x</a>, <a href="../core_components/client.html#y">y</a>, <a href="../core_components/client.html#width">width</a>, <a href="../core_components/client.html#height">height</a>).</li>
+             <li><span class="parameter"><code>geo</code></span> <span class="types"><a href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span> The geometry (with <a href="../core_components/client.html#x">x</a>, <a href="../core_components/client.html#y">y</a>, <a href="../core_components/client.html#width">width</a>, <a href="../core_components/client.html#height">height</a>).</li>
            </ul>
           <li><span class="parameter"><code>property::x</code></span>  </li>
           <li><span class="parameter"><code>property::position</code></span>  </li>
@@ -5241,18 +5335,18 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button275>
-     <a class="show_more_button" onclick="show_extra('275')">
+     <center id=button276>
+     <a class="show_more_button" onclick="show_extra('276')">
       Click to display more
      </a>
      </center>
 
-    <span id=item275 class="hide_extra">
+    <span id=item276 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::geometry</code></span>  </li>
            <ul>
-             <li><span class="parameter"><code>geo</code></span> <span class="types"><a href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span> The geometry (with <a href="../core_components/client.html#x">x</a>, <a href="../core_components/client.html#y">y</a>, <a href="../core_components/client.html#width">width</a>, <a href="../core_components/client.html#height">height</a>).</li>
+             <li><span class="parameter"><code>geo</code></span> <span class="types"><a href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span> The geometry (with <a href="../core_components/client.html#x">x</a>, <a href="../core_components/client.html#y">y</a>, <a href="../core_components/client.html#width">width</a>, <a href="../core_components/client.html#height">height</a>).</li>
            </ul>
           <li><span class="parameter"><code>property::y</code></span>  </li>
           <li><span class="parameter"><code>property::position</code></span>  </li>
@@ -5277,18 +5371,18 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button276>
-     <a class="show_more_button" onclick="show_extra('276')">
+     <center id=button277>
+     <a class="show_more_button" onclick="show_extra('277')">
       Click to display more
      </a>
      </center>
 
-    <span id=item276 class="hide_extra">
+    <span id=item277 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::geometry</code></span>  </li>
            <ul>
-             <li><span class="parameter"><code>geo</code></span> <span class="types"><a href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span> The geometry (with <a href="../core_components/client.html#x">x</a>, <a href="../core_components/client.html#y">y</a>, <a href="../core_components/client.html#width">width</a>, <a href="../core_components/client.html#height">height</a>).</li>
+             <li><span class="parameter"><code>geo</code></span> <span class="types"><a href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span> The geometry (with <a href="../core_components/client.html#x">x</a>, <a href="../core_components/client.html#y">y</a>, <a href="../core_components/client.html#width">width</a>, <a href="../core_components/client.html#height">height</a>).</li>
            </ul>
           <li><span class="parameter"><code>property::width</code></span>  </li>
           <li><span class="parameter"><code>property::size</code></span>  </li>
@@ -5313,18 +5407,18 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button277>
-     <a class="show_more_button" onclick="show_extra('277')">
+     <center id=button278>
+     <a class="show_more_button" onclick="show_extra('278')">
       Click to display more
      </a>
      </center>
 
-    <span id=item277 class="hide_extra">
+    <span id=item278 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::geometry</code></span>  </li>
            <ul>
-             <li><span class="parameter"><code>geo</code></span> <span class="types"><a href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span> The geometry (with <a href="../core_components/client.html#x">x</a>, <a href="../core_components/client.html#y">y</a>, <a href="../core_components/client.html#width">width</a>, <a href="../core_components/client.html#height">height</a>).</li>
+             <li><span class="parameter"><code>geo</code></span> <span class="types"><a href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span> The geometry (with <a href="../core_components/client.html#x">x</a>, <a href="../core_components/client.html#y">y</a>, <a href="../core_components/client.html#width">width</a>, <a href="../core_components/client.html#height">height</a>).</li>
            </ul>
           <li><span class="parameter"><code>property::height</code></span>  </li>
           <li><span class="parameter"><code>property::size</code></span>  </li>
@@ -5341,12 +5435,12 @@ ruled.client.add_rule_source(
     </span>
     </dt>
     <dd>
-    If the client is dockable.</p>
+    If the client is dockable. </p>
 
 <p> A dockable client is an application confined to the edge of the screen. The
  space it occupies is substracted from the <a href="../core_components/screen.html#workarea">screen.workarea</a>.</p>
 
-<p> Clients with a type of &ldquo;utility&rdquo;, &ldquo;toolbar&rdquo; or &ldquo;dock&rdquo; are dockable by
+<p> Clients with a type of "utility", "toolbar" or "dock" are dockable by
  default.
 
     <h3>Type constraints:</h3>
@@ -5362,13 +5456,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button278>
-     <a class="show_more_button" onclick="show_extra('278')">
+     <center id=button279>
+     <a class="show_more_button" onclick="show_extra('279')">
       Click to display more
      </a>
      </center>
 
-    <span id=item278 class="hide_extra">
+    <span id=item279 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::dockable</code></span>  When the <a href="../core_components/client.html#dockable">dockable</a> value changes.</li>
@@ -5388,10 +5482,10 @@ ruled.client.add_rule_source(
     </span>
     </dt>
     <dd>
-    If the client requests not to be decorated with a titlebar.</p>
+    If the client requests not to be decorated with a titlebar. </p>
 
 <p> The motif wm hints allow a client to request not to be decorated by the WM in
- various ways. This property uses the motif MWM_DECOR_TITLE hint and
+ various ways. This property uses the motif MWM<em>DECOR</em>TITLE hint and
  interprets it as the client (not) wanting a titlebar.
 
     <h3>Type constraints:</h3>
@@ -5408,13 +5502,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button279>
-     <a class="show_more_button" onclick="show_extra('279')">
+     <center id=button280>
+     <a class="show_more_button" onclick="show_extra('280')">
       Click to display more
      </a>
      </center>
 
-    <span id=item279 class="hide_extra">
+    <span id=item280 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::requests_no_titlebar</code></span>  When the <a href="../core_components/client.html#requests_no_titlebar">requests_no_titlebar</a> value changes.</li>
@@ -5453,13 +5547,13 @@ ruled.client.add_rule_source(
 
 
      <br />
-     <center id=button280>
-     <a class="show_more_button" onclick="show_extra('280')">
+     <center id=button281>
+     <a class="show_more_button" onclick="show_extra('281')">
       Click to display more
      </a>
      </center>
 
-    <span id=item280 class="hide_extra">
+    <span id=item281 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::shape</code></span>  When the <a href="../core_components/client.html#shape">shape</a> value changes.</li>
@@ -5480,7 +5574,8 @@ ruled.client.add_rule_source(
     </span>
     </dt>
     <dd>
-    <p>Return true if the client is active (has focus).</p>
+
+<p>Return true if the client is active (has focus). </p>
 
 <p> This property is <strong>READ ONLY</strong>. Use <code>c:activate { context = &quot;myreason&quot; }</code>
  to change the focus.</p>
@@ -5534,6 +5629,8 @@ end)
 
 
 
+
+
     <h3>See also:</h3>
     <ul>
          <li><a href="../core_components/client.html#activate">activate</a></li>
@@ -5543,13 +5640,13 @@ end)
 
 
      <br />
-     <center id=button281>
-     <a class="show_more_button" onclick="show_extra('281')">
+     <center id=button282>
+     <a class="show_more_button" onclick="show_extra('282')">
       Click to display more
      </a>
      </center>
 
-    <span id=item281 class="hide_extra">
+    <span id=item282 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -5577,35 +5674,37 @@ end)
     </span>
     </dt>
     <dd>
-    <p>Return client struts (reserved space at the edge of the screen).</p>
+
+<p>Return client struts (reserved space at the edge of the screen). </p>
 
 <p> The struts area is a table with a <code>left</code>, <code>right</code>, <code>top</code> and <code>bottom</code>
  keys to define how much space of the screen <code>workarea</code> this client
  should reserve for itself.</p>
 
-<p> This corresponds to EWMH&rsquo;s <code>_NET_WM_STRUT</code> and <code>_NET_WM_STRUT_PARTIAL</code>.</p>
+<p> This corresponds to EWMH's <code>_NET_WM_STRUT</code> and <code>_NET_WM_STRUT_PARTIAL</code>.</p>
 
 <p> In the example below, 2 object affect the workarea (using their struts):</p>
 
 <ul>
-<li>The top wibar add a <code>top=24</code></li>
-<li>The bottom-left client add <code>bottom=100, left=100</code></li>
+    <li>The top wibar add a <code>top=24</code></li>
+    <li>The bottom-left client add <code>bottom=100, left=100</code></li>
 </ul>
 
 
-<p> <img src="../images/AUTOGEN_screen_struts.svg" alt="Usage example" /></p>
 
-<p>  }
-      &ndash; Wibars and docked clients are the main users of the struts.
-      local wibar = awful.wibar {
-          position = &lsquo;top&rsquo;,
-          height   = 24, &ndash; this will set the wibar won :struts() to top=24
-      }
-      &ndash; This is the client in the bottom left.
-      c.name     = &lsquo;w. struts&rsquo;
-      c.floating = true</p>
+<p> <img src="../images/AUTOGEN_screen_struts.svg" alt="Usage example"/></p>
 
-<pre><code>  c:geometry {
+
+<pre><code>  -- Wibars and docked clients are the main users of the struts.
+  local wibar = awful.wibar {
+      position = "top",
+      height   = 24, -- this will set the wibar won :struts() to top=24
+  }
+  -- This is the client in the bottom left.
+  c.name     = "w. struts"
+  c.floating = true
+
+  c:geometry {
       x      = 0,
       y      = 380,
       height = 100,
@@ -5618,10 +5717,12 @@ end)
   }
 </code></pre>
 
+
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">struts</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with new strut values, or none.
         </li>
     </ul>
@@ -5629,7 +5730,7 @@ end)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with strut values.
     </ol>
 
@@ -5642,7 +5743,7 @@ end)
 
 
 
-    <span id=item282 class="hide_extra">
+    <span id=item283 class="hide_extra">
     </span>
 
 </dd>
@@ -5668,7 +5769,7 @@ end)
 
 
 
-    <span id=item283 class="hide_extra">
+    <span id=item284 class="hide_extra">
     </span>
 
 </dd>
@@ -5680,7 +5781,7 @@ end)
     </span>
     </dt>
     <dd>
-    Kill a client.</p>
+    Kill a client. </p>
 
 <p> This method can be used to close (kill) a <strong>client</strong> using the
  X11 protocol. To use the POSIX way to kill a <strong>process</strong>, use
@@ -5696,7 +5797,7 @@ end)
 
 
 
-    <span id=item284 class="hide_extra">
+    <span id=item285 class="hide_extra">
     </span>
 
 </dd>
@@ -5732,13 +5833,13 @@ end)
 
 
      <br />
-     <center id=button285>
-     <a class="show_more_button" onclick="show_extra('285')">
+     <center id=button286>
+     <a class="show_more_button" onclick="show_extra('286')">
       Click to display more
      </a>
      </center>
 
-    <span id=item285 class="hide_extra">
+    <span id=item286 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../core_components/client.html#swapped">swapped</a></span>  </li>
@@ -5760,14 +5861,14 @@ end)
     </span>
     </dt>
     <dd>
-    Access or set the client tags.</p>
+    Access or set the client tags. </p>
 
 <p> Use the <a href="../core_components/client.html#first_tag">first_tag</a> field to access the first tag of a client directly.
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tags_table</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A table with tags to set, or <code>nil</code> to get the
    current tags.
         </li>
@@ -5776,7 +5877,7 @@ end)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with all tags.
     </ol>
 
@@ -5789,13 +5890,13 @@ end)
 
 
      <br />
-     <center id=button286>
-     <a class="show_more_button" onclick="show_extra('286')">
+     <center id=button287>
+     <a class="show_more_button" onclick="show_extra('287')">
       Click to display more
      </a>
      </center>
 
-    <span id=item286 class="hide_extra">
+    <span id=item287 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::tags</code></span>  </li>
@@ -5827,13 +5928,13 @@ end)
 
 
      <br />
-     <center id=button287>
-     <a class="show_more_button" onclick="show_extra('287')">
+     <center id=button288>
+     <a class="show_more_button" onclick="show_extra('288')">
       Click to display more
      </a>
      </center>
 
-    <span id=item287 class="hide_extra">
+    <span id=item288 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../core_components/client.html#raised">raised</a></span>  </li>
@@ -5865,13 +5966,13 @@ end)
 
 
      <br />
-     <center id=button288>
-     <a class="show_more_button" onclick="show_extra('288')">
+     <center id=button289>
+     <a class="show_more_button" onclick="show_extra('289')">
       Click to display more
      </a>
      </center>
 
-    <span id=item288 class="hide_extra">
+    <span id=item289 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../core_components/client.html#lowered">lowered</a></span>  </li>
@@ -5895,7 +5996,7 @@ end)
 
 
 
-    <span id=item289 class="hide_extra">
+    <span id=item290 class="hide_extra">
     </span>
 
 </dd>
@@ -5935,7 +6036,7 @@ end)
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with client geometry and coordinates.
     </ol>
 
@@ -5951,7 +6052,7 @@ end)
 
 
 
-    <span id=item290 class="hide_extra">
+    <span id=item291 class="hide_extra">
     </span>
 
 </dd>
@@ -5963,7 +6064,7 @@ end)
     </span>
     </dt>
     <dd>
-    Apply size hints to a size.</p>
+    Apply size hints to a size. </p>
 
 <p> This method applies the client size hints. The client
  will be resized according to the size hints as long
@@ -6002,7 +6103,7 @@ end)
 
 
 
-    <span id=item291 class="hide_extra">
+    <span id=item292 class="hide_extra">
     </span>
 
 </dd>
@@ -6014,7 +6115,7 @@ end)
     </span>
     </dt>
     <dd>
-    Get the client&rsquo;s n-th icon.
+    Get the client's n-th icon.
 
     <h3>Parameters:</h3>
     <ul>
@@ -6036,7 +6137,7 @@ end)
 
 
 
-    <span id=item292 class="hide_extra">
+    <span id=item293 class="hide_extra">
     </span>
 
 </dd>
@@ -6056,7 +6157,7 @@ end)
     <ul>
         <li><span class="parameter">merge</span>
             <span class="types"><span class="type">bool</span> or <span class="type">function</span></span>
-         If true then merge tags (select the client&rsquo;s
+         If true then merge tags (select the client's
    first tag additionally) when the client is not visible.
    If it is a function, it will be called with the client and its first
    tag as arguments.
@@ -6073,13 +6174,13 @@ end)
 
 
      <br />
-     <center id=button293>
-     <a class="show_more_button" onclick="show_extra('293')">
+     <center id=button294>
+     <a class="show_more_button" onclick="show_extra('294')">
       Click to display more
      </a>
      </center>
 
-    <span id=item293 class="hide_extra">
+    <span id=item294 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -6123,7 +6224,7 @@ end)
 
 
 
-    <span id=item294 class="hide_extra">
+    <span id=item295 class="hide_extra">
     </span>
 
 </dd>
@@ -6150,7 +6251,7 @@ end)
 
 
 
-    <span id=item295 class="hide_extra">
+    <span id=item296 class="hide_extra">
     </span>
 
 </dd>
@@ -6177,7 +6278,7 @@ end)
 
 
 
-    <span id=item296 class="hide_extra">
+    <span id=item297 class="hide_extra">
     </span>
 
 </dd>
@@ -6204,7 +6305,7 @@ end)
 
 
 
-    <span id=item297 class="hide_extra">
+    <span id=item298 class="hide_extra">
     </span>
 
 </dd>
@@ -6251,7 +6352,7 @@ end)
 
 
 
-    <span id=item298 class="hide_extra">
+    <span id=item299 class="hide_extra">
     </span>
 
 </dd>
@@ -6283,13 +6384,13 @@ end)
 
 
      <br />
-     <center id=button299>
-     <a class="show_more_button" onclick="show_extra('299')">
+     <center id=button300>
+     <a class="show_more_button" onclick="show_extra('300')">
       Click to display more
      </a>
      </center>
 
-    <span id=item299 class="hide_extra">
+    <span id=item300 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -6331,7 +6432,7 @@ end)
 
 
 
-    <span id=item300 class="hide_extra">
+    <span id=item301 class="hide_extra">
     </span>
 
 </dd>
@@ -6365,13 +6466,13 @@ end)
 
 
      <br />
-     <center id=button301>
-     <a class="show_more_button" onclick="show_extra('301')">
+     <center id=button302>
+     <a class="show_more_button" onclick="show_extra('302')">
       Click to display more
      </a>
      </center>
 
-    <span id=item301 class="hide_extra">
+    <span id=item302 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -6394,9 +6495,9 @@ end)
     </span>
     </dt>
     <dd>
-    Find suitable tags for newly created clients.</p>
+    Find suitable tags for newly created clients. </p>
 
-<p> In most cases, the functionality you&rsquo;re actually looking for as a user will
+<p> In most cases, the functionality you're actually looking for as a user will
  either be</p>
 
 <pre><code>c:tags(c.screen.selected_tags)
@@ -6413,8 +6514,8 @@ c:tags(s.selected_tags)
  As such, this method has no effect when applied to a client that already has
  tags assigned (except for emitting <code>property::tag</code>).</p>
 
-<p> Additionally, while it is a rare case, if the client&rsquo;s screen has no selected
- tags at the point of calling this method, it will fall back to the screen&rsquo;s
+<p> Additionally, while it is a rare case, if the client's screen has no selected
+ tags at the point of calling this method, it will fall back to the screen's
  full set of tags.
 
 
@@ -6427,7 +6528,7 @@ c:tags(s.selected_tags)
 
 
 
-    <span id=item302 class="hide_extra">
+    <span id=item303 class="hide_extra">
     </span>
 
 </dd>
@@ -6467,7 +6568,7 @@ c:tags(s.selected_tags)
 
 
 
-    <span id=item303 class="hide_extra">
+    <span id=item304 class="hide_extra">
     </span>
 
 </dd>
@@ -6479,7 +6580,7 @@ c:tags(s.selected_tags)
     </span>
     </dt>
     <dd>
-    Is a client transient for another one?</p>
+    Is a client transient for another one? </p>
 
 <p> This will traverse the chain formed by the <a href="../core_components/client.html#transient_for">transient_for</a> property of <code>self</code>
  until a client <code>c</code> with <code>c.transient_for == c2</code> is found. The found client
@@ -6513,7 +6614,7 @@ c:tags(s.selected_tags)
 
 
 
-    <span id=item304 class="hide_extra">
+    <span id=item305 class="hide_extra">
     </span>
 
 </dd>
@@ -6525,33 +6626,37 @@ c:tags(s.selected_tags)
     </span>
     </dt>
     <dd>
-    <p>Activate (focus) a client.</p>
+
+<p>Activate (focus) a client. </p>
 
 <p> This method is the correct way to focus a client. While
  <code>client.focus = my_client</code> works and is commonly used in older code, it has
  some drawbacks. The most obvious one is that it bypasses the activate
- filters. It also doesn&rsquo;t handle minimized clients well and requires a lot
+ filters. It also doesn't handle minimized clients well and requires a lot
  of boilerplate code to make work properly.</p>
 
 <p> The valid <code>args.actions</code> are:</p>
 
 <ul>
-<li><strong>mouse_move</strong>: Move the client when the mouse cursor moves until the
-mouse buttons are release.</li>
-<li><strong>mouse_resize</strong>: Resize the client when the mouse cursor moves until the
-mouse buttons are release.</li>
-<li><strong>mouse_center</strong>: Move the mouse cursor to the center of the client if it
-isn&rsquo;t already within its geometry,</li>
-<li><strong>toggle_minimization</strong>: If the client is already active, minimize it.</li>
+    <li><strong>mouse_move</strong>: Move the client when the mouse cursor moves until the
+    mouse buttons are release.</li>
+    <li><strong>mouse_resize</strong>: Resize the client when the mouse cursor moves until the
+    mouse buttons are release.</li>
+    <li><strong>mouse_center</strong>: Move the mouse cursor to the center of the client if it
+    isn't already within its geometry,</li>
+    <li><strong>toggle_minimization</strong>: If the client is already active, minimize it.</li>
 </ul>
+
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">args</span>
+
+
         <ul>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Why was this activate called?
          (<em>default</em> other)
         </li>
@@ -6569,10 +6674,14 @@ isn&rsquo;t already within its geometry,</li>
         <li><span class="parameter">switch_to_tags</span>
             <span class="types"><span class="type">boolean</span></span>
 
+
+
          (<em>default</em> false)
         </li>
         <li><span class="parameter">switch_to_tag</span>
             <span class="types"><span class="type">boolean</span></span>
+
+
 
          (<em>default</em> false)
         </li>
@@ -6583,6 +6692,8 @@ isn&rsquo;t already within its geometry,</li>
         </li>
         <li><span class="parameter">toggle_minimization</span>
             <span class="types"><span class="type">boolean</span></span>
+
+
 
          (<em>default</em> false)
         </li>
@@ -6600,7 +6711,7 @@ isn&rsquo;t already within its geometry,</li>
 
 
 
-    <span id=item305 class="hide_extra">
+    <span id=item306 class="hide_extra">
     </span>
 
 </dd>
@@ -6617,46 +6728,11 @@ isn&rsquo;t already within its geometry,</li>
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">permission</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The permission name (just the name, no <code>request::</code>).
         </li>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The reason why this permission is requested.
-        </li>
-    </ul>
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/awful.permissions.html#">awful.permissions</a>
-    </ul>
-
-
-
-    <span id=item306 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "deny"></a>
-    <strong>:deny <span class='function_args'> <b>(</b>permission, context<b>)</b></span></strong>
-    <span class="proptype"></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Deny a permission for a client.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">permission</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The permission name (just the name, no <code>request::</code>).
-        </li>
-        <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The reason why this permission is requested.
         </li>
     </ul>
@@ -6675,6 +6751,41 @@ isn&rsquo;t already within its geometry,</li>
 
 </dd>
     <dt>
+    <a name = "deny"></a>
+    <strong>:deny <span class='function_args'> <b>(</b>permission, context<b>)</b></span></strong>
+    <span class="proptype"></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Deny a permission for a client.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">permission</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The permission name (just the name, no <code>request::</code>).
+        </li>
+        <li><span class="parameter">context</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The reason why this permission is requested.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../libraries/awful.permissions.html#">awful.permissions</a>
+    </ul>
+
+
+
+    <span id=item308 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "emit_signal"></a>
     <strong>:emit_signal <span class='function_args'> <b>(</b>name, ...<b>)</b></span></strong>
     <span class="proptype"></span>
@@ -6688,7 +6799,7 @@ isn&rsquo;t already within its geometry,</li>
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">...</span>
@@ -6703,7 +6814,7 @@ isn&rsquo;t already within its geometry,</li>
 
 
 
-    <span id=item308 class="hide_extra">
+    <span id=item309 class="hide_extra">
     </span>
 
 </dd>
@@ -6721,46 +6832,7 @@ isn&rsquo;t already within its geometry,</li>
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The name of the signal.
-        </li>
-        <li><span class="parameter">func</span>
-            <span class="types"><span class="type">function</span></span>
-         The callback to call when the signal is emitted.
-        </li>
-    </ul>
-
-
-
-
-
-
-    <span id=item309 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "weak_connect_signal"></a>
-    <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
-    <span class="proptype"></span>
-    <span class="baseclass" >
-    &middot;&nbsp;Inherited from gears.object
-    </span>
-    </dt>
-    <dd>
-    Connect to a signal weakly.</p>
-
-<p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.</p>
-
-<p> <strong>Warning:</strong>
- Only use this function if you really, really, really know what you
- are doing.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -6778,6 +6850,45 @@ isn&rsquo;t already within its geometry,</li>
     </span>
 
 </dd>
+    <dt>
+    <a name = "weak_connect_signal"></a>
+    <strong>:weak_connect_signal <span class='function_args'> <b>(</b>name, func<b>)</b></span></strong>
+    <span class="proptype"></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from gears.object
+    </span>
+    </dt>
+    <dd>
+    Connect to a signal weakly. </p>
+
+<p> This allows the callback function to be garbage collected and
+ automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
+ Only use this function if you really, really, really know what you
+ are doing.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The name of the signal.
+        </li>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">function</span></span>
+         The callback to call when the signal is emitted.
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item311 class="hide_extra">
+    </span>
+
+</dd>
 </dl>
     <h2 class="section-header "><a name="Signals"></a>Signals</h2>
 
@@ -6790,7 +6901,7 @@ isn&rsquo;t already within its geometry,</li>
     </span>
     </dt>
     <dd>
-    Emitted when AwesomeWM is about to scan for existing clients.</p>
+    Emitted when AwesomeWM is about to scan for existing clients. </p>
 
 <p> Connect to this signal when code needs to be executed after screens are
  initialized, but before clients are added.
@@ -6801,7 +6912,7 @@ isn&rsquo;t already within its geometry,</li>
 
 
 
-    <span id=item311 class="hide_extra">
+    <span id=item312 class="hide_extra">
     </span>
 
 </dd>
@@ -6813,7 +6924,7 @@ isn&rsquo;t already within its geometry,</li>
     </span>
     </dt>
     <dd>
-    Emitted when AwesomeWM is done scanning for clients.</p>
+    Emitted when AwesomeWM is done scanning for clients. </p>
 
 <p> This is emitted before the <code>startup</code> signal and after the <a href="../core_components/client.html#scanning">scanning</a> signal.
 
@@ -6823,7 +6934,7 @@ isn&rsquo;t already within its geometry,</li>
 
 
 
-    <span id=item312 class="hide_extra">
+    <span id=item313 class="hide_extra">
     </span>
 
 </dd>
@@ -6843,7 +6954,7 @@ isn&rsquo;t already within its geometry,</li>
 
 
 
-    <span id=item313 class="hide_extra">
+    <span id=item314 class="hide_extra">
     </span>
 
 </dd>
@@ -6864,7 +6975,7 @@ isn&rsquo;t already within its geometry,</li>
 
 
 
-    <span id=item314 class="hide_extra">
+    <span id=item315 class="hide_extra">
     </span>
 
 </dd>
@@ -6894,7 +7005,7 @@ isn&rsquo;t already within its geometry,</li>
 
 
 
-    <span id=item315 class="hide_extra">
+    <span id=item316 class="hide_extra">
     </span>
 
 </dd>
@@ -6907,9 +7018,9 @@ isn&rsquo;t already within its geometry,</li>
     </span>
     </dt>
     <dd>
-    Emitted when a new client appears and gets managed by Awesome.</p>
+    Emitted when a new client appears and gets managed by Awesome. </p>
 
-<p> This request should be implemented by code which track the client. It isn&rsquo;t
+<p> This request should be implemented by code which track the client. It isn't
  recommended to use this to initialize the client content. This use case is
  a better fit for <a href="../declarative_rules/ruled.client.html#">ruled.client</a>, which has built-in dependency management.
  Using this request to mutate the client state will likely conflict with
@@ -6922,12 +7033,12 @@ isn&rsquo;t already within its geometry,</li>
          The client.
         </li>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         What created the client. It is currently either &ldquo;new&rdquo;
-  or &ldquo;startup&rdquo;.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         What created the client. It is currently either "new"
+  or "startup".
         </li>
         <li><span class="parameter">hints</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          More metadata (currently empty, it exists for compliance
   with the other <code>request::</code> signals).
         </li>
@@ -6938,13 +7049,13 @@ isn&rsquo;t already within its geometry,</li>
 
 
      <br />
-     <center id=button316>
-     <a class="show_more_button" onclick="show_extra('316')">
+     <center id=button317>
+     <a class="show_more_button" onclick="show_extra('317')">
       Click to display more
      </a>
      </center>
 
-    <span id=item316 class="hide_extra">
+    <span id=item317 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -6967,7 +7078,8 @@ isn&rsquo;t already within its geometry,</li>
     </span>
     </dt>
     <dd>
-    <p>Emitted when a client is going away.</p>
+
+<p>Emitted when a client is going away. </p>
 
 <p> Each places which store <a href="../core_components/client.html#">client</a> objects in non-weak table or whose state
  depend on the current client should answer this request.</p>
@@ -6975,11 +7087,12 @@ isn&rsquo;t already within its geometry,</li>
 <p> The contexts are:</p>
 
 <ul>
-<li><strong>user</strong>: <code>c:unmanage()</code> was called.</li>
-<li><strong>reparented</strong>: The window was reparented to another window. It is no
-longer a stand alone client.</li>
-<li><strong>destroyed</strong>: The window was closed.</li>
+    <li><strong>user</strong>: <code>c:unmanage()</code> was called.</li>
+    <li><strong>reparented</strong>: The window was reparented to another window. It is no
+    longer a stand alone client.</li>
+    <li><strong>destroyed</strong>: The window was closed.</li>
 </ul>
+
 
 
     <h3>Arguments:</h3>
@@ -6989,11 +7102,11 @@ longer a stand alone client.</li>
          The client.
         </li>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Why was the client unmanaged.
         </li>
         <li><span class="parameter">hints</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          More metadata (currently empty, it exists for compliance
   with the other <code>request::</code> signals).
         </li>
@@ -7004,7 +7117,7 @@ longer a stand alone client.</li>
 
 
 
-    <span id=item317 class="hide_extra">
+    <span id=item318 class="hide_extra">
     </span>
 
 </dd>
@@ -7023,7 +7136,7 @@ longer a stand alone client.</li>
 
 
 
-    <span id=item318 class="hide_extra">
+    <span id=item319 class="hide_extra">
     </span>
 
 </dd>
@@ -7042,7 +7155,7 @@ longer a stand alone client.</li>
 
 
 
-    <span id=item319 class="hide_extra">
+    <span id=item320 class="hide_extra">
     </span>
 
 </dd>
@@ -7061,7 +7174,7 @@ longer a stand alone client.</li>
 
 
 
-    <span id=item320 class="hide_extra">
+    <span id=item321 class="hide_extra">
     </span>
 
 </dd>
@@ -7080,7 +7193,7 @@ longer a stand alone client.</li>
 
 
 
-    <span id=item321 class="hide_extra">
+    <span id=item322 class="hide_extra">
     </span>
 
 </dd>
@@ -7099,7 +7212,7 @@ longer a stand alone client.</li>
 
 
 
-    <span id=item322 class="hide_extra">
+    <span id=item323 class="hide_extra">
     </span>
 
 </dd>
@@ -7112,34 +7225,33 @@ longer a stand alone client.</li>
     </span>
     </dt>
     <dd>
-    Emitted when a client should get activated (focused and/or raised).</p>
+    Emitted when a client should get activated (focused and/or raised). </p>
 
 <p> <strong>Contexts are:</strong></p>
 
 <ul>
-<li><em>ewmh</em>: When a client asks for focus (from <code>X11</code> events).</li>
-<li><em>autofocus.check_focus</em>: When autofocus is enabled (from
-<code>awful.autofocus</code>).</li>
-<li><em>autofocus.check_focus_tag</em>: When autofocus is enabled
-(from <code>awful.autofocus</code>).</li>
-<li><em>client.jumpto</em>: When a custom lua extension asks a client to be focused
-(from <a href="../core_components/client.html#jump_to">client.jump_to</a>).</li>
-<li><em>client.swap.global_bydirection</em>: When client swapping requires a focus
-change (from <a href="../core_components/client.html#awful.client.swap.bydirection">awful.client.swap.bydirection</a>).</li>
-<li><em>client.movetotag</em>: When a client is moved to a new tag
-(from <a href="../core_components/client.html#move_to_tag">client.move_to_tag</a>).</li>
-<li><em>client.movetoscreen</em>: When the client is moved to a new screen
-(from <a href="../core_components/client.html#move_to_screen">client.move_to_screen</a>).</li>
-<li><em>client.focus.byidx</em>: When selecting a client using its index
-(from <a href="../core_components/client.html#awful.client.focus.byidx">awful.client.focus.byidx</a>).</li>
-<li><em>client.focus.history.previous</em>: When cycling through history
-(from <a href="../core_components/client.html#awful.client.focus.history.previous">awful.client.focus.history.previous</a>).</li>
-<li><em>menu.clients</em>: When using the builtin client menu
-(from <a href="../popups_and_bars/awful.menu.html#clients">awful.menu.clients</a>).</li>
-<li><em>rules</em>: When a new client is focused from a rule (from <a href="../declarative_rules/ruled.client.html#">ruled.client</a>).</li>
-<li><em>screen.focus</em>: When a screen is focused (from <code>awful.screen.focus</code>).</li>
+    <li><em>ewmh</em>: When a client asks for focus (from <code>X11</code> events).</li>
+    <li>*autofocus.check_focus*: When autofocus is enabled (from
+    <code>awful.autofocus</code>).</li>
+    <li>*autofocus.check<em>focus</em>tag*: When autofocus is enabled
+    (from <code>awful.autofocus</code>).</li>
+    <li><em>client.jumpto</em>: When a custom lua extension asks a client to be focused
+    (from <a href="../core_components/client.html#jump_to">client.jump_to</a>).</li>
+    <li>*client.swap.global_bydirection*: When client swapping requires a focus
+    change (from <a href="../core_components/client.html#awful.client.swap.bydirection">awful.client.swap.bydirection</a>).</li>
+    <li><em>client.movetotag</em>: When a client is moved to a new tag
+    (from <a href="../core_components/client.html#move_to_tag">client.move_to_tag</a>).</li>
+    <li><em>client.movetoscreen</em>: When the client is moved to a new screen
+    (from <a href="../core_components/client.html#move_to_screen">client.move_to_screen</a>).</li>
+    <li><em>client.focus.byidx</em>: When selecting a client using its index
+    (from <a href="../core_components/client.html#awful.client.focus.byidx">awful.client.focus.byidx</a>).</li>
+    <li><em>client.focus.history.previous</em>: When cycling through history
+    (from <a href="../core_components/client.html#awful.client.focus.history.previous">awful.client.focus.history.previous</a>).</li>
+    <li><em>menu.clients</em>: When using the builtin client menu
+    (from <a href="../popups_and_bars/awful.menu.html#clients">awful.menu.clients</a>).</li>
+    <li><em>rules</em>: When a new client is focused from a rule (from <a href="../declarative_rules/ruled.client.html#">ruled.client</a>).</li>
+    <li><em>screen.focus</em>: When a screen is focused (from <code>awful.screen.focus</code>).</li>
 </ul>
-
 
 <p> Default implementation: <code>awful.ewmh.activate</code>.</p>
 
@@ -7148,7 +7260,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The context where this signal was used.
         </li>
         <li><span class="parameter">hints</span> A table with additional hints:
@@ -7166,13 +7278,13 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
      <br />
-     <center id=button323>
-     <a class="show_more_button" onclick="show_extra('323')">
+     <center id=button324>
+     <a class="show_more_button" onclick="show_extra('324')">
       Click to display more
      </a>
      </center>
 
-    <span id=item323 class="hide_extra">
+    <span id=item324 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -7195,10 +7307,10 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     </span>
     </dt>
     <dd>
-    Emitted when an event could lead to the client being activated.</p>
+    Emitted when an event could lead to the client being activated. </p>
 
-<p> This is an layer &ldquo;on top&rdquo; of <a href="../core_components/client.html#request::activate">request::activate</a> for event which are not
- actual request for activation/focus, but where &ldquo;it would be nice&rdquo; if the
+<p> This is an layer "on top" of <a href="../core_components/client.html#request::activate">request::activate</a> for event which are not
+ actual request for activation/focus, but where "it would be nice" if the
  client got the focus. This includes the focus-follow-mouse model and focusing
  previous clients when the selected tag changes.</p>
 
@@ -7211,7 +7323,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The context where this signal was used.
         </li>
         <li><span class="parameter">hints</span> A table with additional hints:
@@ -7229,7 +7341,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item324 class="hide_extra">
+    <span id=item325 class="hide_extra">
     </span>
 
 </dd>
@@ -7242,7 +7354,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     </span>
     </dt>
     <dd>
-    Emitted when something request a client&rsquo;s geometry to be modified.
+    Emitted when something request a client's geometry to be modified.
 
     <h3>Arguments:</h3>
     <ul>
@@ -7251,12 +7363,12 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
          The client
         </li>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Why and what to resize. This is used for the
    handlers to know if they are capable of applying the new geometry.
         </li>
         <li><span class="parameter">Additional</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          arguments. Each context handler may
    interpret this differently.
          (<em>default</em> {})
@@ -7268,13 +7380,13 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
      <br />
-     <center id=button325>
-     <a class="show_more_button" onclick="show_extra('325')">
+     <center id=button326>
+     <a class="show_more_button" onclick="show_extra('326')">
       Click to display more
      </a>
      </center>
 
-    <span id=item325 class="hide_extra">
+    <span id=item326 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -7313,7 +7425,7 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 
 
 
-    <span id=item326 class="hide_extra">
+    <span id=item327 class="hide_extra">
     </span>
 
 </dd>
@@ -7325,7 +7437,8 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
     </span>
     </dt>
     <dd>
-    <p>Emitted when any client&rsquo;s <a href="../core_components/client.html#urgent">urgent</a> property changes.</p>
+
+<p>Emitted when any client's <a href="../core_components/client.html#urgent">urgent</a> property changes. </p>
 
 <p> Emitted both when <code>urgent = true</code> and <code>urgent = false</code>, so you will likely
  want to check <code>c.urgent</code> within the signal callback.</p>
@@ -7340,6 +7453,8 @@ change (from <a href="../core_components/client.html#awful.client.swap.bydirecti
 end)
 </code></pre>
 
+
+
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">c</span>
@@ -7353,7 +7468,7 @@ end)
 
 
 
-    <span id=item327 class="hide_extra">
+    <span id=item328 class="hide_extra">
     </span>
 
 </dd>
@@ -7366,7 +7481,7 @@ end)
     </dt>
     <dd>
     Emitted once to request default client mousebindings during the initial
- startup sequence.</p>
+ startup sequence. </p>
 
 <p> This signal gives all modules a chance to register their default client
  mousebindings.
@@ -7376,7 +7491,7 @@ end)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The reason why the signal was sent (currently always
   <code>startup</code>).
         </li>
@@ -7387,7 +7502,7 @@ end)
 
 
 
-    <span id=item328 class="hide_extra">
+    <span id=item329 class="hide_extra">
     </span>
 
 </dd>
@@ -7401,7 +7516,7 @@ end)
     </dt>
     <dd>
     Emitted once to request default client keybindings during the initial
- startup sequence.</p>
+ startup sequence. </p>
 
 <p> This signal gives all modules a chance to register their default client
  keybindings.
@@ -7411,7 +7526,7 @@ end)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The reason why the signal was sent (currently always
         </li>
     </ul>
@@ -7421,13 +7536,13 @@ end)
 
 
      <br />
-     <center id=button329>
-     <a class="show_more_button" onclick="show_extra('329')">
+     <center id=button330>
+     <a class="show_more_button" onclick="show_extra('330')">
       Click to display more
      </a>
      </center>
 
-    <span id=item329 class="hide_extra">
+    <span id=item330 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -7464,7 +7579,7 @@ end)
 
 
 
-    <span id=item330 class="hide_extra">
+    <span id=item331 class="hide_extra">
     </span>
 
 </dd>
@@ -7483,7 +7598,7 @@ end)
 
 
 
-    <span id=item331 class="hide_extra">
+    <span id=item332 class="hide_extra">
     </span>
 
 </dd>
@@ -7509,7 +7624,7 @@ end)
 
 
 
-    <span id=item332 class="hide_extra">
+    <span id=item333 class="hide_extra">
     </span>
 
 </dd>
@@ -7537,7 +7652,7 @@ end)
 
 
 
-    <span id=item333 class="hide_extra">
+    <span id=item334 class="hide_extra">
     </span>
 
 </dd>
@@ -7565,7 +7680,7 @@ end)
 
 
 
-    <span id=item334 class="hide_extra">
+    <span id=item335 class="hide_extra">
     </span>
 
 </dd>
@@ -7584,7 +7699,7 @@ end)
 
 
 
-    <span id=item335 class="hide_extra">
+    <span id=item336 class="hide_extra">
     </span>
 
 </dd>
@@ -7601,12 +7716,12 @@ end)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">content</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         The context (like &ldquo;rules&rdquo;)
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The context (like "rules")
          (<em>default</em> nil)
         </li>
         <li><span class="parameter">hints</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          Some hints.
          (<em>default</em> nil)
         </li>
@@ -7617,7 +7732,7 @@ end)
 
 
 
-    <span id=item336 class="hide_extra">
+    <span id=item337 class="hide_extra">
     </span>
 
 </dd>
@@ -7629,29 +7744,31 @@ end)
     </span>
     </dt>
     <dd>
-    <p>Emited when the border client might need to be update.</p>
+
+<p>Emited when the border client might need to be update. </p>
 
 <p> The context are:</p>
 
 <ul>
-<li><strong>added</strong>: When a new client is created.</li>
-<li><strong>active</strong>: When client gains the focus (or stop being urgent/floating
-but is active).</li>
-<li><strong>inactive</strong>: When client loses the focus (or stop being urgent/floating
-and is not active.</li>
-<li><strong>urgent</strong>: When a client becomes urgent.</li>
-<li><strong>floating</strong>: When the floating or maximization state changes.</li>
+    <li><strong>added</strong>: When a new client is created.</li>
+    <li><strong>active</strong>: When client gains the focus (or stop being urgent/floating
+    but is active).</li>
+    <li><strong>inactive</strong>: When client loses the focus (or stop being urgent/floating
+    and is not active.</li>
+    <li><strong>urgent</strong>: When a client becomes urgent.</li>
+    <li><strong>floating</strong>: When the floating or maximization state changes.</li>
 </ul>
+
 
 
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">context</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The context.
         </li>
         <li><span class="parameter">hints</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The hints.
         </li>
     </ul>
@@ -7665,7 +7782,7 @@ and is not active.</li>
 
 
 
-    <span id=item337 class="hide_extra">
+    <span id=item338 class="hide_extra">
     </span>
 
 </dd>
@@ -7688,7 +7805,7 @@ and is not active.</li>
 
 
 
-    <span id=item338 class="hide_extra">
+    <span id=item339 class="hide_extra">
     </span>
 
 </dd>
@@ -7707,7 +7824,7 @@ and is not active.</li>
 
 
 
-    <span id=item339 class="hide_extra">
+    <span id=item340 class="hide_extra">
     </span>
 
 </dd>
@@ -7726,7 +7843,7 @@ and is not active.</li>
 
 
 
-    <span id=item340 class="hide_extra">
+    <span id=item341 class="hide_extra">
     </span>
 
 </dd>
@@ -7745,7 +7862,7 @@ and is not active.</li>
 
 
 
-    <span id=item341 class="hide_extra">
+    <span id=item342 class="hide_extra">
     </span>
 
 </dd>
@@ -7775,7 +7892,7 @@ and is not active.</li>
 
 
 
-    <span id=item342 class="hide_extra">
+    <span id=item343 class="hide_extra">
     </span>
 
 </dd>
@@ -7803,7 +7920,7 @@ and is not active.</li>
 
 
 
-    <span id=item343 class="hide_extra">
+    <span id=item344 class="hide_extra">
     </span>
 
 </dd>
@@ -7831,7 +7948,7 @@ and is not active.</li>
 
 
 
-    <span id=item344 class="hide_extra">
+    <span id=item345 class="hide_extra">
     </span>
 
 </dd>
@@ -7859,7 +7976,7 @@ and is not active.</li>
 
 
 
-    <span id=item345 class="hide_extra">
+    <span id=item346 class="hide_extra">
     </span>
 
 </dd>
@@ -7883,7 +8000,7 @@ and is not active.</li>
 
 
 
-    <span id=item346 class="hide_extra">
+    <span id=item347 class="hide_extra">
     </span>
 
 </dd>
@@ -7907,7 +8024,7 @@ and is not active.</li>
 
 
 
-    <span id=item347 class="hide_extra">
+    <span id=item348 class="hide_extra">
     </span>
 
 </dd>
@@ -7931,7 +8048,7 @@ and is not active.</li>
 
 
 
-    <span id=item348 class="hide_extra">
+    <span id=item349 class="hide_extra">
     </span>
 
 </dd>
@@ -7955,7 +8072,7 @@ and is not active.</li>
 
 
 
-    <span id=item349 class="hide_extra">
+    <span id=item350 class="hide_extra">
     </span>
 
 </dd>
@@ -7979,7 +8096,7 @@ and is not active.</li>
 
 
 
-    <span id=item350 class="hide_extra">
+    <span id=item351 class="hide_extra">
     </span>
 
 </dd>
@@ -8003,7 +8120,7 @@ and is not active.</li>
 
 
 
-    <span id=item351 class="hide_extra">
+    <span id=item352 class="hide_extra">
     </span>
 
 </dd>
@@ -8027,7 +8144,7 @@ and is not active.</li>
 
 
 
-    <span id=item352 class="hide_extra">
+    <span id=item353 class="hide_extra">
     </span>
 
 </dd>
@@ -8051,7 +8168,7 @@ and is not active.</li>
 
 
 
-    <span id=item353 class="hide_extra">
+    <span id=item354 class="hide_extra">
     </span>
 
 </dd>
@@ -8075,7 +8192,7 @@ and is not active.</li>
 
 
 
-    <span id=item354 class="hide_extra">
+    <span id=item355 class="hide_extra">
     </span>
 
 </dd>
@@ -8099,7 +8216,7 @@ and is not active.</li>
 
 
 
-    <span id=item355 class="hide_extra">
+    <span id=item356 class="hide_extra">
     </span>
 
 </dd>
@@ -8123,7 +8240,7 @@ and is not active.</li>
 
 
 
-    <span id=item356 class="hide_extra">
+    <span id=item357 class="hide_extra">
     </span>
 
 </dd>
@@ -8147,7 +8264,7 @@ and is not active.</li>
 
 
 
-    <span id=item357 class="hide_extra">
+    <span id=item358 class="hide_extra">
     </span>
 
 </dd>
@@ -8171,7 +8288,7 @@ and is not active.</li>
 
 
 
-    <span id=item358 class="hide_extra">
+    <span id=item359 class="hide_extra">
     </span>
 
 </dd>
@@ -8195,7 +8312,7 @@ and is not active.</li>
 
 
 
-    <span id=item359 class="hide_extra">
+    <span id=item360 class="hide_extra">
     </span>
 
 </dd>
@@ -8219,7 +8336,7 @@ and is not active.</li>
 
 
 
-    <span id=item360 class="hide_extra">
+    <span id=item361 class="hide_extra">
     </span>
 
 </dd>
@@ -8243,7 +8360,7 @@ and is not active.</li>
 
 
 
-    <span id=item361 class="hide_extra">
+    <span id=item362 class="hide_extra">
     </span>
 
 </dd>
@@ -8277,7 +8394,7 @@ and is not active.</li>
 
 
 
-    <span id=item362 class="hide_extra">
+    <span id=item363 class="hide_extra">
     </span>
 
 </dd>
@@ -8305,7 +8422,7 @@ and is not active.</li>
 
 
 
-    <span id=item363 class="hide_extra">
+    <span id=item364 class="hide_extra">
     </span>
 
 </dd>
@@ -8333,7 +8450,7 @@ and is not active.</li>
 
 
 
-    <span id=item364 class="hide_extra">
+    <span id=item365 class="hide_extra">
     </span>
 
 </dd>
@@ -8357,7 +8474,7 @@ and is not active.</li>
 
 
 
-    <span id=item365 class="hide_extra">
+    <span id=item366 class="hide_extra">
     </span>
 
 </dd>
@@ -8381,7 +8498,7 @@ and is not active.</li>
 
 
 
-    <span id=item366 class="hide_extra">
+    <span id=item367 class="hide_extra">
     </span>
 
 </dd>
@@ -8405,7 +8522,7 @@ and is not active.</li>
 
 
 
-    <span id=item367 class="hide_extra">
+    <span id=item368 class="hide_extra">
     </span>
 
 </dd>
@@ -8429,7 +8546,7 @@ and is not active.</li>
 
 
 
-    <span id=item368 class="hide_extra">
+    <span id=item369 class="hide_extra">
     </span>
 
 </dd>
@@ -8453,7 +8570,7 @@ and is not active.</li>
 
 
 
-    <span id=item369 class="hide_extra">
+    <span id=item370 class="hide_extra">
     </span>
 
 </dd>
@@ -8477,7 +8594,7 @@ and is not active.</li>
 
 
 
-    <span id=item370 class="hide_extra">
+    <span id=item371 class="hide_extra">
     </span>
 
 </dd>
@@ -8501,7 +8618,7 @@ and is not active.</li>
 
 
 
-    <span id=item371 class="hide_extra">
+    <span id=item372 class="hide_extra">
     </span>
 
 </dd>
@@ -8525,7 +8642,7 @@ and is not active.</li>
 
 
 
-    <span id=item372 class="hide_extra">
+    <span id=item373 class="hide_extra">
     </span>
 
 </dd>
@@ -8549,7 +8666,7 @@ and is not active.</li>
 
 
 
-    <span id=item373 class="hide_extra">
+    <span id=item374 class="hide_extra">
     </span>
 
 </dd>
@@ -8573,7 +8690,7 @@ and is not active.</li>
 
 
 
-    <span id=item374 class="hide_extra">
+    <span id=item375 class="hide_extra">
     </span>
 
 </dd>
@@ -8597,7 +8714,7 @@ and is not active.</li>
 
 
 
-    <span id=item375 class="hide_extra">
+    <span id=item376 class="hide_extra">
     </span>
 
 </dd>
@@ -8621,7 +8738,7 @@ and is not active.</li>
 
 
 
-    <span id=item376 class="hide_extra">
+    <span id=item377 class="hide_extra">
     </span>
 
 </dd>
@@ -8645,7 +8762,7 @@ and is not active.</li>
 
 
 
-    <span id=item377 class="hide_extra">
+    <span id=item378 class="hide_extra">
     </span>
 
 </dd>
@@ -8669,7 +8786,7 @@ and is not active.</li>
 
 
 
-    <span id=item378 class="hide_extra">
+    <span id=item379 class="hide_extra">
     </span>
 
 </dd>
@@ -8693,7 +8810,7 @@ and is not active.</li>
 
 
 
-    <span id=item379 class="hide_extra">
+    <span id=item380 class="hide_extra">
     </span>
 
 </dd>
@@ -8717,7 +8834,7 @@ and is not active.</li>
 
 
 
-    <span id=item380 class="hide_extra">
+    <span id=item381 class="hide_extra">
     </span>
 
 </dd>
@@ -8729,33 +8846,7 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    The client opacity for the normal clients.</p>
-
-<p> A number between 0 and 1.
-
-
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="../core_components/client.html#request::border">request::border</a>
-    </ul>
-
-
-
-    <span id=item381 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "beautiful.opacity_active"></a>
-    <strong>beautiful.opacity_active</strong>
-    <span class="proptype"><span class='summary_type'>number</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The client opacity for the active client.</p>
+    The client opacity for the normal clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -8774,14 +8865,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_urgent"></a>
-    <strong>beautiful.opacity_urgent</strong>
+    <a name = "beautiful.opacity_active"></a>
+    <strong>beautiful.opacity_active</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the urgent clients.</p>
+    The client opacity for the active client. </p>
 
 <p> A number between 0 and 1.
 
@@ -8800,14 +8891,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_new"></a>
-    <strong>beautiful.opacity_new</strong>
+    <a name = "beautiful.opacity_urgent"></a>
+    <strong>beautiful.opacity_urgent</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the new clients.</p>
+    The client opacity for the urgent clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -8826,14 +8917,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_floating_normal"></a>
-    <strong>beautiful.opacity_floating_normal</strong>
+    <a name = "beautiful.opacity_new"></a>
+    <strong>beautiful.opacity_new</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the normal floating clients.</p>
+    The client opacity for the new clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -8852,14 +8943,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_floating_active"></a>
-    <strong>beautiful.opacity_floating_active</strong>
+    <a name = "beautiful.opacity_floating_normal"></a>
+    <strong>beautiful.opacity_floating_normal</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the active floating client.</p>
+    The client opacity for the normal floating clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -8878,14 +8969,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_floating_urgent"></a>
-    <strong>beautiful.opacity_floating_urgent</strong>
+    <a name = "beautiful.opacity_floating_active"></a>
+    <strong>beautiful.opacity_floating_active</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the urgent floating clients.</p>
+    The client opacity for the active floating client. </p>
 
 <p> A number between 0 and 1.
 
@@ -8904,14 +8995,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_floating_new"></a>
-    <strong>beautiful.opacity_floating_new</strong>
+    <a name = "beautiful.opacity_floating_urgent"></a>
+    <strong>beautiful.opacity_floating_urgent</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the new floating clients.</p>
+    The client opacity for the urgent floating clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -8930,14 +9021,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_maximized_normal"></a>
-    <strong>beautiful.opacity_maximized_normal</strong>
+    <a name = "beautiful.opacity_floating_new"></a>
+    <strong>beautiful.opacity_floating_new</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the normal maximized clients.</p>
+    The client opacity for the new floating clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -8956,14 +9047,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_maximized_active"></a>
-    <strong>beautiful.opacity_maximized_active</strong>
+    <a name = "beautiful.opacity_maximized_normal"></a>
+    <strong>beautiful.opacity_maximized_normal</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the active maximized client.</p>
+    The client opacity for the normal maximized clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -8982,14 +9073,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_maximized_urgent"></a>
-    <strong>beautiful.opacity_maximized_urgent</strong>
+    <a name = "beautiful.opacity_maximized_active"></a>
+    <strong>beautiful.opacity_maximized_active</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the urgent maximized clients.</p>
+    The client opacity for the active maximized client. </p>
 
 <p> A number between 0 and 1.
 
@@ -9008,14 +9099,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_maximized_new"></a>
-    <strong>beautiful.opacity_maximized_new</strong>
+    <a name = "beautiful.opacity_maximized_urgent"></a>
+    <strong>beautiful.opacity_maximized_urgent</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the new maximized clients.</p>
+    The client opacity for the urgent maximized clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -9034,14 +9125,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_fullscreen_normal"></a>
-    <strong>beautiful.opacity_fullscreen_normal</strong>
+    <a name = "beautiful.opacity_maximized_new"></a>
+    <strong>beautiful.opacity_maximized_new</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the normal fullscreen clients.</p>
+    The client opacity for the new maximized clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -9060,14 +9151,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_fullscreen_active"></a>
-    <strong>beautiful.opacity_fullscreen_active</strong>
+    <a name = "beautiful.opacity_fullscreen_normal"></a>
+    <strong>beautiful.opacity_fullscreen_normal</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the active fullscreen client.</p>
+    The client opacity for the normal fullscreen clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -9086,14 +9177,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_fullscreen_urgent"></a>
-    <strong>beautiful.opacity_fullscreen_urgent</strong>
+    <a name = "beautiful.opacity_fullscreen_active"></a>
+    <strong>beautiful.opacity_fullscreen_active</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the urgent fullscreen clients.</p>
+    The client opacity for the active fullscreen client. </p>
 
 <p> A number between 0 and 1.
 
@@ -9112,14 +9203,14 @@ and is not active.</li>
 
 </dd>
     <dt>
-    <a name = "beautiful.opacity_fullscreen_new"></a>
-    <strong>beautiful.opacity_fullscreen_new</strong>
+    <a name = "beautiful.opacity_fullscreen_urgent"></a>
+    <strong>beautiful.opacity_fullscreen_urgent</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The client opacity for the new fullscreen clients.</p>
+    The client opacity for the urgent fullscreen clients. </p>
 
 <p> A number between 0 and 1.
 
@@ -9134,6 +9225,32 @@ and is not active.</li>
 
 
     <span id=item396 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "beautiful.opacity_fullscreen_new"></a>
+    <strong>beautiful.opacity_fullscreen_new</strong>
+    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client opacity for the new fullscreen clients. </p>
+
+<p> A number between 0 and 1.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../core_components/client.html#request::border">request::border</a>
+    </ul>
+
+
+
+    <span id=item397 class="hide_extra">
     </span>
 
 </dd>
@@ -9159,7 +9276,7 @@ and is not active.</li>
         </li>
         <li><span class="parameter">merge</span>
             <span class="types"><span class="type">bool</span> or <span class="type">function</span></span>
-         If true then merge tags (select the client&rsquo;s
+         If true then merge tags (select the client's
    first tag additionally) when the client is not visible.
    If it is a function, it will be called with the client and its first
    tag as arguments.
@@ -9175,7 +9292,7 @@ and is not active.</li>
 
 
 
-    <span id=item397 class="hide_extra">
+    <span id=item398 class="hide_extra">
     </span>
 
 </dd>
@@ -9205,7 +9322,7 @@ and is not active.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with all visible clients.
     </ol>
 
@@ -9217,7 +9334,7 @@ and is not active.</li>
 
 
 
-    <span id=item398 class="hide_extra">
+    <span id=item399 class="hide_extra">
     </span>
 
 </dd>
@@ -9246,7 +9363,7 @@ and is not active.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with all visible and tiled clients.
     </ol>
 
@@ -9258,7 +9375,7 @@ and is not active.</li>
 
 
 
-    <span id=item399 class="hide_extra">
+    <span id=item400 class="hide_extra">
     </span>
 
 </dd>
@@ -9305,7 +9422,7 @@ and is not active.</li>
 
 
 
-    <span id=item400 class="hide_extra">
+    <span id=item401 class="hide_extra">
     </span>
 
 </dd>
@@ -9340,7 +9457,7 @@ and is not active.</li>
 
 
 
-    <span id=item401 class="hide_extra">
+    <span id=item402 class="hide_extra">
     </span>
 
 </dd>
@@ -9376,7 +9493,7 @@ and is not active.</li>
 
 
 
-    <span id=item402 class="hide_extra">
+    <span id=item403 class="hide_extra">
     </span>
 
 </dd>
@@ -9411,7 +9528,7 @@ and is not active.</li>
 
 
 
-    <span id=item403 class="hide_extra">
+    <span id=item404 class="hide_extra">
     </span>
 
 </dd>
@@ -9422,7 +9539,7 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    Mark a client, and then call &lsquo;marked&rsquo; hook.
+    Mark a client, and then call 'marked' hook.
 
     <h3>Parameters:</h3>
     <ul>
@@ -9437,7 +9554,7 @@ and is not active.</li>
 
 
 
-    <span id=item404 class="hide_extra">
+    <span id=item405 class="hide_extra">
     </span>
 
 </dd>
@@ -9448,7 +9565,7 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    Unmark a client and then call &lsquo;unmarked&rsquo; hook.
+    Unmark a client and then call 'unmarked' hook.
 
     <h3>Parameters:</h3>
     <ul>
@@ -9463,7 +9580,7 @@ and is not active.</li>
 
 
 
-    <span id=item405 class="hide_extra">
+    <span id=item406 class="hide_extra">
     </span>
 
 </dd>
@@ -9489,7 +9606,7 @@ and is not active.</li>
 
 
 
-    <span id=item406 class="hide_extra">
+    <span id=item407 class="hide_extra">
     </span>
 
 </dd>
@@ -9515,7 +9632,7 @@ and is not active.</li>
 
 
 
-    <span id=item407 class="hide_extra">
+    <span id=item408 class="hide_extra">
     </span>
 
 </dd>
@@ -9532,7 +9649,7 @@ and is not active.</li>
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with all marked clients.
     </ol>
 
@@ -9540,7 +9657,7 @@ and is not active.</li>
 
 
 
-    <span id=item408 class="hide_extra">
+    <span id=item409 class="hide_extra">
     </span>
 
 </dd>
@@ -9571,7 +9688,7 @@ and is not active.</li>
 
 
 
-    <span id=item409 class="hide_extra">
+    <span id=item410 class="hide_extra">
     </span>
 
 </dd>
@@ -9603,7 +9720,7 @@ and is not active.</li>
 
 
 
-    <span id=item410 class="hide_extra">
+    <span id=item411 class="hide_extra">
     </span>
 
 </dd>
@@ -9641,7 +9758,7 @@ and is not active.</li>
 
 
 
-    <span id=item411 class="hide_extra">
+    <span id=item412 class="hide_extra">
     </span>
 
 </dd>
@@ -9652,7 +9769,7 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    Toggle the floating state of a client between &lsquo;auto&rsquo; and &lsquo;true&rsquo;.
+    Toggle the floating state of a client between 'auto' and 'true'.
  Use <code>c.floating = not c.floating</code>
 
     <h3>Parameters:</h3>
@@ -9672,7 +9789,7 @@ and is not active.</li>
 
 
 
-    <span id=item412 class="hide_extra">
+    <span id=item413 class="hide_extra">
     </span>
 
 </dd>
@@ -9683,7 +9800,7 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    Get a client&rsquo;s dockable state.
+    Get a client's dockable state.
 
     <h3>Parameters:</h3>
     <ul>
@@ -9698,13 +9815,15 @@ and is not active.</li>
 
            <span class="types"><span class="type">bool</span></span>
 
+
+
     </ol>
 
 
 
 
 
-    <span id=item413 class="hide_extra">
+    <span id=item414 class="hide_extra">
     </span>
 
 </dd>
@@ -9715,7 +9834,7 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    Set a client&rsquo;s dockable state, overriding auto-detection.</p>
+    Set a client's dockable state, overriding auto-detection. </p>
 
 <p> With this enabled you can dock windows by moving them from the center
  to the edge of the workarea.
@@ -9737,7 +9856,7 @@ and is not active.</li>
 
 
 
-    <span id=item414 class="hide_extra">
+    <span id=item415 class="hide_extra">
     </span>
 
 </dd>
@@ -9748,7 +9867,7 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    Get a client property.</p>
+    Get a client property. </p>
 
 <p> This method is deprecated. It is now possible to use <code>c.value</code> directly.
 
@@ -9759,7 +9878,7 @@ and is not active.</li>
          The client.
         </li>
         <li><span class="parameter">prop</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The property name.
         </li>
     </ul>
@@ -9774,7 +9893,7 @@ and is not active.</li>
 
 
 
-    <span id=item415 class="hide_extra">
+    <span id=item416 class="hide_extra">
     </span>
 
 </dd>
@@ -9785,7 +9904,7 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    Set a client property.</p>
+    Set a client property. </p>
 
 <p> This method is deprecated. It is now possible to use <code>c.value = value</code>
  directly.
@@ -9797,7 +9916,7 @@ and is not active.</li>
          The client.
         </li>
         <li><span class="parameter">prop</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The property name.
         </li>
         <li><span class="parameter">value</span>
@@ -9810,7 +9929,7 @@ and is not active.</li>
 
 
 
-    <span id=item416 class="hide_extra">
+    <span id=item417 class="hide_extra">
     </span>
 
 </dd>
@@ -9828,7 +9947,7 @@ and is not active.</li>
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          the command to execute
         </li>
         <li><span class="parameter">matcher</span>
@@ -9837,7 +9956,7 @@ and is not active.</li>
         </li>
         <li><span class="parameter">merge</span>
             <span class="types"><span class="type">bool</span> or <span class="type">function</span></span>
-         If true then merge tags (select the client&rsquo;s
+         If true then merge tags (select the client's
    first tag additionally) when the client is not visible.
    If it is a function, it will be called with the client as argument.
         </li>
@@ -9864,7 +9983,7 @@ and is not active.</li>
     </ul>
 
 
-    <span id=item417 class="hide_extra">
+    <span id=item418 class="hide_extra">
     </span>
 
 </dd>
@@ -9905,7 +10024,7 @@ and is not active.</li>
 
 
 
-    <span id=item418 class="hide_extra">
+    <span id=item419 class="hide_extra">
     </span>
 
 </dd>
@@ -9945,7 +10064,7 @@ and is not active.</li>
 
 
 
-    <span id=item419 class="hide_extra">
+    <span id=item420 class="hide_extra">
     </span>
 
 </dd>
@@ -9976,7 +10095,7 @@ and is not active.</li>
 
 
 
-    <span id=item420 class="hide_extra">
+    <span id=item421 class="hide_extra">
     </span>
 
 </dd>
@@ -10002,7 +10121,7 @@ and is not active.</li>
 
 
 
-    <span id=item421 class="hide_extra">
+    <span id=item422 class="hide_extra">
     </span>
 
 </dd>
@@ -10028,7 +10147,7 @@ and is not active.</li>
 
 
 
-    <span id=item422 class="hide_extra">
+    <span id=item423 class="hide_extra">
     </span>
 
 </dd>
@@ -10039,7 +10158,7 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    Calculate a client&rsquo;s column number, index in that column, and
+    Calculate a client's column number, index in that column, and
  number of visible clients in this column.
 
     <h3>Parameters:</h3>
@@ -10055,7 +10174,7 @@ and is not active.</li>
 
 
 
-    <span id=item423 class="hide_extra">
+    <span id=item424 class="hide_extra">
     </span>
 
 </dd>
@@ -10086,13 +10205,13 @@ and is not active.</li>
 
 
      <br />
-     <center id=button424>
-     <a class="show_more_button" onclick="show_extra('424')">
+     <center id=button425>
+     <a class="show_more_button" onclick="show_extra('425')">
       Click to display more
      </a>
      </center>
 
-    <span id=item424 class="hide_extra">
+    <span id=item425 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::windowfact</code></span>  </li>
@@ -10108,7 +10227,7 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    Change window factor of a client.</p>
+    Change window factor of a client. </p>
 
 <p> This will emit <code>property::windowfact</code> on the specific tag object
  <code>c.screen.selected_tag</code>.
@@ -10117,7 +10236,7 @@ and is not active.</li>
     <ul>
         <li><span class="parameter">add</span>
             <span class="types"><span class="type">number</span></span>
-         Amount to increase/decrease the client&rsquo;s window factor by.
+         Amount to increase/decrease the client's window factor by.
    Should be between <code>-current_window_factor</code> and something close to
    infinite. Normalisation then ensures that the sum of all factors is 1.
         </li>
@@ -10132,13 +10251,13 @@ and is not active.</li>
 
 
      <br />
-     <center id=button425>
-     <a class="show_more_button" onclick="show_extra('425')">
+     <center id=button426>
+     <a class="show_more_button" onclick="show_extra('426')">
       Click to display more
      </a>
      </center>
 
-    <span id=item425 class="hide_extra">
+    <span id=item426 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::windowfact</code></span>  </li>
@@ -10158,17 +10277,21 @@ and is not active.</li>
     </span>
     </dt>
     <dd>
-    <p>The client default placement on the screen.</p>
+
+<p>The client default placement on the screen. </p>
 
 <p> The default config uses:</p>
 
 <pre><code>awful.placement.no_overlap+awful.placement.no_offscreen
 </code></pre>
 
-<p><img src="../images/AUTOGEN_sequences_client_rules_placement.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_sequences_client_rules_placement.svg" alt="Usage example"/></p>
+
 
 <pre><code>ruled.client.append_rule {
-    rule = { class = 'mplayer' },
+    rule = { class = "mplayer" },
     properties = {
         floating  = true,
         placement = awful.placement.centered,
@@ -10178,8 +10301,10 @@ and is not active.</li>
 }
 
 -- Spawn mplayer
-awful.spawn('mplayer')
+awful.spawn("mplayer")
 </code></pre>
+
+
 
 
 
@@ -10191,7 +10316,7 @@ awful.spawn('mplayer')
 
 
 
-    <span id=item426 class="hide_extra">
+    <span id=item427 class="hide_extra">
     </span>
 
 </dd>
@@ -10215,7 +10340,7 @@ awful.spawn('mplayer')
 
 
 
-    <span id=item427 class="hide_extra">
+    <span id=item428 class="hide_extra">
     </span>
 
 </dd>
@@ -10227,7 +10352,7 @@ awful.spawn('mplayer')
     </span>
     </dt>
     <dd>
-    When applying the placement, honor the screen work area.</p>
+    When applying the placement, honor the screen work area. </p>
 
 <p> The workarea is the part of the screen that excludes the bars and docks.
 
@@ -10241,7 +10366,7 @@ awful.spawn('mplayer')
 
 
 
-    <span id=item428 class="hide_extra">
+    <span id=item429 class="hide_extra">
     </span>
 
 </dd>
@@ -10253,14 +10378,18 @@ awful.spawn('mplayer')
     </span>
     </dt>
     <dd>
-    <p>The client default tag.</p>
 
-<p><img src="../images/AUTOGEN_sequences_client_rules_tags.svg" alt="Usage example" /></p>
+<p>The client default tag. </p>
+
+
+
+<p><img src="../images/AUTOGEN_sequences_client_rules_tags.svg" alt="Usage example"/></p>
+
 
 <pre><code>-- Select tag by object reference:
 ruled.client.append_rule {
     rule_any    = {
-        class = {'firefox'}
+        class = {"firefox"}
     },
     properties = {
         tag = screen[1].tags[3],
@@ -10270,47 +10399,19 @@ ruled.client.append_rule {
 -- Select tag by name:
 ruled.client.append_rule {
     rule_any    = {
-        class = {'thunderbird'}
+        class = {"thunderbird"}
     },
     properties = {
-        tag = 'five',
+        tag = "five",
     },
 }
 
 -- Spawn firefox and thunderbird
-awful.spawn('firefox')
-awful.spawn('thunderbird')
+awful.spawn("firefox")
+awful.spawn("thunderbird")
 </code></pre>
 
 
-
-
-    <h3>See also:</h3>
-    <ul>
-         <li><a href="../core_components/tag.html#">tag</a></li>
-         <li><a href="../core_components/client.html#new_tag">new_tag</a></li>
-         <li><a href="../core_components/client.html#tags">tags</a></li>
-         <li><a href="../core_components/client.html#switch_to_tags">switch_to_tags</a></li>
-    </ul>
-
-
-
-    <span id=item429 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "tags"></a>
-    <strong>tags</strong>
-    <span class="proptype"><span class='summary_type'>table</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The client default tags.</p>
-
-<p> Avoid using the tag and tags properties at the same time, it will cause
- issues.
 
 
 
@@ -10330,6 +10431,36 @@ awful.spawn('thunderbird')
 
 </dd>
     <dt>
+    <a name = "tags"></a>
+    <strong>tags</strong>
+    <span class="proptype"><span class='summary_type'>table</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The client default tags. </p>
+
+<p> Avoid using the tag and tags properties at the same time, it will cause
+ issues.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/tag.html#">tag</a></li>
+         <li><a href="../core_components/client.html#new_tag">new_tag</a></li>
+         <li><a href="../core_components/client.html#tags">tags</a></li>
+         <li><a href="../core_components/client.html#switch_to_tags">switch_to_tags</a></li>
+    </ul>
+
+
+
+    <span id=item431 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
     <a name = "new_tag"></a>
     <strong>new_tag</strong>
     <span class="proptype"><span class='summary_type'>table <i>or</i> string <i>or</i> boolean</span></span>
@@ -10337,7 +10468,8 @@ awful.spawn('thunderbird')
     </span>
     </dt>
     <dd>
-    <p>Create a new tag for this client.</p>
+
+<p>Create a new tag for this client. </p>
 
 <p> If the value is <code>true</code>, the new tag will be named after the client <a href="../core_components/client.html#class">class</a>.
  If it is a string, it will be the tag name.</p>
@@ -10345,15 +10477,18 @@ awful.spawn('thunderbird')
 <p> If a table is used, all of its properties will be passed to the tag
  constructor:</p>
 
-<p><img src="../images/AUTOGEN_sequences_client_rules_new_tag.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_sequences_client_rules_new_tag.svg" alt="Usage example"/></p>
+
 
 <pre><code>-- Create a new tags with some properties:
 ruled.client.append_rule {
-    rule = { class = 'firefox' },
+    rule = { class = "firefox" },
     properties = {
         switch_to_tags = true,
         new_tag        = {
-            name     = 'My_new_tag!', -- The tag name.
+            name     = "My_new_tag!", -- The tag name.
             layout   = awful.layout.suit.max, -- Set the tag layout.
             volatile = true, -- Remove the tag when the client is closed.
         }
@@ -10362,16 +10497,16 @@ ruled.client.append_rule {
 
 -- Create a new tag with just a name:
 ruled.client.append_rule {
-    rule = { class = 'thunderbird' },
+    rule = { class = "thunderbird" },
     properties = {
         switch_to_tags = true,
-        new_tag        = 'JUST_A_NAME!',
+        new_tag        = "JUST_A_NAME!",
     }
 }
 
 -- Create a new tag using the client metadata:
 ruled.client.append_rule {
-    rule = { class = 'xterm' },
+    rule = { class = "xterm" },
     properties = {
         switch_to_tags = true,
         new_tag        = true,
@@ -10379,10 +10514,12 @@ ruled.client.append_rule {
 }
 
 -- Spawn firefox
-awful.spawn('firefox')
-awful.spawn('thunderbird')
-awful.spawn('xterm')
+awful.spawn("firefox")
+awful.spawn("thunderbird")
+awful.spawn("xterm")
 </code></pre>
+
+
 
 
 
@@ -10396,7 +10533,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item431 class="hide_extra">
+    <span id=item432 class="hide_extra">
     </span>
 
 </dd>
@@ -10408,14 +10545,18 @@ awful.spawn('xterm')
     </span>
     </dt>
     <dd>
-    <p>Unselect the current tags and select this client tags.
+
+<p>Unselect the current tags and select this client tags.
  Note that this property was called <code>switchtotag</code> in previous Awesome versions.</p>
 
-<p><img src="../images/AUTOGEN_sequences_client_rules_switch_to_tags.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_sequences_client_rules_switch_to_tags.svg" alt="Usage example"/></p>
+
 
 <pre><code> -- Select tag by object reference:
  ruled.client.append_rule {
-     rule = { class = 'firefox' },
+     rule = { class = "firefox" },
      properties = {
          tag            = screen[1].tags[4],
          switch_to_tags = true
@@ -10423,8 +10564,10 @@ awful.spawn('xterm')
  }
 
  -- Spawn firefox
- awful.spawn('firefox')
+ awful.spawn("firefox")
 </code></pre>
+
+
 
 
 
@@ -10436,7 +10579,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item432 class="hide_extra">
+    <span id=item433 class="hide_extra">
     </span>
 
 </dd>
@@ -10448,7 +10591,7 @@ awful.spawn('xterm')
     </span>
     </dt>
     <dd>
-    Define if the client should grab focus by default.</p>
+    Define if the client should grab focus by default. </p>
 
 <p> The <a href="../core_components/client.html#request::activate">request::activate</a> context for this call is <code>rules</code>.
 
@@ -10458,7 +10601,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item433 class="hide_extra">
+    <span id=item434 class="hide_extra">
     </span>
 
 </dd>
@@ -10482,7 +10625,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item434 class="hide_extra">
+    <span id=item435 class="hide_extra">
     </span>
 
 </dd>
@@ -10494,7 +10637,7 @@ awful.spawn('xterm')
     </span>
     </dt>
     <dd>
-    A function to call when this client is ready.</p>
+    A function to call when this client is ready. </p>
 
 <p> It can be useful to set extra properties or perform actions.
 
@@ -10508,7 +10651,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item435 class="hide_extra">
+    <span id=item436 class="hide_extra">
     </span>
 
 </dd>
@@ -10523,7 +10666,7 @@ awful.spawn('xterm')
     </span>
     </dt>
     <dd>
-    Client class.</p>
+    Client class. </p>
 
 <p> This table allow to add more dynamic properties to the clients. For example,
  doing:</p>
@@ -10539,11 +10682,11 @@ awful.spawn('xterm')
  end
 </code></pre>
 
-<p> Will add a new &ldquo;my_cool_property&rdquo; dyanmic property to all client. These
+<p> Will add a new "my<em>cool</em>property" dyanmic property to all client. These
  methods will be called when an user does <code>c.my_cool_property = &quot;something&quot;</code>
  or set them in <code>awdul.rules</code>.</p>
 
-<p> Note that doing this isn&rsquo;t required to set random properties to the client,
+<p> Note that doing this isn't required to set random properties to the client,
  it is only useful when setting or getting these properties require code to
  executed.
 
@@ -10553,7 +10696,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item436 class="hide_extra">
+    <span id=item437 class="hide_extra">
     </span>
 
 </dd>
@@ -10569,7 +10712,8 @@ awful.spawn('xterm')
     </span>
     </dt>
     <dd>
-    <p>The focused <a href="../core_components/client.html#">client</a> or nil (in case there is none).</p>
+
+<p>The focused <a href="../core_components/client.html#">client</a> or nil (in case there is none). </p>
 
 <p> It is not recommended to set the focused client using
  this property. Please use <a href="../core_components/client.html#activate">client.activate</a> instead of
@@ -10599,6 +10743,8 @@ awful.spawn('xterm')
 
 
 
+
+
     <h3>See also:</h3>
     <ul>
          <li><a href="../core_components/client.html#active">active</a></li>
@@ -10608,7 +10754,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item437 class="hide_extra">
+    <span id=item438 class="hide_extra">
     </span>
 
 </dd>
@@ -10638,7 +10784,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item438 class="hide_extra">
+    <span id=item439 class="hide_extra">
     </span>
 
 </dd>
@@ -10669,13 +10815,13 @@ awful.spawn('xterm')
 
 
      <br />
-     <center id=button439>
-     <a class="show_more_button" onclick="show_extra('439')">
+     <center id=button440>
+     <a class="show_more_button" onclick="show_extra('440')">
       Click to display more
      </a>
      </center>
 
-    <span id=item439 class="hide_extra">
+    <span id=item440 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -10712,14 +10858,14 @@ awful.spawn('xterm')
     <h3>Returns:</h3>
     <ol>
 
-        The same client if it&rsquo;s ok, nil otherwise.
+        The same client if it's ok, nil otherwise.
     </ol>
 
 
 
 
 
-    <span id=item440 class="hide_extra">
+    <span id=item441 class="hide_extra">
     </span>
 
 </dd>
@@ -10745,7 +10891,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item441 class="hide_extra">
+    <span id=item442 class="hide_extra">
     </span>
 
 </dd>
@@ -10788,7 +10934,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item442 class="hide_extra">
+    <span id=item443 class="hide_extra">
     </span>
 
 </dd>
@@ -10808,13 +10954,13 @@ awful.spawn('xterm')
 
 
      <br />
-     <center id=button443>
-     <a class="show_more_button" onclick="show_extra('443')">
+     <center id=button444>
+     <a class="show_more_button" onclick="show_extra('444')">
       Click to display more
      </a>
      </center>
 
-    <span id=item443 class="hide_extra">
+    <span id=item444 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -10842,62 +10988,9 @@ awful.spawn('xterm')
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">dir</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The direction, can be either
    <code>&quot;up&quot;</code>, <code>&quot;down&quot;</code>, <code>&quot;left&quot;</code> or <code>&quot;right&quot;</code>.
-        </li>
-        <li><span class="parameter">c</span>
-            <span class="types"><span class="type">client</span></span>
-         The client.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">stacked</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Use stacking order? (top to bottom)
-         (<em>default</em> false)
-        </li>
-    </ul>
-
-
-
-
-
-     <br />
-     <center id=button444>
-     <a class="show_more_button" onclick="show_extra('444')">
-      Click to display more
-     </a>
-     </center>
-
-    <span id=item444 class="hide_extra">
-     <h3>Requested actions or permissions:</h3>
-     <table class='widget_list' border=1>
-         <tr style='font-weight: bold;'>
-           <th>Class</th>
-           <th>Permission</th>
-           <th>Context</th>
-           <th>Default</th>
-           <th>Description</th>
-         </tr>
-          <tr><td>client</td><td>activate</td><td>client.focus.bydirection</td><td>granted</td><td>When <code>awful.focus.bydirection</code> is called.</td></tr>
-     </table>
-    </span>
-
-</dd>
-    <dt>
-    <a name = "awful.client.focus.global_bydirection"></a>
-    <strong>awful.client.focus.global_bydirection (dir[, c[, stacked=false]])</strong>
-    <span class="baseclass" >
-         &middot 1 permission
-    </span>
-    </dt>
-    <dd>
-    Focus a client by the given direction.  Moves across screens.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">dir</span>
-         The direction, can be either &ldquo;up&rdquo;, &ldquo;down&rdquo;, &ldquo;left&rdquo; or &ldquo;right&rdquo;.
         </li>
         <li><span class="parameter">c</span>
             <span class="types"><span class="type">client</span></span>
@@ -10932,6 +11025,59 @@ awful.spawn('xterm')
            <th>Default</th>
            <th>Description</th>
          </tr>
+          <tr><td>client</td><td>activate</td><td>client.focus.bydirection</td><td>granted</td><td>When <code>awful.focus.bydirection</code> is called.</td></tr>
+     </table>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "awful.client.focus.global_bydirection"></a>
+    <strong>awful.client.focus.global_bydirection (dir[, c[, stacked=false]])</strong>
+    <span class="baseclass" >
+         &middot 1 permission
+    </span>
+    </dt>
+    <dd>
+    Focus a client by the given direction.  Moves across screens.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dir</span>
+         The direction, can be either "up", "down", "left" or "right".
+        </li>
+        <li><span class="parameter">c</span>
+            <span class="types"><span class="type">client</span></span>
+         The client.
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">stacked</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Use stacking order? (top to bottom)
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+
+
+
+
+     <br />
+     <center id=button446>
+     <a class="show_more_button" onclick="show_extra('446')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item446 class="hide_extra">
+     <h3>Requested actions or permissions:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Class</th>
+           <th>Permission</th>
+           <th>Context</th>
+           <th>Default</th>
+           <th>Description</th>
+         </tr>
           <tr><td>client</td><td>activate</td><td>client.focus.global_bydirection</td><td>granted</td><td>When <a href="../core_components/client.html#awful.client.focus.global_bydirection">awful.client.focus.global_bydirection</a> is called.</td></tr>
      </table>
     </span>
@@ -10948,7 +11094,7 @@ awful.spawn('xterm')
     </span>
     </dt>
     <dd>
-    Get one of a client&rsquo;s shapes and transform it to include window decorations.
+    Get one of a client's shapes and transform it to include window decorations.
 
     <h3>Parameters:</h3>
     <ul>
@@ -10957,34 +11103,8 @@ awful.spawn('xterm')
          The client whose shape should be retrieved
         </li>
         <li><span class="parameter">shape_name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         Either &ldquo;bounding&rdquo; or &ldquo;clip&rdquo;
-        </li>
-    </ul>
-
-
-
-
-
-
-    <span id=item446 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "awful.client.shape.update.all"></a>
-    <strong>awful.client.shape.update.all (c)</strong>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Update all of a client&rsquo;s shapes from the shapes the client set itself.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">c</span>
-            <span class="types"><span class="type">client</span></span>
-         The client to act on
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         Either "bounding" or "clip"
         </li>
     </ul>
 
@@ -10998,13 +11118,13 @@ awful.spawn('xterm')
 
 </dd>
     <dt>
-    <a name = "awful.client.shape.update.bounding"></a>
-    <strong>awful.client.shape.update.bounding (c)</strong>
+    <a name = "awful.client.shape.update.all"></a>
+    <strong>awful.client.shape.update.all (c)</strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Update a client&rsquo;s bounding shape from the shape the client set itself.
+    Update all of a client's shapes from the shapes the client set itself.
 
     <h3>Parameters:</h3>
     <ul>
@@ -11024,13 +11144,13 @@ awful.spawn('xterm')
 
 </dd>
     <dt>
-    <a name = "awful.client.shape.update.clip"></a>
-    <strong>awful.client.shape.update.clip (c)</strong>
+    <a name = "awful.client.shape.update.bounding"></a>
+    <strong>awful.client.shape.update.bounding (c)</strong>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    Update a client&rsquo;s clip shape from the shape the client set itself.
+    Update a client's bounding shape from the shape the client set itself.
 
     <h3>Parameters:</h3>
     <ul>
@@ -11046,6 +11166,32 @@ awful.spawn('xterm')
 
 
     <span id=item449 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "awful.client.shape.update.clip"></a>
+    <strong>awful.client.shape.update.clip (c)</strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Update a client's clip shape from the shape the client set itself.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">c</span>
+            <span class="types"><span class="type">client</span></span>
+         The client to act on
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item450 class="hide_extra">
     </span>
 
 </dd>
@@ -11074,7 +11220,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item450 class="hide_extra">
+    <span id=item451 class="hide_extra">
     </span>
 
 </dd>
@@ -11091,7 +11237,7 @@ awful.spawn('xterm')
     <ul>
         <li><span class="parameter">merge</span>
             <span class="types"><span class="type">bool</span> or <span class="type">function</span></span>
-         If true then merge tags (select the client&rsquo;s
+         If true then merge tags (select the client's
    first tag additionally) when the client is not visible.
    If it is a function, it will be called with the client as argument.
         </li>
@@ -11102,7 +11248,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item451 class="hide_extra">
+    <span id=item452 class="hide_extra">
     </span>
 
 </dd>
@@ -11132,13 +11278,13 @@ awful.spawn('xterm')
 
 
      <br />
-     <center id=button452>
-     <a class="show_more_button" onclick="show_extra('452')">
+     <center id=button453>
+     <a class="show_more_button" onclick="show_extra('453')">
       Click to display more
      </a>
      </center>
 
-    <span id=item452 class="hide_extra">
+    <span id=item453 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -11177,7 +11323,7 @@ awful.spawn('xterm')
 
 
 
-    <span id=item453 class="hide_extra">
+    <span id=item454 class="hide_extra">
     </span>
 
 </dd>

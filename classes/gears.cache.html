@@ -150,6 +150,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -226,9 +227,16 @@
 
 <h1>Module: <code>gears.cache</code></h1>
 <p>Cache object with data that can be garbage-collected.</p>
-<p><p> Here is an example with a basic cache:</p>
+<p>
+
+
+<p> Here is an example with a basic cache:</p>
+
+
+
 
 <p><strong>Usage example output</strong>:</p>
+
 
 <pre>
 new entry created with value <span class="number">0</span>
@@ -239,12 +247,13 @@ new entry created with value <span class="number">2</span>
 <span class="number">84</span>
 <span class="number">0</span>
 </pre>
+
 </p>
     <h3>Usage:</h3>
     <ul>
         <li><pre class="example">local test_cache = cache.new(function(test)
     -- let&apos;s just print about what we created
-    print(&apos;new entry created with value &apos; .. test)
+    print(&quot;new entry created with value &quot; .. test)
     -- Pretend this is some expensive computation
     return test * 42
 end)
@@ -276,19 +285,19 @@ cache:
 end
 local counter = 0
 local wrapper_cache = gears.cache.new(function(arg)
-    local kind = &apos;cache object #&apos; .. tostring(counter) .. &apos; for &apos; .. tostring(arg)
+    local kind = &quot;cache object #&quot; .. tostring(counter) .. &quot; for &quot; .. tostring(arg)
     counter = counter + 1
     return setmetatable({ kind }, { __tostring = tostring_for_cache })
 end)
-print(wrapper_cache:get(&apos;first&apos;))
-print(wrapper_cache:get(&apos;second&apos;))
+print(wrapper_cache:get(&quot;first&quot;))
+print(wrapper_cache:get(&quot;second&quot;))
 -- No new object since it already exists
-print(wrapper_cache:get(&apos;first&apos;))
-print(&apos;forcing a garbage collect&apos;)
+print(wrapper_cache:get(&quot;first&quot;))
+print(&quot;forcing a garbage collect&quot;)
 -- The GC can *always* clear the cache
-collectgarbage(&apos;collect&apos;)
-print(wrapper_cache:get(&apos;first&apos;))
-print(wrapper_cache:get(&apos;second&apos;))
+collectgarbage(&quot;collect&quot;)
+print(wrapper_cache:get(&quot;first&quot;))
+print(wrapper_cache:get(&quot;second&quot;))
 
 </pre></li>
     </ul>
@@ -328,7 +337,7 @@ print(wrapper_cache:get(&apos;second&apos;))
       <td class="name" >
         <a href="#gears.cache:get">:get (...)</a>
       </td>
-      <td colspan="2" class="summary">Get an entry from the cache, creating it if it&rsquo;s missing.</td>
+      <td colspan="2" class="summary">Get an entry from the cache, creating it if it's missing.</td>
     </tr>
 </table>
 
@@ -366,7 +375,7 @@ print(wrapper_cache:get(&apos;second&apos;))
 
 
 
-    <span id=item2459 class="hide_extra">
+    <span id=item2487 class="hide_extra">
     </span>
 
 </dd>
@@ -381,7 +390,7 @@ print(wrapper_cache:get(&apos;second&apos;))
     </span>
     </dt>
     <dd>
-    Get an entry from the cache, creating it if it&rsquo;s missing.
+    Get an entry from the cache, creating it if it's missing.
 
     <h3>Parameters:</h3>
     <ul>
@@ -401,7 +410,7 @@ print(wrapper_cache:get(&apos;second&apos;))
 
 
 
-    <span id=item2460 class="hide_extra">
+    <span id=item2488 class="hide_extra">
     </span>
 
 </dd>

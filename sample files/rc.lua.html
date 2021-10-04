@@ -137,6 +137,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -221,10 +222,15 @@
 
 <h1>Module: <code>rc.lua</code></h1>
 <p>The default rc.lua file.</p>
-<p><p> A copy of this file is usually installed in <code>/etc/xdg/awesome/</code>.</p>
+<p>
+
+
+<p> A copy of this file is usually installed in <code>/etc/xdg/awesome/</code>.</p>
 
 <p> See <a href="../documentation/05-awesomerc.md.html">The declarative layout system</a>
  for a version with additional comments.</p>
+
+
 
 <pre>
 <span class="comment">-- awesome_mode: api-level=4:screen=on
@@ -301,7 +307,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 </span>menubar.utils.terminal = terminal <span class="comment">-- Set the terminal for applications that require it
 </span><span class="comment">-- }}}
 </span>
-<span class="comment">-- {{{ Tag
+<span class="comment">-- {{{ Tag layout
 </span><span class="comment">-- Table of layouts to cover with awful.layout.inc, order matters.
 </span>tag.connect_signal(<span class="string">"request::default_layouts"</span>, <span class="keyword">function</span>()
     awful.layout.append_default_layouts({
@@ -322,6 +328,26 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 <span class="keyword">end</span>)
 <span class="comment">-- }}}
 </span>
+<span class="comment">-- {{{ Wallpaper
+</span>screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
+    awful.wallpaper {
+        screen = s,
+        widget = {
+            {
+                image     = beautiful.wallpaper,
+                upscale   = <span class="keyword">true</span>,
+                downscale = <span class="keyword">true</span>,
+                widget    = wibox.widget.imagebox,
+            },
+            valign = <span class="string">"center"</span>,
+            halign = <span class="string">"center"</span>,
+            tiled  = <span class="keyword">false</span>,
+            widget = wibox.container.tile,
+        }
+    }
+<span class="keyword">end</span>)
+<span class="comment">-- }}}
+</span>
 <span class="comment">-- {{{ Wibar
 </span>
 <span class="comment">-- Keyboard map indicator and switcher
@@ -329,18 +355,6 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 
 <span class="comment">-- Create a textclock widget
 </span>mytextclock = wibox.widget.textclock()
-
-screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
-    <span class="comment">-- Wallpaper
-</span>    <span class="keyword">if</span> beautiful.wallpaper <span class="keyword">then</span>
-        <span class="keyword">local</span> wallpaper = beautiful.wallpaper
-        <span class="comment">-- If wallpaper is a function, call it with the screen
-</span>        <span class="keyword">if</span> <span class="global">type</span>(wallpaper) == <span class="string">"function"</span> <span class="keyword">then</span>
-            wallpaper = wallpaper(s)
-        <span class="keyword">end</span>
-        gears.wallpaper.maximized(wallpaper, s, <span class="keyword">true</span>)
-    <span class="keyword">end</span>
-<span class="keyword">end</span>)
 
 screen.connect_signal(<span class="string">"request::desktop_decoration"</span>, <span class="keyword">function</span>(s)
     <span class="comment">-- Each screen has its own tag table.
@@ -398,25 +412,26 @@ screen.connect_signal(<span class="string">"request::desktop_decoration"</span>,
     }
 
     <span class="comment">-- Create the wibox
-</span>    s.mywibox = awful.wibar({ position = <span class="string">"top"</span>, screen = s })
-
-    <span class="comment">-- Add widgets to the wibox
-</span>    s.mywibox.widget = {
-        layout = wibox.layout.align.horizontal,
-        { <span class="comment">-- Left widgets
-</span>            layout = wibox.layout.fixed.horizontal,
-            mylauncher,
-            s.mytaglist,
-            s.mypromptbox,
-        },
-        s.mytasklist, <span class="comment">-- Middle widget
-</span>        { <span class="comment">-- Right widgets
-</span>            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock,
-            s.mylayoutbox,
-        },
+</span>    s.mywibox = awful.wibar {
+        position = <span class="string">"top"</span>,
+        screen   = s,
+        widget   = {
+            layout = wibox.layout.align.horizontal,
+            { <span class="comment">-- Left widgets
+</span>                layout = wibox.layout.fixed.horizontal,
+                mylauncher,
+                s.mytaglist,
+                s.mypromptbox,
+            },
+            s.mytasklist, <span class="comment">-- Middle widget
+</span>            { <span class="comment">-- Right widgets
+</span>                layout = wibox.layout.fixed.horizontal,
+                mykeyboardlayout,
+                wibox.widget.systray(),
+                mytextclock,
+                s.mylayoutbox,
+            },
+        }
     }
 <span class="keyword">end</span>)
 <span class="comment">-- }}}
@@ -781,6 +796,7 @@ naughty.connect_signal(<span class="string">"request::display"</span>, <span cla
     c:activate { context = <span class="string">"mouse_enter"</span>, raise = <span class="keyword">false</span> }
 <span class="keyword">end</span>)
 </pre>
+
 </p>
     <div class="extra-header">
 

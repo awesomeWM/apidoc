@@ -139,6 +139,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -228,7 +229,10 @@
 
 <h1>Module: <code>wibox.widget.imagebox</code></h1>
 <p>A widget to display an image.</p>
-<p><p> The <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a> is part of the Awesome WM&rsquo;s widget system
+<p>
+
+
+<p> The <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a> is part of the Awesome WM's widget system
  (see <a href="../documentation/03-declarative-layout.md.html#">03-declarative-layout.md</a>).</p>
 
 <p> This widget displays an image. The image can be a file,
@@ -237,15 +241,23 @@
 
 <h2> Examples using a <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a>:</h2>
 
-<p><img src="../images/AUTOGEN_wibox_widget_defaults_imagebox.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_defaults_imagebox.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 <span class="keyword">local</span> my_imagebox = wibox.widget.imagebox(beautiful.awesome_icon, <span class="keyword">false</span>)
 </pre>
 
-
 <p> Alternatively, you can declare the <a href="../widgets/wibox.widget.imagebox.html#wibox.widget.imagebox">imagebox</a> widget using the
  declarative pattern (both variants are strictly equivalent):</p>
+
+
+
+
+
 
 <pre>
 <span class="keyword">local</span> my_imagebox = wibox.widget {
@@ -254,6 +266,7 @@
     widget = wibox.widget.imagebox
 }
 </pre>
+
 </p>
     <div class="extra-header">
   <div class="extra-header__section">
@@ -325,6 +338,31 @@
       <td class="shortname" ><a href="#resize">resize</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
       <td colspan="2" class="summary">Should the image be resized to fit into the available space?</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#upscale">upscale</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td colspan="2" class="summary">Allow the image to be upscaled (made bigger).</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#downscale">downscale</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td colspan="2" class="summary">Allow the image to be downscaled (made smaller).</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#stylesheet">stylesheet</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td colspan="2" class="summary">Set the SVG CSS stylesheet.</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#dpi">dpi</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> table</span></td>
+      <td colspan="2" class="summary">Set the SVG DPI (dot per inch).</td>
+    </tr>
+    <tr>
+      <td class="shortname" ><a href="#auto_dpi">auto_dpi</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td colspan="2" class="summary">Use the object DPI when rendering the SVG.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#horizontal_fit_policy">horizontal_fit_policy</a></td>
@@ -559,7 +597,7 @@
     </span>
     </dt>
     <dd>
-    Returns a new <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a> instance.</p>
+    Returns a new <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a> instance. </p>
 
 <p> This is the constructor of <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a>. It creates a new
  instance of imagebox widget.</p>
@@ -603,7 +641,7 @@
 
 
 
-    <span id=item1345 class="hide_extra">
+    <span id=item1351 class="hide_extra">
     </span>
 
 </dd>
@@ -620,16 +658,18 @@
     </span>
     </dt>
     <dd>
-    <p>The image rendered by the <a href="../widgets/wibox.widget.imagebox.html#wibox.widget.imagebox">imagebox</a>.</p>
+
+<p>The image rendered by the <a href="../widgets/wibox.widget.imagebox.html#wibox.widget.imagebox">imagebox</a>. </p>
 
 <p> It can can be any of the following:</p>
 
 <ul>
-<li>A <a href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a>: Interpreted as a path to an image file</li>
-<li>A cairo image surface: Directly used as-is</li>
-<li>A librsvg handle object: Directly used as-is</li>
-<li><code>nil</code>: Unset the image.</li>
+    <li>A <a href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a>: Interpreted as a path to an image file</li>
+    <li>A cairo image surface: Directly used as-is</li>
+    <li>A librsvg handle object: Directly used as-is</li>
+    <li><code>nil</code>: Unset the image.</li>
 </ul>
+
 
 
     <h3>Type constraints:</h3>
@@ -645,13 +685,13 @@
 
 
      <br />
-     <center id=button859>
-     <a class="show_more_button" onclick="show_extra('859')">
+     <center id=button860>
+     <a class="show_more_button" onclick="show_extra('860')">
       Click to display more
      </a>
      </center>
 
-    <span id=item859 class="hide_extra">
+    <span id=item860 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::image</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#image">image</a> value changes.</li>
@@ -671,12 +711,14 @@
     </span>
     </dt>
     <dd>
-    Set a clip shape for this imagebox.</p>
+    Set a clip shape for this imagebox. </p>
 
 <p> A clip shape defines an area and dimension to which the content should be
  trimmed.</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_imagebox_clip_shape.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_clip_shape.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
@@ -716,13 +758,13 @@
     </ul>
 
      <br />
-     <center id=button860>
-     <a class="show_more_button" onclick="show_extra('860')">
+     <center id=button861>
+     <a class="show_more_button" onclick="show_extra('861')">
       Click to display more
      </a>
      </center>
 
-    <span id=item860 class="hide_extra">
+    <span id=item861 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::clip_shape</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#clip_shape">clip_shape</a> value changes.</li>
@@ -743,9 +785,15 @@
     </span>
     </dt>
     <dd>
-    Should the image be resized to fit into the available space?</p>
+    Should the image be resized to fit into the available space? </p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_imagebox_resize.svg" alt="Usage example" />
+<p> Note that <a href="../widgets/wibox.widget.imagebox.html#upscale">upscale</a> and <a href="../widgets/wibox.widget.imagebox.html#downscale">downscale</a> can affect the value of <a href="../widgets/wibox.widget.imagebox.html#resize">resize</a>.
+ If conflicting values are passed to the constructor, then the result
+ is undefined.</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_resize.svg" alt="Usage example"/>
 
 
 
@@ -753,19 +801,265 @@
 
 
      <br />
-     <center id=button861>
-     <a class="show_more_button" onclick="show_extra('861')">
+     <center id=button862>
+     <a class="show_more_button" onclick="show_extra('862')">
       Click to display more
      </a>
      </center>
 
-    <span id=item861 class="hide_extra">
+    <span id=item862 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::resize</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#resize">resize</a> value changes.</li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
              <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#resize">resize</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "upscale"></a>
+    <strong>upscale</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Allow the image to be upscaled (made bigger). </p>
+
+<p> Note that <a href="../widgets/wibox.widget.imagebox.html#upscale">upscale</a> and <a href="../widgets/wibox.widget.imagebox.html#downscale">downscale</a> can affect the value of <a href="../widgets/wibox.widget.imagebox.html#resize">resize</a>.
+ If conflicting values are passed to the constructor, then the result
+ is undefined.</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_upscale.svg" alt="Usage example"/>
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../widgets/wibox.widget.imagebox.html#downscale">downscale</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#resize">resize</a></li>
+    </ul>
+
+
+
+    <span id=item863 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "downscale"></a>
+    <strong>downscale</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Allow the image to be downscaled (made smaller). </p>
+
+<p> Note that <a href="../widgets/wibox.widget.imagebox.html#upscale">upscale</a> and <a href="../widgets/wibox.widget.imagebox.html#downscale">downscale</a> can affect the value of <a href="../widgets/wibox.widget.imagebox.html#resize">resize</a>.
+ If conflicting values are passed to the constructor, then the result
+ is undefined.</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_downscale.svg" alt="Usage example"/>
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../widgets/wibox.widget.imagebox.html#upscale">upscale</a></li>
+         <li><a href="../widgets/wibox.widget.imagebox.html#resize">resize</a></li>
+    </ul>
+
+
+
+    <span id=item864 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a name = "stylesheet"></a>
+    <strong>stylesheet</strong>
+    <span class="proptype"><span class='summary_type'>string</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Set the SVG CSS stylesheet. </p>
+
+<p> If the image is an SVG (vector graphics), this property allows to set
+ a CSS stylesheet. It can be used to set colors and much more.</p>
+
+<p> Note that this property is a string, not a path. If the stylesheet is
+ stored on disk, read the content first.</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_stylesheet.svg" alt="Usage example"/>
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> image = <span class="string">'&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;'</span>..
+    <span class="string">'&lt;svg width="190" height="60"&gt;'</span>..
+        <span class="string">'&lt;rect x="10"  y="10" width="50" height="50" /&gt;'</span>..
+        <span class="string">'&lt;rect x="70"  y="10" width="50" height="50" class="my_class" /&gt;'</span>..
+        <span class="string">'&lt;rect x="130" y="10" width="50" height="50" id="my_id" /&gt;'</span>..
+    <span class="string">'&lt;/svg&gt;'</span>
+
+<span class="keyword">local</span> stylesheet = <span class="string">""</span> ..
+     <span class="string">"rect { fill: #ffff00; } "</span>..
+     <span class="string">".my_class { fill: #00ff00; } "</span>..
+     <span class="string">"#my_id { fill: #0000ff; }"</span>
+
+<span class="keyword">local</span> w = wibox.widget {
+    stylesheet = stylesheet,
+    image      = image,
+    widget     = wibox.widget.imagebox
+}</pre>
+    </ul>
+
+     <br />
+     <center id=button865>
+     <a class="show_more_button" onclick="show_extra('865')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item865 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::stylesheet</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#stylesheet">stylesheet</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#stylesheet">stylesheet</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "dpi"></a>
+    <strong>dpi</strong>
+    <span class="proptype"><span class='summary_type'>number <i>or</i> table</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Set the SVG DPI (dot per inch). </p>
+
+<p> Force a specific DPI when rendering the <code>.svg</code>. For other file formats,
+ this does nothing.</p>
+
+<p> It can either be a number of a table containing the <code>x</code> and <code>y</code> keys.</p>
+
+<p> Please note that DPI and <a href="../widgets/wibox.widget.imagebox.html#resize">resize</a> can "fight" each other and end up
+ making the image smaller instead of bigger.</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_dpi.svg" alt="Usage example"/>
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../widgets/wibox.widget.imagebox.html#auto_dpi">auto_dpi</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> image = <span class="string">'&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;'</span>..
+    <span class="string">'&lt;svg width="2in" height="1in"&gt;'</span>..
+        <span class="string">'&lt;rect height="0.1in" width="0.1in" style="fill:red;" /&gt;'</span>..
+        <span class="string">'&lt;text x="10" y="32" width="150" style="font-size: 0.1in;"&gt;Hello world!&lt;/text&gt;'</span>..
+    <span class="string">'&lt;/svg&gt;'</span>
+
+ <span class="keyword">for</span> _, dpi <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span>} <span class="keyword">do</span>
+     <span class="keyword">local</span> w = wibox.widget {
+        image         = image,
+        dpi           = dpi,
+        resize        = <span class="keyword">false</span>,
+        forced_height = <span class="number">70</span>,
+        forced_width  = <span class="number">150</span>,
+        widget        = wibox.widget.imagebox
+    }
+ <span class="keyword">end</span></pre>
+    </ul>
+
+     <br />
+     <center id=button866>
+     <a class="show_more_button" onclick="show_extra('866')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item866 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::dpi</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#dpi">dpi</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#dpi">dpi</a></span> The new value affected to the property.</li>
+           </ul>
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a name = "auto_dpi"></a>
+    <strong>auto_dpi</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Use the object DPI when rendering the SVG. </p>
+
+<p> By default, the SVG are interpreted as-is. When this property is set,
+ the screen DPI will be passed to the SVG renderer. Depending on which
+ tool was used to create the <code>.svg</code>, this may do nothing at all. However,
+ for example, if the <code>.svg</code> uses <code>&lt;text&gt;</code> elements and doesn't have an
+ hardcoded stylesheet, the result will differ.
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../widgets/wibox.widget.imagebox.html#dpi">dpi</a>
+    </ul>
+
+
+     <br />
+     <center id=button867>
+     <a class="show_more_button" onclick="show_extra('867')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item867 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::auto_dpi</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#auto_dpi">auto_dpi</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.imagebox.html#auto_dpi">auto_dpi</a></span> The new value affected to the property.</li>
            </ul>
      </ul>
     </span>
@@ -780,21 +1074,22 @@
     </span>
     </dt>
     <dd>
-    Set the horizontal fit policy.</p>
+    Set the horizontal fit policy. </p>
 
 <p> Valid values are:</p>
 
 <ul>
-<li><code>&quot;auto&quot;</code>: Honor the <a href="../widgets/wibox.widget.imagebox.html#resize">resize</a> variable and preserve the aspect ratio.
-This is the default behaviour.</li>
-<li><code>&quot;none&quot;</code>: Do not resize at all.</li>
-<li><code>&quot;fit&quot;</code>: Resize to the widget width.</li>
+    <li><code>&quot;auto&quot;</code>: Honor the <a href="../widgets/wibox.widget.imagebox.html#resize">resize</a> variable and preserve the aspect ratio.
+    This is the default behaviour.</li>
+    <li><code>&quot;none&quot;</code>: Do not resize at all.</li>
+    <li><code>&quot;fit&quot;</code>: Resize to the widget width.</li>
 </ul>
-
 
 <p> Here is the result for a 22x32 image:</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_imagebox_horizontal_fit_policy.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_horizontal_fit_policy.svg" alt="Usage example"/>
 
 
 
@@ -807,13 +1102,13 @@ This is the default behaviour.</li>
 
 
      <br />
-     <center id=button862>
-     <a class="show_more_button" onclick="show_extra('862')">
+     <center id=button868>
+     <a class="show_more_button" onclick="show_extra('868')">
       Click to display more
      </a>
      </center>
 
-    <span id=item862 class="hide_extra">
+    <span id=item868 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::horizontal_fit_policy</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#horizontal_fit_policy">horizontal_fit_policy</a> value changes.</li>
@@ -834,21 +1129,22 @@ This is the default behaviour.</li>
     </span>
     </dt>
     <dd>
-    Set the vertical fit policy.</p>
+    Set the vertical fit policy. </p>
 
 <p> Valid values are:</p>
 
 <ul>
-<li><code>&quot;auto&quot;</code>: Honor the <a href="../widgets/wibox.widget.imagebox.html#resize">resize</a> varible and preserve the aspect ratio.
-This is the default behaviour.</li>
-<li><code>&quot;none&quot;</code>: Do not resize at all.</li>
-<li><code>&quot;fit&quot;</code>: Resize to the widget height.</li>
+    <li><code>&quot;auto&quot;</code>: Honor the <a href="../widgets/wibox.widget.imagebox.html#resize">resize</a> varible and preserve the aspect ratio.
+    This is the default behaviour.</li>
+    <li><code>&quot;none&quot;</code>: Do not resize at all.</li>
+    <li><code>&quot;fit&quot;</code>: Resize to the widget height.</li>
 </ul>
-
 
 <p> Here is the result for a 32x22 image:</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_imagebox_vertical_fit_policy.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_vertical_fit_policy.svg" alt="Usage example"/>
 
 
 
@@ -861,13 +1157,13 @@ This is the default behaviour.</li>
 
 
      <br />
-     <center id=button863>
-     <a class="show_more_button" onclick="show_extra('863')">
+     <center id=button869>
+     <a class="show_more_button" onclick="show_extra('869')">
       Click to display more
      </a>
      </center>
 
-    <span id=item863 class="hide_extra">
+    <span id=item869 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::vertical_fit_policy</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#vertical_fit_policy">vertical_fit_policy</a> value changes.</li>
@@ -888,18 +1184,19 @@ This is the default behaviour.</li>
     </span>
     </dt>
     <dd>
-    The vertical alignment.</p>
+    The vertical alignment. </p>
 
 <p> Possible values are:</p>
 
 <ul>
-<li><code>&quot;top&quot;</code></li>
-<li><code>&quot;center&quot;</code> (default)</li>
-<li><code>&quot;bottom&quot;</code></li>
+    <li><code>&quot;top&quot;</code></li>
+    <li><code>&quot;center&quot;</code> (default)</li>
+    <li><code>&quot;bottom&quot;</code></li>
 </ul>
 
 
-<p><img src="../images/AUTOGEN_wibox_widget_imagebox_valign.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_valign.svg" alt="Usage example"/>
 
 
 
@@ -913,7 +1210,7 @@ This is the default behaviour.</li>
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">for</span> _, resize <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="keyword">true</span>, <span class="keyword">false</span>} <span class="keyword">do</span>
-    <span class="keyword">for</span> _, valign <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'top'</span>, <span class="string">'center'</span>, <span class="string">'bottom'</span>} <span class="keyword">do</span>
+    <span class="keyword">for</span> _, valign <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">"top"</span>, <span class="string">"center"</span>, <span class="string">"bottom"</span>} <span class="keyword">do</span>
         <span class="keyword">local</span> w = wibox.widget {
             {
                 {
@@ -934,13 +1231,13 @@ This is the default behaviour.</li>
     </ul>
 
      <br />
-     <center id=button864>
-     <a class="show_more_button" onclick="show_extra('864')">
+     <center id=button870>
+     <a class="show_more_button" onclick="show_extra('870')">
       Click to display more
      </a>
      </center>
 
-    <span id=item864 class="hide_extra">
+    <span id=item870 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::valign</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#valign">valign</a> value changes.</li>
@@ -961,18 +1258,19 @@ This is the default behaviour.</li>
     </span>
     </dt>
     <dd>
-    The horizontal alignment.</p>
+    The horizontal alignment. </p>
 
 <p> Possible values are:</p>
 
 <ul>
-<li><code>&quot;left&quot;</code></li>
-<li><code>&quot;center&quot;</code> (default)</li>
-<li><code>&quot;right&quot;</code></li>
+    <li><code>&quot;left&quot;</code></li>
+    <li><code>&quot;center&quot;</code> (default)</li>
+    <li><code>&quot;right&quot;</code></li>
 </ul>
 
 
-<p><img src="../images/AUTOGEN_wibox_widget_imagebox_halign.svg" alt="Usage example" />
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_halign.svg" alt="Usage example"/>
 
 
 
@@ -986,7 +1284,7 @@ This is the default behaviour.</li>
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">for</span> _, resize <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="keyword">true</span>, <span class="keyword">false</span>} <span class="keyword">do</span>
-    <span class="keyword">for</span> _, halign <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'left'</span>, <span class="string">'center'</span>, <span class="string">'right'</span>} <span class="keyword">do</span>
+    <span class="keyword">for</span> _, halign <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">"left"</span>, <span class="string">"center"</span>, <span class="string">"right"</span>} <span class="keyword">do</span>
         <span class="keyword">local</span> w = wibox.widget {
             {
                 {
@@ -1007,13 +1305,13 @@ This is the default behaviour.</li>
     </ul>
 
      <br />
-     <center id=button865>
-     <a class="show_more_button" onclick="show_extra('865')">
+     <center id=button871>
+     <a class="show_more_button" onclick="show_extra('871')">
       Click to display more
      </a>
      </center>
 
-    <span id=item865 class="hide_extra">
+    <span id=item871 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::halign</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#halign">halign</a> value changes.</li>
@@ -1034,7 +1332,7 @@ This is the default behaviour.</li>
     </span>
     </dt>
     <dd>
-    The maximum scaling factor.</p>
+    The maximum scaling factor. </p>
 
 <p> If an image is scaled too much, it gets very blurry. This
  property allows to limit the scaling.
@@ -1043,7 +1341,9 @@ This is the default behaviour.</li>
 
 <p> In the example below, the original size is 22x22</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_imagebox_max_scaling_factor.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_max_scaling_factor.svg" alt="Usage example"/>
 
 
 
@@ -1057,13 +1357,13 @@ This is the default behaviour.</li>
 
 
      <br />
-     <center id=button866>
-     <a class="show_more_button" onclick="show_extra('866')">
+     <center id=button872>
+     <a class="show_more_button" onclick="show_extra('872')">
       Click to display more
      </a>
      </center>
 
-    <span id=item866 class="hide_extra">
+    <span id=item872 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::max_scaling_factor</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#max_scaling_factor">max_scaling_factor</a> value changes.</li>
@@ -1084,12 +1384,13 @@ This is the default behaviour.</li>
     </span>
     </dt>
     <dd>
-    Set the scaling aligorithm.</p>
+    Set the scaling aligorithm. </p>
 
-<p> Depending on how the image is used, what is the &ldquo;correct&rdquo; way to
+<p> Depending on how the image is used, what is the "correct" way to
  scale can change. For example, upscaling a pixel art image should
  not make it blurry. However, scaling up a photo should not make it
  blocky.</p>
+
 
 <table class='widget_list' border=1>
  <tr style='font-weight: bold;'>
@@ -1108,12 +1409,14 @@ This is the default behaviour.</li>
  intentionally blocky to highlight the difference.
  It is zoomed by a factor of 3.</p>
 
-<p><img src="../images/AUTOGEN_wibox_widget_imagebox_scaling_quality.svg" alt="Usage example" />
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_imagebox_scaling_quality.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">scaling_quality</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Either <code>&quot;fast&quot;</code>, <code>&quot;good&quot;</code>, <code>&quot;best&quot;</code>,
    <code>&quot;nearest&quot;</code> or <code>&quot;bilinear&quot;</code>.
         </li>
@@ -1131,7 +1434,7 @@ This is the default behaviour.</li>
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">for</span> _, quality <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">'fast'</span>, <span class="string">'good'</span>, <span class="string">'best'</span>, <span class="string">'nearest'</span>, <span class="string">'bilinear'</span>} <span class="keyword">do</span>
+        <pre class="example"><span class="keyword">for</span> _, quality <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">"fast"</span>, <span class="string">"good"</span>, <span class="string">"best"</span>, <span class="string">"nearest"</span>, <span class="string">"bilinear"</span>} <span class="keyword">do</span>
    <span class="keyword">local</span> w = wibox.widget {
        {
            {
@@ -1149,13 +1452,13 @@ This is the default behaviour.</li>
     </ul>
 
      <br />
-     <center id=button867>
-     <a class="show_more_button" onclick="show_extra('867')">
+     <center id=button873>
+     <a class="show_more_button" onclick="show_extra('873')">
       Click to display more
      </a>
      </center>
 
-    <span id=item867 class="hide_extra">
+    <span id=item873 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::scaling_quality</code></span>  When the <a href="../widgets/wibox.widget.imagebox.html#scaling_quality">scaling_quality</a> value changes.</li>
@@ -1181,7 +1484,7 @@ This is the default behaviour.</li>
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The children.
         </li>
     </ul>
@@ -1191,7 +1494,7 @@ This is the default behaviour.</li>
 
 
 
-    <span id=item868 class="hide_extra">
+    <span id=item874 class="hide_extra">
     </span>
 
 </dd>
@@ -1213,7 +1516,7 @@ This is the default behaviour.</li>
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">children</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The children.
         </li>
     </ul>
@@ -1223,7 +1526,7 @@ This is the default behaviour.</li>
 
 
 
-    <span id=item869 class="hide_extra">
+    <span id=item875 class="hide_extra">
     </span>
 
 </dd>
@@ -1251,7 +1554,7 @@ This is the default behaviour.</li>
 
 
 
-    <span id=item870 class="hide_extra">
+    <span id=item876 class="hide_extra">
     </span>
 
 </dd>
@@ -1279,7 +1582,7 @@ This is the default behaviour.</li>
 
 
 
-    <span id=item871 class="hide_extra">
+    <span id=item877 class="hide_extra">
     </span>
 
 </dd>
@@ -1308,7 +1611,7 @@ This is the default behaviour.</li>
 
 
 
-    <span id=item872 class="hide_extra">
+    <span id=item878 class="hide_extra">
     </span>
 
 </dd>
@@ -1329,7 +1632,7 @@ This is the default behaviour.</li>
 
 
 
-    <span id=item873 class="hide_extra">
+    <span id=item879 class="hide_extra">
     </span>
 
 </dd>
@@ -1342,7 +1645,7 @@ This is the default behaviour.</li>
     </span>
     </dt>
     <dd>
-    The widget buttons.</p>
+    The widget buttons. </p>
 
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
@@ -1356,7 +1659,7 @@ This is the default behaviour.</li>
 
 
 
-    <span id=item874 class="hide_extra">
+    <span id=item880 class="hide_extra">
     </span>
 
 </dd>
@@ -1388,7 +1691,7 @@ This is the default behaviour.</li>
 
 
 
-    <span id=item875 class="hide_extra">
+    <span id=item881 class="hide_extra">
     </span>
 
 </dd>
@@ -1401,8 +1704,9 @@ This is the default behaviour.</li>
     </span>
     </dt>
     <dd>
-    <p>Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal.</p>
+
+<p>Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal. </p>
 
 <p> This is useful to track signals when there is a dynamic set of containers
    and layouts wrapping the widget.</p>
@@ -1410,21 +1714,24 @@ This is the default behaviour.</li>
 <p> Note that this function has some flaws:</p>
 
 <ol>
-<li>The signal is only forwarded once the widget tree has been built. This
-happens after all currently scheduled functions have been executed.
-Therefore, it will not start to work right away.</li>
-<li>In case the widget is present multiple times in a single widget tree,
-this function will also forward the signal multiple times (once per upward
-tree path).</li>
-<li>If the widget is removed from the widget tree, the signal is still
-forwarded for some time, similar to the first case.</li>
+    <li>The signal is only forwarded once the widget tree has been built. This
+    happens after all currently scheduled functions have been executed.
+    Therefore, it will not start to work right away.</li>
+    <li>In case the widget is present multiple times in a single widget tree,
+    this function will also forward the signal multiple times (once per upward
+    tree path).</li>
+    <li>If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.</li>
 </ol>
+
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">signal_name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
 
         </li>
         <li><span class="parameter">...</span>
@@ -1437,7 +1744,7 @@ forwarded for some time, similar to the first case.</li>
 
 
 
-    <span id=item876 class="hide_extra">
+    <span id=item882 class="hide_extra">
     </span>
 
 </dd>
@@ -1467,7 +1774,7 @@ forwarded for some time, similar to the first case.</li>
         <li><span class="parameter">...</span>
             <span class="types"><span class="type">widget</span></span>
          Additional widgets to add at the end of the
-   sub-widgets hierarchy &ldquo;path&rdquo;.
+   sub-widgets hierarchy "path".
          (<em>optional</em>)
         </li>
     </ul>
@@ -1481,15 +1788,15 @@ forwarded for some time, similar to the first case.</li>
            <span class="types"><span class="type">widget</span></span>
         The parent widget.</li>
         <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
-        The hierarchy path between &ldquo;self&rdquo; and &ldquo;widget&rdquo;.</li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        The hierarchy path between "self" and "widget".</li>
     </ol>
 
 
 
 
 
-    <span id=item877 class="hide_extra">
+    <span id=item883 class="hide_extra">
     </span>
 
 </dd>
@@ -1502,7 +1809,11 @@ forwarded for some time, similar to the first case.</li>
     </span>
     </dt>
     <dd>
-    <p>Connect to a signal.</p>
+
+<p>Connect to a signal. </p>
+
+
+
 
 <p><strong>Usage example output</strong>:</p>
 
@@ -1510,10 +1821,13 @@ forwarded for some time, similar to the first case.</li>
 In slot [obj]   foo bar 42
 </code></pre>
 
+
+
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1530,23 +1844,23 @@ In slot [obj]   foo bar 42
         <pre class="example"><span class="keyword">local</span> o = gears.object{}
 <span class="comment">-- Function can be attached to signals
 </span><span class="keyword">local</span> <span class="keyword">function</span> slot(obj, a, b, c)
-    <span class="global">print</span>(<span class="string">'In slot'</span>, obj, a, b, c)
+    <span class="global">print</span>(<span class="string">"In slot"</span>, obj, a, b, c)
 <span class="keyword">end</span>
-o:connect_signal(<span class="string">'my_signal'</span>, slot)
+o:connect_signal(<span class="string">"my_signal"</span>, slot)
 <span class="comment">-- Emitting can be done without arguments. In that case, the object will be
 </span><span class="comment">-- implicitly added as an argument.
-</span>o:emit_signal <span class="string">'my_signal'</span>
+</span>o:emit_signal <span class="string">"my_signal"</span>
 <span class="comment">-- It is also possible to add as many random arguments are required.
-</span>o:emit_signal(<span class="string">'my_signal'</span>, <span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="number">42</span>)
+</span>o:emit_signal(<span class="string">"my_signal"</span>, <span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="number">42</span>)
 <span class="comment">-- Finally, to allow the object to be garbage collected (the memory freed), it
 </span><span class="comment">-- is necessary to disconnect the signal or use <code>weak_connect_signal</code>
-</span>o:disconnect_signal(<span class="string">'my_signal'</span>, slot)
+</span>o:disconnect_signal(<span class="string">"my_signal"</span>, slot)
 <span class="comment">-- This time, the <code>slot</code> wont be called as it is no longer connected.
-</span>o:emit_signal <span class="string">'my_signal'</span></pre>
+</span>o:emit_signal <span class="string">"my_signal"</span></pre>
     </ul>
 
 
-    <span id=item878 class="hide_extra">
+    <span id=item884 class="hide_extra">
     </span>
 
 </dd>
@@ -1559,7 +1873,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.</p>
+    Connect to a signal weakly. </p>
 
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
@@ -1570,7 +1884,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1584,7 +1898,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item879 class="hide_extra">
+    <span id=item885 class="hide_extra">
     </span>
 
 </dd>
@@ -1602,7 +1916,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal.
         </li>
         <li><span class="parameter">func</span>
@@ -1616,7 +1930,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item880 class="hide_extra">
+    <span id=item886 class="hide_extra">
     </span>
 
 </dd>
@@ -1634,7 +1948,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The name of the signal
         </li>
         <li><span class="parameter">...</span>
@@ -1649,7 +1963,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item881 class="hide_extra">
+    <span id=item887 class="hide_extra">
     </span>
 
 </dd>
@@ -1680,7 +1994,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item882 class="hide_extra">
+    <span id=item888 class="hide_extra">
     </span>
 
 </dd>
@@ -1707,7 +2021,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item883 class="hide_extra">
+    <span id=item889 class="hide_extra">
     </span>
 
 </dd>
@@ -1724,7 +2038,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">lx</span>
@@ -1742,7 +2056,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
          The button number.
         </li>
         <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1760,7 +2074,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1804,7 +2118,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item884 class="hide_extra">
+    <span id=item890 class="hide_extra">
     </span>
 
 </dd>
@@ -1821,7 +2135,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">lx</span>
@@ -1839,7 +2153,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
          The button number.
         </li>
         <li><span class="parameter">mods</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The modifiers (mod4, mod1 (alt), Control, Shift)
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1857,7 +2171,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1901,7 +2215,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item885 class="hide_extra">
+    <span id=item891 class="hide_extra">
     </span>
 
 </dd>
@@ -1918,7 +2232,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -1936,7 +2250,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -1980,7 +2294,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item886 class="hide_extra">
+    <span id=item892 class="hide_extra">
     </span>
 
 </dd>
@@ -1997,7 +2311,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
     <h3>Arguments:</h3>
     <ul>
         <li><span class="parameter">self</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The current object instance itself.
         </li>
         <li><span class="parameter">find_widgets_result</span> The entry from the result of
@@ -2015,7 +2329,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
         <li><span class="parameter">hierarchy</span>
             <span class="types"><a class="type" href="../classes/wibox.hierarchy.html#">wibox.hierarchy</a></span>
          The hierarchy
- managing the widget&rsquo;s geometry.
+ managing the widget's geometry.
         </li>
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
@@ -2059,7 +2373,7 @@ o:connect_signal(<span class="string">'my_signal'</span>, slot)
 
 
 
-    <span id=item887 class="hide_extra">
+    <span id=item893 class="hide_extra">
     </span>
 
 </dd>

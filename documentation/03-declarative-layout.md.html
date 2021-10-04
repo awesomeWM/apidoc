@@ -157,6 +157,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -226,20 +227,22 @@
 
 <div id="content">
 
-    <h1>The Widget system</h1>
+
+<h1>The Widget system</h1>
 
 <p>This document explains how to define, place and manage widgets.</p>
 
 <p><a name="The_default_configuration"></a></p>
-
 <h2>The default configuration</h2>
 
 <p>This is what the widgets present in the default configuration are named:</p>
 
-<p><img src="../images/AUTOGEN_awful_popup_defaultconfig.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_awful_popup_defaultconfig.svg" alt="Usage example"/></p>
+
 
 <p><a name="The_default_widgets"></a></p>
-
 <h2>The default widgets</h2>
 
 <h3>Widgets</h3>
@@ -247,9 +250,10 @@
 <p>Awesome provides 2 collections of widgets:</p>
 
 <ul>
-<li><a href="../libraries/wibox.widget.html#">wibox.widget</a>: Generic widgets, containers and layouts</li>
-<li><code>awful.widget</code>: The Awesome specific widgets</li>
+    <li><a href="../libraries/wibox.widget.html#">wibox.widget</a>: Generic widgets, containers and layouts</li>
+    <li><code>awful.widget</code>: The Awesome specific widgets</li>
 </ul>
+
 
 
 <table class='widget_list' border=1>
@@ -329,10 +333,13 @@
 </table>
 
 
+
+
 <h3>Containers</h3>
 
 <p>A container is a widget that wraps another widget. It can be used to add
 decorations or to modify the content of the child widget.</p>
+
 
 <table class='widget_list' border=1>
  <tr style='font-weight: bold;'>
@@ -418,10 +425,13 @@ decorations or to modify the content of the child widget.</p>
 </table>
 
 
+
+
 <h3>Layouts</h3>
 
 <p>Layouts are collections of children widgets. They are placed according to
 configurable rules.</p>
+
 
 <table class='widget_list' border=1>
  <tr style='font-weight: bold;'>
@@ -479,12 +489,18 @@ configurable rules.</p>
 </table>
 
 
+
+
 <h3>Awful widgets</h3>
 
 <p>This modules contains the higher level window manager widgets. Since most of them
 are used by the default config, here is how it maps:</p>
 
-<p><img src="../images/AUTOGEN_awful_wibar_defaultwibar.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_awful_wibar_defaultwibar.svg" alt="Usage example"/></p>
+
+
 
 <table class='widget_list' border=1>
  <tr style='font-weight: bold;'>
@@ -563,18 +579,24 @@ are used by the default config, here is how it maps:</p>
 </table>
 
 
+
+
 <h3>Titlebar widgets</h3>
 
 <p>The titlebar comes with some convinient default widgets. It simplify the most
-basic &ldquo;Windows/macOS&rdquo; like titlebars.</p>
+basic "Windows/macOS" like titlebars.</p>
 
-<p><img src="../images/AUTOGEN_awful_titlebar_defaulttitlebar.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_awful_titlebar_defaulttitlebar.svg" alt="Usage example"/></p>
+
 
 <p>Note that titlebars can also be added on
-each side. This is how &ldquo;active&rdquo; titlebars (click to resize) can be implemented.
+each side. This is how "active" titlebars (click to resize) can be implemented.
 The default <a href="../sample files/rc.lua.html#">rc.lua</a> does not add active borders:</p>
 
-<p><img src="../images/client_geo.svg" alt="" /></p>
+<p><img src="../images/client_geo.svg" alt=""/></p>
+
 
 <table class="widget_list" border="1">
  <tr>
@@ -618,13 +640,16 @@ The default <a href="../sample files/rc.lua.html#">rc.lua</a> does not add activ
 
 <h3>The different type of widget boxes (Wibox)</h3>
 
-<p>The Awesome API uses the word &ldquo;wibox&rdquo; (widget box) to describe an area of the
+<p>The Awesome API uses the word "wibox" (widget box) to describe an area of the
 screen filled with widgets. There are many subvariants of wiboxes with
 specialized roles such as widget bars or tooltips. All variants mostly share the
 same characteristics, but add some extra features to make those specialized
 widget boxes easier to work with.</p>
 
-<p><img src="../images/AUTOGEN_awful_popup_wiboxtypes.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_awful_popup_wiboxtypes.svg" alt="Usage example"/></p>
+
 
 <p>The normal <a href="../popups_and_bars/wibox.html#">wibox</a> is the base class for each of these types. It is extremely
 flexible and allows to place just about anything on the screen. However it
@@ -645,18 +670,21 @@ to an object such as the mouse.</p>
 <p>The <a href="../popups_and_bars/naughty.layout.box.html#">naughty.layout.box</a> allows to provide custom widgets to use within the
 notifications.</p>
 
+<p>The <a href="../popups_and_bars/awful.wallpaper.html#">awful.wallpaper</a> provides a non-intereactive "backgroud" for one or more
+<a href="../core_components/screen.html#">screen</a>. While it uses normal widget, it will not automatically be repainted
+if they change. It will also not provide any mouse events.</p>
+
 <p>Finally, the <a href="../popups_and_bars/awful.titlebar.html#">awful.titlebar</a>, while not technically a real <a href="../popups_and_bars/wibox.html#">wibox</a>, acts
 exactly the same way and allows to attach widgets on each side of clients.</p>
 
 <p><a name="The_different_syntaxes_to_initiate_widgets"></a></p>
-
 <h2>The different syntaxes to initiate widgets</h2>
 
 <p>Awesome provides 2 totally different API access styles to manage widgets. Both
 suit different use cases. Under the hood, both produce the
 exact same code. Consider the declarative API to be compiled into the
 imperative syntax when loaded. Also note that in contrast to technologies such
-as QML, it is interpreted only once and isn&rsquo;t automatically updated when
+as QML, it is interpreted only once and isn't automatically updated when
 values change.</p>
 
 <p>The <strong>imperative</strong> widget initialization is similar to QtWidgets, GTK and Win32.
@@ -669,7 +697,7 @@ where widgets are added and removed over the course of their lifecycle.</p>
 <p>The <strong>declarative</strong> syntax resembles HTML style code
 written in JSON or YAML. The widget instances are created automatically and
 the hierarchy is related to the table nesting (indentation). It is preferred
-when creating static layouts that won&rsquo;t change over the course of their
+when creating static layouts that won't change over the course of their
 lifecycle.</p>
 
 <p>Here is the same code written in both the imperative and declarative style</p>
@@ -677,6 +705,7 @@ lifecycle.</p>
 <p><strong>Imperative with accessors</strong></p>
 
 <p>Code:</p>
+
 
 <pre>
 <span class="keyword">local</span> bg = wibox.container.background()
@@ -695,10 +724,10 @@ l:add(tb2)
 bg:set_widget(l)
 </pre>
 
-
 <p><strong>Imperative with properties</strong></p>
 
 <p>Code:</p>
+
 
 <pre>
 <span class="keyword">local</span> bg = wibox.container.background()
@@ -717,10 +746,10 @@ l:add(tb2)
 bg.widget = l
 </pre>
 
-
 <p><strong>Declarative</strong></p>
 
 <p>Code:</p>
+
 
 <pre>
 <span class="keyword">local</span> bg = wibox.widget {
@@ -740,13 +769,11 @@ bg.widget = l
 }
 </pre>
 
-
 <p>The Awesome documentation mostly uses the declarative style for consistency,
 but both are <strong>always</strong> available. Note that each style can be mixed with other
 styles, but this creates very confusing code and should be avoided.</p>
 
 <p><a name="Creating_and_placing_widgets_using_the_declarative_style"></a></p>
-
 <h2>Creating and placing widgets using the declarative style</h2>
 
 <p>The examples below explain in detail how to use the declarative layout system.
@@ -756,14 +783,14 @@ documentation should be enough for most.</p>
 <h3>A simple layout</h3>
 
 <ul>
-<li>Display <code>my_first_widget</code> only on primary screen</li>
-<li>Display <code>my_second_widget</code> only on screen two</li>
-<li>Add a background color to <code>my_fourth_widget</code></li>
-<li>Dispose in a <a href="../widget_layouts/wibox.layout.fixed.html#horizontal">wibox.layout.fixed.horizontal</a> layout</li>
+    <li>Display <code>my_first_widget</code> only on primary screen</li>
+    <li>Display <code>my_second_widget</code> only on screen two</li>
+    <li>Add a background color to <code>my_fourth_widget</code></li>
+    <li>Dispose in a <a href="../widget_layouts/wibox.layout.fixed.html#horizontal">wibox.layout.fixed.horizontal</a> layout</li>
 </ul>
 
-
 <p>Code:</p>
+
 
 <pre>
 s.mywibox : setup {
@@ -787,13 +814,16 @@ s.mywibox : setup {
 }
 </pre>
 
-
 <p>This examples uses the <a href="../widget_containers/awful.widget.only_on_screen.html#">awful.widget.only_on_screen</a> container to display
 widgets only on some screens.</p>
 
 <h3>Composite widgets</h3>
 
-<p><img src="../images/AUTOGEN_wibox_widget_progressbar_encapsulation.svg" alt="Usage example" /></p>
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_progressbar_encapsulation.svg" alt="Usage example"/></p>
+
+
 
 <pre>
 <span class="comment">-- The progressbars will be on top of each other
@@ -824,18 +854,17 @@ widgets only on some screens.</p>
  }
 </pre>
 
-
 <h3>Define widgets inline and place them</h3>
 
 <ul>
-<li>Create a <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a> with various properties</li>
-<li>Force the textbox size using <code>wibox.layout.constraint</code></li>
-<li>Add a margin around another textbox</li>
-<li>Add a <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a> (for visualization)</li>
+    <li>Create a <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a> with various properties</li>
+    <li>Force the textbox size using <code>wibox.layout.constraint</code></li>
+    <li>Add a margin around another textbox</li>
+    <li>Add a <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a> (for visualization)</li>
 </ul>
 
-
 <p>Code:</p>
+
 
 <pre>
 s.mywibox : setup {
@@ -874,17 +903,17 @@ s.mywibox : setup {
 }
 </pre>
 
-
 <p>Result:
-<img src="../images/widgetlayout1.png" alt="Example2 screenshot" /></p>
+<img src="../images/widgetlayout1.png" alt="Example2 screenshot"/></p>
+
 
 <h3>Use a <a href="../widget_layouts/wibox.layout.align.html#">wibox.layout.align</a> layout</h3>
-
 <p>The <a href="../widget_layouts/wibox.layout.align.html#">wibox.layout.align</a> is a little different. While most layouts will
 ignore any <code>nil</code> lines, the <code>align</code> layout relies on them so <code>left</code>, <code>middle</code>
 and <code>right</code> can be defined.</p>
 
 <p>Code:</p>
+
 
 <pre>
 s.mywibox : setup {
@@ -895,13 +924,13 @@ s.mywibox : setup {
 }
 </pre>
 
-
 <h3>Define new widgets</h3>
 
 <p>New trivial widgets can be created directly in the layout declaration. Here
 is a simple circle widget:</p>
 
 <p>Code:</p>
+
 
 <pre>
 s.mywibox : setup {
@@ -917,19 +946,18 @@ s.mywibox : setup {
 }
 </pre>
 
-
 <p>Result:
-<img src="../images/widgetlayout2.png" alt="Example4 screenshot" /></p>
+<img src="../images/widgetlayout2.png" alt="Example4 screenshot"/></p>
 
 <p>For more information about how to draw widgets, refer to the <code>Cairo</code> API:</p>
 
 <ul>
-<li><a href="http://cairographics.org/manual/cairo-Paths.html">Path</a></li>
-<li><a href="http://cairographics.org/manual/cairo-cairo-t.html">Context</a></li>
-<li><a href="http://cairographics.org/manual/cairo-cairo-pattern-t.html">Pattern</a></li>
-<li><a href="http://cairographics.org/manual/cairo-Transformations.html">transformation</a></li>
-<li><a href="http://cairographics.org/operators/">Operator</a></li>
-<li><a href="https://developer.gnome.org/pango/stable/">Pango text</a></li>
+    <li><a href="http://cairographics.org/manual/cairo-Paths.html">Path</a></li>
+    <li><a href="http://cairographics.org/manual/cairo-cairo-t.html">Context</a></li>
+    <li><a href="http://cairographics.org/manual/cairo-cairo-pattern-t.html">Pattern</a></li>
+    <li><a href="http://cairographics.org/manual/cairo-Transformations.html">transformation</a></li>
+    <li><a href="http://cairographics.org/operators/">Operator</a></li>
+    <li><a href="https://developer.gnome.org/pango/stable/">Pango text</a></li>
 </ul>
 
 
@@ -939,6 +967,7 @@ s.mywibox : setup {
 requires complex manipulations which would make the declaration unreadable.</p>
 
 <p>Code:</p>
+
 
 <pre>
 <span class="keyword">local</span> tb = wibox.widget.textbox()
@@ -953,7 +982,6 @@ tb:set_markup(<span class="string">"Hello world! "</span>)
 }
 </pre>
 
-
 <h3>Accessing widgets</h3>
 
 <p>For each widget or container, it is possible to add an <code>identifier</code> attribute
@@ -962,15 +990,14 @@ so that it can be accessed later.</p>
 <p>Widgets defined using <code>setup</code> can be accessed using these methods:</p>
 
 <ul>
-<li>Avoiding the issue by using externally created widgets</li>
-<li>Using <code>my_wibox.my_first_widget.my_second_widget</code> style access</li>
-<li>Using JavaScript like <code>my_wibox:get_children_by_id(&quot;my_second_widget&quot;)[1]</code></li>
+    <li>Avoiding the issue by using externally created widgets</li>
+    <li>Using <code>my_wibox.my_first_widget.my_second_widget</code> style access</li>
+    <li>Using JavaScript like <code>my_wibox:get_children_by_id(&quot;my_second_widget&quot;)[1]</code></li>
 </ul>
-
 
 <p>The first method mixes the imperative and declarative syntax, and makes the code
 less readable. The second is a little verbose and only works if every node in
-the chain has a valid identifier. The last one doesn&rsquo;t require long paths,
+the chain has a valid identifier. The last one doesn't require long paths,
 but it is not easy to get a specific instance if multiple widgets have the
 same identifier.</p>
 
@@ -980,6 +1007,7 @@ also respect the Lua variable conventions (case-sensitive, alphanumeric,
 underscore characters and non-numeric first character).</p>
 
 <p>Code:</p>
+
 
 <pre>
 s.mywibox : setup {
@@ -999,17 +1027,17 @@ s.mywibox.first.second:set_markup(<span class="string">"changed!"</span>)
 s.mywibox:get_children_by_id(<span class="string">"third"</span>)[<span class="number">1</span>]:set_markup(<span class="string">"Also changed!"</span>)
 </pre>
 
-
 <h3>Extending the system</h3>
 
 <p>This system is very flexible. Each section attribute (the entries with string
 keys) is directly linked to the layout or widget API. When setting the
 imaginary <code>myproperty</code>, it will first check if <code>set_myproperty</code> exists. If it
-doesn&rsquo;t, it will check if there is a <code>myproperty</code> method. Finally, it will
+doesn't, it will check if there is a <code>myproperty</code> method. Finally, it will
 just set the <code>mywidget.myproperty</code> directly in case it is used later or
 caught by a Lua <code>metatable</code> (operator overload).</p>
 
 <p>Code:</p>
+
 
 <pre>
 <span class="comment">-- "Monkeypatch" a new function to 3 widget classes to add vicious
@@ -1032,11 +1060,11 @@ s.mywibox : setup {
 }
 </pre>
 
-
 <p>In this example, the system is extended so that the popular
 <a href="https://github.com/vicious-widgets/vicious">Vicious</a> extension module can be
 used directly in the layout declaration. This example will update the textbox
 every 3 seconds to show the CPU usage.</p>
+
 
 <h3>Handling sections</h3>
 
@@ -1045,6 +1073,7 @@ the final layout declaration. Here is an example re-using one of the above
 example:</p>
 
 <p>Code:</p>
+
 
 <pre>
 <span class="keyword">local</span> circle = {
@@ -1080,7 +1109,6 @@ example:</p>
 s.mywibox : setup (three_circle)
 </pre>
 
-
 <h3>Instantiation rules</h3>
 
 <p>Whenever it can, Awesome tries to be asynchronous. This can take various form
@@ -1090,7 +1118,7 @@ allows to instantiate various elements when a new screen is added. In the later
 case, it is why some widgets are added as properties to other objects instead of
 being global variables like in previous versions of Awesome.</p>
 
-<p>However, there is a case where this isn&rsquo;t enough and another abstract widget has
+<p>However, there is a case where this isn't enough and another abstract widget has
 to be used. This concept is called the <code>widget_template</code> and is an optional
 property of many widgets such as the <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a>,
 <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a> and <a href="../popups_and_bars/naughty.layout.box.html#">naughty.layout.box</a>. These templates are a
@@ -1100,12 +1128,12 @@ represents future widgets that will be created by their parent widget. This is
 necessary for three reasons:</p>
 
 <ul>
-<li>The widget must create many instances of the template at different points in
-time.</li>
-<li>The widget data is only partially available and other fields must be set
-at a later time (by the parent widget).</li>
-<li>The code is highly redundant and some of the logic is delegated to the parent
-widget to simplify everything.</li>
+    <li>The widget must create many instances of the template at different points in
+    time.</li>
+    <li>The widget data is only partially available and other fields must be set
+    at a later time (by the parent widget).</li>
+    <li>The code is highly redundant and some of the logic is delegated to the parent
+    widget to simplify everything.</li>
 </ul>
 
 

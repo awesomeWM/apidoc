@@ -137,6 +137,7 @@
   <li><a href="../popups_and_bars/awful.popup.html">awful.popup</a></li>
   <li><a href="../popups_and_bars/awful.titlebar.html">awful.titlebar</a></li>
   <li><a href="../popups_and_bars/awful.tooltip.html">awful.tooltip</a></li>
+  <li><a href="../popups_and_bars/awful.wallpaper.html">awful.wallpaper</a></li>
   <li><a href="../popups_and_bars/awful.wibar.html">awful.wibar</a></li>
   <li><a href="../popups_and_bars/awful.widget.calendar_popup.html">awful.widget.calendar_popup</a></li>
   <li><a href="../popups_and_bars/menubar.html">menubar</a></li>
@@ -226,7 +227,9 @@
 
 <h1>Module: <code>root</code></h1>
 <p>awesome root window API.</p>
-<p></p>
+<p>
+
+</p>
     <div class="extra-header">
 
 
@@ -330,17 +333,18 @@
     </span>
     </dt>
     <dd>
-    <p>Send fake keyboard or mouse events.</p>
+
+<p>Send fake keyboard or mouse events. </p>
 
 <p> Usually the currently focused client or the keybindings will receive those
  events. If a <code>keygrabber</code> or <a href="../core_components/mousegrabber.html#">mousegrabber</a> is running, then it will get them.</p>
 
 <p> Some keys have different names compared to the ones generally used in
- Awesome. For example, Awesome uses &ldquo;modifier keys&rdquo; for keybindings using
- their X11 names such as &ldquo;Control&rdquo; or &ldquo;Mod1&rdquo; (for &ldquo;Alt&rdquo;). These are not the
+ Awesome. For example, Awesome uses "modifier keys" for keybindings using
+ their X11 names such as "Control" or "Mod1" (for "Alt"). These are not the
  name of the key but is only the name of the modifier they represent. Some
  modifiers are even present twice on some keyboard like the left and right
- &ldquo;Shift&rdquo;. Here is a list of the &ldquo;real&rdquo; key names matching the modifiers in
+ "Shift". Here is a list of the "real" key names matching the modifiers in
  <a href="../core_components/root.html#fake_input">fake_input</a>:</p>
 
 <p> <table class='widget_list' border=1>
@@ -355,7 +359,7 @@
   <tr><td> Mod1</td><td align='center'> Alt_L </td><td align='center'> Alt_R </td></tr>
  </table></p>
 
-<p> Note that this is valid for most of the modern &ldquo;western&rdquo; keyboard layouts.
+<p> Note that this is valid for most of the modern "western" keyboard layouts.
  Some older, custom or foreign layouts may break this convention.</p>
 
 <p> This function is very low level, to be more useful, it can be wrapped into
@@ -363,39 +367,49 @@
 
 <p> <strong>Sending strings:</strong></p>
 
+
+
+
+
 <pre><code>local function send_string_to_client(s, c)
     local old_c = client.focus
     client.focus = c
     for i=1, #s do
         local char = s:sub(i,i)
-        root.fake_input('key_press'  , char)
-        root.fake_input('key_release', char)
+        root.fake_input("key_press"  , char)
+        root.fake_input("key_release", char)
     end
     client.focus = old_c
 end
 
-send_string_to_client('Hello world!')
+send_string_to_client("Hello world!")
 </code></pre>
 
 <p> Note that this example works for most ASCII inputs but may fail depending on
  how the string is encoded. Some multi-byte characters may not represent
  keys and some UTF-8 encoding format create characters by combining multiple
  elements such as accent + base character or various escape sequences. If you
- wish to use this example for &ldquo;real world&rdquo; i18n use cases, learning about
+ wish to use this example for "real world" i18n use cases, learning about
  XKB event and UTF-8 encoding is a prerequisites.</p>
 
 <p> <strong>Clicking:</strong></p>
 
-<p> <img src="../images/mouse.svg" alt="Client geometry" /></p>
+<p> <img src="../images/mouse.svg" alt="Client geometry"/></p>
+
+
+
+
 
 <pre><code>local function click(button_id, x, y)
     mouse.coords {x = x, y = y}
-    root.fake_input('button_press' , button_id)
-    root.fake_input('button_release', button_id)
+    root.fake_input("button_press" , button_id)
+    root.fake_input("button_release", button_id)
 end
 
 click(1, 42, 42)
 </code></pre>
+
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -422,7 +436,7 @@ click(1, 42, 42)
 
 
 
-    <span id=item559 class="hide_extra">
+    <span id=item560 class="hide_extra">
     </span>
 
 </dd>
@@ -439,12 +453,12 @@ click(1, 42, 42)
 <p>  <div class='flex-list'>
  <div>num_glyphs</div>
  <div>arrow</div>
- <div>based_arrow_down</div>
- <div>based_arrow_up</div>
+ <div>based<em>arrow</em>down</div>
+ <div>based<em>arrow</em>up</div>
  <div>boat</div>
  <div>bogosity</div>
- <div>bottom_left_corner</div>
- <div>bottom_right_corner</div>
+ <div>bottom<em>left</em>corner</div>
+ <div>bottom<em>right</em>corner</div>
  <div>bottom_side</div>
  <div>bottom_tee</div>
  <div>box_spiral</div>
@@ -491,12 +505,12 @@ click(1, 42, 42)
  <div>right_tee</div>
  <div>rtl_logo</div>
  <div>sailboat</div>
- <div>sb_down_arrow</div>
- <div>sb_h_double_arrow</div>
- <div>sb_left_arrow</div>
- <div>sb_right_arrow</div>
- <div>sb_up_arrow</div>
- <div>sb_v_double_arrow</div>
+ <div>sb<em>down</em>arrow</div>
+ <div>sb<em>h</em>double_arrow</div>
+ <div>sb<em>left</em>arrow</div>
+ <div>sb<em>right</em>arrow</div>
+ <div>sb<em>up</em>arrow</div>
+ <div>sb<em>v</em>double_arrow</div>
  <div>shuttle</div>
  <div>sizing</div>
  <div>spider</div>
@@ -504,9 +518,9 @@ click(1, 42, 42)
  <div>star</div>
  <div>target</div>
  <div>tcross</div>
- <div>top_left_arrow</div>
- <div>top_left_corner</div>
- <div>top_right_corner</div>
+ <div>top<em>left</em>arrow</div>
+ <div>top<em>left</em>corner</div>
+ <div>top<em>right</em>corner</div>
  <div>top_side</div>
  <div>top_tee</div>
  <div>trek</div>
@@ -529,7 +543,7 @@ click(1, 42, 42)
 
 
 
-    <span id=item560 class="hide_extra">
+    <span id=item561 class="hide_extra">
     </span>
 
 </dd>
@@ -554,7 +568,7 @@ click(1, 42, 42)
 
 
 
-    <span id=item561 class="hide_extra">
+    <span id=item562 class="hide_extra">
     </span>
 
 </dd>
@@ -585,7 +599,7 @@ click(1, 42, 42)
 
 
 
-    <span id=item562 class="hide_extra">
+    <span id=item563 class="hide_extra">
     </span>
 
 </dd>
@@ -612,7 +626,7 @@ click(1, 42, 42)
 
 
 
-    <span id=item563 class="hide_extra">
+    <span id=item564 class="hide_extra">
     </span>
 
 </dd>
@@ -639,7 +653,7 @@ click(1, 42, 42)
 
 
 
-    <span id=item564 class="hide_extra">
+    <span id=item565 class="hide_extra">
     </span>
 
 </dd>
@@ -664,7 +678,7 @@ click(1, 42, 42)
 
 
 
-    <span id=item565 class="hide_extra">
+    <span id=item566 class="hide_extra">
     </span>
 
 </dd>
@@ -694,7 +708,7 @@ click(1, 42, 42)
 
 
 
-    <span id=item566 class="hide_extra">
+    <span id=item567 class="hide_extra">
     </span>
 
 </dd>
@@ -712,7 +726,7 @@ click(1, 42, 42)
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">buttons</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          The list of buttons.
          (<em>default</em> {})
         </li>
@@ -735,7 +749,7 @@ click(1, 42, 42)
     </ul>
 
 
-    <span id=item567 class="hide_extra">
+    <span id=item568 class="hide_extra">
     </span>
 
 </dd>
