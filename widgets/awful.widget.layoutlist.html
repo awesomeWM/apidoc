@@ -309,20 +309,20 @@ awful.popup {
     start_callback = <span class="keyword">function</span>() layout_popup.visible = <span class="keyword">true</span>  <span class="keyword">end</span>,
     stop_callback  = <span class="keyword">function</span>() layout_popup.visible = <span class="keyword">false</span> <span class="keyword">end</span>,
     export_keybindings = <span class="keyword">true</span>,
-    release_event = <span class="string">"release"</span>,
+    stop_event = <span class="string">"release"</span>,
     stop_key = {<span class="string">"Escape"</span>, <span class="string">"Super_L"</span>, <span class="string">"Super_R"</span>},
     keybindings = {
         {{ modkey          } , <span class="string">" "</span> , <span class="keyword">function</span>()
-            awful.layout.set(gears.<span class="global">table</span>.cycle_value(ll.layouts, ll.current_layout, <span class="number">1</span>))
+            awful.layout.set((gears.<span class="global">table</span>.cycle_value(ll.layouts, ll.current_layout, <span class="number">1</span>)))
         <span class="keyword">end</span>},
         {{ modkey, <span class="string">"Shift"</span> } , <span class="string">" "</span> , <span class="keyword">function</span>()
-            awful.layout.set(gears.<span class="global">table</span>.cycle_value(ll.layouts, ll.current_layout, -<span class="number">1</span>), <span class="keyword">nil</span>)
+            awful.layout.set((gears.<span class="global">table</span>.cycle_value(ll.layouts, ll.current_layout, -<span class="number">1</span>)), <span class="keyword">nil</span>)
         <span class="keyword">end</span>},
     }
 }
 </pre>
 
-<p> This example extends 'awful.widget.layoutbox' to show a layout list popup:</p>
+<p> This example extends <a href="../widgets/awful.widget.layoutbox.html#">awful.widget.layoutbox</a> to show a layout list popup:</p>
 
 
 
@@ -496,11 +496,6 @@ wb:setup {
       <td class="shortname" ><a href="#filter">filter</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
       <td colspan="2" class="summary">The layoutlist filter function.</td>
-    </tr>
-    <tr>
-      <td class="shortname" ><a href="#buttons">buttons</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td colspan="2" class="summary">The layoutlist buttons.</td>
     </tr>
     <tr>
       <td class="shortname" ><a href="#layouts">layouts</a></td>
@@ -834,8 +829,7 @@ wb:setup {
         </li>
         <li><span class="parameter">buttons</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The list of <code>awful.buttons</code>.
-         (<em>default</em> nil)
+         A table with buttons binding to set.
         </li>
         <li><span class="parameter">source</span>
             <span class="types"><span class="type">function</span></span>
@@ -852,11 +846,6 @@ wb:setup {
             <span class="types"><a class="type" href="../widgets/awful.widget.layoutlist.html#screen">screen</a></span>
          A screen
          (<em>default</em> ascreen.focused())
-        </li>
-        <li><span class="parameter">buttons</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The list of <code>awful.buttons</code>.
-         (<em>default</em> nil)
         </li>
         <li><span class="parameter">style</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
@@ -1117,36 +1106,6 @@ wb:setup {
 
 </dd>
     <dt>
-    <a name = "buttons"></a>
-    <strong>buttons</strong>
-    <span class="proptype"><span class='summary_type'>table</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-
-<p>The layoutlist buttons. </p>
-
-<p> The default is:</p>
-
-<pre><code>gears.table.join(
-    awful.button({ }, 1, awful.layout.set)
-)
-</code></pre>
-
-
-
-
-
-
-
-
-
-    <span id=item959 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
     <a name = "layouts"></a>
     <strong>layouts</strong>
     <span class="proptype"><span class='summary_type'>table</span></span>
@@ -1162,7 +1121,7 @@ wb:setup {
 
 
 
-    <span id=item960 class="hide_extra">
+    <span id=item959 class="hide_extra">
     </span>
 
 </dd>
@@ -1182,7 +1141,7 @@ wb:setup {
 
 
 
-    <span id=item961 class="hide_extra">
+    <span id=item960 class="hide_extra">
     </span>
 
 </dd>
@@ -1403,7 +1362,7 @@ wb:setup {
 
 
 
-    <span id=item962 class="hide_extra">
+    <span id=item961 class="hide_extra">
     </span>
 
 </dd>
@@ -1427,7 +1386,7 @@ wb:setup {
 
 
 
-    <span id=item963 class="hide_extra">
+    <span id=item962 class="hide_extra">
     </span>
 
 </dd>
@@ -1451,7 +1410,7 @@ wb:setup {
 
 
 
-    <span id=item964 class="hide_extra">
+    <span id=item963 class="hide_extra">
     </span>
 
 </dd>
@@ -1475,7 +1434,7 @@ wb:setup {
 
 
 
-    <span id=item965 class="hide_extra">
+    <span id=item964 class="hide_extra">
     </span>
 
 </dd>
@@ -1495,7 +1454,7 @@ wb:setup {
 
 
 
-    <span id=item966 class="hide_extra">
+    <span id=item965 class="hide_extra">
     </span>
 
 </dd>
@@ -1515,7 +1474,7 @@ wb:setup {
 
 
 
-    <span id=item967 class="hide_extra">
+    <span id=item966 class="hide_extra">
     </span>
 
 </dd>
@@ -1535,7 +1494,7 @@ wb:setup {
 
 
 
-    <span id=item968 class="hide_extra">
+    <span id=item967 class="hide_extra">
     </span>
 
 </dd>
@@ -1563,7 +1522,7 @@ wb:setup {
 
 
 
-    <span id=item969 class="hide_extra">
+    <span id=item968 class="hide_extra">
     </span>
 
 </dd>
@@ -1583,7 +1542,7 @@ wb:setup {
 
 
 
-    <span id=item970 class="hide_extra">
+    <span id=item969 class="hide_extra">
     </span>
 
 </dd>
@@ -1611,7 +1570,7 @@ wb:setup {
 
 
 
-    <span id=item971 class="hide_extra">
+    <span id=item970 class="hide_extra">
     </span>
 
 </dd>
@@ -1631,7 +1590,7 @@ wb:setup {
 
 
 
-    <span id=item972 class="hide_extra">
+    <span id=item971 class="hide_extra">
     </span>
 
 </dd>
@@ -1651,7 +1610,7 @@ wb:setup {
 
 
 
-    <span id=item973 class="hide_extra">
+    <span id=item972 class="hide_extra">
     </span>
 
 </dd>
@@ -1675,7 +1634,7 @@ wb:setup {
 
 
 
-    <span id=item974 class="hide_extra">
+    <span id=item973 class="hide_extra">
     </span>
 
 </dd>
@@ -1695,7 +1654,7 @@ wb:setup {
 
 
 
-    <span id=item975 class="hide_extra">
+    <span id=item974 class="hide_extra">
     </span>
 
 </dd>
@@ -1715,7 +1674,7 @@ wb:setup {
 
 
 
-    <span id=item976 class="hide_extra">
+    <span id=item975 class="hide_extra">
     </span>
 
 </dd>
@@ -1739,7 +1698,7 @@ wb:setup {
 
 
 
-    <span id=item977 class="hide_extra">
+    <span id=item976 class="hide_extra">
     </span>
 
 </dd>
@@ -1768,7 +1727,7 @@ wb:setup {
 
 
 
-    <span id=item978 class="hide_extra">
+    <span id=item977 class="hide_extra">
     </span>
 
 </dd>
@@ -1787,7 +1746,7 @@ wb:setup {
 
 
 
-    <span id=item979 class="hide_extra">
+    <span id=item978 class="hide_extra">
     </span>
 
 </dd>
@@ -1810,7 +1769,7 @@ wb:setup {
 
 
 
-    <span id=item980 class="hide_extra">
+    <span id=item979 class="hide_extra">
     </span>
 
 </dd>
