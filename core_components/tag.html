@@ -533,7 +533,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 <table class="function_list">
     <tr>
       <td class="name" >
-        <a href="#awful.tag.add">awful.tag.add <span class='function_args'> <b>(</b>name, props<b>)</b></span></a>
+        <a href="#awful.tag.add">awful.tag.add <span class='function_args'> <b>(</b>name[, props=nil]<b>)</b></span></a>
       </td>
       <td colspan="2" class="summary">Add a tag.</td>
     </tr>
@@ -577,7 +577,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     </tr>
     <tr>
       <td class="name" >
-        <a href="#awful.tag.find_fallback">awful.tag.find_fallback <span class='function_args'> <b>(</b>screen, invalids<b>)</b></span></a>
+        <a href="#awful.tag.find_fallback">awful.tag.find_fallback <span class='function_args'> <b>(</b>screen[, invalids=nil]<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
       <td colspan="2" class="summary">Find a suitable fallback tag.</td>
@@ -1040,9 +1040,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
       <td class="name" >
         <a href="#awful.tag.setnmaster">awful.tag.setnmaster<i class="deprecated_label"> [deprecated]</i></a>
       </td>
-      <td colspan="2" class="summary">
-
-</td>
+      <td colspan="2" class="summary">The number of master clients.</td>
     </tr>
     <tr>
       <td class="name" >
@@ -1134,7 +1132,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <dl class="function">
     <dt>
     <a name = "awful.tag.add"></a>
-    <strong>awful.tag.add <span class='function_args'> <b>(</b>name, props<b>)</b></span></strong>
+    <strong>awful.tag.add <span class='function_args'> <b>(</b>name[, props=nil]<b>)</b></span></strong>
     <span class="baseclass" >
     </span>
     </dt>
@@ -1155,10 +1153,13 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The tag name, a string
         </li>
         <li><span class="parameter">props</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
          The tags initial properties, a table
+         (<em>default</em> nil)
         </li>
     </ul>
 
@@ -1176,7 +1177,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item643 class="hide_extra">
+    <span id=item638 class="hide_extra">
     </span>
 
 </dd>
@@ -1205,7 +1206,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item644 class="hide_extra">
+    <span id=item639 class="hide_extra">
     </span>
 
 </dd>
@@ -1236,7 +1237,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item645 class="hide_extra">
+    <span id=item640 class="hide_extra">
     </span>
 
 </dd>
@@ -1268,7 +1269,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item646 class="hide_extra">
+    <span id=item641 class="hide_extra">
     </span>
 
 </dd>
@@ -1299,7 +1300,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item647 class="hide_extra">
+    <span id=item642 class="hide_extra">
     </span>
 
 </dd>
@@ -1381,13 +1382,13 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item648 class="hide_extra">
+    <span id=item643 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a name = "awful.tag.find_fallback"></a>
-    <strong>awful.tag.find_fallback <span class='function_args'> <b>(</b>screen, invalids<b>)</b></span></strong>
+    <strong>awful.tag.find_fallback <span class='function_args'> <b>(</b>screen[, invalids=nil]<b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
     </span>
@@ -1398,10 +1399,13 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../core_components/tag.html#screen">screen</a></span>
          The screen to look for a tag on. [awful.screen.focused()]
         </li>
         <li><span class="parameter">invalids</span>
-         A table of tags we consider unacceptable. [selectedlist(scr)]
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
+         A table of tags considered unacceptable. [selectedlist(scr)]
+         (<em>default</em> nil)
         </li>
     </ul>
 
@@ -1410,7 +1414,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item649 class="hide_extra">
+    <span id=item644 class="hide_extra">
     </span>
 
 </dd>
@@ -1427,6 +1431,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">obj</span>
+            <span class="types"><a class="type" href="../core_components/tag.html#screen">screen</a></span>
          Screen object.
         </li>
     </ul>
@@ -1436,7 +1441,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item650 class="hide_extra">
+    <span id=item645 class="hide_extra">
     </span>
 
 </dd>
@@ -1453,9 +1458,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">screen</span>
+            <span class="types"><a class="type" href="../core_components/tag.html#screen">screen</a></span>
          The screen.
         </li>
         <li><span class="parameter">idx</span>
+            <span class="types"><span class="type">number</span></span>
          Index in history. Defaults to "previous" which is a special index
  toggling between last two selected sets of tags. Number (eg 1) will go back
  to the given index in history.
@@ -1467,7 +1474,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item651 class="hide_extra">
+    <span id=item646 class="hide_extra">
     </span>
 
 </dd>
@@ -1514,7 +1521,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     </ul>
 
 
-    <span id=item652 class="hide_extra">
+    <span id=item647 class="hide_extra">
     </span>
 
 </dd>
@@ -1531,9 +1538,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">add</span>
+            <span class="types"><span class="type">number</span></span>
          Value to add to master width factor.
         </li>
         <li><span class="parameter">t</span>
+            <span class="types"><span class="type">tag</span></span>
          The tag to modify, if null tag.selected() is used.
         </li>
     </ul>
@@ -1547,7 +1556,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item653 class="hide_extra">
+    <span id=item648 class="hide_extra">
     </span>
 
 </dd>
@@ -1564,9 +1573,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">add</span>
+            <span class="types"><span class="type">number</span></span>
          Value to add to the spacing between clients
         </li>
         <li><span class="parameter">t</span>
+            <span class="types"><span class="type">tag</span></span>
          The tag to modify, if null tag.selected() is used.
         </li>
     </ul>
@@ -1580,7 +1591,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item654 class="hide_extra">
+    <span id=item649 class="hide_extra">
     </span>
 
 </dd>
@@ -1612,7 +1623,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item655 class="hide_extra">
+    <span id=item650 class="hide_extra">
     </span>
 
 </dd>
@@ -1629,9 +1640,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">add</span>
+            <span class="types"><span class="type">number</span></span>
          Value to add to number of master windows.
         </li>
         <li><span class="parameter">t</span>
+            <span class="types"><span class="type">tag</span></span>
          The tag to modify, if null tag.selected() is used.
          (<em>optional</em>)
         </li>
@@ -1652,7 +1665,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item656 class="hide_extra">
+    <span id=item651 class="hide_extra">
     </span>
 
 </dd>
@@ -1669,9 +1682,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">add</span>
+            <span class="types"><span class="type">number</span></span>
          Value to add to number of column windows.
         </li>
         <li><span class="parameter">t</span>
+            <span class="types"><span class="type">tag</span></span>
          The tag to modify, if null tag.selected() is used.
          (<em>optional</em>)
         </li>
@@ -1688,7 +1703,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item657 class="hide_extra">
+    <span id=item652 class="hide_extra">
     </span>
 
 </dd>
@@ -1735,7 +1750,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item658 class="hide_extra">
+    <span id=item653 class="hide_extra">
     </span>
 
 </dd>
@@ -1794,7 +1809,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item659 class="hide_extra">
+    <span id=item654 class="hide_extra">
     </span>
 
 </dd>
@@ -1848,7 +1863,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item660 class="hide_extra">
+    <span id=item655 class="hide_extra">
     </span>
 
 </dd>
@@ -1902,7 +1917,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item661 class="hide_extra">
+    <span id=item656 class="hide_extra">
     </span>
 
 </dd>
@@ -1943,7 +1958,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item662 class="hide_extra">
+    <span id=item657 class="hide_extra">
     </span>
 
 </dd>
@@ -1974,7 +1989,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item663 class="hide_extra">
+    <span id=item658 class="hide_extra">
     </span>
 
 </dd>
@@ -2014,7 +2029,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-    <span id=item664 class="hide_extra">
+    <span id=item659 class="hide_extra">
     </span>
 
 </dd>
@@ -2027,6 +2042,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <strong>name</strong>
     <span class="proptype"><span class='summary_type'>string</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
@@ -2047,11 +2063,6 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
   screen[1].tags[2].name = "New*tag*name"
 </code></pre>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::name</em></li>
-</ul>
 
 
 
@@ -2059,9 +2070,21 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
+     <br />
+     <center id=button660>
+     <a class="show_more_button" onclick="show_extra('660')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item665 class="hide_extra">
+    <span id=item660 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::name</code></span>  When the <a href="../core_components/tag.html#name">name</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/tag.html#">tag</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2070,6 +2093,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <strong>selected</strong>
     <span class="proptype"><span class='summary_type'>boolean</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
@@ -2090,11 +2114,6 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
   screen[1].tags[3].selected = true
 </code></pre>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::selected</em></li>
-</ul>
 
 
 
@@ -2102,9 +2121,21 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
+     <br />
+     <center id=button661>
+     <a class="show_more_button" onclick="show_extra('661')">
+      Click to display more
+     </a>
+     </center>
 
-
-    <span id=item666 class="hide_extra">
+    <span id=item661 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::selected</code></span>  When the <a href="../core_components/tag.html#selected">selected</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/tag.html#">tag</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2113,27 +2144,32 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <strong>activated</strong>
     <span class="proptype"><span class='summary_type'>boolean</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
-
-<p>True if the tag is active and can be used. </p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::activated</em></li>
-</ul>
+    True if the tag is active and can be used.
 
 
 
 
 
 
+     <br />
+     <center id=button662>
+     <a class="show_more_button" onclick="show_extra('662')">
+      Click to display more
+     </a>
+     </center>
 
-
-
-    <span id=item667 class="hide_extra">
+    <span id=item662 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::activated</code></span>  When the <a href="../core_components/tag.html#activated">activated</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/tag.html#">tag</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2142,11 +2178,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <strong>index</strong>
     <span class="proptype"><span class='summary_type'>integer</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
-
-<p>The tag index. </p>
+    The tag index. </p>
 
 
 
@@ -2163,23 +2199,28 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
  screen[1].tags[4].index = 1
 </code></pre>
 
-<p> The index is the position as shown in the <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a>.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::index</em></li>
-</ul>
+<p> The index is the position as shown in the <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a>.
 
 
 
 
 
 
+     <br />
+     <center id=button663>
+     <a class="show_more_button" onclick="show_extra('663')">
+      Click to display more
+     </a>
+     </center>
 
-
-
-    <span id=item668 class="hide_extra">
+    <span id=item663 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::index</code></span>  When the <a href="../core_components/tag.html#index">index</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/tag.html#">tag</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2188,19 +2229,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <strong>screen</strong>
     <span class="proptype"><span class='summary_type'>screen</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
-
-<p>The tag screen. </p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::screen</em></li>
-</ul>
-
-
+    The tag screen.
 
 
 
@@ -2211,8 +2244,21 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     </ul>
 
 
+     <br />
+     <center id=button664>
+     <a class="show_more_button" onclick="show_extra('664')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item669 class="hide_extra">
+    <span id=item664 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::screen</code></span>  When the <a href="../core_components/screen.html#">screen</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/tag.html#">tag</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2221,11 +2267,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <strong>master_width_factor</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
+         &middot 2 signals
     </span>
     </dt>
     <dd>
-
-<p>The tag master width factor. </p>
+    The tag master width factor. </p>
 
 <p> The master width factor is one of the 5 main properties used to configure
  the <a href="../core_components/tag.html#layout">layout</a>. Each layout interpret (or ignore) this property differently.</p>
@@ -2243,21 +2289,12 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-<p><img src="../images/AUTOGEN_screen_mwfact2.svg" alt="Usage example"/></p>
-
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::mwfact</em> (deprecated)</li>
-    <li>*property::master<em>width</em>factor*</li>
-</ul>
-
-
+<p><img src="../images/AUTOGEN_screen_mwfact2.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">number</span>
+        <li><span class="parameter">master_width_factor</span>
+            <span class="types"><span class="type">number</span></span>
          Between 0 and 1
         </li>
     </ul>
@@ -2274,8 +2311,19 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     </ul>
 
 
+     <br />
+     <center id=button665>
+     <a class="show_more_button" onclick="show_extra('665')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item670 class="hide_extra">
+    <span id=item665 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::mwfact</code></span>  When the value changes (deprecated).</li>
+          <li><span class="parameter"><code>property::master_width_factor</code></span>  When the value changes.</li>
+     </ul>
     </span>
 
 </dd>
@@ -2284,11 +2332,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <strong>layout</strong>
     <span class="proptype"><span class='summary_type'>layout <i>or</i> function</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
-
-<p>The tag client layout. </p>
+    The tag client layout. </p>
 
 <p> This property holds the layout. A layout can be either stateless or stateful.
  Stateless layouts are used by default by Awesome. They tile clients without
@@ -2325,16 +2373,7 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
 
-<p><img src="../images/AUTOGEN_screen_taglayout.svg" alt="Usage example"/></p>
-
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::layout</em></li>
-</ul>
-
-
+<p><img src="../images/AUTOGEN_screen_taglayout.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
@@ -2352,8 +2391,21 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     </ul>
 
 
+     <br />
+     <center id=button666>
+     <a class="show_more_button" onclick="show_extra('666')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item671 class="hide_extra">
+    <span id=item666 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::layout</code></span>  When the <a href="../core_components/tag.html#layout">layout</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/tag.html#">tag</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2388,13 +2440,13 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
 
 
      <br />
-     <center id=button672>
-     <a class="show_more_button" onclick="show_extra('672')">
+     <center id=button667>
+     <a class="show_more_button" onclick="show_extra('667')">
       Click to display more
      </a>
      </center>
 
-    <span id=item672 class="hide_extra">
+    <span id=item667 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -2414,11 +2466,11 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <strong>volatile</strong>
     <span class="proptype"><span class='summary_type'>boolean</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
-
-<p>Define if the tag must be deleted when the last client is untagged. </p>
+    Define if the tag must be deleted when the last client is untagged. </p>
 
 <p> This is useful to create "throw-away" tags for operation like 50/50
  (Windows "Aero Snap) side-by-side views. This keybinding code for this is:</p>
@@ -2477,15 +2529,7 @@ end
 </code></pre>
 
 <p> As you can see, the "Volatile" tag has been automatically discarded while
- the "Non-volatile" tag is still there (but with zero clients).</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::volatile</em></li>
-</ul>
-
-
+ the "Non-volatile" tag is still there (but with zero clients).
 
 
 
@@ -2496,8 +2540,21 @@ end
     </ul>
 
 
+     <br />
+     <center id=button668>
+     <a class="show_more_button" onclick="show_extra('668')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item673 class="hide_extra">
+    <span id=item668 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::volatile</code></span>  When the <a href="../core_components/tag.html#volatile">volatile</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/tag.html#">tag</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2506,11 +2563,11 @@ end
     <strong>gap</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
-
-<p>The gap (spacing, also called <a href="../core_components/tag.html#beautiful.useless_gap">useless_gap</a>) between clients. </p>
+    The gap (spacing, also called <a href="../core_components/tag.html#beautiful.useless_gap">useless_gap</a>) between clients. </p>
 
 <p> This property allows to waste space on the screen in the name of style,
  unicorns and readability.</p>
@@ -2526,20 +2583,12 @@ end
 
 
 
-<p><img src="../images/AUTOGEN_screen_gaps2.svg" alt="Usage example"/></p>
-
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li>*property::useless_gap*</li>
-</ul>
-
-
+<p><img src="../images/AUTOGEN_screen_gaps2.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">number</span>
+        <li><span class="parameter">gap</span>
+            <span class="types"><span class="type">number</span></span>
          The value has to be greater than zero.
         </li>
     </ul>
@@ -2553,8 +2602,18 @@ end
     </ul>
 
 
+     <br />
+     <center id=button669>
+     <a class="show_more_button" onclick="show_extra('669')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item674 class="hide_extra">
+    <span id=item669 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::useless_gap</code></span>  When the gap changes.</li>
+     </ul>
     </span>
 
 </dd>
@@ -2563,11 +2622,11 @@ end
     <strong>gap_single_client</strong>
     <span class="proptype"><span class='summary_type'>boolean</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
-
-<p>Enable gaps for a single client. </p>
+    Enable gaps for a single client. </p>
 
 <p> If the gaps are used purely for readability when multiple
  clients are tiled, then it may make sense to disable it
@@ -2585,20 +2644,12 @@ end
 
 
 
-<p><img src="../images/AUTOGEN_screen_gap_single_client_false.svg" alt="Usage example"/></p>
-
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::gap_single_client</em></li>
-</ul>
-
-
+<p><img src="../images/AUTOGEN_screen_gap_single_client_false.svg" alt="Usage example"/>
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">boolean</span>
+        <li><span class="parameter">gap_single_client</span>
+            <span class="types"><span class="type">boolean</span></span>
          Enable gaps for a single client
         </li>
     </ul>
@@ -2611,8 +2662,21 @@ end
     </ul>
 
 
+     <br />
+     <center id=button670>
+     <a class="show_more_button" onclick="show_extra('670')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item675 class="hide_extra">
+    <span id=item670 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::gap_single_client</code></span>  When the <a href="../core_components/tag.html#gap_single_client">gap_single_client</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/tag.html#">tag</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2621,11 +2685,11 @@ end
     <strong>master_fill_policy</strong>
     <span class="proptype"><span class='summary_type'>string</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
-
-<p>Set size fill policy for the master client(s). </p>
+    Set size fill policy for the master client(s). </p>
 
 <p> Some multi-column layouts can be configured so that the space is
  redistributed when there is not enough clients to fill all columns.</p>
@@ -2653,19 +2717,12 @@ end
 
 
 <p> The remaining space that would have been used for the second column is
- redistributed on both side.</p>
-
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li>*property::master<em>fill</em>policy*</li>
-</ul>
-
-
+ redistributed on both side.
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">string</span>
+        <li><span class="parameter">master_fill_policy</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          "expand" or "master<em>width</em>factor"
         </li>
     </ul>
@@ -2678,8 +2735,21 @@ end
     </ul>
 
 
+     <br />
+     <center id=button671>
+     <a class="show_more_button" onclick="show_extra('671')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item676 class="hide_extra">
+    <span id=item671 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::master_fill_policy</code></span>  When the <a href="../core_components/tag.html#master_fill_policy">master_fill_policy</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/tag.html#">tag</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2688,6 +2758,7 @@ end
     <strong>master_count</strong>
     <span class="proptype"><span class='summary_type'>integer</span></span>
     <span class="baseclass" >
+         &middot 2 signals
     </span>
     </dt>
     <dd>
@@ -2720,18 +2791,12 @@ end
  end
 </code></pre>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::nmaster</em> (deprecated)</li>
-    <li>*property::master_count*</li>
-</ul>
-
 
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">integer</span>
+        <li><span class="parameter">master_count</span>
+            <span class="types"><span class="type">integer</span></span>
          nmaster Only positive values are accepted
         </li>
     </ul>
@@ -2744,8 +2809,19 @@ end
     </ul>
 
 
+     <br />
+     <center id=button672>
+     <a class="show_more_button" onclick="show_extra('672')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item677 class="hide_extra">
+    <span id=item672 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::nmaster</code></span>  Deprecated.</li>
+          <li><span class="parameter"><code>property::master_count</code></span>  When the value changes.</li>
+     </ul>
     </span>
 
 </dd>
@@ -2754,6 +2830,7 @@ end
     <strong>icon</strong>
     <span class="proptype"><span class='summary_type'>path <i>or</i> surface</span></span>
     <span class="baseclass" >
+         &middot 1 signal
     </span>
     </dt>
     <dd>
@@ -2775,12 +2852,6 @@ end
 </code></pre>
 
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::icon</em></li>
-</ul>
-
 
 
     <h3>Type constraints:</h3>
@@ -2800,8 +2871,21 @@ end
     </ul>
 
 
+     <br />
+     <center id=button673>
+     <a class="show_more_button" onclick="show_extra('673')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item678 class="hide_extra">
+    <span id=item673 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::icon</code></span>  When the <a href="../core_components/tag.html#icon">icon</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../core_components/tag.html#">tag</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+           </ul>
+     </ul>
     </span>
 
 </dd>
@@ -2810,6 +2894,7 @@ end
     <strong>column_count</strong>
     <span class="proptype"><span class='summary_type'>integer</span></span>
     <span class="baseclass" >
+         &middot 2 signals
     </span>
     </dt>
     <dd>
@@ -2848,13 +2933,6 @@ end
  end
 </code></pre>
 
-<p> <strong>Signal:</strong></p>
-
-<ul>
-    <li><em>property::ncol</em> (deprecated)</li>
-    <li>*property::column_count*</li>
-</ul>
-
 
 
     <h3>Type constraints:</h3>
@@ -2873,8 +2951,19 @@ end
     </ul>
 
 
+     <br />
+     <center id=button674>
+     <a class="show_more_button" onclick="show_extra('674')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item679 class="hide_extra">
+    <span id=item674 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::ncol</code></span>  Deprecated.</li>
+          <li><span class="parameter"><code>property::column_count</code></span>  When the value changes.</li>
+     </ul>
     </span>
 
 </dd>
@@ -2912,7 +3001,7 @@ end
 
 
 
-    <span id=item680 class="hide_extra">
+    <span id=item675 class="hide_extra">
     </span>
 
 </dd>
@@ -2946,6 +3035,7 @@ end
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tag2</span>
+            <span class="types"><span class="type">tag</span></span>
          The second tag
         </li>
     </ul>
@@ -2959,7 +3049,7 @@ end
 
 
 
-    <span id=item681 class="hide_extra">
+    <span id=item676 class="hide_extra">
     </span>
 
 </dd>
@@ -3008,13 +3098,13 @@ end
 
 
      <br />
-     <center id=button682>
-     <a class="show_more_button" onclick="show_extra('682')">
+     <center id=button677>
+     <a class="show_more_button" onclick="show_extra('677')">
       Click to display more
      </a>
      </center>
 
-    <span id=item682 class="hide_extra">
+    <span id=item677 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../core_components/tag.html#cleared">cleared</a></span>  After all clients have been untagged.</li>
@@ -3090,7 +3180,7 @@ end
 
 
 
-    <span id=item683 class="hide_extra">
+    <span id=item678 class="hide_extra">
     </span>
 
 </dd>
@@ -3133,7 +3223,7 @@ end
 
 
 
-    <span id=item684 class="hide_extra">
+    <span id=item679 class="hide_extra">
     </span>
 
 </dd>
@@ -3166,7 +3256,7 @@ end
 
 
 
-    <span id=item685 class="hide_extra">
+    <span id=item680 class="hide_extra">
     </span>
 
 </dd>
@@ -3198,7 +3288,7 @@ end
 
 
 
-    <span id=item686 class="hide_extra">
+    <span id=item681 class="hide_extra">
     </span>
 
 </dd>
@@ -3237,7 +3327,7 @@ end
 
 
 
-    <span id=item687 class="hide_extra">
+    <span id=item682 class="hide_extra">
     </span>
 
 </dd>
@@ -3268,13 +3358,13 @@ end
 
 
      <br />
-     <center id=button688>
-     <a class="show_more_button" onclick="show_extra('688')">
+     <center id=button683>
+     <a class="show_more_button" onclick="show_extra('683')">
       Click to display more
      </a>
      </center>
 
-    <span id=item688 class="hide_extra">
+    <span id=item683 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -3363,13 +3453,13 @@ end
 
 
      <br />
-     <center id=button689>
-     <a class="show_more_button" onclick="show_extra('689')">
+     <center id=button684>
+     <a class="show_more_button" onclick="show_extra('684')">
       Click to display more
      </a>
      </center>
 
-    <span id=item689 class="hide_extra">
+    <span id=item684 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -3413,7 +3503,7 @@ end
 
 
 
-    <span id=item690 class="hide_extra">
+    <span id=item685 class="hide_extra">
     </span>
 
 </dd>
@@ -3439,7 +3529,7 @@ end
 
 
 
-    <span id=item691 class="hide_extra">
+    <span id=item686 class="hide_extra">
     </span>
 
 </dd>
@@ -3465,7 +3555,7 @@ end
 
 
 
-    <span id=item692 class="hide_extra">
+    <span id=item687 class="hide_extra">
     </span>
 
 </dd>
@@ -3488,7 +3578,7 @@ end
 
 
 
-    <span id=item693 class="hide_extra">
+    <span id=item688 class="hide_extra">
     </span>
 
 </dd>
@@ -3517,7 +3607,7 @@ end
 
 
 
-    <span id=item694 class="hide_extra">
+    <span id=item689 class="hide_extra">
     </span>
 
 </dd>
@@ -3546,7 +3636,7 @@ end
 
 
 
-    <span id=item695 class="hide_extra">
+    <span id=item690 class="hide_extra">
     </span>
 
 </dd>
@@ -3579,7 +3669,7 @@ end
 
 
 
-    <span id=item696 class="hide_extra">
+    <span id=item691 class="hide_extra">
     </span>
 
 </dd>
@@ -3601,7 +3691,7 @@ end
 
 
 
-    <span id=item697 class="hide_extra">
+    <span id=item692 class="hide_extra">
     </span>
 
 </dd>
@@ -3636,7 +3726,7 @@ end
 
 
 
-    <span id=item698 class="hide_extra">
+    <span id=item693 class="hide_extra">
     </span>
 
 </dd>
@@ -3667,7 +3757,7 @@ end
 
 
 
-    <span id=item699 class="hide_extra">
+    <span id=item694 class="hide_extra">
     </span>
 
 </dd>
@@ -3698,7 +3788,7 @@ end
 
 
 
-    <span id=item700 class="hide_extra">
+    <span id=item695 class="hide_extra">
     </span>
 
 </dd>
@@ -3739,7 +3829,7 @@ end
 
 
 
-    <span id=item701 class="hide_extra">
+    <span id=item696 class="hide_extra">
     </span>
 
 </dd>
@@ -3769,7 +3859,7 @@ end
 
 
 
-    <span id=item702 class="hide_extra">
+    <span id=item697 class="hide_extra">
     </span>
 
 </dd>
@@ -3799,7 +3889,7 @@ end
 
 
 
-    <span id=item703 class="hide_extra">
+    <span id=item698 class="hide_extra">
     </span>
 
 </dd>
@@ -3836,7 +3926,7 @@ end
 
 
 
-    <span id=item704 class="hide_extra">
+    <span id=item699 class="hide_extra">
     </span>
 
 </dd>
@@ -3868,7 +3958,7 @@ end
 
 
 
-    <span id=item705 class="hide_extra">
+    <span id=item700 class="hide_extra">
     </span>
 
 </dd>
@@ -3909,7 +3999,7 @@ end
 
 
 
-    <span id=item706 class="hide_extra">
+    <span id=item701 class="hide_extra">
     </span>
 
 </dd>
@@ -3944,7 +4034,7 @@ end
 
 
 
-    <span id=item707 class="hide_extra">
+    <span id=item702 class="hide_extra">
     </span>
 
 </dd>
@@ -3976,7 +4066,7 @@ end
 
 
 
-    <span id=item708 class="hide_extra">
+    <span id=item703 class="hide_extra">
     </span>
 
 </dd>
@@ -4011,7 +4101,7 @@ end
 
 
 
-    <span id=item709 class="hide_extra">
+    <span id=item704 class="hide_extra">
     </span>
 
 </dd>
@@ -4045,7 +4135,7 @@ end
 
 
 
-    <span id=item710 class="hide_extra">
+    <span id=item705 class="hide_extra">
     </span>
 
 </dd>
@@ -4074,7 +4164,7 @@ end
 
 
 
-    <span id=item711 class="hide_extra">
+    <span id=item706 class="hide_extra">
     </span>
 
 </dd>
@@ -4107,7 +4197,7 @@ end
 
 
 
-    <span id=item712 class="hide_extra">
+    <span id=item707 class="hide_extra">
     </span>
 
 </dd>
@@ -4138,7 +4228,7 @@ end
 
 
 
-    <span id=item713 class="hide_extra">
+    <span id=item708 class="hide_extra">
     </span>
 
 </dd>
@@ -4175,7 +4265,7 @@ end
 
 
 
-    <span id=item714 class="hide_extra">
+    <span id=item709 class="hide_extra">
     </span>
 
 </dd>
@@ -4208,7 +4298,7 @@ end
 
 
 
-    <span id=item715 class="hide_extra">
+    <span id=item710 class="hide_extra">
     </span>
 
 </dd>
@@ -4243,7 +4333,7 @@ end
 
 
 
-    <span id=item716 class="hide_extra">
+    <span id=item711 class="hide_extra">
     </span>
 
 </dd>
@@ -4275,7 +4365,7 @@ end
 
 
 
-    <span id=item717 class="hide_extra">
+    <span id=item712 class="hide_extra">
     </span>
 
 </dd>
@@ -4313,7 +4403,7 @@ end
 
 
 
-    <span id=item718 class="hide_extra">
+    <span id=item713 class="hide_extra">
     </span>
 
 </dd>
@@ -4350,7 +4440,7 @@ end
 
 
 
-    <span id=item719 class="hide_extra">
+    <span id=item714 class="hide_extra">
     </span>
 
 </dd>
@@ -4389,7 +4479,7 @@ end
 
 
 
-    <span id=item720 class="hide_extra">
+    <span id=item715 class="hide_extra">
     </span>
 
 </dd>
@@ -4400,9 +4490,7 @@ end
     </span>
     </dt>
     <dd>
-
-
-
+    The number of master clients.
 
     <h3>Parameters:</h3>
     <ul>
@@ -4424,7 +4512,7 @@ end
 
 
 
-    <span id=item721 class="hide_extra">
+    <span id=item716 class="hide_extra">
     </span>
 
 </dd>
@@ -4454,7 +4542,7 @@ end
 
 
 
-    <span id=item722 class="hide_extra">
+    <span id=item717 class="hide_extra">
     </span>
 
 </dd>
@@ -4472,7 +4560,8 @@ end
         <li><span class="parameter">icon</span>
          the icon to set, either path or image object
         </li>
-        <li><span class="parameter">_tag</span>
+        <li><span class="parameter">tag</span>
+            <span class="types"><span class="type">tag</span></span>
          the tag
         </li>
     </ul>
@@ -4486,7 +4575,7 @@ end
 
 
 
-    <span id=item723 class="hide_extra">
+    <span id=item718 class="hide_extra">
     </span>
 
 </dd>
@@ -4501,7 +4590,8 @@ end
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">_tag</span>
+        <li><span class="parameter">tag</span>
+            <span class="types"><span class="type">tag</span></span>
          the tag
         </li>
     </ul>
@@ -4515,7 +4605,7 @@ end
 
 
 
-    <span id=item724 class="hide_extra">
+    <span id=item719 class="hide_extra">
     </span>
 
 </dd>
@@ -4547,7 +4637,7 @@ end
 
 
 
-    <span id=item725 class="hide_extra">
+    <span id=item720 class="hide_extra">
     </span>
 
 </dd>
@@ -4577,7 +4667,7 @@ end
 
 
 
-    <span id=item726 class="hide_extra">
+    <span id=item721 class="hide_extra">
     </span>
 
 </dd>
@@ -4611,7 +4701,7 @@ end
 
 
 
-    <span id=item727 class="hide_extra">
+    <span id=item722 class="hide_extra">
     </span>
 
 </dd>
@@ -4641,7 +4731,7 @@ end
 
 
 
-    <span id=item728 class="hide_extra">
+    <span id=item723 class="hide_extra">
     </span>
 
 </dd>
@@ -4674,7 +4764,7 @@ end
 
 
 
-    <span id=item729 class="hide_extra">
+    <span id=item724 class="hide_extra">
     </span>
 
 </dd>
@@ -4711,7 +4801,7 @@ end
 
 
 
-    <span id=item730 class="hide_extra">
+    <span id=item725 class="hide_extra">
     </span>
 
 </dd>
@@ -4746,7 +4836,7 @@ end
 
 
 
-    <span id=item731 class="hide_extra">
+    <span id=item726 class="hide_extra">
     </span>
 
 </dd>
@@ -4771,7 +4861,7 @@ end
 
 
 
-    <span id=item732 class="hide_extra">
+    <span id=item727 class="hide_extra">
     </span>
 
 </dd>
@@ -4795,7 +4885,7 @@ end
 
 
 
-    <span id=item733 class="hide_extra">
+    <span id=item728 class="hide_extra">
     </span>
 
 </dd>
@@ -4842,7 +4932,7 @@ end
 
 
 
-    <span id=item734 class="hide_extra">
+    <span id=item729 class="hide_extra">
     </span>
 
 </dd>
