@@ -1146,7 +1146,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
     </tr>
     <tr>
       <td class="name" >
-        <a href="#relative_move">:relative_move <span class='function_args'> <b>(</b>[x=c.x[, y=c.y[, w=c.width[, h=c.height]]]]<b>)</b></span></a>
+        <a href="#relative_move">:relative_move <span class='function_args'> <b>(</b>[x=0[, y=0[, w=0[, h=0]]]]<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
       <td colspan="2" class="summary">
@@ -7340,7 +7340,7 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
 </dd>
     <dt>
     <a name = "relative_move"></a>
-    <strong>:relative_move <span class='function_args'> <b>(</b>[x=c.x[, y=c.y[, w=c.width[, h=c.height]]]]<b>)</b></span></strong>
+    <strong>:relative_move <span class='function_args'> <b>(</b>[x=0[, y=0[, w=0[, h=0]]]]<b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
     </span>
@@ -7355,8 +7355,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
 
 <p><strong>Usage example output</strong>:</p>
 
-<pre><code>Client geometry:    110 110 120 100
-Client geometry:    220 220 220 200
+<pre><code>Client geometry:    4   10  60  50
+Client geometry:    104 110 60  50
+Client geometry:    104 110 160 150
 </code></pre>
 <p> <strong>Usage example:</strong></p>
 
@@ -7366,14 +7367,17 @@ Client geometry:    220 220 220 200
 
  client.get()[1].floating = true
 
+ geo = client.get()[1]:geometry()
+ print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
+
  client.get()[1]:relative_move(100, 100)
 
- local geo = client.get()[1]:geometry()
+ geo = client.get()[1]:geometry()
  print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
 
  client.get()[1]:relative_move(nil, nil, 100, 100)
 
- local geo = client.get()[1]:geometry()
+ geo = client.get()[1]:geometry()
  print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
 </code></pre>
 
@@ -7384,22 +7388,22 @@ Client geometry:    220 220 220 200
         <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
          The relative x coordinate.
-         (<em>default</em> c.x)
+         (<em>default</em> 0)
         </li>
         <li><span class="parameter">y</span>
             <span class="types"><span class="type">number</span></span>
          The relative y coordinate.
-         (<em>default</em> c.y)
+         (<em>default</em> 0)
         </li>
         <li><span class="parameter">w</span>
             <span class="types"><span class="type">number</span></span>
          The relative width.
-         (<em>default</em> c.width)
+         (<em>default</em> 0)
         </li>
         <li><span class="parameter">h</span>
             <span class="types"><span class="type">number</span></span>
          The relative height.
-         (<em>default</em> c.height)
+         (<em>default</em> 0)
         </li>
     </ul>
 
