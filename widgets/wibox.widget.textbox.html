@@ -1094,7 +1094,40 @@ widget{
     </span>
     </dt>
     <dd>
-    Set a textbox font.
+    Set a textbox font. </p>
+
+<p> There is multiple valid font string representation. The most precise is
+ <a href="https://wiki.archlinux.org/title/X_Logical_Font_Description">XFT</a>. It
+ is also possible to use the family name, followed by the face and size
+ such as <code>Monospace Bold 10</code>. This script lists the fonts present
+ on your system:</p>
+
+<pre><code>#!/usr/bin/env lua
+
+local lgi = require("lgi")
+local pangocairo = lgi.PangoCairo
+
+local font_map = pangocairo.font_map_get_default()
+
+for k, v in pairs(font_map:list_families()) do
+    print(v:get_name(), "monospace?: "..tostring(v:is_monospace()))
+    for k2, v2 in ipairs(v:list_faces()) do
+        print("    ".. v2:get_face_name())
+    end
+end
+</code></pre>
+
+<p> Save this script somewhere on your system, <code>chmod +x</code> it and run it. It
+ will list something like:</p>
+
+<pre><code>Sans    monospace?: false
+    Regular
+    Bold
+    Italic
+    Bold Italic
+</code></pre>
+
+<p> In this case, the font could be <code>Sans 10</code> or <code>Sans Bold Italic 10</code>.
 
     <h3>Type constraints:</h3>
     <ul>
