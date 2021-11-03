@@ -400,8 +400,7 @@
       <td class="shortname" ><a href="#markup">markup</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td colspan="1" class="summary">
-        Set the text of the textbox (with
- <a href="https://docs.gtk.org/Pango/pango_markup.html">Pango markup</a>).
+        Set the HTML text of the textbox.
       </td>
       <td class="baseclass" nowrap>
         Inherited from wibox.widget.textbox
@@ -411,7 +410,7 @@
       <td class="shortname" ><a href="#text">text</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td colspan="1" class="summary">
-        Set a textbox text.
+        Set a textbox plain text.
       </td>
       <td class="baseclass" nowrap>
         Inherited from wibox.widget.textbox
@@ -923,12 +922,46 @@
     </span>
     </dt>
     <dd>
-    Set the text of the textbox (with
- <a href="https://docs.gtk.org/Pango/pango_markup.html">Pango markup</a>).
+
+<p>Set the HTML text of the textbox. </p>
+
+<p> The main difference between <code>text</code> and <code>markup</code> is that <code>markup</code> is
+ able to render a small subset of HTML tags. See the
+ <a href="https://docs.gtk.org/Pango/pango_markup.html">Pango markup</a>) documentation
+ to see what is and isn't valid in this property.</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_textbox_markup1.svg" alt="Usage example"/></p>
+
+
+<pre><code> local w = wibox.widget {
+     markup = "This is some &lt;i&gt;text&lt;/i&gt;, &lt;b&gt;HTML tags&lt;/b&gt; &lt;u&gt;WILL&lt;/u&gt; work.",
+     widget = wibox.widget.textbox,
+ }
+</code></pre>
+
+<p> The <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a> colors are usually set by wrapping into a
+ <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a> widget, but can also be done using the
+ markup:</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_textbox_markup2.svg" alt="Usage example"/></p>
+
+
+<pre><code> local w = wibox.widget {
+     markup = "&lt;span background='#ff0000' foreground='#0000ff'&gt;Some&lt;/span&gt;"..
+       " nice &lt;span foreground='#00ff00'&gt;colors!&lt;/span&gt;",
+     widget = wibox.widget.textbox,
+ }
+</code></pre>
+
+
 
     <h3>Type constraints:</h3>
     <ul>
-        <li><span class="parameter">text</span>
+        <li><span class="parameter">markup</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The text to set. This can contain pango markup (e.g.
    <code>&lt;b&gt;bold&lt;/b&gt;</code>). You can use <code>gears.string.escape</code> to escape
@@ -957,7 +990,7 @@
           <li><span class="parameter"><code>property::markup</code></span>  When the <code>markup</code> value changes.</li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
-             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>text</code></span> The new value affected to the property.</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>markup</code></span> The new value affected to the property.</li>
            </ul>
      </ul>
     </span>
@@ -973,7 +1006,36 @@
     </span>
     </dt>
     <dd>
-    Set a textbox text.
+
+<p>Set a textbox plain text. </p>
+
+<p> This property renders the text as-is, it does not interpret it:</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_textbox_text1.svg" alt="Usage example"/></p>
+
+
+<pre><code> local w = wibox.widget {
+     text   = "This is some &lt;i&gt;text&lt;/i&gt;, &lt;b&gt;HTML tags&lt;/b&gt; will &lt;u&gt;NOT&lt;/u&gt; work.",
+     widget = wibox.widget.textbox,
+ }
+</code></pre>
+
+<p> One exception are the control characters, which are interpreted:</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_textbox_text2.svg" alt="Usage example"/></p>
+
+
+<pre><code> local w = wibox.widget {
+     text   = "This is some text\nover\nmultiple lines!",
+     widget = wibox.widget.textbox,
+ }
+</code></pre>
+
+
 
     <h3>Type constraints:</h3>
     <ul>
@@ -1044,6 +1106,7 @@
         <li><span class="parameter">mode</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The ellipsize mode.
+         (<em>default</em> "end")
         </li>
     </ul>
 
@@ -1104,8 +1167,7 @@ widget{
     </span>
     </dt>
     <dd>
-
-<p>Set a textbox wrap mode. </p>
+    Set a textbox wrap mode. </p>
 
 <p> Valid values are:</p>
 
@@ -1117,17 +1179,30 @@ widget{
 
 
 
+<p><img src="../images/AUTOGEN_wibox_widget_textbox_wrap1.svg" alt="Usage example"/>
+
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">mode</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Where to wrap? After "word", "char" or "word_char".
+         (<em>default</em> "word_char")
         </li>
     </ul>
 
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, wrap <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">"word"</span>, <span class="string">"char"</span>, <span class="string">"word_char"</span>} <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.widget {
+        wrap   = wrap,
+        text   = <span class="string">"Notable dinausors: Tyrannosaurus-Rex, Triceratops, Velociraptor, Sauropods, Archaeopteryx."</span>,
+        widget = wibox.widget.textbox,
+    }
+<span class="keyword">end</span></pre>
+    </ul>
 
      <br />
      <center id=button1444>
@@ -1158,8 +1233,7 @@ widget{
     </span>
     </dt>
     <dd>
-
-<p>The textbox' vertical alignment. </p>
+    The textbox' vertical alignment. </p>
 
 <p> Valid values are:</p>
 
@@ -1171,18 +1245,31 @@ widget{
 
 
 
+<p><img src="../images/AUTOGEN_wibox_widget_textbox_valign1.svg" alt="Usage example"/>
+
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">mode</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Where should the textbox be drawn? "top", "center" or
   "bottom".
+         (<em>default</em> "center")
         </li>
     </ul>
 
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, valign <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">"top"</span>, <span class="string">"center"</span>, <span class="string">"bottom"</span>} <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.widget {
+        valign = valign,
+        text   = <span class="string">"some text"</span>,
+        widget = wibox.widget.textbox,
+    }
+<span class="keyword">end</span></pre>
+    </ul>
 
      <br />
      <center id=button1445>
@@ -1213,8 +1300,7 @@ widget{
     </span>
     </dt>
     <dd>
-
-<p>Set a textbox horizontal alignment. </p>
+    Set a textbox horizontal alignment. </p>
 
 <p> Valid values are:</p>
 
@@ -1226,18 +1312,31 @@ widget{
 
 
 
+<p><img src="../images/AUTOGEN_wibox_widget_textbox_align1.svg" alt="Usage example"/>
+
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">mode</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Where should the textbox be drawn? "left", "center" or
   "right".
+         (<em>default</em> "left")
         </li>
     </ul>
 
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, align <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">"left"</span>, <span class="string">"center"</span>, <span class="string">"right"</span>} <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.widget {
+        align  = align,
+        text   = <span class="string">"some text"</span>,
+        widget = wibox.widget.textbox,
+    }
+<span class="keyword">end</span></pre>
+    </ul>
 
      <br />
      <center id=button1446>
@@ -1269,7 +1368,8 @@ widget{
     </span>
     </dt>
     <dd>
-    Set a textbox font. </p>
+
+<p>Set a textbox font. </p>
 
 <p> There is multiple valid font string representation. The most precise is
  <a href="https://wiki.archlinux.org/title/X_Logical_Font_Description">XFT</a>. It
@@ -1302,13 +1402,70 @@ end
     Bold Italic
 </code></pre>
 
-<p> In this case, the font could be <code>Sans 10</code> or <code>Sans Bold Italic 10</code>.
+<p> In this case, the font could be <code>Sans 10</code> or <code>Sans Bold Italic 10</code>.</p>
+
+<p> Here are examples of several font families:</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_textbox_font1.svg" alt="Usage example"/></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>sans    0.0 sans    NORMAL  NORMAL
+Roboto, Bold    0.0 Roboto  NORMAL  NORMAL
+DejaVu Sans, Oblique    0.0 DejaVu Sans NORMAL  OBLIQUE
+Noto Mono, Regular  0.0 Noto Mono   NORMAL  NORMAL
+</code></pre>
+<p> <strong>Usage example:</strong></p>
+
+
+
+<pre><code>local pango = require("lgi").Pango
+local fonts = {
+    "sans",
+    "Roboto, Bold",
+    "DejaVu Sans, Oblique",
+    "Noto Mono, Regular"
+}
+
+for _, font in ipairs(fonts) do
+    local w = wibox.widget {
+        font   = font,
+        text   = "The quick brown fox jumps over the lazy dog!",
+        widget = wibox.widget.textbox,
+    }
+
+    -- Use the low level Pango API to validate the font was parsed properly.
+    local desc = pango.FontDescription.from_string(w.font)
+    print(w.font, desc:get_size(), desc:get_family(), desc:get_variant(), desc:get_style())
+end
+</code></pre>
+
+<p> The font size is a number at the end of the font description string:</p>
+
+
+
+<p><img src="../images/AUTOGEN_wibox_widget_textbox_font2.svg" alt="Usage example"/></p>
+
+
+<pre><code>for _, font in ipairs { "sans 8", "sans 10", "sans 12", "sans 14" } do
+    local w = wibox.widget {
+        font   = font,
+        text   = "The quick brown fox jumps over the lazy dog!",
+        widget = wibox.widget.textbox,
+    }
+end
+</code></pre>
+
+
 
     <h3>Type constraints:</h3>
     <ul>
         <li><span class="parameter">font</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          The font description as string.
+         (<em>default</em> beautiful.font)
         </li>
     </ul>
 
@@ -1338,7 +1495,7 @@ end
            <th>Theme variable</th>
            <th>Usage</th>
          </tr>
-          <tr><td><code>beautiful.textbox_font</code></td><td>Fallback when <code>font</code> isn't set.</td></tr>
+          <tr><td><a href="../theme_related_libraries/beautiful.html#font">beautiful.font</a></td><td>The default font.</td></tr>
      </table>
     </span>
 
