@@ -3531,8 +3531,7 @@ c3.skip_taskbar = false
     </span>
     </dt>
     <dd>
-
-<p>The client icon as a surface. </p>
+    The client icon as a surface. </p>
 
 <p> This property holds the client icon closest to the size configured via
  <a href="../core_components/awesome.html#set_preferred_icon_size">awesome.set_preferred_icon_size</a>.</p>
@@ -3554,7 +3553,9 @@ cr:set_source_surface(s, 0, 0)
 cr:paint()
 </code></pre>
 
-
+<p> (Note that <a href="../core_components/awesome.html#set_preferred_icon_size">awesome.set_preferred_icon_size</a> defaults to <code>0</code> if it wasn't
+ set. It means that, by default, the preferred icon provided will be the
+ smallest available)
 
 
 
@@ -7038,7 +7039,20 @@ client.get()[<span class="number">2</span>]:swap(client.get()[<span class="numbe
     </span>
     </dt>
     <dd>
-    Get the client's n-th icon.
+    Get the client's n-th icon. </p>
+
+<p> The icon index can be deternined by inspecting the <a href="../core_components/client.html#icon_sizes">icon_sizes</a> property first.</p>
+
+<p> The user has the responsibility to test the value returned by this function
+ to ensure an icon have been returned.</p>
+
+<p> It is recommended to use the <a href="../widgets/awful.widget.clienticon.html#">awful.widget.clienticon</a> widget when the
+ client icon is used in a widget structure.</p>
+
+<p> Note that this function tests the provided index and raise an "invalid icon
+ index" error if the provided index doesn't exist in the client's icons list
+ (by raising an error, the function will be stopped and nothing will be
+ returned to the caller).
 
     <h3>Parameters:</h3>
     <ul>
@@ -7057,6 +7071,11 @@ client.get()[<span class="number">2</span>]:swap(client.get()[<span class="numbe
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../core_components/client.html#icon_sizes">icon_sizes</a></li>
+         <li><a href="../widgets/awful.widget.clienticon.html#">awful.widget.clienticon</a></li>
+    </ul>
 
 
 
