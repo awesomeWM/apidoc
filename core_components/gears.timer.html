@@ -440,7 +440,7 @@ gears.timer {
         <a href="#start">start</a>
       </td>
       <td colspan="2" class="summary">
-        When the timer is started.
+        Emitted when the timer is started.
       </td>
     </tr>
     <tr>
@@ -448,7 +448,7 @@ gears.timer {
         <a href="#stop">stop</a>
       </td>
       <td colspan="2" class="summary">
-        When the timer is stopped.
+        Emitted when the timer is stopped.
       </td>
     </tr>
     <tr>
@@ -456,7 +456,7 @@ gears.timer {
         <a href="#timeout">timeout</a>
       </td>
       <td colspan="2" class="summary">
-        When the timer had a timeout event.
+        Emitted when <a href="../core_components/gears.timer.html#timeout">timeout</a> seconds have elapsed.
       </td>
     </tr>
 </table>
@@ -486,7 +486,13 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    Create a new timer object.
+    Create a new timer object. </p>
+
+<p> <code>call_now</code> only takes effect when a <code>callback</code> is provided. <code>single_shot</code>,
+ on the other hand, also stops signals connected to the <a href="../core_components/gears.timer.html#timeout">timeout</a> signal.</p>
+
+<p> Specifying a function <code>func</code> as <code>args.callback</code> is equivalent to calling
+ <code>:connect_signal(func)</code> on the timer object.
 
     <h3>Parameters:</h3>
     <ul>
@@ -494,28 +500,28 @@ gears.timer {
         <ul>
         <li><span class="parameter">timeout</span>
             <span class="types"><span class="type">number</span></span>
-         Timeout in seconds (e.g. 1.5).
+         Timeout in seconds (e.g. <code>1.5</code>).
         </li>
         <li><span class="parameter">autostart</span>
             <span class="types"><span class="type">boolean</span></span>
          Automatically start the timer.
-         (<em>default</em> false)
+         (<em>default</em> <code>false</code>)
         </li>
         <li><span class="parameter">call_now</span>
             <span class="types"><span class="type">boolean</span></span>
          Call the callback at timer creation.
-         (<em>default</em> false)
+         (<em>default</em> <code>false</code>)
         </li>
         <li><span class="parameter">callback</span>
             <span class="types"><span class="type">function</span></span>
          Callback function to connect to the
   "timeout" signal.
-         (<em>default</em> nil)
+         (<em>optional</em>)
         </li>
         <li><span class="parameter">single_shot</span>
             <span class="types"><span class="type">boolean</span></span>
          Run only once then stop.
-         (<em>default</em> false)
+         (<em>default</em> <code>false</code>)
         </li>
         </li></ul>
     </ul>
@@ -965,7 +971,7 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    When the timer is started.
+    Emitted when the timer is started.
 
 
 
@@ -984,7 +990,7 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    When the timer is stopped.
+    Emitted when the timer is stopped.
 
 
 
@@ -1003,7 +1009,10 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    When the timer had a timeout event.
+    Emitted when <a href="../core_components/gears.timer.html#timeout">timeout</a> seconds have elapsed. </p>
+
+<p> This will be emitted repeatedly, unless <code>single_shot</code> has been set to <code>true</code>
+ for the timer.
 
 
 
@@ -1026,17 +1035,18 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    Timer objects.  This type of object is useful when triggering events repeatedly.
- The timer will emit the "timeout" signal every N seconds, N being the timeout
+    Timer objects.  This type of object is useful when triggering events repeatedly.</p>
+
+<p> The timer will emit the "timeout" signal every N seconds, N being the timeout
  value. Note that a started timer will not be garbage collected. Call <code>:stop</code>
- to enable garbage collection.
+ before dropping the last reference to prevent leaking the object.
 
     <h3>Fields:</h3>
     <ul>
         <li><span class="parameter">timeout</span>
             <span class="types"><span class="type">number</span></span>
          Interval in seconds to emit the timeout signal.
-   Can be any value, including floating point ones (e.g. 1.5 seconds).
+   Can be any value, including floating point ones (e.g. <code>1.5</code> seconds).
         </li>
         <li><span class="parameter">started</span>
             <span class="types"><span class="type">boolean</span></span>

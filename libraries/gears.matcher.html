@@ -248,7 +248,7 @@
 <h1> Rules</h1>
 
 <p> The <code>rules</code> sources themselves are composed, as the name imply, of a set of
- rule. A rule is a table with a <a href="../libraries/gears.matcher.html#properties">properties</a> <em>or</em> <a href="../libraries/gears.matcher.html#callbacks">callbacks</a> attribute along
+ rule. A rule is a table with a <a href="../libraries/gears.matcher.html#properties">properties</a> <em>or</em> <code>callbacks</code> attribute along
  with either <a href="../libraries/gears.matcher.html#rule">rule</a> or <a href="../libraries/gears.matcher.html#rule_any">rule_any</a>. It is also possible to add an <a href="../libraries/gears.matcher.html#except">except</a> or
  <a href="../libraries/gears.matcher.html#except_any">except_any</a> attribute to narrow the scope in which the rule is applied.
  Here's a basic example of a minimal <a href="../libraries/gears.matcher.html#">gears.matcher</a>.</p>
@@ -669,10 +669,10 @@ matcher:apply(candidate6)
       </td>
     </tr>
     <tr>
-      <td class="shortname" ><a href="#callbacks">callbacks</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
+      <td class="shortname" ><a href="#callback">callback</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
       <td colspan="2" class="summary">
-        A list of callback function to call <em>after</em> the properties have been apploed.
+        A callback function to call <em>after</em> the <a href="../libraries/gears.matcher.html#properties">properties</a> have been applied.
       </td>
     </tr>
     <tr>
@@ -828,7 +828,7 @@ matcher:apply(candidate6)
          The rules to check. List with "rule", "rule<em>any",
   "except" and "except</em>any" keys. If no rules are provided, all rules
   registered with a source will be matched.
-         (<em>default</em> nil)
+         (<em>default</em> <code>nil</code>)
         </li>
     </ul>
 
@@ -998,13 +998,13 @@ matcher:apply(candidate6)
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A list of names of sources this source
   depends on (sources that must be executed <em>before</em> <code>name</code>).
-         (<em>default</em> {})
+         (<em>default</em> <code>{}</code>)
         </li>
         <li><span class="parameter">precede</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A list of names of sources this source has a
   priority over.
-         (<em>default</em> {})
+         (<em>default</em> <code>{}</code>)
         </li>
     </ul>
 
@@ -1063,13 +1063,13 @@ matcher:apply(candidate6)
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A list of names of sources this source depends on
   (sources that must be executed <em>before</em> <code>name</code>).
-         (<em>default</em> {})
+         (<em>default</em> <code>{}</code>)
         </li>
         <li><span class="parameter">precede</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A list of names of sources this source has a
   priority over.
-         (<em>default</em> {})
+         (<em>default</em> <code>{}</code>)
         </li>
     </ul>
 
@@ -1539,7 +1539,7 @@ matcher:apply(candidate6)
 
     <h3>See also:</h3>
     <ul>
-         <a href="../libraries/gears.matcher.html#callbacks">callbacks</a>
+         <a href="../libraries/gears.matcher.html#callback">callback</a>
     </ul>
 
 
@@ -1549,22 +1549,20 @@ matcher:apply(candidate6)
 
 </dd>
     <dt>
-    <a name = "callbacks"></a>
-    <strong>callbacks</strong>
-    <span class="proptype"><span class='summary_type'>table</span></span>
+    <a name = "callback"></a>
+    <strong>callback</strong>
+    <span class="proptype"><span class='summary_type'>function</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    A list of callback function to call <em>after</em> the properties have been apploed.
+    A callback function to call <em>after</em> the <a href="../libraries/gears.matcher.html#properties">properties</a> have been applied. </p>
+
+<p> The callback is called with the current client as first argument.
 
 
 
 
-    <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/gears.matcher.html#properties">properties</a>
-    </ul>
 
 
 
