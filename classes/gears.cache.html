@@ -251,33 +251,33 @@ new entry created with value <span class="number">2</span>
 </p>
     <h3>Usage:</h3>
     <ul>
-        <li><pre class="example">local test_cache = cache.new(function(test)
-    -- let&apos;s just print about what we created
-    print(&quot;new entry created with value &quot; .. test)
-    -- Pretend this is some expensive computation
-    return test * 42
-end)
--- Populate the cache
-print(test_cache:get(0))
-print(test_cache:get(1))
-print(test_cache:get(2))
--- no message since it exists
-print(test_cache:get(0))
+        <li><pre class="example"> local test_cache = cache.new(function(test)
+     -- let&apos;s just print about what we created
+     print(&quot;new entry created with value &quot; .. test)
+     -- Pretend this is some expensive computation
+     return test * 42
+ end)
+ -- Populate the cache
+ print(test_cache:get(0))
+ print(test_cache:get(1))
+ print(test_cache:get(2))
+ -- no message since it exists
+ print(test_cache:get(0))
 
-The example below demonstrates how the garbage collector will clear the
-cache:
-
-
+ The example below demonstrates how the garbage collector will clear the
+ cache:
 
 
-*Usage example output**:
 
-   cache object #0 for first
-   cache object #1 for second
-   cache object #0 for first
-   forcing a garbage collect
-   cache object #2 for first
-   cache object #3 for second
+
+**Usage example output**:
+
+    cache object #0 for first
+    cache object #1 for second
+    cache object #0 for first
+    forcing a garbage collect
+    cache object #2 for first
+    cache object #3 for second
 
 </pre></li>
         <li><pre class="example">local function tostring_for_cache(obj)

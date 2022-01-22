@@ -1110,45 +1110,45 @@ screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span cl
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="comment">-- There is 3 screens. This will add the wallpaper to the last 2.
-</span>awful.wallpaper {
-    screens = {
-        screen[<span class="number">2</span>],
-        screen[<span class="number">3</span>],
-    },
-    bg      = <span class="string">"#222222"</span>,
-    widget  = wibox.widget {
-        {
-            fit = <span class="keyword">function</span>(_, width, height)
-                <span class="keyword">return</span> width, height
-            <span class="keyword">end</span>,
-            draw = <span class="keyword">function</span>(_, _, cr, width, height)
-                cr:set_source(gears.color(<span class="string">"#0000ff"</span>))
-                cr:line_to(width, height)
-                cr:line_to(width, <span class="number">0</span>)
-                cr:line_to(<span class="number">0</span>, <span class="number">0</span>)
-                cr:close_path()
-                cr:fill()
-                cr:set_source(gears.color(<span class="string">"#ff00ff"</span>))
-                cr:move_to(<span class="number">0</span>, <span class="number">0</span>)
-                cr:line_to(<span class="number">0</span>, height)
-                cr:line_to(width, height)
-                cr:close_path()
-                cr:fill()
-            <span class="keyword">end</span>,
-            widget = wibox.widget.base.make_widget()
-        },
-        {
-            text   = <span class="string">"Center"</span>,
-            valign = <span class="string">"center"</span>,
-            align  = <span class="string">"center"</span>,
-            widget = wibox.widget.textbox,
-        },
-        widget = wibox.layout.stack
-    }
-}
+        <pre class="example">   <span class="comment">-- There is 3 screens. This will add the wallpaper to the last 2.
+</span>   awful.wallpaper {
+       screens = {
+           screen[<span class="number">2</span>],
+           screen[<span class="number">3</span>],
+       },
+       bg      = <span class="string">"#222222"</span>,
+       widget  = wibox.widget {
+           {
+               fit = <span class="keyword">function</span>(_, width, height)
+                   <span class="keyword">return</span> width, height
+               <span class="keyword">end</span>,
+               draw = <span class="keyword">function</span>(_, _, cr, width, height)
+                   cr:set_source(gears.color(<span class="string">"#0000ff"</span>))
+                   cr:line_to(width, height)
+                   cr:line_to(width, <span class="number">0</span>)
+                   cr:line_to(<span class="number">0</span>, <span class="number">0</span>)
+                   cr:close_path()
+                   cr:fill()
+                   cr:set_source(gears.color(<span class="string">"#ff00ff"</span>))
+                   cr:move_to(<span class="number">0</span>, <span class="number">0</span>)
+                   cr:line_to(<span class="number">0</span>, height)
+                   cr:line_to(width, height)
+                   cr:close_path()
+                   cr:fill()
+               <span class="keyword">end</span>,
+               widget = wibox.widget.base.make_widget()
+           },
+           {
+               text   = <span class="string">"Center"</span>,
+               valign = <span class="string">"center"</span>,
+               align  = <span class="string">"center"</span>,
+               widget = wibox.widget.textbox,
+           },
+           widget = wibox.layout.stack
+       }
+   }
 
-e large wallpaper are made to span multiple screens.</pre>
+Some large wallpaper are made to span multiple screens.</pre>
     </ul>
 
 
