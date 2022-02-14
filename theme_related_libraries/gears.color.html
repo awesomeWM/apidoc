@@ -293,7 +293,7 @@
     <tr>
       <td class="name" >
         <a href="#parse_color"><span class='function_modname'>gears.color.</span>parse_color <span class='function_args'> <b>(</b>col<b>)</b></span></a>
-        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
+        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;(number, number, number, number, nil)</span></span>
       </td>
       <td colspan="2" class="summary">
         Parse a HTML-color.
@@ -413,7 +413,7 @@
     <dt>
     <a name = "parse_color"></a>
     <strong><span class='function_modname'>gears.color.</span>parse_color <span class='function_args'> <b>(</b>col<b>)</b></span></strong>
-    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
+    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;(number, number, number, number, nil)</span></span>
     <span class="baseclass" >
     </span>
     </dt>
@@ -431,18 +431,32 @@
 
     <h3>Returns:</h3>
     <ol>
-
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-        4 values representing color in RGBA format (each of them in
- [0, 1] range) or nil if input is incorrect.
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        between 0 and 1 for the 'red' value (1st channel)</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        between 0 and 1 for the 'green' value (2nd channel)</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        between 0 and 1 for the 'blue' value (3rd channel)</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+         between 0 and 1 for the 'opacity' value (4th channel)
+ if the incoming color code only has 3 values (only rgb, not opacity) the 4th
+ return value is 1.</li>
+        <li>
+           <span class="types"><span class="type">nil</span></span>
+        if input is incorrect</li>
     </ol>
 
 
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="comment">-- This will return 0, 1, 0, 1
-</span> gears.color.parse_color(<span class="string">"#00ff00ff"</span>)</pre>
+        <pre class="example"><span class="comment">-- Both of the following will return 0, 0.4, 0.8, 1
+</span>gears.color.parse_color(<span class="string">"#0066ccff"</span>)
+gears.color.parse_color(<span class="string">"#0066cc"</span>)</pre>
     </ul>
 
 
