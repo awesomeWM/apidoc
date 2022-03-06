@@ -1416,10 +1416,10 @@ end
 
 <p><strong>Usage example output</strong>:</p>
 
-<pre><code>sans    0.0 sans    NORMAL  NORMAL
-Roboto, Bold    0.0 Roboto  NORMAL  NORMAL
-DejaVu Sans, Oblique    0.0 DejaVu Sans NORMAL  OBLIQUE
-Noto Mono, Regular  0.0 Noto Mono   NORMAL  NORMAL
+<pre><code>sans 0 sans NORMAL NORMAL
+Roboto, Bold 0 Roboto NORMAL NORMAL
+DejaVu Sans, Oblique 0 DejaVu Sans NORMAL OBLIQUE
+Noto Mono, Regular 0 Noto Mono NORMAL NORMAL
 </code></pre>
 <p> <strong>Usage example:</strong></p>
 
@@ -1442,7 +1442,16 @@ for _, font in ipairs(fonts) do
 
     -- Use the low level Pango API to validate the font was parsed properly.
     local desc = pango.FontDescription.from_string(w.font)
-    print(w.font, desc:get_size(), desc:get_family(), desc:get_variant(), desc:get_style())
+    print(
+        string.format(
+            "%s %d %s %s %s",
+            w.font,
+            desc:get_size(),
+            desc:get_family(),
+            desc:get_variant(),
+            desc:get_style()
+         )
+    )
 end
 </code></pre>
 
