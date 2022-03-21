@@ -49,6 +49,7 @@
 <li><a href="#Static_module_functions">Static module functions</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
 <li><a href="#Theme_variables">Theme variables</a></li>
+<li><a href="#Tables">Tables</a></li>
 <li><a href="#Fields">Fields</a></li>
 </ul>
 
@@ -272,6 +273,30 @@
 hotkeys_popup.add_hotkeys(firefox_keys)
 </pre>
 
+<p> Example of having different types of hotkey popups:</p>
+
+
+<pre>
+awful.keyboard.append_global_keybindings({
+    awful.key({modkey}, <span class="string">"/"</span>, <span class="keyword">function</span>()
+      hotkeys_popup.show_help()
+    <span class="keyword">end</span>, <span class="keyword">nil</span>, {
+      description = <span class="string">"show help (all)"</span>, group=<span class="string">"HELP"</span>
+    }),
+    awful.key({<span class="string">"Shift"</span>, modkey}, <span class="string">"/"</span>, <span class="keyword">function</span>()
+      hotkeys_popup.show_help(<span class="keyword">nil</span>, <span class="keyword">nil</span>, {show_awesome_keys=<span class="keyword">false</span>})
+    <span class="keyword">end</span>, <span class="keyword">nil</span>, {
+      description = <span class="string">"show help for current app"</span>, group=<span class="string">"HELP"</span>
+    }),
+    awful.key({altkey, modkey}, <span class="string">"/"</span>, <span class="keyword">function</span>()
+      hotkeys_popup.show_help({}, <span class="keyword">nil</span>, {show_awesome_keys=<span class="keyword">true</span>})
+    <span class="keyword">end</span>, <span class="keyword">nil</span>, {
+      description = <span class="string">"show help for awesome only"</span>, group=<span class="string">"HELP"</span>
+    })
+    <span class="comment">-- (more hotkeys go here)
+</span>})
+</pre>
+
 </p>
     <div class="extra-header">
 
@@ -444,6 +469,17 @@ hotkeys_popup.add_hotkeys(firefox_keys)
       <td class="summarytype" nowrap><span class='summary_type'>int</span></td>
       <td colspan="2" class="summary">
         Margin between hotkeys groups.
+      </td>
+    </tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+    <tr>
+      <td class="name" >
+        <a href="#widget.labels">widget.labels</a>
+      </td>
+      <td colspan="2" class="summary">
+        Labels used for displaying human-readable keynames.
       </td>
     </tr>
 </table>
@@ -1035,6 +1071,37 @@ hotkeys_popup.add_hotkeys(firefox_keys)
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "widget.labels"></a>
+    <strong>widget.labels</strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Labels used for displaying human-readable keynames.
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+    <span id=item1717 class="hide_extra">
+    </span>
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Fields"></a>Fields</h2>
 
     <dl class="function">
@@ -1054,7 +1121,7 @@ hotkeys_popup.add_hotkeys(firefox_keys)
 
 
 
-    <span id=item1717 class="hide_extra">
+    <span id=item1718 class="hide_extra">
     </span>
 
 </dd>
@@ -1079,7 +1146,7 @@ hotkeys_popup.add_hotkeys(firefox_keys)
 
 
 
-    <span id=item1718 class="hide_extra">
+    <span id=item1719 class="hide_extra">
     </span>
 
 </dd>
