@@ -509,7 +509,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </tr>
     <tr>
       <td class="name" >
-        <a href="#stop">:stop <span class='function_args'> <b>(</b><b>)</b></span></a>
+        <a href="#stop">:stop <span class='function_args'> <b>(</b>stop_key, Override<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
       <td colspan="2" class="summary">
@@ -1351,7 +1351,7 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
 </dd>
     <dt>
     <a name = "stop"></a>
-    <strong>:stop <span class='function_args'> <b>(</b><b>)</b></span></strong>
+    <strong>:stop <span class='function_args'> <b>(</b>stop_key, Override<b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
          &middot 2 signals
@@ -1362,6 +1362,17 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
 
 <p> Also stops any <a href="../core_components/awful.keygrabber.html#timeout">timeout</a>.
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">stop_key</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">nil</span></span>
+         Override the key passed to <a href="../core_components/awful.keygrabber.html#stop_callback">stop_callback</a> <strong>DEPRECATED</strong>
+        </li>
+        <li><span class="parameter">Override</span>
+            <span class="types"><span class="type">tale</span> or <span class="type">nil</span></span>
+         the modifiers passed to <a href="../core_components/awful.keygrabber.html#stop_callback">stop_callback</a> <strong>DEPRECATED</strong>
+        </li>
+    </ul>
 
 
 
@@ -1393,7 +1404,13 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     <dd>
     Add a keybinding to this keygrabber. </p>
 
-<p> Those keybindings will automatically start the keygrabbing when hit.
+<p> Those keybindings will automatically start the keygrabbing when hit.</p>
+
+<p> Please note that this method previously accepted a
+ <code>mods, keycode, callback, description</code> signature. This is deprecated. Store
+ those values in an <a href="../input_handling/awful.key.html#">awful.key</a> prior to passing it to this function. The
+ previous method signature made it impossible to alter the description and/or
+ enable/disable the keybinding.
 
     <h3>Parameters:</h3>
     <ul>
