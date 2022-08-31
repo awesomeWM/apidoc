@@ -20,15 +20,8 @@
 <body>
 
 <div id="container">
-
-<div id="product">
-    <div id="product_logo"></div>
-    <div id="product_name"><big><b></b></big></div>
-    <div id="product_description"></div>
-</div> <!-- id="product" -->
-
-
 <div id="main">
+
 
 
 
@@ -36,7 +29,6 @@
 <!-- Menu -->
 
 <div id="navigation">
-<br/>
 <h1>awesome</h1>
 
 <ul>
@@ -47,6 +39,7 @@
 <ul>
 <li><a href="#Static_module_functions">Static module functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
+<li><a href="#Deprecated_functions">Deprecated functions</a></li>
 </ul>
 
 
@@ -196,8 +189,6 @@
   <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
   <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
   <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
-  <li><a href="../classes/signals.html">signals</a></li>
-  <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
   <li><a href="../classes/wibox.hierarchy.html">wibox.hierarchy</a></li>
   <li><a href="../classes/wibox.widget.base.html">wibox.widget.base</a></li>
   <li><a href="../classes/xproperties.html">xproperties</a></li>
@@ -226,10 +217,14 @@
 <div id="content">
 
 <h1>Module: <code>root</code></h1>
-<p>awesome root window API.</p>
-<p>
+<p>APIs to interact with the root window.</p>
+<p> X11 windows (clients) are stored in a tree. Each window
+ can have children. A common example of this are modal
+ dialog windows.</p>
 
-</p>
+<p> This tree goes beyond a process. The root window is where
+ the wallpaper is drawn. It span the combined geometry of
+ every screen. It also persist when AwesomeWM is restarted.</p>
     <div class="extra-header">
 
 
@@ -253,92 +248,115 @@
 
 <h2><a href="#Static_module_functions">Static module functions</a></h2>
 <table class="function_list">
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
         <a href="#fake_input"><span class='function_modname'>root.</span>fake_input <span class='function_args'> <b>(</b>event_type, detail, x, y<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Send fake keyboard or mouse events.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
         <a href="#cursor"><span class='function_modname'>root.</span>cursor <span class='function_args'> <b>(</b>cursor_name<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Set the root cursor
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
         <a href="#drawins"><span class='function_modname'>root.</span>drawins <span class='function_args'> <b>(</b><b>)</b></span></a>
-        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
+        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Get the drawins attached to a screen.
       </td>
-    </tr>
-    <tr>
-      <td class="name" >
-        <a href="#wallpaper"><span class='function_modname'>root.</span>wallpaper <span class='function_args'> <b>(</b>pattern<b>)</b></span></a>
-        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
-      </td>
-      <td colspan="2" class="summary">
-        Get the wallpaper as a cairo surface or set it as a cairo pattern.
+      <td class="baseclass" nowrap>
       </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
         <a href="#size"><span class='function_modname'>root.</span>size <span class='function_args'> <b>(</b><b>)</b></span></a>
-        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
+        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;(integer, integer)</span></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Get the size of the root window.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
         <a href="#size_mm"><span class='function_modname'>root.</span>size_mm <span class='function_args'> <b>(</b><b>)</b></span></a>
-        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
+        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;(integer, integer)</span></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Get the physical size of the root window, in millimeter.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
         <a href="#tags"><span class='function_modname'>root.</span>tags <span class='function_args'> <b>(</b><b>)</b></span></a>
-        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
+        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Get the attached tags.
+      </td>
+      <td class="baseclass" nowrap>
       </td>
     </tr>
 </table>
 <h2><a href="#Object_properties">Object properties</a></h2>
 <table class="function_list">
-    <tr>
+    <tr class="summary_row">
       <td class="shortname" ><a href="#keys">keys</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Get or set global key bindings.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="shortname" ><a href="#buttons">buttons</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>table</span></td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Store the list of mouse buttons to be applied on the wallpaper (also
  known as root window).
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="shortname" ><a href="#content">content</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>surface</span></td>
-      <td colspan="2" class="summary">
+      <td class="summarytype" nowrap><span class='summary_type'>raw_surface</span></td>
+      <td class="summary">
         Get the content of the root window as a cairo surface.
+      </td>
+      <td class="baseclass" nowrap>
+      </td>
+    </tr>
+</table>
+<h2><a href="#Deprecated_functions">Deprecated functions</a></h2>
+<table class="function_list">
+    <tr class="summary_row">
+      <td class="name" >
+        <a href="#wallpaper"><span class='function_modname'>root.</span>wallpaper <span class='function_args'> <b>(</b>pattern<b>)</b></span></a>
+      </td>
+      <td class="summary">
+        Get the wallpaper as a cairo surface or set it as a cairo pattern.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
       </td>
     </tr>
 </table>
@@ -351,7 +369,7 @@
 
     <dl class="function">
     <dt>
-    <a name = "fake_input"></a>
+    <a class="copy-link js-copy-link" name="fake_input" href="#fake_input">&#128279;</a>
     <strong><span class='function_modname'>root.</span>fake_input <span class='function_args'> <b>(</b>event_type, detail, x, y<b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
@@ -437,36 +455,54 @@ click(1, 42, 42)
 
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">event_type</span>
-         The event type: key_press, key_release, button_press,
-  button_release or motion_notify.
-        </li>
-        <li><span class="parameter">detail</span>
-         The detail: in case of a key event, this is the keycode
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">event_type</span></td>
+           <td></td>
+           <td><span class="types"></span></td>
+           <td class="see_also_description"> The event type: key_press, key_release, button_press,
+  button_release or motion_notify.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">detail</span></td>
+           <td></td>
+           <td><span class="types"></span></td>
+           <td class="see_also_description"> The detail: in case of a key event, this is the keycode
   to send, in case of a button event this is the number of the button. In
   case of a motion event, this is a boolean value which if true makes the
-  coordinates relatives.
-        </li>
-        <li><span class="parameter">x</span>
-         In case of a motion event, this is the X coordinate.
-        </li>
-        <li><span class="parameter">y</span>
-         In case of a motion event, this is the Y coordinate.
-        </li>
-    </ul>
+  coordinates relatives.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">x</span></td>
+           <td></td>
+           <td><span class="types"></span></td>
+           <td class="see_also_description"> In case of a motion event, this is the X coordinate.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">y</span></td>
+           <td></td>
+           <td><span class="types"></span></td>
+           <td class="see_also_description"> In case of a motion event, this is the Y coordinate.</td>
+         </tr>
+        </table>
 
 
 
 
 
 
-    <span id=item555 class="hide_extra">
+    <span id=item1504 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "cursor"></a>
+    <a class="copy-link js-copy-link" name="cursor" href="#cursor">&#128279;</a>
     <strong><span class='function_modname'>root.</span>cursor <span class='function_args'> <b>(</b>cursor_name<b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
@@ -557,25 +593,34 @@ click(1, 42, 42)
  </div>
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cursor_name</span>
-         A X cursor name.
-        </li>
-    </ul>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">cursor_name</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> A X cursor name.</td>
+         </tr>
+        </table>
 
 
 
 
 
 
-    <span id=item556 class="hide_extra">
+    <span id=item1505 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "drawins"></a>
+    <a class="copy-link js-copy-link" name="drawins" href="#drawins">&#128279;</a>
     <strong><span class='function_modname'>root.</span>drawins <span class='function_args'> <b>(</b><b>)</b></span></strong>
-    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
+    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
     <span class="baseclass" >
     </span>
     </dt>
@@ -586,6 +631,7 @@ click(1, 42, 42)
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with all drawins.
     </ol>
 
@@ -593,45 +639,14 @@ click(1, 42, 42)
 
 
 
-    <span id=item557 class="hide_extra">
+    <span id=item1506 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "wallpaper"></a>
-    <strong><span class='function_modname'>root.</span>wallpaper <span class='function_args'> <b>(</b>pattern<b>)</b></span></strong>
-    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Get the wallpaper as a cairo surface or set it as a cairo pattern.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">pattern</span>
-         A cairo pattern as light userdata
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        A cairo surface or nothing.
-    </ol>
-
-
-
-
-
-    <span id=item558 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a name = "size"></a>
+    <a class="copy-link js-copy-link" name="size" href="#size">&#128279;</a>
     <strong><span class='function_modname'>root.</span>size <span class='function_args'> <b>(</b><b>)</b></span></strong>
-    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
+    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;(integer, integer)</span></span>
     <span class="baseclass" >
     </span>
     </dt>
@@ -642,8 +657,10 @@ click(1, 42, 42)
     <h3>Returns:</h3>
     <ol>
         <li>
+           <span class="types"><span class="type">integer</span></span>
         Width of the root window.</li>
         <li>
+           <span class="types"><span class="type">integer</span></span>
         height of the root window.</li>
     </ol>
 
@@ -651,14 +668,14 @@ click(1, 42, 42)
 
 
 
-    <span id=item559 class="hide_extra">
+    <span id=item1507 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "size_mm"></a>
+    <a class="copy-link js-copy-link" name="size_mm" href="#size_mm">&#128279;</a>
     <strong><span class='function_modname'>root.</span>size_mm <span class='function_args'> <b>(</b><b>)</b></span></strong>
-    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
+    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;(integer, integer)</span></span>
     <span class="baseclass" >
     </span>
     </dt>
@@ -669,8 +686,10 @@ click(1, 42, 42)
     <h3>Returns:</h3>
     <ol>
         <li>
+           <span class="types"><span class="type">integer</span></span>
         Width of the root window, in millimeters.</li>
         <li>
+           <span class="types"><span class="type">integer</span></span>
         height of the root window, in millimeters.</li>
     </ol>
 
@@ -678,14 +697,14 @@ click(1, 42, 42)
 
 
 
-    <span id=item560 class="hide_extra">
+    <span id=item1508 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "tags"></a>
+    <a class="copy-link js-copy-link" name="tags" href="#tags">&#128279;</a>
     <strong><span class='function_modname'>root.</span>tags <span class='function_args'> <b>(</b><b>)</b></span></strong>
-    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
+    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
     <span class="baseclass" >
     </span>
     </dt>
@@ -696,6 +715,7 @@ click(1, 42, 42)
     <h3>Returns:</h3>
     <ol>
 
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
         A table with all tags.
     </ol>
 
@@ -703,7 +723,7 @@ click(1, 42, 42)
 
 
 
-    <span id=item561 class="hide_extra">
+    <span id=item1509 class="hide_extra">
     </span>
 
 </dd>
@@ -712,7 +732,7 @@ click(1, 42, 42)
 
     <dl class="function">
     <dt>
-    <a name = "keys"></a>
+    <a class="copy-link js-copy-link" name="keys" href="#keys">&#128279;</a>
     <strong>keys</strong>
     <span class="proptype"><span class='summary_type'>table</span></span>
     <span class="baseclass" >
@@ -723,22 +743,49 @@ click(1, 42, 42)
  These bindings will be available when you press keys on the root window
  (the wallpaper).
 
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: <code>{}</code></td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Table content
+         </i>
+        </td>
+        <td>: A list of <a href="input_handling/awful.key.html#">awful.key</a> objects.</td>
+       <tr/>
+     </table>
+    </span>
 
 
 
     <h3>See also:</h3>
-    <ul>
-         <a href="../input_handling/awful.key.html#">awful.key</a>
-    </ul>
+    <table class="see_also">
+     <tr>
+         <td><a href="../input_handling/awful.key.html#" title="In the awful.key module.">awful.key</a></td>
+         <td>Create easily new key objects ignoring certain modifiers. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+    </table>
 
 
 
-    <span id=item562 class="hide_extra">
+    <span id=item1510 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "buttons"></a>
+    <a class="copy-link js-copy-link" name="buttons" href="#buttons">&#128279;</a>
     <strong>buttons</strong>
     <span class="proptype"><span class='summary_type'>table</span></span>
     <span class="baseclass" >
@@ -748,21 +795,40 @@ click(1, 42, 42)
     Store the list of mouse buttons to be applied on the wallpaper (also
  known as root window).
 
-    <h3>Type constraints:</h3>
-    <ul>
-        <li><span class="parameter">buttons</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The list of buttons.
-         (<em>default</em> <code>{}</code>)
-        </li>
-    </ul>
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: <code>{}</code></td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Table content
+         </i>
+        </td>
+        <td>: A list of <a href="input_handling/awful.button.html#">awful.button</a> objects.</td>
+       <tr/>
+     </table>
+    </span>
 
 
 
     <h3>See also:</h3>
-    <ul>
-         <a href="../input_handling/awful.button.html#">awful.button</a>
-    </ul>
+    <table class="see_also">
+     <tr>
+         <td><a href="../input_handling/awful.button.html#" title="In the awful.button module.">awful.button</a></td>
+         <td>Create easily new buttons objects ignoring certain modifiers. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+    </table>
 
     <h3>Usage:</h3>
     <ul>
@@ -774,38 +840,112 @@ click(1, 42, 42)
     </ul>
 
 
-    <span id=item563 class="hide_extra">
+    <span id=item1511 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "content"></a>
+    <a class="copy-link js-copy-link" name="content" href="#content">&#128279;</a>
     <strong>content</strong>
-    <span class="proptype"><span class='summary_type'>surface</span></span>
+    <span class="proptype"><span class='summary_type'>raw_surface</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
     Get the content of the root window as a cairo surface.
 
-    <h3>Type constraints:</h3>
-    <ul>
-        <li><span class="parameter">A</span>
-            <span class="types"><span class="type">surface</span></span>
-         cairo surface with the root window content (aka the whole surface from every screens).
-        </li>
-    </ul>
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: This is the live content. Use <code>gears.surface(root.content)</code> to
+  take a screenshot.</td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Valid values
+         </i>
+        </td>
+        <td>:  A cairo surface with the root window content (aka the whole surface from every screens).</td>
+       <tr/>
+     </table>
+    </span>
 
 
 
     <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/gears.surface.html#">gears.surface</a>
-    </ul>
+    <table class="see_also">
+     <tr>
+         <td><a href="../libraries/gears.surface.html#" title="In the gears.surface module.">gears.surface</a></td>
+         <td>Utilities to integrate and manipulate Cairo drawing surfaces. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+    </table>
 
 
 
-    <span id=item564 class="hide_extra">
+    <span id=item1512 class="hide_extra">
+    </span>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Deprecated_functions"></a>Deprecated functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a class="copy-link js-copy-link" name="wallpaper" href="#wallpaper">&#128279;</a>
+    <strong><span class='function_modname'>root.</span>wallpaper <span class='function_args'> <b>(</b>pattern<b>)</b></span></strong>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Get the wallpaper as a cairo surface or set it as a cairo pattern.
+
+    <h3>Parameters:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">pattern</span></td>
+           <td></td>
+           <td><span class="types"></span></td>
+           <td class="see_also_description"> A cairo pattern as light userdata</td>
+         </tr>
+        </table>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A cairo surface or nothing.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../popups_and_bars/awful.wallpaper.html#" title="In the awful.wallpaper module.">awful.wallpaper</a></td>
+         <td>Allows to use the wibox widget system to draw the wallpaper. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item1513 class="hide_extra">
     </span>
 
 </dd>
@@ -818,5 +958,78 @@ click(1, 42, 42)
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
+
+<script defer type="text/javascript">
+    const $nav = document.querySelector("#navigation");
+
+    // When clicking the sidebar, open it
+    $nav.addEventListener("click", function(ev) {
+        if (document.body.clientWidth >= 768) {
+            return;
+        }
+
+        const target = $nav;
+        if (!target.classList.contains("open")) {
+            target.classList.add("open");
+            ev.stopPropagation();
+        }
+    });
+
+    // When clicking anywhere else than the sidebar, close it
+    document.querySelector("body").addEventListener("click", function(ev) {
+        if (document.body.clientWidth >= 768 || ev.target.contains($nav)) {
+            return;
+        }
+
+        const target = $nav;
+        if (target.classList.contains("open")) {
+            target.classList.remove("open");
+        }
+    });
+
+    const copyResultClasses = {
+        success : "copy-link--success",
+        failure: "copy-link--failure"
+    };
+
+    const removeCopyResultClasses = ($target) =>
+        Object.values(copyResultClasses).forEach(c => $target.classList.remove(c));
+
+    document.querySelectorAll(".js-copy-link").forEach(copyLink => {
+        copyLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            const $target = e.target;
+
+            removeCopyResultClasses($target);
+
+            let link = $target.href;
+            if (!link) {
+                return;
+            }
+            if (link.startsWith("#")) {
+                const curr = window.location.pathname;
+                link = curr.substring(0, curr.indexOf("#")) + link;
+            }
+
+            // We need to create a fake element to copy the text from
+            const fakeElement = document.createElement("textarea");
+            fakeElement.value = link;
+            document.body.appendChild(fakeElement);
+            fakeElement.select();
+
+            let success = false;
+            try {
+                success = document.execCommand("copy");
+            } catch(err) {
+                success = false;
+            }
+
+            fakeElement.remove();
+            $target.classList.add(success ? copyResultClasses.success : copyResultClasses.failure);
+            setInterval(() => removeCopyResultClasses($target), 1500);
+        });
+    });
+</script>
+
 </body>
 </html>
