@@ -20,15 +20,8 @@
 <body>
 
 <div id="container">
-
-<div id="product">
-    <div id="product_logo"></div>
-    <div id="product_name"><big><b></b></big></div>
-    <div id="product_description"></div>
-</div> <!-- id="product" -->
-
-
 <div id="main">
+
 
 
 
@@ -36,7 +29,6 @@
 <!-- Menu -->
 
 <div id="navigation">
-<br/>
 <h1>awesome</h1>
 
 <ul>
@@ -195,8 +187,6 @@
   <li><a href="../classes/gears.matrix.html">gears.matrix</a></li>
   <li><a href="../classes/menubar.icon_theme.html">menubar.icon_theme</a></li>
   <li><a href="../classes/menubar.index_theme.html">menubar.index_theme</a></li>
-  <li><a href="../classes/signals.html">signals</a></li>
-  <li><a href="../classes/wibox.drawable.html">wibox.drawable</a></li>
   <li><a href="../classes/wibox.hierarchy.html">wibox.hierarchy</a></li>
   <li><a href="../classes/wibox.widget.base.html">wibox.widget.base</a></li>
   <li><a href="../classes/xproperties.html">xproperties</a></li>
@@ -225,7 +215,7 @@
 <div id="content">
 
 <h1>Module: <code>awful.spawn</code></h1>
-<p>Spawning of programs.</p>
+<p>Spawn sub-processes and optionally get their output.</p>
 <p>
 
 
@@ -568,85 +558,103 @@ awesome-client <span class="string">'awful=require("awful");
 
 <h2><a href="#Static_module_functions">Static module functions</a></h2>
 <table class="function_list">
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
-        <a href="#awful.spawn">awful.spawn <span class='function_args'> <b>(</b>cmd[, sn_rules=true[, callback]]<b>)</b></span></a>
+        <a href="#awful.spawn">awful.spawn <span class='function_args'> <b>(</b>cmd, <span class="optional_param">sn_rules</span>, <span class="optional_param">callback</span><b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;(integer, nil <i>or</i> string) <i>or</i> string</span></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Spawn a program, and optionally apply properties and/or run a callback.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
         <a href="#awful.spawn.with_shell"><span class='function_modname'>awful.spawn.</span>with_shell <span class='function_args'> <b>(</b>cmd<b>)</b></span></a>
-        <span class="summarytype"></span>
+        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;(integer, nil <i>or</i> string) <i>or</i> string</span></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Spawn a program using the shell.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
         <a href="#awful.spawn.with_line_callback"><span class='function_modname'>awful.spawn.</span>with_line_callback <span class='function_args'> <b>(</b>cmd, callbacks<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;Integer <i>or</i> string</span></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Spawn a program and asynchronously capture its output line by line.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
         <a href="#awful.spawn.easy_async"><span class='function_modname'>awful.spawn.</span>easy_async <span class='function_args'> <b>(</b>cmd, callback<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;Integer <i>or</i> string</span></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Asynchronously spawn a program and capture its output.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
         <a href="#awful.spawn.easy_async_with_shell"><span class='function_modname'>awful.spawn.</span>easy_async_with_shell <span class='function_args'> <b>(</b>cmd, callback<b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;Integer <i>or</i> string</span></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Call <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">spawn.easy_async</a> with a shell.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
-        <a href="#awful.spawn.read_lines"><span class='function_modname'>awful.spawn.</span>read_lines <span class='function_args'> <b>(</b>input_stream, line_callback[, done_callback[, close=false]]<b>)</b></span></a>
+        <a href="#awful.spawn.read_lines"><span class='function_modname'>awful.spawn.</span>read_lines <span class='function_args'> <b>(</b>input_stream, line_callback, <span class="optional_param">done_callback</span>, <span class="optional_param">close</span><b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Read lines from a Gio input stream
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
-        <a href="#awful.spawn.once"><span class='function_modname'>awful.spawn.</span>once <span class='function_args'> <b>(</b>cmd[, rules[, matcher[, unique_id[, callback]]]]<b>)</b></span></a>
+        <a href="#awful.spawn.once"><span class='function_modname'>awful.spawn.</span>once <span class='function_args'> <b>(</b>cmd, <span class="optional_param">rules</span>, <span class="optional_param">matcher</span>, <span class="optional_param">unique_id</span>, <span class="optional_param">callback</span><b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Spawn a command if it has not been spawned before.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
-        <a href="#awful.spawn.single_instance"><span class='function_modname'>awful.spawn.</span>single_instance <span class='function_args'> <b>(</b>cmd[, rules[, matcher[, unique_id[, callback]]]]<b>)</b></span></a>
+        <a href="#awful.spawn.single_instance"><span class='function_modname'>awful.spawn.</span>single_instance <span class='function_args'> <b>(</b>cmd, <span class="optional_param">rules</span>, <span class="optional_param">matcher</span>, <span class="optional_param">unique_id</span>, <span class="optional_param">callback</span><b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Spawn a command if an instance is not already running.
       </td>
+      <td class="baseclass" nowrap>
+      </td>
     </tr>
-    <tr>
+    <tr class="summary_row">
       <td class="name" >
-        <a href="#awful.spawn.raise_or_spawn"><span class='function_modname'>awful.spawn.</span>raise_or_spawn <span class='function_args'> <b>(</b>cmd, rules[, matcher[, unique_id[, callback]]]<b>)</b></span></a>
+        <a href="#awful.spawn.raise_or_spawn"><span class='function_modname'>awful.spawn.</span>raise_or_spawn <span class='function_args'> <b>(</b>cmd, rules, <span class="optional_param">matcher</span>, <span class="optional_param">unique_id</span>, <span class="optional_param">callback</span><b>)</b></span></a>
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;client</span></span>
       </td>
-      <td colspan="2" class="summary">
+      <td class="summary">
         Raise a client if it exists or spawn a new one then raise it.
+      </td>
+      <td class="baseclass" nowrap>
       </td>
     </tr>
 </table>
@@ -659,8 +667,8 @@ awesome-client <span class="string">'awful=require("awful");
 
     <dl class="function">
     <dt>
-    <a name = "awful.spawn"></a>
-    <strong>awful.spawn <span class='function_args'> <b>(</b>cmd[, sn_rules=true[, callback]]<b>)</b></span></strong>
+    <a class="copy-link js-copy-link" name="awful.spawn" href="#awful.spawn">&#128279;</a>
+    <strong>awful.spawn <span class='function_args'> <b>(</b>cmd, <span class="optional_param">sn_rules</span>, <span class="optional_param">callback</span><b>)</b></span></strong>
     <span class="proptype"><span class='summary_type'> -&gt;&nbsp;(integer, nil <i>or</i> string) <i>or</i> string</span></span>
     <span class="baseclass" >
     </span>
@@ -674,23 +682,37 @@ awesome-client <span class="string">'awful=require("awful");
 <p> See <a href="../declarative_rules/ruled.client.html#execute">ruled.client.execute</a> for more details about the format of <code>sn_rules</code>.
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The command.
-        </li>
-        <li><span class="parameter">sn_rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">boolean</span></span>
-         A table of properties to be applied
-   after startup; <code>false</code> to disable startup notifications.
-         (<em>default</em> <code>true</code>)
-        </li>
-        <li><span class="parameter">callback</span>
-            <span class="types"><span class="type">function</span></span>
-         A callback function to be run after startup.
-         (<em>optional</em>)
-        </li>
-    </ul>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">cmd</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The command.</td>
+           <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
+         </tr>
+         <tr>
+           <td><span class="parameter">sn_rules</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">boolean</span></span></td>
+           <td class="see_also_description"> A table of properties to be applied
+   after startup; <code>false</code> to disable startup notifications.</td>
+           <td><span class="default_value"><code>true</code></span></td>
+         </tr>
+         <tr>
+           <td><span class="parameter">callback</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> A callback function to be run after startup.</td>
+           <td><span class="not_applicable">Undefined</span></td>
+         </tr>
+        </table>
 
     <h3>Returns:</h3>
     <ol>
@@ -713,14 +735,14 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2339 class="hide_extra">
+    <span id=item358 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.spawn.with_shell"></a>
+    <a class="copy-link js-copy-link" name="awful.spawn.with_shell" href="#awful.spawn.with_shell">&#128279;</a>
     <strong><span class='function_modname'>awful.spawn.</span>with_shell <span class='function_args'> <b>(</b>cmd<b>)</b></span></strong>
-    <span class="proptype"></span>
+    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;(integer, nil <i>or</i> string) <i>or</i> string</span></span>
     <span class="baseclass" >
     </span>
     </dt>
@@ -729,24 +751,48 @@ awesome-client <span class="string">'awful=require("awful");
  This calls <code>cmd</code> with <code>$SHELL -c</code> (via <a href="../libraries/awful.util.html#shell">awful.util.shell</a>).
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         The command.
-        </li>
-    </ul>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">cmd</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> The command.</td>
+         </tr>
+        </table>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">integer</span></span>
+        The forked PID.</li>
+        <li>
+           <span class="types">optional <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+        The startup notification ID, if <code>sn</code> is not false, or
+   a <code>callback</code> is provided.</li>
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+        Error message.
+    </ol>
 
 
 
 
 
-
-    <span id=item2340 class="hide_extra">
+    <span id=item359 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.spawn.with_line_callback"></a>
+    <a class="copy-link js-copy-link" name="awful.spawn.with_line_callback" href="#awful.spawn.with_line_callback">&#128279;</a>
     <strong><span class='function_modname'>awful.spawn.</span>with_line_callback <span class='function_args'> <b>(</b>cmd, callbacks<b>)</b></span></strong>
     <span class="proptype"><span class='summary_type'> -&gt;&nbsp;Integer <i>or</i> string</span></span>
     <span class="baseclass" >
@@ -756,45 +802,60 @@ awesome-client <span class="string">'awful=require("awful");
     Spawn a program and asynchronously capture its output line by line.
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The command.
-        </li>
-        <li><span class="parameter">callbacks</span> Table containing callbacks that should be invoked on
-   various conditions.
-        <ul>
-        <li><span class="parameter">stdout</span>
-            <span class="types"><span class="type">function</span></span>
-         Function that is called with each
-   line of output on stdout, e.g. <code>stdout(line)</code>.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">stderr</span>
-            <span class="types"><span class="type">function</span></span>
-         Function that is called with each
-   line of output on stderr, e.g. <code>stderr(line)</code>.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">output_done</span>
-            <span class="types"><span class="type">function</span></span>
-         Function to call when no more
-   output is produced.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">exit</span>
-            <span class="types"><span class="type">function</span></span>
-         Function to call when the spawned
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">cmd</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The command.</td>
+         </tr>
+        <tr>
+           <td><span class="parameter">callbacks</span></td>
+           <td></td>
+           <td><span class="types"><span class="type">table</span></span></td>
+           <td class="see_also_description"> Table containing callbacks that should be invoked on
+   various conditions. </td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">stdout</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> Function that is called with each
+   line of output on stdout, e.g. <code>stdout(line)</code>.</td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">stderr</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> Function that is called with each
+   line of output on stderr, e.g. <code>stderr(line)</code>.</td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">output_done</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> Function to call when no more
+   output is produced.</td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">exit</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> Function to call when the spawned
    process exits. This function gets the exit reason and code as its
    arguments.
    The reason can be "exit" or "signal".
    For "exit", the second argument is the exit code.
    For "signal", the second argument is the signal causing process
-   termination.
-         (<em>optional</em>)
-        </li>
-        </li></ul>
-    </ul>
+   termination.</td>
+         </tr>
+        </table>
 
     <h3>Returns:</h3>
     <ol>
@@ -813,12 +874,12 @@ awesome-client <span class="string">'awful=require("awful");
 
 
 
-    <span id=item2341 class="hide_extra">
+    <span id=item360 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.spawn.easy_async"></a>
+    <a class="copy-link js-copy-link" name="awful.spawn.easy_async" href="#awful.spawn.easy_async">&#128279;</a>
     <strong><span class='function_modname'>awful.spawn.</span>easy_async <span class='function_args'> <b>(</b>cmd, callback<b>)</b></span></strong>
     <span class="proptype"><span class='summary_type'> -&gt;&nbsp;Integer <i>or</i> string</span></span>
     <span class="baseclass" >
@@ -829,32 +890,51 @@ awesome-client <span class="string">'awful=require("awful");
  (wraps <a href="../libraries/awful.spawn.html#awful.spawn.with_line_callback">spawn.with_line_callback</a>).
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The command.
-        </li>
-        <li><span class="parameter">callback</span> Function with the following arguments
-        <ul>
-        <li><span class="parameter">stdout</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         Output on stdout.
-        </li>
-        <li><span class="parameter">stderr</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         Output on stderr.
-        </li>
-        <li><span class="parameter">exitreason</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         Exit reason ("exit" or "signal").
-        </li>
-        <li><span class="parameter">exitcode</span>
-            <span class="types"><span class="type">integer</span></span>
-         Exit code (exit code or signal number,
-   depending on <code>exitreason</code>).
-        </li>
-        </li></ul>
-    </ul>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">cmd</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The command.</td>
+         </tr>
+        <tr>
+           <td><span class="parameter">callback</span></td>
+           <td></td>
+           <td><span class="types"><span class="type">table</span></span></td>
+           <td class="see_also_description"> Function with the following arguments </td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">stdout</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> Output on stdout.</td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">stderr</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> Output on stderr.</td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">exitreason</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> Exit reason ("exit" or "signal").</td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">exitcode</span></td>
+           <td></td>
+           <td><span class="types"><span class="type">integer</span></span></td>
+           <td class="see_also_description"> Exit code (exit code or signal number,
+   depending on <code>exitreason</code>).</td>
+         </tr>
+        </table>
 
     <h3>Returns:</h3>
     <ol>
@@ -871,18 +951,24 @@ awesome-client <span class="string">'awful=require("awful");
 
 
     <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/awful.spawn.html#awful.spawn.with_line_callback">spawn.with_line_callback</a>
-    </ul>
+    <table class="see_also">
+     <tr>
+         <td><a href="../libraries/awful.spawn.html#awful.spawn.with_line_callback" title="In the awful.spawn module.">spawn.with_line_callback</a></td>
+         <td>Spawn a program and asynchronously capture its output line by line. </td>
+         <td>
+             <span class="chips">static module functions</span>
+         </td>
+     <tr>
+    </table>
 
 
 
-    <span id=item2342 class="hide_extra">
+    <span id=item361 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.spawn.easy_async_with_shell"></a>
+    <a class="copy-link js-copy-link" name="awful.spawn.easy_async_with_shell" href="#awful.spawn.easy_async_with_shell">&#128279;</a>
     <strong><span class='function_modname'>awful.spawn.</span>easy_async_with_shell <span class='function_args'> <b>(</b>cmd, callback<b>)</b></span></strong>
     <span class="proptype"><span class='summary_type'> -&gt;&nbsp;Integer <i>or</i> string</span></span>
     <span class="baseclass" >
@@ -893,32 +979,51 @@ awesome-client <span class="string">'awful=require("awful");
  This calls <code>cmd</code> with <code>$SHELL -c</code> (via <a href="../libraries/awful.util.html#shell">awful.util.shell</a>).
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         The command.
-        </li>
-        <li><span class="parameter">callback</span> Function with the following arguments
-        <ul>
-        <li><span class="parameter">stdout</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         Output on stdout.
-        </li>
-        <li><span class="parameter">stderr</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         Output on stderr.
-        </li>
-        <li><span class="parameter">exitreason</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         Exit reason ("exit" or "signal").
-        </li>
-        <li><span class="parameter">exitcode</span>
-            <span class="types"><span class="type">integer</span></span>
-         Exit code (exit code or signal number,
-   depending on <code>exitreason</code>).
-        </li>
-        </li></ul>
-    </ul>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">cmd</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> The command.</td>
+         </tr>
+        <tr>
+           <td><span class="parameter">callback</span></td>
+           <td></td>
+           <td><span class="types"><span class="type">table</span></span></td>
+           <td class="see_also_description"> Function with the following arguments </td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">stdout</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> Output on stdout.</td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">stderr</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> Output on stderr.</td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">exitreason</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> Exit reason ("exit" or "signal").</td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">exitcode</span></td>
+           <td></td>
+           <td><span class="types"><span class="type">integer</span></span></td>
+           <td class="see_also_description"> Exit code (exit code or signal number,
+   depending on <code>exitreason</code>).</td>
+         </tr>
+        </table>
 
     <h3>Returns:</h3>
     <ol>
@@ -935,19 +1040,25 @@ awesome-client <span class="string">'awful=require("awful");
 
 
     <h3>See also:</h3>
-    <ul>
-         <a href="../libraries/awful.spawn.html#awful.spawn.with_line_callback">spawn.with_line_callback</a>
-    </ul>
+    <table class="see_also">
+     <tr>
+         <td><a href="../libraries/awful.spawn.html#awful.spawn.with_line_callback" title="In the awful.spawn module.">spawn.with_line_callback</a></td>
+         <td>Spawn a program and asynchronously capture its output line by line. </td>
+         <td>
+             <span class="chips">static module functions</span>
+         </td>
+     <tr>
+    </table>
 
 
 
-    <span id=item2343 class="hide_extra">
+    <span id=item362 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.spawn.read_lines"></a>
-    <strong><span class='function_modname'>awful.spawn.</span>read_lines <span class='function_args'> <b>(</b>input_stream, line_callback[, done_callback[, close=false]]<b>)</b></span></strong>
+    <a class="copy-link js-copy-link" name="awful.spawn.read_lines" href="#awful.spawn.read_lines">&#128279;</a>
+    <strong><span class='function_modname'>awful.spawn.</span>read_lines <span class='function_args'> <b>(</b>input_stream, line_callback, <span class="optional_param">done_callback</span>, <span class="optional_param">close</span><b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
     </span>
@@ -956,41 +1067,58 @@ awesome-client <span class="string">'awful=require("awful");
     Read lines from a Gio input stream
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">input_stream</span>
-            <span class="types"><span class="type">Gio.InputStream</span></span>
-         The input stream to read from.
-        </li>
-        <li><span class="parameter">line_callback</span>
-            <span class="types"><span class="type">function</span></span>
-         Function that is called with each line
-   read, e.g. <code>line_callback(line_from_stream)</code>.
-        </li>
-        <li><span class="parameter">done_callback</span>
-            <span class="types"><span class="type">function</span></span>
-         Function that is called when the
-   operation finishes (e.g. due to end of file).
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">close</span>
-            <span class="types"><span class="type">boolean</span></span>
-         Should the stream be closed after end-of-file?
-         (<em>default</em> <code>false</code>)
-        </li>
-    </ul>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">input_stream</span></td>
+           <td></td>
+           <td><span class="types"><span class="type">Gio.InputStream</span></span></td>
+           <td class="see_also_description"> The input stream to read from.</td>
+           <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
+         </tr>
+         <tr>
+           <td><span class="parameter">line_callback</span></td>
+           <td></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> Function that is called with each line
+   read, e.g. <code>line_callback(line_from_stream)</code>.</td>
+           <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
+         </tr>
+         <tr>
+           <td><span class="parameter">done_callback</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> Function that is called when the
+   operation finishes (e.g. due to end of file).</td>
+           <td><span class="not_applicable">Undefined</span></td>
+         </tr>
+         <tr>
+           <td><span class="parameter">close</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">boolean</span></span></td>
+           <td class="see_also_description"> Should the stream be closed after end-of-file?</td>
+           <td><span class="default_value"><code>false</code></span></td>
+         </tr>
+        </table>
 
 
 
 
 
 
-    <span id=item2344 class="hide_extra">
+    <span id=item363 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.spawn.once"></a>
-    <strong><span class='function_modname'>awful.spawn.</span>once <span class='function_args'> <b>(</b>cmd[, rules[, matcher[, unique_id[, callback]]]]<b>)</b></span></strong>
+    <a class="copy-link js-copy-link" name="awful.spawn.once" href="#awful.spawn.once">&#128279;</a>
+    <strong><span class='function_modname'>awful.spawn.</span>once <span class='function_args'> <b>(</b>cmd, <span class="optional_param">rules</span>, <span class="optional_param">matcher</span>, <span class="optional_param">unique_id</span>, <span class="optional_param">callback</span><b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
     </span>
@@ -1012,51 +1140,69 @@ awesome-client <span class="string">'awful=require("awful");
  Note that this also won't work with shell or terminal commands.
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The command.
-        </li>
-        <li><span class="parameter">rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The properties that need to be applied to the client.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">matcher</span>
-            <span class="types"><span class="type">function</span></span>
-         A matching function to find the instance
-  among running clients.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">unique_id</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         A string to identify the client so it isn't executed
-  multiple time.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">callback</span>
-            <span class="types"><span class="type">function</span></span>
-         A callback function when the client is created.
-         (<em>optional</em>)
-        </li>
-    </ul>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">cmd</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The command.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">rules</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The properties that need to be applied to the client.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">matcher</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> A matching function to find the instance
+  among running clients.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">unique_id</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> A string to identify the client so it isn't executed
+  multiple time.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">callback</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> A callback function when the client is created.</td>
+         </tr>
+        </table>
 
 
 
     <h3>See also:</h3>
-    <ul>
-         <a href="../declarative_rules/ruled.client.html#">ruled.client</a>
-    </ul>
+    <table class="see_also">
+     <tr>
+         <td><a href="../declarative_rules/ruled.client.html#" title="In the ruled.client module.">ruled.client</a></td>
+         <td>Apply properties to a new client based on pre-determined rules. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+    </table>
 
 
 
-    <span id=item2345 class="hide_extra">
+    <span id=item364 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.spawn.single_instance"></a>
-    <strong><span class='function_modname'>awful.spawn.</span>single_instance <span class='function_args'> <b>(</b>cmd[, rules[, matcher[, unique_id[, callback]]]]<b>)</b></span></strong>
+    <a class="copy-link js-copy-link" name="awful.spawn.single_instance" href="#awful.spawn.single_instance">&#128279;</a>
+    <strong><span class='function_modname'>awful.spawn.</span>single_instance <span class='function_args'> <b>(</b>cmd, <span class="optional_param">rules</span>, <span class="optional_param">matcher</span>, <span class="optional_param">unique_id</span>, <span class="optional_param">callback</span><b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
     </span>
@@ -1077,51 +1223,69 @@ awesome-client <span class="string">'awful=require("awful");
  faster than the client has time to start.
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The command.
-        </li>
-        <li><span class="parameter">rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The properties that need to be applied to the client.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">matcher</span>
-            <span class="types"><span class="type">function</span></span>
-         A matching function to find the instance
-  among running clients.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">unique_id</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         A string to identify the client so it isn't executed
-  multiple time.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">callback</span>
-            <span class="types"><span class="type">function</span></span>
-         A callback function when the client is created.
-         (<em>optional</em>)
-        </li>
-    </ul>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">cmd</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The command.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">rules</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The properties that need to be applied to the client.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">matcher</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> A matching function to find the instance
+  among running clients.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">unique_id</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> A string to identify the client so it isn't executed
+  multiple time.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">callback</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> A callback function when the client is created.</td>
+         </tr>
+        </table>
 
 
 
     <h3>See also:</h3>
-    <ul>
-         <a href="../declarative_rules/ruled.client.html#">ruled.client</a>
-    </ul>
+    <table class="see_also">
+     <tr>
+         <td><a href="../declarative_rules/ruled.client.html#" title="In the ruled.client module.">ruled.client</a></td>
+         <td>Apply properties to a new client based on pre-determined rules. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+    </table>
 
 
 
-    <span id=item2346 class="hide_extra">
+    <span id=item365 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a name = "awful.spawn.raise_or_spawn"></a>
-    <strong><span class='function_modname'>awful.spawn.</span>raise_or_spawn <span class='function_args'> <b>(</b>cmd, rules[, matcher[, unique_id[, callback]]]<b>)</b></span></strong>
+    <a class="copy-link js-copy-link" name="awful.spawn.raise_or_spawn" href="#awful.spawn.raise_or_spawn">&#128279;</a>
+    <strong><span class='function_modname'>awful.spawn.</span>raise_or_spawn <span class='function_args'> <b>(</b>cmd, rules, <span class="optional_param">matcher</span>, <span class="optional_param">unique_id</span>, <span class="optional_param">callback</span><b>)</b></span></strong>
     <span class="proptype"><span class='summary_type'> -&gt;&nbsp;client</span></span>
     <span class="baseclass" >
          &middot 1 permission
@@ -1135,33 +1299,46 @@ awesome-client <span class="string">'awful=require("awful");
  Note that this also won't work with shell or terminal commands.
 
     <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cmd</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The command.
-        </li>
-        <li><span class="parameter">rules</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The properties that need to be applied to the client.
-        </li>
-        <li><span class="parameter">matcher</span>
-            <span class="types"><span class="type">function</span></span>
-         A matching function to find the instance
-  among running clients.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">unique_id</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         A string to identify the client so it isn't executed
-  multiple time.
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">callback</span>
-            <span class="types"><span class="type">function</span></span>
-         A callback function when the client is created.
-         (<em>optional</em>)
-        </li>
-    </ul>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">cmd</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The command.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">rules</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The properties that need to be applied to the client.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">matcher</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> A matching function to find the instance
+  among running clients.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">unique_id</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> A string to identify the client so it isn't executed
+  multiple time.</td>
+         </tr>
+         <tr>
+           <td><span class="parameter">callback</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">function</span></span></td>
+           <td class="see_also_description"> A callback function when the client is created.</td>
+         </tr>
+        </table>
 
     <h3>Returns:</h3>
     <ol>
@@ -1172,19 +1349,25 @@ awesome-client <span class="string">'awful=require("awful");
 
 
     <h3>See also:</h3>
-    <ul>
-         <a href="../declarative_rules/ruled.client.html#">ruled.client</a>
-    </ul>
+    <table class="see_also">
+     <tr>
+         <td><a href="../declarative_rules/ruled.client.html#" title="In the ruled.client module.">ruled.client</a></td>
+         <td>Apply properties to a new client based on pre-determined rules. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+    </table>
 
 
      <br />
-     <center id=button2347>
-     <a class="show_more_button" onclick="show_extra('2347')">
+     <center id=button366>
+     <a class="show_more_button" onclick="show_extra('366')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2347 class="hide_extra">
+    <span id=item366 class="hide_extra">
      <h3>Requested actions or permissions:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -1195,6 +1378,7 @@ awesome-client <span class="string">'awful=require("awful");
            <th>Description</th>
          </tr>
           <tr><td>client</td><td>activate</td><td>spawn.raise_or_spawn</td><td>granted</td><td>Activate a client when <a href="../libraries/awful.spawn.html#awful.spawn.raise_or_spawn">awful.spawn.raise_or_spawn</a> is called and the client exists.</td></tr>
+
      </table>
     </span>
 
@@ -1208,5 +1392,78 @@ awesome-client <span class="string">'awful=require("awful");
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
+
+<script defer type="text/javascript">
+    const $nav = document.querySelector("#navigation");
+
+    // When clicking the sidebar, open it
+    $nav.addEventListener("click", function(ev) {
+        if (document.body.clientWidth >= 768) {
+            return;
+        }
+
+        const target = $nav;
+        if (!target.classList.contains("open")) {
+            target.classList.add("open");
+            ev.stopPropagation();
+        }
+    });
+
+    // When clicking anywhere else than the sidebar, close it
+    document.querySelector("body").addEventListener("click", function(ev) {
+        if (document.body.clientWidth >= 768 || ev.target.contains($nav)) {
+            return;
+        }
+
+        const target = $nav;
+        if (target.classList.contains("open")) {
+            target.classList.remove("open");
+        }
+    });
+
+    const copyResultClasses = {
+        success : "copy-link--success",
+        failure: "copy-link--failure"
+    };
+
+    const removeCopyResultClasses = ($target) =>
+        Object.values(copyResultClasses).forEach(c => $target.classList.remove(c));
+
+    document.querySelectorAll(".js-copy-link").forEach(copyLink => {
+        copyLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            const $target = e.target;
+
+            removeCopyResultClasses($target);
+
+            let link = $target.href;
+            if (!link) {
+                return;
+            }
+            if (link.startsWith("#")) {
+                const curr = window.location.pathname;
+                link = curr.substring(0, curr.indexOf("#")) + link;
+            }
+
+            // We need to create a fake element to copy the text from
+            const fakeElement = document.createElement("textarea");
+            fakeElement.value = link;
+            document.body.appendChild(fakeElement);
+            fakeElement.select();
+
+            let success = false;
+            try {
+                success = document.execCommand("copy");
+            } catch(err) {
+                success = false;
+            }
+
+            fakeElement.remove();
+            $target.classList.add(success ? copyResultClasses.success : copyResultClasses.failure);
+            setInterval(() => removeCopyResultClasses($target), 1500);
+        });
+    });
+</script>
+
 </body>
 </html>
