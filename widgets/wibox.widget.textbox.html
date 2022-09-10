@@ -40,6 +40,7 @@
 <li><a href="#Constructors">Constructors</a></li>
 <li><a href="#Static_module_functions">Static module functions</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
+<li><a href="#Deprecated_object_properties">Deprecated object properties</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
 <li><a href="#Signals">Signals</a></li>
 </ul>
@@ -225,7 +226,7 @@
     <ul>
         <pre class="example">wibox.widget{
     markup = &quot;This &lt;i&gt;is&lt;/i&gt; a &lt;b&gt;textbox&lt;/b&gt;!!!&quot;,
-    align  = &quot;center&quot;,
+    halign = &quot;center&quot;,
     valign = &quot;center&quot;,
     widget = wibox.widget.textbox
 }
@@ -351,7 +352,7 @@
       </td>
     </tr>
     <tr class="summary_row">
-      <td class="shortname" ><a href="#align">align</a></td>
+      <td class="shortname" ><a href="#halign">halign</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
         The horizontal text alignment.
@@ -364,6 +365,33 @@
       <td class="summarytype" nowrap><span class='summary_type'>font</span></td>
       <td class="summary">
         Set a textbox font.
+      </td>
+      <td class="baseclass" nowrap>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#line_spacing_factor">line_spacing_factor</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
+      <td class="summary">
+        Set the distance between the lines.
+      </td>
+      <td class="baseclass" nowrap>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#justify">justify</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summary">
+        Justify the text when there is more space.
+      </td>
+      <td class="baseclass" nowrap>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#indent">indent</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">
+        How to indent text with multiple lines.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -436,6 +464,19 @@
       </td>
       <td class="baseclass" nowrap>
         <span class="chips">Inherited from wibox.widget.base</span>
+      </td>
+    </tr>
+</table>
+<h2><a href="#Deprecated_object_properties">Deprecated object properties</a></h2>
+<table class="function_list">
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#align">align</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
+      <td class="summary">
+        The horizontal text alignment.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
       </td>
     </tr>
 </table>
@@ -1277,8 +1318,8 @@ widget{
 
 </dd>
     <dt>
-    <a class="copy-link js-copy-link" name="align" href="#align">&#128279;</a>
-    <strong>align</strong>
+    <a class="copy-link js-copy-link" name="halign" href="#halign">&#128279;</a>
+    <strong>halign</strong>
     <span class="proptype"><span class='summary_type'>string</span></span>
     <span class="baseclass" >
          &middot 1 signal
@@ -1343,7 +1384,7 @@ widget{
     <ul>
         <pre class="example"><span class="keyword">for</span> _, align <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">"left"</span>, <span class="string">"center"</span>, <span class="string">"right"</span>} <span class="keyword">do</span>
     <span class="keyword">local</span> w = wibox.widget {
-        align  = align,
+        halign = align,
         text   = <span class="string">"some text"</span>,
         widget = wibox.widget.textbox,
     }
@@ -1360,10 +1401,10 @@ widget{
     <span id=item2258 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
-          <li><span class="parameter"><code>property::align</code></span>  When the <a href="../widgets/wibox.widget.textbox.html#align">align</a> value changes.</li>
+          <li><span class="parameter"><code>property::halign</code></span>  When the <a href="../widgets/wibox.widget.textbox.html#halign">halign</a> value changes.</li>
            <ul>
              <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
-             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#align">align</a></span> The new value affected to the property.</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#halign">halign</a></span> The new value affected to the property.</li>
            </ul>
 
      </ul>
@@ -1550,6 +1591,273 @@ end
           <tr><td><a href="../theme_related_libraries/beautiful.html#beautiful.font">beautiful.font</a></td><td></td></tr>
 
      </table>
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="line_spacing_factor" href="#line_spacing_factor">&#128279;</a>
+    <strong>line_spacing_factor</strong>
+    <span class="proptype"><span class='summary_type'>number <i>or</i> nil</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Set the distance between the lines. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_line_spacing.svg" alt="Usage example" type="image/svg+xml"></object>
+
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: <code>nil</code></td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Type description:
+         </i>
+        </td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>nil</span>
+         </i>
+        </td>
+        <td>: Automatic (most probably <code>1.0</code>).</td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Unit
+         </i>
+        </td>
+        <td>:  Distance between lines as a ratio of the line height. <code>1.0</code> means
+  no spacing. Less than <code>1.0</code> will squash the lines and more than <code>1.0</code> will move
+  them further apart.</td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Negative allowed
+         </i>
+        </td>
+        <td>: false</td>
+       <tr/>
+     </table>
+    </span>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, spacing <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="number">0.0</span>, <span class="number">0.1</span>, <span class="number">0.5</span>, <span class="number">0.9</span>, <span class="number">1</span>, <span class="number">1.5</span>, <span class="number">2.0</span>, <span class="number">2.5</span>} <span class="keyword">do</span>
+    <span class="keyword">local</span> text = <span class="string">"This text shas a line\nspacing of "</span>..<span class="global">tostring</span>(spacing).. <span class="string">"\nunits."</span>
+
+    widget{
+        text                = text,
+        font                = <span class="string">"sans 10"</span>,
+        line_spacing_factor = spacing,
+        widget              = wibox.widget.textbox,
+    }
+<span class="keyword">end</span>
+
+Please note that the Pango version (one of AwesomeWM dependency) must be at
+least <span class="number">1.44</span> <span class="keyword">for</span> this to work.</pre>
+    </ul>
+
+     <br />
+     <center id=button2260>
+     <a class="show_more_button" onclick="show_extra('2260')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item2260 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::line_spacing_factor</code></span>  When the <a href="../widgets/wibox.widget.textbox.html#line_spacing_factor">line_spacing_factor</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#line_spacing_factor">line_spacing_factor</a></span> The new value affected to the property.</li>
+           </ul>
+
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="justify" href="#justify">&#128279;</a>
+    <strong>justify</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Justify the text when there is more space. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_justify.svg" alt="Usage example" type="image/svg+xml"></object>
+
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: <code>false</code></td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Valid values
+         </i>
+        </td>
+        <td>: <code>true</code> or <code>false</code>.</td>
+       <tr/>
+     </table>
+    </span>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> lorem_ipsum = <span class="string">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed "</span>..
+    <span class="string">"do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad "</span>..
+    <span class="string">"minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex "</span>..
+    <span class="string">"ea commodo consequat."</span>
+
+widget{
+    text    = lorem_ipsum,
+    justify = <span class="keyword">false</span>,
+    widget  = wibox.widget.textbox,
+}
+
+widget{
+    text    = lorem_ipsum,
+    justify = <span class="keyword">true</span>,
+    widget  = wibox.widget.textbox,
+}</pre>
+    </ul>
+
+     <br />
+     <center id=button2261>
+     <a class="show_more_button" onclick="show_extra('2261')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item2261 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::justify</code></span>  When the <a href="../widgets/wibox.widget.textbox.html#justify">justify</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#justify">justify</a></span> The new value affected to the property.</li>
+           </ul>
+
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="indent" href="#indent">&#128279;</a>
+    <strong>indent</strong>
+    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    How to indent text with multiple lines. </p>
+
+<p> Note that this does nothing if <code>align == &quot;center&quot;</code>.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_indent.svg" alt="Usage example" type="image/svg+xml"></object>
+
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: <code>0.0</code></td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Unit
+         </i>
+        </td>
+        <td>: points</td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Negative allowed
+         </i>
+        </td>
+        <td>: true</td>
+       <tr/>
+     </table>
+    </span>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> lorem_ipsum = <span class="string">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed "</span>..
+    <span class="string">"do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad "</span>..
+    <span class="string">"minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex "</span>..
+    <span class="string">"ea commodo consequat."</span>
+<span class="keyword">for</span> _, indent <span class="keyword">in</span> <span class="global">ipairs</span> { -<span class="number">10</span>, <span class="number">0</span>, <span class="number">10</span> } <span class="keyword">do</span>
+    widget{
+        text   = lorem_ipsum,
+        indent = indent,
+        widget = wibox.widget.textbox,
+    }
+<span class="keyword">end</span></pre>
+    </ul>
+
+     <br />
+     <center id=button2262>
+     <a class="show_more_button" onclick="show_extra('2262')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item2262 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::indent</code></span>  When the <a href="../widgets/wibox.widget.textbox.html#indent">indent</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#indent">indent</a></span> The new value affected to the property.</li>
+           </ul>
+
+     </ul>
     </span>
 
 </dd>
@@ -2002,6 +2310,48 @@ end
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Deprecated_object_properties"></a>Deprecated object properties</h2>
+
+    <dl class="function">
+    <dt>
+    <a class="copy-link js-copy-link" name="align" href="#align">&#128279;</a>
+    <strong>align</strong>
+    <span class="proptype"><span class='summary_type'>string</span></span>
+    <span class="baseclass" >
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    The horizontal text alignment. </p>
+
+<p> Renamed to <a href="../widgets/wibox.widget.textbox.html#halign">halign</a> for consistency with other APIs.
+
+
+
+
+
+
+     <br />
+     <center id=button2263>
+     <a class="show_more_button" onclick="show_extra('2263')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item2263 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::align</code></span>  When the <a href="../widgets/wibox.widget.textbox.html#align">align</a> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><a href="../widgets/wibox.widget.textbox.html#align">align</a></span> The new value affected to the property.</li>
+           </ul>
+
+     </ul>
+    </span>
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Object_methods"></a>Object methods </h2>
 
     <dl class="function">
@@ -2048,7 +2398,7 @@ end
 
 
 
-    <span id=item2260 class="hide_extra">
+    <span id=item2264 class="hide_extra">
     </span>
 
 </dd>
@@ -2098,7 +2448,7 @@ end
 
 
 
-    <span id=item2261 class="hide_extra">
+    <span id=item2265 class="hide_extra">
     </span>
 
 </dd>
@@ -2145,7 +2495,7 @@ end
 
 
 
-    <span id=item2262 class="hide_extra">
+    <span id=item2266 class="hide_extra">
     </span>
 
 </dd>
@@ -2195,7 +2545,7 @@ end
 
 
 
-    <span id=item2263 class="hide_extra">
+    <span id=item2267 class="hide_extra">
     </span>
 
 </dd>
@@ -2248,7 +2598,7 @@ end
 
 
 
-    <span id=item2264 class="hide_extra">
+    <span id=item2268 class="hide_extra">
     </span>
 
 </dd>
