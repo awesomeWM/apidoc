@@ -222,72 +222,58 @@
 <h1>Module: <code>awful.hotkeys_popup.widget</code></h1>
 <p>Popup widget which shows current hotkeys and their descriptions.</p>
 <p>
-
-
 <p> It's easy to add hotkeys for your favorite application. Below is how to add
- hotkeys for firefox to the previously created <code>hotkeys_popup</code> in <a href="../sample files/rc.lua.html#">rc.lua</a>.</p>
-
-
-<pre>
-<span class="comment">-- Create the rule that we will use to match for the application.
-</span><span class="keyword">local</span> fire_rule = { class = { <span class="string">"firefox"</span>, <span class="string">"Firefox"</span> } }
-<span class="keyword">for</span> group_name, group_data <span class="keyword">in</span> <span class="global">pairs</span>({
-    [<span class="string">"Firefox: tabs"</span>] = { color = <span class="string">"#009F00"</span>, rule_any = fire_rule }
-}) <span class="keyword">do</span>
-    hotkeys_popup.add_group_rules(group_name, group_data)
-<span class="keyword">end</span>
-
-<span class="comment">-- Table with all of our hotkeys
-</span><span class="keyword">local</span> firefox_keys = {
-
-    [<span class="string">"Firefox: tabs"</span>] = {{
-        modifiers = { <span class="string">"Mod1"</span> },
-        keys = {
-            [<span class="string">"1..9"</span>] = <span class="string">"go to tab"</span>
-        }
-    }, {
-        modifiers = { <span class="string">"Ctrl"</span> },
-        keys = {
-            t = <span class="string">"new tab"</span>,
-            w = <span class="string">'close tab'</span>,
-            [<span class="string">'Tab'</span>] = <span class="string">"next tab"</span>
-        }
-    }, {
-        modifiers = { <span class="string">"Ctrl"</span>, <span class="string">"Shift"</span> },
-        keys = {
-          [<span class="string">'Tab'</span>] = <span class="string">"previous tab"</span>
-        }
-    }}
-}
-
-hotkeys_popup.add_hotkeys(firefox_keys)
-</pre>
-
-<p> Example of having different types of hotkey popups:</p>
-
-
-<pre>
-awful.keyboard.append_global_keybindings({
-    awful.key({modkey}, <span class="string">"/"</span>, <span class="keyword">function</span>()
-      hotkeys_popup.show_help()
-    <span class="keyword">end</span>, <span class="keyword">nil</span>, {
-      description = <span class="string">"show help (all)"</span>, group=<span class="string">"HELP"</span>
-    }),
-    awful.key({<span class="string">"Shift"</span>, modkey}, <span class="string">"/"</span>, <span class="keyword">function</span>()
-      hotkeys_popup.show_help(<span class="keyword">nil</span>, <span class="keyword">nil</span>, {show_awesome_keys=<span class="keyword">false</span>})
-    <span class="keyword">end</span>, <span class="keyword">nil</span>, {
-      description = <span class="string">"show help for current app"</span>, group=<span class="string">"HELP"</span>
-    }),
-    awful.key({altkey, modkey}, <span class="string">"/"</span>, <span class="keyword">function</span>()
-      hotkeys_popup.show_help({}, <span class="keyword">nil</span>, {show_awesome_keys=<span class="keyword">true</span>})
-    <span class="keyword">end</span>, <span class="keyword">nil</span>, {
-      description = <span class="string">"show help for awesome only"</span>, group=<span class="string">"HELP"</span>
+ hotkeys for firefox to the previously created <code>hotkeys_popup</code> in <a href="../sample files/rc.lua.html#">rc.lua</a>.
+<p>    -- Create the rule that we will use to match for the application.
+    local fire_rule = { class = { "firefox", "Firefox" } }
+    for group_name, group_data in pairs({
+        ["Firefox: tabs"] = { color = "#009F00", rule_any = fire_rule }
+    }) do
+        hotkeys_popup.add_group_rules(group_name, group_data)
+    end
+<p>    -- Table with all of our hotkeys
+    local firefox_keys = {
+<p>        ["Firefox: tabs"] = {{
+            modifiers = { "Mod1" },
+            keys = {
+                ["1..9"] = "go to tab"
+            }
+        }, {
+            modifiers = { "Ctrl" },
+            keys = {
+                t = "new tab",
+                w = 'close tab',
+                ['Tab'] = "next tab"
+            }
+        }, {
+            modifiers = { "Ctrl", "Shift" },
+            keys = {
+              ['Tab'] = "previous tab"
+            }
+        }}
+    }
+<p>    hotkeys_popup.add_hotkeys(firefox_keys)
+<p>
+ Example of having different types of hotkey popups:
+<p>    awful.keyboard.append_global_keybindings({
+        awful.key({modkey}, "/", function()
+          hotkeys_popup.show_help()
+        end, nil, {
+          description = "show help (all)", group="HELP"
+        }),
+        awful.key({"Shift", modkey}, "/", function()
+          hotkeys_popup.show_help(nil, nil, {show_awesome_keys=false})
+        end, nil, {
+          description = "show help for current app", group="HELP"
+        }),
+        awful.key({altkey, modkey}, "/", function()
+          hotkeys_popup.show_help({}, nil, {show_awesome_keys=true})
+        end, nil, {
+          description = "show help for awesome only", group="HELP"
+        })
+        -- (more hotkeys go here)
     })
-    <span class="comment">-- (more hotkeys go here)
-</span>})
-</pre>
-
-</p>
+<p></p>
     <div class="extra-header">
 
 
@@ -1417,396 +1403,308 @@ awful.keyboard.append_global_keybindings({
            <td><span class="parameter">Control</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Ctrl"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Mod1</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Alt"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">ISO_Level3_Shift</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Alt Gr"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Mod4</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Super"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Insert</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Ins"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Delete</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Del"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Next</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"PgDn"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Prior</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"PgUp"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Left</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"←"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Up</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"↑"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Right</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"→"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Down</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"↓"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_End</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num1"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Down</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num2"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Next</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num3"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Left</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num4"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Begin</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num5"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Right</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num6"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Home</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num7"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Up</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num8"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Prior</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num9"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Insert</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num0"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Delete</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num."</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Divide</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num/"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Multiply</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num*"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Subtract</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num-"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Add</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Num+"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">KP_Enter</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"NumEnter"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Escape</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Esc"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Tab</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Tab"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">space</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Space"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">Return</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"Enter"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">dead_acute</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"´"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">dead_circumflex</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"^"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">dead_grave</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"`"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">XF86MonBrightnessUp</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"🔆+"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">XF86MonBrightnessDown</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"🔅-"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">XF86AudioRaiseVolume</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"🕩+"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">XF86AudioLowerVolume</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"🕩-"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">XF86AudioMute</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"🔇"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">XF86AudioPlay</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"⏯"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">XF86AudioPrev</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"⏮"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">XF86AudioNext</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"⏭"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">XF86AudioStop</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"⏹"</code></span></td>
          </tr>
         </table>
@@ -1853,8 +1751,7 @@ awful.keyboard.append_global_keybindings({
     </dt>
     <dd>
     Merge hotkey records into one if they have the same modifiers and
- description.  Records with five or more keys will abbreviate them.</p>
-
+ description.  Records with five or more keys will abbreviate them.
 <p> This property only affects hotkey records added via <a href="../input_handling/awful.key.html#">awful.key</a> keybindings.
  Cheatsheets for external programs are static and will present merged records
  regardless of the value of this property.

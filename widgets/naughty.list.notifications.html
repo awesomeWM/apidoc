@@ -221,90 +221,88 @@
 
 <h1>Module: <code>naughty.list.notifications</code></h1>
 <p>Get a list of all currently active notifications.</p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_notification_notificationlist_bottombar.svg" alt="Usage example" type="image/svg+xml"></object></p>
+<p>
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_notification_notificationlist_bottombar.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
+     -- This awful.wibar will be placed at the bottom and contain the notifications.
+     local notif_wb = awful.wibar {
+         position = "bottom",
+         height   = 48,
+         visible  = #naughty.active > 0,
+     }
 
+     notif_wb:setup {
+         nil,
+         {
+             base_layout = wibox.widget {
+                 spacing_widget = wibox.widget {
+                     orientation = "vertical",
+                     span_ratio  = 0.5,
+                     widget      = wibox.widget.separator,
+                 },
+                 forced_height = 30,
+                 spacing       = 3,
+                 layout        = wibox.layout.flex.horizontal
+             },
+             widget_template = {
+                 {
+                     naughty.widget.icon,
+                     {
+                         naughty.widget.title,
+                         naughty.widget.message,
+                         {
+                             layout = wibox.widget {
+                                 -- Adding the <a href="../libraries/wibox.widget.html#">wibox.widget</a> allows to share a
+                                 -- single instance for all spacers.
+                                 spacing_widget = wibox.widget {
+                                     orientation = "vertical",
+                                     span_ratio  = 0.9,
+                                     widget      = wibox.widget.separator,
+                                 },
+                                 spacing = 3,
+                                 layout  = wibox.layout.flex.horizontal
+                             },
+                             widget = naughty.list.widgets,
+                         },
+                         layout = wibox.layout.align.vertical
+                     },
+                     spacing = 10,
+                     fill_space = true,
+                     layout  = wibox.layout.fixed.horizontal
+                 },
+                 margins = 5,
+                 widget  = wibox.container.margin
+             },
+             widget = naughty.list.notifications,
+         },
+         -- Add a button to dismiss all notifications, because why not.
+         {
+             {
+                 text   = "Dismiss all",
+                 halign = "center",
+                 valign = "center",
+                 widget = wibox.widget.textbox
+             },
+             buttons = gears.table.join(
+                 awful.button({ }, 1, function() naughty.destroy_all_notifications() end)
+             ),
+             forced_width       = 75,
+             shape              = gears.shape.rounded_bar,
+             shape_border_width = 1,
+             shape_border_color = beautiful.bg_highlight,
+             widget = wibox.container.background
+         },
+         layout = wibox.layout.align.horizontal
+     }
 
-
-<pre>
-<span class="comment">-- This awful.wibar will be placed at the bottom and contain the notifications.
-</span><span class="keyword">local</span> notif_wb = awful.wibar {
-    position = <span class="string">"bottom"</span>,
-    height   = <span class="number">48</span>,
-    visible  = #naughty.active &gt; <span class="number">0</span>,
-}
-
-notif_wb:setup {
-    <span class="keyword">nil</span>,
-    {
-        base_layout = wibox.widget {
-            spacing_widget = wibox.widget {
-                orientation = <span class="string">"vertical"</span>,
-                span_ratio  = <span class="number">0.5</span>,
-                widget      = wibox.widget.separator,
-            },
-            forced_height = <span class="number">30</span>,
-            spacing       = <span class="number">3</span>,
-            layout        = wibox.layout.flex.horizontal
-        },
-        widget_template = {
-            {
-                naughty.widget.icon,
-                {
-                    naughty.widget.title,
-                    naughty.widget.message,
-                    {
-                        layout = wibox.widget {
-                            <span class="comment">-- Adding the <a href="../libraries/wibox.widget.html#">wibox.widget</a> allows to share a
-</span>                            <span class="comment">-- single instance for all spacers.
-</span>                            spacing_widget = wibox.widget {
-                                orientation = <span class="string">"vertical"</span>,
-                                span_ratio  = <span class="number">0.9</span>,
-                                widget      = wibox.widget.separator,
-                            },
-                            spacing = <span class="number">3</span>,
-                            layout  = wibox.layout.flex.horizontal
-                        },
-                        widget = naughty.list.widgets,
-                    },
-                    layout = wibox.layout.align.vertical
-                },
-                spacing = <span class="number">10</span>,
-                fill_space = <span class="keyword">true</span>,
-                layout  = wibox.layout.fixed.horizontal
-            },
-            margins = <span class="number">5</span>,
-            widget  = wibox.container.margin
-        },
-        widget = naughty.list.notifications,
-    },
-    <span class="comment">-- Add a button to dismiss all notifications, because why not.
-</span>    {
-        {
-            text   = <span class="string">"Dismiss all"</span>,
-            halign = <span class="string">"center"</span>,
-            valign = <span class="string">"center"</span>,
-            widget = wibox.widget.textbox
-        },
-        buttons = gears.<span class="global">table</span>.join(
-            awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>() naughty.destroy_all_notifications() <span class="keyword">end</span>)
-        ),
-        forced_width       = <span class="number">75</span>,
-        shape              = gears.shape.rounded_bar,
-        shape_border_width = <span class="number">1</span>,
-        shape_border_color = beautiful.bg_highlight,
-        widget = wibox.container.background
-    },
-    layout = wibox.layout.align.horizontal
-}
-
-<span class="comment">-- We don't want to have that bar all the time, only when there is content.
-</span>naughty.connect_signal(<span class="string">"property::active"</span>, <span class="keyword">function</span>()
-    notif_wb.visible = #naughty.active &gt; <span class="number">0</span>
-<span class="keyword">end</span>)
-</pre>
-
-<p> require("gears.timer").run<em>delayed</em>calls_now()</p>
+     -- We don't want to have that bar all the time, only when there is content.
+     naughty.connect_signal("property::active", function()
+         notif_wb.visible = #naughty.active > 0
+     end)
+ require("gears.timer").run_delayed_calls_now()
+</p>
     <div class="extra-header">
   <div class="extra-header__section">
     <h3>Class Hierarchy</h3>
@@ -833,9 +831,7 @@ notif_wb:setup {
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">base_layout</span></td>
@@ -859,105 +855,79 @@ notif_wb:setup {
            <td><span class="parameter">style.shape_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.shape</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.shape</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_color_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_color_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.icon_size</span></td>
            <td></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.fg_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.fg_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bgimage_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bgimage_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">widget_template</span></td>
@@ -1056,10 +1026,10 @@ notif_wb:setup {
     </span>
     </dt>
     <dd>
-    A <code>wibox.layout</code> to be used to place the entries. </p>
-
+    A <code>wibox.layout</code> to be used to place the entries.
 <p> If no layout is specified, a <a href="../widget_layouts/wibox.layout.flex.html#horizontal">wibox.layout.flex.horizontal</a> will be created
  automatically.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1181,7 +1151,7 @@ notif_wb:setup {
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A table containing a widget tree definition. WARNING: This is really a table and <strong>NOT</strong> a widget object. Use the <code>widget = come.class.here</code> to define the topmost class rather than construct an instance.</td>
+        <td>: A table containing a widget tree definition. WARNING: This is really a table and **NOT** a widget object. Use the <code>widget = come.class.here</code> to define the topmost class rather than construct an instance.</td>
        <tr/>
      </table>
     </span>
@@ -1803,8 +1773,7 @@ notif_wb:setup {
     </span>
     </dt>
     <dd>
-    The widget buttons. </p>
-
+    The widget buttons.
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>
@@ -1947,12 +1916,10 @@ notif_wb:setup {
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly. </p>
-
+    Connect to a signal weakly.
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.</p>
-
-<p> <strong>Warning:</strong>
+ automatically disconnects the signal when that happens.
+<p> **Warning:**
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -2032,26 +1999,19 @@ notif_wb:setup {
     </span>
     </dt>
     <dd>
-
-<p>Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal. </p>
-
+    Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.</p>
-
-<p> Note that this function has some flaws:</p>
-
-<ol>
-    <li>The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.
+<p> Note that this function has some flaws:
+<p> 1. The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.</li>
-    <li>In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.
+ 2. In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).</li>
-    <li>If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.</li>
-</ol>
-
+    tree path).
+ 3. If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.
 
 
     <h3>Parameters:</h3>
@@ -2066,9 +2026,7 @@ notif_wb:setup {
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>
@@ -2773,14 +2731,9 @@ notif_wb:setup {
     </span>
     </dt>
     <dd>
-
-<p>Only get the most recent notification(s). </p>
-
-<p> To set the count, the function needs to be wrapped:</p>
-
-<pre><code>filter = function(n) return naughty.list.notifications.filter.most_recent(n, 3) end
-</code></pre>
-
+    Only get the most recent notification(s).
+<p> To set the count, the function needs to be wrapped:
+<p>    filter = function(n) return naughty.list.notifications.filter.most_recent(n, 3) end
 
 
     <table class="see_also">

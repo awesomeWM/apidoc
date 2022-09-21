@@ -223,33 +223,24 @@
 
 <h1>Module: <code>screen</code></h1>
 <p>A physical or virtual screen object.</p>
+<p>
 <p> Screen objects can be added and removed over time. To get a callback for all
- current and future screens, use <a href="../core_components/screen.html#awful.screen.connect_for_each_screen">awful.screen.connect_for_each_screen</a>:</p>
-
-
-<pre>
-awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
-    <span class="comment">-- do something
-</span><span class="keyword">end</span>)
-</pre>
-
-<p> It is also possible loop over all current screens using:</p>
-
-
-<pre>
-<span class="keyword">for</span> s <span class="keyword">in</span> screen <span class="keyword">do</span>
-    <span class="comment">-- do something
-</span><span class="keyword">end</span>
-</pre>
-
+ current and future screens, use <a href="../core_components/screen.html#awful.screen.connect_for_each_screen">awful.screen.connect_for_each_screen</a>:
+<p>    awful.screen.connect_for_each_screen(function(s)
+        -- do something
+    end)
+<p> It is also possible loop over all current screens using:
+<p>    for s in screen do
+        -- do something
+    end
 <p> Most basic Awesome objects also have a screen property, see <a href="../input_handling/mouse.html#screen">mouse.screen</a>
- <a href="../core_components/client.html#screen">client.screen</a>, <a href="../popups_and_bars/wibox.html#screen">wibox.screen</a> and <a href="../core_components/tag.html#screen">tag.screen</a>.</p>
+ <a href="../core_components/client.html#screen">client.screen</a>, <a href="../popups_and_bars/wibox.html#screen">wibox.screen</a> and <a href="../core_components/tag.html#screen">tag.screen</a>.
+<p>
 
-
-
-<p> <object class="img-object" data="../images/AUTOGEN_uml_nav_tables_screen.svg" alt="Usage example" type="image/svg+xml"></object></p>
-<h1> Core components relationship</h1>
-<p> <div class="components-relationship"><div class="components-relationship--diagrams">
+ <object class="img-object" data="../images/AUTOGEN_uml_nav_tables_screen.svg" alt="Usage example" type="image/svg+xml"></object>
+ Core components relationship
+ ===
+ <div class="components-relationship"><div class="components-relationship--diagrams">
  <div class="components-relationship--diagram"><table class='widget_list' border=1><colgroup span="3"></colgroup><tr><th align='center' colspan=3 scope=colgroup>Acquire other objects from a screen</th></tr><tr style='font-weight: bold;'><th align='center'>Class</th><th align='center'></th><th align='center'>Property</th></tr>
  <tr><td>tag</td><td><img src="../images/AUTOGEN_uml_nav_tables_screen1.svg"></td><td>s.tags</td></tr>
  <tr><td>tag</td><td><img src="../images/AUTOGEN_uml_nav_tables_screen2.svg"></td><td>s.selected_tag</td></tr>
@@ -263,9 +254,10 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
  <tr><td>client</td><td><img src="../images/AUTOGEN_uml_nav_tables_screen8.svg"></td><td>c.screen</td></tr>
  <tr><td>naughty.notification</td><td><img src="../images/AUTOGEN_uml_nav_tables_screen9.svg"></td><td>n.screen</td></tr>
  </table></div>
- </div><div class="components-relationship--legend"><b>Legend:</b> <i>c</i>: a client object, <i>t</i>: a tag object, <i>s</i>: a screen object, <i>k</i>: an awful.key object, <i>b</i>: a awful.button object,<i>n</i>: a naughty.notification object</div></div> <!-- .components-relationship --></p>
+ </div><div class="components-relationship--legend"><b>Legend:</b> <i>c</i>: a client object, <i>t</i>: a tag object, <i>s</i>: a screen object, <i>k</i>: an awful.key object, <i>b</i>: a awful.button object,<i>n</i>: a naughty.notification object</div></div> <!-- .components-relationship -->
 
-<p> </p>
+
+</p>
     <div class="extra-header">
 
 
@@ -858,8 +850,6 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
       </td>
       <td class="summary">
 
-
-
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1078,18 +1068,15 @@ awful.screen.connect_for_each_screen(<span class="keyword">function</span>(s)
     </span>
     </dt>
     <dd>
-    Add a fake screen. </p>
-
-<p> To vertically split the first screen in 2 equal parts, use:</p>
-
-<pre><code>local geo = screen[1].geometry
-local new_width = math.ceil(geo.width/2)
-local new_width2 = geo.width - new_width
-screen[1]:fake_resize(geo.x, geo.y, new_width, geo.height)
-screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
-</code></pre>
-
+    Add a fake screen.
+<p> To vertically split the first screen in 2 equal parts, use:
+<p>    local geo = screen[1].geometry
+    local new_width = math.ceil(geo.width/2)
+    local new_width2 = geo.width - new_width
+    screen[1]:fake_resize(geo.x, geo.y, new_width, geo.height)
+    screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
 <p> Both virtual screens will have their own taglist and wibars.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1361,8 +1348,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Return the screen index corresponding to the given (pixel) coordinates. </p>
-
+    Return the screen index corresponding to the given (pixel) coordinates.
 <p> The number returned can be used as an index into the global
  <a href="../core_components/screen.html#">screen</a> table/object.
 
@@ -1412,8 +1398,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Move the focus to a screen. </p>
-
+    Move the focus to a screen.
 <p> This moves the mouse pointer to the last known position on the new screen,
  or keeps its position relative to the current focused screen.
 
@@ -1474,8 +1459,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Move the focus to a screen in a specific direction. </p>
-
+    Move the focus to a screen in a specific direction.
 <p> This moves the mouse pointer to the last known position on the new screen,
  or keeps its position relative to the current focused screen.
 
@@ -1530,6 +1514,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     Move the focus to a screen relative to the current one,  This moves the mouse pointer to the last known position on the new screen,
  or keeps its position relative to the current focused screen.
 
+
     <h3>Parameters:</h3>
     <table class="see_also">
          <tr class="param_header">
@@ -1570,8 +1555,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Get the preferred screen in the context of a client. </p>
-
+    Get the preferred screen in the context of a client.
 <p> This is exactly the same as <a href="../core_components/screen.html#awful.screen.focused">awful.screen.focused</a> except that it avoids
  clients being moved when Awesome is restarted.
  This is used in the default <a href="../sample files/rc.lua.html#">rc.lua</a> to ensure clients get assigned to the
@@ -1616,10 +1600,10 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Get the focused screen. </p>
-
+    Get the focused screen.
 <p> It is possible to set <a href="../core_components/screen.html#awful.screen.default_focused_args">awful.screen.default_focused_args</a> to override the
  default settings.
+
 
     <h3>Parameters:</h3>
         <div class="important_box">
@@ -1642,9 +1626,7 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
            <td><span class="parameter">args</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -1764,25 +1746,21 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Enable the automatic calculation of the screen DPI (experimental). </p>
-
+    Enable the automatic calculation of the screen DPI (experimental).
 <p> This will cause many elements such as the font and some widgets to be scaled
  so they look the same (physical) size on different devices with different
- pixel density.</p>
-
-<p> It is calculated using the information provided from <code>xrandr</code>.</p>
-
+ pixel density.
+<p> It is calculated using the information provided from <code>xrandr</code>.
 <p> When enabled, the theme and configuration must avoid using pixel sizes for
  different elements as this will cause misalignment or hidden content on some
- devices.</p>
-
+ devices.
 <p> Note that it has to be called early in <a href="../sample files/rc.lua.html#">rc.lua</a> and requires restarting
  awesome to take effect. It is disabled by default and changes introduced in
  minor releases of Awesome may slightly break the behavior as more components
- gain support for HiDPI.</p>
-
+ gain support for HiDPI.
 <p> When disabled the DPI is acquired from the <code>Xft.dpi</code> X resource (xrdb),
  defaulting to 96.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1823,13 +1801,13 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    The screen coordinates. </p>
+    The screen coordinates.
+<p> The returned table contains the <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code> keys.
+<p>
 
-<p> The returned table contains the <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code> keys.</p>
+ <object class="img-object" data="../images/AUTOGEN_screen_geometry.svg" alt="Usage example" type="image/svg+xml"></object>
 
 
-
-<p> <object class="img-object" data="../images/AUTOGEN_screen_geometry.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1928,36 +1906,22 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-
-<p>The internal screen number. </p>
-
-<ul>
-    <li>The indeces are a continuous sequence from 1 to <code>screen.count()</code>.</li>
-    <li>It is <strong>NOT</strong> related to the actual screen position relative to each
-    other.</li>
-    <li>1 is <strong>NOT</strong> necessarily the primary screen.</li>
-    <li>When screens are added and removed indices <strong>CAN</strong> change.</li>
-</ul>
-
+    The internal screen number.
+<p> * The indeces are a continuous sequence from 1 to <code>screen.count()</code>.
+ * It is **NOT** related to the actual screen position relative to each
+   other.
+ * 1 is **NOT** necessarily the primary screen.
+ * When screens are added and removed indices **CAN** change.
 <p> If you really want to keep an array of screens you should use something
- along:</p>
-
-<pre><code> local myscreens = setmetatable({}. {__mode="k"})
- myscreens[ screen[1] ] = "mydata"
-</code></pre>
-
+ along:
+<p>     local myscreens = setmetatable({}. {__mode="k"})
+     myscreens[ screen[1] ] = "mydata"
 <p> But it might be a better option to simply store the data directly in the
- screen object as:</p>
-
-<pre><code> screen[1].mydata = "mydata"
-</code></pre>
-
+ screen object as:
+<p>     screen[1].mydata = "mydata"
 <p> Remember that screens are also objects, so if you only want to store a simple
- property, you can do it directly:</p>
-
-<pre><code> screen[1].answer = 42
-</code></pre>
-
+ property, you can do it directly:
+<p>     screen[1].answer = 42
 
 
     <h3>Constraints:</h3>
@@ -2012,37 +1976,31 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-
-<p>The screen workarea. </p>
-
+    The screen workarea.
 <p> The workarea is a subsection of the screen where clients can be placed. It
  usually excludes the toolbars (see <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a>) and dockable clients
- (see <a href="../core_components/client.html#dockable">client.dockable</a>) like WindowMaker DockAPP.</p>
+ (see <a href="../core_components/client.html#dockable">client.dockable</a>) like WindowMaker DockAPP.
+<p> It can be modified be altering the <a href="../popups_and_bars/wibox.html#">wibox</a> or <a href="../core_components/client.html#">client</a> struts.
+<p>
 
-<p> It can be modified be altering the <a href="../popups_and_bars/wibox.html#">wibox</a> or <a href="../core_components/client.html#">client</a> struts.</p>
-
-
-
-<p> <object class="img-object" data="../images/AUTOGEN_screen_workarea.svg" alt="Usage example" type="image/svg+xml"></object></p>
+ <object class="img-object" data="../images/AUTOGEN_screen_workarea.svg" alt="Usage example" type="image/svg+xml"></object>
 
 
 
-<pre><code>  -- With a padding, the tiled clients wont use 20px at the top and bottom
-  -- and 40px on the left and right.
-  screen[1].padding = {
-      left   = 40,
-      right  = 40,
-      top    = 20,
-      bottom = 20,
-  }
+      -- With a padding, the tiled clients wont use 20px at the top and bottom
+      -- and 40px on the left and right.
+      screen[1].padding = {
+          left   = 40,
+          right  = 40,
+          top    = 20,
+          bottom = 20,
+      }
 
-  -- This will shift the workarea by 24px at the top.
-  local wibar = awful.wibar {
-      position = "top",
-      height   = 24,
-  }
-</code></pre>
-
+      -- This will shift the workarea by 24px at the top.
+      local wibar = awful.wibar {
+          position = "top",
+          height   = 24,
+      }
 
 
     <h3>Constraints:</h3>
@@ -2153,15 +2111,13 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    The area where clients can be tiled. </p>
-
+    The area where clients can be tiled.
 <p> This property holds the area where clients can be tiled. Use
  the <a href="../core_components/screen.html#padding">padding</a> property, <a href="../popups_and_bars/wibox.html#struts">wibox.struts</a> and <a href="../core_components/client.html#struts">client.struts</a> to modify this
- area.</p>
-
-
-
+ area.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_screen_tiling_area.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2259,12 +2215,11 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-    Take a screenshot of the physical screen. </p>
-
+    Take a screenshot of the physical screen.
 <p> Reading this property returns a screenshot of the physical
- (Xinerama) screen as a cairo surface.</p>
-
+ (Xinerama) screen as a cairo surface.
 <p> Use <code>gears.surface(c.content)</code> to convert the raw content into a static image.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2310,27 +2265,20 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
+    The screen padding.
+<p> This adds a "buffer" section on each side of the screen.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_screen_padding.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
-<p>The screen padding. </p>
-
-<p> This adds a "buffer" section on each side of the screen.</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_screen_padding.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre><code> -- With a padding, the tiled clients wont use 20px at the top and bottom
- -- and 40px on the left and right.
- screen[1].padding = {
-     left   = 40,
-     right  = 40,
-     top    = 20,
-     bottom = 20,
- }
-</code></pre>
-
+     -- With a padding, the tiled clients wont use 20px at the top and bottom
+     -- and 40px on the left and right.
+     screen[1].padding = {
+         left   = 40,
+         right  = 40,
+         top    = 20,
+         bottom = 20,
+     }
 
 
     <h3>Constraints:</h3>
@@ -2465,19 +2413,13 @@ screen.fake_add(geo.x + new_width, geo.y, new_width2, geo.height)
     </span>
     </dt>
     <dd>
-
-<p>A list of outputs for this screen with their size in mm. </p>
-
+    A list of outputs for this screen with their size in mm.
 <p> Please note that the table content may vary. In some case, it might also be
- empty.</p>
-
-<p> An easy way to check if a screen is the laptop screen is usually:</p>
-
-<pre><code>if s.outputs["LVDS-1"] then
-    -- do something
-end
-</code></pre>
-
+ empty.
+<p> An easy way to check if a screen is the laptop screen is usually:
+<p>    if s.outputs["LVDS-1"] then
+        -- do something
+    end
 
 
     <h3>Constraints:</h3>
@@ -2572,16 +2514,14 @@ end
     </span>
     </dt>
     <dd>
-    The list of visible clients for the screen. </p>
-
+    The list of visible clients for the screen.
 <p> Minimized and unmanaged clients are not included in this list as they are
- technically not on the screen.</p>
-
-<p> The clients on tags that are currently not visible are not part of this list.</p>
-
+ technically not on the screen.
+<p> The clients on tags that are currently not visible are not part of this list.
 <p> Clients are returned using the stacking order (from top to bottom).
  See <a href="../core_components/screen.html#get_clients">get_clients</a> if you want them in the order used in the tasklist by
  default.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2654,9 +2594,9 @@ end
     </span>
     </dt>
     <dd>
-    Get the list of clients assigned to the screen but not currently visible. </p>
-
+    Get the list of clients assigned to the screen but not currently visible.
 <p> This includes minimized clients and clients on hidden tags.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2802,19 +2742,14 @@ end
     </span>
     </dt>
     <dd>
-    Tiled clients for the screen. </p>
-
-<p> Same as <a href="../core_components/screen.html#clients">clients</a>, but excluding:</p>
-
-<ul>
-    <li>fullscreen clients</li>
-    <li>maximized clients</li>
-    <li>floating clients</li>
-</ul>
-
-
-
+    Tiled clients for the screen.
+<p> Same as <a href="../core_components/screen.html#clients">clients</a>, but excluding:
+<p> * fullscreen clients
+ * maximized clients
+ * floating clients
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_screen_tiled_clients.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2864,10 +2799,10 @@ end
     </span>
     </dt>
     <dd>
-    A list of all tags on the screen. </p>
-
+    A list of all tags on the screen.
 <p> Use <a href="../core_components/tag.html#screen">tag.screen</a>, <code>awful.tag.add</code>,
  <code>awful.tag.new</code> or <code>t:delete()</code> to alter this list.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3018,13 +2953,13 @@ end
     </span>
     </dt>
     <dd>
-    The number of pixels per inch of the screen. </p>
-
+    The number of pixels per inch of the screen.
 <p> The default DPI comes from the X11 server. In most case, it will be 96. If
  <code>autodpi</code> is set to <code>true</code> on the screen, it will use the least dense dpi
  from the screen outputs. Most of the time, screens only have a single output,
  however it will have two (or more) when "clone mode" is used (eg, when a
  screen is duplicated on a projector).
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3043,7 +2978,7 @@ end
           Unit
          </i>
         </td>
-        <td>: pixel_per_inch</td>
+        <td>: pixel\_per\_inch</td>
        <tr/>
        <tr class="">
         <td style="padding-left:0px;">
@@ -3093,7 +3028,7 @@ end
           Unit
          </i>
         </td>
-        <td>: pixel_per_inch</td>
+        <td>: pixel\_per\_inch</td>
        <tr/>
        <tr class="">
         <td style="padding-left:0px;">
@@ -3143,7 +3078,7 @@ end
           Unit
          </i>
         </td>
-        <td>: pixel_per_inch</td>
+        <td>: pixel\_per\_inch</td>
        <tr/>
        <tr class="">
         <td style="padding-left:0px;">
@@ -3174,10 +3109,10 @@ end
     </span>
     </dt>
     <dd>
-    The preferred DPI from all of the (physical) outputs. </p>
-
+    The preferred DPI from all of the (physical) outputs.
 <p> This is computed by normalizing all output to fill the area, then picking
  the lowest of the resulting virtual DPIs.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3418,11 +3353,10 @@ end
     </span>
     </dt>
     <dd>
-    Remove a screen. </p>
+    Remove a screen.
+<p>
 
-
-
-<p> <object class="img-object" data="../images/AUTOGEN_sequences_screen_fake_remove.svg" alt="Usage example" type="image/svg+xml"></object>
+ <object class="img-object" data="../images/AUTOGEN_sequences_screen_fake_remove.svg" alt="Usage example" type="image/svg+xml"></object>
 
 
 
@@ -3447,14 +3381,12 @@ end
     </span>
     </dt>
     <dd>
-    Resize a screen. </p>
-
+    Resize a screen.
 <p> Calling this will resize the screen even if it no longer matches the viewport
- size.</p>
+ size.
+<p>
 
-
-
-<p> <object class="img-object" data="../images/AUTOGEN_sequences_screen_fake_resize.svg" alt="Usage example" type="image/svg+xml"></object>
+ <object class="img-object" data="../images/AUTOGEN_sequences_screen_fake_resize.svg" alt="Usage example" type="image/svg+xml"></object>
 
 
     <h3>Parameters:</h3>
@@ -3529,11 +3461,10 @@ end
     </span>
     </dt>
     <dd>
-    Swap a screen with another one in global screen list. </p>
+    Swap a screen with another one in global screen list.
+<p>
 
-
-
-<p> <object class="img-object" data="../images/AUTOGEN_sequences_screen_swap.svg" alt="Usage example" type="image/svg+xml"></object>
+ <object class="img-object" data="../images/AUTOGEN_sequences_screen_swap.svg" alt="Usage example" type="image/svg+xml"></object>
 
 
     <h3>Parameters:</h3>
@@ -3620,10 +3551,10 @@ end
     </span>
     </dt>
     <dd>
-    Get the next screen in a specific direction. </p>
-
+    Get the next screen in a specific direction.
 <p> This gets the next screen relative to this one in
  the specified direction.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -3664,9 +3595,9 @@ end
     </span>
     </dt>
     <dd>
-    Get a placement bounding geometry. </p>
-
+    Get a placement bounding geometry.
 <p> This method computes the different variants of the "usable" screen geometry.
+
 
     <h3>Parameters:</h3>
         <div class="important_box">
@@ -3711,8 +3642,8 @@ end
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">int</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
            <td class="see_also_description"> Apply some margins on the output.
-   This can either be a number or a table with <em>left</em>, <em>right</em>, <em>top</em>
-   and <em>bottom</em> keys.</td>
+   This can either be a number or a table with *left*, *right*, *top*
+   and *bottom* keys.</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -3743,7 +3674,7 @@ end
     <ol>
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-        A table with <em>x</em>, <em>y</em>, <em>width</em> and <em>height</em>.
+        A table with *x*, *y*, *width* and *height*.
     </ol>
 
 
@@ -3772,9 +3703,9 @@ end
     </span>
     </dt>
     <dd>
-    Get the list of visible clients for the screen. </p>
-
+    Get the list of visible clients for the screen.
 <p> This is used by <a href="../core_components/screen.html#clients">screen.clients</a> internally (with <code>stacked=true</code>).
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -3817,9 +3748,9 @@ end
     </span>
     </dt>
     <dd>
-    Get all clients assigned to the screen. </p>
-
+    Get all clients assigned to the screen.
 <p> This is used by <a href="../core_components/screen.html#all_clients">all_clients</a> internally (with <code>stacked=true</code>).
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -3862,9 +3793,9 @@ end
     </span>
     </dt>
     <dd>
-    Get tiled clients for the screen. </p>
-
+    Get tiled clients for the screen.
 <p> This is used by <code>tiles_clients</code> internally (with <code>stacked=true</code>).
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -3907,30 +3838,18 @@ end
     </span>
     </dt>
     <dd>
-
-<p>Split the screen into multiple screens. </p>
-
+    Split the screen into multiple screens.
 <p> This is useful to turn ultrawide monitors into something more useful without
- fancy client layouts:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_screen_split1.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<pre><code> screen[1]:split({1/5, 3/5, 1/5})
-</code></pre>
-
-<p> It can also be used to turn a vertical "side" screen into 2 smaller screens:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_screen_split2.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<pre><code> screen[1]:split()
-</code></pre>
-
+ fancy client layouts:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_screen_split1.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     screen[1]:split({1/5, 3/5, 1/5})
+<p> It can also be used to turn a vertical "side" screen into 2 smaller screens:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_screen_split2.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     screen[1]:split()
 
 
     <h3>Parameters:</h3>
@@ -4073,12 +3992,10 @@ end
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly. </p>
-
+    Connect to a signal weakly.
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.</p>
-
-<p> <strong>Warning:</strong>
+ automatically disconnects the signal when that happens.
+<p> **Warning:**
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -4124,16 +4041,15 @@ end
     </span>
     </dt>
     <dd>
-    AwesomeWM is about to scan for existing screens. </p>
-
+    AwesomeWM is about to scan for existing screens.
 <p> Connect to this signal when code needs to be executed after the Lua context
- is initialized and modules are loaded, but before screens are added.</p>
-
+ is initialized and modules are loaded, but before screens are added.
 <p> To manage screens manually, set <code>screen.automatic_factory = false</code> and
  connect to the <a href="../core_components/screen.html#property::viewports">property::viewports</a> signal. It is then possible to use
  <a href="../core_components/screen.html#fake_add">screen.fake_add</a> to create virtual screens. Be careful when using this,
  when done incorrectly, no screens will be created. Using Awesome with zero
- screens is <strong>not</strong> supported.
+ screens is **not** supported.
+
 
 
 
@@ -4169,15 +4085,14 @@ end
     </span>
     </dt>
     <dd>
-    AwesomeWM is done scanning for screens. </p>
-
+    AwesomeWM is done scanning for screens.
 <p> Connect to this signal to execute code after the screens have been created,
  but before the clients are added. This signal can also be used to split
  physical screens into multiple virtual screens before the clients (and their
- rules) are executed.</p>
-
+ rules) are executed.
 <p> Note that if no screens exist at this point, the fallback code will be
  triggered and the default (detected) screens will be added.
+
 
 
 
@@ -4213,8 +4128,6 @@ end
     </span>
     </dt>
     <dd>
-
-
 
 
 
@@ -4350,22 +4263,15 @@ end
     </span>
     </dt>
     <dd>
-
-<p>This signal is emitted when the list of physical screen viewport changes. </p>
-
-<p> Each viewport in the list corresponds to a <strong>physical</strong> screen rectangle, which
- is <strong>not</strong> the <a href="../core_components/screen.html#property::viewports">viewports</a> property of the <a href="../core_components/screen.html#">screen</a> objects.</p>
-
-<p> Each entry in the <a href="../core_components/screen.html#property::viewports">viewports</a> entry has the following keys:</p>
-
-<ul>
-    <li><a href="../core_components/screen.html#geometry">geometry</a> <em>(table)</em>: A table with an <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code> keys.</li>
-    <li><a href="../core_components/screen.html#outputs">outputs</a> <em>(table)</em>: All outputs sharing this viewport.</li>
-    <li><a href="../core_components/screen.html#maximum_dpi">maximum_dpi</a> <em>(number)</em>: The DPI of the most dense output.</li>
-    <li><a href="../core_components/screen.html#minimum_dpi">minimum_dpi</a> <em>(number)</em>: The DPI of the least dense output.</li>
-    <li><a href="../core_components/screen.html#preferred_dpi">preferred_dpi</a> <em>(number)</em>: The optimal DPI.</li>
-</ul>
-
+    This signal is emitted when the list of physical screen viewport changes.
+<p> Each viewport in the list corresponds to a **physical** screen rectangle, which
+ is **not** the <a href="../core_components/screen.html#property::viewports">viewports</a> property of the <a href="../core_components/screen.html#">screen</a> objects.
+<p> Each entry in the <a href="../core_components/screen.html#property::viewports">viewports</a> entry has the following keys:
+<p> * <a href="../core_components/screen.html#geometry">geometry</a> *(table)*: A table with an <code>x</code>, <code>y</code>, <code>width</code> and <code>height</code> keys.
+ * <a href="../core_components/screen.html#outputs">outputs</a> *(table)*: All outputs sharing this viewport.
+ * <a href="../core_components/screen.html#maximum_dpi">maximum_dpi</a> *(number)*: The DPI of the most dense output.
+ * <a href="../core_components/screen.html#minimum_dpi">minimum_dpi</a> *(number)*: The DPI of the least dense output.
+ * <a href="../core_components/screen.html#preferred_dpi">preferred_dpi</a> *(number)*: The optimal DPI.
 
 
     <h3>Arguments:</h3>
@@ -4411,13 +4317,12 @@ end
     </span>
     </dt>
     <dd>
-    Emitted when a new screen is added. </p>
-
+    Emitted when a new screen is added.
 <p> The handler(s) of this signal are responsible of adding elements such as
  bars, docks or other elements to a screen. The signal is emitted when a
- screen is added, including during startup.</p>
-
+ screen is added, including during startup.
 <p> The only default implementation is the one provided by <a href="../sample files/rc.lua.html#">rc.lua</a>.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -4470,13 +4375,12 @@ end
     </span>
     </dt>
     <dd>
-    Emitted when a new screen needs a wallpaper. </p>
-
+    Emitted when a new screen needs a wallpaper.
 <p> The handler(s) of this signal are responsible to set the wallpaper. The
  signal is emitted when a screen is added (including at startup), when its
- DPI changes or when its geometry changes.</p>
-
+ DPI changes or when its geometry changes.
 <p> The only default implementation is the one provided by <a href="../sample files/rc.lua.html#">rc.lua</a>.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -4532,23 +4436,16 @@ end
     </span>
     </dt>
     <dd>
-
-<p>When a new (physical) screen area has been added. </p>
-
+    When a new (physical) screen area has been added.
 <p> Important: This only exists when Awesome is started with <code>--screen off</code>.
  Please also note that this doesn't mean it will appear when a screen is
  physically plugged. Depending on the configuration a tool like <code>arandr</code> or
- the <code>xrandr</code> command is needed.</p>
-
-<p> The default handler will create a screen that fills the area.</p>
-
-<p> To disconnect the default handler, use:</p>
-
-<pre><code>screen.disconnect_signal(
-    "request::create", awful.screen.create_screen_handler
-)
-</code></pre>
-
+ the <code>xrandr</code> command is needed.
+<p> The default handler will create a screen that fills the area.
+<p> To disconnect the default handler, use:
+<p>    screen.disconnect_signal(
+        "request::create", awful.screen.create_screen_handler
+    )
 
 
     <h3>Arguments:</h3>
@@ -4563,9 +4460,7 @@ end
            <td><span class="parameter">viewport</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">geometry</span></td>
@@ -4613,9 +4508,7 @@ end
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">context</span></td>
@@ -4669,21 +4562,14 @@ end
     </span>
     </dt>
     <dd>
-
-<p>When a physical monitor viewport has been removed. </p>
-
-<p> Important: This only exists when Awesome is started with <code>--screen off</code>.</p>
-
+    When a physical monitor viewport has been removed.
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.
 <p> If you replace the default handler, it is up to you to find the screen(s)
- associated with this viewport.</p>
-
-<p> To disconnect the default handler, use:</p>
-
-<pre><code>screen.disconnect_signal(
-    "request::remove", awful.screen.remove_screen_handler
-)
-</code></pre>
-
+ associated with this viewport.
+<p> To disconnect the default handler, use:
+<p>    screen.disconnect_signal(
+        "request::remove", awful.screen.remove_screen_handler
+    )
 
 
     <h3>Arguments:</h3>
@@ -4698,9 +4584,7 @@ end
            <td><span class="parameter">viewport</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">geometry</span></td>
@@ -4747,9 +4631,7 @@ end
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">context</span></td>
@@ -4796,24 +4678,17 @@ end
     </span>
     </dt>
     <dd>
-
-<p>When a physical viewport resolution has changed or it has been replaced. </p>
-
-<p> Important: This only exists when Awesome is started with <code>--screen off</code>.</p>
-
+    When a physical viewport resolution has changed or it has been replaced.
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.
 <p> Note that given the viewports are not the same, the <code>id</code> won't be the same.
  Also note that if multiple new viewports fit within a single "old" viewport,
  the resized screen will be the one with the largest total overlapping
  viewport (<code>intersection.width*intersection.height</code>), regardless of the
- outputs names.</p>
-
-<p> To disconnect the default handler, use:</p>
-
-<pre><code>screen.disconnect_signal(
-    "request::resize", awful.screen.resize_screen_handler
-)
-</code></pre>
-
+ outputs names.
+<p> To disconnect the default handler, use:
+<p>    screen.disconnect_signal(
+        "request::resize", awful.screen.resize_screen_handler
+    )
 
 
     <h3>Arguments:</h3>
@@ -4828,9 +4703,7 @@ end
            <td><span class="parameter">old_viewport</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">geometry</span></td>
@@ -4878,9 +4751,7 @@ end
            <td><span class="parameter">new_viewport</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">geometry</span></td>
@@ -4928,9 +4799,7 @@ end
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">context</span></td>
@@ -5000,22 +4869,18 @@ end
     </span>
     </dt>
     <dd>
-    Default handler for <a href="../core_components/screen.html#request::create">request::create</a>. </p>
-
-<p> Important: This only exists when Awesome is started with <code>--screen off</code>.</p>
-
-<p> A simplified implementation looks like:</p>
-
-<pre><code>function(viewport --[[, args]])
-    local geo = viewport.geometry
-    local s = screen.fake_add(geo.x, geo.y, geo.width, geo.height)
-    s:emit_signal("request::desktop_decoration")
-    s:emit_signal("request::wallpaper")
-end
-</code></pre>
-
+    Default handler for <a href="../core_components/screen.html#request::create">request::create</a>.
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.
+<p> A simplified implementation looks like:
+<p>    function(viewport --[[, args]])
+        local geo = viewport.geometry
+        local s = screen.fake_add(geo.x, geo.y, geo.width, geo.height)
+        s:emit_signal("request::desktop_decoration")
+        s:emit_signal("request::wallpaper")
+    end
 <p> If you implement this by hand, you must also implement handler for the
  <a href="../core_components/screen.html#request::remove">request::remove</a> and <a href="../core_components/screen.html#request::resize">request::resize</a>.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -5029,9 +4894,7 @@ end
            <td><span class="parameter">viewport</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
         </table>
 
@@ -5081,24 +4944,18 @@ end
     </span>
     </dt>
     <dd>
-
-<p>Default handler for <a href="../core_components/screen.html#request::remove">request::remove</a>. </p>
-
-<p> Important: This only exists when Awesome is started with <code>--screen off</code>.</p>
-
-<p> A simplified version of the logic is:</p>
-
-<pre><code>function (viewport --[[, args]])
-    local geo = viewport.geometry
-    for s in screen do
-        if gears.geometry.rectangle.are_equal(geo, s.geometry) then
-            s:fake_remove()
-            return
+    Default handler for <a href="../core_components/screen.html#request::remove">request::remove</a>.
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.
+<p> A simplified version of the logic is:
+<p>    function (viewport --[[, args]])
+        local geo = viewport.geometry
+        for s in screen do
+            if gears.geometry.rectangle.are_equal(geo, s.geometry) then
+                s:fake_remove()
+                return
+            end
         end
     end
-end
-</code></pre>
-
 
 
     <h3>Arguments:</h3>
@@ -5113,9 +4970,7 @@ end
            <td><span class="parameter">viewport</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
         </table>
 
@@ -5165,26 +5020,20 @@ end
     </span>
     </dt>
     <dd>
-
-<p>Default handler for <a href="../core_components/screen.html#request::resize">request::resize</a>. </p>
-
-<p> Important: This only exists when Awesome is started with <code>--screen off</code>.</p>
-
-<p> A simplified version of the logic is:</p>
-
-<pre><code>function (old_viewport, new_viewport --[[, args]])
-    local old_geo, new_geo = old_viewport.geometry, new_viewport.geometry
-    for s in screen do
-        local sgeo = new_viewport.geometry
-        if gears.geometry.rectangle.are_equal(old_geo, s.geometry) then
-            s:fake_resize(
-                sgeo.x, sgeo.y, sgeo.width, sgeo.height
-            )
+    Default handler for <a href="../core_components/screen.html#request::resize">request::resize</a>.
+<p> Important: This only exists when Awesome is started with <code>--screen off</code>.
+<p> A simplified version of the logic is:
+<p>    function (old_viewport, new_viewport --[[, args]])
+        local old_geo, new_geo = old_viewport.geometry, new_viewport.geometry
+        for s in screen do
+            local sgeo = new_viewport.geometry
+            if gears.geometry.rectangle.are_equal(old_geo, s.geometry) then
+                s:fake_resize(
+                    sgeo.x, sgeo.y, sgeo.width, sgeo.height
+                )
+            end
         end
     end
-end
-</code></pre>
-
 
 
     <h3>Arguments:</h3>
@@ -5199,9 +5048,7 @@ end
            <td><span class="parameter">viewport</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
         </table>
 
@@ -5403,11 +5250,11 @@ end
     </span>
     </dt>
     <dd>
-    If <a href="../core_components/screen.html#">screen</a> objects are created automatically when new viewports are detected. </p>
-
+    If <a href="../core_components/screen.html#">screen</a> objects are created automatically when new viewports are detected.
 <p> Be very, very careful when setting this to false. You might end up with
- no screens. This is <strong>not</strong> supported. Always connect to the <a href="../core_components/screen.html#scanned">scanned</a>
+ no screens. This is **not** supported. Always connect to the <a href="../core_components/screen.html#scanned">scanned</a>
  signal to make sure to create a fallback screen if none were created.
+
 
 
 

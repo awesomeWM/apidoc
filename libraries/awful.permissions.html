@@ -219,11 +219,11 @@
 
 <h1>Module: <code>awful.permissions</code></h1>
 <p>Default implementation of the various requests handers.</p>
+<p>
 <p> AwesomeWM has many <code>request::</code> signals across the core APIs. They help
  decouple the default behavior from the core API. The request handlers
  can be disconnected and replaced by module or <a href="../sample files/rc.lua.html#">rc.lua</a> to alter
- AwesomeWM behavior.</p>
-
+ AwesomeWM behavior.
 <p> This module provides the default implementation of those request handlers.
  Beside some legacy signals, most request handlers have a main object, a
  named context and a table containing any low-level hints the core code is
@@ -231,7 +231,8 @@
  This filter is called the "permissions". It allows requests to be denied.
  For example, if a tiled client asks to be resized or moved, the permission
  and deny it. In the documentation, many objects and properties have a
- "permissions" section you can display by clicking "show more".</p>
+ "permissions" section you can display by clicking "show more".
+</p>
     <div class="extra-header">
 
 
@@ -442,31 +443,21 @@
     </span>
     </dt>
     <dd>
-
-<p>Add an activate (focus stealing) filter function. </p>
-
-<p> The callback takes the following parameters:</p>
-
-<ul>
-    <li><strong>c</strong> (<em>client</em>) The client requesting the activation</li>
-    <li><strong>context</strong> (<em>string</em>) The activation context.</li>
-    <li><strong>hints</strong> (<em>table</em>) Some additional hints (depending on the context)</li>
-</ul>
-
+    Add an activate (focus stealing) filter function.
+<p> The callback takes the following parameters:
+<p> * **c** (*client*) The client requesting the activation
+ * **context** (*string*) The activation context.
+ * **hints** (*table*) Some additional hints (depending on the context)
 <p> If the callback returns <code>true</code>, the client will be activated. If the callback
  returns <code>false</code>, the activation request is cancelled unless the <code>force</code> hint is
  set. If the callback returns <code>nil</code>, the previous callback will be executed.
  This will continue until either a callback handles the request or when it runs
  out of callbacks. In that case, the request will be granted if the client is
- visible.</p>
-
-<p> For example, to block Firefox from stealing the focus, use:</p>
-
-<pre><code>awful.permissions.add_activate_filter(function(c)
-    if c.class == "Firefox" then return false end
-end, "permissions")
-</code></pre>
-
+ visible.
+<p> For example, to block Firefox from stealing the focus, use:
+<p>    awful.permissions.add_activate_filter(function(c)
+        if c.class == "Firefox" then return false end
+    end, "permissions")
 
 
     <h3>Parameters:</h3>
@@ -611,13 +602,12 @@ end, "permissions")
     </span>
     </dt>
     <dd>
-    Activate a window. </p>
-
+    Activate a window.
 <p> This sets the focus only if the client is visible. If <code>raise</code> is set
  in the hints, it will also unminimize the client and move it to the top
- of its layer.</p>
-
+ of its layer.
 <p> It is the default signal handler for <code>request::activate</code> on a <a href="../core_components/client.html#">client</a>.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -711,9 +701,9 @@ end, "permissions")
     </span>
     </dt>
     <dd>
-    Tag a window with its requested tag. </p>
-
+    Tag a window with its requested tag.
 <p> It is the default signal handler for <code>request::tag</code> on a <a href="../core_components/client.html#">client</a>.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -850,9 +840,9 @@ end, "permissions")
     </span>
     </dt>
     <dd>
-    Move and resize the client. </p>
-
+    Move and resize the client.
 <p> This is the default geometry request handler.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -938,9 +928,9 @@ end, "permissions")
     </span>
     </dt>
     <dd>
-    Move and resize the wiboxes. </p>
-
+    Move and resize the wiboxes.
 <p> This is the default geometry request handler.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -1030,12 +1020,12 @@ end, "permissions")
     </span>
     </dt>
     <dd>
-    Merge the 2 requests sent by clients wanting to be maximized. </p>
-
+    Merge the 2 requests sent by clients wanting to be maximized.
 <p> The X clients set 2 flags (atoms) when they want to be maximized. This caused
  2 <code>request::geometry</code> to be sent. This code gives some time for them to arrive
  and send a new <code>request::geometry</code> (through the property change) with the
  combined state.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -1113,9 +1103,9 @@ end, "permissions")
     </span>
     </dt>
     <dd>
-    Allow the client to move itself. </p>
-
+    Allow the client to move itself.
 <p> This is the default geometry request handler when the context is <a href="../libraries/awful.permissions.html">permissions</a>.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -1206,16 +1196,13 @@ end, "permissions")
     </span>
     </dt>
     <dd>
-    The default client <code>request::border</code> handler. </p>
-
-<p> To replace this handler with your own, use:</p>
-
-<pre><code>client.disconnect_signal("request::border", awful.permisions.update_border)
-</code></pre>
-
+    The default client <code>request::border</code> handler.
+<p> To replace this handler with your own, use:
+<p>    client.disconnect_signal("request::border", awful.permisions.update_border)
 <p> The default implementation chooses from dozens beautiful theme variables
  depending if the client is tiled, floating, maximized and then from its state
  (urgent, new, active, normal)
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -1415,18 +1402,12 @@ end, "permissions")
     </span>
     </dt>
     <dd>
-
-<p>Default handler for the <code>request::autoactivate</code> signal. </p>
-
+    Default handler for the <code>request::autoactivate</code> signal.
 <p> All it does is to emit <code>request::activate</code> with the following context
- mapping:</p>
-
-<ul>
-    <li>mouse_enter: <em>mouse.enter</em></li>
-    <li>switch<em>tag : *autofocus.check</em>focus_tag*</li>
-    <li>history    : *autofocus.check_focus*</li>
-</ul>
-
+ mapping:
+<p> * mouse_enter: *mouse.enter*
+ * switch_tag : *autofocus.check_focus_tag*
+ * history    : *autofocus.check_focus*
 
 
     <h3>Arguments:</h3>

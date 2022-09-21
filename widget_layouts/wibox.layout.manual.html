@@ -219,12 +219,12 @@
 
 <h1>Module: <code>wibox.layout.manual</code></h1>
 <p>A layout with widgets added at specific positions.</p>
+<p>
 <p> Use cases include desktop icons, complex custom composed widgets, a floating
- client layout and fine grained control over the output.</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_defaults_manual.svg" alt="Usage example" type="image/svg+xml"></object></p>
+ client layout and fine grained control over the output.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_defaults_manual.svg" alt="Usage example" type="image/svg+xml"></object>
+</p>
     <h3>Usage:</h3>
     <ul>
         <pre class="example">local w1, w2 = generic_widget(), generic_widget()
@@ -861,10 +861,10 @@ wibox.layout {
     </span>
     </dt>
     <dd>
-    Remove one or more widgets from the layout. </p>
-
+    Remove one or more widgets from the layout.
 <p> The last parameter can be a boolean, forcing a recursive seach of the
  widget(s) to remove.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -905,48 +905,33 @@ wibox.layout {
     </span>
     </dt>
     <dd>
-    Add a widget at a specific point. </p>
-
+    Add a widget at a specific point.
 <p> The point can either be a function or a table. The table follow the generic
- geometry format used elsewhere in Awesome.</p>
-
-<ul>
-    <li><em>x</em>: The horizontal position.</li>
-    <li><em>y</em>: The vertical position.</li>
-    <li><em>width</em>: The width.</li>
-    <li><em>height</em>: The height.</li>
-</ul>
-
+ geometry format used elsewhere in Awesome.
+<p> * *x*: The horizontal position.
+ * *y*: The vertical position.
+ * *width*: The width.
+ * *height*: The height.
 <p> If a function is used, it follows the same prototype as <a href="../libraries/awful.placement.html#">awful.placement</a>
- functions.</p>
-
-<ul>
-    <li><em>geo</em>:
-    <ul>
-        <li><em>x</em>: The horizontal position (always 0).</li>
-        <li><em>y</em>: The vertical position (always 0).</li>
-        <li><em>width</em>: The width.</li>
-        <li><em>height</em>: The height.</li>
-        <li><em>geometry</em>: A function to get or set the geometry (for compatibility).
-        The function is compatible with the <a href="../libraries/awful.placement.html#">awful.placement</a> prototype.</li>
-    </ul></li>
-    <li><em>args</em>:
-    <ul>
-        <li><em>parent</em> The layout own geometry
-        <ul>
-            <li><em>x</em>: The horizontal position (always 0).</li>
-            <li><em>y</em>: The vertical position (always 0).</li>
-            <li><em>width</em>: The width.</li>
-            <li><em>height</em>: The height.</li>
-            <li><em>geometry</em>: A function to get or set the geometry (for compatibility)
-            The function is compatible with the <a href="../libraries/awful.placement.html#">awful.placement</a> prototype.</li>
-        </ul></li>
-    </ul></li>
-</ul>
-
-
-
+ functions.
+<p> * *geo*:
+     * *x*: The horizontal position (always 0).
+     * *y*: The vertical position (always 0).
+     * *width*: The width.
+     * *height*: The height.
+     * *geometry*: A function to get or set the geometry (for compatibility).
+       The function is compatible with the <a href="../libraries/awful.placement.html#">awful.placement</a> prototype.
+ * *args*:
+     * *parent* The layout own geometry
+         * *x*: The horizontal position (always 0).
+         * *y*: The vertical position (always 0).
+         * *width*: The width.
+         * *height*: The height.
+         * *geometry*: A function to get or set the geometry (for compatibility)
+           The function is compatible with the <a href="../libraries/awful.placement.html#">awful.placement</a> prototype.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_layout_manual_add_at.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1077,11 +1062,10 @@ l:add_at(w4, awful.placement.centered + awful.placement.maximize_horizontally)</
     </span>
     </dt>
     <dd>
-    Move a widget. </p>
-
-
-
+    Move a widget.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_layout_manual_move_widget.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1356,12 +1340,11 @@ l:move_widget(w1, awful.placement.bottom_right)</pre>
     </span>
     </dt>
     <dd>
-    Swap 2 widgets in a layout. </p>
-
-<p> If <code>widget1</code> is present multiple time, only the first instance is swapped.</p>
-
+    Swap 2 widgets in a layout.
+<p> If <code>widget1</code> is present multiple time, only the first instance is swapped.
 <p> Calls <a href="../widget_layouts/wibox.layout.manual.html#set">set</a> internally, so the signal <code>widget::replaced</code> is emitted for both
  widgets as well.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1520,26 +1503,19 @@ l:move_widget(w1, awful.placement.bottom_right)</pre>
     </span>
     </dt>
     <dd>
-
-<p>Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal. </p>
-
+    Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.</p>
-
-<p> Note that this function has some flaws:</p>
-
-<ol>
-    <li>The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.
+<p> Note that this function has some flaws:
+<p> 1. The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.</li>
-    <li>In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.
+ 2. In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).</li>
-    <li>If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.</li>
-</ol>
-
+    tree path).
+ 3. If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.
 
 
     <h3>Parameters:</h3>
@@ -1554,9 +1530,7 @@ l:move_widget(w1, awful.placement.bottom_right)</pre>
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>
@@ -1646,20 +1620,13 @@ l:move_widget(w1, awful.placement.bottom_right)</pre>
     </span>
     </dt>
     <dd>
-
-<p>Connect to a signal. </p>
-
-
-
-
-<p><strong>Usage example output</strong>:</p>
-
-<pre><code>In slot [obj]   nil nil nil
-In slot [obj]   foo bar 42
-</code></pre>
-
-
-
+    Connect to a signal.
+<p>
+<p>
+**Usage example output**:
+<p>    In slot	[obj]	nil	nil	nil
+    In slot	[obj]	foo	bar	42
+<p>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1720,13 +1687,13 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly. </p>
-
+    Connect to a signal weakly.
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
- <strong>Warning:</strong>
+ **Warning:**
  Only use this function if you really, really, really know what you
  are doing.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2252,8 +2219,7 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
     </span>
     </dt>
     <dd>
-    The widget buttons. </p>
-
+    The widget buttons.
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>

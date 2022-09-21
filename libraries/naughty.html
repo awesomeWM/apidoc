@@ -221,9 +221,10 @@
 
 <h1>Module: <code>naughty</code></h1>
 <p>Notification library.</p>
-<p> For more details on how to create notifications, see <a href="../core_components/naughty.notification.html#">naughty.notification</a>.</p>
-
-<p> To send notifications from the terminal, use <code>notify-send</code>.</p>
+<p>
+<p> For more details on how to create notifications, see <a href="../core_components/naughty.notification.html#">naughty.notification</a>.
+<p> To send notifications from the terminal, use <code>notify-send</code>.
+</p>
     <div class="extra-header">
 
 
@@ -757,13 +758,12 @@
     </span>
     </dt>
     <dd>
-    Connect a global signal on the module. </p>
-
+    Connect a global signal on the module.
 <p> Functions connected to this signal source will be executed when any
- module object emits the signal.</p>
-
+ module object emits the signal.
 <p> It is also used for some generic module signals such as
  <a href="../libraries/naughty.html#request::display">request::display</a>.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -904,10 +904,10 @@
     </span>
     </dt>
     <dd>
-    The global suspension state. </p>
-
+    The global suspension state.
 <p> When suspended, no notification widget should interrupt the user. This is
  useful when watching movies or doing presentations.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -969,11 +969,11 @@
     </span>
     </dt>
     <dd>
-    Do not allow notifications to auto-expire. </p>
-
+    Do not allow notifications to auto-expire.
 <p> When navigating the notifications, for example on mouse over or when
  keyboard navigation is enabled, it is very annoying when notifications
  just vanish.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1030,9 +1030,9 @@
     </span>
     </dt>
     <dd>
-    A table with all active notifications. </p>
-
+    A table with all active notifications.
 <p> Please note that this list is kept up-to-date even in suspended mode.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1087,9 +1087,9 @@
     </span>
     </dt>
     <dd>
-    True when there is a handler connected to <a href="../libraries/naughty.html#request::display">request::display</a>. </p>
-
+    True when there is a handler connected to <a href="../libraries/naughty.html#request::display">request::display</a>.
 <p> Note that using the legacy notifications is deprecated.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1132,10 +1132,10 @@
     </span>
     </dt>
     <dd>
-    If the timeout needs to be reset when a property changes. </p>
-
+    If the timeout needs to be reset when a property changes.
 <p> This is the global variant of the <a href="../core_components/naughty.notification.html#">naughty.notification</a> <a href="../libraries/naughty.html#auto_reset_timeout">auto_reset_timeout</a>
  property.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1192,11 +1192,11 @@
     </span>
     </dt>
     <dd>
-    Enable or disable naughty ability to claim to support animations. </p>
-
+    Enable or disable naughty ability to claim to support animations.
 <p> When this is true, applications which query <a href="../libraries/naughty.html#">naughty</a> feature support
- will see that animations are supported. Note that there is <em>very little</em>
+ will see that animations are supported. Note that there is *very little*
  support for this and enabling it will cause bugs.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1253,17 +1253,16 @@
     </span>
     </dt>
     <dd>
-    Enable or disable the persistent notifications. </p>
-
+    Enable or disable the persistent notifications.
 <p> This is very annoying when using <a href="../popups_and_bars/naughty.layout.box.html#">naughty.layout.box</a> popups, but tolerable
- when using <a href="../widgets/naughty.list.notifications.html#">naughty.list.notifications</a>.</p>
-
-<p> Note that enabling this <strong>does nothing</strong> in <a href="../libraries/naughty.html#">naughty</a> itself. The timeouts
+ when using <a href="../widgets/naughty.list.notifications.html#">naughty.list.notifications</a>.
+<p> Note that enabling this **does nothing** in <a href="../libraries/naughty.html#">naughty</a> itself. The timeouts
  are still honored and notifications still destroyed. It is the user
  responsibility to disable the dismiss timer. However, this tells the
  applications that notification persistence is supported so they might
  stop using systray icons for the sake of displaying or other changes like
  that.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1431,16 +1430,11 @@
     </span>
     </dt>
     <dd>
-
-<p>Emitted when a notification has to be displayed. </p>
-
-<p> To add a handler, use:</p>
-
-<pre><code>naughty.connect_signal("request::display", function(notification, args)
-    -- do something
-end)
-</code></pre>
-
+    Emitted when a notification has to be displayed.
+<p> To add a handler, use:
+<p>    naughty.connect_signal("request::display", function(notification, args)
+        -- do something
+    end)
 
 
     <h3>Arguments:</h3>
@@ -1535,23 +1529,16 @@ end)
     </span>
     </dt>
     <dd>
-
-<p>Emitted when an action requires an icon it doesn't know. </p>
-
+    Emitted when an action requires an icon it doesn't know.
 <p> The implementation should look in the icon theme for an action icon or
- provide something natively.</p>
-
+ provide something natively.
 <p> If an icon is found, the handler must set the <a href="../libraries/naughty.html#request::icon">icon</a> property on the <code>action</code>
- object to a path or a <a href="../libraries/gears.surface.html#">gears.surface</a>.</p>
-
+ object to a path or a <a href="../libraries/gears.surface.html#">gears.surface</a>.
 <p> There is no implementation by default. To use the XDG-icon, the common
- implementation will be:</p>
-
-<pre><code>naughty.connect_signal("request::action_icon", function(a, context, hints)
-     a.icon = menubar.utils.lookup_icon(hints.id)
-end)
-</code></pre>
-
+ implementation will be:
+<p>    naughty.connect_signal("request::action_icon", function(a, context, hints)
+         a.icon = menubar.utils.lookup_icon(hints.id)
+    end)
 
 
     <h3>Arguments:</h3>
@@ -1578,9 +1565,7 @@ end)
            <td><span class="parameter">hints</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
         </table>
 
@@ -1600,44 +1585,34 @@ end)
     </span>
     </dt>
     <dd>
-    Emitted when a notification icon could not be loaded. </p>
-
+    Emitted when a notification icon could not be loaded.
 <p> When an icon is passed in some "encoded" formats, such as XDG icon names or
  network URLs, AwesomeWM will not attempt to load it. If you wish to see the
  icon displayed, you must provide an handler. It is highly recommended for
- handler to only set <code>n.icon</code> when they <em>found</em> the icon. That way multiple
- handlers can be attached for multiple protocols.</p>
-
+ handler to only set <code>n.icon</code> when they *found* the icon. That way multiple
+ handlers can be attached for multiple protocols.
 <p> The <code>context</code> argument is the origin of the icon to decode. If an handler
  only supports one if them, it should check the <code>context</code> and return if it
- doesn't handle it. The currently valid contexts are:</p>
-
-<ul>
-    <li>app_icon</li>
-    <li>clients</li>
-    <li>path</li>
-    <li>image</li>
-    <li>images</li>
-    <li>dbus_clear</li>
-</ul>
-
+ doesn't handle it. The currently valid contexts are:
+<p> * app_icon
+ * clients
+ * path
+ * image
+ * images
+ * dbus_clear
 <p> For example, an implementation which uses the <code>app_icon</code> to perform an XDG
- icon lookup will look like:</p>
-
-<pre><code>naughty.connect_signal("request::icon", function(n, context, hints)
-    if context ~= "app_icon" then return end
-
-    local path = menubar.utils.lookup_icon(hints.app_icon) or
-        menubar.utils.lookup_icon(hints.app_icon:lower())
-
-    if path then
-        n.icon = path
-    end
-end)
-</code></pre>
-
+ icon lookup will look like:
+<p>    naughty.connect_signal("request::icon", function(n, context, hints)
+        if context ~= "app_icon" then return end
+<p>        local path = menubar.utils.lookup_icon(hints.app_icon) or
+            menubar.utils.lookup_icon(hints.app_icon:lower())
+<p>        if path then
+            n.icon = path
+        end
+    end)
 <p> The <code>images</code> context has no handler. It is part of the specification to
  handle animations. This is not supported by default.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -1763,9 +1738,9 @@ end)
     </span>
     </dt>
     <dd>
-    The default handler for <a href="../libraries/naughty.html#request::screen">request::screen</a>. </p>
-
+    The default handler for <a href="../libraries/naughty.html#request::screen">request::screen</a>.
 <p> It selects <code>awful.screen.focused()</code>.
+
 
 
 
@@ -1845,9 +1820,9 @@ end)
     </span>
     </dt>
     <dd>
-    Notification state. </p>
-
+    Notification state.
 <p> This function is deprecated, use <a href="../libraries/naughty.html#suspended">naughty.suspended</a>.
+
 
 
 
@@ -1866,9 +1841,9 @@ end)
     </span>
     </dt>
     <dd>
-    Suspend notifications. </p>
-
+    Suspend notifications.
 <p> This function is deprecated, use <code>naughty.suspended = true</code>.
+
 
 
 
@@ -1887,9 +1862,9 @@ end)
     </span>
     </dt>
     <dd>
-    Resume notifications. </p>
-
+    Resume notifications.
 <p> This function is deprecated, use <code>naughty.suspended = false</code>.
+
 
 
 
@@ -1908,9 +1883,9 @@ end)
     </span>
     </dt>
     <dd>
-    Toggle notification state. </p>
-
+    Toggle notification state.
 <p> This function is deprecated, use <code>naughty.suspended = not naughty.suspended</code>.
+
 
 
 
@@ -1931,6 +1906,7 @@ end)
     <dd>
     Destroy notification by notification object  This function is deprecated in favor of
  <code>notification:destroy(reason, keep_visible)</code>.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2025,9 +2001,9 @@ end)
     </span>
     </dt>
     <dd>
-    Set new notification timeout. </p>
-
+    Set new notification timeout.
 <p> This function is deprecated, use <code>notification:reset_timeout(new_timeout)</code>.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2067,10 +2043,10 @@ end)
     </span>
     </dt>
     <dd>
-    Replace title and text of an existing notification. </p>
-
+    Replace title and text of an existing notification.
 <p> This function is deprecated, use <code>notification.message = new_text</code> and
  <code>notification.title = new_title</code>
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2121,14 +2097,9 @@ end)
     </span>
     </dt>
     <dd>
-
-<p>Create a notification. </p>
-
-<p> This function is deprecated, create notification objects instead:</p>
-
-<pre><code>local notif = naughty.notification(args)
-</code></pre>
-
+    Create a notification.
+<p> This function is deprecated, create notification objects instead:
+<p>    local notif = naughty.notification(args)
 
 
     <h3>Parameters:</h3>
@@ -2382,17 +2353,12 @@ end)
     </span>
     </dt>
     <dd>
-
-<p>Naughty configuration - a table containing common popup settings. </p>
-
-<p> The callback has the follwing format:</p>
-
-<pre><code> naughty.config.notify_callback = function(args)
-     args.text = 'prefix: ' .. args.text
-     return args
- end
-</code></pre>
-
+    Naughty configuration - a table containing common popup settings.
+<p> The callback has the follwing format:
+<p>     naughty.config.notify_callback = function(args)
+         args.text = 'prefix: ' .. args.text
+         return args
+     end
 
 
     <h3>Fields:</h3>
@@ -2444,7 +2410,8 @@ end)
    To reject a notification return <code>nil</code> from the callback.
    If the notification is a freedesktop notification received via DBUS, you can
    access the freedesktop hints via <code>args.freedesktop_hints</code> if any where
-   specified.</td>
+   specified.
+</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr>
@@ -2483,13 +2450,12 @@ end)
     Notification presets for <a href="../libraries/naughty.html#notify">naughty.notify</a>.
  This holds presets for different purposes.  A preset is a table of any
  parameters for <code>naughty.notification{}</code>, overriding the default values
- (<a href="../libraries/naughty.html#naughty.config.defaults">naughty.config.defaults</a>).</p>
-
+ (<a href="../libraries/naughty.html#naughty.config.defaults">naughty.config.defaults</a>).
 <p> You have to pass a reference of a preset in your <code>naughty.notification{}</code> as the <a href="../libraries/naughty.html#request::preset">preset</a>
- argument.</p>
-
+ argument.
 <p> The presets <code>&quot;low&quot;</code>, <code>&quot;normal&quot;</code> and <code>&quot;critical&quot;</code> are used for notifications
  over DBUS.
+
 
     <h3>Fields:</h3>
     <table class="see_also">
@@ -2511,9 +2477,7 @@ end)
            <td><span class="parameter">timeout</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>5</code></span></td>
          </tr>
          <tr>
@@ -2528,36 +2492,28 @@ end)
            <td><span class="parameter">ok</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bg</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"#00bb00"</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">fg</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"#ffffff"</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">timeout</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>5</code></span></td>
          </tr>
         <tr>
@@ -2572,99 +2528,77 @@ end)
            <td><span class="parameter">bg</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"#ff0000"</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">fg</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"#ffffff"</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">timeout</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>0</code></span></td>
          </tr>
         <tr>
            <td><span class="parameter">info</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bg</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"#0000ff"</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">fg</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"#ffffff"</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">timeout</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>5</code></span></td>
          </tr>
         <tr>
            <td><span class="parameter">warn</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bg</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"#ffaa00"</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">fg</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"#00000"</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">timeout</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>5</code></span></td>
          </tr>
         </table>
@@ -2700,63 +2634,49 @@ end)
            <td><span class="parameter">timeout</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>5</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">text</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>""</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">screen</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>awful.screen.focused()</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">ontop</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>true</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">margin</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.xresources.apply_dpi(5)</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">border_width</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.xresources.apply_dpi(1)</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">position</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>"top_right"</code></span></td>
          </tr>
         </table>
@@ -2777,10 +2697,10 @@ end)
     </span>
     </dt>
     <dd>
-    The reason why a notification is to be closed. </p>
-
-<p> See <a href="https://developer.gnome.org/notification-spec/#signals">the specification</a>
+    The reason why a notification is to be closed.
+<p> See [the specification](https://developer.gnome.org/notification-spec/#signals)
  for more details.
+
 
     <h3>Fields:</h3>
     <table class="see_also">
@@ -2795,54 +2715,42 @@ end)
            <td><span class="parameter">too_many_on_screen</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>-2</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">silent</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>-1</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">expired</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>1</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">dismissed_by_user</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>2</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">dismissed_by_command</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>3</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">undefined</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>4</code></span></td>
          </tr>
         </table>

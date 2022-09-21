@@ -221,7 +221,10 @@
 
 <h1>Module: <code>wibox.widget.textbox</code></h1>
 <p>A widget to display either plain or HTML text.</p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_defaults_textbox.svg" alt="Usage example" type="image/svg+xml"></object></p>
+<p>
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_defaults_textbox.svg" alt="Usage example" type="image/svg+xml"></object>
+</p>
     <h3>Usage:</h3>
     <ul>
         <pre class="example">wibox.widget{
@@ -533,7 +536,7 @@
       </td>
       <td class="summary">
         Set the text of the textbox.(with
- <a href="https://docs.gtk.org/Pango/pango_markup.html">Pango markup</a>).
+ [Pango markup](https://docs.gtk.org/Pango/pango_markup.html)).
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -824,41 +827,29 @@
     </span>
     </dt>
     <dd>
-
-<p>Set the HTML text of the textbox. </p>
-
+    Set the HTML text of the textbox.
 <p> The main difference between <a href="../widgets/wibox.widget.textbox.html#text">text</a> and <a href="../widgets/wibox.widget.textbox.html#markup">markup</a> is that <a href="../widgets/wibox.widget.textbox.html#markup">markup</a> is
  able to render a small subset of HTML tags. See the
- <a href="https://docs.gtk.org/Pango/pango_markup.html">Pango markup</a>) documentation
- to see what is and isn't valid in this property.</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_markup1.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<pre><code> local w = wibox.widget {
-     markup = "This is some &lt;i&gt;text&lt;/i&gt;, &lt;b&gt;HTML tags&lt;/b&gt; &lt;u&gt;WILL&lt;/u&gt; work.",
-     widget = wibox.widget.textbox,
- }
-</code></pre>
-
+ [Pango markup](https://docs.gtk.org/Pango/pango_markup.html)) documentation
+ to see what is and isn't valid in this property.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_markup1.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local w = wibox.widget {
+         markup = "This is some <i>text</i>, <b>HTML tags</b> <u>WILL</u> work.",
+         widget = wibox.widget.textbox,
+     }
 <p> The <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a> colors are usually set by wrapping into a
  <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a> widget, but can also be done using the
- markup:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_markup2.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<pre><code> local w = wibox.widget {
-     markup = "&lt;span background='#ff0000' foreground='#0000ff'&gt;Some&lt;/span&gt;"..
-       " nice &lt;span foreground='#00ff00'&gt;colors!&lt;/span&gt;",
-     widget = wibox.widget.textbox,
- }
-</code></pre>
-
+ markup:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_markup2.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local w = wibox.widget {
+         markup = "<span background='#ff0000' foreground='#0000ff'>Some</span>"..
+           " nice <span foreground='#00ff00'>colors!</span>",
+         widget = wibox.widget.textbox,
+     }
 
 
     <h3>Constraints:</h3>
@@ -928,35 +919,23 @@
     </span>
     </dt>
     <dd>
-
-<p>Set a textbox plain text. </p>
-
-<p> This property renders the text as-is, it does not interpret it:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_text1.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<pre><code> local w = wibox.widget {
-     text   = "This is some &lt;i&gt;text&lt;/i&gt;, &lt;b&gt;HTML tags&lt;/b&gt; will &lt;u&gt;NOT&lt;/u&gt; work.",
-     widget = wibox.widget.textbox,
- }
-</code></pre>
-
-<p> One exception are the control characters, which are interpreted:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_text2.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<pre><code> local w = wibox.widget {
-     text   = "This is some text\nover\nmultiple lines!",
-     widget = wibox.widget.textbox,
- }
-</code></pre>
-
+    Set a textbox plain text.
+<p> This property renders the text as-is, it does not interpret it:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_text1.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local w = wibox.widget {
+         text   = "This is some <i>text</i>, <b>HTML tags</b> will <u>NOT</u> work.",
+         widget = wibox.widget.textbox,
+     }
+<p> One exception are the control characters, which are interpreted:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_text2.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local w = wibox.widget {
+         text   = "This is some text\nover\nmultiple lines!",
+         widget = wibox.widget.textbox,
+     }
 
 
     <h3>Constraints:</h3>
@@ -1025,14 +1004,12 @@
     </span>
     </dt>
     <dd>
-    Set the text ellipsize mode. </p>
-
+    Set the text ellipsize mode.
 <p> See Pango for additional details:
- <a href="https://docs.gtk.org/Pango/method.Layout.set_ellipsize.html">Layout.set_ellipsize</a></p>
-
-
-
+ [Layout.set_ellipsize](https://docs.gtk.org/Pango/method.Layout.set_ellipsize.html)
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_ellipsize.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1140,11 +1117,10 @@ widget{
     </span>
     </dt>
     <dd>
-    Set a textbox wrap mode. </p>
-
-
-
+    Set a textbox wrap mode.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_wrap1.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1232,14 +1208,12 @@ widget{
     </span>
     </dt>
     <dd>
-    The vertical text alignment. </p>
-
+    The vertical text alignment.
 <p> This aligns the text within the widget's bounds. In some situations this may
- differ from aligning the widget with <a href="../widget_containers/wibox.container.place.html#">wibox.container.place</a>.</p>
-
-
-
+ differ from aligning the widget with <a href="../widget_containers/wibox.container.place.html#">wibox.container.place</a>.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_valign1.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1326,14 +1300,12 @@ widget{
     </span>
     </dt>
     <dd>
-    The horizontal text alignment. </p>
-
+    The horizontal text alignment.
 <p> This aligns the text within the widget's bounds. In some situations this may
- differ from aligning the widget with <a href="../widget_containers/wibox.container.place.html#">wibox.container.place</a>.</p>
-
-
-
+ differ from aligning the widget with <a href="../widget_containers/wibox.container.place.html#">wibox.container.place</a>.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_align1.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1421,105 +1393,80 @@ widget{
     </span>
     </dt>
     <dd>
-
-<p>Set a textbox font. </p>
-
+    Set a textbox font.
 <p> There is multiple valid font string representation. The most precise is
- <a href="https://wiki.archlinux.org/title/X_Logical_Font_Description">XFT</a>. It
+ [XFT](https://wiki.archlinux.org/title/X_Logical_Font_Description). It
  is also possible to use the family name, followed by the face and size
  such as <code>Monospace Bold 10</code>. This script lists the fonts present
- on your system:</p>
-
-<pre><code>#!/usr/bin/env lua
-
-local lgi = require("lgi")
-local pangocairo = lgi.PangoCairo
-
-local font_map = pangocairo.font_map_get_default()
-
-for k, v in pairs(font_map:list_families()) do
-    print(v:get_name(), "monospace?: "..tostring(v:is_monospace()))
-    for k2, v2 in ipairs(v:list_faces()) do
-        print("    ".. v2:get_face_name())
+ on your system:
+<p>    #!/usr/bin/env lua
+<p>    local lgi = require("lgi")
+    local pangocairo = lgi.PangoCairo
+<p>    local font_map = pangocairo.font_map_get_default()
+<p>    for k, v in pairs(font_map:list_families()) do
+        print(v:get_name(), "monospace?: "..tostring(v:is_monospace()))
+        for k2, v2 in ipairs(v:list_faces()) do
+            print("    ".. v2:get_face_name())
+        end
     end
-end
-</code></pre>
-
 <p> Save this script somewhere on your system, <code>chmod +x</code> it and run it. It
- will list something like:</p>
+ will list something like:
+<p>    Sans    monospace?: false
+        Regular
+        Bold
+        Italic
+        Bold Italic
+<p> In this case, the font could be <code>Sans 10</code> or <code>Sans Bold Italic 10</code>.
+<p> Here are examples of several font families:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_font1.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>**Usage example output**:
+<p>    sans 0 sans NORMAL NORMAL
+    Roboto, Bold 0 Roboto NORMAL NORMAL
+    DejaVu Sans, Oblique 0 DejaVu Sans NORMAL OBLIQUE
+    Noto Mono, Regular 0 Noto Mono NORMAL NORMAL
+ **Usage example:**
+<p>
 
-<pre><code>Sans    monospace?: false
-    Regular
-    Bold
-    Italic
-    Bold Italic
-</code></pre>
-
-<p> In this case, the font could be <code>Sans 10</code> or <code>Sans Bold Italic 10</code>.</p>
-
-<p> Here are examples of several font families:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_font1.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-<p><strong>Usage example output</strong>:</p>
-
-<pre><code>sans 0 sans NORMAL NORMAL
-Roboto, Bold 0 Roboto NORMAL NORMAL
-DejaVu Sans, Oblique 0 DejaVu Sans NORMAL OBLIQUE
-Noto Mono, Regular 0 Noto Mono NORMAL NORMAL
-</code></pre>
-<p> <strong>Usage example:</strong></p>
-
-
-
-<pre><code>local pango = require("lgi").Pango
-local fonts = {
-    "sans",
-    "Roboto, Bold",
-    "DejaVu Sans, Oblique",
-    "Noto Mono, Regular"
-}
-
-for _, font in ipairs(fonts) do
-    local w = wibox.widget {
-        font   = font,
-        text   = "The quick brown fox jumps over the lazy dog!",
-        widget = wibox.widget.textbox,
+    local pango = require("lgi").Pango
+    local fonts = {
+        "sans",
+        "Roboto, Bold",
+        "DejaVu Sans, Oblique",
+        "Noto Mono, Regular"
     }
 
-    -- Use the low level Pango API to validate the font was parsed properly.
-    local desc = pango.FontDescription.from_string(w.font)
-    print(
-        string.format(
-            "%s %d %s %s %s",
-            w.font,
-            desc:get_size(),
-            desc:get_family(),
-            desc:get_variant(),
-            desc:get_style()
-         )
-    )
-end
-</code></pre>
+    for _, font in ipairs(fonts) do
+        local w = wibox.widget {
+            font   = font,
+            text   = "The quick brown fox jumps over the lazy dog!",
+            widget = wibox.widget.textbox,
+        }
 
-<p> The font size is a number at the end of the font description string:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_font2.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<pre><code>for _, font in ipairs { "sans 8", "sans 10", "sans 12", "sans 14" } do
-    local w = wibox.widget {
-        font   = font,
-        text   = "The quick brown fox jumps over the lazy dog!",
-        widget = wibox.widget.textbox,
-    }
-end
-</code></pre>
-
+        -- Use the low level Pango API to validate the font was parsed properly.
+        local desc = pango.FontDescription.from_string(w.font)
+        print(
+            string.format(
+                "%s %d %s %s %s",
+                w.font,
+                desc:get_size(),
+                desc:get_family(),
+                desc:get_variant(),
+                desc:get_style()
+             )
+        )
+    end
+<p> The font size is a number at the end of the font description string:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_font2.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+    for _, font in ipairs { "sans 8", "sans 10", "sans 12", "sans 14" } do
+        local w = wibox.widget {
+            font   = font,
+            text   = "The quick brown fox jumps over the lazy dog!",
+            widget = wibox.widget.textbox,
+        }
+    end
 
 
     <h3>Constraints:</h3>
@@ -1546,7 +1493,7 @@ end
           <span class='summary_type'>string</span>
          </i>
         </td>
-        <td>: A Pango <a href="../widgets/wibox.widget.textbox.html#font">font description</a>.</td>
+        <td>: A Pango [font description](../widgets/wibox.widget.textbox.html#font).</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1554,7 +1501,7 @@ end
           <span class='summary_type'>string</span>
          </i>
         </td>
-        <td>: An <a href="https://wiki.archlinux.org/title/X_Logical_Font_Description">XFT string</a>, such as <code>&quot;-<em>-dejavu sans mono-medium-r-normal--</em>-80-<em>-</em>-<em>-</em>-iso10646-1&quot;</code>.</td>
+        <td>: An [XFT string](https://wiki.archlinux.org/title/X_Logical_Font_Description), such as <code>&quot;-*-dejavu sans mono-medium-r-normal--*-80-*-*-*-*-iso10646-1&quot;</code>.</td>
        <tr/>
      </table>
     </span>
@@ -1603,11 +1550,10 @@ end
     </span>
     </dt>
     <dd>
-    Set the distance between the lines. </p>
-
-
-
+    Set the distance between the lines.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_line_spacing.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1705,11 +1651,10 @@ least <span class="number">1.44</span> <span class="keyword">for</span> this to 
     </span>
     </dt>
     <dd>
-    Justify the text when there is more space. </p>
-
-
-
+    Justify the text when there is more space.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_justify.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1785,13 +1730,11 @@ widget{
     </span>
     </dt>
     <dd>
-    How to indent text with multiple lines. </p>
-
-<p> Note that this does nothing if <code>align == &quot;center&quot;</code>.</p>
-
-
-
+    How to indent text with multiple lines.
+<p> Note that this does nothing if <code>align == &quot;center&quot;</code>.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_textbox_indent.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2264,8 +2207,7 @@ widget{
     </span>
     </dt>
     <dd>
-    The widget buttons. </p>
-
+    The widget buttons.
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>
@@ -2322,9 +2264,9 @@ widget{
     </span>
     </dt>
     <dd>
-    The horizontal text alignment. </p>
-
+    The horizontal text alignment.
 <p> Renamed to <a href="../widgets/wibox.widget.textbox.html#halign">halign</a> for consistency with other APIs.
+
 
 
 
@@ -2363,10 +2305,10 @@ widget{
     </span>
     </dt>
     <dd>
-    Get the preferred size of a textbox. </p>
-
+    Get the preferred size of a textbox.
 <p> This returns the size that the textbox would use if infinite space were
  available.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2410,10 +2352,10 @@ widget{
     </span>
     </dt>
     <dd>
-    Get the preferred height of a textbox at a given width. </p>
-
+    Get the preferred height of a textbox at a given width.
 <p> This returns the height that the textbox would use when it is limited to the
  given width.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2460,10 +2402,10 @@ widget{
     </span>
     </dt>
     <dd>
-    Get the preferred size of a textbox. </p>
-
+    Get the preferred size of a textbox.
 <p> This returns the size that the textbox would use if infinite space were
  available.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2507,10 +2449,10 @@ widget{
     </span>
     </dt>
     <dd>
-    Get the preferred height of a textbox at a given width. </p>
-
+    Get the preferred height of a textbox at a given width.
 <p> This returns the height that the textbox would use when it is limited to the
  given width.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2558,7 +2500,7 @@ widget{
     </dt>
     <dd>
     Set the text of the textbox.(with
- <a href="https://docs.gtk.org/Pango/pango_markup.html">Pango markup</a>).
+ [Pango markup](https://docs.gtk.org/Pango/pango_markup.html)).
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2647,26 +2589,19 @@ widget{
     </span>
     </dt>
     <dd>
-
-<p>Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal. </p>
-
+    Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.</p>
-
-<p> Note that this function has some flaws:</p>
-
-<ol>
-    <li>The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.
+<p> Note that this function has some flaws:
+<p> 1. The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.</li>
-    <li>In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.
+ 2. In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).</li>
-    <li>If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.</li>
-</ol>
-
+    tree path).
+ 3. If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.
 
 
     <h3>Parameters:</h3>
@@ -2681,9 +2616,7 @@ widget{
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>
@@ -2773,20 +2706,13 @@ widget{
     </span>
     </dt>
     <dd>
-
-<p>Connect to a signal. </p>
-
-
-
-
-<p><strong>Usage example output</strong>:</p>
-
-<pre><code>In slot [obj]   nil nil nil
-In slot [obj]   foo bar 42
-</code></pre>
-
-
-
+    Connect to a signal.
+<p>
+<p>
+**Usage example output**:
+<p>    In slot	[obj]	nil	nil	nil
+    In slot	[obj]	foo	bar	42
+<p>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2847,13 +2773,13 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly. </p>
-
+    Connect to a signal weakly.
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
- <strong>Warning:</strong>
+ **Warning:**
  Only use this function if you really, really, really know what you
  are doing.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">

@@ -220,52 +220,42 @@
 <h1>Module: <code>awful.widget.launcher</code></h1>
 <p>A button widget which hosts a menu or starts a command.</p>
 <p>
-
-
 <p>  Implementation of <a href="../widgets/awful.widget.button.html#">awful.widget.button</a> with the ability to host an
-  <a href="../popups_and_bars/awful.menu.html#">awful.menu</a> or a command to execute on user click.</p>
+  <a href="../popups_and_bars/awful.menu.html#">awful.menu</a> or a command to execute on user click.
+<p> This example is the default launcher.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_widget_launcher_default.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     myawesomemenu = {
+        { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+        { "manual", "xterm" .. " -e man awesome" },
+        { "restart", awesome.restart },
+        { "quit", function() awesome.quit() end }
+     }
 
-<p> This example is the default launcher.</p>
+     mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                         { "open terminal", "xterm"}
+                                       }
+                             })
 
+     mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                          menu = mymainmenu })
 
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_widget_launcher_default.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-myawesomemenu = {
-   { <span class="string">"hotkeys"</span>, <span class="keyword">function</span>() hotkeys_popup.show_help(<span class="keyword">nil</span>, awful.screen.focused()) <span class="keyword">end</span> },
-   { <span class="string">"manual"</span>, <span class="string">"xterm"</span> .. <span class="string">" -e man awesome"</span> },
-   { <span class="string">"restart"</span>, awesome.restart },
-   { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.quit() <span class="keyword">end</span> }
-}
-
-mymainmenu = awful.menu({ items = { { <span class="string">"awesome"</span>, myawesomemenu, beautiful.awesome_icon },
-                                    { <span class="string">"open terminal"</span>, <span class="string">"xterm"</span>}
-                                  }
-                        })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
-wb:setup {
-    layout = wibox.layout.align.horizontal,
-    { <span class="comment">-- Left widgets
-</span>        mylauncher,
-        mytaglist,
-        layout = wibox.layout.fixed.horizontal,
-    },
-    mytasklist, <span class="comment">-- Middle widget
-</span>    { <span class="comment">-- Right widgets
-</span>        layout = wibox.layout.fixed.horizontal,
-        mykeyboardlayout,
-        mytextclock,
-        mylayoutbox,
-    },
-}
-</pre>
-
+     wb:setup {
+         layout = wibox.layout.align.horizontal,
+         { -- Left widgets
+             mylauncher,
+             mytaglist,
+             layout = wibox.layout.fixed.horizontal,
+         },
+         mytasklist, -- Middle widget
+         { -- Right widgets
+             layout = wibox.layout.fixed.horizontal,
+             mykeyboardlayout,
+             mytextclock,
+             mylayoutbox,
+         },
+     }
 </p>
     <div class="extra-header">
   <div class="extra-header__section">
@@ -724,9 +714,8 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Create a button widget which will launch a command. </p>
-
-<p> <strong>NOTE</strong>: You need either command or menu argument for widget to create
+    Create a button widget which will launch a command.
+<p> **NOTE**: You need either command or menu argument for widget to create
  successfully
 
     <h3>Parameters:</h3>
@@ -749,9 +738,7 @@ wb:setup {
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">image</span></td>
@@ -915,14 +902,12 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Set a clip shape for this imagebox. </p>
-
+    Set a clip shape for this imagebox.
 <p> A clip shape defines an area and dimension to which the content should be
- trimmed.</p>
-
-
-
+ trimmed.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_clip_shape.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -979,7 +964,7 @@ wb:setup {
          </i>
           <span class="inline_types"> (cairo.context)</span>
         </td>
-        <td>: A <a href="https://cairographics.org/manual/cairo-cairo-t.html">Cairo context</a></td>
+        <td>: A [Cairo context](https://cairographics.org/manual/cairo-cairo-t.html)</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:60px;">
@@ -1083,15 +1068,13 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Should the image be resized to fit into the available space? </p>
-
+    Should the image be resized to fit into the available space?
 <p> Note that <code>upscale</code> and <code>downscale</code> can affect the value of <code>resize</code>.
  If conflicting values are passed to the constructor, then the result
- is undefined.</p>
-
-
-
+ is undefined.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_resize.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1148,15 +1131,13 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Allow the image to be upscaled (made bigger). </p>
-
+    Allow the image to be upscaled (made bigger).
 <p> Note that <code>upscale</code> and <code>downscale</code> can affect the value of <code>resize</code>.
  If conflicting values are passed to the constructor, then the result
- is undefined.</p>
-
-
-
+ is undefined.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_upscale.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1215,15 +1196,13 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Allow the image to be downscaled (made smaller). </p>
-
+    Allow the image to be downscaled (made smaller).
 <p> Note that <code>upscale</code> and <code>downscale</code> can affect the value of <code>resize</code>.
  If conflicting values are passed to the constructor, then the result
- is undefined.</p>
-
-
-
+ is undefined.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_downscale.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1283,17 +1262,14 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Set the SVG CSS stylesheet. </p>
-
+    Set the SVG CSS stylesheet.
 <p> If the image is an SVG (vector graphics), this property allows to set
- a CSS stylesheet. It can be used to set colors and much more.</p>
-
+ a CSS stylesheet. It can be used to set colors and much more.
 <p> Note that this property is a string, not a path. If the stylesheet is
- stored on disk, read the content first.</p>
-
-
-
+ stored on disk, read the content first.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_stylesheet.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1363,19 +1339,15 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Set the SVG DPI (dot per inch). </p>
-
+    Set the SVG DPI (dot per inch).
 <p> Force a specific DPI when rendering the <code>.svg</code>. For other file formats,
- this does nothing.</p>
-
-<p> It can either be a number of a table containing the <code>x</code> and <code>y</code> keys.</p>
-
+ this does nothing.
+<p> It can either be a number of a table containing the <code>x</code> and <code>y</code> keys.
 <p> Please note that DPI and <code>resize</code> can "fight" each other and end up
- making the image smaller instead of bigger.</p>
-
-
-
+ making the image smaller instead of bigger.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_dpi.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1462,13 +1434,13 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Use the object DPI when rendering the SVG. </p>
-
+    Use the object DPI when rendering the SVG.
 <p> By default, the SVG are interpreted as-is. When this property is set,
  the screen DPI will be passed to the SVG renderer. Depending on which
  tool was used to create the <code>.svg</code>, this may do nothing at all. However,
  for example, if the <code>.svg</code> uses <code>&lt;text&gt;</code> elements and doesn't have an
  hardcoded stylesheet, the result will differ.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1536,13 +1508,11 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Set the horizontal fit policy. </p>
-
-<p> Here is the result for a 22x32 image:</p>
-
-
-
+    Set the horizontal fit policy.
+<p> Here is the result for a 22x32 image:
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_horizontal_fit_policy.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1640,13 +1610,11 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Set the vertical fit policy. </p>
-
-<p> Here is the result for a 32x22 image:</p>
-
-
-
+    Set the vertical fit policy.
+<p> Here is the result for a 32x22 image:
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_vertical_fit_policy.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1744,11 +1712,10 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    The vertical alignment. </p>
-
-
-
+    The vertical alignment.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_valign.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1865,11 +1832,10 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    The horizontal alignment. </p>
-
-
-
+    The horizontal alignment.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_halign.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1986,18 +1952,15 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    The maximum scaling factor. </p>
-
+    The maximum scaling factor.
 <p> If an image is scaled too much, it gets very blurry. This
  property allows to limit the scaling.
  Use the properties <code>valign</code> and <code>halign</code> to control how the image will be
- aligned.</p>
-
-<p> In the example below, the original size is 22x22</p>
-
-
-
+ aligned.
+<p> In the example below, the original size is 22x22
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_max_scaling_factor.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2087,15 +2050,12 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    Set the scaling aligorithm. </p>
-
+    Set the scaling aligorithm.
 <p> Depending on how the image is used, what is the "correct" way to
  scale can change. For example, upscaling a pixel art image should
  not make it blurry. However, scaling up a photo should not make it
- blocky.</p>
-
-
-<table class='widget_list' border=1>
+ blocky.
+<p><table class='widget_list' border=1>
  <tr style='font-weight: bold;'>
   <th align='center'>Value</th>
   <th align='center'>Description</th>
@@ -2106,15 +2066,12 @@ wb:setup {
  <tr><td>nearest</td><td>Nearest-neighbor filtering (blocky)</td></tr>
  <tr><td>bilinear</td><td>Linear interpolation in two dimensions</td></tr>
 </table>
-
-
 <p> The image used in the example below has a resolution of 32x22 and is
  intentionally blocky to highlight the difference.
- It is zoomed by a factor of 3.</p>
-
-
-
+ It is zoomed by a factor of 3.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_wibox_widget_imagebox_scaling_quality.svg" alt="Usage example" type="image/svg+xml"></object>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2653,8 +2610,7 @@ wb:setup {
     </span>
     </dt>
     <dd>
-    The widget buttons. </p>
-
+    The widget buttons.
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>
@@ -2747,26 +2703,19 @@ wb:setup {
     </span>
     </dt>
     <dd>
-
-<p>Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal. </p>
-
+    Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.</p>
-
-<p> Note that this function has some flaws:</p>
-
-<ol>
-    <li>The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.
+<p> Note that this function has some flaws:
+<p> 1. The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.</li>
-    <li>In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.
+ 2. In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).</li>
-    <li>If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.</li>
-</ol>
-
+    tree path).
+ 3. If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.
 
 
     <h3>Parameters:</h3>
@@ -2781,9 +2730,7 @@ wb:setup {
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>
@@ -2873,20 +2820,13 @@ wb:setup {
     </span>
     </dt>
     <dd>
-
-<p>Connect to a signal. </p>
-
-
-
-
-<p><strong>Usage example output</strong>:</p>
-
-<pre><code>In slot [obj]   nil nil nil
-In slot [obj]   foo bar 42
-</code></pre>
-
-
-
+    Connect to a signal.
+<p>
+<p>
+**Usage example output**:
+<p>    In slot	[obj]	nil	nil	nil
+    In slot	[obj]	foo	bar	42
+<p>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2947,13 +2887,13 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly. </p>
-
+    Connect to a signal weakly.
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
- <strong>Warning:</strong>
+ **Warning:**
  Only use this function if you really, really, really know what you
  are doing.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
