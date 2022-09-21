@@ -219,9 +219,11 @@
 
 <h1>Module: <code>naughty.action</code></h1>
 <p>A notification action.</p>
+<p>
 <p> A notification can have multiple actions to chose from. This module allows
  to manage such actions. An action object can be shared by multiple
- notifications.</p>
+ notifications.
+</p>
     <div class="extra-header">
 
 
@@ -600,42 +602,36 @@
     </span>
     </dt>
     <dd>
-
-<p>If the action should hide the label and only display the icon. </p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_actionlist_icon_only.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<pre><code> local notif = naughty.notification {
-     title   = "A notification",
-     message = "This notification has actions!",
-     actions = {
-         naughty.action {
-             name = "Accept",
-             icon = beautiful.awesome_icon,
-             icon_only = true,
-         },
-         naughty.action {
-             name = "Refuse",
-             icon = beautiful.awesome_icon,
-             icon_only = true,
-         },
-         naughty.action {
-             name = "Ignore",
-             icon = beautiful.awesome_icon,
-             icon_only = true,
-         },
+    If the action should hide the label and only display the icon.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_actionlist_icon_only.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local notif = naughty.notification {
+         title   = "A notification",
+         message = "This notification has actions!",
+         actions = {
+             naughty.action {
+                 name = "Accept",
+                 icon = beautiful.awesome_icon,
+                 icon_only = true,
+             },
+             naughty.action {
+                 name = "Refuse",
+                 icon = beautiful.awesome_icon,
+                 icon_only = true,
+             },
+             naughty.action {
+                 name = "Ignore",
+                 icon = beautiful.awesome_icon,
+                 icon_only = true,
+             },
+         }
      }
- }
 
- wibox.widget {
-     notification = notif,
-     widget = naughty.list.actions,
- }
-</code></pre>
-
+     wibox.widget {
+         notification = notif,
+         widget = naughty.list.actions,
+     }
 
 
     <h3>Constraints:</h3>
@@ -696,9 +692,9 @@
     </span>
     </dt>
     <dd>
-    Execute this action. </p>
-
+    Execute this action.
 <p> This only emits the <a href="../core_components/naughty.action.html#invoked">invoked</a> signal.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -825,12 +821,10 @@
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly. </p>
-
+    Connect to a signal weakly.
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.</p>
-
-<p> <strong>Warning:</strong>
+ automatically disconnects the signal when that happens.
+<p> **Warning:**
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -876,10 +870,10 @@
     </span>
     </dt>
     <dd>
-    When a notification is invoked. </p>
-
+    When a notification is invoked.
 <p> Note that it is possible to call <code>:invoke()</code> without a notification object.
  It is possible the <code>notification</code> parameter will be nil.
+
 
     <h3>Arguments:</h3>
     <table class="see_also">

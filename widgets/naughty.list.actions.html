@@ -221,170 +221,140 @@
 <h1>Module: <code>naughty.list.actions</code></h1>
 <p>Manage a notification action list.</p>
 <p>
-
-
 <p> A notification action is a "button" that will trigger an action on the sender
  process. <code>notify-send</code> doesn't support actions, but <code>libnotify</code> based
- applications do.</p>
+ applications do.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_actionlist_simple.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local notif = naughty.notification {
+         title   = "A notification",
+         message = "This notification has actions!",
+         actions = {
+             naughty.action {
+                 name = "Accept",
+             },
+             naughty.action {
+                 name = "Refuse",
+             },
+             naughty.action {
+                 name = "Ignore",
+             },
+         }
+     }
 
+     wibox.widget {
+         notification = notif,
+         widget = naughty.list.actions,
+     }
+<p> This example has a custom vertical widget template:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_actionlist_fancy.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
+     wibox.widget {
+         notification = notif,
+         base_layout = wibox.widget {
+             spacing        = 3,
+             spacing_widget = wibox.widget {
+                 orientation = "horizontal",
+                 widget      = wibox.widget.separator,
+             },
+             layout         = wibox.layout.fixed.vertical
+         },
+         widget_template = {
+             {
+                 {
+                     {
+                         id     = "text_role",
+                         widget = wibox.widget.textbox
+                     },
+                     widget = wibox.container.place
+                 },
+                 shape              = gears.shape.rounded_rect,
+                 shape_border_width = 2,
+                 shape_border_color = beautiful.bg_normal,
+                 forced_height      = 30,
+                 widget             = wibox.container.background,
+             },
+             margins = 4,
+             widget  = wibox.container.margin,
+         },
+         widget = naughty.list.actions,
+     }
+<p> This example has a horizontal widget template and icons:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_actionlist_fancy_icons.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
-<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_actionlist_simple.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="keyword">local</span> notif = naughty.notification {
-    title   = <span class="string">"A notification"</span>,
-    message = <span class="string">"This notification has actions!"</span>,
-    actions = {
-        naughty.action {
-            name = <span class="string">"Accept"</span>,
-        },
-        naughty.action {
-            name = <span class="string">"Refuse"</span>,
-        },
-        naughty.action {
-            name = <span class="string">"Ignore"</span>,
-        },
-    }
-}
-
-wibox.widget {
-    notification = notif,
-    widget = naughty.list.actions,
-}
-</pre>
-
-<p> This example has a custom vertical widget template:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_actionlist_fancy.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-
-<pre>
-wibox.widget {
-    notification = notif,
-    base_layout = wibox.widget {
-        spacing        = <span class="number">3</span>,
-        spacing_widget = wibox.widget {
-            orientation = <span class="string">"horizontal"</span>,
-            widget      = wibox.widget.separator,
-        },
-        layout         = wibox.layout.fixed.vertical
-    },
-    widget_template = {
-        {
-            {
-                {
-                    id     = <span class="string">"text_role"</span>,
-                    widget = wibox.widget.textbox
-                },
-                widget = wibox.container.place
-            },
-            shape              = gears.shape.rounded_rect,
-            shape_border_width = <span class="number">2</span>,
-            shape_border_color = beautiful.bg_normal,
-            forced_height      = <span class="number">30</span>,
-            widget             = wibox.container.background,
-        },
-        margins = <span class="number">4</span>,
-        widget  = wibox.container.margin,
-    },
-    widget = naughty.list.actions,
-}
-</pre>
-
-<p> This example has a horizontal widget template and icons:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_actionlist_fancy_icons.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-
-<pre>
-wibox.widget {
-    notification = notif,
-    base_layout = wibox.widget {
-        spacing        = <span class="number">3</span>,
-        spacing_widget = wibox.widget {
-            orientation = <span class="string">"vertical"</span>,
-            widget      = wibox.widget.separator,
-        },
-        layout         = wibox.layout.flex.horizontal
-    },
-    widget_template = {
-        {
-            {
-                {
-                    id            = <span class="string">"icon_role"</span>,
-                    forced_height = <span class="number">16</span>,
-                    forced_width  = <span class="number">16</span>,
-                    widget        = wibox.widget.imagebox
-                },
-                {
-                    id     = <span class="string">"text_role"</span>,
-                    widget = wibox.widget.textbox
-                },
-                spacing = <span class="number">5</span>,
-                layout = wibox.layout.fixed.horizontal
-            },
-            id = <span class="string">"background_role"</span>,
-            widget             = wibox.container.background,
-        },
-        margins = <span class="number">4</span>,
-        widget  = wibox.container.margin,
-    },
-    widget = naughty.list.actions,
-}
-</pre>
-
+     wibox.widget {
+         notification = notif,
+         base_layout = wibox.widget {
+             spacing        = 3,
+             spacing_widget = wibox.widget {
+                 orientation = "vertical",
+                 widget      = wibox.widget.separator,
+             },
+             layout         = wibox.layout.flex.horizontal
+         },
+         widget_template = {
+             {
+                 {
+                     {
+                         id            = "icon_role",
+                         forced_height = 16,
+                         forced_width  = 16,
+                         widget        = wibox.widget.imagebox
+                     },
+                     {
+                         id     = "text_role",
+                         widget = wibox.widget.textbox
+                     },
+                     spacing = 5,
+                     layout = wibox.layout.fixed.horizontal
+                 },
+                 id = "background_role",
+                 widget             = wibox.container.background,
+             },
+             margins = 4,
+             widget  = wibox.container.margin,
+         },
+         widget = naughty.list.actions,
+     }
 <p> This example uses the theme/style variables instead of the template. This is
  less flexible, but easier to put in the theme file. Note that each style
- variable has a <a href="../theme_related_libraries/beautiful.html#">beautiful</a> equivalent.</p>
+ variable has a <a href="../theme_related_libraries/beautiful.html#">beautiful</a> equivalent.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_actionlist_style.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_actionlist_style.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-
-<pre>
-wibox.widget {
-    notification = notif,
-    base_layout = wibox.widget {
-        spacing        = <span class="number">3</span>,
-        spacing_widget = wibox.widget {
-            orientation = <span class="string">"vertical"</span>,
-            widget      = wibox.widget.separator,
-        },
-        layout         = wibox.layout.flex.horizontal
-    },
-    style = {
-        underline_normal             = <span class="keyword">false</span>,
-        underline_selected           = <span class="keyword">true</span>,
-        shape_normal                 = gears.shape.octogon,
-        shape_selected               = gears.shape.hexagon,
-        shape_border_width_normal    = <span class="number">2</span>,
-        shape_border_width_selected  = <span class="number">4</span>,
-        icon_size_normal             = <span class="number">16</span>,
-        icon_size_selected           = <span class="number">24</span>,
-        shape_border_color_normal    = <span class="string">"#0000ff"</span>,
-        shape_border_color_selected  = <span class="string">"#ff0000"</span>,
-        bg_normal                    = <span class="string">"#ffff00"</span>,
-        bg_selected                  = <span class="string">"#00ff00"</span>,
-    },
-    forced_height = beautiful.get_font_height(beautiful.font) * <span class="number">2.5</span>,
-    widget = naughty.list.actions,
-}
-</pre>
-
+     wibox.widget {
+         notification = notif,
+         base_layout = wibox.widget {
+             spacing        = 3,
+             spacing_widget = wibox.widget {
+                 orientation = "vertical",
+                 widget      = wibox.widget.separator,
+             },
+             layout         = wibox.layout.flex.horizontal
+         },
+         style = {
+             underline_normal             = false,
+             underline_selected           = true,
+             shape_normal                 = gears.shape.octogon,
+             shape_selected               = gears.shape.hexagon,
+             shape_border_width_normal    = 2,
+             shape_border_width_selected  = 4,
+             icon_size_normal             = 16,
+             icon_size_selected           = 24,
+             shape_border_color_normal    = "#0000ff",
+             shape_border_color_selected  = "#ff0000",
+             bg_normal                    = "#ffff00",
+             bg_selected                  = "#00ff00",
+         },
+         forced_height = beautiful.get_font_height(beautiful.font) * 2.5,
+         widget = naughty.list.actions,
+     }
 </p>
     <div class="extra-header">
   <div class="extra-header__section">
@@ -910,9 +880,7 @@ wibox.widget {
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">notification</span></td>
@@ -936,121 +904,91 @@ wibox.widget {
            <td><span class="parameter">style.underline_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.underline_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.shape</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.shape</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_color_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_color_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.icon_size</span></td>
            <td></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.fg_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.fg_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.color</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bgimage_normal</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bgimage_selected</span></td>
            <td></td>
            <td><span class="types"><span class="type">gears.surface</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr>
            <td><span class="parameter">widget_template</span></td>
@@ -1234,7 +1172,7 @@ wibox.widget {
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A table containing a widget tree definition. WARNING: This is really a table and <strong>NOT</strong> a widget object. Use the <code>widget = come.class.here</code> to define the topmost class rather than construct an instance.</td>
+        <td>: A table containing a widget tree definition. WARNING: This is really a table and **NOT** a widget object. Use the <code>widget = come.class.here</code> to define the topmost class rather than construct an instance.</td>
        <tr/>
      </table>
     </span>
@@ -1888,8 +1826,7 @@ wibox.widget {
     </span>
     </dt>
     <dd>
-    The widget buttons. </p>
-
+    The widget buttons.
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>
@@ -2032,12 +1969,10 @@ wibox.widget {
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly. </p>
-
+    Connect to a signal weakly.
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.</p>
-
-<p> <strong>Warning:</strong>
+ automatically disconnects the signal when that happens.
+<p> **Warning:**
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -2117,26 +2052,19 @@ wibox.widget {
     </span>
     </dt>
     <dd>
-
-<p>Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal. </p>
-
+    Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.</p>
-
-<p> Note that this function has some flaws:</p>
-
-<ol>
-    <li>The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.
+<p> Note that this function has some flaws:
+<p> 1. The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.</li>
-    <li>In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.
+ 2. In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).</li>
-    <li>If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.</li>
-</ol>
-
+    tree path).
+ 3. If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.
 
 
     <h3>Parameters:</h3>
@@ -2151,9 +2079,7 @@ wibox.widget {
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>

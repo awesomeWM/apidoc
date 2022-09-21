@@ -219,10 +219,7 @@
 <h1>Module: <code>awful.prompt</code></h1>
 <p>Convert a <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a> into an input prompt.</p>
 <p>
-
-
-<p> <strong>Keyboard navigation</strong>:</p>
-
+<p> **Keyboard navigation**:
 <p> The following readline keyboard shortcuts are implemented as expected:
  <table class='widget_list' border=1>
    <tr><th>Name</th><th>Usage</th></tr>
@@ -242,271 +239,220 @@
    <tr><td><kbd>SHIFT+INSERT</kbd></td><td>paste</td></tr>
    <tr><td><kbd>HOME</kbd></td><td>beginning-of-line</td></tr>
    <tr><td><kbd>END</kbd></td><td>end-of-line</td></tr>
- </table></p>
-
+ </table>
 <p> The following shortcuts implement additional history manipulation commands
  where the search term is defined as the substring of the command from first
- character to cursor position.</p>
-
-<ul>
-    <li><kbd>CTRL+R</kbd>: reverse history search, matches any history entry
-    containing search term.</li>
-    <li><kbd>CTRL+S</kbd>: forward history search, matches any history entry
-    containing search term.</li>
-    <li><kbd>CTRL+UP</kbd>: ZSH up line or search, matches any history entry
-    starting with search term.</li>
-    <li><kbd>CTRL+DOWN</kbd>: ZSH down line or search, matches any history
-    entry starting with search term.</li>
-    <li><kbd>CTRL+DELETE</kbd>: delete the currently visible history entry from
-    history file. This does not delete new commands or history entries under
-    user editing.</li>
-</ul>
-
-<p> <strong>Basic usage</strong>:</p>
-
+ character to cursor position.
+<p> * <kbd>CTRL+R</kbd>: reverse history search, matches any history entry
+ containing search term.
+ * <kbd>CTRL+S</kbd>: forward history search, matches any history entry
+ containing search term.
+ * <kbd>CTRL+UP</kbd>: ZSH up line or search, matches any history entry
+ starting with search term.
+ * <kbd>CTRL+DOWN</kbd>: ZSH down line or search, matches any history
+ entry starting with search term.
+ * <kbd>CTRL+DELETE</kbd>: delete the currently visible history entry from
+ history file. This does not delete new commands or history entries under
+ user editing.
+<p> **Basic usage**:
 <p> By default, <a href="../sample files/rc.lua.html#">rc.lua</a> will create one <a href="../widgets/awful.widget.prompt.html#">awful.widget.prompt</a> per screen called
  <code>mypromptbox</code>. It is used for both the command execution (<code>mod4+r</code>) and
- Lua prompt (<code>mod4+x</code>). It can be re-used for random inputs using:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_prompt_simple.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="keyword">local</span> atextbox = wibox.widget.textbox()
-<span class="comment">-- Create a shortcut function
-</span><span class="keyword">local</span> <span class="keyword">function</span> echo_test()
-    awful.prompt.run {
-        prompt       = <span class="string">"&lt;b&gt;Echo: &lt;/b&gt;"</span>,
-        text         = <span class="string">"default command"</span>,
-        bg_cursor    = <span class="string">"#ff0000"</span>,
-        <span class="comment">-- To use the default <a href="../sample files/rc.lua.html#">rc.lua</a> prompt:
-</span>        <span class="comment">--textbox      = mouse.screen.mypromptbox.widget,
-</span>        textbox      = atextbox,
-        exe_callback = <span class="keyword">function</span>(input)
-            <span class="keyword">if</span> <span class="keyword">not</span> input <span class="keyword">or</span> #input == <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
-            naughty.notification { message = <span class="string">"The input was: "</span>..input }
-        <span class="keyword">end</span>
-    }
-<span class="keyword">end</span>
-
-<span class="comment">-- Then **IN THE globalkeys TABLE** add a new shortcut
-</span>awful.key({ modkey }, <span class="string">"e"</span>, echo_test,
-    {description = <span class="string">"Echo a string"</span>, group = <span class="string">"custom"</span>}),
-</pre>
-
+ Lua prompt (<code>mod4+x</code>). It can be re-used for random inputs using:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_prompt_simple.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local atextbox = wibox.widget.textbox()
+     -- Create a shortcut function
+     local function echo_test()
+         awful.prompt.run {
+             prompt       = "<b>Echo: </b>",
+             text         = "default command",
+             bg_cursor    = "#ff0000",
+             -- To use the default <a href="../sample files/rc.lua.html#">rc.lua</a> prompt:
+             --textbox      = mouse.screen.mypromptbox.widget,
+             textbox      = atextbox,
+             exe_callback = function(input)
+                 if not input or #input == 0 then return end
+                 naughty.notification { message = "The input was: "..input }
+             end
+         }
+     end
+<p>     -- Then **IN THE globalkeys TABLE** add a new shortcut
+     awful.key({ modkey }, "e", echo_test,
+         {description = "Echo a string", group = "custom"}),
 <p> Note that this assumes an <a href="../sample files/rc.lua.html#">rc.lua</a> file based on the default one. The way
- to access the screen prompt may vary.</p>
-
-<p> <strong>Extra key hooks</strong>:</p>
-
+ to access the screen prompt may vary.
+<p> **Extra key hooks**:
 <p> The Awesome prompt also supports adding custom extensions to specific
  keyboard keybindings. Those keybindings have precedence over the built-in
- ones. Therefore, they can be used to override the default ones.</p>
-
-<p> *[Example one] Adding pre-configured <a href="../libraries/awful.spawn.html#">awful.spawn</a> commands:*</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_prompt_hooks.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="keyword">local</span> atextbox = wibox.widget.textbox()
-<span class="comment">-- Custom handler for the return value. This implementation does nothing,
-</span><span class="comment">-- but you might want be notified of the failure, so it is part of this
-</span><span class="comment">-- example.
-</span><span class="keyword">local</span> <span class="keyword">function</span> clear(result)
-    atextbox.widget.text =
-        <span class="global">type</span>(result) == <span class="string">"string"</span> <span class="keyword">and</span> result <span class="keyword">or</span> <span class="string">""</span>
-<span class="keyword">end</span>
-<span class="keyword">local</span> hooks = {
-    <span class="comment">-- Replace the "normal" <code>Return</code> with a custom one
-</span>    {{         }, <span class="string">"Return"</span>, awful.spawn},
-    <span class="comment">-- Spawn method to spawn in the current tag
-</span>    {{<span class="string">"Mod1"</span>   }, <span class="string">"Return"</span>, <span class="keyword">function</span>(command)
-        clear(awful.spawn(command,{
-            tag       = mouse.screen.selected_tag
-        }))
-    <span class="keyword">end</span>},
-    <span class="comment">-- Spawn in the current tag as floating and on top
-</span>    {{<span class="string">"Shift"</span>  }, <span class="string">"Return"</span>, <span class="keyword">function</span>(command)
-        clear(awful.spawn(command,{
-            ontop     = <span class="keyword">true</span>,
-            floating  = <span class="keyword">true</span>,
-            tag       = mouse.screen.selected_tag
-        }))
-    <span class="keyword">end</span>},
-    <span class="comment">-- Spawn in a new tag
-</span>    {{<span class="string">"Control"</span>}, <span class="string">"Return"</span>, <span class="keyword">function</span>(command)
-        clear(awful.spawn(command,{
-            new_tag = <span class="keyword">true</span>
-        }))
-    <span class="keyword">end</span>},
-    <span class="comment">-- Cancel
-</span>    {{         }, <span class="string">"Escape"</span>, <span class="keyword">function</span>(_)
-        clear()
-    <span class="keyword">end</span>},
-}
-awful.prompt.run {
-    prompt        = <span class="string">"&lt;b&gt;Run: &lt;/b&gt;"</span>,
-    hooks         = hooks,
-    textbox       = atextbox,
-    history_path  = gfs.get_cache_dir() .. <span class="string">"/history"</span>,
-    done_callback = clear,
-}
-</pre>
-
-<p> <em>[Example two] Modifying the command (+ vi like input)</em>:</p>
-
+ ones. Therefore, they can be used to override the default ones.
+<p> *[Example one] Adding pre-configured <a href="../libraries/awful.spawn.html#">awful.spawn</a> commands:*
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_prompt_hooks.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local atextbox = wibox.widget.textbox()
+     -- Custom handler for the return value. This implementation does nothing,
+     -- but you might want be notified of the failure, so it is part of this
+     -- example.
+     local function clear(result)
+         atextbox.widget.text =
+             type(result) == "string" and result or ""
+     end
+     local hooks = {
+         -- Replace the "normal" <code>Return</code> with a custom one
+         {{         }, "Return", awful.spawn},
+         -- Spawn method to spawn in the current tag
+         {{"Mod1"   }, "Return", function(command)
+             clear(awful.spawn(command,{
+                 tag       = mouse.screen.selected_tag
+             }))
+         end},
+         -- Spawn in the current tag as floating and on top
+         {{"Shift"  }, "Return", function(command)
+             clear(awful.spawn(command,{
+                 ontop     = true,
+                 floating  = true,
+                 tag       = mouse.screen.selected_tag
+             }))
+         end},
+         -- Spawn in a new tag
+         {{"Control"}, "Return", function(command)
+             clear(awful.spawn(command,{
+                 new_tag = true
+             }))
+         end},
+         -- Cancel
+         {{         }, "Escape", function(_)
+             clear()
+         end},
+     }
+     awful.prompt.run {
+         prompt        = "<b>Run: </b>",
+         hooks         = hooks,
+         textbox       = atextbox,
+         history_path  = gfs.get_cache_dir() .. "/history",
+         done_callback = clear,
+     }
+<p> *[Example two] Modifying the command (+ vi like input)*:
 <p> The hook system also allows to modify the command before interpreting it in
- the <a href="../libraries/awful.prompt.html#exe_callback">exe_callback</a>.</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_prompt_vilike.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="keyword">local</span> atextbox = wibox.widget.textbox()
-<span class="comment">-- Store a list of verbs characters in a hash
-</span><span class="keyword">local</span> verbs = {
-    <span class="comment">-- Spawn in a terminal
-</span>    t = <span class="keyword">function</span>(adjs, count, cmd) <span class="keyword">return</span> {terminal, <span class="string">"-e"</span>, cmd} <span class="keyword">end</span>,  <span class="comment">--luacheck: no unused args
-</span>    <span class="comment">-- Spawn with a shell
-</span>    s = <span class="keyword">function</span>(adjs, count, cmd) <span class="keyword">return</span> {awful.util.shell, <span class="string">'-c'</span>, cmd} <span class="keyword">end</span>, <span class="comment">--luacheck: no unused args
-</span>}
-<span class="keyword">local</span> <span class="keyword">function</span> vi_parse(action, command)
-    <span class="keyword">local</span> req, ret = {count={}, adjectives={}}
-    <span class="comment">-- Quite dumb, don't do something like &lt;num&gt;+&lt;adj&gt;+&lt;num&gt;+&lt;verb&gt;
-</span>    <span class="keyword">for</span> char <span class="keyword">in</span> action:gmatch(<span class="string">'(.)'</span>) <span class="keyword">do</span>
-        <span class="keyword">if</span>     <span class="global">tonumber</span>(char)  <span class="keyword">then</span> <span class="global">table</span>.insert(req.count, char)
-        <span class="keyword">elseif</span> verbs[char]     <span class="keyword">then</span> req.verb = char
-        <span class="keyword">else</span>   <span class="global">table</span>.insert(ret.adjectives, char) <span class="keyword">end</span>
-        <span class="keyword">if</span> req.verb <span class="keyword">then</span>
-            req.count = <span class="global">tonumber</span>(<span class="global">table</span>.concat(req.count)) <span class="keyword">or</span> <span class="number">1</span>
-            ret = ret <span class="keyword">or</span> verbs[req.verb](req.adjectives, req.count, command)
-            req = {count={}, adjectives={}}
-        <span class="keyword">end</span>
-    <span class="keyword">end</span>
-    <span class="keyword">return</span> ret
-<span class="keyword">end</span>
-awful.prompt.run {
-    prompt       = <span class="string">'&lt;b&gt;Run: &lt;/b&gt;'</span>,
-    hooks        = {
-        {{},<span class="string">'Return'</span>, <span class="keyword">function</span>(cmd)
-            <span class="keyword">if</span> (<span class="keyword">not</span> cmd) <span class="keyword">or</span> cmd:sub(<span class="number">1</span>,<span class="number">1</span>) ~= <span class="string">':'</span> <span class="keyword">then</span> <span class="keyword">return</span> cmd <span class="keyword">end</span>
-            <span class="keyword">local</span> act, cmd2 = cmd:gmatch(<span class="string">':([a-zA-Z1-9]+)[ ]+(.*)'</span>)()
-            <span class="keyword">if</span> <span class="keyword">not</span> act <span class="keyword">then</span> <span class="keyword">return</span> cmd <span class="keyword">end</span>
-            <span class="keyword">return</span> vi_parse(act, cmd2)
-        <span class="keyword">end</span>},
-    },
-    textbox      = atextbox,
-    history_path = gfs.get_cache_dir() .. <span class="string">'/history'</span>,
-    exe_callback = <span class="keyword">function</span>(cmd) awful.spawn(cmd) <span class="keyword">end</span>
-}
-</pre>
-
-<p> <em>[Example three] Key listener</em>:</p>
-
+ the <a href="../libraries/awful.prompt.html#exe_callback">exe_callback</a>.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_prompt_vilike.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local atextbox = wibox.widget.textbox()
+     -- Store a list of verbs characters in a hash
+     local verbs = {
+         -- Spawn in a terminal
+         t = function(adjs, count, cmd) return {terminal, "-e", cmd} end,  --luacheck: no unused args
+         -- Spawn with a shell
+         s = function(adjs, count, cmd) return {awful.util.shell, '-c', cmd} end, --luacheck: no unused args
+     }
+     local function vi_parse(action, command)
+         local req, ret = {count={}, adjectives={}}
+         -- Quite dumb, don't do something like <num>+<adj>+<num>+<verb>
+         for char in action:gmatch('(.)') do
+             if     tonumber(char)  then table.insert(req.count, char)
+             elseif verbs[char]     then req.verb = char
+             else   table.insert(ret.adjectives, char) end
+             if req.verb then
+                 req.count = tonumber(table.concat(req.count)) or 1
+                 ret = ret or verbs[req.verb](req.adjectives, req.count, command)
+                 req = {count={}, adjectives={}}
+             end
+         end
+         return ret
+     end
+     awful.prompt.run {
+         prompt       = '<b>Run: </b>',
+         hooks        = {
+             {{},'Return', function(cmd)
+                 if (not cmd) or cmd:sub(1,1) ~= ':' then return cmd end
+                 local act, cmd2 = cmd:gmatch(':([a-zA-Z1-9]+)[ ]+(.*)')()
+                 if not act then return cmd end
+                 return vi_parse(act, cmd2)
+             end},
+         },
+         textbox      = atextbox,
+         history_path = gfs.get_cache_dir() .. '/history',
+         exe_callback = function(cmd) awful.spawn(cmd) end
+     }
+<p> *[Example three] Key listener*:
 <p> The 2 previous examples were focused on changing the prompt behavior. This
- one explains how to "spy" on the prompt events. This can be used for</p>
-
-<ul>
-    <li>Implementing more complex mutator</li>
-    <li>Synchronising other widgets</li>
-    <li>Showing extra tips to the user</li>
-</ul>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_prompt_keypress.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="keyword">local</span> atextbox = wibox.widget.textbox()
-<span class="keyword">local</span> notif = <span class="keyword">nil</span>
-awful.prompt.run {
-    prompt               = <span class="string">"&lt;b&gt;Run: &lt;/b&gt;"</span>,
-    keypressed_callback  = <span class="keyword">function</span>(mod, key, cmd) <span class="comment">--luacheck: no unused args
-</span>        <span class="keyword">if</span> key == <span class="string">"Shift_L"</span> <span class="keyword">then</span>
-            notif = naughty.notification { message = <span class="string">"Shift pressed"</span> }
-        <span class="keyword">end</span>
-    <span class="keyword">end</span>,
-    keyreleased_callback = <span class="keyword">function</span>(mod, key, cmd) <span class="comment">--luacheck: no unused args
-</span>        <span class="keyword">if</span> notif <span class="keyword">then</span>
-            naughty.destroy(notif)
-            notif = <span class="keyword">nil</span>
-        <span class="keyword">end</span>
-    <span class="keyword">end</span>,
-    textbox              = atextbox,
-    history_path         = gfs.get_cache_dir() .. <span class="string">"/history"</span>,
-}
-</pre>
-
-<p> <strong>highlighting</strong>:</p>
-
-<p> The prompt also support custom highlighters:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_prompt_highlight.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="keyword">local</span> amp = <span class="string">"&amp;amp"</span>..<span class="global">string</span>.char(<span class="number">0x3B</span>)
-<span class="keyword">local</span> quot = <span class="string">"&amp;quot"</span>..<span class="global">string</span>.char(<span class="number">0x3B</span>)
-<span class="keyword">local</span> atextbox = wibox.widget.textbox()
-<span class="comment">-- Create a shortcut function
-</span><span class="keyword">local</span> <span class="keyword">function</span> echo_test()
-    awful.prompt.run {
-        prompt       = <span class="string">"&lt;b&gt;Echo: &lt;/b&gt;"</span>,
-        bg_cursor    = <span class="string">"#ff0000"</span>,
-        <span class="comment">-- To use the default <a href="../sample files/rc.lua.html#">rc.lua</a> prompt:
-</span>        <span class="comment">--textbox      = mouse.screen.mypromptbox.widget,
-</span>        textbox      = atextbox,
-        highlighter  = <span class="keyword">function</span>(b, a)
-            <span class="comment">-- Add a random marker to delimitate the cursor
-</span>            <span class="keyword">local</span> cmd = b..<span class="string">"ZZZCURSORZZZ"</span>..a
-            <span class="comment">-- Find shell variables
-</span>            <span class="keyword">local</span> sub = <span class="string">"&lt;span foreground='#CFBA5D'&gt;%1&lt;/span&gt;"</span>
-            cmd = cmd:gsub(<span class="string">"($[A-Za-z][a-zA-Z0-9]*)"</span>, sub)
-            <span class="comment">-- Highlight " &amp;&amp; "
-</span>            sub = <span class="string">"&lt;span foreground='#159040'&gt;%1&lt;/span&gt;"</span>
-            cmd = cmd:gsub(<span class="string">"( "</span>..amp..amp..<span class="string">")"</span>, sub)
-            <span class="comment">-- Highlight double quotes
-</span>            <span class="keyword">local</span> quote_pos = cmd:find(<span class="string">"[^\\]"</span>..quot)
-            <span class="keyword">while</span> quote_pos <span class="keyword">do</span>
-                <span class="keyword">local</span> old_pos = quote_pos
-                quote_pos = cmd:find(<span class="string">"[^\\]"</span>..quot, old_pos+<span class="number">2</span>)
-                <span class="keyword">if</span> quote_pos <span class="keyword">then</span>
-                    <span class="keyword">local</span> content = cmd:sub(old_pos+<span class="number">1</span>, quote_pos+<span class="number">6</span>)
-                    cmd = <span class="global">table</span>.concat({
-                            cmd:sub(<span class="number">1</span>, old_pos),
-                            <span class="string">"&lt;span foreground='#2977CF'&gt;"</span>,
-                            content,
-                            <span class="string">"&lt;/span&gt;"</span>,
-                            cmd:sub(quote_pos+<span class="number">7</span>, #cmd)
-                    }, <span class="string">""</span>)
-                    quote_pos = cmd:find(<span class="string">"[^\\]"</span>..quot, old_pos+<span class="number">38</span>)
-                <span class="keyword">end</span>
-            <span class="keyword">end</span>
-            <span class="comment">-- Split the string back to the original content
-</span>            <span class="comment">-- (ignore the recursive and escaped ones)
-</span>            <span class="keyword">local</span> pos = cmd:find(<span class="string">"ZZZCURSORZZZ"</span>)
-            b,a = cmd:sub(<span class="number">1</span>, pos-<span class="number">1</span>), cmd:sub(pos+<span class="number">12</span>, #cmd)
-            <span class="keyword">return</span> b,a
-        <span class="keyword">end</span>,
-    }
-<span class="keyword">end</span>
-</pre>
-
+ one explains how to "spy" on the prompt events. This can be used for
+<p> * Implementing more complex mutator
+ * Synchronising other widgets
+ * Showing extra tips to the user
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_prompt_keypress.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local atextbox = wibox.widget.textbox()
+     local notif = nil
+     awful.prompt.run {
+         prompt               = "<b>Run: </b>",
+         keypressed_callback  = function(mod, key, cmd) --luacheck: no unused args
+             if key == "Shift_L" then
+                 notif = naughty.notification { message = "Shift pressed" }
+             end
+         end,
+         keyreleased_callback = function(mod, key, cmd) --luacheck: no unused args
+             if notif then
+                 naughty.destroy(notif)
+                 notif = nil
+             end
+         end,
+         textbox              = atextbox,
+         history_path         = gfs.get_cache_dir() .. "/history",
+     }
+<p> **highlighting**:
+<p> The prompt also support custom highlighters:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_prompt_highlight.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local amp = "&amp"..string.char(0x3B)
+     local quot = "&quot"..string.char(0x3B)
+     local atextbox = wibox.widget.textbox()
+     -- Create a shortcut function
+     local function echo_test()
+         awful.prompt.run {
+             prompt       = "<b>Echo: </b>",
+             bg_cursor    = "#ff0000",
+             -- To use the default <a href="../sample files/rc.lua.html#">rc.lua</a> prompt:
+             --textbox      = mouse.screen.mypromptbox.widget,
+             textbox      = atextbox,
+             highlighter  = function(b, a)
+                 -- Add a random marker to delimitate the cursor
+                 local cmd = b.."ZZZCURSORZZZ"..a
+                 -- Find shell variables
+                 local sub = "<span foreground='#CFBA5D'>%1</span>"
+                 cmd = cmd:gsub("($[A-Za-z][a-zA-Z0-9]*)", sub)
+                 -- Highlight " && "
+                 sub = "<span foreground='#159040'>%1</span>"
+                 cmd = cmd:gsub("( "..amp..amp..")", sub)
+                 -- Highlight double quotes
+                 local quote_pos = cmd:find("[^\\]"..quot)
+                 while quote_pos do
+                     local old_pos = quote_pos
+                     quote_pos = cmd:find("[^\\]"..quot, old_pos+2)
+                     if quote_pos then
+                         local content = cmd:sub(old_pos+1, quote_pos+6)
+                         cmd = table.concat({
+                                 cmd:sub(1, old_pos),
+                                 "<span foreground='#2977CF'>",
+                                 content,
+                                 "</span>",
+                                 cmd:sub(quote_pos+7, #cmd)
+                         }, "")
+                         quote_pos = cmd:find("[^\\]"..quot, old_pos+38)
+                     end
+                 end
+                 -- Split the string back to the original content
+                 -- (ignore the recursive and escaped ones)
+                 local pos = cmd:find("ZZZCURSORZZZ")
+                 b,a = cmd:sub(1, pos-1), cmd:sub(pos+12, #cmd)
+                 return b,a
+             end,
+         }
+     end
 </p>
     <div class="extra-header">
 
@@ -696,65 +642,49 @@ awful.prompt.run {
            <td><span class="parameter">fg_cursor</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">gears.color</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bg_cursor</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">gears.color</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">ul_cursor</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">gears.color</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">prompt</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">widget</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">text</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">selectall</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">font</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">autoexec</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">textbox</span></td>
@@ -828,64 +758,61 @@ awful.prompt.run {
            <td><span class="parameter">hooks</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
-           <td class="see_also_description">
-<p> The "hooks" argument uses a syntax similar to
+           <td class="see_also_description"> The "hooks" argument uses a syntax similar to
    <a href="../input_handling/awful.key.html#">awful.key</a>.  It will call a function for the matching modifiers + key.
    It receives the command (widget text/input) as an argument.
    If the callback returns a command, this will be passed to the
    <a href="../libraries/awful.prompt.html#exe_callback">exe_callback</a>, otherwise nothing gets executed by default, and the hook
-   needs to handle it.</p>
-<pre><code> hooks = {
-   -- Apply startup notification properties with Shift-Return.
-   {{"Shift"  }, "Return", function(command)
-     awful.screen.focused().mypromptbox:spawn_and_handle_error(
-       command, {floating=true})
-   end},
-   -- Override default behavior of "Return": launch commands prefixed
-   -- with ":" in a terminal.
-   {{}, "Return", function(command)
-     if command:sub(1,1) == ":" then
-       return terminal .. ' -e ' .. command:sub(2)
-     end
-     return command
-   end}
- }
-</code></pre>
-</td>
+   needs to handle it.
+     hooks = {
+       -- Apply startup notification properties with Shift-Return.
+       {{"Shift"  }, "Return", function(command)
+         awful.screen.focused().mypromptbox:spawn_and_handle_error(
+           command, {floating=true})
+       end},
+       -- Override default behavior of "Return": launch commands prefixed
+       -- with ":" in a terminal.
+       {{}, "Return", function(command)
+         if command:sub(1,1) == ":" then
+           return terminal .. ' -e ' .. command:sub(2)
+         end
+         return command
+       end}
+     }</td>
          </tr>
          <tr>
            <td><span class="parameter">textbox</span></td>
            <td></td>
            <td><span class="types"><span class="type">wibox.widget.textbox</span></span></td>
-           <td class="see_also_description"> The textbox to use for the prompt. [<strong>DEPRECATED</strong>]</td>
+           <td class="see_also_description"> The textbox to use for the prompt. [**DEPRECATED**]</td>
          </tr>
          <tr>
            <td><span class="parameter">exe_callback</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">function</span> or <span class="type">nil</span></span></td>
            <td class="see_also_description"> The callback function to call with command as argument
- when finished. [<strong>DEPRECATED</strong>]</td>
+ when finished. [**DEPRECATED**]</td>
          </tr>
          <tr>
            <td><span class="parameter">completion_callback</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">function</span></span></td>
            <td class="see_also_description"> The callback function to call to get completion.
-   [<strong>DEPRECATED</strong>]</td>
+   [**DEPRECATED**]</td>
          </tr>
          <tr>
            <td><span class="parameter">history_path</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
            <td class="see_also_description"> File path where the history should be
- saved, set nil to disable history [<strong>DEPRECATED</strong>]</td>
+ saved, set nil to disable history [**DEPRECATED**]</td>
          </tr>
          <tr>
            <td><span class="parameter">history_max</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
            <td class="see_also_description"> Set the maximum entries in history
- file, 50 by default [<strong>DEPRECATED</strong>]</td>
+ file, 50 by default [**DEPRECATED**]</td>
          </tr>
          <tr>
            <td><span class="parameter">done_callback</span></td>
@@ -893,14 +820,14 @@ awful.prompt.run {
            <td><span class="types"><span class="type">function</span></span></td>
            <td class="see_also_description"> The callback function to always call
  without arguments, regardless of whether the prompt was cancelled.
-  [<strong>DEPRECATED</strong>]</td>
+  [**DEPRECATED**]</td>
          </tr>
          <tr>
            <td><span class="parameter">changed_callback</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">function</span></span></td>
            <td class="see_also_description"> The callback function to call
- with command as argument when a command was changed. [<strong>DEPRECATED</strong>]</td>
+ with command as argument when a command was changed. [**DEPRECATED**]</td>
          </tr>
          <tr>
            <td><span class="parameter">keypressed_callback</span></td>
@@ -908,7 +835,7 @@ awful.prompt.run {
            <td><span class="types"><span class="type">function</span></span></td>
            <td class="see_also_description"> The callback function to call
    with mod table, key and command as arguments when a key was pressed.
-   [<strong>DEPRECATED</strong>]</td>
+   [**DEPRECATED**]</td>
          </tr>
         </table>
 
@@ -1353,17 +1280,13 @@ awful.prompt.run {
            <td><span class="parameter">before_cursor</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr>
            <td><span class="parameter">after_cursor</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
         </table>
 
@@ -1391,17 +1314,14 @@ awful.prompt.run {
     </dt>
     <dd>
     A callback when a key combination is triggered.
- This callback can return many things:</p>
-
-<ul>
-    <li>a modified command</li>
-    <li><code>true</code> If the command is successful (then it won't exit)</li>
-    <li>nothing or <code>nil</code> to execute the <a href="../libraries/awful.prompt.html#exe_callback">exe_callback</a> and <a href="../libraries/awful.prompt.html#done_callback">done_callback</a> and exit</li>
-</ul>
-
+ This callback can return many things:
+<p> * a modified command
+ * <code>true</code> If the command is successful (then it won't exit)
+ * nothing or <code>nil</code> to execute the <a href="../libraries/awful.prompt.html#exe_callback">exe_callback</a> and <a href="../libraries/awful.prompt.html#done_callback">done_callback</a> and exit
 <p> An optional second return value controls if the prompt should exit or simply
  update the command (from the first return value) and keep going. The default
  is to execute the <a href="../libraries/awful.prompt.html#exe_callback">exe_callback</a> and <a href="../libraries/awful.prompt.html#done_callback">done_callback</a> before exiting.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">

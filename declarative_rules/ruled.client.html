@@ -220,234 +220,179 @@
 
 <h1>Module: <code>ruled.client</code></h1>
 <p>Apply properties to a new client based on pre-determined rules.</p>
+<p>
 <p> This module applies <a href="../declarative_rules/ruled.client.html#awful.rules">rules</a> to clients during startup (via <a href="../core_components/client.html#manage">client.manage</a>,
- but its functions can be used for client matching in general.</p>
-
+ but its functions can be used for client matching in general.
 <p> All existing <a href="../core_components/client.html#">client</a> properties can be used in rules. It is also possible
  to add random properties that will be later accessible as <code>c.property_name</code>
- (where <code>c</code> is a valid client object)</p>
+ (where <code>c</code> is a valid client object)
+<p> Syntax
+ ===
+ You should fill this table with your rule and properties to apply.
+ For example, if you want to set xterm maximized at startup, you can add:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_maximized.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     ruled.client.append_rule {
+         rule = { class = "xterm" },
+         properties = {
+             maximized_vertical   = true,
+             maximized_horizontal = true
+         },
+     }
 
-<h1> Syntax</h1>
-<p> You should fill this table with your rule and properties to apply.
- For example, if you want to set xterm maximized at startup, you can add:</p>
+     -- Spawn xterm
+     awful.spawn("xterm")
+<p> If you want to set mplayer floating at startup, you can add:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_floating.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     ruled.client.append_rule {
+         rule = { class = "mplayer" },
+         properties = {
+             floating  = true,
+             placement = awful.placement.centered,
+             width     = 640,
+             height    = 480,
+         },
+     }
 
+     -- Spawn xterm
+     for _=1, 5 do
+         awful.spawn("xterm")
+     end
 
-
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_maximized.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-ruled.client.append_rule {
-    rule = { class = <span class="string">"xterm"</span> },
-    properties = {
-        maximized_vertical   = <span class="keyword">true</span>,
-        maximized_horizontal = <span class="keyword">true</span>
-    },
-}
-
-<span class="comment">-- Spawn xterm
-</span>awful.spawn(<span class="string">"xterm"</span>)
-</pre>
-
-<p> If you want to set mplayer floating at startup, you can add:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_floating.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-ruled.client.append_rule {
-    rule = { class = <span class="string">"mplayer"</span> },
-    properties = {
-        floating  = <span class="keyword">true</span>,
-        placement = awful.placement.centered,
-        width     = <span class="number">640</span>,
-        height    = <span class="number">480</span>,
-    },
-}
-
-<span class="comment">-- Spawn xterm
-</span><span class="keyword">for</span> _=<span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
-    awful.spawn(<span class="string">"xterm"</span>)
-<span class="keyword">end</span>
-
-<span class="comment">-- Spawn mplayer
-</span>awful.spawn(<span class="string">"mplayer"</span>)
-</pre>
-
+     -- Spawn mplayer
+     awful.spawn("mplayer")
 <p> If you want to put Firefox on a specific tag at startup. It is possible to
- specify the tag with it's object or by name:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_tags.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="comment">-- Select tag by object reference:
-</span>ruled.client.append_rule {
-    rule_any    = {
-        class = {<span class="string">"firefox"</span>}
-    },
-    properties = {
-        tag = screen[<span class="number">1</span>].tags[<span class="number">3</span>],
-    },
-}
-
-<span class="comment">-- Select tag by name:
-</span>ruled.client.append_rule {
-    rule_any    = {
-        class = {<span class="string">"thunderbird"</span>}
-    },
-    properties = {
-        tag = <span class="string">"five"</span>,
-    },
-}
-
-<span class="comment">-- Spawn firefox and thunderbird
-</span>awful.spawn(<span class="string">"firefox"</span>)
-awful.spawn(<span class="string">"thunderbird"</span>)
-</pre>
-
-<p> If you want to put Thunderbird on a specific screen at startup, use:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_screens.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-mouse.coords {x = <span class="number">2500</span>, y = <span class="number">100</span> }
-
-<span class="comment">-- Screen by IDs:
-</span>ruled.client.append_rule {
-    rule_any    = {
-        class = {<span class="string">"firefox"</span>}
-    },
-    properties = {
-        screen = <span class="number">2</span>,
-    },
-}
-
-<span class="comment">-- Screen by object:
-</span>ruled.client.append_rule {
-    rule_any    = {
-        class = {<span class="string">"thunderbird"</span>}
-    },
-    properties = {
-        screen = mouse.screen,
-    },
-}
-
-<span class="comment">-- Screen by output name:
-</span>ruled.client.append_rule {
-    rule_any    = {
-        class = {<span class="string">"xterm"</span>}
-    },
-    properties = {
-        screen = <span class="string">"LVDS1"</span>,
-    },
-}
-
-<span class="comment">-- Spawn firefox, thunderbird and xterm
-</span>awful.spawn(<span class="string">"firefox"</span>)
-awful.spawn(<span class="string">"thunderbird"</span>)
-awful.spawn(<span class="string">"xterm"</span>)
-</pre>
-
-<p> If you want to put Emacs on a specific tag at startup, and immediately switch
- to that tag you can add:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_switch_to_tags.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="comment">-- Select tag by object reference:
-</span>ruled.client.append_rule {
-    rule = { class = <span class="string">"firefox"</span> },
-    properties = {
-        tag            = screen[<span class="number">1</span>].tags[<span class="number">4</span>],
-        switch_to_tags = <span class="keyword">true</span>
+ specify the tag with it's object or by name:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_tags.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+    -- Select tag by object reference:
+    ruled.client.append_rule {
+        rule_any    = {
+            class = {"firefox"}
+        },
+        properties = {
+            tag = screen[1].tags[3],
+        },
     }
-}
 
-<span class="comment">-- Spawn firefox
-</span>awful.spawn(<span class="string">"firefox"</span>)
-</pre>
+    -- Select tag by name:
+    ruled.client.append_rule {
+        rule_any    = {
+            class = {"thunderbird"}
+        },
+        properties = {
+            tag = "five",
+        },
+    }
 
+    -- Spawn firefox and thunderbird
+    awful.spawn("firefox")
+    awful.spawn("thunderbird")
+<p> If you want to put Thunderbird on a specific screen at startup, use:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_screens.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     mouse.coords {x = 2500, y = 100 }
+
+     -- Screen by IDs:
+     ruled.client.append_rule {
+         rule_any    = {
+             class = {"firefox"}
+         },
+         properties = {
+             screen = 2,
+         },
+     }
+
+     -- Screen by object:
+     ruled.client.append_rule {
+         rule_any    = {
+             class = {"thunderbird"}
+         },
+         properties = {
+             screen = mouse.screen,
+         },
+     }
+
+     -- Screen by output name:
+     ruled.client.append_rule {
+         rule_any    = {
+             class = {"xterm"}
+         },
+         properties = {
+             screen = "LVDS1",
+         },
+     }
+
+     -- Spawn firefox, thunderbird and xterm
+     awful.spawn("firefox")
+     awful.spawn("thunderbird")
+     awful.spawn("xterm")
+<p> If you want to put Emacs on a specific tag at startup, and immediately switch
+ to that tag you can add:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_switch_to_tags.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     -- Select tag by object reference:
+     ruled.client.append_rule {
+         rule = { class = "firefox" },
+         properties = {
+             tag            = screen[1].tags[4],
+             switch_to_tags = true
+         }
+     }
+
+     -- Spawn firefox
+     awful.spawn("firefox")
 <p> If you want to apply a custom callback to execute when a rule matched,
  for example to pause playing music from mpd when you start dosbox, you
- can add:</p>
-
-
-<pre>
-{ rule = { class = <span class="string">"dosbox"</span> },
-  callback = <span class="keyword">function</span>(c)
-     awful.spawn(<span class="string">'mpc pause'</span>)
-  <span class="keyword">end</span> }
-</pre>
-
+ can add:
+<p>     { rule = { class = "dosbox" },
+       callback = function(c)
+          awful.spawn('mpc pause')
+       end }
 <p> Note that all "rule" entries need to match. If any of the entry does not
- match, the rule won't be applied.</p>
-
+ match, the rule won't be applied.
 <p> If a client matches multiple rules, they are applied in the order they are
  put in this global rules table. If the value of a rule is a string, then the
- match function is used to determine if the client matches the rule.</p>
-
+ match function is used to determine if the client matches the rule.
 <p> If the value of a property is a function, that function gets called and
- function's return value is used for the property.</p>
-
+ function's return value is used for the property.
 <p> To match multiple clients to a rule one need to use slightly different
- syntax:</p>
-
-
-<pre>
-{ rule_any = { class = { <span class="string">"MPlayer"</span>, <span class="string">"Nitrogen"</span> }, instance = { <span class="string">"xterm"</span> } },
-  properties = { floating = <span class="keyword">true</span> } }
-</pre>
-
+ syntax:
+<p>     { rule_any = { class = { "MPlayer", "Nitrogen" }, instance = { "xterm" } },
+       properties = { floating = true } }
 <p> To match multiple clients with an exception one can couple <code>rules.except</code> or
- <code>rules.except_any</code> with the rules:</p>
-
-
-<pre>
-{ rule = { class = <span class="string">"Firefox"</span> },
-  except = { instance = <span class="string">"Navigator"</span> },
-  properties = {floating = <span class="keyword">true</span>},
-},
-
-{ rule_any = { class = { <span class="string">"Pidgin"</span>, <span class="string">"Xchat"</span> } },
-  except_any = { role = { <span class="string">"conversation"</span> } },
-  properties = { tag = <span class="string">"1"</span> }
-}
-
-{ rule = {},
-  except_any = { class = { <span class="string">"Firefox"</span>, <span class="string">"Vim"</span> } },
-  properties = { floating = <span class="keyword">true</span> }
-}
-</pre>
-
+ <code>rules.except_any</code> with the rules:
+<p>     { rule = { class = "Firefox" },
+       except = { instance = "Navigator" },
+       properties = {floating = true},
+     },
+<p>     { rule_any = { class = { "Pidgin", "Xchat" } },
+       except_any = { role = { "conversation" } },
+       properties = { tag = "1" }
+     }
+<p>     { rule = {},
+       except_any = { class = { "Firefox", "Vim" } },
+       properties = { floating = true }
+     }
 <p> Note that all rules can have an <a href="../declarative_rules/ruled.client.html#id">id</a> field. This can then be used to find
- the rule. For example, it can be used in <a href="../declarative_rules/ruled.client.html#module.remove_rule">remove_rule</a> instead of the table.</p>
-
-<h1> Flowchart</h1>
-
-<p> <img src="../images/client_rules.svg" alt="Client rules"/></p>
-
-<h1> Applicable client properties</h1>
-
+ the rule. For example, it can be used in <a href="../declarative_rules/ruled.client.html#module.remove_rule">remove_rule</a> instead of the table.
+<p> Flowchart
+ =========
+<p> ![Client rules](../images/client_rules.svg)
+<p> Applicable client properties
+ ===
 <p> The table below holds the list of default client properties along with
  some extra properties that are specific to the rules. Note that any property
  can be set in the rules and interpreted by user provided code. This table
- only represent those offered by default.</p>
+ only represent those offered by default.
+<p>
+</p>
     <div class="extra-header">
 
 
@@ -652,7 +597,7 @@ awful.spawn(<span class="string">"xterm"</span>)
       <td class="shortname" ><a href="#callback">callback</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
       <td class="summary">
-        A callback function to call <em>before</em> the <a href="../declarative_rules/ruled.client.html#properties">properties</a> have been applied.
+        A callback function to call *before* the <a href="../declarative_rules/ruled.client.html#properties">properties</a> have been applied.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1010,8 +955,6 @@ awful.spawn(<span class="string">"xterm"</span>)
 
            <span class="types"><span class="type">bool</span></span>
 
-
-
     </ol>
 
 
@@ -1050,8 +993,8 @@ awful.spawn(<span class="string">"xterm"</span>)
            <td><span class="parameter">rules</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
-           <td class="see_also_description"> The rules to check. List with "rule", "rule<em>any", "except" and
-   "except</em>any" keys.</td>
+           <td class="see_also_description"> The rules to check. List with "rule", "rule_any", "except" and
+   "except_any" keys.</td>
          </tr>
         </table>
 
@@ -1202,34 +1145,29 @@ awful.spawn(<span class="string">"xterm"</span>)
     </span>
     </dt>
     <dd>
-    Add a new rule source. </p>
-
+    Add a new rule source.
 <p> A rule source is a provider called when a client is managed (started). It
  allows to configure the client by providing properties that should be applied.
- By default, Awesome provides 2 sources:</p>
-
-<ul>
-    <li><a href="../libraries/awful.rules.html#">awful.rules</a>: A declarative matcher</li>
-    <li><a href="../libraries/awful.spawn.html#">awful.spawn</a>: Launch clients with pre-defined properties</li>
-</ul>
-
+ By default, Awesome provides 2 sources:
+<p> * <a href="../libraries/awful.rules.html#">awful.rules</a>: A declarative matcher
+ * <a href="../libraries/awful.spawn.html#">awful.spawn</a>: Launch clients with pre-defined properties
 <p> It is possible to register new callbacks to modify the properties table
  before it is applied. Each provider is executed sequentially and modifies the
  same table. If the first provider set a property, then the second can
  override it, then the third, etc. Once the providers are exhausted, the
- properties are applied on the client.</p>
-
+ properties are applied on the client.
 <p> It is important to note that properties themselves have their own
  dependencies. For example, a <a href="../core_components/tag.html#">tag</a> property implies a <a href="../core_components/screen.html#">screen</a>. Therefor, if
  a <a href="../core_components/screen.html#">screen</a> is already specified, then it will be ignored when the rule is
  executed. Properties also have their own priorities. For example, the
  <code>titlebar</code> and <code>border_width</code> need to be applied before the <code>x</code> and <code>y</code>
  positions are set. Otherwise, it will be off or the client will shift
- upward everytime Awesome is restarted. A rule source <em>cannot</em> change this.
+ upward everytime Awesome is restarted. A rule source *cannot* change this.
  It is up to the callback to be aware of the dependencies and avoid to
  introduce issues. For example, if the source wants to set a <a href="../core_components/screen.html#">screen</a>, it has
  to check if the <a href="../core_components/tag.html#">tag</a>, <code>tags</code> or <code>new_tag</code> are on that <a href="../core_components/screen.html#">screen</a> or remove
  those properties. Otherwise, they will be ignored once the rule is applied.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1282,7 +1220,7 @@ awful.spawn(<span class="string">"xterm"</span>)
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
            <td class="see_also_description"> A list of names of sources this source depends on
-  (sources that must be executed <em>before</em> <code>name</code>.</td>
+  (sources that must be executed *before* <code>name</code>.</td>
            <td><span class="default_value"><code>{}</code></span></td>
          </tr>
          <tr>
@@ -1391,13 +1329,11 @@ awful.spawn(<span class="string">"xterm"</span>)
     </span>
     </dt>
     <dd>
-    The default <a href="../declarative_rules/ruled.client.html#">ruled.client</a> source. </p>
+    The default <a href="../declarative_rules/ruled.client.html#">ruled.client</a> source.
+<p> It is called <a href="../libraries/awful.rules.html#">awful.rules</a> for historical reasons.
+<p> **Has priority over:**
+<p> *nothing*
 
-<p> It is called <a href="../libraries/awful.rules.html#">awful.rules</a> for historical reasons.</p>
-
-<p> <strong>Has priority over:</strong></p>
-
-<p> <em>nothing</em>
 
 
 
@@ -1416,15 +1352,9 @@ awful.spawn(<span class="string">"xterm"</span>)
     </span>
     </dt>
     <dd>
-
-<p>The rule source for clients spawned by <a href="../libraries/awful.spawn.html#">awful.spawn</a>. </p>
-
-<p> <strong>Has priority over:</strong></p>
-
-<ul>
-    <li><a href="../libraries/awful.rules.html#">awful.rules</a></li>
-</ul>
-
+    The rule source for clients spawned by <a href="../libraries/awful.spawn.html#">awful.spawn</a>.
+<p> **Has priority over:**
+<p> * <a href="../libraries/awful.rules.html#">awful.rules</a>
 
 
 
@@ -1444,21 +1374,11 @@ awful.spawn(<span class="string">"xterm"</span>)
     </span>
     </dt>
     <dd>
-
-<p>The rule source for clients spawned by <a href="../libraries/awful.spawn.html#awful.spawn.once">awful.spawn.once</a> and <code>single_instance</code>. </p>
-
-<p> <strong>Has priority over:</strong></p>
-
-<ul>
-    <li><a href="../libraries/awful.rules.html#">awful.rules</a></li>
-</ul>
-
-<p> <strong>Depends on:</strong></p>
-
-<ul>
-    <li><a href="../libraries/awful.spawn.html#">awful.spawn</a></li>
-</ul>
-
+    The rule source for clients spawned by <a href="../libraries/awful.spawn.html#awful.spawn.once">awful.spawn.once</a> and <code>single_instance</code>.
+<p> **Has priority over:**
+<p> * <a href="../libraries/awful.rules.html#">awful.rules</a>
+<p> **Depends on:**
+<p> * <a href="../libraries/awful.spawn.html#">awful.spawn</a>
 
 
 
@@ -1492,7 +1412,7 @@ awful.spawn(<span class="string">"xterm"</span>)
     <table class="see_also">
      <tr>
          <td><a href="../declarative_rules/ruled.client.html#callback" title="In the ruled.client module.">callback</a></td>
-         <td>A callback function to call <em>before</em> the <a href="../declarative_rules/ruled.client.html#properties">properties</a> have been applied. </td>
+         <td>A callback function to call *before* the <a href="../declarative_rules/ruled.client.html#properties">properties</a> have been applied. </td>
          <td>
              <span class="chips">rule components</span>
          </td>
@@ -1513,9 +1433,9 @@ awful.spawn(<span class="string">"xterm"</span>)
     </span>
     </dt>
     <dd>
-    A callback function to call <em>before</em> the <a href="../declarative_rules/ruled.client.html#properties">properties</a> have been applied. </p>
-
+    A callback function to call *before* the <a href="../declarative_rules/ruled.client.html#properties">properties</a> have been applied.
 <p> The callback is called with the current client as first argument.
+
 
 
 
@@ -1573,6 +1493,7 @@ awful.spawn(<span class="string">"xterm"</span>)
     </dt>
     <dd>
     Similar to <a href="../declarative_rules/ruled.client.html#rule">rule</a>, but each entry is a table with multiple values.
+<p>
 
 
 
@@ -1720,9 +1641,9 @@ awful.spawn(<span class="string">"xterm"</span>)
     </span>
     </dt>
     <dd>
-    A table whose content will be compared to the target object current properties. </p>
-
+    A table whose content will be compared to the target object current properties.
 <p> The comparison will be made using the lesser (<code>&lt;</code>) operator.
+
 
 
 
@@ -1759,9 +1680,9 @@ awful.spawn(<span class="string">"xterm"</span>)
     </span>
     </dt>
     <dd>
-    A table whose content will be compared to the target object current properties. </p>
-
+    A table whose content will be compared to the target object current properties.
 <p> The comparison will be made using the greater (<code>&gt;</code>) operator.
+
 
 
 
@@ -1798,14 +1719,13 @@ awful.spawn(<span class="string">"xterm"</span>)
     </span>
     </dt>
     <dd>
-    An identifier for this rule. </p>
-
+    An identifier for this rule.
 <p> It can be anything. It will be compared with the <code>==</code> operator. Strings are
- highly recommended.</p>
-
+ highly recommended.
 <p> Setting an <a href="../declarative_rules/ruled.client.html#id">id</a> is useful to be able to remove the rule by using its id
  instead of a table reference. Modules can also listen to <code>rule::appended</code> and
  modify or disable a rule.
+
 
 
 
@@ -1828,26 +1748,16 @@ awful.spawn(<span class="string">"xterm"</span>)
     </span>
     </dt>
     <dd>
-
-<p>Extra rules properties. </p>
-
+    Extra rules properties.
 <p> These properties are used in the rules only and are not sent to the client
- afterward.</p>
-
-<p> To add a new properties, just do:</p>
-
-<pre><code>function ruled.client.extra_properties.my_new_property(c, value, props)
-    -- do something
-end
-</code></pre>
-
-<p> By default, the table has the following functions:</p>
-
-<ul>
-    <li>geometry</li>
-    <li>placement</li>
-</ul>
-
+ afterward.
+<p> To add a new properties, just do:
+<p>    function ruled.client.extra_properties.my_new_property(c, value, props)
+        -- do something
+    end
+<p> By default, the table has the following functions:
+<p> * geometry
+ * placement
 
 
 
@@ -1867,27 +1777,17 @@ end
     </span>
     </dt>
     <dd>
-
-<p>Extra high priority properties. </p>
-
+    Extra high priority properties.
 <p> Some properties, such as anything related to tags, geometry or focus, will
  cause a race condition if set in the main property section. This is why
- they have a section for them.</p>
-
-<p> To add a new properties, just do:</p>
-
-<pre><code>function ruled.client.high_priority_properties.my_new_property(c, value, props)
-    -- do something
-end
-</code></pre>
-
-<p> By default, the table has the following functions:</p>
-
-<ul>
-    <li>tag</li>
-    <li>new_tag</li>
-</ul>
-
+ they have a section for them.
+<p> To add a new properties, just do:
+<p>    function ruled.client.high_priority_properties.my_new_property(c, value, props)
+        -- do something
+    end
+<p> By default, the table has the following functions:
+<p> * tag
+ * new_tag
 
 
 

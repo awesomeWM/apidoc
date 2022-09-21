@@ -219,87 +219,61 @@
 
 <h1>Module: <code>awful.tooltip</code></h1>
 <p>Tooltip module for awesome objects.</p>
+<p>
 <p> A tooltip is a small hint displayed when the mouse cursor
  hovers over a specific item.
  In awesome, a tooltip can be linked with almost any
  object having a <code>:connect_signal()</code> method and receiving
- <code>mouse::enter</code> and <code>mouse::leave</code> signals.</p>
+ <code>mouse::enter</code> and <code>mouse::leave</code> signals.
+<p> How to create a tooltip?
+ ---
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_textclock.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local mytextclock = wibox.widget.textclock()
 
-<h2> How to create a tooltip?</h2>
+     local myclock_t = awful.tooltip {
+         objects        = { mytextclock },
+         timer_function = function()
+             return os.date("Today is %A %B %d %Y\nThe time is %T")
+         end,
+     }
+<p> Alternatively, you can use <code>mouse::enter</code> signal:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_textclock2.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local mytextclock = wibox.widget.textclock()
 
+     local myclock_t = awful.tooltip { }
 
+     myclock_t:add_to_object(mytextclock)
 
-<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_textclock.svg" alt="Usage example" type="image/svg+xml"></object></p>
+     mytextclock:connect_signal("mouse::enter", function()
+         myclock_t.text = os.date("Today is %A %B %d %Y\nThe time is %T")
+     end)
+<p> How to create a tooltip without objects?
+ ---
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_mouse.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     local tt = awful.tooltip {
+         text = "A tooltip!",
+         visible = true,
+     }
 
+     tt.bg = beautiful.bg_normal
 
-
-<pre>
-<span class="keyword">local</span> mytextclock = wibox.widget.textclock()
-
-<span class="keyword">local</span> myclock_t = awful.tooltip {
-    objects        = { mytextclock },
-    timer_function = <span class="keyword">function</span>()
-        <span class="keyword">return</span> <span class="global">os</span>.date(<span class="string">"Today is %A %B %d %Y\nThe time is %T"</span>)
-    <span class="keyword">end</span>,
-}
-</pre>
-
-<p> Alternatively, you can use <code>mouse::enter</code> signal:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_textclock2.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="keyword">local</span> mytextclock = wibox.widget.textclock()
-
-<span class="keyword">local</span> myclock_t = awful.tooltip { }
-
-myclock_t:add_to_object(mytextclock)
-
-mytextclock:connect_signal(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>()
-    myclock_t.text = <span class="global">os</span>.date(<span class="string">"Today is %A %B %d %Y\nThe time is %T"</span>)
-<span class="keyword">end</span>)
-</pre>
-
-<h2> How to create a tooltip without objects?</h2>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_mouse.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="keyword">local</span> tt = awful.tooltip {
-    text = <span class="string">"A tooltip!"</span>,
-    visible = <span class="keyword">true</span>,
-}
-
-tt.bg = beautiful.bg_normal
-</pre>
-
-<h2> How to add the same tooltip to multiple objects?</h2>
-
-
-<pre>
-myclock_t:add_to_object(obj1)
-myclock_t:add_to_object(obj2)
-</pre>
-
-<p> Now the same tooltip is attached to <code>myclock</code>, <code>obj1</code>, <code>obj2</code>.</p>
-
-<h2> How to remove a tooltip from several objects?</h2>
-
-
-<pre>
-myclock_t:remove_from_object(obj1)
-myclock_t:remove_from_object(obj2)
-</pre>
-
-<p> Now the same tooltip is only attached to <code>myclock</code>.</p>
+<p> How to add the same tooltip to multiple objects?
+ ---
+<p>     myclock_t:add_to_object(obj1)
+     myclock_t:add_to_object(obj2)
+<p> Now the same tooltip is attached to <code>myclock</code>, <code>obj1</code>, <code>obj2</code>.
+<p> How to remove a tooltip from several objects?
+ ---
+<p>     myclock_t:remove_from_object(obj1)
+     myclock_t:remove_from_object(obj2)
+<p> Now the same tooltip is only attached to <code>myclock</code>.
+</p>
     <div class="extra-header">
   <div class="extra-header__section">
     <h3>Class Hierarchy</h3>
@@ -1254,19 +1228,15 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    The horizontal alignment. </p>
-
+    The horizontal alignment.
 <p> This is valid for the mouse mode only. For the outside mode, use
- <a href="../popups_and_bars/awful.tooltip.html#preferred_positions">preferred_positions</a>.</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_align.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
+ <a href="../popups_and_bars/awful.tooltip.html#preferred_positions">preferred_positions</a>.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_align.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
 <p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_align2.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1420,11 +1390,10 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    The shape of the tooltip window. </p>
-
-
-
+    The shape of the tooltip window.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_shape.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1510,20 +1479,15 @@ myclock_t:remove_from_object(obj2)
     Set the tooltip positioning mode.
  This affects how the tooltip is placed. By default, the tooltip is <a href="../popups_and_bars/awful.tooltip.html#align">align</a>ed
  close to the mouse cursor. It is also possible to place the tooltip relative
- to the widget geometry.</p>
-
-<p> <strong>mouse:</strong></p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_mode.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<p> <strong>outside:</strong></p>
-
-
-
+ to the widget geometry.
+<p> **mouse:**
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_mode.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+ **outside:**
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_mode2.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1595,26 +1559,17 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-
-<p>The preferred positions when in <code>outside</code> mode. </p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_preferred_positions.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<p> If the tooltip fits on multiple sides of the drawable, then this defines the
- priority.</p>
-
-<p> The valid table values are:</p>
-
-<ul>
-    <li>"top"</li>
-    <li>"right"</li>
-    <li>"left"</li>
-    <li>"bottom"</li>
-</ul>
-
+    The preferred positions when in <code>outside</code> mode.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_preferred_positions.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+ If the tooltip fits on multiple sides of the drawable, then this defines the
+ priority.
+<p> The valid table values are:
+<p> * "top"
+ * "right"
+ * "left"
+ * "bottom"
 
 
     <h3>Constraints:</h3>
@@ -1704,41 +1659,25 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-
-<p>The preferred alignment when using the <code>outside</code> mode. </p>
-
+    The preferred alignment when using the <code>outside</code> mode.
 <p> The values of the table are ordered by priority, the first one that fits
- will be used.</p>
-
-<p> <strong>front:</strong></p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_preferred_alignment.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<p> <strong>middle:</strong></p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_preferred_alignment2.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<p> <strong>back:</strong></p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_preferred_alignment3.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<p> The valid table values are:</p>
-
-<ul>
-    <li>"front"</li>
-    <li>"middle"</li>
-    <li>"back"</li>
-</ul>
-
+ will be used.
+<p> **front:**
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_preferred_alignment.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+ **middle:**
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_preferred_alignment2.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+ **back:**
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_preferred_alignment3.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+ The valid table values are:
+<p> * "front"
+ * "middle"
+ * "back"
 
 
     <h3>Constraints:</h3>
@@ -2007,11 +1946,10 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    Set all margins around the tooltip textbox. </p>
-
-
-
+    Set all margins around the tooltip textbox.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_margins.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2132,11 +2070,10 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    The border width. </p>
-
-
-
+    The border width.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_border_width.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2226,11 +2163,10 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    The border color. </p>
-
-
-
+    The border color.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_border_color.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2272,7 +2208,7 @@ myclock_t:remove_from_object(obj2)
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
+        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -2280,7 +2216,7 @@ myclock_t:remove_from_object(obj2)
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
+        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -2288,7 +2224,7 @@ myclock_t:remove_from_object(obj2)
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
+        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -2356,11 +2292,10 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    Set the margins around the left and right of the tooltip textbox. </p>
-
-
-
+    Set the margins around the left and right of the tooltip textbox.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_margins_leftright.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2442,11 +2377,10 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    Set the margins around the top and bottom of the tooltip textbox. </p>
-
-
-
+    Set the margins around the top and bottom of the tooltip textbox.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_margins_topbottom.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2529,11 +2463,10 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    Set the margins between the tooltip and its parent. </p>
-
-
-
+    Set the margins between the tooltip and its parent.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_awful_tooltip_gaps.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3392,11 +3325,11 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    The wibox's bounding shape as a (native) cairo surface. </p>
-
+    The wibox's bounding shape as a (native) cairo surface.
 <p> If you want to set a shape, let say some rounded corners, use
  the <a href="../popups_and_bars/awful.tooltip.html#shape">shape</a> property rather than this. If you want something
  very complex, for example, holes, then use this.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3455,10 +3388,10 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    The wibox's clip shape as a (native) cairo surface. </p>
-
-<p> The clip shape is the shape of the window <em>content</em> rather
+    The wibox's clip shape as a (native) cairo surface.
+<p> The clip shape is the shape of the window *content* rather
  than the outer window shape.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3517,11 +3450,11 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    The wibox's input shape as a (native) cairo surface. </p>
-
+    The wibox's input shape as a (native) cairo surface.
 <p> The input shape allows to disable clicks and mouse events
  on part of the window. This is how <code>input_passthrough</code> is
  implemented.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3580,13 +3513,13 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    Forward the inputs to the client below the wibox. </p>
-
+    Forward the inputs to the client below the wibox.
 <p> This replace the <code>shape_input</code> mask with an empty area. All mouse and
  keyboard events are sent to the object (such as a client) positioned below
  this wibox. When used alongside compositing, it allows, for example, to have
  a subtle transparent wibox on top a fullscreen client to display important
  data such as a low battery warning.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3720,13 +3653,13 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    The background of the wibox. </p>
-
+    The background of the wibox.
 <p> The background color can be transparent. If there is a
  compositing manager such as compton, then it will be
  real transparency and may include blur (provided by the
  compositor). When there is no compositor, it will take
  a picture of the wallpaper and blend it.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3768,7 +3701,7 @@ myclock_t:remove_from_object(obj2)
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
+        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -3776,7 +3709,7 @@ myclock_t:remove_from_object(obj2)
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
+        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -3784,7 +3717,7 @@ myclock_t:remove_from_object(obj2)
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
+        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
        <tr/>
        <tr class="">
         <td style="padding-left:0px;">
@@ -3853,10 +3786,10 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    The background image of the drawable. </p>
-
+    The background image of the drawable.
 <p> If <code>image</code> is a function, it will be called with <code>(context, cr, width, height)</code>
  as arguments. Any other arguments passed to this method will be appended.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4006,7 +3939,7 @@ myclock_t:remove_from_object(obj2)
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
+        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -4014,7 +3947,7 @@ myclock_t:remove_from_object(obj2)
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
+        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -4022,7 +3955,7 @@ myclock_t:remove_from_object(obj2)
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
+        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
        <tr/>
      </table>
     </span>
@@ -4243,12 +4176,10 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly. </p>
-
+    Connect to a signal weakly.
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.</p>
-
-<p> <strong>Warning:</strong>
+ automatically disconnects the signal when that happens.
+<p> **Warning:**
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -4295,6 +4226,7 @@ myclock_t:remove_from_object(obj2)
     <dd>
     Get or set wibox geometry.  That's the same as accessing or setting the x,
  y, width or height properties of a wibox.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -4354,14 +4286,14 @@ myclock_t:remove_from_object(obj2)
     </span>
     </dt>
     <dd>
-    Get or set wibox struts. </p>
-
+    Get or set wibox struts.
 <p> Struts are the area which should be reserved on each side of
  the screen for this wibox. This is used to make bars and
  docked displays. Note that <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a> implements all the
  required boilerplate code to make bar. Only use this if you
  want special type of bars (like bars not fully attached to
  the side of the screen).
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -4424,7 +4356,7 @@ myclock_t:remove_from_object(obj2)
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
- See <a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a>
+ See [The declarative layout system](../documentation/03-declarative-layout.md.html)
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -4490,8 +4422,8 @@ myclock_t:remove_from_object(obj2)
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A sorted table of widgets positions. The first element is the biggest
- container while the last is the topmost widget. The table contains <em>x</em>, <em>y</em>,
- <em>width</em>, <em>height</em> and <em>widget</em>.
+ container while the last is the topmost widget. The table contains *x*, *y*,
+ *width*, *height* and *widget*.
     </ol>
 
 
@@ -4598,9 +4530,7 @@ myclock_t:remove_from_object(obj2)
            <td><span class="parameter">wibox</span></td>
            <td></td>
            <td><span class="types"></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
         </table>
 

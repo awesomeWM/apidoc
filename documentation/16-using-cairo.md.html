@@ -215,212 +215,117 @@
 
 <div id="content">
 
-
-<h1>Using Cairo and LGI</h1>
-
+    # Using Cairo and LGI
 <p>The interface of Awesome is mostly based on a library called LGI. It provides
 access to C libraries such as GTK, GLib, Cairo, Pango, PangoCairo and RSVG using
-Lua code without having to write actual "glue" C code.</p>
-
+Lua code without having to write actual "glue" C code.
 <p>This is done using the GObject-introspection framework. The main advantage is
 the time saved and large number of features exposed for free. The downside is
 the lack of proper Lua centric documentation and examples. Some examples can be
-found in <a href="https://github.com/pavouk/lgi/tree/master/docs">LGI's own documentation</a>,
+found in [LGI's own documentation](https://github.com/pavouk/lgi/tree/master/docs),
 but this does not directly explain how to use a concrete API.
 Using other APIs requires some trial and error, and can be even impossible if
 the introspection data is missing or inaccurate.
 Using low-level APIs directly can easily cause crashes.
 It is the programmer's responsibility to properly check return and error
-values.</p>
-
-<p><a name="Using_LGI_in_Awesome"></a></p>
-<h2>Using LGI in Awesome</h2>
-
+values.
+<p>## Using LGI in Awesome
 <p>GObject and Gnome centric libraries tend to use the common C practice of
 emulating namespaces using underscores in function names.
-LGI exposes a proper namespace based API. For example, if the C function is:</p>
-
-
-<pre>
-cairo_image_surface_create()
-</pre>
-
-<p>Then the LGI equivalent is:</p>
-
-
-<pre>
-lgi.cairo.ImageSurface.create()
-</pre>
-
-<p>The same goes for enums:</p>
-
-
-<pre>
-CAIRO_FORMAT_ARGB32
-</pre>
-
-<p>becomes:</p>
-
-
-<pre>
-lgi.cairo.Format.ARGB32
-</pre>
-
+LGI exposes a proper namespace based API. For example, if the C function is:
+<p>    cairo_image_surface_create()
+<p>Then the LGI equivalent is:
+<p>    lgi.cairo.ImageSurface.create()
+<p>The same goes for enums:
+<p>    CAIRO_FORMAT_ARGB32
+<p>becomes:
+<p>    lgi.cairo.Format.ARGB32
 <p>LGI is also object oriented while the C API is function based. When those
-functions take the "class" "object", then this:</p>
-
-
-<pre>
-cairo_line_to(cr, x, y)
-</pre>
-
-<p>can be expressed as:</p>
-
-
-<pre>
-cr:line_to(x, y)
-</pre>
-
+functions take the "class" "object", then this:
+<p>    cairo_line_to(cr, x, y)
+<p>can be expressed as:
+<p>    cr:line_to(x, y)
 <p>It is however important to note some inconsistencies. For example, Cairo is
 called <code>lgi.cairo</code> while GLib is called <code>lgi.GLib</code>. Figuring this out will
 require some experimenting. The best way to do this without actually
-reloading Awesome is to open the <code>lua</code> command in a terminal and use <a href="https://www.lua.org/manual/5.3/manual.html#pdf-print">print</a>:</p>
-
-
-<pre>
-<span class="global">print</span>(<span class="string">"This will print a table address:"</span>, <span class="global">require</span>(<span class="string">"lgi"</span>).cairo)
-<span class="global">print</span>(<span class="string">"This will print an error:"</span>, <span class="global">require</span>(<span class="string">"lgi"</span>).Cairo)
-</pre>
-
+reloading Awesome is to open the <code>lua</code> command in a terminal and use <a href="https://www.lua.org/manual/5.3/manual.html#pdf-print">print</a>:
+<p>    print("This will print a table address:", require("lgi").cairo)
+    print("This will print an error:", require("lgi").Cairo)
 <p>It is recommended to avoid using <a href="https://www.lua.org/manual/5.3/manual.html#pdf-require">require</a> always when using a function, but
-include the libraries at the top of your <a href="../sample files/rc.lua.html#">rc.lua</a> or Lua module instead:</p>
-
-
-<pre>
-<span class="keyword">local</span> cairo = <span class="global">require</span>(<span class="string">"lgi"</span>).cairo
-</pre>
-
-<p><a name="The_Cairo_API"></a></p>
-<h2>The Cairo API</h2>
-
+include the libraries at the top of your <a href="../sample files/rc.lua.html#">rc.lua</a> or Lua module instead:
+<p>    local cairo = require("lgi").cairo
+<p>## The Cairo API
 <p>Cairo is a 2D graphic library used by Awesome, Gnome and XFCE. It allows to
 e.g. paint paths on a <code>surface</code>.
 Awesome uses it internally and being able to call it directly is a powerful
-feature.</p>
-
-<p>The following concepts are necessary to be able to use Cairo:</p>
-
-<p><strong>Surface</strong>:</p>
-
+feature.
+<p>The following concepts are necessary to be able to use Cairo:
+<p>**Surface**:
 <p>A surface is the area where the painting will be done. There are multiple types
-of surfaces including:</p>
-
-<ul>
-    <li>Color images with transparency (<code>ARGB32</code>) or without (<code>RGB24</code>)</li>
-    <li>Monochrome image surfaces with transparency (<code>A8</code>) or without (<code>A1</code>)</li>
-    <li>SVG vectorial surfaces</li>
-    <li>Native (XCB) surfaces</li>
-    <li>Framebuffers and other less interesting ones (from the point of
-    view of Awesome)</li>
-</ul>
-
-<p>For more details see <a href="https://cairographics.org/manual/cairo-Image-Surfaces.html">Surfaces</a>.</p>
-
-<p><strong>Sources</strong>:</p>
-
+of surfaces including:
+<p> * Color images with transparency (<code>ARGB32</code>) or without (<code>RGB24</code>)
+ * Monochrome image surfaces with transparency (<code>A8</code>) or without (<code>A1</code>)
+ * SVG vectorial surfaces
+ * Native (XCB) surfaces
+ * Framebuffers and other less interesting ones (from the point of
+   view of Awesome)
+<p>For more details see [Surfaces](https://cairographics.org/manual/cairo-Image-Surfaces.html).
+<p>**Sources**:
 <p>Sources are elements like colors, patterns or gradients. See <a href="../theme_related_libraries/gears.color.html#">gears.color</a> for
-common sources.</p>
-
-<p>For more details see <a href="http://cairographics.org/manual/cairo-cairo-pattern-t.html">Pattern</a>.</p>
-
-<p><strong>Context and paths</strong>:</p>
-
+common sources.
+<p>For more details see [Pattern](http://cairographics.org/manual/cairo-cairo-pattern-t.html).
+<p>**Context and paths**:
 <p>A context is the proxy between the program and the surface, and holds a path.
 Paths are something like a line, circle or rectangle, which may or
-may not be closed (a shape).</p>
-
+may not be closed (a shape).
 <p>All drawing operations on a surface are done via a context.
 The current path is extended until it is used and reset (see next section).
-Until then nothing will be drawn to the surface.  For example:</p>
-
-
-<pre>
-cr:rectangle(<span class="number">0</span> , <span class="number">0</span> , <span class="number">10</span>, <span class="number">10</span>)
-cr:rectangle(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>)
-</pre>
-
-<p>will not do anything until the operation is applied to the context.</p>
-
-<p>For more details, read:</p>
-
-<ul>
-    <li><a href="http://cairographics.org/manual/cairo-Paths.html">Path</a></li>
-    <li><a href="http://cairographics.org/manual/cairo-cairo-t.html">Context</a></li>
-    <li><a href="http://cairographics.org/manual/cairo-Transformations.html">Transformation</a></li>
-</ul>
-
+Until then nothing will be drawn to the surface.  For example:
+<p>    cr:rectangle(0 , 0 , 10, 10)
+    cr:rectangle(10, 10, 10, 10)
+<p>will not do anything until the operation is applied to the context.
+<p>For more details, read:
+<p>* [Path](http://cairographics.org/manual/cairo-Paths.html)
+* [Context](http://cairographics.org/manual/cairo-cairo-t.html)
+* [Transformation](http://cairographics.org/manual/cairo-Transformations.html)
 <p>A context also holds a transformation matrix (see <a href="../classes/gears.matrix.html#">gears.matrix</a>), which is
-used when applying an operation.</p>
-
-<p><strong>Operations</strong>:</p>
-
-<p>Multiple operations can be done with the paths. The most common are:</p>
-
-<ul>
-    <li><em>fill</em>: Fill the path with the current source.</li>
-    <li><em>stroke</em>: Paint the path outline with the current source.</li>
-    <li><em>mask</em>: Use the current source as an alpha mask while painting with the
-    current operator.</li>
-    <li><em>clip</em>: Crop the surface's workarea so nothing outside of the clip will be
-    affected by all following operations.</li>
-</ul>
-
-<p><strong>Operators</strong>:</p>
-
-<p><a href="http://cairographics.org/operators/">Operators</a> are modifiers used when
-applying operations.</p>
-
-<h3>Cairo in Awesome</h3>
-
+used when applying an operation.
+<p>**Operations**:
+<p>Multiple operations can be done with the paths. The most common are:
+<p> * *fill*: Fill the path with the current source.
+ * *stroke*: Paint the path outline with the current source.
+ * *mask*: Use the current source as an alpha mask while painting with the
+   current operator.
+ * *clip*: Crop the surface's workarea so nothing outside of the clip will be
+   affected by all following operations.
+<p>**Operators**:
+<p>[Operators](http://cairographics.org/operators/) are modifiers used when
+applying operations.
+<p>### Cairo in Awesome
 <p>The <a href="../popups_and_bars/wibox.html#">wibox</a>es, <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a>s, <a href="../utility_libraries/gears.wallpaper.html#">gears.wallpaper</a>s and
 <a href="../popups_and_bars/awful.titlebar.html#">awful.titlebar</a>s in Awesome contain Cairo surfaces, which can be accessed through
 the <code>drawin</code> API.  This allows widgets to use the Cairo context directly.
 See the
-<a href="../documentation/03-declarative-layout.md.html">declarative layout system</a>
-and <a href="../documentation/04-new-widgets.md.html">new widgets</a> articles for more
-information and examples on how widgets work.</p>
-
+[declarative layout system](../documentation/03-declarative-layout.md.html)
+and [new widgets](../documentation/04-new-widgets.md.html) articles for more
+information and examples on how widgets work.
 <p>It is also possible to create surfaces manually. See <a href="../libraries/gears.surface.html#">gears.surface</a> for
-some examples. Here is the most simple example you can get:</p>
-
-
-<pre>
-<span class="comment">-- Create a surface
-</span><span class="keyword">local</span> img = cairo.ImageSurface.create(cairo.Format.ARGB32, <span class="number">50</span>, <span class="number">50</span>)
-
-<span class="comment">-- Create a context
-</span><span class="keyword">local</span> cr  = cairo.Context(img)
-
-<span class="comment">-- Set a red source
-</span>cr:set_source_rgb(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>)
-<span class="comment">-- Alternative:
-</span>cr:set_source(gears.color(<span class="string">"#ff0000"</span>))
-
-<span class="comment">-- Add a 10px square path to the context at x=10, y=10
-</span>cr:rectangle(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>)
-
-<span class="comment">-- Actually draw the rectangle on img
-</span>cr:fill()
-</pre>
-
+some examples. Here is the most simple example you can get:
+<p>    -- Create a surface
+    local img = cairo.ImageSurface.create(cairo.Format.ARGB32, 50, 50)
+<p>    -- Create a context
+    local cr  = cairo.Context(img)
+<p>    -- Set a red source
+    cr:set_source_rgb(1, 0, 0)
+    -- Alternative:
+    cr:set_source(gears.color("#ff0000"))
+<p>    -- Add a 10px square path to the context at x=10, y=10
+    cr:rectangle(10, 10, 10, 10)
+<p>    -- Actually draw the rectangle on img
+    cr:fill()
 <p>This can then be used as <code>bgimage</code> for a <a href="../popups_and_bars/wibox.html#">wibox</a>, <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a> or
-<a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>:</p>
-
-
-<pre>
-screen.primary.mywibox.bgimage = img
-</pre>
-
+<a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>:
+<p>    screen.primary.mywibox.bgimage = img
 
 
 </div> <!-- id="content" -->

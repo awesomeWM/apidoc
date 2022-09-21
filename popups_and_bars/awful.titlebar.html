@@ -221,68 +221,59 @@
 <h1>Module: <code>awful.titlebar</code></h1>
 <p>Create widget area on the edge of a client.</p>
 <p>
-
-
-<h1> Create a titlebar</h1>
-
+<p> Create a titlebar
+ =================
 <p> This example reproduces what the default <a href="../sample files/rc.lua.html#">rc.lua</a> does. It shows how to
- handle the titlebars on a lower level.</p>
+ handle the titlebars on a lower level.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_titlebar_default.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     -- Create a titlebar for the client.
+     -- By default, <a href="../declarative_rules/ruled.client.html#">ruled.client</a> will create one, but all it does is to call this
+     -- function.
+     local top_titlebar = awful.titlebar(c, {
+         size      = 20,
+         bg_normal = "#ff0000",
+     })
 
+     -- buttons for the titlebar
+     local buttons = gears.table.join(
+         awful.button({ }, 1, function()
+             client.focus = c
+             c:raise()
+             awful.mouse.client.move(c)
+         end),
+         awful.button({ }, 3, function()
+             client.focus = c
+             c:raise()
+             awful.mouse.client.resize(c)
+         end)
+     )
 
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_titlebar_default.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-<span class="comment">-- Create a titlebar for the client.
-</span><span class="comment">-- By default, <a href="../declarative_rules/ruled.client.html#">ruled.client</a> will create one, but all it does is to call this
-</span><span class="comment">-- function.
-</span><span class="keyword">local</span> top_titlebar = awful.titlebar(c, {
-    size      = <span class="number">20</span>,
-    bg_normal = <span class="string">"#ff0000"</span>,
-})
-
-<span class="comment">-- buttons for the titlebar
-</span><span class="keyword">local</span> buttons = gears.<span class="global">table</span>.join(
-    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>()
-        client.focus = c
-        c:raise()
-        awful.mouse.client.move(c)
-    <span class="keyword">end</span>),
-    awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span>()
-        client.focus = c
-        c:raise()
-        awful.mouse.client.resize(c)
-    <span class="keyword">end</span>)
-)
-
-top_titlebar.widget = {
-    { <span class="comment">-- Left
-</span>        awful.titlebar.widget.iconwidget(c),
-        buttons = buttons,
-        layout  = wibox.layout.fixed.horizontal
-    },
-    { <span class="comment">-- Middle
-</span>        { <span class="comment">-- Title
-</span>            halign = <span class="string">"center"</span>,
-            widget = awful.titlebar.widget.titlewidget(c)
-        },
-        buttons = buttons,
-        layout  = wibox.layout.flex.horizontal
-    },
-    { <span class="comment">-- Right
-</span>        awful.titlebar.widget.floatingbutton (c),
-        awful.titlebar.widget.maximizedbutton(c),
-        awful.titlebar.widget.stickybutton   (c),
-        awful.titlebar.widget.ontopbutton    (c),
-        awful.titlebar.widget.closebutton    (c),
-        layout = wibox.layout.fixed.horizontal()
-    },
-    layout = wibox.layout.align.horizontal
-}
-</pre>
-
+     top_titlebar.widget = {
+         { -- Left
+             awful.titlebar.widget.iconwidget(c),
+             buttons = buttons,
+             layout  = wibox.layout.fixed.horizontal
+         },
+         { -- Middle
+             { -- Title
+                 halign = "center",
+                 widget = awful.titlebar.widget.titlewidget(c)
+             },
+             buttons = buttons,
+             layout  = wibox.layout.flex.horizontal
+         },
+         { -- Right
+             awful.titlebar.widget.floatingbutton (c),
+             awful.titlebar.widget.maximizedbutton(c),
+             awful.titlebar.widget.stickybutton   (c),
+             awful.titlebar.widget.ontopbutton    (c),
+             awful.titlebar.widget.closebutton    (c),
+             layout = wibox.layout.fixed.horizontal()
+         },
+         layout = wibox.layout.align.horizontal
+     }
 </p>
     <div class="extra-header">
 
@@ -1184,7 +1175,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_messages_close">beautiful.titlebar_tooltip_messages_close</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar tooltip message for close button.
+        The message in the close button tooltip.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1193,7 +1184,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_messages_minimize">beautiful.titlebar_tooltip_messages_minimize</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar tooltip message for minimize button.
+        The message in the minimize button tooltip.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1202,7 +1193,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_messages_maximized_active">beautiful.titlebar_tooltip_messages_maximized_active</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar tooltip message for maximized button when client is maximized.
+        The message in the maximize button tooltip when the client is maximized.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1211,7 +1202,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_messages_maximized_inactive">beautiful.titlebar_tooltip_messages_maximized_inactive</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar tooltip message for maximized button when client is unmaximized.
+        The message in the maximize button tooltip when the client is unmaximized.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1220,7 +1211,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_messages_floating_active">beautiful.titlebar_tooltip_messages_floating_active</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar tooltip message for floating button when client is floating.
+        The message in the floating button tooltip when then client is floating.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1229,7 +1220,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_messages_floating_inactive">beautiful.titlebar_tooltip_messages_floating_inactive</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar tooltip message for floating button when client isn't floating.
+        The message in the floating button tooltip when then client isn't floating.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1238,7 +1229,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_messages_ontop_active">beautiful.titlebar_tooltip_messages_ontop_active</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar tooltip message for onTop button when client is onTop.
+        The message in the onTop button tooltip when the client is onTop.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1247,7 +1238,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_messages_ontop_inactive">beautiful.titlebar_tooltip_messages_ontop_inactive</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar tooltip message for onTop button when client isn't onTop.
+        The message in the onTop button tooltip when client isn't onTop.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1256,7 +1247,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_messages_sticky_active">beautiful.titlebar_tooltip_messages_sticky_active</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar tooltip message for onTop button when client is sticky.
+        The message in the sticky button tooltip when the client is sticky.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1265,7 +1256,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_messages_sticky_inactive">beautiful.titlebar_tooltip_messages_sticky_inactive</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar tooltip message for onTop button when client isn't sticky.
+        The message in the sticky button tooltip when the client isn't sticky.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1274,7 +1265,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_delay_show">beautiful.titlebar_tooltip_delay_show</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
       <td class="summary">
-        Titlebar buttons tooltip parameter <code>delay_show</code>.
+        The delay in second before the titlebar buttons tooltip is shown.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1283,7 +1274,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_margins_leftright">beautiful.titlebar_tooltip_margins_leftright</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
       <td class="summary">
-        Titlebar buttons tooltip parameter <code>margins_leftright</code>.
+        The inner left and right margins for tooltip messages.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1292,7 +1283,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_margins_topbottom">beautiful.titlebar_tooltip_margins_topbottom</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
       <td class="summary">
-        Titlebar buttons tooltip parameter <code>margins_topbottom</code>.
+        The inner top and bottom margins for the tooltip messages.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1301,7 +1292,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_timeout">beautiful.titlebar_tooltip_timeout</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
       <td class="summary">
-        Titlebar buttons tooltip parameter <code>timeout</code>.
+        The time in second before invoking the <code>timer_function</code> callback.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1310,7 +1301,7 @@ top_titlebar.widget = {
       <td class="shortname" ><a href="#beautiful.titlebar_tooltip_align">beautiful.titlebar_tooltip_align</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
-        Titlebar buttons tooltip parameter <code>align</code>.
+        The text horizontal alignment in tooltips.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1353,31 +1344,23 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-
-<p>Create a new titlebar for the given client. </p>
-
+    Create a new titlebar for the given client.
 <p> Every client can hold up to four titlebars, one for each side (i.e. each
- value of <code>args.position</code>).</p>
-
+ value of <code>args.position</code>).
 <p> If this constructor is called again with the same
  values for the client (<code>c</code>) and the titlebar position (<code>args.position</code>),
- the previous titlebar will be removed and replaced by the new one.</p>
+ the previous titlebar will be removed and replaced by the new one.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_titlebar_constructor.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     -- Create default titlebar.
+     awful.titlebar(c)
 
+     -- Create titlebar on the client's bottom edge.
+     awful.titlebar(c, { position = "bottom" })
 
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_titlebar_constructor.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-<pre><code> -- Create default titlebar.
- awful.titlebar(c)
-
- -- Create titlebar on the client's bottom edge.
- awful.titlebar(c, { position = "bottom" })
-
- -- Create titlebar with inverted colors.
- awful.titlebar(c, { bg_normal = beautiful.fg_normal, fg_normal = beautiful.bg_normal })
-</code></pre>
-
+     -- Create titlebar with inverted colors.
+     awful.titlebar(c, { bg_normal = beautiful.fg_normal, fg_normal = beautiful.bg_normal })
 
 
     <h3>Parameters:</h3>
@@ -1424,81 +1407,63 @@ top_titlebar.widget = {
            <td><span class="parameter">bg_normal</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bg_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bg_urgent</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bgimage_normal</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bgimage_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">fg_normal</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">fg_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">fg_urgent</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">font</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
         </table>
@@ -1562,11 +1527,11 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Create a new title widget. </p>
-
+    Create a new title widget.
 <p> A title widget displays the name of a client.
  Please note that this returns a textbox and all of textbox' API is available.
  This way, you can e.g. modify the font that is used.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1605,11 +1570,11 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Create a new icon widget. </p>
-
+    Create a new icon widget.
 <p> An icon widget displays the icon of a client.
  Please note that this returns an imagebox and all of the imagebox' API is
  available. This way, you can e.g. disallow resizes.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1645,11 +1610,11 @@ top_titlebar.widget = {
     <a class="copy-link js-copy-link" name="awful.titlebar.widget.button" href="#awful.titlebar.widget.button">&#128279;</a>
     <strong><span class='function_modname'>awful.titlebar.</span>widget.button <span class='function_args'> <b>(</b>c, name, selector, action<b>)</b></span></strong>
     <span class="baseclass" >
+         &middot 15 theme variables
     </span>
     </dt>
     <dd>
-    Create a new button widget. </p>
-
+    Create a new button widget.
 <p> A button widget displays an image and reacts to
  mouse clicks. Please note that the caller has to make sure that this widget
  gets redrawn when needed by calling the returned widget's <code>:update()</code> method.
@@ -1657,6 +1622,7 @@ top_titlebar.widget = {
  is a boolean, either <code>&quot;active&quot;</code> or <code>&quot;inactive&quot;</code> are used. The actual image is
  then found in the theme as <code>titlebar_[name]_button_[normal/focus]_[state]</code>.
  If that value does not exist, the focused state is ignored for the next try.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1703,8 +1669,51 @@ top_titlebar.widget = {
 
 
 
+     <br />
+     <center id=button370>
+     <a class="show_more_button" onclick="show_extra('370')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item370 class="hide_extra">
+     <h3>Consumed theme variables:</h3>
+     <table class='widget_list' border=1>
+         <tr style='font-weight: bold;'>
+           <th>Theme variable</th>
+           <th>Usage</th>
+         </tr>
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_messages_close">beautiful.titlebar_tooltip_messages_close</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_messages_minimize">beautiful.titlebar_tooltip_messages_minimize</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_messages_maximized_active">beautiful.titlebar_tooltip_messages_maximized_active</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_messages_maximized_inactive">beautiful.titlebar_tooltip_messages_maximized_inactive</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_messages_floating_active">beautiful.titlebar_tooltip_messages_floating_active</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_messages_floating_inactive">beautiful.titlebar_tooltip_messages_floating_inactive</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_messages_ontop_active">beautiful.titlebar_tooltip_messages_ontop_active</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_messages_ontop_inactive">beautiful.titlebar_tooltip_messages_ontop_inactive</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_messages_sticky_active">beautiful.titlebar_tooltip_messages_sticky_active</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_messages_sticky_inactive">beautiful.titlebar_tooltip_messages_sticky_inactive</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_delay_show">beautiful.titlebar_tooltip_delay_show</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_margins_leftright">beautiful.titlebar_tooltip_margins_leftright</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_margins_topbottom">beautiful.titlebar_tooltip_margins_topbottom</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_timeout">beautiful.titlebar_tooltip_timeout</a></td><td></td></tr>
+
+          <tr><td><a href="../popups_and_bars/awful.titlebar.html#beautiful.titlebar_tooltip_align">beautiful.titlebar_tooltip_align</a></td><td></td></tr>
+
+     </table>
     </span>
 
 </dd>
@@ -2321,9 +2330,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Set a declarative widget hierarchy description. </p>
-
-<p> See <a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a>
+    Set a declarative widget hierarchy description.
+<p> See [The declarative layout system](../documentation/03-declarative-layout.md.html)
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -5648,23 +5656,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar tooltip message for close button.
+    The message in the close button tooltip.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">tooltip</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> tooltip message</td>
-         </tr>
-        </table>
 
 
 
@@ -5680,8 +5673,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button461>
+     <a class="show_more_button" onclick="show_extra('461')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item461 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -5693,23 +5697,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar tooltip message for minimize button.
+    The message in the minimize button tooltip.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">tooltip</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> tooltip message</td>
-         </tr>
-        </table>
 
 
 
@@ -5725,8 +5714,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button462>
+     <a class="show_more_button" onclick="show_extra('462')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item462 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -5738,23 +5738,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar tooltip message for maximized button when client is maximized.
+    The message in the maximize button tooltip when the client is maximized.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">tooltip</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> tooltip message</td>
-         </tr>
-        </table>
 
 
 
@@ -5770,8 +5755,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button463>
+     <a class="show_more_button" onclick="show_extra('463')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item463 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -5783,23 +5779,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar tooltip message for maximized button when client is unmaximized.
+    The message in the maximize button tooltip when the client is unmaximized.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">tooltip</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> tooltip message</td>
-         </tr>
-        </table>
 
 
 
@@ -5815,8 +5796,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button464>
+     <a class="show_more_button" onclick="show_extra('464')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item464 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -5828,23 +5820,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar tooltip message for floating button when client is floating.
+    The message in the floating button tooltip when then client is floating.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">tooltip</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> tooltip message</td>
-         </tr>
-        </table>
 
 
 
@@ -5860,8 +5837,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button465>
+     <a class="show_more_button" onclick="show_extra('465')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item465 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -5873,23 +5861,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar tooltip message for floating button when client isn't floating.
+    The message in the floating button tooltip when then client isn't floating.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">tooltip</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> tooltip message</td>
-         </tr>
-        </table>
 
 
 
@@ -5905,8 +5878,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button466>
+     <a class="show_more_button" onclick="show_extra('466')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item466 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -5918,23 +5902,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar tooltip message for onTop button when client is onTop.
+    The message in the onTop button tooltip when the client is onTop.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">tooltip</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> tooltip message</td>
-         </tr>
-        </table>
 
 
 
@@ -5950,8 +5919,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button467>
+     <a class="show_more_button" onclick="show_extra('467')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item467 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -5963,23 +5943,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar tooltip message for onTop button when client isn't onTop.
+    The message in the onTop button tooltip when client isn't onTop.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">tooltip</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> tooltip message</td>
-         </tr>
-        </table>
 
 
 
@@ -5995,8 +5960,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button468>
+     <a class="show_more_button" onclick="show_extra('468')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item468 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -6008,23 +5984,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar tooltip message for onTop button when client is sticky.
+    The message in the sticky button tooltip when the client is sticky.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">tooltip</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> tooltip message</td>
-         </tr>
-        </table>
 
 
 
@@ -6040,8 +6001,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button469>
+     <a class="show_more_button" onclick="show_extra('469')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item469 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -6053,23 +6025,8 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar tooltip message for onTop button when client isn't sticky.
+    The message in the sticky button tooltip when the client isn't sticky.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">tooltip</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> tooltip message</td>
-         </tr>
-        </table>
 
 
 
@@ -6085,8 +6042,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button470>
+     <a class="show_more_button" onclick="show_extra('470')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item470 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -6098,24 +6066,9 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar buttons tooltip parameter <code>delay_show</code>.
- This parameter <code>delay_show</code> defines a delay in seconds before showing the tooltip.
+    The delay in second before the titlebar buttons tooltip is shown.
+ It is used as the <code>delay_show</code> parameter passed to the <a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a> constructor function.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">delay</span></td>
-           <td></td>
-           <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description"> in seconds before showing the tooltip</td>
-         </tr>
-        </table>
 
 
 
@@ -6131,8 +6084,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button471>
+     <a class="show_more_button" onclick="show_extra('471')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item471 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -6144,24 +6108,9 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar buttons tooltip parameter <code>margins_leftright</code>.
- This parameter <code>margins_leftright</code> defines the left/right margin for the tooltip text.
+    The inner left and right margins for tooltip messages.
+ It is used as the <code>margins_leftright</code> parameter passed to the <a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a> constructor function.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">margin</span></td>
-           <td></td>
-           <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description"> for left/right corner for the tooltop text</td>
-         </tr>
-        </table>
 
 
 
@@ -6177,8 +6126,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button472>
+     <a class="show_more_button" onclick="show_extra('472')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item472 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -6190,24 +6150,9 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar buttons tooltip parameter <code>margins_topbottom</code>.
- This parameter <code>margins_topbottom</code> defines the top/bottom margin for the tooltip text.
+    The inner top and bottom margins for the tooltip messages.
+ It is used as the <code>margins_topbottom</code> parameter passed to the <a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a> constructor function.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">margin</span></td>
-           <td></td>
-           <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description"> for top/bottom corner for the tooltip text</td>
-         </tr>
-        </table>
 
 
 
@@ -6223,8 +6168,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button473>
+     <a class="show_more_button" onclick="show_extra('473')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item473 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -6236,41 +6192,37 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar buttons tooltip parameter <code>timeout</code>.
- This parameter <code>timeout</code> defines the timeout value for declared <code>timer_function</code>.
+    The time in second before invoking the <code>timer_function</code> callback.
+ It is used as the <code>timeout</code> parameter passed to the <a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a> constructor function.
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">timeout</span></td>
-           <td></td>
-           <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description"> timeout value in seconds for activation of <code>timer_function</code></td>
-         </tr>
-        </table>
 
 
 
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../popups_and_bars/awful.tooltip.html#" title="In the awful.tooltip module.">awful.tooltip</a></td>
-         <td>Tooltip module for awesome objects. </td>
+         <td><a href="../popups_and_bars/awful.tooltip.html#timeout" title="In the awful.tooltip module.">awful.tooltip.timeout</a></td>
+         <td>Change the tooltip's update interval. (awful.tooltip)</td>
          <td>
-             <span class="chips">module</span>
+             <span class="chips">object properties</span>
          </td>
      <tr>
     </table>
 
 
+     <br />
+     <center id=button474>
+     <a class="show_more_button" onclick="show_extra('474')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item474 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>
@@ -6282,25 +6234,17 @@ top_titlebar.widget = {
     </span>
     </dt>
     <dd>
-    Titlebar buttons tooltip parameter <code>align</code>.
- This parameter <code>align</code> defines the alignment:
- <code>right</code>, <code>top_right</code>, <code>left</code>, <code>bottom_left</code>, <code>top_left</code>, <code>bottom</code>, <code>top</code>
+    The text horizontal alignment in tooltips.
+ It is used as the <code>align</code> parameter passed to the <a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a> constructor function.
+<p> Valid values are:
+<p>  * <code>&quot;right&quot;</code>
+  * <code>&quot;top_right&quot;</code>
+  * <code>&quot;left&quot;</code>
+  * <code>&quot;bottom_left&quot;</code>
+  * <code>&quot;top_left&quot;</code>
+  * <code>&quot;bottom&quot;</code>
+  * <code>&quot;top&quot;</code>
 
-    <h3>Type constraints:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">align</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> the alignment string type</td>
-         </tr>
-        </table>
 
 
 
@@ -6316,8 +6260,19 @@ top_titlebar.widget = {
     </table>
 
 
+     <br />
+     <center id=button475>
+     <a class="show_more_button" onclick="show_extra('475')">
+      Click to display more
+     </a>
+     </center>
 
     <span id=item475 class="hide_extra">
+     <h3>Used by:</h3>
+     <ul>
+          <li><a href="../popups_and_bars/awful.titlebar.html#awful.titlebar.widget.button">awful.titlebar.widget.button</a> Create a new button widget.</li>
+
+     </ul>
     </span>
 
 </dd>

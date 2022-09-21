@@ -223,47 +223,32 @@
 
 <h1>Module: <code>mouse</code></h1>
 <p>Manipulate and inspect the mouse cursor.</p>
-<p> The mouse buttons are represented as index. The common ones are:</p>
-
-<p> <img src="../images/mouse.svg" alt="Client geometry"/></p>
-
+<p>
+<p> The mouse buttons are represented as index. The common ones are:
+<p> ![Client geometry](../images/mouse.svg)
 <p> It is possible to be notified of mouse events by connecting to various
- <a href="../core_components/client.html#">client</a>, <code>widget</code>s and <a href="../popups_and_bars/wibox.html#">wibox</a> signals:</p>
-
-<ul>
-    <li><code>mouse::enter</code></li>
-    <li><code>mouse::leave</code></li>
-    <li><code>mouse::press</code></li>
-    <li><code>mouse::release</code></li>
-    <li><code>mouse::move</code></li>
-</ul>
-
+ <a href="../core_components/client.html#">client</a>, <code>widget</code>s and <a href="../popups_and_bars/wibox.html#">wibox</a> signals:
+<p>  * <code>mouse::enter</code>
+  * <code>mouse::leave</code>
+  * <code>mouse::press</code>
+  * <code>mouse::release</code>
+  * <code>mouse::move</code>
 <p> It is also possible to add generic mouse button callbacks for <a href="../core_components/client.html#">client</a>s,
- <code>wiboxe</code>s and the <a href="../core_components/root.html#">root</a> window. Those are set in the default <a href="../sample files/rc.lua.html#">rc.lua</a> as such:</p>
-
-<p> <strong>root</strong>:</p>
-
-
-<pre>
-root.buttons(awful.util.<span class="global">table</span>.join(
-    awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span> () mymainmenu:toggle() <span class="keyword">end</span>),
-    awful.button({ }, <span class="number">4</span>, awful.tag.viewnext),
-    awful.button({ }, <span class="number">5</span>, awful.tag.viewprev)
-))
-</pre>
-
-<p> <strong>client</strong>:</p>
-
-
-<pre>
-clientbuttons = awful.util.<span class="global">table</span>.join(
-    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c) client.focus = c; c:raise() <span class="keyword">end</span>),
-    awful.button({ modkey }, <span class="number">1</span>, awful.mouse.client.move),
-    awful.button({ modkey }, <span class="number">3</span>, awful.mouse.client.resize)
-)
-</pre>
-
-<p> See also <a href="../core_components/mousegrabber.html#">mousegrabber</a></p>
+ <code>wiboxe</code>s and the <a href="../core_components/root.html#">root</a> window. Those are set in the default <a href="../sample files/rc.lua.html#">rc.lua</a> as such:
+<p> **root**:
+<p>    root.buttons(awful.util.table.join(
+        awful.button({ }, 3, function () mymainmenu:toggle() end),
+        awful.button({ }, 4, awful.tag.viewnext),
+        awful.button({ }, 5, awful.tag.viewprev)
+    ))
+<p> **client**:
+<p>    clientbuttons = awful.util.table.join(
+        awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+        awful.button({ modkey }, 1, awful.mouse.client.move),
+        awful.button({ modkey }, 3, awful.mouse.client.resize)
+    )
+<p> See also <a href="../core_components/mousegrabber.html#">mousegrabber</a>
+</p>
     <div class="extra-header">
 
 
@@ -809,11 +794,11 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </span>
     </dt>
     <dd>
-    Add an <a href="../input_handling/awful.button.html#">awful.button</a> based mousebinding to the global set. </p>
-
-<p> A <strong>global</strong> mousebinding is one which is always present, even when there is
+    Add an <a href="../input_handling/awful.button.html#">awful.button</a> based mousebinding to the global set.
+<p> A **global** mousebinding is one which is always present, even when there is
  no focused client. If your intent is too add a mousebinding which acts on
- the focused client do <strong>not</strong> use this.
+ the focused client do **not** use this.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -858,11 +843,11 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </span>
     </dt>
     <dd>
-    Add multiple <a href="../input_handling/awful.button.html#">awful.button</a> based mousebindings to the global set. </p>
-
-<p> A <strong>global</strong> mousebinding is one which is always present, even when there is
+    Add multiple <a href="../input_handling/awful.button.html#">awful.button</a> based mousebindings to the global set.
+<p> A **global** mousebinding is one which is always present, even when there is
  no focused client. If your intent is too add a mousebinding which acts on
- the focused client do <strong>not</strong> use this
+ the focused client do **not** use this
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1138,20 +1123,12 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </span>
     </dt>
     <dd>
-
-<p>Get or set the mouse coords. </p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_awful_mouse_coords.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-<p><strong>Usage example output</strong>:</p>
-
-<pre><code>235
-</code></pre>
-
-
-
+    Get or set the mouse coords.
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_awful_mouse_coords.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>**Usage example output**:
+<p>    235
+<p>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1284,7 +1261,7 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
           <span class='summary_type'>nil</span>
          </i>
         </td>
-        <td>: This will only happen if <a href="core_components/screen.html#">screen</a> is set to <code>off</code> in the modeline or command line options. It happens very early in the initialization before the screens are created. If you check the screen from a signal, then you should never have to worry about this. Another corner case where this <em>might</em> happen is if you use <code>fake_resize</code> to have a smaller area than the physical screen.</td>
+        <td>: This will only happen if <a href="core_components/screen.html#">screen</a> is set to <code>off</code> in the modeline or command line options. It happens very early in the initialization before the screens are created. If you check the screen from a signal, then you should never have to worry about this. Another corner case where this *might* happen is if you use <code>fake_resize</code> to have a smaller area than the physical screen.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -2083,11 +2060,10 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </span>
     </dt>
     <dd>
-    The default distance before snapping clients together. </p>
-
-
-
+    The default distance before snapping clients together.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_screen_client_snap.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
 
 
@@ -2147,11 +2123,10 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </span>
     </dt>
     <dd>
-    Enable screen edges snapping. </p>
-
-
-
+    Enable screen edges snapping.
+<p>
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_aero_snap.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
 
 
 
@@ -2446,14 +2421,11 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </dt>
     <dd>
     Set the resize mode.
- The available modes are:</p>
-
-<ul>
-    <li><strong>live</strong>: Resize the layout everytime the mouse moves.</li>
-    <li><strong>after</strong>: Resize the layout only when the mouse is released.</li>
-</ul>
-
+ The available modes are:
+<p> * **live**: Resize the layout everytime the mouse moves.
+ * **after**: Resize the layout only when the mouse is released.
 <p> Some clients, such as XTerm, may lose information if resized too often.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2622,18 +2594,12 @@ clientbuttons = awful.util.<span class="global">table</span>.join(
     </span>
     </dt>
     <dd>
-
-<p>Resize the drawable. </p>
-
-<p> Valid <code>args</code> are:</p>
-
-<ul>
-    <li>*enter_callback*: A function called before the <a href="../core_components/mousegrabber.html#">mousegrabber</a> starts.</li>
-    <li>*move_callback*: A function called when the mouse moves.</li>
-    <li>*leave_callback*: A function called before the <a href="../core_components/mousegrabber.html#">mousegrabber</a> is released.</li>
-    <li><em>mode</em>: The resize mode.</li>
-</ul>
-
+    Resize the drawable.
+<p> Valid <code>args</code> are:
+<p> * *enter_callback*: A function called before the <a href="../core_components/mousegrabber.html#">mousegrabber</a> starts.
+ * *move_callback*: A function called when the mouse moves.
+ * *leave_callback*: A function called before the <a href="../core_components/mousegrabber.html#">mousegrabber</a> is released.
+ * *mode*: The resize mode.
 
 
     <h3>Parameters:</h3>

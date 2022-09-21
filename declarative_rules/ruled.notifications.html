@@ -220,167 +220,143 @@
 <h1>Module: <code>ruled.notifications</code></h1>
 <p>Apply properties to a new <a href="../core_components/naughty.notification.html#">naughty.notification</a> based on pre-determined rules.</p>
 <p>
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_rules_urgency.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+    ruled.notification.connect_signal("request::rules", function()
+        -- Add a red background for urgent notifications.
+        ruled.notification.append_rule {
+            rule       = { urgency = "critical" },
+            properties = { bg = "#ff0000", fg = "#ffffff", timeout = 0 }
+        }
 
+        -- Or green background for normal ones.
+        ruled.notification.append_rule {
+            rule       = { urgency = "normal" },
+            properties = { bg      = "#00ff00", fg = "#000000"}
+        }
+    end)
 
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_rules_urgency.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-ruled.notification.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
-    <span class="comment">-- Add a red background for urgent notifications.
-</span>    ruled.notification.append_rule {
-        rule       = { urgency = <span class="string">"critical"</span> },
-        properties = { bg = <span class="string">"#ff0000"</span>, fg = <span class="string">"#ffffff"</span>, timeout = <span class="number">0</span> }
+    -- Create a normal notification.
+    naughty.notification {
+        title   = "A notification 1",
+        message = "This is very informative",
+        icon    = beautiful.awesome_icon,
+        urgency = "normal",
     }
 
-    <span class="comment">-- Or green background for normal ones.
-</span>    ruled.notification.append_rule {
-        rule       = { urgency = <span class="string">"normal"</span> },
-        properties = { bg      = <span class="string">"#00ff00"</span>, fg = <span class="string">"#000000"</span>}
+    -- Create a normal notification.
+    naughty.notification {
+        title   = "A notification 2",
+        message = "This is very informative",
+        icon    = beautiful.awesome_icon,
+        urgency = "critical",
     }
-<span class="keyword">end</span>)
-
-<span class="comment">-- Create a normal notification.
-</span>naughty.notification {
-    title   = <span class="string">"A notification 1"</span>,
-    message = <span class="string">"This is very informative"</span>,
-    icon    = beautiful.awesome_icon,
-    urgency = <span class="string">"normal"</span>,
-}
-
-<span class="comment">-- Create a normal notification.
-</span>naughty.notification {
-    title   = <span class="string">"A notification 2"</span>,
-    message = <span class="string">"This is very informative"</span>,
-    icon    = beautiful.awesome_icon,
-    urgency = <span class="string">"critical"</span>,
-}
-</pre>
-
 <p> In this example, we setup a different widget template for some music
- notifications:</p>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_rules_widget_template.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-ruled.notification.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
-    <span class="comment">-- Add a red background for urgent notifications.
-</span>    ruled.notification.append_rule {
-        rule       = { app_name = <span class="string">"mdp"</span> },
-        properties = {
-            widget_template = {
-                {
+ notifications:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_rules_widget_template.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+    ruled.notification.connect_signal("request::rules", function()
+        -- Add a red background for urgent notifications.
+        ruled.notification.append_rule {
+            rule       = { app_name = "mdp" },
+            properties = {
+                widget_template = {
                     {
                         {
                             {
-                                naughty.widget.icon,
-                                forced_height = <span class="number">48</span>,
-                                halign        = <span class="string">"center"</span>,
-                                valign        = <span class="string">"center"</span>,
-                                widget        = wibox.container.place
-                            },
-                            {
-                                halign = <span class="string">"center"</span>,
-                                widget = naughty.widget.title,
-                            },
-                            {
-                                halign = <span class="string">"center"</span>,
-                                widget = naughty.widget.message,
-                            },
-                            {
-                                orientation   = <span class="string">"horizontal"</span>,
-                                widget        = wibox.widget.separator,
-                                forced_height = <span class="number">1</span>,
-                            },
-                            {
-                                <span class="keyword">nil</span>,
                                 {
-                                    wibox.widget.textbox <span class="string">"⏪"</span>,
-                                    wibox.widget.textbox <span class="string">"⏸"</span>,
-                                    wibox.widget.textbox <span class="string">"⏩"</span>,
-                                    spacing = <span class="number">20</span>,
-                                    layout  = wibox.layout.fixed.horizontal,
+                                    naughty.widget.icon,
+                                    forced_height = 48,
+                                    halign        = "center",
+                                    valign        = "center",
+                                    widget        = wibox.container.place
                                 },
-                                expand = <span class="string">"outside"</span>,
-                                <span class="keyword">nil</span>,
-                                layout = wibox.layout.align.horizontal,
+                                {
+                                    halign = "center",
+                                    widget = naughty.widget.title,
+                                },
+                                {
+                                    halign = "center",
+                                    widget = naughty.widget.message,
+                                },
+                                {
+                                    orientation   = "horizontal",
+                                    widget        = wibox.widget.separator,
+                                    forced_height = 1,
+                                },
+                                {
+                                    nil,
+                                    {
+                                        wibox.widget.textbox "⏪",
+                                        wibox.widget.textbox "⏸",
+                                        wibox.widget.textbox "⏩",
+                                        spacing = 20,
+                                        layout  = wibox.layout.fixed.horizontal,
+                                    },
+                                    expand = "outside",
+                                    nil,
+                                    layout = wibox.layout.align.horizontal,
+                                },
+                                spacing = 10,
+                                layout  = wibox.layout.fixed.vertical,
                             },
-                            spacing = <span class="number">10</span>,
-                            layout  = wibox.layout.fixed.vertical,
+                            margins = beautiful.notification_margin,
+                            widget  = wibox.container.margin,
                         },
-                        margins = beautiful.notification_margin,
-                        widget  = wibox.container.margin,
+                        id     = "background_role",
+                        widget = naughty.container.background,
                     },
-                    id     = <span class="string">"background_role"</span>,
-                    widget = naughty.container.background,
-                },
-                strategy = <span class="string">"max"</span>,
-                width    = <span class="number">160</span>,
-                widget   = wibox.container.constraint,
+                    strategy = "max",
+                    width    = 160,
+                    widget   = wibox.container.constraint,
+                }
             }
         }
-    }
-<span class="keyword">end</span>)
-naughty.connect_signal(<span class="string">"request::display"</span>, <span class="keyword">function</span>(n)
-    naughty.layout.box { notification = n }
-<span class="keyword">end</span>)
-    icon      = beautiful.awesome_icon,
-</pre>
-
+    end)
+    naughty.connect_signal("request::display", function(n)
+        naughty.layout.box { notification = n }
+    end)
+        icon      = beautiful.awesome_icon,
 <p> In this example, we add action to a notification that originally lacked
- them:</p>
+ them:
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_rules_add_actions.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+    ruled.notification.connect_signal("request::rules", function()
+        -- Add a red background for urgent notifications.
+        ruled.notification.append_rule {
+            rule       = { }, -- Match everything.
+            properties = {
+                append_actions = {
+                   naughty.action {
+                       name = "Snooze (5m)",
+                   },
+                   naughty.action {
+                       name = "Snooze (15m)",
+                   },
+                   naughty.action {
+                       name = "Snooze (1h)",
+                   },
+                },
+            }
+        }
+    end)
 
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_nwidget_rules_add_actions.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-ruled.notification.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
-    <span class="comment">-- Add a red background for urgent notifications.
-</span>    ruled.notification.append_rule {
-        rule       = { }, <span class="comment">-- Match everything.
-</span>        properties = {
-            append_actions = {
-               naughty.action {
-                   name = <span class="string">"Snooze (5m)"</span>,
-               },
-               naughty.action {
-                   name = <span class="string">"Snooze (15m)"</span>,
-               },
-               naughty.action {
-                   name = <span class="string">"Snooze (1h)"</span>,
-               },
-            },
+    -- Create a normal notification.
+    naughty.notification {
+        title   = "A notification",
+        message = "This is very informative",
+        icon    = beautiful.awesome_icon,
+        actions = {
+            naughty.action { name = "Existing 1" },
+            naughty.action { name = "Existing 2" },
         }
     }
-<span class="keyword">end</span>)
-
-<span class="comment">-- Create a normal notification.
-</span>naughty.notification {
-    title   = <span class="string">"A notification"</span>,
-    message = <span class="string">"This is very informative"</span>,
-    icon    = beautiful.awesome_icon,
-    actions = {
-        naughty.action { name = <span class="string">"Existing 1"</span> },
-        naughty.action { name = <span class="string">"Existing 2"</span> },
-    }
-}
-</pre>
-
 <p> Here is a list of all properties available in the <a href="../declarative_rules/ruled.notifications.html#properties">properties</a> section of
- a rule:</p>
-
-
-<table class='widget_list' border=1>
+ a rule:
+<p><table class='widget_list' border=1>
  <tr>
   <th align='center'>Name</th>
   <th align='center'>Description</th>
@@ -400,7 +376,7 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
    <tr><td><a href='../core_components/notification.html#font'>font</a></td><td>Notification font</td></tr>
    <tr><td><a href='../core_components/notification.html#icon'>icon</a></td><td>\"All in one\" way to access the default image or icon</td></tr>
    <tr><td><a href='../core_components/notification.html#icon_size'>icon\_size</a></td><td>Desired icon size in px</td></tr>
-   <tr><td><a href='../core_components/notification.html#app_icon'>app\_icon</a></td><td>The icon provided in the <code>app\_icon</code> field of the DBus notification</td></tr>
+   <tr><td><a href='../core_components/notification.html#app_icon'>app\_icon</a></td><td>The icon provided in the <code>app_icon</code> field of the DBus notification</td></tr>
    <tr><td><a href='../core_components/notification.html#image'>image</a></td><td>The notification image</td></tr>
    <tr><td><a href='../core_components/notification.html#images'>images</a></td><td>The notification (animated) images</td></tr>
    <tr><td><a href='../core_components/notification.html#fg'>fg</a></td><td>Foreground color</td></tr>
@@ -423,7 +399,6 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
    <tr><td><a href='../core_components/notification.html#app_name'>app\_name</a></td><td>The application name specified by the notification</td></tr>
    <tr><td><a href='../core_components/notification.html#widget_template'>widget\_template</a></td><td>The widget template used to represent the notification</td></tr>
  </table>
-
 </p>
     <div class="extra-header">
 
@@ -530,7 +505,7 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
       <td class="shortname" ><a href="#callback">callback</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
       <td class="summary">
-        A callback function to call <em>before</em> the <a href="../declarative_rules/ruled.notifications.html#properties">properties</a> have been applied.
+        A callback function to call *before* the <a href="../declarative_rules/ruled.notifications.html#properties">properties</a> have been applied.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -725,11 +700,11 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </span>
     </dt>
     <dd>
-    Apply the tag rules to a client. </p>
-
+    Apply the tag rules to a client.
 <p> This is useful when it is necessary to apply rules after a tag has been
  created. Many workflows can make use of "blank" tags which wont match any
  rules until later.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -875,11 +850,11 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </span>
     </dt>
     <dd>
-    Add a new rule source. </p>
-
+    Add a new rule source.
 <p> A rule source is a provider called when a client initially request tags. It
  allows to configure, select or create a tag (or many) to be attached to the
  client.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -932,7 +907,7 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
            <td class="see_also_description"> A list of names of sources this source depends on
-  (sources that must be executed <em>before</em> <code>name</code>.</td>
+  (sources that must be executed *before* <code>name</code>.</td>
            <td><span class="default_value"><code>{}</code></span></td>
          </tr>
          <tr>
@@ -981,7 +956,7 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     <table class="see_also">
      <tr>
          <td><a href="../declarative_rules/ruled.notifications.html#callback" title="In the ruled.notifications module.">callback</a></td>
-         <td>A callback function to call <em>before</em> the <a href="../declarative_rules/ruled.notifications.html#properties">properties</a> have been applied. </td>
+         <td>A callback function to call *before* the <a href="../declarative_rules/ruled.notifications.html#properties">properties</a> have been applied. </td>
          <td>
              <span class="chips">rule components</span>
          </td>
@@ -1002,9 +977,9 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </span>
     </dt>
     <dd>
-    A callback function to call <em>before</em> the <a href="../declarative_rules/ruled.notifications.html#properties">properties</a> have been applied. </p>
-
+    A callback function to call *before* the <a href="../declarative_rules/ruled.notifications.html#properties">properties</a> have been applied.
 <p> The callback is called with the current client as first argument.
+
 
 
 
@@ -1062,6 +1037,7 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </dt>
     <dd>
     Similar to <a href="../declarative_rules/ruled.notifications.html#rule">rule</a>, but each entry is a table with multiple values.
+<p>
 
 
 
@@ -1209,9 +1185,9 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </span>
     </dt>
     <dd>
-    A table whose content will be compared to the target object current properties. </p>
-
+    A table whose content will be compared to the target object current properties.
 <p> The comparison will be made using the lesser (<code>&lt;</code>) operator.
+
 
 
 
@@ -1248,9 +1224,9 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </span>
     </dt>
     <dd>
-    A table whose content will be compared to the target object current properties. </p>
-
+    A table whose content will be compared to the target object current properties.
 <p> The comparison will be made using the greater (<code>&gt;</code>) operator.
+
 
 
 
@@ -1287,14 +1263,13 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </span>
     </dt>
     <dd>
-    An identifier for this rule. </p>
-
+    An identifier for this rule.
 <p> It can be anything. It will be compared with the <code>==</code> operator. Strings are
- highly recommended.</p>
-
+ highly recommended.
 <p> Setting an <a href="../declarative_rules/ruled.notifications.html#id">id</a> is useful to be able to remove the rule by using its id
  instead of a table reference. Modules can also listen to <code>rule::appended</code> and
  modify or disable a rule.
+
 
 
 
@@ -1318,10 +1293,10 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </span>
     </dt>
     <dd>
-    Append some actions to a notification. </p>
-
+    Append some actions to a notification.
 <p> Using <code>actions</code> directly is destructive since it will override existing
  actions.
+
 
 
 
@@ -1341,10 +1316,10 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </span>
     </dt>
     <dd>
-    Set a fallback timeout when the notification doesn't have an explicit timeout. </p>
-
+    Set a fallback timeout when the notification doesn't have an explicit timeout.
 <p> The value is in seconds. If none is specified, the default is 5 seconds. If
  the notification specifies its own timeout, this property will be skipped.
+
 
 
 
@@ -1388,11 +1363,12 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </span>
     </dt>
     <dd>
-    The notification is attached to the focused client. </p>
-
+    The notification is attached to the focused client.
 <p> This is useful, along with other matching properties and the <code>ignore</code>
  notification property, to prevent focused application from spamming with
  useless notifications.
+<p>
+<p>
 
 
 
@@ -1421,6 +1397,8 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </dt>
     <dd>
     The notification is attached to a client with this class.
+<p>
+<p>
 
 
 
@@ -1461,6 +1439,8 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     </dt>
     <dd>
     The notification is attached to a client with this instance name.
+<p>
+<p>
 
 
 

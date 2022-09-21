@@ -223,134 +223,115 @@
 
 <h1>Module: <code>awful.keygrabber</code></h1>
 <p>A keyboard grabbing and transaction object.</p>
+<p>
 <p> This module allows to grab all keyboard inputs until stopped. It is used
  to gather input data (such as in <a href="../libraries/awful.prompt.html#">awful.prompt</a>), implement VI-like keybindings
- or multi key transactions such as emulating the Alt+Tab behavior.</p>
-
+ or multi key transactions such as emulating the Alt+Tab behavior.
 <p> Note that this module has been redesigned in Awesome 4.3 to be object oriented
  and stateful. The use of the older global keygrabbing API is discouraged
  going forward since it had problem with recursive keygrabbers and required
- a lot of boiler plate code to get anything done.</p>
-
-<h2> Using keygrabber as transactions</h2>
-
+ a lot of boiler plate code to get anything done.
+<p> Using keygrabber as transactions
+ --------------------------------
 <p> The transactional keybindings are keybindings that start with a normal
  keybindings, but only end when a (mod)key is released. In the classic
  "Alt+Tab" transaction, first pressing "Alt+Tab" will display a popup listing
- all windows (clients). This popup will only disappear when "Alt" is released.</p>
+ all windows (clients). This popup will only disappear when "Alt" is released.
+<p>
+<p>
 
-
-
-
-
-
-<pre>
-awful.keygrabber {
-    keybindings = {
-        awful.key {
-            modifiers = {<span class="string">"Mod1"</span>},
-            key       = <span class="string">"Tab"</span>,
-            on_press  = awful.client.focus.history.select_previous
-        },
-        awful.key {
-            modifiers = {<span class="string">"Mod1"</span>, <span class="string">"Shift"</span>},
-            key       = <span class="string">"Tab"</span>,
-            on_press  = awful.client.focus.history.select_next
-        },
-    },
-    <span class="comment">-- Note that it is using the key name and not the modifier name.
-</span>    stop_key           = <span class="string">"Mod1"</span>,
-    stop_event         = <span class="string">"release"</span>,
-    start_callback     = awful.client.focus.history.disable_tracking,
-    stop_callback      = awful.client.focus.history.enable_tracking,
-    export_keybindings = <span class="keyword">true</span>,
-}
-</pre>
-
+     awful.keygrabber {
+         keybindings = {
+             awful.key {
+                 modifiers = {"Mod1"},
+                 key       = "Tab",
+                 on_press  = awful.client.focus.history.select_previous
+             },
+             awful.key {
+                 modifiers = {"Mod1", "Shift"},
+                 key       = "Tab",
+                 on_press  = awful.client.focus.history.select_next
+             },
+         },
+         -- Note that it is using the key name and not the modifier name.
+         stop_key           = "Mod1",
+         stop_event         = "release",
+         start_callback     = awful.client.focus.history.disable_tracking,
+         stop_callback      = awful.client.focus.history.enable_tracking,
+         export_keybindings = true,
+     }
 <p> In that example, because <a href="../core_components/awful.keygrabber.html#export_keybindings">export_keybindings</a> is set to <code>true</code>, pressing
  <code>alt+tab</code> or <code>alt+shift+tab</code> will start the transaction even if the
- keygrabber is not (yet) running.</p>
-
-<h2> Using keygrabber for modal keybindings (VI like)</h2>
-
+ keygrabber is not (yet) running.
+<p> Using keygrabber for modal keybindings (VI like)
+ ------------------------------------------------
 <p> VI-like modal keybindings are triggered by a key, like <code>Escape</code>, followed by
  either a number, an adjective (or noun) and closed by a verb. For example
  <code>&lt;Escape&gt;+2+t+f</code> could mean "focus (f) the second (2) tag (t)".
- <code>&lt;Escape&gt;+2+h+t+f</code> would "focus (f) two (2) tags (t) to the right (h)".</p>
-
+ <code>&lt;Escape&gt;+2+h+t+f</code> would "focus (f) two (2) tags (t) to the right (h)".
 <p> Here is a basic implementation of such a system. Note that the action
  functions themselves are not implemented to keep the example size and
  complexity to a minimum. The implementation is just if/elseif of all action
- and the code can be found in the normal <a href="../sample files/rc.lua.html#">rc.lua</a> keybindings section:</p>
+ and the code can be found in the normal <a href="../sample files/rc.lua.html#">rc.lua</a> keybindings section:
+<p>
+<p>
 
+     local map, actions = {
+         verbs = {
+             m = "move" , f = "focus" , d = "delete" , a = "append",
+             w = "swap" , p = "print" , n = "new"    ,
+         },
+         adjectives = { h = "left"  , j = "down" , k = "up"    , l = "right" , },
+         nouns      = { c = "client", t = "tag"  , s = "screen", y = "layout", },
+     }, {}
 
+     function actions.client(action, adj) print("IN CLIENT!") end --luacheck: no unused args
+     function actions.tag   (action, adj) print("IN TAG!"   ) end --luacheck: no unused args
+     function actions.screen(action, adj) print("IN SCREEN!") end --luacheck: no unused args
+     function actions.layout(action, adj) print("IN LAYOUT!") end --luacheck: no unused args
 
+     local function parse(_, stop_key, _, sequence)
+         local parsed, count = { verbs = "", adjectives = "", nouns = "", }, ""
+         sequence = sequence..stop_key
 
+         for i=1, #sequence do
+             local char = sequence:sub(i,i)
+             if char >= "0" and char <= "9" then
+                 count = count .. char
+             else
+                 for kind in pairs(parsed) do
+                     parsed[kind] = map[kind][char] or parsed[kind]
+                 end
+             end
+         end
 
+         if parsed.nouns == "" then return end
+         for _=1, count == "" and 1 or tonumber(count) do
+             actions[parsed.nouns](parsed.verbs, parsed.adjectives)
+         end
+     end
 
-<pre>
-<span class="keyword">local</span> map, actions = {
-    verbs = {
-        m = <span class="string">"move"</span> , f = <span class="string">"focus"</span> , d = <span class="string">"delete"</span> , a = <span class="string">"append"</span>,
-        w = <span class="string">"swap"</span> , p = <span class="string">"print"</span> , n = <span class="string">"new"</span>    ,
-    },
-    adjectives = { h = <span class="string">"left"</span>  , j = <span class="string">"down"</span> , k = <span class="string">"up"</span>    , l = <span class="string">"right"</span> , },
-    nouns      = { c = <span class="string">"client"</span>, t = <span class="string">"tag"</span>  , s = <span class="string">"screen"</span>, y = <span class="string">"layout"</span>, },
-}, {}
-
-<span class="keyword">function</span> actions.client(action, adj) <span class="global">print</span>(<span class="string">"IN CLIENT!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
-</span><span class="keyword">function</span> actions.tag   (action, adj) <span class="global">print</span>(<span class="string">"IN TAG!"</span>   ) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
-</span><span class="keyword">function</span> actions.screen(action, adj) <span class="global">print</span>(<span class="string">"IN SCREEN!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
-</span><span class="keyword">function</span> actions.layout(action, adj) <span class="global">print</span>(<span class="string">"IN LAYOUT!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
-</span>
-<span class="keyword">local</span> <span class="keyword">function</span> parse(_, stop_key, _, sequence)
-    <span class="keyword">local</span> parsed, count = { verbs = <span class="string">""</span>, adjectives = <span class="string">""</span>, nouns = <span class="string">""</span>, }, <span class="string">""</span>
-    sequence = sequence..stop_key
-
-    <span class="keyword">for</span> i=<span class="number">1</span>, #sequence <span class="keyword">do</span>
-        <span class="keyword">local</span> char = sequence:sub(i,i)
-        <span class="keyword">if</span> char &gt;= <span class="string">"0"</span> <span class="keyword">and</span> char &lt;= <span class="string">"9"</span> <span class="keyword">then</span>
-            count = count .. char
-        <span class="keyword">else</span>
-            <span class="keyword">for</span> kind <span class="keyword">in</span> <span class="global">pairs</span>(parsed) <span class="keyword">do</span>
-                parsed[kind] = map[kind][char] <span class="keyword">or</span> parsed[kind]
-            <span class="keyword">end</span>
-        <span class="keyword">end</span>
-    <span class="keyword">end</span>
-
-    <span class="keyword">if</span> parsed.nouns == <span class="string">""</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
-    <span class="keyword">for</span> _=<span class="number">1</span>, count == <span class="string">""</span> <span class="keyword">and</span> <span class="number">1</span> <span class="keyword">or</span> <span class="global">tonumber</span>(count) <span class="keyword">do</span>
-        actions[parsed.nouns](parsed.verbs, parsed.adjectives)
-    <span class="keyword">end</span>
-<span class="keyword">end</span>
-
-awful.keygrabber {
-    stop_callback = parse,
-    stop_key   = gears.<span class="global">table</span>.keys(map.verbs),
-    root_keybindings = {
-        awful.key({<span class="string">"Mod4"</span>}, <span class="string">"v"</span>)
-    },
-}
-</pre>
-
-<h2> Using signals</h2>
-
+     awful.keygrabber {
+         stop_callback = parse,
+         stop_key   = gears.table.keys(map.verbs),
+         root_keybindings = {
+             awful.key({"Mod4"}, "v")
+         },
+     }
+<p> Using signals
+ -------------
 <p> When the keygrabber is running, it will emit signals on each event. The
- format is "key<em>name".."::".."pressed</em>or_released". For example, to attach
- a callback to <code>Escape</code> being pressed, do:</p>
-
-
-<pre>
-mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span class="keyword">function</span>(self, modifiers, modset)
-    <span class="global">print</span>(<span class="string">"Escape called!"</span>)
-<span class="keyword">end</span>)
-</pre>
-
+ format is "key_name".."::".."pressed_or_released". For example, to attach
+ a callback to <code>Escape</code> being pressed, do:
+<p>    mykeygrabber:connect_signal("Escape::pressed", function(self, modifiers, modset)
+        print("Escape called!")
+    end)
 <p> The <code>self</code> argument is the keygrabber instance. The <code>modifiers</code> is a list of
  all the currently pressed modifiers and the <code>modset</code> is the same table, but
  with the modifiers as keys instead of value. It allow to save time by
  checking <code>if modset.Mod4 then ... end</code> instead of looping into the <code>modifiers</code>
- table or using <a href="../utility_libraries/gears.table.html#">gears.table</a>.</p>
+ table or using <a href="../utility_libraries/gears.table.html#">gears.table</a>.
+</p>
     <div class="extra-header">
 
 
@@ -529,7 +510,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </tr>
     <tr class="summary_row">
       <td class="name" >
-        <a href="#stop">:stop <span class='function_args'> <b>(</b>stop_key, Override<b>)</b></span></a>
+        <a href="#stop">:stop <span class='function_args'> <b>(</b>stop_key, stop_mods<b>)</b></span></a>
         <span class="summarytype"></span>
       </td>
       <td class="summary">
@@ -735,15 +716,14 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    A wrapper around the keygrabber to make it easier to add keybindings. </p>
-
+    A wrapper around the keygrabber to make it easier to add keybindings.
 <p> This is similar to the <a href="../libraries/awful.prompt.html#">awful.prompt</a>, but without an actual widget. It can
  be used to implement custom transactions such as alt+tab or keyboard menu
- navigation.</p>
-
+ navigation.
 <p> Note that the object returned can be used as a client or global keybinding
  callback without modification. Make sure to set <a href="../core_components/awful.keygrabber.html#stop_key">stop_key</a> and <a href="../core_components/awful.keygrabber.html#stop_event">stop_event</a>
  to proper values to avoid permanently locking the keyboard.
+
 
     <h3>Parameters:</h3>
         <div class="important_box">
@@ -766,9 +746,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -811,45 +789,35 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
            <td><span class="parameter">start_callback</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">function</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">stop_callback</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">function</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">timeout_callback</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">function</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">keypressed_callback</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">function</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">keyreleased_callback</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">function</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -857,7 +825,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span></td>
            <td class="see_also_description"> A table with all keys that
-  <strong>won't</strong> stop the keygrabber.</td>
+  **won't** stop the keygrabber.</td>
            <td><span class="default_value"><code>nil</code></span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -994,11 +962,11 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    Emit a signal on the keygrabber module itself. </p>
-
+    Emit a signal on the keygrabber module itself.
 <p> Warning, usually don't use this directly, use
  <code>my_keygrabber:emit_signal(name, ...)</code>. This function works on the whole
  keygrabber module, not one of its instance.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1044,6 +1012,8 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </dt>
     <dd>
     The keygrabber timeout.
+<p>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1134,21 +1104,18 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    The key on which the keygrabber listen to terminate itself. </p>
-
+    The key on which the keygrabber listen to terminate itself.
 <p> When this is set, the running keygrabber will quit when [one of] the stop
- key event occurs.</p>
-
+ key event occurs.
 <p> By default, the event is <code>press</code>. It is common for use case like the
  <a href="../libraries/awful.prompt.html#">awful.prompt</a> where <code>return</code> (enter) will terminate the keygrabbing. Using
  <code>release</code> as an event is more appropriate when the keygrabber is tied to a
  modifier key. For example, an Alt+Tab implementation stops when <code>mod1</code> (Alt)
- is released.</p>
-
-<p> It can also be a table containing many keys (as values).</p>
-
+ is released.
+<p> It can also be a table containing many keys (as values).
 <p> Please note that modkeys are not accepted as <a href="../core_components/awful.keygrabber.html#stop_key">stop_key</a>s. You have to use
  their corresponding key names such as <code>Control_L</code>.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1273,13 +1240,12 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    Whether or not to execute the key press/release callbacks when keybindings are called. </p>
-
+    Whether or not to execute the key press/release callbacks when keybindings are called.
 <p> When this property is set to false, the <a href="../core_components/awful.keygrabber.html#keyreleased_callback">keyreleased_callback</a> and
  <a href="../core_components/awful.keygrabber.html#keypressed_callback">keypressed_callback</a> callbacks will be executed even when the event was
- consumed by a <code>keybinding</code>.</p>
-
+ consumed by a <code>keybinding</code>.
 <p> By default, keybindings block those callbacks from being executed.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1397,15 +1363,14 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-    Export all keygrabber keybindings as root (global) keybindings. </p>
-
+    Export all keygrabber keybindings as root (global) keybindings.
 <p> When this is enabled, calling all of the keygrabber object <code>keybinding</code>s will
- will create root <a href="../input_handling/awful.key.html#">awful.key</a> and will automatically starts the grabbing.</p>
-
+ will create root <a href="../input_handling/awful.key.html#">awful.key</a> and will automatically starts the grabbing.
 <p> Use this with caution. If many keygrabber or "real" root keybindings are set
  on the same key combination, they are all executed and there is almost no
  safe way to undo that. Make sure the <a href="../core_components/awful.keygrabber.html#awful.keygrabber">keygrabber</a> that use this option
  have a single instance.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1446,26 +1411,18 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
     </span>
     </dt>
     <dd>
-
-<p>The root (global) keybinding to start this keygrabber. </p>
-
+    The root (global) keybinding to start this keygrabber.
 <p> Instead of adding an entry to <a href="../core_components/root.html#keys">root.keys</a> or <a href="../sample files/rc.lua.html#">rc.lua</a> <code>globalkeys</code> section,
  this property can be used to take care of everything. This way, it becomes
- easier to package modules using keygrabbers.</p>
-
-
-
-
-<p><strong>Usage example output</strong>:</p>
-
-<pre><code>Is now active!  nil
-A key was pressed:  a   with    0   modifier!
-A key was pressed:  i   with    1   modifier!
-Called again!
-</code></pre>
-
-
-
+ easier to package modules using keygrabbers.
+<p>
+<p>
+**Usage example output**:
+<p>    Is now active!	nil
+    A key was pressed:	a	with	0	modifier!
+    A key was pressed:	i	with	1	modifier!
+    Called again!
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1571,9 +1528,9 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    The keybindings associated with this keygrabber. </p>
-
+    The keybindings associated with this keygrabber.
 <p> This property contains a table of <a href="../input_handling/awful.key.html#">awful.key</a> objects.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1638,14 +1595,14 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    If any key is pressed that is not in this list, the keygrabber is stopped. </p>
-
+    If any key is pressed that is not in this list, the keygrabber is stopped.
 <p> When defined, this property allows to define an implicit way to release the
- keygrabber. It helps save some boilerplate code in the handler callbacks.</p>
-
+ keygrabber. It helps save some boilerplate code in the handler callbacks.
 <p> It is useful when a transaction only handle a limited number of keys. If
  a key unhandled by the transaction is triggered, the transaction is
  canceled.
+<p>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1716,13 +1673,13 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    The sequence of keys recorded since the start of the keygrabber. </p>
-
+    The sequence of keys recorded since the start of the keygrabber.
 <p> In this example, the <a href="../core_components/awful.keygrabber.html#stop_callback">stop_callback</a> is used to retrieve the final key
- sequence.</p>
-
+ sequence.
 <p> Please note that backspace will remove elements from the sequence and
  named keys and modifiers are ignored.
+<p>
+<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1770,10 +1727,10 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    Start the keygrabber. </p>
-
+    Start the keygrabber.
 <p> Note that only a single keygrabber can be started at any one time. If another
  keygrabber (or this one) is currently running. This method returns false.
+
 
 
     <h3>Returns:</h3>
@@ -1806,16 +1763,16 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
 </dd>
     <dt>
     <a class="copy-link js-copy-link" name="stop" href="#stop">&#128279;</a>
-    <strong>:stop <span class='function_args'> <b>(</b>stop_key, Override<b>)</b></span></strong>
+    <strong>:stop <span class='function_args'> <b>(</b>stop_key, stop_mods<b>)</b></span></strong>
     <span class="proptype"></span>
     <span class="baseclass" >
          &middot 2 signals
     </span>
     </dt>
     <dd>
-    Stop the keygrabber. </p>
-
+    Stop the keygrabber.
 <p> Also stops any <a href="../core_components/awful.keygrabber.html#timeout">timeout</a>.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1829,13 +1786,13 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
            <td><span class="parameter">stop_key</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">nil</span></span></td>
-           <td class="see_also_description"> Override the key passed to <a href="../core_components/awful.keygrabber.html#stop_callback">stop_callback</a> <strong>DEPRECATED</strong></td>
+           <td class="see_also_description"> Override the key passed to <a href="../core_components/awful.keygrabber.html#stop_callback">stop_callback</a> **DEPRECATED**</td>
          </tr>
          <tr>
-           <td><span class="parameter">Override</span></td>
+           <td><span class="parameter">stop_mods</span></td>
            <td></td>
            <td><span class="types"><span class="type">tale</span> or <span class="type">nil</span></span></td>
-           <td class="see_also_description"> the modifiers passed to <a href="../core_components/awful.keygrabber.html#stop_callback">stop_callback</a> <strong>DEPRECATED</strong></td>
+           <td class="see_also_description"> Override the modifiers passed to <a href="../core_components/awful.keygrabber.html#stop_callback">stop_callback</a> **DEPRECATED**</td>
          </tr>
         </table>
 
@@ -1869,15 +1826,14 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    Add a keybinding to this keygrabber. </p>
-
-<p> Those keybindings will automatically start the keygrabbing when hit.</p>
-
+    Add a keybinding to this keygrabber.
+<p> Those keybindings will automatically start the keygrabbing when hit.
 <p> Please note that this method previously accepted a
  <code>mods, keycode, callback, description</code> signature. This is deprecated. Store
  those values in an <a href="../input_handling/awful.key.html#">awful.key</a> prior to passing it to this function. The
  previous method signature made it impossible to alter the description and/or
  enable/disable the keybinding.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1999,12 +1955,10 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly. </p>
-
+    Connect to a signal weakly.
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.</p>
-
-<p> <strong>Warning:</strong>
+ automatically disconnects the signal when that happens.
+<p> **Warning:**
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -2111,10 +2065,10 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    Stop grabbing the keyboard for the provided callback. </p>
-
+    Stop grabbing the keyboard for the provided callback.
 <p> When no callback is given, the last grabber gets removed (last one added to
  the stack).
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2148,24 +2102,16 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    A lower level API to interact with the keygrabber directly. </p>
-
+    A lower level API to interact with the keygrabber directly.
 <p> Grab keyboard input and read pressed keys, calling the least callback
- function from the stack at each keypress, until the stack is empty.</p>
-
+ function from the stack at each keypress, until the stack is empty.
 <p> Calling run with the same callback again will bring the callback
- to the top of the stack.</p>
-
-<p> The callback function receives three arguments:</p>
-
-<ul>
-    <li>a table containing modifiers keys</li>
-    <li>a string with the pressed key</li>
-    <li>a string with either "press" or "release" to indicate the event type.</li>
-</ul>
-
-<p> Here is the content of the modifier table:</p>
-
+ to the top of the stack.
+<p> The callback function receives three arguments:
+<p> * a table containing modifiers keys
+ * a string with the pressed key
+ * a string with either "press" or "release" to indicate the event type.
+<p> Here is the content of the modifier table:
 <p> <table class='widget_list' border=1>
   <tr style='font-weight: bold;'>
    <th align='center'>Modifier name </th>
@@ -2176,10 +2122,10 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
   <tr><td> Control </td><td align='center'> Control_L </td><td align='center'> Control_R </td></tr>
   <tr><td> Shift </td><td align='center'> Shift_L </td><td align='center'> Shift_R </td></tr>
   <tr><td> Mod1</td><td align='center'> Alt_L </td><td align='center'> Alt_R </td></tr>
- </table></p>
-
+ </table>
 <p> A callback can return <code>false</code> to pass the events to the next
  keygrabber in the stack.
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2351,9 +2297,9 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    The function called when the keygrabber stops because of a <a href="../core_components/awful.keygrabber.html#timeout">timeout</a>. </p>
-
+    The function called when the keygrabber stops because of a <a href="../core_components/awful.keygrabber.html#timeout">timeout</a>.
 <p> Note that the <a href="../core_components/awful.keygrabber.html#stop_callback">stop_callback</a> is also called when the keygrabbers timeout.
+
 
 
 
@@ -2506,12 +2452,12 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
     </span>
     </dt>
     <dd>
-    The current (running) instance of this keygrabber. </p>
-
+    The current (running) instance of this keygrabber.
 <p> The keygrabber instance is created when the keygrabber starts. It is an object
  mirroring this keygrabber object, but where extra properties can be added. It
  is useful to keep some contextual data part of the current transaction without
  polluting the original object of having extra boilerplate code.
+
 
 
 

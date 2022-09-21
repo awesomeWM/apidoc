@@ -223,124 +223,101 @@
 <h1>Module: <code>awful.widget.taglist</code></h1>
 <p>Taglist widget module for awful.</p>
 <p>
-
-
-<p> Here is a more advanced example of how to extent the <a href="../widgets/awful.widget.taglist.html#awful.widget.taglist">taglist</a>. It provides:</p>
-
-<ul>
-    <li>mouse "hover" color</li>
-    <li>an extra index field</li>
-    <li>a powerline look and feel</li>
-</ul>
-
-
-
-<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_taglist_indexed.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-
-
-<pre>
-s.mytaglist = awful.widget.taglist {
-    screen  = s,
-    filter  = awful.widget.taglist.filter.all,
-    style   = {
-        shape = gears.shape.powerline
-    },
-    layout   = {
-        spacing = -<span class="number">12</span>,
-        spacing_widget = {
-            color  = <span class="string">"#dddddd"</span>,
-            shape  = gears.shape.powerline,
-            widget = wibox.widget.separator,
-        },
-        layout  = wibox.layout.fixed.horizontal
-    },
-    widget_template = {
-        {
-            {
-                {
-                    {
-                        {
-                            id     = <span class="string">"index_role"</span>,
-                            widget = wibox.widget.textbox,
-                        },
-                        margins = <span class="number">4</span>,
-                        widget  = wibox.container.margin,
-                    },
-                    bg     = <span class="string">"#dddddd"</span>,
-                    shape  = gears.shape.circle,
-                    widget = wibox.container.background,
-                },
-                {
-                    {
-                        id     = <span class="string">"icon_role"</span>,
-                        widget = wibox.widget.imagebox,
-                    },
-                    margins = <span class="number">2</span>,
-                    widget  = wibox.container.margin,
-                },
-                {
-                    id     = <span class="string">"text_role"</span>,
-                    widget = wibox.widget.textbox,
-                },
-                layout = wibox.layout.fixed.horizontal,
-            },
-            left  = <span class="number">18</span>,
-            right = <span class="number">18</span>,
-            widget = wibox.container.margin
-        },
-        id     = <span class="string">"background_role"</span>,
-        widget = wibox.container.background,
-        <span class="comment">-- Add support for hover colors and an index label
-</span>        create_callback = <span class="keyword">function</span>(self, c3, index, objects) <span class="comment">--luacheck: no unused args
-</span>            self:get_children_by_id(<span class="string">"index_role"</span>)[<span class="number">1</span>].markup = <span class="string">"&lt;b&gt; "</span>..c3.index..<span class="string">" &lt;/b&gt;"</span>
-            self:connect_signal(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>()
-                <span class="keyword">if</span> self.bg ~= <span class="string">"#ff0000"</span> <span class="keyword">then</span>
-                    self.backup     = self.bg
-                    self.has_backup = <span class="keyword">true</span>
-                <span class="keyword">end</span>
-                self.bg = <span class="string">"#ff0000"</span>
-            <span class="keyword">end</span>)
-            self:connect_signal(<span class="string">"mouse::leave"</span>, <span class="keyword">function</span>()
-                <span class="keyword">if</span> self.has_backup <span class="keyword">then</span> self.bg = self.backup <span class="keyword">end</span>
-            <span class="keyword">end</span>)
-        <span class="keyword">end</span>,
-        update_callback = <span class="keyword">function</span>(self, c3, index, objects) <span class="comment">--luacheck: no unused args
-</span>            self:get_children_by_id(<span class="string">"index_role"</span>)[<span class="number">1</span>].markup = <span class="string">"&lt;b&gt; "</span>..c3.index..<span class="string">" &lt;/b&gt;"</span>
-        <span class="keyword">end</span>,
-    },
-    buttons = taglist_buttons
-}
-</pre>
-
+<p> Here is a more advanced example of how to extent the <a href="../widgets/awful.widget.taglist.html#awful.widget.taglist">taglist</a>. It provides:
+<p> * mouse "hover" color
+ * an extra index field
+ * a powerline look and feel
+<p>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_taglist_indexed.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>
+     s.mytaglist = awful.widget.taglist {
+         screen  = s,
+         filter  = awful.widget.taglist.filter.all,
+         style   = {
+             shape = gears.shape.powerline
+         },
+         layout   = {
+             spacing = -12,
+             spacing_widget = {
+                 color  = "#dddddd",
+                 shape  = gears.shape.powerline,
+                 widget = wibox.widget.separator,
+             },
+             layout  = wibox.layout.fixed.horizontal
+         },
+         widget_template = {
+             {
+                 {
+                     {
+                         {
+                             {
+                                 id     = "index_role",
+                                 widget = wibox.widget.textbox,
+                             },
+                             margins = 4,
+                             widget  = wibox.container.margin,
+                         },
+                         bg     = "#dddddd",
+                         shape  = gears.shape.circle,
+                         widget = wibox.container.background,
+                     },
+                     {
+                         {
+                             id     = "icon_role",
+                             widget = wibox.widget.imagebox,
+                         },
+                         margins = 2,
+                         widget  = wibox.container.margin,
+                     },
+                     {
+                         id     = "text_role",
+                         widget = wibox.widget.textbox,
+                     },
+                     layout = wibox.layout.fixed.horizontal,
+                 },
+                 left  = 18,
+                 right = 18,
+                 widget = wibox.container.margin
+             },
+             id     = "background_role",
+             widget = wibox.container.background,
+             -- Add support for hover colors and an index label
+             create_callback = function(self, c3, index, objects) --luacheck: no unused args
+                 self:get_children_by_id("index_role")[1].markup = "<b> "..c3.index.." </b>"
+                 self:connect_signal("mouse::enter", function()
+                     if self.bg ~= "#ff0000" then
+                         self.backup     = self.bg
+                         self.has_backup = true
+                     end
+                     self.bg = "#ff0000"
+                 end)
+                 self:connect_signal("mouse::leave", function()
+                     if self.has_backup then self.bg = self.backup end
+                 end)
+             end,
+             update_callback = function(self, c3, index, objects) --luacheck: no unused args
+                 self:get_children_by_id("index_role")[1].markup = "<b> "..c3.index.." </b>"
+             end,
+         },
+         buttons = taglist_buttons
+     }
 <p> As demonstrated in the example above, there are a few "shortcuts" to avoid
  re-inventing the wheel. By setting the predefined roles as widget <code>id</code>s,
  <a href="../classes/awful.widget.common.html#">awful.widget.common</a> will do most of the work to update the values
- automatically. All of them are optional. The supported roles are:</p>
-
-<ul>
-    <li><code>icon_role</code>: A <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a></li>
-    <li><code>text_role</code>: A <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a></li>
-    <li><code>background_role</code>: A <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a></li>
-    <li><code>text_margin_role</code>: A <a href="../widget_containers/wibox.container.margin.html#">wibox.container.margin</a></li>
-    <li><code>icon_margin_role</code>: A <a href="../widget_containers/wibox.container.margin.html#">wibox.container.margin</a></li>
-</ul>
-
-<p> <a href="../classes/awful.widget.common.html#">awful.widget.common</a> also has 2 callbacks to give more control over the widget:</p>
-
-<ul>
-    <li><code>create_callback</code>: Called once after the widget instance is created</li>
-    <li><code>update_callback</code>: Called every time the data is refreshed</li>
-</ul>
-
-<p> Both callback have the same parameters:</p>
-
-<ul>
-    <li><code>self</code>: The widget instance (<em>widget</em>).</li>
-    <li><code>t</code>: The tag (<em>tag</em>)</li>
-    <li><code>index</code>: The widget position in the list (<em>number</em>)</li>
-    <li><code>tags</code>: The list of tag, in order (<em>table</em>)</li>
-</ul>
+ automatically. All of them are optional. The supported roles are:
+<p> * <code>icon_role</code>: A <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a>
+ * <code>text_role</code>: A <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a>
+ * <code>background_role</code>: A <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a>
+ * <code>text_margin_role</code>: A <a href="../widget_containers/wibox.container.margin.html#">wibox.container.margin</a>
+ * <code>icon_margin_role</code>: A <a href="../widget_containers/wibox.container.margin.html#">wibox.container.margin</a>
+<p> <a href="../classes/awful.widget.common.html#">awful.widget.common</a> also has 2 callbacks to give more control over the widget:
+<p> * <code>create_callback</code>: Called once after the widget instance is created
+ * <code>update_callback</code>: Called every time the data is refreshed
+<p> Both callback have the same parameters:
+<p> * <code>self</code>: The widget instance (*widget*).
+ * <code>t</code>: The tag (*tag*)
+ * <code>index</code>: The widget position in the list (*number*)
+ * <code>tags</code>: The list of tag, in order (*table*)
 </p>
     <div class="extra-header">
   <div class="extra-header__section">
@@ -1055,10 +1032,10 @@ s.mytaglist = awful.widget.taglist {
     </span>
     </dt>
     <dd>
-    Create a new taglist widget.  The last two arguments (update<em>function
+    Create a new taglist widget.  The last two arguments (update_function
  and layout) serve to customize the layout of the taglist (eg. to
  make it vertical). For that, you will need to copy the
- awful.widget.common.list</em>update function, make your changes to it
+ awful.widget.common.list_update function, make your changes to it
  and pass it as update_function here. Also change the layout if the
  default is not what you want.
 
@@ -1075,9 +1052,7 @@ s.mytaglist = awful.widget.taglist {
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description">
-
- </td>
+           <td class="see_also_description"> </td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -1143,90 +1118,70 @@ s.mytaglist = awful.widget.taglist {
            <td><span class="parameter">style.fg_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_fg_focus</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_bg_focus</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.fg_urgent</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_fg_urgent</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_urgent</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_bg_urgent</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_occupied</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_bg_occupied</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.fg_occupied</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_fg_occupied</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_empty</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_bg_empty</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.fg_empty</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_fg_empty</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_volatile</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_bg_volatile</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.fg_volatile</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_fg_volatile</code></span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -1273,9 +1228,7 @@ s.mytaglist = awful.widget.taglist {
            <td><span class="parameter">style.disable_icon</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_disable_icon</code></span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -1343,170 +1296,140 @@ s.mytaglist = awful.widget.taglist {
            <td><span class="parameter">style.shape</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">gears.shape</span> or <span class="type">function</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_border_width</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_color</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_border_color</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_empty</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">gears.shape</span> or <span class="type">function</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_empty</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width_empty</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_border_width_empty</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.border_color_empty</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_border_color_empty</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">gears.shape</span> or <span class="type">function</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_focus</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_border_width_focus</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_color_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_border_color_focus</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_urgent</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">gears.shape</span> or <span class="type">function</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_urgent</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width_urgent</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_border_width_urgent</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_color_urgent</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_border_color_urgent</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_volatile</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">gears.shape</span> or <span class="type">function</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_volatile</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width_volatile</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_border_width_volatile</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_color_volatile</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
            <td><span class="default_value"><code>beautiful.taglist_shape_border_color_volatile</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">filter</span></td>
            <td></td>
            <td><span class="types"></span></td>
-           <td class="see_also_description"> <strong>DEPRECATED</strong> use args.filter</td>
+           <td class="see_also_description"> **DEPRECATED** use args.filter</td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr>
            <td><span class="parameter">buttons</span></td>
            <td></td>
            <td><span class="types"></span></td>
-           <td class="see_also_description"> <strong>DEPRECATED</strong> use args.buttons</td>
+           <td class="see_also_description"> **DEPRECATED** use args.buttons</td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr>
            <td><span class="parameter">style</span></td>
            <td></td>
            <td><span class="types"></span></td>
-           <td class="see_also_description"> <strong>DEPRECATED</strong> use args.style</td>
+           <td class="see_also_description"> **DEPRECATED** use args.style</td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr>
            <td><span class="parameter">update_function</span></td>
            <td></td>
            <td><span class="types"></span></td>
-           <td class="see_also_description"> <strong>DEPRECATED</strong> use args.update_function</td>
+           <td class="see_also_description"> **DEPRECATED** use args.update_function</td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr>
            <td><span class="parameter">base_widget</span></td>
            <td></td>
            <td><span class="types"></span></td>
-           <td class="see_also_description"> <strong>DEPRECATED</strong> use args.base_layout</td>
+           <td class="see_also_description"> **DEPRECATED** use args.base_layout</td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
         </table>
@@ -1720,11 +1643,11 @@ s.mytaglist = awful.widget.taglist {
     </span>
     </dt>
     <dd>
-    The current number of tags. </p>
-
+    The current number of tags.
 <p> Note that the <code>tasklist</code> is usually lazy-loaded. Reading this property
  may cause the widgets to be created. Depending on where the property is called
  from, it might, in theory, cause an infinite loop.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1788,10 +1711,10 @@ s.mytaglist = awful.widget.taglist {
     </span>
     </dt>
     <dd>
-    An alternative function to configure the content. </p>
-
+    An alternative function to configure the content.
 <p> You should use <a href="../widgets/awful.widget.taglist.html#widget_template">widget_template</a> if it fits your use case first. This
  API is very low level.
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2120,7 +2043,7 @@ s.mytaglist = awful.widget.taglist {
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A table containing a widget tree definition. WARNING: This is really a table and <strong>NOT</strong> a widget object. Use the <code>widget = come.class.here</code> to define the topmost class rather than construct an instance.</td>
+        <td>: A table containing a widget tree definition. WARNING: This is really a table and **NOT** a widget object. Use the <code>widget = come.class.here</code> to define the topmost class rather than construct an instance.</td>
        <tr/>
      </table>
     </span>
@@ -2537,8 +2460,7 @@ s.mytaglist = awful.widget.taglist {
     </span>
     </dt>
     <dd>
-    The widget buttons. </p>
-
+    The widget buttons.
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>
@@ -2681,12 +2603,10 @@ s.mytaglist = awful.widget.taglist {
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly. </p>
-
+    Connect to a signal weakly.
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.</p>
-
-<p> <strong>Warning:</strong>
+ automatically disconnects the signal when that happens.
+<p> **Warning:**
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -2766,26 +2686,19 @@ s.mytaglist = awful.widget.taglist {
     </span>
     </dt>
     <dd>
-
-<p>Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal. </p>
-
+    Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal.
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.</p>
-
-<p> Note that this function has some flaws:</p>
-
-<ol>
-    <li>The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.
+<p> Note that this function has some flaws:
+<p> 1. The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.</li>
-    <li>In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.
+ 2. In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).</li>
-    <li>If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.</li>
-</ol>
-
+    tree path).
+ 3. If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.
 
 
     <h3>Parameters:</h3>
@@ -2800,9 +2713,7 @@ s.mytaglist = awful.widget.taglist {
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description">
-
-</td>
+           <td class="see_also_description"></td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>
@@ -4371,9 +4282,9 @@ s.mytaglist = awful.widget.taglist {
     </span>
     </dt>
     <dd>
-    All tags for the defined screen ordered by indices. </p>
-
+    All tags for the defined screen ordered by indices.
 <p> This is the default source.
+
 
 
 
