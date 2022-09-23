@@ -217,163 +217,248 @@
 <h1>Module: <code>awful.spawn</code></h1>
 <p>Spawn sub-processes and optionally get their output.</p>
 <p>
+
+
 <p> This module provides methods to start programs and supports startup
  notifications, which allows for callbacks and applying properties to the
  program after it has been launched.  This requires currently that the
- application supports them.
-<p> Frequently asked questions
- ===
-<p> **Rules of thumb when a shell is needed**:
-<p> * A shell is required when the commands contain <code>&amp;&amp;</code>, <code>;</code>, <code>||</code>, <code>&amp;</code> or
-  any other unix shell language syntax
- * When shell variables are defined as part of the command
- * When the command is a shell alias
-<p> Note that a shell is **not** a terminal emulator. A terminal emulator is
+ application supports them.</p>
+
+<h1> Frequently asked questions</h1>
+
+<p> <strong>Rules of thumb when a shell is needed</strong>:</p>
+
+<ul>
+    <li>A shell is required when the commands contain <code>&amp;&amp;</code>, <code>;</code>, <code>||</code>, <code>&amp;</code> or
+    any other unix shell language syntax</li>
+    <li>When shell variables are defined as part of the command</li>
+    <li>When the command is a shell alias</li>
+</ul>
+
+<p> Note that a shell is <strong>not</strong> a terminal emulator. A terminal emulator is
  something like XTerm, Gnome-terminal or Konsole. A shell is something like
- <code>bash</code>, <code>zsh</code>, <code>busybox sh</code> or <code>Debian ash</code>.
+ <code>bash</code>, <code>zsh</code>, <code>busybox sh</code> or <code>Debian ash</code>.</p>
+
 <p> If you wish to open a process in a terminal window, check that your terminal
  emulator supports the common <a href="../libraries/awful.spawn.html#awful.spawn.single_instance">-e</a> option. If it does, then something like
- this should work:
-<p>    awful.spawn(terminal.." -e my_command")
+ this should work:</p>
+
+
+<pre>
+awful.spawn(terminal..<span class="string">" -e my_command"</span>)
+</pre>
+
 <p> Note that some terminals, such as rxvt-unicode (urxvt) support full commands
- using quotes, while other terminal emulators require to use quoting.
-<p> **Understanding clients versus PID versus commands versus class**:
-<p> A *process* has a *PID* (process identifier). It can have 0, 1 or many
- *window*s.
-<p> A *command* is what is used to start *process*(es). It has no direct relation
- with *process*, *client* or *window*. When a command is executed, it will
- usually start a *process* which keeps running until it exits. This however is
+ using quotes, while other terminal emulators require to use quoting.</p>
+
+<p> <strong>Understanding clients versus PID versus commands versus class</strong>:</p>
+
+<p> A <em>process</em> has a <em>PID</em> (process identifier). It can have 0, 1 or many
+ <em>window</em>s.</p>
+
+<p> A <em>command</em> is what is used to start <em>process</em>(es). It has no direct relation
+ with <em>process</em>, <em>client</em> or <em>window</em>. When a command is executed, it will
+ usually start a <em>process</em> which keeps running until it exits. This however is
  not always the case as some applications use scripts as command and others
  use various single-instance mechanisms (usually client/server) and merge
- with an existing process.
-<p> A *client* corresponds to a *window*. It is owned by a process. It can have
- both a parent and one or many children. A *client* has a *class*, an
- *instance*, a *role*, and a *type*. See <a href="../core_components/client.html#class">client.class</a>, <a href="../core_components/client.html#instance">client.instance</a>,
- <a href="../core_components/client.html#role">client.role</a> and <a href="../core_components/client.html#type">client.type</a> for more information about these properties.
-<p> **Understanding blocking versus asynchronous execution**:
+ with an existing process.</p>
+
+<p> A <em>client</em> corresponds to a <em>window</em>. It is owned by a process. It can have
+ both a parent and one or many children. A <em>client</em> has a <em>class</em>, an
+ <em>instance</em>, a <em>role</em>, and a <em>type</em>. See <a href="../core_components/client.html#class">client.class</a>, <a href="../core_components/client.html#instance">client.instance</a>,
+ <a href="../core_components/client.html#role">client.role</a> and <a href="../core_components/client.html#type">client.type</a> for more information about these properties.</p>
+
+<p> <strong>Understanding blocking versus asynchronous execution</strong>:</p>
+
 <p> Awesome is single threaded, it means only one thing is executed at any time.
  But Awesome isn't doomed to be slow. It may not have multiple threads, but
  it has something called coroutine and also has callbacks. This means things
  that take time to execute can still do so in the background (using C threads
  or external process + sockets). When they are done, they can notify the
- Awesome thread. This works perfectly and avoid blocking Awesome.
+ Awesome thread. This works perfectly and avoid blocking Awesome.</p>
+
 <p> If you want to update the text of a <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a> with the output
  of a shell command, you should use the <a href="../libraries/awful.spawn.html#awful.spawn.easy_async_with_shell">awful.spawn.easy_async_with_shell</a>
  command. It is strongly recommended not to use <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> is explained in the
  "Getting a command's output" section. Asynchronous execution is at first a
  bit tricky to understand if you never used that before. The example below
- should demonstrate how it works.
-<p> If we do (but *really*, don't do that):
-<p>     -- **NEVER, EVER, DO THIS**: your computer will freeze
-     os.execute("sleep 1; echo foo > /tmp/foo.txt")
-     mylabel.text = io.popen("cat /tmp/foo.txt"):read("*all")
-<p> The label will display <code>foo</code>. But If we do:
-<p>     -- Don't do this, it won't work.
-     -- Assumes /tmp/foo.txt does not exist
-     awful.spawn.with_shell("sleep 1; echo foo > /tmp/foo.txt")
-     mylabel.text = io.popen("cat /tmp/foo.txt"):read("*all")
-<p> Then the label will be **empty**. <a href="../libraries/awful.spawn.html#">awful.spawn</a> and <a href="../libraries/awful.spawn.html#awful.spawn.with_shell">awful.spawn.with_shell</a>
- will **not** block and thus the <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> will be executed before
+ should demonstrate how it works.</p>
+
+<p> If we do (but <em>really</em>, don't do that):</p>
+
+
+<pre>
+<span class="comment">-- **NEVER, EVER, DO THIS**: your computer will freeze
+</span><span class="global">os</span>.execute(<span class="string">"sleep 1; echo foo &gt; /tmp/foo.txt"</span>)
+mylabel.text = <span class="global">io</span>.popen(<span class="string">"cat /tmp/foo.txt"</span>):read(<span class="string">"*all"</span>)
+</pre>
+
+<p> The label will display <code>foo</code>. But If we do:</p>
+
+
+<pre>
+<span class="comment">-- Don't do this, it won't work.
+</span><span class="comment">-- Assumes /tmp/foo.txt does not exist
+</span>awful.spawn.with_shell(<span class="string">"sleep 1; echo foo &gt; /tmp/foo.txt"</span>)
+mylabel.text = <span class="global">io</span>.popen(<span class="string">"cat /tmp/foo.txt"</span>):read(<span class="string">"*all"</span>)
+</pre>
+
+<p> Then the label will be <strong>empty</strong>. <a href="../libraries/awful.spawn.html#">awful.spawn</a> and <a href="../libraries/awful.spawn.html#awful.spawn.with_shell">awful.spawn.with_shell</a>
+ will <strong>not</strong> block and thus the <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> will be executed before
  <code>sleep 1</code> finishes. This is why we have async functions to execute shell
  commands. There are many variants with difference characteristics and
  complexity. <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">awful.spawn.easy_async</a> is the most common as it is good enough
  for the general "I want to execute a command and do something with the
- output when it finishes".
-<p>     -- This is the correct way
-     local command = "sleep 1; echo foo > /tmp/foo.txt"
-<p>     awful.spawn.easy_async_with_shell(command, function()
-         awful.spawn.easy_async_with_shell("cat /tmp/foo.txt", function(out)
-             mylabel.text = out
-         end)
-     end)
+ output when it finishes".</p>
+
+
+<pre>
+<span class="comment">-- This is the correct way
+</span><span class="keyword">local</span> command = <span class="string">"sleep 1; echo foo &gt; /tmp/foo.txt"</span>
+
+awful.spawn.easy_async_with_shell(command, <span class="keyword">function</span>()
+    awful.spawn.easy_async_with_shell(<span class="string">"cat /tmp/foo.txt"</span>, <span class="keyword">function</span>(out)
+        mylabel.text = out
+    <span class="keyword">end</span>)
+<span class="keyword">end</span>)
+</pre>
+
 <p> In this variant, Awesome will not block. Again, like other spawn, you
  cannot add code outside of the callback function to use the result of the
  command. The code will be executed before the command is finished so the
- result won't yet be available.
-<p> **Getting a command's output**:
-<p> First, do **not** use <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> **ever**. It is synchronous. Synchronous
- functions **block everything** until they are done. All visual applications
+ result won't yet be available.</p>
+
+<p> <strong>Getting a command's output</strong>:</p>
+
+<p> First, do <strong>not</strong> use <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> <strong>ever</strong>. It is synchronous. Synchronous
+ functions <strong>block everything</strong> until they are done. All visual applications
  lock (as Awesome no longer responds), you will probably lose some keyboard
  and mouse events and will have higher latency when playing games. This is
- also true when reading files synchronously, but this is another topic.
+ also true when reading files synchronously, but this is another topic.</p>
+
 <p> Awesome provides a few ways to get output from commands. One is to use the
  <code>Gio</code> libraries directly. This is usually very complicated, but gives a lot
- of control on the command execution.
+ of control on the command execution.</p>
+
 <p> This modules provides <a href="../libraries/awful.spawn.html#awful.spawn.with_line_callback">with_line_callback</a> and <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">easy_async</a> for convenience.
- First, lets add this bash command to <a href="../sample files/rc.lua.html#">rc.lua</a>:
-<p>    local noisy = [[bash -c '
-      for I in $(seq 1 5); do
-        date
-        echo err >&2
-        sleep 2
-      done
-    ']]
-<p> It prints a bunch of junk on the standard output (*stdout*) and error
- (*stderr*) streams. This command would block Awesome for 10 seconds if it
+ First, lets add this bash command to <a href="../sample files/rc.lua.html#">rc.lua</a>:</p>
+
+
+<pre>
+<span class="keyword">local</span> noisy = <span class="string">[[bash -c '
+  for I in $(seq 1 5); do
+    date
+    echo err &gt;&amp;2
+    sleep 2
+  done
+']]</span>
+</pre>
+
+<p> It prints a bunch of junk on the standard output (<em>stdout</em>) and error
+ (<em>stderr</em>) streams. This command would block Awesome for 10 seconds if it
  were executed synchronously, but will not block it at all using the
- asynchronous functions.
+ asynchronous functions.</p>
+
 <p> <a href="../libraries/awful.spawn.html#awful.spawn.with_line_callback">with_line_callback</a> will execute the callbacks every time a new line is
- printed by the command:
-<p>    awful.spawn.with_line_callback(noisy, {
-        stdout = function(line)
-            naughty.notification { message = "LINE:"..line }
-        end,
-        stderr = function(line)
-            naughty.notification { message = "ERR:"..line}
-        end,
-    })
-<p> If only the full output is needed, then <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">easy_async</a> is the right choice:
-<p>    awful.spawn.easy_async(noisy, function(stdout, stderr, reason, exit_code)
-        naughty.notification { message = stdout }
-    end)
-<p> **Default applications**:
+ printed by the command:</p>
+
+
+<pre>
+awful.spawn.with_line_callback(noisy, {
+    stdout = <span class="keyword">function</span>(line)
+        naughty.notification { message = <span class="string">"LINE:"</span>..line }
+    <span class="keyword">end</span>,
+    stderr = <span class="keyword">function</span>(line)
+        naughty.notification { message = <span class="string">"ERR:"</span>..line}
+    <span class="keyword">end</span>,
+})
+</pre>
+
+<p> If only the full output is needed, then <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">easy_async</a> is the right choice:</p>
+
+
+<pre>
+awful.spawn.easy_async(noisy, <span class="keyword">function</span>(stdout, stderr, reason, exit_code)
+    naughty.notification { message = stdout }
+<span class="keyword">end</span>)
+</pre>
+
+<p> <strong>Default applications</strong>:</p>
+
 <p> If the intent is to open a file/document, then it is recommended to use the
  following standard command. The default application will be selected
- according to the [Shared MIME-info Database](https://specifications.freedesktop.org/shared-mime-info-spec/shared-mime-info-spec-latest.html)
+ according to the <a href="https://specifications.freedesktop.org/shared-mime-info-spec/shared-mime-info-spec-latest.html">Shared MIME-info Database</a>
  specification. The <code>xdg-utils</code> package provided by most distributions
- includes the <code>xdg-open</code> command:
-<p>    awful.spawn({"xdg-open", "/path/to/file"})
-<p> Awesome **does not** manage, modify or otherwise influence the database
+ includes the <code>xdg-open</code> command:</p>
+
+
+<pre>
+awful.spawn({<span class="string">"xdg-open"</span>, <span class="string">"/path/to/file"</span>})
+</pre>
+
+<p> Awesome <strong>does not</strong> manage, modify or otherwise influence the database
  for default applications. For information about how to do this, consult the
- [ARCH Linux Wiki](https://wiki.archlinux.org/index.php/default_applications).
+ <a href="https://wiki.archlinux.org/index.php/default_applications">ARCH Linux Wiki</a>.</p>
+
 <p> If you wish to change how the default applications behave, then consult the
- [Desktop Entry](https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html)
- specification.
-<p> Spawning applications with specific properties
- ===
-<p> **The startup notification protocol**:
+ <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html">Desktop Entry</a>
+ specification.</p>
+
+<h1> Spawning applications with specific properties</h1>
+
+<p> <strong>The startup notification protocol</strong>:</p>
+
 <p> The startup notification protocol is an optional specification implemented
  by X11 applications to bridge the chain of knowledge between the moment a
  program is launched to the moment its window (client) is shown. It can be
- found [on the FreeDesktop.org website](https://www.freedesktop.org/wiki/Specifications/startup-notification-spec/).
+ found <a href="https://www.freedesktop.org/wiki/Specifications/startup-notification-spec/">on the FreeDesktop.org website</a>.</p>
+
 <p> Awesome has support for the various events that are part of the protocol, but
  the most useful is the identifier, usually identified by its <code>SNID</code> acronym in
  the documentation. It isn't usually necessary to even know it exists, as it
  is all done automatically. However, if more control is required, the
  identifier can be specified by an environment variable called
  <code>DESKTOP_STARTUP_ID</code>. For example, let us consider execution of the following
- command:
-<p>    DESKTOP_STARTUP_ID="something_TIME$(date '+%s')" my_command
+ command:</p>
+
+
+<pre>
+DESKTOP_STARTUP_ID=<span class="string">"something_TIME$(date '+%s')"</span> my_command
+</pre>
+
 <p> This should (if the program correctly implements the protocol) result in
  <code>c.startup_id</code> to at least match <code>something</code>.
- This identifier can then be used in <a href="../declarative_rules/ruled.client.html#">ruled.client</a> to configure the client.
+ This identifier can then be used in <a href="../declarative_rules/ruled.client.html#">ruled.client</a> to configure the client.</p>
+
 <p> Awesome can automatically set the <code>DESKTOP_STARTUP_ID</code> variable. This is used
- by <a href="../libraries/awful.spawn.html#">awful.spawn</a> to specify additional rules for the startup. For example:
-<p>    awful.spawn("urxvt -e maxima -name CALCULATOR", {
-        floating  = true,
-        tag       = mouse.screen.selected_tag,
-        placement = awful.placement.bottom_right,
-    })
-<p> This can also be used from the command line:
-<p>    awesome-client 'awful=require("awful");
-      awful.spawn("urxvt -e maxima -name CALCULATOR", {
-        floating  = true,
-        tag       = mouse.screen.selected_tag,
-        placement = awful.placement.bottom_right,
-      })'
+ by <a href="../libraries/awful.spawn.html#">awful.spawn</a> to specify additional rules for the startup. For example:</p>
+
+
+<pre>
+awful.spawn(<span class="string">"urxvt -e maxima -name CALCULATOR"</span>, {
+    floating  = <span class="keyword">true</span>,
+    tag       = mouse.screen.selected_tag,
+    placement = awful.placement.bottom_right,
+})
+</pre>
+
+<p> This can also be used from the command line:</p>
+
+
+<pre>
+awesome-client <span class="string">'awful=require("awful");
+  awful.spawn("urxvt -e maxima -name CALCULATOR", {
+    floating  = true,
+    tag       = mouse.screen.selected_tag,
+    placement = awful.placement.bottom_right,
+  })'</span>
+</pre>
+
 <p> This table contains the client properties that are valid when used the
- <code>sn_rules</code> or <code>prop</code> function argument. They are the same as in <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.
-<p><table class='widget_list' border=1>
+ <code>sn_rules</code> or <code>prop</code> function argument. They are the same as in <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.</p>
+
+
+<table class='widget_list' border=1>
  <tr>
   <th align='center'>Name</th>
   <th align='center'>Description</th>
@@ -448,6 +533,7 @@
    <tr><td><a href='../core_components/client.html#buttons'>buttons</a></td><td>Get or set mouse buttons bindings for a client</td></tr>
    <tr><td><a href='../core_components/client.html#keys'>keys</a></td><td>Get or set keys bindings for a client</td></tr>
  </table>
+
 </p>
     <div class="extra-header">
 
@@ -588,11 +674,12 @@
     </span>
     </dt>
     <dd>
-    Spawn a program, and optionally apply properties and/or run a callback.
-<p> Applying properties or running a callback requires the program/client to
- support startup notifications.
-<p> See <a href="../declarative_rules/ruled.client.html#execute">ruled.client.execute</a> for more details about the format of <code>sn_rules</code>.
+    Spawn a program, and optionally apply properties and/or run a callback. </p>
 
+<p> Applying properties or running a callback requires the program/client to
+ support startup notifications.</p>
+
+<p> See <a href="../declarative_rules/ruled.client.html#execute">ruled.client.execute</a> for more details about the format of <code>sn_rules</code>.
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1037,17 +1124,20 @@
     </span>
     </dt>
     <dd>
-    Spawn a command if it has not been spawned before.
-<p> This function tries its best to preserve the state across <code>awesome.restart()</code>.
+    Spawn a command if it has not been spawned before. </p>
+
+<p> This function tries its best to preserve the state across <code>awesome.restart()</code>.</p>
+
 <p> By default, when no <code>unique_id</code> is specified, this function will generate one by
  hashing the command and its rules. If you have multiple instance of the same
  command and rules, you need to specify an UID or only the first one will be
- executed.
-<p> The <a href="../libraries/awful.rules.html">rules</a> are standard <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.
+ executed.</p>
+
+<p> The <a href="../libraries/awful.rules.html">rules</a> are standard <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.</p>
+
 <p> This function depends on the startup notification protocol to be correctly
  implemented by the command. See <a href="../core_components/client.html#startup_id">client.startup_id</a> for more information.
  Note that this also won't work with shell or terminal commands.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1118,16 +1208,19 @@
     </span>
     </dt>
     <dd>
-    Spawn a command if an instance is not already running.
+    Spawn a command if an instance is not already running. </p>
+
 <p> This is like <a href="../libraries/awful.spawn.html#awful.spawn.once">awful.spawn.once</a>, but will spawn new instances if the previous
- has finished.
-<p> The <a href="../libraries/awful.rules.html">rules</a> are standard <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.
+ has finished.</p>
+
+<p> The <a href="../libraries/awful.rules.html">rules</a> are standard <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.</p>
+
 <p> This function depends on the startup notification protocol to be correctly
  implemented by the command. See <a href="../core_components/client.html#startup_id">client.startup_id</a> for more information.
- Note that this also won't work with shell or terminal commands.
+ Note that this also won't work with shell or terminal commands.</p>
+
 <p> Note that multiple instances can still be spawned if the command is called
  faster than the client has time to start.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1199,11 +1292,11 @@
     </span>
     </dt>
     <dd>
-    Raise a client if it exists or spawn a new one then raise it.
+    Raise a client if it exists or spawn a new one then raise it. </p>
+
 <p> This function depends on the startup notification protocol to be correctly
  implemented by the command. See <a href="../core_components/client.html#startup_id">client.startup_id</a> for more information.
  Note that this also won't work with shell or terminal commands.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">

@@ -216,113 +216,174 @@
 
 <div id="content">
 
-    # Building and Testing
-<p>## Dependencies
+
+<h1>Building and Testing</h1>
+
+<p><a name="Dependencies"></a></p>
+<h2>Dependencies</h2>
+
 <p>Awesome has the following dependencies (besides a more-or-less standard POSIX
-environment):
-<p>- [CMake >= 3.0.0](https://cmake.org)
-- [Lua >= 5.1.0](https://www.lua.org) or [LuaJIT](http://luajit.org)
-- [LGI >= 0.8.0](https://github.com/pavouk/lgi)
-- [xproto >= 7.0.15](https://www.x.org/archive//individual/proto/)
-- [libxcb >= 1.6](https://xcb.freedesktop.org/) with support for the RandR, XTest, Xinerama, SHAPE and
-  XKB extensions
-- [libxcb-cursor](https://xcb.freedesktop.org/)
-- [libxcb-util >= 0.3.8](https://xcb.freedesktop.org/)
-- [libxcb-keysyms >= 0.3.4](https://xcb.freedesktop.org/)
-- [libxcb-icccm >= 0.3.8](https://xcb.freedesktop.org/)
-- [libxcb-xfixes](https://xcb.freedesktop.org/)
-- [xcb-util-xrm >= 1.0](https://github.com/Airblader/xcb-util-xrm)
-- [libxkbcommon](http://xkbcommon.org/) with X11 support enabled
-- [libstartup-notification >=
-  0.10](https://www.freedesktop.org/wiki/Software/startup-notification/)
-- [cairo](https://www.cairographics.org/) with support for XCB and GObject
-  introspection
-- [Pango](http://www.pango.org/) with support for Cairo and GObject
-  introspection
-- [GLib >= 2.40](https://wiki.gnome.org/Projects/GLib) with support for GObject
-  introspection
-- [GIO](https://developer.gnome.org/gio/stable/) with support for GObject
-  introspection
-- [GdkPixbuf](https://wiki.gnome.org/Projects/GdkPixbuf)
-- libX11 with xcb support
-- [Imagemagick's convert utility](http://www.imagemagick.org/script/index.php)
-- [libxdg-basedir >= 1.0.0](https://github.com/devnev/libxdg-basedir)
-<p>Additionally, the following optional dependencies exist:
-<p>- [DBus](https://www.freedesktop.org/wiki/Software/dbus/) for DBus integration
-  and the <code>awesome-client</code> utility
-- [asciidoctor](https://asciidoctor.org/) for generating man pages
-- [gzip](http://www.gzip.org/) for compressing man pages
-- [ldoc >= 1.4.5](https://stevedonovan.github.io/ldoc/) for generating the
-  documentation
-- [busted](https://olivinelabs.com/busted/) for running unit tests
-- [luacheck](https://github.com/mpeterv/luacheck) for static code analysis
-- [LuaCov](https://keplerproject.github.io/luacov/) for collecting code coverage
-  information
-- libexecinfo on systems where libc does not provide <code>backtrace_symbols()</code> to
-  generate slightly better backtraces on crashes
-- <code>Xephyr</code> or <code>Xvfb</code> for running integration tests
-- [GTK+ >= 3.10](https://www.gtk.org/) for <code>./themes/gtk/</code>
-- [xcb-errors](https://gitlab.freedesktop.org/xorg/lib/libxcb-errors) for
-  pretty-printing of X11 errors
-- [libRSVG](https://wiki.gnome.org/action/show/Projects/LibRsvg) for displaying
-  SVG files without scaling artifacts
-- [wmctrl](http://tripie.sweb.cz/utils/wmctrl) for testing WM interactions
-  with external actions
-- [xterm](https://invisible-island.net/xterm/) for various test cases
-<p>## Building
-<p>With all dependencies installed, run the following commands within the root of the repository to build and install Awesome on your system:
-<p>``<code>sh
+environment):</p>
+
+<ul>
+    <li><a href="https://cmake.org">CMake >= 3.0.0</a></li>
+    <li><a href="https://www.lua.org">Lua >= 5.1.0</a> or <a href="http://luajit.org">LuaJIT</a></li>
+    <li><a href="https://github.com/pavouk/lgi">LGI >= 0.8.0</a></li>
+    <li><a href="https://www.x.org/archive//individual/proto/">xproto >= 7.0.15</a></li>
+    <li><a href="https://xcb.freedesktop.org/">libxcb >= 1.6</a> with support for the RandR, XTest, Xinerama, SHAPE and
+    XKB extensions</li>
+    <li><a href="https://xcb.freedesktop.org/">libxcb-cursor</a></li>
+    <li><a href="https://xcb.freedesktop.org/">libxcb-util >= 0.3.8</a></li>
+    <li><a href="https://xcb.freedesktop.org/">libxcb-keysyms >= 0.3.4</a></li>
+    <li><a href="https://xcb.freedesktop.org/">libxcb-icccm >= 0.3.8</a></li>
+    <li><a href="https://xcb.freedesktop.org/">libxcb-xfixes</a></li>
+    <li><a href="https://github.com/Airblader/xcb-util-xrm">xcb-util-xrm >= 1.0</a></li>
+    <li><a href="http://xkbcommon.org/">libxkbcommon</a> with X11 support enabled</li>
+    <li><a href="https://www.freedesktop.org/wiki/Software/startup-notification/">libstartup-notification >=
+    0.10</a></li>
+    <li><a href="https://www.cairographics.org/">cairo</a> with support for XCB and GObject
+    introspection</li>
+    <li><a href="http://www.pango.org/">Pango</a> with support for Cairo and GObject
+    introspection</li>
+    <li><a href="https://wiki.gnome.org/Projects/GLib">GLib >= 2.40</a> with support for GObject
+    introspection</li>
+    <li><a href="https://developer.gnome.org/gio/stable/">GIO</a> with support for GObject
+    introspection</li>
+    <li><a href="https://wiki.gnome.org/Projects/GdkPixbuf">GdkPixbuf</a></li>
+    <li>libX11 with xcb support</li>
+    <li><a href="http://www.imagemagick.org/script/index.php">Imagemagick's convert utility</a></li>
+    <li><a href="https://github.com/devnev/libxdg-basedir">libxdg-basedir >= 1.0.0</a></li>
+</ul>
+
+<p>Additionally, the following optional dependencies exist:</p>
+
+<ul>
+    <li><a href="https://www.freedesktop.org/wiki/Software/dbus/">DBus</a> for DBus integration
+    and the <code>awesome-client</code> utility</li>
+    <li><a href="https://asciidoctor.org/">asciidoctor</a> for generating man pages</li>
+    <li><a href="http://www.gzip.org/">gzip</a> for compressing man pages</li>
+    <li><a href="https://stevedonovan.github.io/ldoc/">ldoc >= 1.4.5</a> for generating the
+    documentation</li>
+    <li><a href="https://olivinelabs.com/busted/">busted</a> for running unit tests</li>
+    <li><a href="https://github.com/mpeterv/luacheck">luacheck</a> for static code analysis</li>
+    <li><a href="https://keplerproject.github.io/luacov/">LuaCov</a> for collecting code coverage
+    information</li>
+    <li>libexecinfo on systems where libc does not provide <code>backtrace_symbols()</code> to
+    generate slightly better backtraces on crashes</li>
+    <li><code>Xephyr</code> or <code>Xvfb</code> for running integration tests</li>
+    <li><a href="https://www.gtk.org/">GTK+ >= 3.10</a> for <code>./themes/gtk/</code></li>
+    <li><a href="https://gitlab.freedesktop.org/xorg/lib/libxcb-errors">xcb-errors</a> for
+    pretty-printing of X11 errors</li>
+    <li><a href="https://wiki.gnome.org/action/show/Projects/LibRsvg">libRSVG</a> for displaying
+    SVG files without scaling artifacts</li>
+    <li><a href="http://tripie.sweb.cz/utils/wmctrl">wmctrl</a> for testing WM interactions
+    with external actions</li>
+    <li><a href="https://invisible-island.net/xterm/">xterm</a> for various test cases</li>
+</ul>
+
+<p><a name="Building"></a></p>
+<h2>Building</h2>
+
+<p>With all dependencies installed, run the following commands within the root of the repository to build and install Awesome on your system:</p>
+
+
+<pre>
 make
 sudo make install
-</code>`<code>
-&lt;p&gt;### Create packages
-&lt;p&gt;To ease installation management, you can pack Awesome into </code>.deb<code> or </code>.rpm<code> packages. The following command will build the correct package for your system&apos;s package manager:
-&lt;p&gt;</code>`<code>sh
-make package
-</code>`<code>
-&lt;p&gt;To install the package, run one of the following commands:
-&lt;p&gt;</code>`<code>sh
+</pre>
+
+
+<h3>Create packages</h3>
+
+<p>To ease installation management, you can pack Awesome into <code>.deb</code> or <code>.rpm</code> packages. The following command will build the correct package for your system's package manager:</p>
+
+
+<pre>
+make <span class="global">package</span>
+</pre>
+
+
+<p>To install the package, run one of the following commands:</p>
+
+
+<pre>
 sudo dpkg -i awesome-x.y.z.deb
-# or
+# <span class="keyword">or</span>
 sudo rpm -Uvh awesome-x.y.z.rpm
-</code>`<code>
-&lt;p&gt;### Customizing build options
-&lt;p&gt;Awesome allows customizing various aspects of the build process through CMake variables. To change these variables, pass the </code>CMAKE_ARGS<code> environment variable to </code>make<code> with CMake flags as content (see </code>cmake -h<code>).
-&lt;p&gt;Here is an example:
-&lt;p&gt;</code>`<code>sh
-CMAKE_ARGS=&quot;-DLUA_EXECUTABLE=/usr/bin/lua5.3&quot; make
-</code>`<code>
-&lt;p&gt;**Note:**
-&lt;p&gt;CMake arguments only need to be specified on the first run of </code>make<code> or after </code>make distclean<code>.
-&lt;p&gt;#### Skip documentation
-&lt;p&gt;The CMake variables </code>GENERATE_DOC<code> and </code>GENERATE_MANPAGES<code> toggle generation of HTML documentation and man pages respectively. They are enabled by default but can be set to </code>OFF<code>.
-&lt;p&gt;</code>`<code>sh
-CMAKE_ARGS=&quot;-DGENERATE_DOC=OFF -DGENERATE_MANPAGES=OFF&quot; make
-</code>`<code>
-&lt;p&gt;#### Change the Lua version
-&lt;p&gt;Both the build steps and the final binary require a working Lua interpreter. To change the Lua interpreter that both the build process and Awesome should use, specify an absolute path to a </code>lua<code> binary for </code>LUA_EXECUTABLE<code> and values that match the binary&apos;s version for </code>LUA_LIBRARY<code> and </code>LUA_INCLUDE_DIR<code>.
-&lt;p&gt;Example to build on Arch Linux:
-&lt;p&gt;</code>`<code>sh
-CMAKE_ARGS=&quot;-DLUA_EXECUTABLE=/usr/bin/lua5.3 -DLUA_LIBRARY=/usr/lib/liblua.so.5.3 -DLUA_INCLUDE_DIR=/usr/include/lua5.3&quot; make
-</code>`<code>
-&lt;p&gt;#### Additional options
-&lt;p&gt;Additional variables can be found through CMake. Run the following command to print a list of all available variables, including the ones explained above:
-&lt;p&gt;</code>`<code>sh
+</pre>
+
+
+<h3>Customizing build options</h3>
+
+<p>Awesome allows customizing various aspects of the build process through CMake variables. To change these variables, pass the <code>CMAKE_ARGS</code> environment variable to <code>make</code> with CMake flags as content (see <code>cmake -h</code>).</p>
+
+<p>Here is an example:</p>
+
+
+<pre>
+CMAKE_ARGS=<span class="string">"-DLUA_EXECUTABLE=/usr/bin/lua5.3"</span> make
+</pre>
+
+
+<p><strong>Note:</strong></p>
+
+<p>CMake arguments only need to be specified on the first run of <code>make</code> or after <code>make distclean</code>.</p>
+
+<h4>Skip documentation</h4>
+
+<p>The CMake variables <code>GENERATE_DOC</code> and <code>GENERATE_MANPAGES</code> toggle generation of HTML documentation and man pages respectively. They are enabled by default but can be set to <code>OFF</code>.</p>
+
+
+<pre>
+CMAKE_ARGS=<span class="string">"-DGENERATE_DOC=OFF -DGENERATE_MANPAGES=OFF"</span> make
+</pre>
+
+
+<h4>Change the Lua version</h4>
+
+<p>Both the build steps and the final binary require a working Lua interpreter. To change the Lua interpreter that both the build process and Awesome should use, specify an absolute path to a <code>lua</code> binary for <code>LUA_EXECUTABLE</code> and values that match the binary's version for <code>LUA_LIBRARY</code> and <code>LUA_INCLUDE_DIR</code>.</p>
+
+<p>Example to build on Arch Linux:</p>
+
+
+<pre>
+CMAKE_ARGS=<span class="string">"-DLUA_EXECUTABLE=/usr/bin/lua5.3 -DLUA_LIBRARY=/usr/lib/liblua.so.5.3 -DLUA_INCLUDE_DIR=/usr/include/lua5.3"</span> make
+</pre>
+
+
+<h4>Additional options</h4>
+
+<p>Additional variables can be found through CMake. Run the following command to print a list of all available variables, including the ones explained above:</p>
+
+
+<pre>
 cmake -B build -L
-</code>`<code>
-&lt;p&gt;## Testing
-&lt;p&gt;Once Awesome has been built, you can run various test suites to verify functionality for both the binary and the Lua library. Make sure to install applicable dependencies as outlined at the top.
-&lt;p&gt;**Full test suite:**
-&lt;p&gt;</code>`<code>sh
+</pre>
+
+
+<p><a name="Testing"></a></p>
+<h2>Testing</h2>
+
+<p>Once Awesome has been built, you can run various test suites to verify functionality for both the binary and the Lua library. Make sure to install applicable dependencies as outlined at the top.</p>
+
+<p><strong>Full test suite:</strong></p>
+
+
+<pre>
 make check
-</code>`<code>
-&lt;p&gt;Individual test categories can be run as well:
-&lt;p&gt;* </code>make check-integration<code>: Run integration tests within a Xephyr session.
-* </code>make check-qa<code>: Run </code>luacheck<code> against the Lua library
-* </code>make check-unit<code>: Run unit tests with </code>busted<code> against the Lua library. You can also run </code>busted <options> ./spec<code> if you want to specify options for </code>busted<code>.
-* </code>make check-requires<code>: Check for invalid </code>require()<code> calls.
-* </code>make check-examples<code>: Run integration tests within the examples in </code>./tests/examples<code>.
-* </code>make check-themes`: Test themes.
+</pre>
+
+
+<p>Individual test categories can be run as well:</p>
+
+<ul>
+    <li><code>make check-integration</code>: Run integration tests within a Xephyr session.</li>
+    <li><code>make check-qa</code>: Run <code>luacheck</code> against the Lua library</li>
+    <li><code>make check-unit</code>: Run unit tests with <code>busted</code> against the Lua library. You can also run <code>busted &lt;options&gt; ./spec</code> if you want to specify options for <code>busted</code>.</li>
+    <li><code>make check-requires</code>: Check for invalid <code>require()</code> calls.</li>
+    <li><code>make check-examples</code>: Run integration tests within the examples in <code>./tests/examples</code>.</li>
+    <li><code>make check-themes</code>: Test themes.</li>
+</ul>
 
 
 </div> <!-- id="content" -->

@@ -220,36 +220,44 @@
 <h1>Module: <code>awful.widget.layoutbox</code></h1>
 <p>Display the current client layout (<a href="../libraries/awful.layout.html#">awful.layout</a>) icon or name.</p>
 <p>
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_widget_layoutbox_default.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     local s = screen[1]
 
-     local mylayoutbox = awful.widget.layoutbox {
-         screen = s,
-         -- Add buttons, allowing you to change the layout
-         buttons = {
-             awful.button({ }, 1, function () awful.layout.inc( 1) end),
-             awful.button({ }, 3, function () awful.layout.inc(-1) end),
-             awful.button({ }, 4, function () awful.layout.inc( 1) end),
-             awful.button({ }, 5, function () awful.layout.inc(-1) end),
-         }
-     }
 
-     wb:setup {
-         layout = wibox.layout.align.horizontal,
-         { -- Left widgets
-             mytaglist,
-             layout = wibox.layout.fixed.horizontal,
-         },
-         mytasklist, -- Middle widget
-         { -- Right widgets
-             layout = wibox.layout.fixed.horizontal,
-             mykeyboardlayout,
-             mytextclock,
-             mylayoutbox,
-         },
-     }
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_widget_layoutbox_default.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="keyword">local</span> s = screen[<span class="number">1</span>]
+
+<span class="keyword">local</span> mylayoutbox = awful.widget.layoutbox {
+    screen = s,
+    <span class="comment">-- Add buttons, allowing you to change the layout
+</span>    buttons = {
+        awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> () awful.layout.inc( <span class="number">1</span>) <span class="keyword">end</span>),
+        awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span> () awful.layout.inc(-<span class="number">1</span>) <span class="keyword">end</span>),
+        awful.button({ }, <span class="number">4</span>, <span class="keyword">function</span> () awful.layout.inc( <span class="number">1</span>) <span class="keyword">end</span>),
+        awful.button({ }, <span class="number">5</span>, <span class="keyword">function</span> () awful.layout.inc(-<span class="number">1</span>) <span class="keyword">end</span>),
+    }
+}
+
+wb:setup {
+    layout = wibox.layout.align.horizontal,
+    { <span class="comment">-- Left widgets
+</span>        mytaglist,
+        layout = wibox.layout.fixed.horizontal,
+    },
+    mytasklist, <span class="comment">-- Middle widget
+</span>    { <span class="comment">-- Right widgets
+</span>        layout = wibox.layout.fixed.horizontal,
+        mykeyboardlayout,
+        mytextclock,
+        mylayoutbox,
+    },
+}
+</pre>
+
 </p>
     <div class="extra-header">
   <div class="extra-header__section">
@@ -766,14 +774,17 @@
     </span>
     </dt>
     <dd>
-    A widget to insert as a separator between child widgets.
+    A widget to insert as a separator between child widgets. </p>
+
 <p> If this property is a valid widget and <code>spacing</code> is greater than <code>0</code>, a
  copy of this widget is inserted between each child widget, with its size in
- the layout's main direction determined by <code>spacing</code>.
-<p> By default no widget is used and any <code>spacing</code> is applied as an empty offset.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_fixed_spacing_widget.svg" alt="Usage example" type="image/svg+xml"></object>
+ the layout's main direction determined by <code>spacing</code>.</p>
 
+<p> By default no widget is used and any <code>spacing</code> is applied as an empty offset.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_fixed_spacing_widget.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -925,11 +936,13 @@
     </span>
     </dt>
     <dd>
-    The amount of space inserted between the child widgets.
-<p> If a <code>spacing_widget</code> is defined, this value is used for its size.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_fixed_spacing.svg" alt="Usage example" type="image/svg+xml"></object>
+    The amount of space inserted between the child widgets. </p>
 
+<p> If a <code>spacing_widget</code> is defined, this value is used for its size.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_fixed_spacing.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1400,7 +1413,8 @@
     </span>
     </dt>
     <dd>
-    The widget buttons.
+    The widget buttons. </p>
+
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>
@@ -1535,7 +1549,8 @@
     </span>
     </dt>
     <dd>
-    Remove one or more widgets from the layout.
+    Remove one or more widgets from the layout. </p>
+
 <p> The last parameter can be a boolean, forcing a recursive seach of the
  widget(s) to remove.
 
@@ -1838,11 +1853,12 @@
     </span>
     </dt>
     <dd>
-    Swap 2 widgets in a layout.
-<p> If <code>widget1</code> is present multiple time, only the first instance is swapped.
+    Swap 2 widgets in a layout. </p>
+
+<p> If <code>widget1</code> is present multiple time, only the first instance is swapped.</p>
+
 <p> Calls <code>set</code> internally, so the signal <code>widget::replaced</code> is emitted for both
  widgets as well.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2002,19 +2018,26 @@
     </span>
     </dt>
     <dd>
-    Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal.
+
+<p>Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal. </p>
+
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.
-<p> Note that this function has some flaws:
-<p> 1. The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.</p>
+
+<p> Note that this function has some flaws:</p>
+
+<ol>
+    <li>The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.
- 2. In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.</li>
+    <li>In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).
- 3. If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.
+    tree path).</li>
+    <li>If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.</li>
+</ol>
+
 
 
     <h3>Parameters:</h3>
@@ -2029,7 +2052,9 @@
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>
@@ -2119,13 +2144,20 @@
     </span>
     </dt>
     <dd>
-    Connect to a signal.
-<p>
-<p>
-**Usage example output**:
-<p>    In slot	[obj]	nil	nil	nil
-    In slot	[obj]	foo	bar	42
-<p>
+
+<p>Connect to a signal. </p>
+
+
+
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>In slot [obj]   nil nil nil
+In slot [obj]   foo bar 42
+</code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2186,13 +2218,13 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.
+    Connect to a signal weakly. </p>
+
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
- **Warning:**
+ <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
  are doing.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">

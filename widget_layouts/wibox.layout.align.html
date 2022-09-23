@@ -224,19 +224,23 @@
  widgets by stretching or shrinking them based on the chosen <a href="../widget_layouts/wibox.layout.align.html#expand">expand</a>
  strategy.
  On its secondary axis, the biggest child widget determines the size of the
- layout, but smaller widgets will not be stretched to match it.
+ layout, but smaller widgets will not be stretched to match it.</p>
+
 <p> In its default configuration, the layout will give the first and third
  widgets only the minimum space they ask for and it aligns them to the outer
  edges. The remaining space between them is made available to the widget in
- slot two.
+ slot two.</p>
+
 <p> This layout is most commonly used to split content into left/top, center and
  right/bottom sections. As such, it is usually seen as the root layout in
- <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a>.
+ <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a>.</p>
+
 <p> You may also fill just one or two of the widget slots, the <a href="../widget_layouts/wibox.layout.align.html#expand">expand</a> algorithm
- will adjust accordingly.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_defaults_align.svg" alt="Usage example" type="image/svg+xml"></object>
-</p>
+ will adjust accordingly.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_defaults_align.svg" alt="Usage example" type="image/svg+xml"></object></p>
     <h3>Usage:</h3>
     <ul>
         <pre class="example">wibox.widget {
@@ -652,8 +656,10 @@
     </span>
     </dt>
     <dd>
-    Returns a new horizontal align layout.
-<p> The three widget slots are aligned left, center and right.
+    Returns a new horizontal align layout. </p>
+
+<p> The three widget slots are aligned left, center and right.</p>
+
 <p> Additionally, this creates the aliases <code>set_left</code>, <code>set_middle</code> and
  <code>set_right</code> to assign <a href="../widget_layouts/wibox.layout.align.html#first">first</a>, <a href="../widget_layouts/wibox.layout.align.html#second">second</a> and <a href="../widget_layouts/wibox.layout.align.html#third">third</a> respectively.
 
@@ -701,8 +707,10 @@
     </span>
     </dt>
     <dd>
-    Returns a new vertical align layout.
-<p> The three widget slots are aligned top, center and bottom.
+    Returns a new vertical align layout. </p>
+
+<p> The three widget slots are aligned top, center and bottom.</p>
+
 <p> Additionally, this creates the aliases <code>set_top</code>, <code>set_middle</code> and
  <code>set_bottom</code> to assign <a href="../widget_layouts/wibox.layout.align.html#first">first</a>, <a href="../widget_layouts/wibox.layout.align.html#second">second</a> and <a href="../widget_layouts/wibox.layout.align.html#third">third</a> respectively.
 
@@ -756,9 +764,9 @@
     </span>
     </dt>
     <dd>
-    The widget in slot one.
-<p> This is the widget that is at the left/top.
+    The widget in slot one. </p>
 
+<p> This is the widget that is at the left/top.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -822,9 +830,9 @@
     </span>
     </dt>
     <dd>
-    The widget in slot two.
-<p> This is the centered one.
+    The widget in slot two. </p>
 
+<p> This is the centered one.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -888,9 +896,9 @@
     </span>
     </dt>
     <dd>
-    The widget in slot three.
-<p> This is the widget that is at the right/bottom.
+    The widget in slot three. </p>
 
+<p> This is the widget that is at the right/bottom.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -954,10 +962,10 @@
     </dt>
     <dd>
     Set the expand mode, which determines how child widgets expand to take up
- unused space.
+ unused space. </p>
+
 <p> Attempting to set any other value than one of those three will fall back to
  <code>&quot;inside&quot;</code>.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1417,7 +1425,8 @@
     </span>
     </dt>
     <dd>
-    The widget buttons.
+    The widget buttons. </p>
+
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>
@@ -1684,11 +1693,12 @@
     </span>
     </dt>
     <dd>
-    Swap 2 widgets in a layout.
-<p> If <code>widget1</code> is present multiple time, only the first instance is swapped.
+    Swap 2 widgets in a layout. </p>
+
+<p> If <code>widget1</code> is present multiple time, only the first instance is swapped.</p>
+
 <p> Calls <a href="../widget_layouts/wibox.layout.align.html#set">set</a> internally, so the signal <code>widget::replaced</code> is emitted for both
  widgets as well.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1847,19 +1857,26 @@
     </span>
     </dt>
     <dd>
-    Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal.
+
+<p>Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal. </p>
+
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.
-<p> Note that this function has some flaws:
-<p> 1. The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.</p>
+
+<p> Note that this function has some flaws:</p>
+
+<ol>
+    <li>The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.
- 2. In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.</li>
+    <li>In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).
- 3. If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.
+    tree path).</li>
+    <li>If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.</li>
+</ol>
+
 
 
     <h3>Parameters:</h3>
@@ -1874,7 +1891,9 @@
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>
@@ -1964,13 +1983,20 @@
     </span>
     </dt>
     <dd>
-    Connect to a signal.
-<p>
-<p>
-**Usage example output**:
-<p>    In slot	[obj]	nil	nil	nil
-    In slot	[obj]	foo	bar	42
-<p>
+
+<p>Connect to a signal. </p>
+
+
+
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>In slot [obj]   nil nil nil
+In slot [obj]   foo bar 42
+</code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2031,13 +2057,13 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.
+    Connect to a signal weakly. </p>
+
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
- **Warning:**
+ <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
  are doing.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">

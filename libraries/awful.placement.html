@@ -216,62 +216,99 @@
 
 <h1>Module: <code>awful.placement</code></h1>
 <p>Algorithms used to place various drawables.</p>
-<p>
 <p> The functions provided by this module all follow the same arguments
- conventions. This allow:
-<p> * To use them in various other module as
-   [visitor objects](https://en.wikipedia.org/wiki/Visitor_pattern)
- * Turn each function into an API with various common customization parameters.
- * Re-use the same functions for the <a href="../input_handling/mouse.html#">mouse</a>, <a href="../core_components/client.html#">client</a>s, <a href="../core_components/screen.html#">screen</a>s and <a href="../popups_and_bars/wibox.html#">wibox</a>es
-<p>
- <h3>Compositing</h3>
-<p> It is possible to compose placement function using the <code>+</code> or <code>*</code> operator:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_placement_compose.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- "right" will be replaced by "left"
-     local f = (awful.placement.right + awful.placement.left)
-     f(client.focus)
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_placement_compose2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Simulate Windows 7 "edge snap" (also called aero snap) feature
-     local axis = "vertically"
-     local f = awful.placement.scale
-         + awful.placement.left
-         + (axis and awful.placement["maximize_"..axis] or nil)
-     local geo = f(client.focus, {honor_workarea=true, to_percent = 0.5})
-<p> <h3>Common arguments</h3>
-<p> **pretend** (*boolean*):
+ conventions. This allow:</p>
+
+<ul>
+    <li>To use them in various other module as
+    <a href="https://en.wikipedia.org/wiki/Visitor_pattern">visitor objects</a></li>
+    <li>Turn each function into an API with various common customization parameters.</li>
+    <li>Re-use the same functions for the <a href="../input_handling/mouse.html#">mouse</a>, <a href="../core_components/client.html#">client</a>s, <a href="../core_components/screen.html#">screen</a>s and <a href="../popups_and_bars/wibox.html#">wibox</a>es</li>
+</ul>
+
+
+<p> <h3>Compositing</h3></p>
+
+<p> It is possible to compose placement function using the <code>+</code> or <code>*</code> operator:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_compose.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="comment">-- "right" will be replaced by "left"
+</span><span class="keyword">local</span> f = (awful.placement.right + awful.placement.left)
+f(client.focus)
+</pre>
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_compose2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="comment">-- Simulate Windows 7 "edge snap" (also called aero snap) feature
+</span><span class="keyword">local</span> axis = <span class="string">"vertically"</span>
+<span class="keyword">local</span> f = awful.placement.scale
+    + awful.placement.left
+    + (axis <span class="keyword">and</span> awful.placement[<span class="string">"maximize_"</span>..axis] <span class="keyword">or</span> <span class="keyword">nil</span>)
+<span class="keyword">local</span> geo = f(client.focus, {honor_workarea=<span class="keyword">true</span>, to_percent = <span class="number">0.5</span>})
+</pre>
+
+<p> <h3>Common arguments</h3></p>
+
+<p> <strong>pretend</strong> (<em>boolean</em>):</p>
+
 <p> Do not apply the new geometry. This is useful if only the return values is
- necessary.
-<p> **honor_workarea** (*boolean*):
-<p>  Take workarea into account when placing the drawable (default: false)
-<p> **honor_padding** (*boolean*):
-<p>  Take the screen padding into account (see <a href="../core_components/screen.html#padding">screen.padding</a>)
-<p> **tag** (*tag*):
-<p>  Use a tag geometry
-<p> **margins** (*number* or *table*):
-<p>  A table with left, right, top, bottom keys or a number
-<p> **parent** (client, wibox, mouse or screen):
-<p>  A parent drawable to use a base geometry
-<p> **bounding_rect** (table):
-<p> A bounding rectangle
-<p> **attach** (*boolean*):
+ necessary.</p>
+
+<p> <strong>honor_workarea</strong> (<em>boolean</em>):</p>
+
+<p>  Take workarea into account when placing the drawable (default: false)</p>
+
+<p> <strong>honor_padding</strong> (<em>boolean</em>):</p>
+
+<p>  Take the screen padding into account (see <a href="../core_components/screen.html#padding">screen.padding</a>)</p>
+
+<p> <strong>tag</strong> (<em>tag</em>):</p>
+
+<p>  Use a tag geometry</p>
+
+<p> <strong>margins</strong> (<em>number</em> or <em>table</em>):</p>
+
+<p>  A table with left, right, top, bottom keys or a number</p>
+
+<p> <strong>parent</strong> (client, wibox, mouse or screen):</p>
+
+<p>  A parent drawable to use a base geometry</p>
+
+<p> <strong>bounding_rect</strong> (table):</p>
+
+<p> A bounding rectangle</p>
+
+<p> <strong>attach</strong> (<em>boolean</em>):</p>
+
 <p> When the parent geometry (like the screen) changes, re-apply the placement
  function. This will add a <code>detach_callback</code> function to the drawable. Call
  this to detach the function. This will be called automatically when a new
- attached function is set.
-<p> **offset** (*table or number*):
-<p> The offset(s) to apply to the new geometry.
-<p> **store_geometry** (*boolean*):
+ attached function is set.</p>
+
+<p> <strong>offset</strong> (<em>table or number</em>):</p>
+
+<p> The offset(s) to apply to the new geometry.</p>
+
+<p> <strong>store_geometry</strong> (<em>boolean</em>):</p>
+
 <p> Keep a single history of each type of placement. It can be restored using
- <a href="../libraries/awful.placement.html#awful.placement.restore">awful.placement.restore</a> by setting the right <code>context</code> argument.
+ <a href="../libraries/awful.placement.html#awful.placement.restore">awful.placement.restore</a> by setting the right <code>context</code> argument.</p>
+
 <p> When either the parent or the screen geometry change, call the placement
- function again.
-<p> **update_workarea** (*boolean*):
-<p> If *attach* is true, also update the screen workarea.
-</p>
+ function again.</p>
+
+<p> <strong>update_workarea</strong> (<em>boolean</em>):</p>
+
+<p> If <em>attach</em> is true, also update the screen workarea.</p>
     <div class="extra-header">
 
 
@@ -643,15 +680,27 @@
     </span>
     </dt>
     <dd>
-    Move a drawable to the closest corner of the parent geometry (such as the
- screen).
-<p> Valid arguments include the common ones and:
-<p> * **include_sides**: Also include the left, right, top and bottom positions
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_placement_closest_mouse.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>**Usage example output**:
-<p>    Closest corner:	top_left
-<p>
+
+<p>Move a drawable to the closest corner of the parent geometry (such as the
+ screen). </p>
+
+<p> Valid arguments include the common ones and:</p>
+
+<ul>
+    <li><strong>include_sides</strong>: Also include the left, right, top and bottom positions</li>
+</ul>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_closest_mouse.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>Closest corner: top_left
+</code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -717,13 +766,20 @@
     </span>
     </dt>
     <dd>
-    Place the client so no part of it will be outside the screen (workarea).
-<p>
-<object class="img-object" data="../images/AUTOGEN_awful_placement_no_offscreen.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>**Usage example output**:
-<p>    Before:	x=-30, y=-30, width=100, height=100
-    After:	x=50, y=50, width=100, height=100
-<p>
+
+<p>Place the client so no part of it will be outside the screen (workarea). </p>
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_no_offscreen.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>Before: x=-30, y=-30, width=100, height=100
+After:  x=50, y=50, width=100, height=100
+</code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -784,10 +840,10 @@
     </span>
     </dt>
     <dd>
-    Place the client where there's place available with minimum overlap.
-<p>
-<object class="img-object" data="../images/AUTOGEN_awful_placement_no_overlap.svg" alt="Usage example" type="image/svg+xml"></object>
+    Place the client where there's place available with minimum overlap. </p>
 
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_no_overlap.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -842,10 +898,10 @@
     </span>
     </dt>
     <dd>
-    Place the client under the mouse.
-<p>
-<object class="img-object" data="../images/AUTOGEN_awful_placement_under_mouse.svg" alt="Usage example" type="image/svg+xml"></object>
+    Place the client under the mouse. </p>
 
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_under_mouse.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -899,12 +955,13 @@
     </span>
     </dt>
     <dd>
-    Place the client next to the mouse.
-<p> It will place <code>c</code> next to the mouse pointer, trying the following positions
- in this order: right, left, above and below.
-<p>
-<object class="img-object" data="../images/AUTOGEN_awful_placement_next_to_mouse.svg" alt="Usage example" type="image/svg+xml"></object>
+    Place the client next to the mouse. </p>
 
+<p> It will place <code>c</code> next to the mouse pointer, trying the following positions
+ in this order: right, left, above and below.</p>
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_next_to_mouse.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -958,13 +1015,18 @@
     </span>
     </dt>
     <dd>
-    Resize the drawable to the cursor.
-<p> Valid args:
-<p> * *axis*: The axis (vertical or horizontal). If none is
-    specified, then the drawable will be resized on both axis.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_placement_resize_to_mouse.svg" alt="Usage example" type="image/svg+xml"></object>
+    Resize the drawable to the cursor. </p>
 
+<p> Valid args:</p>
+
+<ul>
+    <li><em>axis</em>: The axis (vertical or horizontal). If none is
+    specified, then the drawable will be resized on both axis.</li>
+</ul>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_resize_to_mouse.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1014,22 +1076,27 @@
     </span>
     </dt>
     <dd>
-    Move the drawable (client or wibox) <code>d</code> to a screen position or side.
-<p> Supported args.positions are:
-<p> * top_left
- * top_right
- * bottom_left
- * bottom_right
- * left
- * right
- * top
- * bottom
- * centered
- * center_vertical
- * center_horizontal
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_placement_align.svg" alt="Usage example" type="image/svg+xml"></object>
+    Move the drawable (client or wibox) <code>d</code> to a screen position or side. </p>
 
+<p> Supported args.positions are:</p>
+
+<ul>
+    <li>top_left</li>
+    <li>top_right</li>
+    <li>bottom_left</li>
+    <li>bottom_right</li>
+    <li>left</li>
+    <li>right</li>
+    <li>top</li>
+    <li>bottom</li>
+    <li>centered</li>
+    <li>center_vertical</li>
+    <li>center_horizontal</li>
+</ul>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_align.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1079,7 +1146,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the top left of the parent area.
+    Align a client to the top left of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_top_left.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1134,7 +1202,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the top right of the parent area.
+    Align a client to the top right of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_top_right.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1189,7 +1258,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the bottom left of the parent area.
+    Align a client to the bottom left of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_bottom_left.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1244,7 +1314,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the bottom right of the parent area.
+    Align a client to the bottom right of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_bottom_right.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1299,7 +1370,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the left of the parent area.
+    Align a client to the left of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_left.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1354,7 +1426,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the right of the parent area.
+    Align a client to the right of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_right.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1409,7 +1482,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the top of the parent area.
+    Align a client to the top of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_top.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1465,7 +1539,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the bottom of the parent area.
+    Align a client to the bottom of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_bottom.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1520,7 +1595,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the center of the parent area.
+    Align a client to the center of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_centered.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1575,7 +1651,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the vertical center of the parent area.
+    Align a client to the vertical center of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_center_vertical.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1630,7 +1707,8 @@
     </span>
     </dt>
     <dd>
-    Align a client to the horizontal center left of the parent area.
+    Align a client to the horizontal center left of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_center_horizontal.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1686,12 +1764,16 @@
     </dt>
     <dd>
     Stretch a drawable in a specific direction.
- Valid args:
-<p> * **direction**: The stretch direction (*left*, *right*, *up*, *down*) or
-  a table with multiple directions.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_placement_stretch.svg" alt="Usage example" type="image/svg+xml"></object>
+ Valid args:</p>
 
+<ul>
+    <li><strong>direction</strong>: The stretch direction (<em>left</em>, <em>right</em>, <em>up</em>, <em>down</em>) or
+    a table with multiple directions.</li>
+</ul>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_stretch.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1741,7 +1823,8 @@
     </span>
     </dt>
     <dd>
-    Stretch the drawable to the left of the parent area.
+    Stretch the drawable to the left of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_stretch_left.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1796,7 +1879,8 @@
     </span>
     </dt>
     <dd>
-    Stretch the drawable to the right of the parent area.
+    Stretch the drawable to the right of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_stretch_right.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1851,7 +1935,8 @@
     </span>
     </dt>
     <dd>
-    Stretch the drawable to the top of the parent area.
+    Stretch the drawable to the top of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_stretch_up.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1906,7 +1991,8 @@
     </span>
     </dt>
     <dd>
-    Stretch the drawable to the bottom of the parent area.
+    Stretch the drawable to the bottom of the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_stretch_down.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -1962,12 +2048,16 @@
     </dt>
     <dd>
     Maximize a drawable horizontally, vertically or both.
- Valid args:
-<p> * *axis*:The axis (vertical or horizontal). If none is
-    specified, then the drawable will be maximized on both axis.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_placement_maximize.svg" alt="Usage example" type="image/svg+xml"></object>
+ Valid args:</p>
 
+<ul>
+    <li><em>axis</em>:The axis (vertical or horizontal). If none is
+    specified, then the drawable will be maximized on both axis.</li>
+</ul>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_maximize.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2017,7 +2107,8 @@
     </span>
     </dt>
     <dd>
-    Vetically maximize the drawable in the parent area.
+    Vetically maximize the drawable in the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_maximize_vertically.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -2072,7 +2163,8 @@
     </span>
     </dt>
     <dd>
-    Horizontally maximize the drawable in the parent area.
+    Horizontally maximize the drawable in the parent area. </p>
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_placement_maximize_horizontally.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
@@ -2127,14 +2219,15 @@
     </span>
     </dt>
     <dd>
-    Scale the drawable by either a relative or absolute percent.
-<p> Valid args:
-<p> **to_percent** : A number between 0 and 1. It represent a percent related to
-  the parent geometry.
- **by_percent** : A number between 0 and 1. It represent a percent related to
-  the current size.
- **direction**: Nothing or "left", "right", "up", "down".
+    Scale the drawable by either a relative or absolute percent. </p>
 
+<p> Valid args:</p>
+
+<p> <strong>to_percent</strong> : A number between 0 and 1. It represent a percent related to
+  the parent geometry.
+ <strong>by_percent</strong> : A number between 0 and 1. It represent a percent related to
+  the current size.
+ <strong>direction</strong>: Nothing or "left", "right", "up", "down".
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2184,25 +2277,35 @@
     </span>
     </dt>
     <dd>
-    Move a drawable to a relative position next to another one.
+    Move a drawable to a relative position next to another one. </p>
+
 <p> This placement function offers two additional settings to align the drawable
  alongside the parent geometry. The first one, the position, sets the side
  relative to the parent. The second one, the anchor, set the alignment within
  the side selected by the <code>preferred_positions</code>. Both settings are tables of
  priorities. The first available slot will be used. If there isn't enough
  space, then it will fallback to the next until it is possible to fit the
- drawable. This is meant to avoid going offscreen.
-<p> The <code>args.preferred_positions</code> look like this:
-<p>    {"top", "right", "left", "bottom"}
-<p> The <code>args.preferred_anchors</code> are:
-<p> * "front": The closest to the origin (0,0)
- * "middle": Centered aligned with the parent
- * "back": The opposite side compared to <code>front</code>
-<p> In that case, if there is room on the top of the geometry, then it will have
- priority, followed by all the others, in order.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_placement_next_to.svg" alt="Usage example" type="image/svg+xml"></object>
+ drawable. This is meant to avoid going offscreen.</p>
 
+<p> The <code>args.preferred_positions</code> look like this:</p>
+
+<pre><code>{"top", "right", "left", "bottom"}
+</code></pre>
+
+<p> The <code>args.preferred_anchors</code> are:</p>
+
+<ul>
+    <li>"front": The closest to the origin (0,0)</li>
+    <li>"middle": Centered aligned with the parent</li>
+    <li>"back": The opposite side compared to <code>front</code></li>
+</ul>
+
+<p> In that case, if there is room on the top of the geometry, then it will have
+ priority, followed by all the others, in order.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_next_to.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2222,7 +2325,9 @@
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description"> </td>
+           <td class="see_also_description">
+
+ </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">mode</span></td>
@@ -2352,17 +2457,24 @@ source object from. The valid values are:
     </span>
     </dt>
     <dd>
-    Skip all preceding results of placement pipeline for fullscreen clients.
-<p>
-<object class="img-object" data="../images/AUTOGEN_awful_placement_skip_fullscreen.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>**Usage example output**:
-<p>    no_offscreen:
-    Before:	x=0, y=0, width=320, height=240
-    After:	x=10, y=10, width=320, height=240
-    no_offscreen + skip_fullscreen:
-    Before:	x=0, y=0, width=320, height=240
-    After:	x=0, y=0, width=320, height=240
-<p>
+
+<p>Skip all preceding results of placement pipeline for fullscreen clients. </p>
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_placement_skip_fullscreen.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>no_offscreen:
+Before: x=0, y=0, width=320, height=240
+After:  x=10, y=10, width=320, height=240
+no_offscreen + skip_fullscreen:
+Before: x=0, y=0, width=320, height=240
+After:  x=0, y=0, width=320, height=240
+</code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <table class="see_also">

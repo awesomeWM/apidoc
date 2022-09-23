@@ -220,384 +220,477 @@
 <h1>Module: <code>awful.wallpaper</code></h1>
 <p>Allows to use the wibox widget system to draw the wallpaper.</p>
 <p>
+
+
 <p> Rather than simply having a function to set an image
  (stretched, centered or tiled) like most wallpaper tools, this module
  leverage the full widget system to draw the wallpaper. Note that the result
- is **not** interactive. If you want an interactive wallpaper, better use
+ is <strong>not</strong> interactive. If you want an interactive wallpaper, better use
  a <a href="../popups_and_bars/wibox.html#">wibox</a> object with the <code>below</code> property set to <code>true</code> and maximized
- using <code>awful.placement.maximized</code>.
+ using <code>awful.placement.maximized</code>.</p>
+
 <p> It is possible to create an <a href="../popups_and_bars/awful.wallpaper.html#">awful.wallpaper</a> object from any places, but
  it is recommanded to do it from the <code>request::wallpaper</code> signal handler.
  That signal is called everytime something which could affect the wallpaper
- rendering changes, such as new screens.
-<p> Single image
- ============
+ rendering changes, such as new screens.</p>
+
+<h1> Single image</h1>
+
 <p> This is the default <a href="../sample files/rc.lua.html#">rc.lua</a> wallpaper format. It fills the whole screen
- and stretches the image while keeping the aspect ratio.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_mazimized1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.wallpaper {
-        screen = s,
-        widget = {
-            {
-                image  = beautiful.wallpaper,
-                resize = true,
-                widget = wibox.widget.imagebox,
-            },
-            valign = "center",
-            halign = "center",
-            tiled  = false,
-            widget = wibox.container.tile,
-        }
+ and stretches the image while keeping the aspect ratio.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_mazimized1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+awful.wallpaper {
+    screen = s,
+    widget = {
+        {
+            image  = beautiful.wallpaper,
+            resize = <span class="keyword">true</span>,
+            widget = wibox.widget.imagebox,
+        },
+        valign = <span class="string">"center"</span>,
+        halign = <span class="string">"center"</span>,
+        tiled  = <span class="keyword">false</span>,
+        widget = wibox.container.tile,
     }
+}
+</pre>
+
 <p> If the image aspect ratio doesn't match, the <a href="../popups_and_bars/awful.wallpaper.html#bg">bg</a> property can be used to
- fill the empty area:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_mazimized2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.wallpaper {
-        screen = s,
-        bg     = "#0000ff",
-        widget = {
-            {
-                image  = beautiful.wallpaper,
-                resize = true,
-                widget = wibox.widget.imagebox,
-            },
-            valign = "center",
-            halign = "center",
-            tiled  = false,
-            widget = wibox.container.tile,
-        }
+ fill the empty area:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_mazimized2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+awful.wallpaper {
+    screen = s,
+    bg     = <span class="string">"#0000ff"</span>,
+    widget = {
+        {
+            image  = beautiful.wallpaper,
+            resize = <span class="keyword">true</span>,
+            widget = wibox.widget.imagebox,
+        },
+        valign = <span class="string">"center"</span>,
+        halign = <span class="string">"center"</span>,
+        tiled  = <span class="keyword">false</span>,
+        widget = wibox.container.tile,
     }
-<p> It is also possible to stretch the image:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_mazimized3.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.wallpaper {
-        screen = s,
-        widget = {
-             horizontal_fit_policy = "fit",
-             vertical_fit_policy   = "fit",
-             image                 = beautiful.wallpaper,
-             widget                = wibox.widget.imagebox,
-         },
-    }
+}
+</pre>
+
+<p> It is also possible to stretch the image:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_mazimized3.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+awful.wallpaper {
+    screen = s,
+    widget = {
+         horizontal_fit_policy = <span class="string">"fit"</span>,
+         vertical_fit_policy   = <span class="string">"fit"</span>,
+         image                 = beautiful.wallpaper,
+         widget                = wibox.widget.imagebox,
+     },
+}
+</pre>
+
 <p> Finally, it is also possible to use simpler "branding" in a corner using
- <a href="../libraries/awful.placement.html#">awful.placement</a>:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_corner1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.wallpaper {
-        screen = s,
-        bg     = "#000000",
-        widget = {
-            {
-                {
-                    image  = beautiful.awesome_icon,
-                    resize = false,
-                    point  = awful.placement.bottom_right,
-                    widget = wibox.widget.imagebox,
-                },
-                widget = wibox.layout.manual,
-            },
-            margins = 5,
-            widget  = wibox.container.margin
-        }
-    }
-<p> Tiled
- =====
-<p> This example tiles an image:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_tiled1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.wallpaper {
-        screen = s,
-        bg     = "#0000ff",
-        widget = {
+ <a href="../libraries/awful.placement.html#">awful.placement</a>:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_corner1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+awful.wallpaper {
+    screen = s,
+    bg     = <span class="string">"#000000"</span>,
+    widget = {
+        {
             {
                 image  = beautiful.awesome_icon,
-                resize = false,
+                resize = <span class="keyword">false</span>,
+                point  = awful.placement.bottom_right,
                 widget = wibox.widget.imagebox,
             },
-            horizontal_spacing = 5,
-            vertical_spacing   = 5,
-            valign             = "top",
-            halign             = "left",
-            tiled              = true,
-            widget             = wibox.container.tile,
-        }
+            widget = wibox.layout.manual,
+        },
+        margins = <span class="number">5</span>,
+        widget  = wibox.container.margin
     }
-<p> This one tiles a shape using the <a href="../widgets/wibox.widget.separator.html#">wibox.widget.separator</a> widget:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_tiled2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.wallpaper {
-        screen = s,
-        bg     = "#0000ff",
-        widget = {
-            {
-                shape         = gears.shape.star,
-                forced_width  = 30,
-                forced_height = 30,
-                widget        = wibox.widget.separator,
-            },
-            horizontal_spacing = 5,
-            vertical_spacing   = 5,
-            vertical_crop      = true,
-            horizontal_crop    = true,
-            valign             = "center",
-            halign             = "center",
-            tiled              = true,
-            widget             = wibox.container.tile,
-        }
+}
+</pre>
+
+<h1> Tiled</h1>
+
+<p> This example tiles an image:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_tiled1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+awful.wallpaper {
+    screen = s,
+    bg     = <span class="string">"#0000ff"</span>,
+    widget = {
+        {
+            image  = beautiful.awesome_icon,
+            resize = <span class="keyword">false</span>,
+            widget = wibox.widget.imagebox,
+        },
+        horizontal_spacing = <span class="number">5</span>,
+        vertical_spacing   = <span class="number">5</span>,
+        valign             = <span class="string">"top"</span>,
+        halign             = <span class="string">"left"</span>,
+        tiled              = <span class="keyword">true</span>,
+        widget             = wibox.container.tile,
     }
+}
+</pre>
+
+<p> This one tiles a shape using the <a href="../widgets/wibox.widget.separator.html#">wibox.widget.separator</a> widget:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_tiled2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+awful.wallpaper {
+    screen = s,
+    bg     = <span class="string">"#0000ff"</span>,
+    widget = {
+        {
+            shape         = gears.shape.star,
+            forced_width  = <span class="number">30</span>,
+            forced_height = <span class="number">30</span>,
+            widget        = wibox.widget.separator,
+        },
+        horizontal_spacing = <span class="number">5</span>,
+        vertical_spacing   = <span class="number">5</span>,
+        vertical_crop      = <span class="keyword">true</span>,
+        horizontal_crop    = <span class="keyword">true</span>,
+        valign             = <span class="string">"center"</span>,
+        halign             = <span class="string">"center"</span>,
+        tiled              = <span class="keyword">true</span>,
+        widget             = wibox.container.tile,
+    }
+}
+</pre>
+
 <p> See the <a href="../widget_containers/wibox.container.tile.html#">wibox.container.tile</a> for more advanced tiling configuration
- options.
-<p> Solid colors and gradients
- ==========================
+ options.</p>
+
+<h1> Solid colors and gradients</h1>
+
 <p> Solid colors can be set using the <a href="../popups_and_bars/awful.wallpaper.html#bg">bg</a> property mentionned above. It
- is also possible to set gradients:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_gradient1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.wallpaper {
-        screen = s,
-        bg     = {
-            type  = "linear" ,
-            from  = { 0, 0  },
-            to    = { 0, 240 },
-            stops = {
-                { 0, "#0000ff" },
-                { 1, "#ff0000" }
-            }
-         }
-    }
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_gradient2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.wallpaper {
-        screen = s,
-        bg     = {
-            type = "radial",
-            from  = { 160, 98, 20  },
-            to    = { 160, 98, 120 },
-            stops = {
-                { 0  , "#ff0000" },
-                { 0.5, "#00ff00" },
-                { 1  , "#0000ff" },
-            }
+ is also possible to set gradients:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_gradient1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+awful.wallpaper {
+    screen = s,
+    bg     = {
+        <span class="global">type</span>  = <span class="string">"linear"</span> ,
+        from  = { <span class="number">0</span>, <span class="number">0</span>  },
+        to    = { <span class="number">0</span>, <span class="number">240</span> },
+        stops = {
+            { <span class="number">0</span>, <span class="string">"#0000ff"</span> },
+            { <span class="number">1</span>, <span class="string">"#ff0000"</span> }
+        }
+     }
+}
+</pre>
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_gradient2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+awful.wallpaper {
+    screen = s,
+    bg     = {
+        <span class="global">type</span> = <span class="string">"radial"</span>,
+        from  = { <span class="number">160</span>, <span class="number">98</span>, <span class="number">20</span>  },
+        to    = { <span class="number">160</span>, <span class="number">98</span>, <span class="number">120</span> },
+        stops = {
+            { <span class="number">0</span>  , <span class="string">"#ff0000"</span> },
+            { <span class="number">0.5</span>, <span class="string">"#00ff00"</span> },
+            { <span class="number">1</span>  , <span class="string">"#0000ff"</span> },
         }
     }
-<p> Widgets
- =======
+}
+</pre>
+
+<h1> Widgets</h1>
+
 <p> It is possible to create a wallpaper using any widgets. However, keep
  in mind that the wallpaper surface is not interactive, so some widgets
  like the sliders will render, but will not behave correctly. Also, it
- is not recommanded to update the wallpaper too often. This is very slow.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_widget2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    local function binary()
-        local ret = {}
-        for _=1, 15 do
-            for _=1, 57 do
-                table.insert(ret, math.random() > 0.5 and 1 or 0)
-            end
-            table.insert(ret, "\n")
-        end
-        return table.concat(ret)
-    end
+ is not recommanded to update the wallpaper too often. This is very slow.</p>
 
-    awful.wallpaper {
-        bg     = "#000000",
-        fg     = "#55ff5577",
-        widget = wibox.widget {
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_widget2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> binary()
+    <span class="keyword">local</span> ret = {}
+    <span class="keyword">for</span> _=<span class="number">1</span>, <span class="number">15</span> <span class="keyword">do</span>
+        <span class="keyword">for</span> _=<span class="number">1</span>, <span class="number">57</span> <span class="keyword">do</span>
+            <span class="global">table</span>.insert(ret, <span class="global">math</span>.random() &gt; <span class="number">0.5</span> <span class="keyword">and</span> <span class="number">1</span> <span class="keyword">or</span> <span class="number">0</span>)
+        <span class="keyword">end</span>
+        <span class="global">table</span>.insert(ret, <span class="string">"\n"</span>)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> <span class="global">table</span>.concat(ret)
+<span class="keyword">end</span>
+
+awful.wallpaper {
+    bg     = <span class="string">"#000000"</span>,
+    fg     = <span class="string">"#55ff5577"</span>,
+    widget = wibox.widget {
+        {
             {
-                {
-                    markup = "<tt><b>[SYSTEM FAILURE]</b></tt>",
-                    valign = "center",
-                    halign = "center",
-                    widget = wibox.widget.textbox
-                },
-                fg = "#00ff00",
-                widget = wibox.container.background
+                markup = <span class="string">"&lt;tt&gt;&lt;b&gt;[SYSTEM FAILURE]&lt;/b&gt;&lt;/tt&gt;"</span>,
+                valign = <span class="string">"center"</span>,
+                halign = <span class="string">"center"</span>,
+                widget = wibox.widget.textbox
             },
-            {
-                wrap   = "word",
-                text   = binary(),
-                widget = wibox.widget.textbox,
-            },
-            widget = wibox.layout.stack
+            fg = <span class="string">"#00ff00"</span>,
+            widget = wibox.container.background
         },
-    }
-<p> Cairo graphics API
- ==================
+        {
+            wrap   = <span class="string">"word"</span>,
+            text   = binary(),
+            widget = wibox.widget.textbox,
+        },
+        widget = wibox.layout.stack
+    },
+}
+</pre>
+
+<h1> Cairo graphics API</h1>
+
 <p> AwesomeWM widgets are backed by Cairo. So it is always possible to get
- access to the Cairo context directly to do some vector art:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_widget1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.wallpaper {
-        screen = s,
-        widget = wibox.widget {
-             fit = function(_, width, height)
-                 return width, height
-             end,
-             draw = function(_, _, cr, width, height)
-                 cr:set_source(gears.color {
-                     type  = 'linear',
-                     from  = { 0, 0      },
-                     to    = { 0, height },
-                     stops = {
-                         { 0   , '#030d27' },
-                         { 0.75, '#3a183f' },
-                         { 0.75, '#000000' },
-                         { 1   , '#222222' }
-                     }
-                 })
-                 cr:paint()
-                 -- Clip the first 33% of the screen
-                 cr:rectangle(0,0, width, height/3)
+ access to the Cairo context directly to do some vector art:</p>
 
-                 -- Clip-out some increasingly large sections of add the sun "bars"
-                 for i=0, 6 do
-                     cr:rectangle(0, height*.28 + i*(height*.055 + i/2), width, height*.055)
-                 end
-                 cr:clip()
 
-                 -- Draw the sun
-                 cr:set_source(gears.color {
-                     type  = 'linear' ,
-                     from  = { 0, 0      },
-                     to    = { 0, height },
-                     stops = {
-                         { 0, '#f0d64f' },
-                         { 1, '#e484c6' }
-                     }
-                 })
-                 cr:arc(width/2, height/2, height*.35, 0, math.pi*2)
-                 cr:fill()
 
-                 -- Draw the grid
-                 local lines = width/8
-                 cr:reset_clip()
-                 cr:set_line_width(0.5)
-                 cr:set_source(gears.color("#8922a3"))
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_widget1.svg" alt="Usage example" type="image/svg+xml"></object></p>
 
-                 for i=1, lines do
-                     cr:move_to((-width) + i* math.sin(i * (math.pi/(lines*2)))*30, height)
-                     cr:line_to(width/4 + i*((width/2)/lines), height*0.75 + 2)
-                     cr:stroke()
-                 end
 
-                 for i=1, 5 do
-                     cr:move_to(0, height*0.75 + i*10 + i*2)
-                     cr:line_to(width, height*0.75 + i*10 + i*2)
-                     cr:stroke()
-                 end
-             end,
-        }
+
+<pre>
+awful.wallpaper {
+    screen = s,
+    widget = wibox.widget {
+         fit = <span class="keyword">function</span>(_, width, height)
+             <span class="keyword">return</span> width, height
+         <span class="keyword">end</span>,
+         draw = <span class="keyword">function</span>(_, _, cr, width, height)
+             cr:set_source(gears.color {
+                 <span class="global">type</span>  = <span class="string">'linear'</span>,
+                 from  = { <span class="number">0</span>, <span class="number">0</span>      },
+                 to    = { <span class="number">0</span>, height },
+                 stops = {
+                     { <span class="number">0</span>   , <span class="string">'#030d27'</span> },
+                     { <span class="number">0.75</span>, <span class="string">'#3a183f'</span> },
+                     { <span class="number">0.75</span>, <span class="string">'#000000'</span> },
+                     { <span class="number">1</span>   , <span class="string">'#222222'</span> }
+                 }
+             })
+             cr:paint()
+             <span class="comment">-- Clip the first 33% of the screen
+</span>             cr:rectangle(<span class="number">0</span>,<span class="number">0</span>, width, height/<span class="number">3</span>)
+
+             <span class="comment">-- Clip-out some increasingly large sections of add the sun "bars"
+</span>             <span class="keyword">for</span> i=<span class="number">0</span>, <span class="number">6</span> <span class="keyword">do</span>
+                 cr:rectangle(<span class="number">0</span>, height*.<span class="number">28</span> + i*(height*.<span class="number">055</span> + i/<span class="number">2</span>), width, height*.<span class="number">055</span>)
+             <span class="keyword">end</span>
+             cr:clip()
+
+             <span class="comment">-- Draw the sun
+</span>             cr:set_source(gears.color {
+                 <span class="global">type</span>  = <span class="string">'linear'</span> ,
+                 from  = { <span class="number">0</span>, <span class="number">0</span>      },
+                 to    = { <span class="number">0</span>, height },
+                 stops = {
+                     { <span class="number">0</span>, <span class="string">'#f0d64f'</span> },
+                     { <span class="number">1</span>, <span class="string">'#e484c6'</span> }
+                 }
+             })
+             cr:arc(width/<span class="number">2</span>, height/<span class="number">2</span>, height*.<span class="number">35</span>, <span class="number">0</span>, <span class="global">math</span>.pi*<span class="number">2</span>)
+             cr:fill()
+
+             <span class="comment">-- Draw the grid
+</span>             <span class="keyword">local</span> lines = width/<span class="number">8</span>
+             cr:reset_clip()
+             cr:set_line_width(<span class="number">0.5</span>)
+             cr:set_source(gears.color(<span class="string">"#8922a3"</span>))
+
+             <span class="keyword">for</span> i=<span class="number">1</span>, lines <span class="keyword">do</span>
+                 cr:move_to((-width) + i* <span class="global">math</span>.sin(i * (<span class="global">math</span>.pi/(lines*<span class="number">2</span>)))*<span class="number">30</span>, height)
+                 cr:line_to(width/<span class="number">4</span> + i*((width/<span class="number">2</span>)/lines), height*<span class="number">0.75</span> + <span class="number">2</span>)
+                 cr:stroke()
+             <span class="keyword">end</span>
+
+             <span class="keyword">for</span> i=<span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
+                 cr:move_to(<span class="number">0</span>, height*<span class="number">0.75</span> + i*<span class="number">10</span> + i*<span class="number">2</span>)
+                 cr:line_to(width, height*<span class="number">0.75</span> + i*<span class="number">10</span> + i*<span class="number">2</span>)
+                 cr:stroke()
+             <span class="keyword">end</span>
+         <span class="keyword">end</span>,
     }
-<p>
- SVG vector images
- =================
+}
+</pre>
+
+<h1> SVG vector images</h1>
+
 <p> SVG are supported if <code>librsvg</code> is installed. Please note that <code>librsvg</code>
  doesn't implement all filters you might find in the latest version of
  your web browser. It is possible some advanced SVG will not look exactly
  as they do in a web browser or even Inkscape. However, for most images,
- it should look identical.
+ it should look identical.</p>
+
 <p> Our SVG support goes beyond simple rendering. It is possible to set a
- custom CSS stylesheet (see <a href="../widgets/wibox.widget.imagebox.html#stylesheet">wibox.widget.imagebox.stylesheet</a>):
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_svg.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    local image = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'..
-        '<svg width="190" height="60">'..
-            '<rect x="10"  y="10" width="50" height="50" />'..
-            '<rect x="70"  y="10" width="50" height="50" class="my_class" />'..
-            '<rect x="130" y="10" width="50" height="50" id="my_id" />'..
-        '</svg>'
+ custom CSS stylesheet (see <a href="../widgets/wibox.widget.imagebox.html#stylesheet">wibox.widget.imagebox.stylesheet</a>):</p>
 
-    local stylesheet = "" ..
-         "rect { fill: #ffff00; } "..
-         ".my_class { fill: #00ff00; } "..
-         "#my_id { fill: #0000ff; }"
 
-    awful.wallpaper {
-        widget = wibox.widget {
-            stylesheet = stylesheet,
-            image      = image,
-            widget     = wibox.widget.imagebox
-        }
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_svg.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="keyword">local</span> image = <span class="string">'&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;'</span>..
+    <span class="string">'&lt;svg width="190" height="60"&gt;'</span>..
+        <span class="string">'&lt;rect x="10"  y="10" width="50" height="50" /&gt;'</span>..
+        <span class="string">'&lt;rect x="70"  y="10" width="50" height="50" class="my_class" /&gt;'</span>..
+        <span class="string">'&lt;rect x="130" y="10" width="50" height="50" id="my_id" /&gt;'</span>..
+    <span class="string">'&lt;/svg&gt;'</span>
+
+<span class="keyword">local</span> stylesheet = <span class="string">""</span> ..
+     <span class="string">"rect { fill: #ffff00; } "</span>..
+     <span class="string">".my_class { fill: #00ff00; } "</span>..
+     <span class="string">"#my_id { fill: #0000ff; }"</span>
+
+awful.wallpaper {
+    widget = wibox.widget {
+        stylesheet = stylesheet,
+        image      = image,
+        widget     = wibox.widget.imagebox
     }
+}
+</pre>
+
 <p> Note that in the example above, it is raw SVG code, but it is also possible
  to use a file path. If you have a <code>.svgz</code>, you need to uncompress it first
- using <code>gunzip</code> or a software like Inkscape.
-<p> Multiple screen
- ===============
+ using <code>gunzip</code> or a software like Inkscape.</p>
+
+<h1> Multiple screen</h1>
+
 <p> The default <a href="../sample files/rc.lua.html#">rc.lua</a> creates a new wallpaper everytime <code>request::wallpaper</code>
  is emitted. This is well suited for having a single wallpaper per screen.
- It is also much simpler to implement slideshows and add/remove screens.
+ It is also much simpler to implement slideshows and add/remove screens.</p>
+
 <p> However, it isn't wall suited for wallpaper rendered across multiple screens.
  For this case, it is better to capture the return value of <code>awful.wallpaper {}</code>
  as a global variable. Then manually call <a href="../popups_and_bars/awful.wallpaper.html#add_screen">add_screen</a> and <a href="../popups_and_bars/awful.wallpaper.html#remove_screen">remove_screen</a> when
- needed. A shortcut can be to do:
-<p>
-<p>
+ needed. A shortcut can be to do:</p>
 
-    local global_wallpaper = awful.wallpaper {
-        -- [...] your content
-    }
 
-    screen.connect_signal("request::wallpaper", function()
-        -- <a href="../core_components/screen.html#">screen</a> is the global screen module. It is also a list of all screens.
-        global_wallpaper.screens = screen
-    end)
-<p> Slideshow
- =========
+
+
+
+
+<pre>
+<span class="keyword">local</span> global_wallpaper = awful.wallpaper {
+    <span class="comment">-- [...] your content
+</span>}
+
+screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>()
+    <span class="comment">-- <a href="../core_components/screen.html#">screen</a> is the global screen module. It is also a list of all screens.
+</span>    global_wallpaper.screens = screen
+<span class="keyword">end</span>)
+</pre>
+
+<h1> Slideshow</h1>
+
 <p> Slideshows (changing the wallpaper after a few minutes) can be implemented
  directly using a timer and callback, but it is more elegant to simply request
  a new wallpaper, then get a random image from within the request handler. This
- way, corner cases such as adding and removing screens are handled:
-<p>
-<p>
+ way, corner cases such as adding and removing screens are handled:</p>
 
-    -- The "request::wallpaper" section is already in the default
-    -- <a href="../sample files/rc.lua.html#">rc.lua</a>, replace it with this.
-    screen.connect_signal("request::wallpaper", function(s)
-        awful.wallpaper {
-            screen = s,
-            bg     = "#0000ff",
-            widget = {
-                {
-                    image  = gears.filesystem.get_random_file_from_dir(
-                        "path/to/dir",
-                        {".jpg", ".png", ".svg"},
-                        true
-                    ),
-                    resize = true,
-                    widget = wibox.widget.imagebox,
-                },
-                valign = "center",
-                halign = "center",
-                tiled  = false,
-                widget = wibox.container.tile,
-            }
+
+
+
+
+
+<pre>
+<span class="comment">-- The "request::wallpaper" section is already in the default
+</span><span class="comment">-- <a href="../sample files/rc.lua.html#">rc.lua</a>, replace it with this.
+</span>screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
+    awful.wallpaper {
+        screen = s,
+        bg     = <span class="string">"#0000ff"</span>,
+        widget = {
+            {
+                image  = gears.filesystem.get_random_file_from_dir(
+                    <span class="string">"path/to/dir"</span>,
+                    {<span class="string">".jpg"</span>, <span class="string">".png"</span>, <span class="string">".svg"</span>},
+                    <span class="keyword">true</span>
+                ),
+                resize = <span class="keyword">true</span>,
+                widget = wibox.widget.imagebox,
+            },
+            valign = <span class="string">"center"</span>,
+            halign = <span class="string">"center"</span>,
+            tiled  = <span class="keyword">false</span>,
+            widget = wibox.container.tile,
         }
-    end)
-
-    -- **Somewhere else** in the code, **not** in the <code>request::wallpaper</code> handler.
-    gears.timer {
-        timeout   = 1800,
-        autostart = true,
-        callback  = function()
-            for s in screen do
-                s:emit_signal("request::wallpaper")
-            end
-        end,
     }
+<span class="keyword">end</span>)
+
+<span class="comment">-- **Somewhere else** in the code, **not** in the <code>request::wallpaper</code> handler.
+</span>gears.timer {
+    timeout   = <span class="number">1800</span>,
+    autostart = <span class="keyword">true</span>,
+    callback  = <span class="keyword">function</span>()
+        <span class="keyword">for</span> s <span class="keyword">in</span> screen <span class="keyword">do</span>
+            s:emit_signal(<span class="string">"request::wallpaper"</span>)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>,
+}
+</pre>
+
 </p>
     <div class="extra-header">
 
@@ -818,10 +911,10 @@
     </span>
     </dt>
     <dd>
-    Create a wallpaper.
+    Create a wallpaper. </p>
+
 <p> Note that all parameters are not required. Please refer to the
  module description and examples to understand parameters usages.
-
 
     <h3>Parameters:</h3>
         <div class="important_box">
@@ -843,7 +936,9 @@
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description"> </td>
+           <td class="see_also_description">
+
+ </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">widget</span></td>
@@ -936,10 +1031,10 @@
     </span>
     </dt>
     <dd>
-    The wallpaper widget.
+    The wallpaper widget. </p>
+
 <p> When set, instead of using the <code>image_path</code> or <code>surface</code> properties, the
  wallpaper will be defined as a normal <a href="../popups_and_bars/wibox.html#">wibox</a> widget tree.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -989,19 +1084,23 @@
     </span>
     </dt>
     <dd>
-    The wallpaper DPI (dots per inch).
+    The wallpaper DPI (dots per inch). </p>
+
 <p> Each screen has a DPI. This value will be used by default, but sometime it
  is useful to override the screen DPI and use a custom one. This makes
  possible, for example, to draw the widgets bigger than they would otherwise
- be.
-<p> If not DPI is defined, it will use the smallest DPI from any of the screen.
+ be.</p>
+
+<p> If not DPI is defined, it will use the smallest DPI from any of the screen.</p>
+
 <p> In this example, there is 3 screens with DPI of 100, 200 and 300. As you can
  see, only the text size is affected. Many widgetds are DPI aware, but not all
  of them. This is either because DPI isn't relevant to them or simply because it
- isn't supported (like <a href="../widgets/wibox.widget.graph.html#">wibox.widget.graph</a>).
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_dpi1.svg" alt="Usage example" type="image/svg+xml"></object>
+ isn't supported (like <a href="../widgets/wibox.widget.graph.html#">wibox.widget.graph</a>).</p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_dpi1.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1020,7 +1119,7 @@
           Unit
          </i>
         </td>
-        <td>: pixel\_per\_inch</td>
+        <td>: pixel_per_inch</td>
        <tr/>
        <tr class="">
         <td style="padding-left:0px;">
@@ -1083,10 +1182,10 @@
     </span>
     </dt>
     <dd>
-    The wallpaper screen.
+    The wallpaper screen. </p>
+
 <p> Note that there can only be one wallpaper per screen. If there is more, one
  will be chosen and all other ignored.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1174,10 +1273,11 @@
     </span>
     </dt>
     <dd>
-    A list of screen for this wallpaper.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_screens1.svg" alt="Usage example" type="image/svg+xml"></object>
+    A list of screen for this wallpaper. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_screens1.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1292,11 +1392,12 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    The background color.
-<p> It will be used as the "fill" color if the <code>image</code> doesn't take all the
- screen space. It will also be the default background for the <a href="../popups_and_bars/awful.wallpaper.html#widget">widget</a>.
-<p> As usual with colors in <code>AwesomeWM</code>, it can also be a gradient or a pattern.
+    The background color. </p>
 
+<p> It will be used as the "fill" color if the <code>image</code> doesn't take all the
+ screen space. It will also be the default background for the <a href="../popups_and_bars/awful.wallpaper.html#widget">widget</a>.</p>
+
+<p> As usual with colors in <code>AwesomeWM</code>, it can also be a gradient or a pattern.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1338,7 +1439,7 @@ Some large wallpaper are made to span multiple screens.</pre>
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
+        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1346,7 +1447,7 @@ Some large wallpaper are made to span multiple screens.</pre>
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
+        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1354,7 +1455,7 @@ Some large wallpaper are made to span multiple screens.</pre>
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
+        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
        <tr/>
      </table>
     </span>
@@ -1403,10 +1504,11 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    The foreground color.
-<p> This will be used by the <a href="../popups_and_bars/awful.wallpaper.html#widget">widget</a> (if any).
-<p> As usual with colors in <code>AwesomeWM</code>, it can also be a gradient or a pattern.
+    The foreground color. </p>
 
+<p> This will be used by the <a href="../popups_and_bars/awful.wallpaper.html#widget">widget</a> (if any).</p>
+
+<p> As usual with colors in <code>AwesomeWM</code>, it can also be a gradient or a pattern.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1448,7 +1550,7 @@ Some large wallpaper are made to span multiple screens.</pre>
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
+        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1456,7 +1558,7 @@ Some large wallpaper are made to span multiple screens.</pre>
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
+        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1464,7 +1566,7 @@ Some large wallpaper are made to span multiple screens.</pre>
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
+        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
        <tr/>
      </table>
     </span>
@@ -1511,15 +1613,17 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    Honor the workarea.
+    Honor the workarea. </p>
+
 <p> When set to <code>true</code>, the wallpaper will only fill the workarea space instead
  of the entire screen. This means it wont be drawn below the <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a> or
  docked clients. This is useful when using opaque bars. Note that it can cause
  aspect ratio issues for the wallpaper <code>image</code> and add bars colored with the
- <a href="../popups_and_bars/awful.wallpaper.html#bg">bg</a> color on the sides.
-<p>
+ <a href="../popups_and_bars/awful.wallpaper.html#bg">bg</a> color on the sides.</p>
+
+
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_workarea1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1577,16 +1681,25 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    Honor the screen padding.
+
+<p>Honor the screen padding. </p>
+
 <p> When set, this will look at the <a href="../core_components/screen.html#padding">screen.padding</a> property to restrict the
- area where the wallpaper is rendered.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_padding1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>**Usage example output**:
-<p>    Uncovered area:	0	0	30	196
-    Uncovered area:	0	0	320	14
-    Uncovered area:	310	0	10	196
-<p>
+ area where the wallpaper is rendered.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_padding1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>Uncovered area: 0   0   30  196
+Uncovered area: 0   0   320 14
+Uncovered area: 310 0   10  196
+</code></pre>
+
+
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1686,10 +1799,10 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    Returns the list of screen(s) area which won't be covered by the wallpaper.
+    Returns the list of screen(s) area which won't be covered by the wallpaper. </p>
+
 <p> When <a href="../popups_and_bars/awful.wallpaper.html#honor_workarea">honor_workarea</a>, <a href="../popups_and_bars/awful.wallpaper.html#honor_padding">honor_padding</a> or panning are used, some section of
  the screen won't have a wallpaper.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1786,14 +1899,14 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    The color for the uncovered areas.
+    The color for the uncovered areas. </p>
+
 <p> Some application rely on the wallpaper for "fake" transparency. Even if an
  area is hidden under a wibar (or other clients), its background can still
  become visible. If you use such application and change your screen geometry
  often enough, it is possible some areas would become filled with the remains
  of previous wallpapers. This property allows to clean those areas with a solid
  color or a gradient.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1835,7 +1948,7 @@ Some large wallpaper are made to span multiple screens.</pre>
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
+        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1843,7 +1956,7 @@ Some large wallpaper are made to span multiple screens.</pre>
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
+        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1851,7 +1964,7 @@ Some large wallpaper are made to span multiple screens.</pre>
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
+        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
        <tr/>
      </table>
     </span>
@@ -1883,57 +1996,85 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    Defines where the wallpaper is placed when there is multiple screens.
+
+<p>Defines where the wallpaper is placed when there is multiple screens. </p>
+
 <p> When there is more than 1 screen, it is possible they don't have the same
  resolution, position or orientation. Panning the wallpaper over them may look
  better if a continuous rectangle is used rather than creating a virtual rectangle
- around all screens.
-<p> The default algorithms are:
-<p> **outer:** *(default)*
-<p> Draw an imaginary rectangle around all screens.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_panning_outer.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- **inner:**
-<p> Take the largest area or either <code>inner_horizontal</code> or <code>inner_vertical</code>.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_panning_inner.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- **inner_horizontal:**
+ around all screens.</p>
+
+<p> The default algorithms are:</p>
+
+<p> <strong>outer:</strong> <em>(default)</em></p>
+
+<p> Draw an imaginary rectangle around all screens.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_panning_outer.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> <strong>inner:</strong></p>
+
+<p> Take the largest area or either <code>inner_horizontal</code> or <code>inner_vertical</code>.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_panning_inner.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> <strong>inner_horizontal:</strong></p>
+
 <p> Take the smallest <code>x</code> value, the largest <code>x+width</code>, the smallest <code>y</code>
- and the smallest <code>y+height</code>.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_panning_inner_horizontal.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- **inner_vertical:**
+ and the smallest <code>y+height</code>.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_panning_inner_horizontal.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> <strong>inner_vertical:</strong></p>
+
 <p> Take the smallest <code>y</code> value, the largest <code>y+height</code>, the smallest <code>x</code>
- and the smallest <code>x+width</code>.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_panning_inner_vertical.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- **Custom function:**
-<p> It is also possible to define a custom function.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_panning_custom.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>**Usage example output**:
-<p> **Usage example:**
-<p>
+ and the smallest <code>x+width</code>.</p>
 
-    local function custom_panning_area(wallpaper)
-         return {
-             x      = wallpaper.screens[1].geometry.x + 50,
-             y      = wallpaper.screens[2].geometry.y + 50,
-             width  = 96,
-             height = 96,
-         }
-    end
 
-    -- Areas due to the padding and the wibar (workarea).
-    for k, wall in ipairs(walls) do
-        for _, area in ipairs(wall.uncovered_areas) do
-             print("Uncovered wallpaper #".. k .." area:", area.x, area.y, area.width, area.height)
-        end
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_panning_inner_vertical.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> <strong>Custom function:</strong></p>
+
+<p> It is also possible to define a custom function.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_panning_custom.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<p> <strong>Usage example:</strong></p>
+
+
+
+<pre><code>local function custom_panning_area(wallpaper)
+     return {
+         x      = wallpaper.screens[1].geometry.x + 50,
+         y      = wallpaper.screens[2].geometry.y + 50,
+         width  = 96,
+         height = 96,
+     }
+end
+
+-- Areas due to the padding and the wibar (workarea).
+for k, wall in ipairs(walls) do
+    for _, area in ipairs(wall.uncovered_areas) do
+         print("Uncovered wallpaper #".. k .." area:", area.x, area.y, area.width, area.height)
     end
+end
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -2071,20 +2212,28 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    Add another screen (enable panning).
-<p> **Before:**
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_add_screen1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- **After:**
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_add_screen2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- Also note that adding a non-continuous screen might not work well,
- but will not automatically add the screens in between:
-<p>
+    Add another screen (enable panning). </p>
+
+<p> <strong>Before:</strong></p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_add_screen1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> <strong>After:</strong></p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_add_screen2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> Also note that adding a non-continuous screen might not work well,
+ but will not automatically add the screens in between:</p>
+
+
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_add_screen3.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2129,13 +2278,13 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    Detach the wallpaper from all screens.
+    Detach the wallpaper from all screens. </p>
+
 <p> Adding a new wallpaper to a screen will automatically
  detach the older one. However there is some case when
  it is useful to call this manually. For example, when
  adding a new panned wallpaper, it is possible that 2
  wallpaper will have an overlap.
-
 
 
 
@@ -2172,12 +2321,12 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    Repaint the wallpaper.
-<p> By default, even if the widget changes, the wallpaper will **NOT** be
+    Repaint the wallpaper. </p>
+
+<p> By default, even if the widget changes, the wallpaper will <strong>NOT</strong> be
  automatically repainted. Repainting the native X11 wallpaper is slow and
  it would be too easy to accidentally cause a performance problem. If you
  really need to repaint the wallpaper, call this method.
-
 
 
 
@@ -2197,26 +2346,39 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    Remove a screen.
-<p> Calling this will remove a screen, but will **not** repaint its area.
+
+<p>Remove a screen. </p>
+
+<p> Calling this will remove a screen, but will <strong>not</strong> repaint its area.
  In this example, the wallpaper was spanning all 3 screens and the
- first screen was removed:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_remove_screen1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    wall:remove_screen(screen[1])
+ first screen was removed:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_remove_screen1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>wall:remove_screen(screen[1])
+</code></pre>
+
 <p> As you can see, the content of screen 1 still looks like it is part of
  the 3 screen wallpaper. The only use case for calling this method is if
- you use a 3rd party tools to change the wallpaper.
+ you use a 3rd party tools to change the wallpaper.</p>
+
 <p> If you wish to simply remove a screen and not have leftover content, it is
- simpler to just create a new wallpaper for that screen:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_remove_screen2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.wallpaper {
-        screen = screen[1],
-        bg     = "#00ffff",
-    }
+ simpler to just create a new wallpaper for that screen:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wallpaper_remove_screen2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>awful.wallpaper {
+    screen = screen[1],
+    bg     = "#00ffff",
+}
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -2342,10 +2504,10 @@ Some large wallpaper are made to span multiple screens.</pre>
     </span>
     </dt>
     <dd>
-    The default wallpaper foreground color.
+    The default wallpaper foreground color. </p>
+
 <p> This is useful when using widgets or text in the wallpaper. A wallpaper
  created from a single image wont use this.
-
 
 
 

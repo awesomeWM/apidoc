@@ -214,322 +214,427 @@
 
 <div id="content">
 
-    # Tips for upgrading your configuration
+
+<h1>Tips for upgrading your configuration</h1>
+
 <p><a name="v4"></a>
-## From 3.5 to 4.0
+<a name="From_3_5_to_4_0"></a></p>
+<h2>From 3.5 to 4.0</h2>
+
 <p>The
 **best advice is to start from the default <a href="../sample files/rc.lua.html#">rc.lua</a> and backport any changes**
 you might have added to your <a href="../sample files/rc.lua.html#">rc.lua</a>.
-This avoids most of the possible errors due to missing important changes.
+This avoids most of the possible errors due to missing important changes.</p>
+
 <p>To do this, you can download the default rc.lua for 3.5.9
-[here](https://github.com/awesomeWM/awesome/blob/v3.5.9/awesomerc.lua.in), and
+<a href="https://github.com/awesomeWM/awesome/blob/v3.5.9/awesomerc.lua.in">here</a>, and
 then compare your existing rc.lua with the 3.5.9 default using your diff tool of
 choice. Write down the changes, then apply these to the 4.0 default rc.lua,
 which you can find at /etc/xdg/awesome/rc.lua after the upgrade, or
-[here](../sample%20files/rc.lua.html) if you have not yet performed the upgrade.
+<a href="../sample%20files/rc.lua.html">here</a> if you have not yet performed the upgrade.</p>
+
 <p>If you still wish to ignore this advice, first read the
 <a href="89-NEWS.md.html#v4">NEWS</a> section about the breaking changes. This
-document assumes you did.
-<p>Be warned, even if it looks like it's working after changing some lines, **it wont
-supports dynamic screen changes and will have many subtle bugs**. The changes
-mentioned below **are important for the stability of your window manager**.
+document assumes you did.</p>
+
+<p>Be warned, even if it looks like it's working after changing some lines, <strong>it wont
+supports dynamic screen changes and will have many subtle bugs</strong>. The changes
+mentioned below <strong>are important for the stability of your window manager</strong>.</p>
+
 <p>Here is a diff of the 3.5.9 <a href="../sample files/rc.lua.html#">rc.lua</a> with the 4.0 one. All changes due to
 new features and new syntaxes have been removed. A <code>-</code> in front of the line
-correspond to content of the 3.5 <a href="../sample files/rc.lua.html#">rc.lua</a> and <code>+</code> its replacement in 4.0.
+correspond to content of the 3.5 <a href="../sample files/rc.lua.html#">rc.lua</a> and <code>+</code> its replacement in 4.0.</p>
+
 <p>This document does not cover the new features added in the Awesome v4 <a href="../sample files/rc.lua.html#">rc.lua</a>,
-it only covers the minimal required changes to have a properly behaving config.
-<p>To test during the port, we recommend the <code>Xephyr</code> X11 server.
-<p>If Awesome v4 **is not installed yet**, we recommend to install it in its own
+it only covers the minimal required changes to have a properly behaving config.</p>
+
+<p>To test during the port, we recommend the <code>Xephyr</code> X11 server.</p>
+
+<p>If Awesome v4 <strong>is not installed yet</strong>, we recommend to install it in its own
 prefix to avoid conflicts in case you wish to stay on 3.5 for a little
-longer:
-<p>    cd path/to/awesome/code
-    mkdir -p $HOME/.config/awesome4
-    mkdir build -p
-    cd build
-<p>    # Install in a local folder, this assumes all the dependencies are installed
-    cmake -DCMAKE_INSTALL_PREFIX=$HOME/awesome4_test ..
-    make -j4
-<p>    # Use a copy of rc.lua to avoid it being overwritten accidentally
-    cp awesomerc.lua $HOME/.config/awesome4/rc.lua
-<p>    make install
-<p>    # Start Awesome in a 1280x800 window
-    Xephyr :1 -screen 1280x800 &
-    DISPLAY=:1 $HOME/awesome4_test/bin/awesome \
-        -c $HOME/.config/awesome4/rc.lua \
-        --search $HOME/awesome4_test/share/awesome/lib
-<p>If Awesome v4 is **already installed**, then backup your old <a href="../sample files/rc.lua.html#">rc.lua</a> and overwrite
+longer:</p>
+
+
+<pre>
+cd path/to/awesome/code
+mkdir -p $HOME/.config/awesome4
+mkdir build -p
+cd build
+
+# Install <span class="keyword">in</span> a <span class="keyword">local</span> folder, this assumes all the dependencies are installed
+cmake -DCMAKE_INSTALL_PREFIX=$HOME/awesome4_test ..
+make -j4
+
+# Use a copy of rc.lua to avoid it being overwritten accidentally
+cp awesomerc.lua $HOME/.config/awesome4/rc.lua
+
+make install
+
+# Start Awesome <span class="keyword">in</span> a <span class="number">1280</span>x800 window
+Xephyr :<span class="number">1</span> -screen <span class="number">1280</span>x800 &amp;
+DISPLAY=:<span class="number">1</span> $HOME/awesome4_test/bin/awesome \
+    -c $HOME/.config/awesome4/rc.lua \
+    <span class="comment">--search $HOME/awesome4_test/share/awesome/lib</span>
+</pre>
+
+<p>If Awesome v4 is <strong>already installed</strong>, then backup your old <a href="../sample files/rc.lua.html#">rc.lua</a> and overwrite
 <code>~/.config/awesome/rc.lua</code> (replace this by another path if you use a custom
-XDH config local directory). And only execute:
-<p>    Xephyr :1 -screen 1280x800 &
-    DISPLAY=:1 awesome
+XDH config local directory). And only execute:</p>
+
+
+<pre>
+Xephyr :<span class="number">1</span> -screen <span class="number">1280</span>x800 &amp;
+DISPLAY=:<span class="number">1</span> awesome
+</pre>
+
 <p>Screens are now added and removed without reloading <a href="../sample files/rc.lua.html#">rc.lua</a>. The wallpaper are
-now set in a signal callback.
-<p>    --- {{{ Wallpaper
-    -if <a href="../theme_related_libraries/beautiful.html#beautiful.wallpaper">beautiful.wallpaper</a> then
-    -    for s = 1, screen.count() do
-    -        <a href="../utility_libraries/gears.wallpaper.html#maximized">gears.wallpaper.maximized</a>(beautiful.wallpaper, s, true)
-    -    end
-    -end
-    --- }}}
-<p>    +local function set_wallpaper(s)
-    +    -- Wallpaper
-    +    if <a href="../theme_related_libraries/beautiful.html#beautiful.wallpaper">beautiful.wallpaper</a> then
-    +        local wallpaper = <a href="../theme_related_libraries/beautiful.html#beautiful.wallpaper">beautiful.wallpaper</a>
-    +        -- If wallpaper is a function, call it with the screen
-    +        if type(wallpaper) == "function" then
-    +            wallpaper = wallpaper(s)
-    +        end
-    +        <a href="../utility_libraries/gears.wallpaper.html#maximized">gears.wallpaper.maximized</a>(wallpaper, s, true)
-    +    end
-    +end
-    +
-    +-- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-    +<a href="../core_components/screen.html#connect_signal">screen.connect_signal</a>("property::geometry", set_wallpaper)
+now set in a signal callback.</p>
+
+
+<pre>
+<span class="comment">--- {{{ Wallpaper
+</span>-<span class="keyword">if</span> <span class="backtick"><a href="../theme_related_libraries/beautiful.html#beautiful.wallpaper">beautiful.wallpaper</a></span> <span class="keyword">then</span>
+-    <span class="keyword">for</span> s = <span class="number">1</span>, screen.count() <span class="keyword">do</span>
+-        <span class="backtick"><a href="../utility_libraries/gears.wallpaper.html#maximized">gears.wallpaper.maximized</a></span>(beautiful.wallpaper, s, <span class="keyword">true</span>)
+-    <span class="keyword">end</span>
+-<span class="keyword">end</span>
+<span class="comment">--- }}}
+</span>
++<span class="keyword">local</span> <span class="keyword">function</span> set_wallpaper(s)
++    <span class="comment">-- Wallpaper
+</span>+    <span class="keyword">if</span> <span class="backtick"><a href="../theme_related_libraries/beautiful.html#beautiful.wallpaper">beautiful.wallpaper</a></span> <span class="keyword">then</span>
++        <span class="keyword">local</span> wallpaper = <span class="backtick"><a href="../theme_related_libraries/beautiful.html#beautiful.wallpaper">beautiful.wallpaper</a></span>
++        <span class="comment">-- If wallpaper is a function, call it with the screen
+</span>+        <span class="keyword">if</span> <span class="global">type</span>(wallpaper) == <span class="string">"function"</span> <span class="keyword">then</span>
++            wallpaper = wallpaper(s)
++        <span class="keyword">end</span>
++        <span class="backtick"><a href="../utility_libraries/gears.wallpaper.html#maximized">gears.wallpaper.maximized</a></span>(wallpaper, s, <span class="keyword">true</span>)
++    <span class="keyword">end</span>
++<span class="keyword">end</span>
++
++<span class="comment">-- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+</span>+<span class="backtick"><a href="../core_components/screen.html#connect_signal">screen.connect_signal</a></span>(<span class="string">"property::geometry"</span>, set_wallpaper)
+</pre>
+
 <p>Tags need to be created for each screens, the old static initialization cannot
-work. Remove this section.
-<p>    --- {{{ Tags
-    --- Define a tag table which hold all screen tags.
-    -tags = {}
-    -for s = 1, <a href="../core_components/screen.html#count">screen.count</a>() do
-    -    -- Each screen has its own tag table.
-    -    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
-    - end
-    --- }}}
+work. Remove this section.</p>
+
+
+<pre>
+<span class="comment">--- {{{ Tags
+</span><span class="comment">--- Define a tag table which hold all screen tags.
+</span>-tags = {}
+-<span class="keyword">for</span> s = <span class="number">1</span>, <span class="backtick"><a href="../core_components/screen.html#count">screen.count</a></span>() <span class="keyword">do</span>
+-    <span class="comment">-- Each screen has its own tag table.
+</span>-    tags[s] = awful.tag({ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> }, s, layouts[<span class="number">1</span>])
+- <span class="keyword">end</span>
+<span class="comment">--- }}}</span>
+</pre>
+
 <p>The <code>quit</code> menu command must be wrapped in a function, otherwise an error
-occurs due to mismatched argument types from the v4 <a href="../popups_and_bars/awful.menu.html#">awful.menu</a> library.
-<p>     -- {{{ Menu
-     -- Create a laucher widget and a main menu
-     myawesomemenu = {
-       { "manual", terminal .. " -e man awesome" },
-       { "edit config", editor_cmd .. " " .. awesome.conffile },
-       { "restart", awesome.restart },
-    -  { "quit", awesome.quit }
-    +  { "quit", function() awesome.quit() end}
-     }
-<p>The textclock is now part of the <a href="../popups_and_bars/wibox.html#">wibox</a> library, rename it.
-<p>     -- {{{ Wibar
-     -- Create a textclock widget
-    -mytextclock = <code>awful.widget.textclock</code>()
-    +mytextclock = <a href="../widgets/wibox.widget.textclock.html#">wibox.widget.textclock</a>()
-<p>
-Widgets were previously added to static global tables. This isn't going to
-behave correctly when screen are added and removed. Remove this section.
-<p>     --- Create a wibox for each screen and add it
-     -mywibox = {}
-     -mypromptbox = {}
-     -mylayoutbox = {}
-     -mytaglist = {}
-     -mytasklist = {}
+occurs due to mismatched argument types from the v4 <a href="../popups_and_bars/awful.menu.html#">awful.menu</a> library.</p>
+
+
+<pre>
+ <span class="comment">-- {{{ Menu
+</span> <span class="comment">-- Create a laucher widget and a main menu
+</span> myawesomemenu = {
+   { <span class="string">"manual"</span>, terminal .. <span class="string">" -e man awesome"</span> },
+   { <span class="string">"edit config"</span>, editor_cmd .. <span class="string">" "</span> .. awesome.conffile },
+   { <span class="string">"restart"</span>, awesome.restart },
+-  { <span class="string">"quit"</span>, awesome.quit }
++  { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.quit() <span class="keyword">end</span>}
+ }
+</pre>
+
+<p>The textclock is now part of the <a href="../popups_and_bars/wibox.html#">wibox</a> library, rename it.</p>
+
+
+<pre>
+ <span class="comment">-- {{{ Wibar
+</span> <span class="comment">-- Create a textclock widget
+</span>-mytextclock = <span class="backtick"><code>awful.widget.textclock</code></span>()
++mytextclock = <span class="backtick"><a href="../widgets/wibox.widget.textclock.html#">wibox.widget.textclock</a></span>()
+</pre>
+
+<p>Widgets were previously added to static global tables. This isn't going to
+behave correctly when screen are added and removed. Remove this section.</p>
+
+
+<pre>
+<span class="comment">--- Create a wibox for each screen and add it
+</span>-mywibox = {}
+-mypromptbox = {}
+-mylayoutbox = {}
+-mytaglist = {}
+-mytasklist = {}
+</pre>
+
 <p>Many functions have been converted to methods. The old functions are deprecated,
-they are still supported, but will be removed in the next release.
-<p>    -mytaglist.buttons = awful.util.table.join(
-    +local taglist_buttons = awful.util.table.join(
-    -                    awful.button({ }, 1, <code>awful.tag.viewonly</code>),
-    +                    awful.button({ }, 1, function(t) t:<code>view_only</code>() end),
-    -                    awful.button({ modkey }, 1, <code>awful.client.movetotag</code>),
-    +                    awful.button({ modkey }, 1, function(t)
-    +                                              if <a href="../core_components/client.html#focus">client.focus</a> then
-    +                                                  <code>client.focus:move_to_tag</code>(t)
-    +                                              end
-    +                                          end),
-                         <a href="../input_handling/awful.button.html#">awful.button</a>({ }, 3, <code>awful.tag.viewtoggle</code>),
-    -                    <a href="../input_handling/awful.button.html#">awful.button</a>({ modkey }, 3, <code>awful.client.toggletag</code>),
-    +                    <a href="../input_handling/awful.button.html#">awful.button</a>({ modkey }, 3, function(t)
-    +                                              if client.focus then
-    +                                                  client.focus:toggle_tag(t)
-    +                                              end
-    +                                          end),
-    -                    <a href="../input_handling/awful.button.html#">awful.button</a>({ }, 4, function(t) <code>awful.tag.viewnext</code>(awful.tag.getscreen(t)) end),
-    -                    <a href="../input_handling/awful.button.html#">awful.button</a>({ }, 5, function(t) <code>awful.tag.viewprev</code>(awful.tag.getscreen(t)) end)
-    +                    <a href="../input_handling/awful.button.html#">awful.button</a>({ }, 4, function(t) <code>awful.tag.viewnext</code>(t.screen) end),
-    +                    <a href="../input_handling/awful.button.html#">awful.button</a>({ }, 5, function(t) <code>awful.tag.viewprev</code>(t.screen) end)
-                         )
-<p>    -mytasklist.buttons = awful.util.table.join(
-    +local tasklist_buttons = awful.util.table.join(
-                          awful.button({ }, 1, function (c)
-                                                   if c == <a href="../core_components/client.html#focus">client.focus</a> then
-                                                       c.minimized = true
-                                                   else
-                                                       -- Without this, the following
-                                                       -- :isvisible() makes no sense
-                                                       c.minimized = false
-    -                                                  if not c:isvisible() then
-    -                                                      <code>awful.tag.viewonly</code>(c:tags()[1])
-    +                                                  if not c:isvisible() and c.<code>first_tag</code> then
-    +                                                      c.first_tag:view_only()
-                                                       end
-                                                       -- This will also un-minimize
-                                                       -- the client, if needed
-                                                       <a href="../core_components/client.html#focus">client.focus</a> = c
-                                                       c:raise()
-                                                   end
-                                               end),
-<p>
-This section is **very important**. This is where adding and removing screens is
+they are still supported, but will be removed in the next release.</p>
+
+
+<pre>
+-mytaglist.buttons = awful.util.<span class="global">table</span>.join(
++<span class="keyword">local</span> taglist_buttons = awful.util.<span class="global">table</span>.join(
+-                    awful.button({ }, <span class="number">1</span>, <span class="backtick"><code>awful.tag.viewonly</code></span>),
++                    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:<span class="backtick"><code>view_only</code></span>() <span class="keyword">end</span>),
+-                    awful.button({ modkey }, <span class="number">1</span>, <span class="backtick"><code>awful.client.movetotag</code></span>),
++                    awful.button({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
++                                              <span class="keyword">if</span> <span class="backtick"><a href="../core_components/client.html#focus">client.focus</a></span> <span class="keyword">then</span>
++                                                  <span class="backtick"><code>client.focus:move_to_tag</code></span>(t)
++                                              <span class="keyword">end</span>
++                                          <span class="keyword">end</span>),
+                     <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="backtick"><code>awful.tag.viewtoggle</code></span>),
+-                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="backtick"><code>awful.client.toggletag</code></span>),
++                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="keyword">function</span>(t)
++                                              <span class="keyword">if</span> client.focus <span class="keyword">then</span>
++                                                  client.focus:toggle_tag(t)
++                                              <span class="keyword">end</span>
++                                          <span class="keyword">end</span>),
+-                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewnext</code></span>(awful.tag.getscreen(t)) <span class="keyword">end</span>),
+-                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewprev</code></span>(awful.tag.getscreen(t)) <span class="keyword">end</span>)
++                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewnext</code></span>(t.screen) <span class="keyword">end</span>),
++                    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewprev</code></span>(t.screen) <span class="keyword">end</span>)
+                     )
+
+-mytasklist.buttons = awful.util.<span class="global">table</span>.join(
++<span class="keyword">local</span> tasklist_buttons = awful.util.<span class="global">table</span>.join(
+                      awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
+                                               <span class="keyword">if</span> c == <span class="backtick"><a href="../core_components/client.html#focus">client.focus</a></span> <span class="keyword">then</span>
+                                                   c.minimized = <span class="keyword">true</span>
+                                               <span class="keyword">else</span>
+                                                   <span class="comment">-- Without this, the following
+</span>                                                   <span class="comment">-- :isvisible() makes no sense
+</span>                                                   c.minimized = <span class="keyword">false</span>
+-                                                  <span class="keyword">if</span> <span class="keyword">not</span> c:isvisible() <span class="keyword">then</span>
+-                                                      <span class="backtick"><code>awful.tag.viewonly</code></span>(c:tags()[<span class="number">1</span>])
++                                                  <span class="keyword">if</span> <span class="keyword">not</span> c:isvisible() <span class="keyword">and</span> c.<span class="backtick"><code>first_tag</code></span> <span class="keyword">then</span>
++                                                      c.first_tag:view_only()
+                                                   <span class="keyword">end</span>
+                                                   <span class="comment">-- This will also un-minimize
+</span>                                                   <span class="comment">-- the client, if needed
+</span>                                                   <span class="backtick"><a href="../core_components/client.html#focus">client.focus</a></span> = c
+                                                   c:raise()
+                                               <span class="keyword">end</span>
+                                           <span class="keyword">end</span>),
+</pre>
+
+<p>This section is <strong>very important</strong>. This is where adding and removing screens is
 handled (including during startup). Note that the <code>mysomething</code> table
-previously removed are replaced by custom screens attributes.
-<p>    -for s = 1, <a href="../core_components/screen.html#count">screen.count</a>() do
-    +<code>awful.screen.connect_for_each_screen</code>(function(s)
-    +    -- Wallpaper
-    +    set_wallpaper(s)
-    +
-    +    -- Each screen has its own tag table.
-    +    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
-    +
-         -- Create a promptbox for each screen
-    -    mypromptbox[s] = <a href="../widgets/awful.widget.prompt.html#">awful.widget.prompt</a>()
-    +    s.mypromptbox = <a href="../widgets/awful.widget.prompt.html#">awful.widget.prompt</a>()
-         -- Create an imagebox widget which will contains an icon indicating which layout we're using.
-         -- We need one layoutbox per screen.
-    -    mylayoutbox[s] = <a href="../widgets/awful.widget.layoutbox.html#">awful.widget.layoutbox</a>(s)
-    +    s.mylayoutbox = <a href="../widgets/awful.widget.layoutbox.html#">awful.widget.layoutbox</a>(s)
-    -    mylayoutbox[s]:buttons(<code>awful.util.table.join</code>(
-    +    s.mylayoutbox:buttons(<code>awful.util.table.join</code>(
-                                <a href="../input_handling/awful.button.html#">awful.button</a>({ }, 1, function () <a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a>( 1) end),
-                                <a href="../input_handling/awful.button.html#">awful.button</a>({ }, 3, function () <a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a>(-1) end),
-                                <a href="../input_handling/awful.button.html#">awful.button</a>({ }, 4, function () <a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a>( 1) end),
-                                <a href="../input_handling/awful.button.html#">awful.button</a>({ }, 5, function () <a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a>(-1) end)))
-         -- Create a taglist widget
-    -    mytaglist[s] = <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a>(s, <code>awful.widget.taglist.filter.all</code>, mytaglist.buttons)
-    +    s.mytaglist = <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a>(s, <code>awful.widget.taglist.filter.all</code>, taglist_buttons)
-<p>         -- Create a tasklist widget
-    -    mytasklist[s] = <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a>(s, <code>awful.widget.tasklist.filter.currenttags</code>, mytasklist.buttons)
-    +    s.mytasklist = <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a>(s, <code>awful.widget.tasklist.filter.currenttags</code>, tasklist_buttons)
-<p>         -- Create the wibox
-    -    mywibox[s] = <code>awful.wibox</code>({ position = "top", screen = s })
-    +    s.mywibox = <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a>({ position = "top", screen = s })
-<p>         -- Widgets that are aligned to the left
-         local left_layout = wibox.layout.fixed.horizontal()
-    -    left_layout:add(mylauncher)
-    -    left_layout:add(mytaglist[s])
-    -    left_layout:add(mypromptbox[s])
-    +    left_layout:add(s.mytaglist)
-    +    left_layout:add(s.mypromptbox)
-<p>        -- Widgets that are aligned to the right
-         local right_layout = wibox.layout.fixed.horizontal()
-    -    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    +    right_layout:add(wibox.widget.systray())
-         right_layout:add(mytextclock)
-    -    right_layout:add(mylayoutbox[s])
-    +    right_layout:add(s.mylayoutbox)
-<p>         -- Now bring it all together (with the tasklist in the middle)
-         local layout = wibox.layout.align.horizontal()
-         layout:set_left(left_layout)
-    -    layout:set_middle(mytasklist[s])
-    +    layout:set_middle(s.mytasklist)
-         layout:set_right(right_layout)
-<p>    -    mywibox[s]:set_widget(layout)
-    +    s.mywibox:set_widget(layout)
-    end)
-     -- }}}
-<p>
-<code>awful.util.spawn</code> is now called <a href="../libraries/awful.spawn.html#">awful.spawn</a>.
-<p>    -- Standard program
-    -    <a href="../input_handling/awful.key.html#">awful.key</a>({ modkey,           }, "Return", function () <code>awful.util.spawn</code>(terminal) end),
-    +    <a href="../input_handling/awful.key.html#">awful.key</a>({ modkey,           }, "Return", function () <a href="../libraries/awful.spawn.html#">awful.spawn</a>(terminal) end),
-<p>Another dynamic screen related changes.
-<p>    ⠀-- Prompt
-    -    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
-    +    awful.key({ modkey },            "r",     function () <code>awful.screen.focused</code>().mypromptbox:run() end),
+previously removed are replaced by custom screens attributes.</p>
+
+
+<pre>
+-<span class="keyword">for</span> s = <span class="number">1</span>, <span class="backtick"><a href="../core_components/screen.html#count">screen.count</a></span>() <span class="keyword">do</span>
++<span class="backtick"><code>awful.screen.connect_for_each_screen</code></span>(<span class="keyword">function</span>(s)
++    <span class="comment">-- Wallpaper
+</span>+    set_wallpaper(s)
++
++    <span class="comment">-- Each screen has its own tag table.
+</span>+    awful.tag({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, awful.layout.layouts[<span class="number">1</span>])
++
+     <span class="comment">-- Create a promptbox for each screen
+</span>-    mypromptbox[s] = <span class="backtick"><a href="../widgets/awful.widget.prompt.html#">awful.widget.prompt</a></span>()
++    s.mypromptbox = <span class="backtick"><a href="../widgets/awful.widget.prompt.html#">awful.widget.prompt</a></span>()
+     <span class="comment">-- Create an imagebox widget which will contains an icon indicating which layout we're using.
+</span>     <span class="comment">-- We need one layoutbox per screen.
+</span>-    mylayoutbox[s] = <span class="backtick"><a href="../widgets/awful.widget.layoutbox.html#">awful.widget.layoutbox</a></span>(s)
++    s.mylayoutbox = <span class="backtick"><a href="../widgets/awful.widget.layoutbox.html#">awful.widget.layoutbox</a></span>(s)
+-    mylayoutbox[s]:buttons(<span class="backtick"><code>awful.util.table.join</code></span>(
++    s.mylayoutbox:buttons(<span class="backtick"><code>awful.util.table.join</code></span>(
+                            <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>( <span class="number">1</span>) <span class="keyword">end</span>),
+                            <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>(-<span class="number">1</span>) <span class="keyword">end</span>),
+                            <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>( <span class="number">1</span>) <span class="keyword">end</span>),
+                            <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.inc">awful.layout.inc</a></span>(-<span class="number">1</span>) <span class="keyword">end</span>)))
+     <span class="comment">-- Create a taglist widget
+</span>-    mytaglist[s] = <span class="backtick"><a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a></span>(s, <span class="backtick"><code>awful.widget.taglist.filter.all</code></span>, mytaglist.buttons)
++    s.mytaglist = <span class="backtick"><a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a></span>(s, <span class="backtick"><code>awful.widget.taglist.filter.all</code></span>, taglist_buttons)
+
+     <span class="comment">-- Create a tasklist widget
+</span>-    mytasklist[s] = <span class="backtick"><a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a></span>(s, <span class="backtick"><code>awful.widget.tasklist.filter.currenttags</code></span>, mytasklist.buttons)
++    s.mytasklist = <span class="backtick"><a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a></span>(s, <span class="backtick"><code>awful.widget.tasklist.filter.currenttags</code></span>, tasklist_buttons)
+
+     <span class="comment">-- Create the wibox
+</span>-    mywibox[s] = <span class="backtick"><code>awful.wibox</code></span>({ position = <span class="string">"top"</span>, screen = s })
++    s.mywibox = <span class="backtick"><a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a></span>({ position = <span class="string">"top"</span>, screen = s })
+
+     <span class="comment">-- Widgets that are aligned to the left
+</span>     <span class="keyword">local</span> left_layout = wibox.layout.fixed.horizontal()
+-    left_layout:add(mylauncher)
+-    left_layout:add(mytaglist[s])
+-    left_layout:add(mypromptbox[s])
++    left_layout:add(s.mytaglist)
++    left_layout:add(s.mypromptbox)
+
+    <span class="comment">-- Widgets that are aligned to the right
+</span>     <span class="keyword">local</span> right_layout = wibox.layout.fixed.horizontal()
+-    <span class="keyword">if</span> s == <span class="number">1</span> <span class="keyword">then</span> right_layout:add(wibox.widget.systray()) <span class="keyword">end</span>
++    right_layout:add(wibox.widget.systray())
+     right_layout:add(mytextclock)
+-    right_layout:add(mylayoutbox[s])
++    right_layout:add(s.mylayoutbox)
+
+     <span class="comment">-- Now bring it all together (with the tasklist in the middle)
+</span>     <span class="keyword">local</span> layout = wibox.layout.align.horizontal()
+     layout:set_left(left_layout)
+-    layout:set_middle(mytasklist[s])
++    layout:set_middle(s.mytasklist)
+     layout:set_right(right_layout)
+
+-    mywibox[s]:set_widget(layout)
++    s.mywibox:set_widget(layout)
+<span class="keyword">end</span>)
+ <span class="comment">-- }}}</span>
+</pre>
+
+<p><code>awful.util.spawn</code> is now called <a href="../libraries/awful.spawn.html#">awful.spawn</a>.</p>
+
+
+<pre>
+<span class="comment">-- Standard program
+</span>-    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"Return"</span>, <span class="keyword">function</span> () <span class="backtick"><code>awful.util.spawn</code></span>(terminal) <span class="keyword">end</span>),
++    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"Return"</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.spawn.html#">awful.spawn</a></span>(terminal) <span class="keyword">end</span>),
+</pre>
+
+<p>Another dynamic screen related changes.</p>
+
+
+<pre>
+⠀<span class="comment">-- Prompt
+</span>-    awful.key({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () mypromptbox[mouse.screen]:run() <span class="keyword">end</span>),
++    awful.key({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox:run() <span class="keyword">end</span>),
+</pre>
+
 <p><a href="../libraries/awful.prompt.html#">awful.prompt</a> now uses a more future-proof arguments table instead of many
-optional arguments.
-<p>    ⠀    awful.key({ modkey }, "x",
-                   function ()
-    -                  <a href="../libraries/awful.prompt.html#awful.prompt.run">awful.prompt.run</a>({ prompt = "Run Lua code: " },
-    -                  mypromptbox[mouse.screen].widget,
-    -                  <a href="../libraries/awful.util.html#awful.util.eval">awful.util.eval</a>, nil,
-    -                  <a href="../libraries/awful.util.html#getdir">awful.util.getdir</a>("cache") .. "/history_eval")
-    -              end),
-    +                  awful.prompt.run {
-    +                    prompt       = "Run Lua code: ",
-    +                    textbox      = <code>awful.screen.focused</code>().mypromptbox.widget,
-    +                    exe_callback = <a href="../libraries/awful.util.html#awful.util.eval">awful.util.eval</a>,
-    +                    history_path = <a href="../libraries/awful.util.html#get_cache_dir">awful.util.get_cache_dir</a>() .. "/history_eval"
-    +                  }
-    +              end),
-<p>
-Another function-to-method API change:
-<p>    -    <a href="../input_handling/awful.key.html#">awful.key</a>({ modkey,           }, "o",      <code>awful.client.movetoscreen</code>                        ),
-    +    <a href="../input_handling/awful.key.html#">awful.key</a>({ modkey,           }, "o",      function (c) c:<code>move_to_screen</code>()               end),
+optional arguments.</p>
+
+
+<pre>
+⠀    awful.key({ modkey }, <span class="string">"x"</span>,
+               <span class="keyword">function</span> ()
+-                  <span class="backtick"><a href="../libraries/awful.prompt.html#awful.prompt.run">awful.prompt.run</a></span>({ prompt = <span class="string">"Run Lua code: "</span> },
+-                  mypromptbox[mouse.screen].widget,
+-                  <span class="backtick"><a href="../libraries/awful.util.html#awful.util.eval">awful.util.eval</a></span>, <span class="keyword">nil</span>,
+-                  <span class="backtick"><a href="../libraries/awful.util.html#getdir">awful.util.getdir</a></span>(<span class="string">"cache"</span>) .. <span class="string">"/history_eval"</span>)
+-              <span class="keyword">end</span>),
++                  awful.prompt.run {
++                    prompt       = <span class="string">"Run Lua code: "</span>,
++                    textbox      = <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox.widget,
++                    exe_callback = <span class="backtick"><a href="../libraries/awful.util.html#awful.util.eval">awful.util.eval</a></span>,
++                    history_path = <span class="backtick"><a href="../libraries/awful.util.html#get_cache_dir">awful.util.get_cache_dir</a></span>() .. <span class="string">"/history_eval"</span>
++                  }
++              <span class="keyword">end</span>),
+</pre>
+
+<p>Another function-to-method API change:</p>
+
+
+<pre>
+-    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"o"</span>,      <span class="backtick"><code>awful.client.movetoscreen</code></span>                        ),
++    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"o"</span>,      <span class="keyword">function</span> (c) c:<span class="backtick"><code>move_to_screen</code></span>()               <span class="keyword">end</span>),
+</pre>
+
 <p>The <code>mod4+[1-9]</code> keybindings also have some changes related to deprecated
-functions.
-<p>    -- Bind all key numbers to tags.
-    -- Be careful: we use keycodes to make it works on any keyboard layout.
-    -- This should map on the top row of your keyboard, usually 1 to 9.
-    for i = 1, 9 do
-              -- View tag only.
-              awful.key({ modkey }, "#" .. i + 9,
-                        function ()
-     -                        local screen = <a href="../input_handling/mouse.html#screen">mouse.screen</a>
-     -                        local tag = <code>awful.tag.gettags</code>(screen)[i]
-     +                        local screen = <code>awful.screen.focused</code>()
-     +                        local tag = <a href="../core_components/screen.html#tags">screen.tags</a>[i]
-                              if tag then
-     -                           <code>awful.tag.viewonly</code>(tag)
-     +                           <a href="../core_components/tag.html#view_only">tag:view_only</a>()
-                              end
-                        end),
-     -        -- Toggle tag.
-     +        -- Toggle tag display.
-              awful.key({ modkey, "Control" }, "#" .. i + 9,
-                        function ()
-     -                      local screen = <a href="../input_handling/mouse.html#screen">mouse.screen</a>
-     -                      local tag = <code>awful.tag.gettags</code>(screen)[i]
-     +                      local screen = <code>awful.screen.focused</code>()
-     +                      local tag = <a href="../core_components/screen.html#tags">screen.tags</a>[i]
-                            if tag then
-                               <code>awful.tag.viewtoggle</code>(tag)
-                            end
-     for i = 1, 9 do
-              awful.key({ modkey, "Shift" }, "#" .. i + 9,
-                        function ()
-                            if client.focus then
-     -                          local tag = <code>awful.tag.gettags</code>(client.focus.screen)[i]
-     +                          local tag = <code>client.focus.screen.tags</code>[i]
-                                if tag then
-     -                              <code>awful.client.movetotag</code>(tag)
-     +                              <code>client.focus:move_to_tag</code>(tag)
-                                end
-                           end
-                        end),
-     -        -- Toggle tag.
-     +        -- Toggle tag on focused client.
-              awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-                        function ()
-                            if client.focus then
-     -                          local tag = <code>awful.tag.gettags</code>(client.focus.screen)[i]
-     +                          local tag = <code>client.focus.screen.tags</code>[i]
-                                if tag then
-     -                              <code>awful.client.toggletag</code>(tag)
-     +                              <code>client.focus:toggle_tag</code>(tag)
-                                end
-                            end
-     -                  end))
-     +                  end),
-     +    )
-    end
-<p>The default rules need to be changed to avoid having offscreen clients:
-<p>     awful.rules.rules = {
-         -- All clients will match this rule.
-         { rule = { },
-           properties = { border_width = beautiful.border_width,
-               awful.rules.rules = {
-                          focus = awful.client.focus.filter,
-                          raise = true,
-                          keys = clientkeys,
-     +                     buttons = clientbuttons,
-     +                     screen = <code>awful.screen.preferred</code>,
-     +                     placement = <a href="../libraries/awful.placement.html#awful.placement.no_overlap">awful.placement.no_overlap</a>+<a href="../libraries/awful.placement.html#awful.placement.no_offscreen">awful.placement.no_offscreen</a>
+functions.</p>
+
+
+<pre>
+<span class="comment">-- Bind all key numbers to tags.
+</span><span class="comment">-- Be careful: we use keycodes to make it works on any keyboard layout.
+</span><span class="comment">-- This should map on the top row of your keyboard, usually 1 to 9.
+</span><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">9</span> <span class="keyword">do</span>
+          <span class="comment">-- View tag only.
+</span>          awful.key({ modkey }, <span class="string">"#"</span> .. i + <span class="number">9</span>,
+                    <span class="keyword">function</span> ()
+ -                        <span class="keyword">local</span> screen = <span class="backtick"><a href="../input_handling/mouse.html#screen">mouse.screen</a></span>
+ -                        <span class="keyword">local</span> tag = <span class="backtick"><code>awful.tag.gettags</code></span>(screen)[i]
+ +                        <span class="keyword">local</span> screen = <span class="backtick"><code>awful.screen.focused</code></span>()
+ +                        <span class="keyword">local</span> tag = <span class="backtick"><a href="../core_components/screen.html#tags">screen.tags</a></span>[i]
+                          <span class="keyword">if</span> tag <span class="keyword">then</span>
+ -                           <span class="backtick"><code>awful.tag.viewonly</code></span>(tag)
+ +                           <span class="backtick"><a href="../core_components/tag.html#view_only">tag:view_only</a></span>()
+                          <span class="keyword">end</span>
+                    <span class="keyword">end</span>),
+ -        <span class="comment">-- Toggle tag.
+</span> +        <span class="comment">-- Toggle tag display.
+</span>          awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"#"</span> .. i + <span class="number">9</span>,
+                    <span class="keyword">function</span> ()
+ -                      <span class="keyword">local</span> screen = <span class="backtick"><a href="../input_handling/mouse.html#screen">mouse.screen</a></span>
+ -                      <span class="keyword">local</span> tag = <span class="backtick"><code>awful.tag.gettags</code></span>(screen)[i]
+ +                      <span class="keyword">local</span> screen = <span class="backtick"><code>awful.screen.focused</code></span>()
+ +                      <span class="keyword">local</span> tag = <span class="backtick"><a href="../core_components/screen.html#tags">screen.tags</a></span>[i]
+                        <span class="keyword">if</span> tag <span class="keyword">then</span>
+                           <span class="backtick"><code>awful.tag.viewtoggle</code></span>(tag)
+                        <span class="keyword">end</span>
+ <span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">9</span> <span class="keyword">do</span>
+          awful.key({ modkey, <span class="string">"Shift"</span> }, <span class="string">"#"</span> .. i + <span class="number">9</span>,
+                    <span class="keyword">function</span> ()
+                        <span class="keyword">if</span> client.focus <span class="keyword">then</span>
+ -                          <span class="keyword">local</span> tag = <span class="backtick"><code>awful.tag.gettags</code></span>(client.focus.screen)[i]
+ +                          <span class="keyword">local</span> tag = <span class="backtick"><code>client.focus.screen.tags</code></span>[i]
+                            <span class="keyword">if</span> tag <span class="keyword">then</span>
+ -                              <span class="backtick"><code>awful.client.movetotag</code></span>(tag)
+ +                              <span class="backtick"><code>client.focus:move_to_tag</code></span>(tag)
+                            <span class="keyword">end</span>
+                       <span class="keyword">end</span>
+                    <span class="keyword">end</span>),
+ -        <span class="comment">-- Toggle tag.
+</span> +        <span class="comment">-- Toggle tag on focused client.
+</span>          awful.key({ modkey, <span class="string">"Control"</span>, <span class="string">"Shift"</span> }, <span class="string">"#"</span> .. i + <span class="number">9</span>,
+                    <span class="keyword">function</span> ()
+                        <span class="keyword">if</span> client.focus <span class="keyword">then</span>
+ -                          <span class="keyword">local</span> tag = <span class="backtick"><code>awful.tag.gettags</code></span>(client.focus.screen)[i]
+ +                          <span class="keyword">local</span> tag = <span class="backtick"><code>client.focus.screen.tags</code></span>[i]
+                            <span class="keyword">if</span> tag <span class="keyword">then</span>
+ -                              <span class="backtick"><code>awful.client.toggletag</code></span>(tag)
+ +                              <span class="backtick"><code>client.focus:toggle_tag</code></span>(tag)
+                            <span class="keyword">end</span>
+                        <span class="keyword">end</span>
+ -                  <span class="keyword">end</span>))
+ +                  <span class="keyword">end</span>),
+ +    )
+<span class="keyword">end</span>
+</pre>
+
+<p>The default rules need to be changed to avoid having offscreen clients:</p>
+
+
+<pre>
+awful.rules.rules = {
+    <span class="comment">-- All clients will match this rule.
+</span>    { rule = { },
+      properties = { border_width = beautiful.border_width,
+          awful.rules.rules = {
+                     focus = awful.client.focus.filter,
+                     raise = <span class="keyword">true</span>,
+                     keys = clientkeys,
++                     buttons = clientbuttons,
++                     screen = <span class="backtick"><code>awful.screen.preferred</code></span>,
++                     placement = <span class="backtick"><a href="../libraries/awful.placement.html#awful.placement.no_overlap">awful.placement.no_overlap</a></span>+<span class="backtick"><a href="../libraries/awful.placement.html#awful.placement.no_offscreen">awful.placement.no_offscreen</a></span>
+</pre>
+
 <p>The <code>tags</code> global table has been removed to support dynamic screens, you can
-now access tags by name.
-<p>    -    --   properties = { tag = tags[1][2] } },
-    +    --   properties = { screen = 1, tag = "2" } },
+now access tags by name.</p>
+
+
+<pre>
+-    <span class="comment">--   properties = { tag = tags[1][2] } },
+</span>+    <span class="comment">--   properties = { screen = 1, tag = "2" } },</span>
+</pre>
+
 <p>If you need to get the current client object in global context, currently you can use
-<a href="../core_components/client.html#focus">client.focus</a> for it. E.g., to mark/unmark the client:
-<p>    -    awful.client.mark()
-    +    client.focus.marked = true
-<p>    -    awful.client.unmark()
-    +    client.focus.marked = false
+<a href="../core_components/client.html#focus">client.focus</a> for it. E.g., to mark/unmark the client:</p>
+
+
+<pre>
+-    awful.client.mark()
++    client.focus.marked = <span class="keyword">true</span>
+
+-    awful.client.unmark()
++    client.focus.marked = <span class="keyword">false</span>
+</pre>
+
 
 
 </div> <!-- id="content" -->

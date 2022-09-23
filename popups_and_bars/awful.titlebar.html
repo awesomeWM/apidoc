@@ -221,59 +221,68 @@
 <h1>Module: <code>awful.titlebar</code></h1>
 <p>Create widget area on the edge of a client.</p>
 <p>
-<p> Create a titlebar
- =================
+
+
+<h1> Create a titlebar</h1>
+
 <p> This example reproduces what the default <a href="../sample files/rc.lua.html#">rc.lua</a> does. It shows how to
- handle the titlebars on a lower level.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_titlebar_default.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Create a titlebar for the client.
-     -- By default, <a href="../declarative_rules/ruled.client.html#">ruled.client</a> will create one, but all it does is to call this
-     -- function.
-     local top_titlebar = awful.titlebar(c, {
-         size      = 20,
-         bg_normal = "#ff0000",
-     })
+ handle the titlebars on a lower level.</p>
 
-     -- buttons for the titlebar
-     local buttons = gears.table.join(
-         awful.button({ }, 1, function()
-             client.focus = c
-             c:raise()
-             awful.mouse.client.move(c)
-         end),
-         awful.button({ }, 3, function()
-             client.focus = c
-             c:raise()
-             awful.mouse.client.resize(c)
-         end)
-     )
 
-     top_titlebar.widget = {
-         { -- Left
-             awful.titlebar.widget.iconwidget(c),
-             buttons = buttons,
-             layout  = wibox.layout.fixed.horizontal
-         },
-         { -- Middle
-             { -- Title
-                 halign = "center",
-                 widget = awful.titlebar.widget.titlewidget(c)
-             },
-             buttons = buttons,
-             layout  = wibox.layout.flex.horizontal
-         },
-         { -- Right
-             awful.titlebar.widget.floatingbutton (c),
-             awful.titlebar.widget.maximizedbutton(c),
-             awful.titlebar.widget.stickybutton   (c),
-             awful.titlebar.widget.ontopbutton    (c),
-             awful.titlebar.widget.closebutton    (c),
-             layout = wibox.layout.fixed.horizontal()
-         },
-         layout = wibox.layout.align.horizontal
-     }
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_titlebar_default.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="comment">-- Create a titlebar for the client.
+</span><span class="comment">-- By default, <a href="../declarative_rules/ruled.client.html#">ruled.client</a> will create one, but all it does is to call this
+</span><span class="comment">-- function.
+</span><span class="keyword">local</span> top_titlebar = awful.titlebar(c, {
+    size      = <span class="number">20</span>,
+    bg_normal = <span class="string">"#ff0000"</span>,
+})
+
+<span class="comment">-- buttons for the titlebar
+</span><span class="keyword">local</span> buttons = gears.<span class="global">table</span>.join(
+    awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>()
+        client.focus = c
+        c:raise()
+        awful.mouse.client.move(c)
+    <span class="keyword">end</span>),
+    awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span>()
+        client.focus = c
+        c:raise()
+        awful.mouse.client.resize(c)
+    <span class="keyword">end</span>)
+)
+
+top_titlebar.widget = {
+    { <span class="comment">-- Left
+</span>        awful.titlebar.widget.iconwidget(c),
+        buttons = buttons,
+        layout  = wibox.layout.fixed.horizontal
+    },
+    { <span class="comment">-- Middle
+</span>        { <span class="comment">-- Title
+</span>            halign = <span class="string">"center"</span>,
+            widget = awful.titlebar.widget.titlewidget(c)
+        },
+        buttons = buttons,
+        layout  = wibox.layout.flex.horizontal
+    },
+    { <span class="comment">-- Right
+</span>        awful.titlebar.widget.floatingbutton (c),
+        awful.titlebar.widget.maximizedbutton(c),
+        awful.titlebar.widget.stickybutton   (c),
+        awful.titlebar.widget.ontopbutton    (c),
+        awful.titlebar.widget.closebutton    (c),
+        layout = wibox.layout.fixed.horizontal()
+    },
+    layout = wibox.layout.align.horizontal
+}
+</pre>
+
 </p>
     <div class="extra-header">
 
@@ -1344,23 +1353,31 @@
     </span>
     </dt>
     <dd>
-    Create a new titlebar for the given client.
+
+<p>Create a new titlebar for the given client. </p>
+
 <p> Every client can hold up to four titlebars, one for each side (i.e. each
- value of <code>args.position</code>).
+ value of <code>args.position</code>).</p>
+
 <p> If this constructor is called again with the same
  values for the client (<code>c</code>) and the titlebar position (<code>args.position</code>),
- the previous titlebar will be removed and replaced by the new one.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_titlebar_constructor.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Create default titlebar.
-     awful.titlebar(c)
+ the previous titlebar will be removed and replaced by the new one.</p>
 
-     -- Create titlebar on the client's bottom edge.
-     awful.titlebar(c, { position = "bottom" })
 
-     -- Create titlebar with inverted colors.
-     awful.titlebar(c, { bg_normal = beautiful.fg_normal, fg_normal = beautiful.bg_normal })
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_titlebar_constructor.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Create default titlebar.
+ awful.titlebar(c)
+
+ -- Create titlebar on the client's bottom edge.
+ awful.titlebar(c, { position = "bottom" })
+
+ -- Create titlebar with inverted colors.
+ awful.titlebar(c, { bg_normal = beautiful.fg_normal, fg_normal = beautiful.bg_normal })
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -1407,63 +1424,81 @@
            <td><span class="parameter">bg_normal</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bg_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bg_urgent</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bgimage_normal</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bgimage_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">fg_normal</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">fg_focus</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">fg_urgent</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">font</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
         </table>
@@ -1527,11 +1562,11 @@
     </span>
     </dt>
     <dd>
-    Create a new title widget.
+    Create a new title widget. </p>
+
 <p> A title widget displays the name of a client.
  Please note that this returns a textbox and all of textbox' API is available.
  This way, you can e.g. modify the font that is used.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1570,11 +1605,11 @@
     </span>
     </dt>
     <dd>
-    Create a new icon widget.
+    Create a new icon widget. </p>
+
 <p> An icon widget displays the icon of a client.
  Please note that this returns an imagebox and all of the imagebox' API is
  available. This way, you can e.g. disallow resizes.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1614,7 +1649,8 @@
     </span>
     </dt>
     <dd>
-    Create a new button widget.
+    Create a new button widget. </p>
+
 <p> A button widget displays an image and reacts to
  mouse clicks. Please note that the caller has to make sure that this widget
  gets redrawn when needed by calling the returned widget's <code>:update()</code> method.
@@ -1622,7 +1658,6 @@
  is a boolean, either <code>&quot;active&quot;</code> or <code>&quot;inactive&quot;</code> are used. The actual image is
  then found in the theme as <code>titlebar_[name]_button_[normal/focus]_[state]</code>.
  If that value does not exist, the focused state is ignored for the next try.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2330,8 +2365,9 @@
     </span>
     </dt>
     <dd>
-    Set a declarative widget hierarchy description.
-<p> See [The declarative layout system](../documentation/03-declarative-layout.md.html)
+    Set a declarative widget hierarchy description. </p>
+
+<p> See <a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -6234,16 +6270,22 @@
     </span>
     </dt>
     <dd>
-    The text horizontal alignment in tooltips.
- It is used as the <code>align</code> parameter passed to the <a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a> constructor function.
-<p> Valid values are:
-<p>  * <code>&quot;right&quot;</code>
-  * <code>&quot;top_right&quot;</code>
-  * <code>&quot;left&quot;</code>
-  * <code>&quot;bottom_left&quot;</code>
-  * <code>&quot;top_left&quot;</code>
-  * <code>&quot;bottom&quot;</code>
-  * <code>&quot;top&quot;</code>
+
+<p>The text horizontal alignment in tooltips.
+ It is used as the <code>align</code> parameter passed to the <a href="../popups_and_bars/awful.tooltip.html#">awful.tooltip</a> constructor function.</p>
+
+<p> Valid values are:</p>
+
+<ul>
+    <li><code>&quot;right&quot;</code></li>
+    <li><code>&quot;top_right&quot;</code></li>
+    <li><code>&quot;left&quot;</code></li>
+    <li><code>&quot;bottom_left&quot;</code></li>
+    <li><code>&quot;top_left&quot;</code></li>
+    <li><code>&quot;bottom&quot;</code></li>
+    <li><code>&quot;top&quot;</code></li>
+</ul>
+
 
 
 

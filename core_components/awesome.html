@@ -218,12 +218,11 @@
 
 <h1>Module: <code>awesome</code></h1>
 <p>AwesomeWM lifecycle and low-level APIs.</p>
-<p>
 <p> This module contains the functions and signal to manage the lifecycle of the
  AwesomeWM process. It allows to execute code at specific point from the early
- initialization all the way to the last events before exiting or restarting.
-<p> Additionally it handles signals for spawn and keyboard related events.
-</p>
+ initialization all the way to the last events before exiting or restarting.</p>
+
+<p> Additionally it handles signals for spawn and keyboard related events.</p>
     <div class="extra-header">
 
 
@@ -1012,10 +1011,10 @@
     </span>
     </dt>
     <dd>
-    Set the preferred size for client icons.
+    Set the preferred size for client icons. </p>
+
 <p> The closest equal or bigger size is picked if present, otherwise the closest
  smaller size is picked. The default is 0 pixels, ie. the smallest icon.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1175,7 +1174,6 @@
     <dd>
     Spawn a program.
  The program will be started on the default screen.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1351,7 +1349,7 @@
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
         A string describing the current layout settings,
-   e.g.: 'pc+us+de:2+inet(evdev)+group(alt_shift_toggle)+ctrl(nocaps)'
+   e.g.: 'pc+us+de:2+inet(evdev)+group(alt<em>shift</em>toggle)+ctrl(nocaps)'
     </ol>
 
 
@@ -1373,7 +1371,8 @@
     </span>
     </dt>
     <dd>
-    A call into the Lua code aborted with an error.
+    A call into the Lua code aborted with an error. </p>
+
 <p> This signal is used in the example configuration, <a href="../documentation/05-awesomerc.md.html#">05-awesomerc.md</a>,
  to let a notification box pop up.
 
@@ -1461,7 +1460,8 @@
     </span>
     </dt>
     <dd>
-    An invalid key was read from an object.
+    An invalid key was read from an object. </p>
+
 <p> This can happen if <code>foo</code> in an <code>c.foo</code> access does not exist.
 
     <h3>Arguments:</h3>
@@ -1502,7 +1502,8 @@
     </span>
     </dt>
     <dd>
-    An invalid key was written to an object.
+    An invalid key was written to an object. </p>
+
 <p> This can happen if <code>foo</code> in an <code>c.foo = &quot;bar&quot;</code> assignment doesn't exist.
 
     <h3>Arguments:</h3>
@@ -1549,7 +1550,8 @@
     </span>
     </dt>
     <dd>
-    The systray should be updated.
+    The systray should be updated. </p>
+
 <p> This signal is used in <a href="../widgets/wibox.widget.systray.html#">wibox.widget.systray</a>.
 
 
@@ -1569,7 +1571,8 @@
     </span>
     </dt>
     <dd>
-    The wallpaper has changed.
+    The wallpaper has changed. </p>
+
 <p> This signal is used for pseudo-transparency in <code>wibox.drawable</code> if no
  composite manager is running.
 
@@ -1590,7 +1593,8 @@
     </span>
     </dt>
     <dd>
-    Keyboard map has changed.
+    Keyboard map has changed. </p>
+
 <p> This signal is sent after the new keymap has been loaded. It is used in
  <a href="../widgets/awful.widget.keyboardlayout.html#">awful.widget.keyboardlayout</a> to redraw the layout.
 
@@ -1611,7 +1615,8 @@
     </span>
     </dt>
     <dd>
-    Keyboard group has changed.
+    Keyboard group has changed. </p>
+
 <p> It's used in <a href="../widgets/awful.widget.keyboardlayout.html#">awful.widget.keyboardlayout</a> to redraw the layout.
 
     <h3>Arguments:</h3>
@@ -1646,7 +1651,8 @@
     </span>
     </dt>
     <dd>
-    Refresh.
+    Refresh. </p>
+
 <p> This signal is emitted as a kind of idle signal in the event loop.
  One example usage is in <a href="../core_components/gears.timer.html#">gears.timer</a> to executed delayed calls.
 
@@ -1667,7 +1673,8 @@
     </span>
     </dt>
     <dd>
-    AwesomeWM is about to enter the event loop.
+    AwesomeWM is about to enter the event loop. </p>
+
 <p> This means all initialization has been done.
 
 
@@ -1687,7 +1694,8 @@
     </span>
     </dt>
     <dd>
-    AwesomeWM is exiting / about to restart.
+    AwesomeWM is exiting / about to restart. </p>
+
 <p> This signal is emitted in the <code>atexit</code> handler as well when awesome
  restarts.
 
@@ -1981,25 +1989,28 @@
     </span>
     </dt>
     <dd>
-    The AwesomeWM API level.
-<p> By default, this matches the major version (first component of the version).
+    The AwesomeWM API level. </p>
+
+<p> By default, this matches the major version (first component of the version).</p>
+
 <p> API levels are used to allow newer version of AwesomeWM to alter the behavior
  and subset deprecated APIs. Using an older API level than the current major
  version allows to use legacy <a href="../sample files/rc.lua.html#">rc.lua</a> with little porting. However, they won't
  be able to use all the new features. Attempting to use a newer feature along
  with an older API level is not and will not be supported, even if it almost
- works. Keeping up to date with the newer API levels is highly recommended.
+ works. Keeping up to date with the newer API levels is highly recommended.</p>
+
 <p> Going the other direction, setting an higher API level allows to take
  advantage of experimental feature. It will also be much harsher when it comes
  to deprecation. Setting the API level value beyond <code>current+3</code> will treat
  using APIs currently pending deprecation as fatal errors. All new code
  submitted to the upstream AwesomeWM codebase is forbidden to use deprecated
  APIs. Testing your patches with mode and the default config is recommended
- before submitting a patch.
-<p> You can use the <a href="../core_components/awesome.html#emit_signal">-l</a> command line option or <code>api-level</code> modeline key to set
+ before submitting a patch.</p>
+
+<p> You can use the <a href="../core_components/awesome.html#disconnect_signal">-l</a> command line option or <code>api-level</code> modeline key to set
  the API level for your <a href="../sample files/rc.lua.html#">rc.lua</a>. This setting is global and read only,
  individual modules cannot set their own API level.
-
 
 
 
