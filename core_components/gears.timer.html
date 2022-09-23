@@ -221,7 +221,9 @@
 
 <h1>Module: <code>gears.timer</code></h1>
 <p>Class to execute code at specific intervals.</p>
-<p></p>
+<p>
+
+</p>
     <h3>Usage:</h3>
     <ul>
         <pre class="example">-- Create a widget and update its content using the output of a shell
@@ -502,12 +504,13 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    Create a new timer object.
+    Create a new timer object. </p>
+
 <p> <code>call_now</code> only takes effect when a <code>callback</code> is provided. <code>single_shot</code>,
- on the other hand, also stops signals connected to the <a href="../core_components/gears.timer.html#timeout">timeout</a> signal.
+ on the other hand, also stops signals connected to the <a href="../core_components/gears.timer.html#timeout">timeout</a> signal.</p>
+
 <p> Specifying a function <code>func</code> as <code>args.callback</code> is equivalent to calling
  <code>:connect_signal(func)</code> on the timer object.
-
 
     <h3>Parameters:</h3>
         <div class="important_box">
@@ -576,6 +579,8 @@ gears.timer {
 
            <span class="types"><a class="type" href="../core_components/gears.timer.html#timer">timer</a></span>
 
+
+
     </ol>
 
 
@@ -598,13 +603,13 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    Create a simple timer for calling the <code>callback</code> function continuously.
+    Create a simple timer for calling the <code>callback</code> function continuously. </p>
+
 <p> This is a small wrapper around <a href="../core_components/gears.timer.html#">gears.timer</a>, that creates a timer based on
  <code>callback</code>.
  The timer will run continuously and call <code>callback</code> every <a href="../core_components/gears.timer.html#timeout">timeout</a> seconds.
  It is stopped when <code>callback</code> returns <code>false</code>, when <code>callback</code> throws an
  error or when the <code>:stop()</code> method is called on the return value.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -661,14 +666,14 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    Create a simple timer for calling the <code>callback</code> function continuously.
+    Create a simple timer for calling the <code>callback</code> function continuously. </p>
+
 <p> This function is almost identical to <a href="../core_components/gears.timer.html#start_new">gears.timer.start_new</a>. The only
  difference is that this does not prevent the callback function from being
  garbage collected.
  In addition to the conditions in <a href="../core_components/gears.timer.html#start_new">gears.timer.start_new</a>,
  this timer will also stop if <code>callback</code> was garbage collected since the
  previous run.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -792,9 +797,9 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    The timer is started.
-<p> For this to be <code>true</code> by default, pass <code>autostart</code> to the constructor.
+    The timer is started. </p>
 
+<p> For this to be <code>true</code> by default, pass <code>autostart</code> to the constructor.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -954,9 +959,9 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    Stop the timer.
-<p> Does nothing if the timer isn't running.
+    Stop the timer. </p>
 
+<p> Does nothing if the timer isn't running.
 
 
 
@@ -1110,10 +1115,12 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.
+    Connect to a signal weakly. </p>
+
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.
-<p> **Warning:**
+ automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -1197,7 +1204,8 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    Emitted when <a href="../core_components/gears.timer.html#timeout">timeout</a> seconds have elapsed.
+    Emitted when <a href="../core_components/gears.timer.html#timeout">timeout</a> seconds have elapsed. </p>
+
 <p> This will be emitted repeatedly, unless <code>single_shot</code> has been set to <code>true</code>
  for the timer.
 
@@ -1222,11 +1230,11 @@ gears.timer {
     </span>
     </dt>
     <dd>
-    Timer objects.  This type of object is useful when triggering events repeatedly.
+    Timer objects.  This type of object is useful when triggering events repeatedly.</p>
+
 <p> The timer will emit the "timeout" signal every N seconds, N being the timeout
  value. Note that a started timer will not be garbage collected. Call <code>:stop</code>
  before dropping the last reference to prevent leaking the object.
-
 
     <h3>Fields:</h3>
     <table class="see_also">

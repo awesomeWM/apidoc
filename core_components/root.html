@@ -218,14 +218,13 @@
 
 <h1>Module: <code>root</code></h1>
 <p>APIs to interact with the root window.</p>
-<p>
 <p> X11 windows (clients) are stored in a tree. Each window
  can have children. A common example of this are modal
- dialog windows.
+ dialog windows.</p>
+
 <p> This tree goes beyond a process. The root window is where
  the wallpaper is drawn. It span the combined geometry of
- every screen. It also persist when AwesomeWM is restarted.
-</p>
+ every screen. It also persist when AwesomeWM is restarted.</p>
     <div class="extra-header">
 
 
@@ -377,16 +376,20 @@
     </span>
     </dt>
     <dd>
-    Send fake keyboard or mouse events.
+
+<p>Send fake keyboard or mouse events. </p>
+
 <p> Usually the currently focused client or the keybindings will receive those
- events. If a <code>keygrabber</code> or <a href="../core_components/mousegrabber.html#">mousegrabber</a> is running, then it will get them.
+ events. If a <code>keygrabber</code> or <a href="../core_components/mousegrabber.html#">mousegrabber</a> is running, then it will get them.</p>
+
 <p> Some keys have different names compared to the ones generally used in
  Awesome. For example, Awesome uses "modifier keys" for keybindings using
  their X11 names such as "Control" or "Mod1" (for "Alt"). These are not the
  name of the key but is only the name of the modifier they represent. Some
  modifiers are even present twice on some keyboard like the left and right
  "Shift". Here is a list of the "real" key names matching the modifiers in
- <a href="../core_components/root.html#fake_input">fake_input</a>:
+ <a href="../core_components/root.html#fake_input">fake_input</a>:</p>
+
 <p> <table class='widget_list' border=1>
   <tr style='font-weight: bold;'>
    <th align='center'>Modifier name </th>
@@ -397,47 +400,58 @@
   <tr><td> Control </td><td align='center'> Control_L </td><td align='center'> Control_R </td></tr>
   <tr><td> Shift </td><td align='center'> Shift_L </td><td align='center'> Shift_R </td></tr>
   <tr><td> Mod1</td><td align='center'> Alt_L </td><td align='center'> Alt_R </td></tr>
- </table>
+ </table></p>
+
 <p> Note that this is valid for most of the modern "western" keyboard layouts.
- Some older, custom or foreign layouts may break this convention.
+ Some older, custom or foreign layouts may break this convention.</p>
+
 <p> This function is very low level, to be more useful, it can be wrapped into
- higher level constructs such as:
-<p> **Sending strings:**
-<p>
+ higher level constructs such as:</p>
+
+<p> <strong>Sending strings:</strong></p>
 
 
 
-    local function send_string_to_client(s, c)
-        local old_c = client.focus
-        client.focus = c
-        for i=1, #s do
-            local char = s:sub(i,i)
-            root.fake_input("key_press"  , char)
-            root.fake_input("key_release", char)
-        end
-        client.focus = old_c
+
+
+<pre><code>local function send_string_to_client(s, c)
+    local old_c = client.focus
+    client.focus = c
+    for i=1, #s do
+        local char = s:sub(i,i)
+        root.fake_input("key_press"  , char)
+        root.fake_input("key_release", char)
     end
+    client.focus = old_c
+end
 
-    send_string_to_client("Hello world!")
+send_string_to_client("Hello world!")
+</code></pre>
+
 <p> Note that this example works for most ASCII inputs but may fail depending on
  how the string is encoded. Some multi-byte characters may not represent
  keys and some UTF-8 encoding format create characters by combining multiple
  elements such as accent + base character or various escape sequences. If you
  wish to use this example for "real world" i18n use cases, learning about
- XKB event and UTF-8 encoding is a prerequisites.
-<p> **Clicking:**
-<p> ![Client geometry](../images/mouse.svg)
-<p>
+ XKB event and UTF-8 encoding is a prerequisites.</p>
+
+<p> <strong>Clicking:</strong></p>
+
+<p> <img src="../images/mouse.svg" alt="Client geometry"/></p>
 
 
 
-    local function click(button_id, x, y)
-        mouse.coords {x = x, y = y}
-        root.fake_input("button_press" , button_id)
-        root.fake_input("button_release", button_id)
-    end
 
-    click(1, 42, 42)
+
+<pre><code>local function click(button_id, x, y)
+    mouse.coords {x = x, y = y}
+    root.fake_input("button_press" , button_id)
+    root.fake_input("button_release", button_id)
+end
+
+click(1, 42, 42)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -452,8 +466,8 @@
            <td><span class="parameter">event_type</span></td>
            <td></td>
            <td><span class="types"></span></td>
-           <td class="see_also_description"> The event type: key\_press, key\_release, button\_press,
-  button\_release or motion\_notify.</td>
+           <td class="see_also_description"> The event type: key_press, key_release, button_press,
+  button_release or motion_notify.</td>
          </tr>
          <tr>
            <td><span class="parameter">detail</span></td>
@@ -495,34 +509,35 @@
     </span>
     </dt>
     <dd>
-    Set the root cursor  The possible values are:
+    Set the root cursor  The possible values are:</p>
+
 <p>  <div class='flex-list'>
- <div>num\_glyphs</div>
+ <div>num_glyphs</div>
  <div>arrow</div>
- <div>based\_arrow\_down</div>
- <div>based\_arrow\_up</div>
+ <div>based_arrow_down</div>
+ <div>based_arrow_up</div>
  <div>boat</div>
  <div>bogosity</div>
- <div>bottom\_left\_corner</div>
- <div>bottom\_right\_corner</div>
- <div>bottom\_side</div>
- <div>bottom\_tee</div>
- <div>box\_spiral</div>
- <div>center\_ptr</div>
+ <div>bottom_left_corner</div>
+ <div>bottom_right_corner</div>
+ <div>bottom_side</div>
+ <div>bottom_tee</div>
+ <div>box_spiral</div>
+ <div>center_ptr</div>
  <div>circle</div>
  <div>clock</div>
- <div>coffee\_mug</div>
+ <div>coffee_mug</div>
  <div>cross</div>
  <div>crosshair</div>
- <div>cross\_reverse</div>
+ <div>cross_reverse</div>
  <div>cursor</div>
- <div>diamond\_cross</div>
+ <div>diamond_cross</div>
  <div>dotbox</div>
  <div>dot</div>
- <div>double\_arrow</div>
- <div>draft\_large</div>
- <div>draft\_small</div>
- <div>draped\_box</div>
+ <div>double_arrow</div>
+ <div>draft_large</div>
+ <div>draft_small</div>
+ <div>draped_box</div>
  <div>exchange</div>
  <div>fleur</div>
  <div>gobbler</div>
@@ -531,32 +546,32 @@
  <div>hand</div>
  <div>heart</div>
  <div>icon</div>
- <div>iron\_cross</div>
+ <div>iron_cross</div>
  <div>leftbutton</div>
- <div>left\_ptr</div>
- <div>left\_side</div>
- <div>left\_tee</div>
- <div>ll\_angle</div>
- <div>lr\_angle</div>
+ <div>left_ptr</div>
+ <div>left_side</div>
+ <div>left_tee</div>
+ <div>ll_angle</div>
+ <div>lr_angle</div>
  <div>man</div>
  <div>middlebutton</div>
  <div>mouse</div>
  <div>pencil</div>
  <div>pirate</div>
  <div>plus</div>
- <div>question\_arrow</div>
+ <div>question_arrow</div>
  <div>rightbutton</div>
- <div>right\_ptr</div>
- <div>right\_side</div>
- <div>right\_tee</div>
- <div>rtl\_logo</div>
+ <div>right_ptr</div>
+ <div>right_side</div>
+ <div>right_tee</div>
+ <div>rtl_logo</div>
  <div>sailboat</div>
- <div>sb\_down\_arrow</div>
- <div>sb\_h\_double\_arrow</div>
- <div>sb\_left\_arrow</div>
- <div>sb\_right\_arrow</div>
- <div>sb\_up\_arrow</div>
- <div>sb\_v\_double\_arrow</div>
+ <div>sb_down_arrow</div>
+ <div>sb_h_double_arrow</div>
+ <div>sb_left_arrow</div>
+ <div>sb_right_arrow</div>
+ <div>sb_up_arrow</div>
+ <div>sb_v_double_arrow</div>
  <div>shuttle</div>
  <div>sizing</div>
  <div>spider</div>
@@ -564,19 +579,18 @@
  <div>star</div>
  <div>target</div>
  <div>tcross</div>
- <div>top\_left\_arrow</div>
- <div>top\_left\_corner</div>
- <div>top\_right\_corner</div>
- <div>top\_side</div>
- <div>top\_tee</div>
+ <div>top_left_arrow</div>
+ <div>top_left_corner</div>
+ <div>top_right_corner</div>
+ <div>top_side</div>
+ <div>top_tee</div>
  <div>trek</div>
- <div>ul\_angle</div>
+ <div>ul_angle</div>
  <div>umbrella</div>
- <div>ur\_angle</div>
+ <div>ur_angle</div>
  <div>watch</div>
  <div>xterm</div>
  </div>
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -728,7 +742,6 @@
     Get or set global key bindings.
  These bindings will be available when you press keys on the root window
  (the wallpaper).
-
 
     <h3>Constraints:</h3>
     <span class="property_type">

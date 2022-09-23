@@ -221,56 +221,72 @@
 <h1>Module: <code>awful.wibar</code></h1>
 <p>The main AwesomeWM "bar" module.</p>
 <p>
+
+
 <p> This module allows you to easily create wibox and attach them to the edge of
- a screen.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_default.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     local wb = awful.wibar { position = "top" }
-     wb:setup {
-         layout = wibox.layout.align.horizontal,
-         {
-             mytaglist,
-             layout = wibox.layout.fixed.horizontal,
-         },
-         mytasklist,
-         {
-             layout = wibox.layout.fixed.horizontal,
-             mykeyboardlayout,
-             mytextclock,
-         },
-     }
-<p> You can even have vertical bars too.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_left.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     local wb = awful.wibar { position = "left" }
-     wb:setup {
-         layout = wibox.layout.align.vertical,
-         {
-             -- Rotate the widgets with the container
-             {
-                 mytaglist,
-                 direction = 'west',
-                 widget = wibox.container.rotate
-             },
-             layout = wibox.layout.fixed.vertical,
-         },
-         mytasklist,
-         {
-             layout = wibox.layout.fixed.vertical,
-             {
-                 -- Rotate the widgets with the container
-                 {
-                     mykeyboardlayout,
-                     mytextclock,
-                     layout = wibox.layout.fixed.horizontal
-                 },
-                 direction = 'west',
-                 widget = wibox.container.rotate
-             }
-         },
-     }
+ a screen.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_default.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="keyword">local</span> wb = awful.wibar { position = <span class="string">"top"</span> }
+wb:setup {
+    layout = wibox.layout.align.horizontal,
+    {
+        mytaglist,
+        layout = wibox.layout.fixed.horizontal,
+    },
+    mytasklist,
+    {
+        layout = wibox.layout.fixed.horizontal,
+        mykeyboardlayout,
+        mytextclock,
+    },
+}
+</pre>
+
+<p> You can even have vertical bars too.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_left.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="keyword">local</span> wb = awful.wibar { position = <span class="string">"left"</span> }
+wb:setup {
+    layout = wibox.layout.align.vertical,
+    {
+        <span class="comment">-- Rotate the widgets with the container
+</span>        {
+            mytaglist,
+            direction = <span class="string">'west'</span>,
+            widget = wibox.container.rotate
+        },
+        layout = wibox.layout.fixed.vertical,
+    },
+    mytasklist,
+    {
+        layout = wibox.layout.fixed.vertical,
+        {
+            <span class="comment">-- Rotate the widgets with the container
+</span>            {
+                mykeyboardlayout,
+                mytextclock,
+                layout = wibox.layout.fixed.horizontal
+            },
+            direction = <span class="string">'west'</span>,
+            widget = wibox.container.rotate
+        }
+    },
+}
+</pre>
+
 </p>
     <div class="extra-header">
   <div class="extra-header__section">
@@ -1080,7 +1096,9 @@
            <td><span class="parameter">args</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description"> </td>
+           <td class="see_also_description">
+
+ </td>
           <td><span class="default_value"><code>nil</code></span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -1345,10 +1363,11 @@
     </span>
     </dt>
     <dd>
-    If the wibar needs to be stretched to fill the screen.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_stretch.svg" alt="Usage example" type="image/svg+xml"></object>
+    If the wibar needs to be stretched to fill the screen. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_stretch.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1458,10 +1477,11 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    How to align non-stretched wibars.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_align.svg" alt="Usage example" type="image/svg+xml"></object>
+    How to align non-stretched wibars. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_align.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1623,12 +1643,14 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Margins on each side of the wibar.
-<p> It can either be a table with <code>top</code>, <code>bottom</code>, <code>left</code> and <code>right</code>
- properties, or a single number that applies to all four sides.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_margins.svg" alt="Usage example" type="image/svg+xml"></object>
+    Margins on each side of the wibar. </p>
 
+<p> It can either be a table with <code>top</code>, <code>bottom</code>, <code>left</code> and <code>right</code>
+ properties, or a single number that applies to all four sides.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_margins.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1796,13 +1818,15 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Allow or deny the tiled clients to cover the wibar.
+    Allow or deny the tiled clients to cover the wibar. </p>
+
 <p> In the example below, we can see that the first screen workarea
  shrunk by the height of the wibar while the second screen is
- unchanged.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_screen_wibar_workarea.svg" alt="Usage example" type="image/svg+xml"></object>
+ unchanged.</p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_screen_wibar_workarea.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1892,33 +1916,39 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    The wibox position.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_position.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    local colors = {
-        top    = "#ffff00",
-        bottom = "#ff00ff",
-        left   = "#00ffff",
-        right  = "#ffcc00"
-    }
 
-    for _, position in ipairs { "top", "bottom", "left", "right" } do
-        awful.wibar {
-            position = position,
-            bg       = colors[position],
-            widget   = {
-                {
-                    text   = position,
-                    halign = "center",
-                    widget = wibox.widget.textbox
-                },
-                direction = (position == "left" or position == "right") and
-                    "east" or "north",
-                widget    = wibox.container.rotate
+<p>The wibox position. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_wibar_position.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>local colors = {
+    top    = "#ffff00",
+    bottom = "#ff00ff",
+    left   = "#00ffff",
+    right  = "#ffcc00"
+}
+
+for _, position in ipairs { "top", "bottom", "left", "right" } do
+    awful.wibar {
+        position = position,
+        bg       = colors[position],
+        widget   = {
+            {
+                text   = position,
+                halign = "center",
+                widget = wibox.widget.textbox
             },
-        }
-    end
+            direction = (position == "left" or position == "right") and
+                "east" or "north",
+            widget    = wibox.container.rotate
+        },
+    }
+end
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -2004,45 +2034,58 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Set the preferred popup position relative to its parent.
+
+<p>Set the preferred popup position relative to its parent. </p>
+
 <p> This allows, for example, to have a submenu that goes on the right of the
  parent menu. If there is no space on the right, it tries on the left and so
- on.
-<p> The basic use case for this method is to give it a parent wibox:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_popup_position1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    for _, v in ipairs {"left", "right", "bottom", "top"} do
-        local p2 = awful.popup {
-            widget = wibox.widget {
-                text   = "On the "..v,
-                widget = wibox.widget.textbox
-            },
-            border_color        = "#777777",
-            border_width        = 2,
-            preferred_positions = v,
-            ontop               = true,
-        }
-        p2:move_next_to(p)
-    end
+ on.</p>
+
+<p> The basic use case for this method is to give it a parent wibox:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_popup_position1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for _, v in ipairs {"left", "right", "bottom", "top"} do
+    local p2 = awful.popup {
+        widget = wibox.widget {
+            text   = "On the "..v,
+            widget = wibox.widget.textbox
+        },
+        border_color        = "#777777",
+        border_width        = 2,
+        preferred_positions = v,
+        ontop               = true,
+    }
+    p2:move_next_to(p)
+end
+</code></pre>
+
 <p> As demonstrated by this second example, it is also possible to use a widget
- as a parent object:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_popup_position2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    for _, v in ipairs {"left", "right"} do
-        local p2 = awful.popup {
-            widget = wibox.widget {
-                text = "On the "..v,
-                forced_height = 100,
-                widget = wibox.widget.textbox
-            },
-            border_color  = "#0000ff",
-            preferred_positions = v,
-            border_width  = 2,
-        }
-        p2:move_next_to(textboxinstance, v)
-    end
+ as a parent object:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_popup_position2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for _, v in ipairs {"left", "right"} do
+    local p2 = awful.popup {
+        widget = wibox.widget {
+            text = "On the "..v,
+            forced_height = 100,
+            widget = wibox.widget.textbox
+        },
+        border_color  = "#0000ff",
+        preferred_positions = v,
+        border_width  = 2,
+    }
+    p2:move_next_to(textboxinstance, v)
+end
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -2168,35 +2211,43 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Set the preferred popup anchors relative to the parent.
-<p> For details information, see the <a href="../libraries/awful.placement.html#awful.placement.next_to">awful.placement.next_to</a> documentation.
+
+<p>Set the preferred popup anchors relative to the parent. </p>
+
+<p> For details information, see the <a href="../libraries/awful.placement.html#awful.placement.next_to">awful.placement.next_to</a> documentation.</p>
+
 <p> In this example, it is possible to see the effect of having a fallback
- preferred anchors when the popup would otherwise not fit:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_popup_anchors.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     local p2 = awful.popup {
-         widget = wibox.widget {
-             text   = "A popup",
-             forced_height = 100,
-             widget = wibox.widget.textbox
-         },
-         border_color        = "#777777",
-         border_width        = 2,
-         preferred_positions = "right",
-         preferred_anchors   = {"front", "back"},
-     }
-     local p4 = awful.popup {
-         widget = wibox.widget {
-             text   = "A popup2",
-             forced_height = 100,
-             widget = wibox.widget.textbox
-         },
-         border_color        = "#777777",
-         border_width        = 2,
-         preferred_positions = "right",
-         preferred_anchors   = {"front", "back"},
-     }
+ preferred anchors when the popup would otherwise not fit:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_popup_anchors.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> local p2 = awful.popup {
+     widget = wibox.widget {
+         text   = "A popup",
+         forced_height = 100,
+         widget = wibox.widget.textbox
+     },
+     border_color        = "#777777",
+     border_width        = 2,
+     preferred_positions = "right",
+     preferred_anchors   = {"front", "back"},
+ }
+ local p4 = awful.popup {
+     widget = wibox.widget {
+         text   = "A popup2",
+         forced_height = 100,
+         widget = wibox.widget.textbox
+     },
+     border_color        = "#777777",
+     border_width        = 2,
+     preferred_positions = "right",
+     preferred_anchors   = {"front", "back"},
+ }
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -2239,8 +2290,7 @@ awful.wibar {
           Valid values:
          </i>
         </td>
-        <td>:
-  ordered by priority.</td>
+        <td>:   ordered by priority.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -2317,12 +2367,12 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    The current position relative to the parent object.
+    The current position relative to the parent object. </p>
+
 <p> If there is a parent object (widget, wibox, wibar, client or the mouse), then
  this property returns the current position. This is determined using
  <code>preferred_positions</code>. It is usually the preferred position, but when there
  isn't enough space, it can also be one of the fallback.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2402,12 +2452,12 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Get the current anchor relative to the parent object.
+    Get the current anchor relative to the parent object. </p>
+
 <p> If there is a parent object (widget, wibox, wibar, client or the mouse), then
  this property returns the current anchor. The anchor is the "side" of the
  parent object on which the popup is based on. It will "grow" in the
  opposite direction from the anchor.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2802,31 +2852,38 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    The distance between the popup and its parent (if any).
+
+<p>The distance between the popup and its parent (if any). </p>
+
 <p> Here is an example of 5 popups stacked one below the other with an y axis
- offset (spacing).
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_popup_position3.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    local previous = nil
-    for i=1, 5 do
-        local p2 = awful.popup {
-            widget = wibox.widget {
-                text   = "Hello world!  "..i.."  aaaa.",
-                widget = wibox.widget.textbox
-            },
-            border_color        = beautiful.border_color,
-            preferred_positions = "bottom",
-            border_width        = 2,
-            preferred_anchors   = "back",
-            placement           = (not previous) and awful.placement.top or nil,
-            offset = {
-                 y = 10,
-            },
-        }
-        p2:move_next_to(previous)
-        previous = p2
-    end
+ offset (spacing).</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_popup_position3.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>local previous = nil
+for i=1, 5 do
+    local p2 = awful.popup {
+        widget = wibox.widget {
+            text   = "Hello world!  "..i.."  aaaa.",
+            widget = wibox.widget.textbox
+        },
+        border_color        = beautiful.border_color,
+        preferred_positions = "bottom",
+        border_width        = 2,
+        preferred_anchors   = "back",
+        placement           = (not previous) and awful.placement.top or nil,
+        offset = {
+             y = 10,
+        },
+    }
+    p2:move_next_to(previous)
+    previous = p2
+end
+</code></pre>
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2975,7 +3032,7 @@ awful.wibar {
           <span class='summary_type'>function</span>:
          </i>
         </td>
-        <td>: A custom callback to generate *and set* the geometry.</td>
+        <td>: A custom callback to generate <em>and set</em> the geometry.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:30px;">
@@ -3138,20 +3195,26 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Border color.
+
+<p>Border color. </p>
+
 <p> Please note that this property only support string based 24 bit or 32 bit
- colors:
-<p>    Red Blue
-     _|  _|
-    #FF00FF
-       T‾
-     Green
-<p>
-    Red Blue
-     _|  _|
-    #FF00FF00
-       T‾  ‾T
-    Green   Alpha
+ colors:</p>
+
+<pre><code>Red Blue
+ _|  _|
+#FF00FF
+   T‾
+ Green
+
+
+Red Blue
+ _|  _|
+#FF00FF00
+   T‾  ‾T
+Green   Alpha
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -3988,11 +4051,11 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    The wibox's bounding shape as a (native) cairo surface.
+    The wibox's bounding shape as a (native) cairo surface. </p>
+
 <p> If you want to set a shape, let say some rounded corners, use
  the <code>shape</code> property rather than this. If you want something
  very complex, for example, holes, then use this.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4051,10 +4114,10 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    The wibox's clip shape as a (native) cairo surface.
-<p> The clip shape is the shape of the window *content* rather
- than the outer window shape.
+    The wibox's clip shape as a (native) cairo surface. </p>
 
+<p> The clip shape is the shape of the window <em>content</em> rather
+ than the outer window shape.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4113,11 +4176,11 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    The wibox's input shape as a (native) cairo surface.
+    The wibox's input shape as a (native) cairo surface. </p>
+
 <p> The input shape allows to disable clicks and mouse events
  on part of the window. This is how <code>input_passthrough</code> is
  implemented.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4233,7 +4296,7 @@ awful.wibar {
          </i>
           <span class="inline_types"> (cairo.context)</span>
         </td>
-        <td>: A [Cairo context](https://cairographics.org/manual/cairo-cairo-t.html)</td>
+        <td>: A <a href="https://cairographics.org/manual/cairo-cairo-t.html">Cairo context</a></td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:60px;">
@@ -4308,13 +4371,13 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Forward the inputs to the client below the wibox.
+    Forward the inputs to the client below the wibox. </p>
+
 <p> This replace the <code>shape_input</code> mask with an empty area. All mouse and
  keyboard events are sent to the object (such as a client) positioned below
  this wibox. When used alongside compositing, it allows, for example, to have
  a subtle transparent wibox on top a fullscreen client to display important
  data such as a low battery warning.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4448,13 +4511,13 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    The background of the wibox.
+    The background of the wibox. </p>
+
 <p> The background color can be transparent. If there is a
  compositing manager such as compton, then it will be
  real transparency and may include blur (provided by the
  compositor). When there is no compositor, it will take
  a picture of the wallpaper and blend it.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4496,7 +4559,7 @@ awful.wibar {
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
+        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -4504,7 +4567,7 @@ awful.wibar {
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
+        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -4512,7 +4575,7 @@ awful.wibar {
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
+        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
        <tr/>
        <tr class="">
         <td style="padding-left:0px;">
@@ -4581,10 +4644,10 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    The background image of the drawable.
+    The background image of the drawable. </p>
+
 <p> If <code>image</code> is a function, it will be called with <code>(context, cr, width, height)</code>
  as arguments. Any other arguments passed to this method will be appended.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4734,7 +4797,7 @@ awful.wibar {
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
+        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -4742,7 +4805,7 @@ awful.wibar {
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
+        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -4750,7 +4813,7 @@ awful.wibar {
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
+        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
        <tr/>
      </table>
     </span>
@@ -4836,7 +4899,6 @@ awful.wibar {
     Move the wibox to a position relative to <code>geo</code>.
  This will try to avoid overlapping the source wibox and auto-detect the right
  direction to avoid going off-screen.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -4964,7 +5026,9 @@ awful.wibar {
            <td><span class="parameter">widget</span></td>
            <td></td>
            <td><span class="types"><span class="type">widget</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
         </table>
 
@@ -4989,7 +5053,6 @@ awful.wibar {
     <dd>
     Get or set wibox geometry.  That's the same as accessing or setting the x,
  y, width or height properties of a wibox.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -5049,14 +5112,14 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Get or set wibox struts.
+    Get or set wibox struts. </p>
+
 <p> Struts are the area which should be reserved on each side of
  the screen for this wibox. This is used to make bars and
  docked displays. Note that <a href="../popups_and_bars/awful.wibar.html#">awful.wibar</a> implements all the
  required boilerplate code to make bar. Only use this if you
  want special type of bars (like bars not fully attached to
  the side of the screen).
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -5119,7 +5182,7 @@ awful.wibar {
     </dt>
     <dd>
     Set a declarative widget hierarchy description.
- See [The declarative layout system](../documentation/03-declarative-layout.md.html)
+ See <a href="../documentation/03-declarative-layout.md.html">The declarative layout system</a>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -5185,8 +5248,8 @@ awful.wibar {
 
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
          A sorted table of widgets positions. The first element is the biggest
- container while the last is the topmost widget. The table contains *x*, *y*,
- *width*, *height* and *widget*.
+ container while the last is the topmost widget. The table contains <em>x</em>, <em>y</em>,
+ <em>width</em>, <em>height</em> and <em>widget</em>.
     </ol>
 
 
@@ -5293,7 +5356,9 @@ awful.wibar {
            <td><span class="parameter">wibox</span></td>
            <td></td>
            <td><span class="types"></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
         </table>
 
@@ -5349,14 +5414,18 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    If there is both vertical and horizontal wibar, give more space to vertical ones.
+    If there is both vertical and horizontal wibar, give more space to vertical ones. </p>
+
 <p> By default, if multiple wibars risk overlapping, it will be resolved
- by giving more space to the horizontal one:
-<p> ![wibar position](../images/AUTOGEN_awful_wibar_position.svg)
-<p> If this variable is to to <code>true</code>, it will behave like:
-<p>
+ by giving more space to the horizontal one:</p>
+
+<p> <img src="../images/AUTOGEN_awful_wibar_position.svg" alt="wibar position"/></p>
+
+<p> If this variable is to to <code>true</code>, it will behave like:</p>
+
+
+
 <p><object class="img-object" data="../images/AUTOGEN_awful_wibar_position2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
 
 
@@ -5824,10 +5893,10 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Attach a wibox to a screen.
+    Attach a wibox to a screen. </p>
+
 <p> This function has been moved to the <a href="../libraries/awful.placement.html#">awful.placement</a> module. Calling this
  no longer does anything.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -5883,19 +5952,25 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Align a wibox.
-<p> Supported alignment are:
-<p> * top_left
- * top_right
- * bottom_left
- * bottom_right
- * left
- * right
- * top
- * bottom
- * centered
- * center_vertical
- * center_horizontal
+
+<p>Align a wibox. </p>
+
+<p> Supported alignment are:</p>
+
+<ul>
+    <li>top_left</li>
+    <li>top_right</li>
+    <li>bottom_left</li>
+    <li>bottom_right</li>
+    <li>left</li>
+    <li>right</li>
+    <li>top</li>
+    <li>bottom</li>
+    <li>centered</li>
+    <li>center_vertical</li>
+    <li>center_horizontal</li>
+</ul>
+
 
 
     <h3>Parameters:</h3>
@@ -5953,9 +6028,9 @@ awful.wibar {
     </span>
     </dt>
     <dd>
-    Stretch a wibox so it takes all screen width or height.
-<p> **This function has been removed.**
+    Stretch a wibox so it takes all screen width or height. </p>
 
+<p> <strong>This function has been removed.</strong>
 
 
 

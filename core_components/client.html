@@ -227,55 +227,84 @@
 
 <h1>Module: <code>client</code></h1>
 <p>A process window managed by AwesomeWM.</p>
-<p>
-<p> Clients are the name used by Awesome (and X11) to refer to a window.
+<p> Clients are the name used by Awesome (and X11) to refer to a window.</p>
+
 <p> A program can have multiple clients (e.g. for dialogs) or none at all (e.g.
  command line applications).
  Clients are usually grouped by classes.
  A class is the name used by X11 to help the window manager distinguish
  between windows and write rules for them.  A client's behavior is also
  defined by its <a href="../core_components/client.html#type">type</a> and <a href="../core_components/client.html#size_hints">size_hints</a> properties.
- See the <code>xprop</code> command line application to query properties for a client.
-<p> ![Client geometry](../images/client_geo.svg)
-<p> The client's <code>:geometry()</code> function returns a table with *x*, *y*, *width*
- and *height*.  The area returned **excludes the border width**.
+ See the <code>xprop</code> command line application to query properties for a client.</p>
+
+<p> <img src="../images/client_geo.svg" alt="Client geometry"/></p>
+
+<p> The client's <code>:geometry()</code> function returns a table with <em>x</em>, <em>y</em>, <em>width</em>
+ and <em>height</em>.  The area returned <strong>excludes the border width</strong>.
  All clients also have a <a href="../core_components/client.html#shape_bounding">shape_bounding</a> and <a href="../core_components/client.html#shape_clip">shape_clip</a> used to "crop" the
  client's content.
- Finally, each clients can have titlebars (see <a href="../popups_and_bars/awful.titlebar.html#">awful.titlebar</a>).
+ Finally, each clients can have titlebars (see <a href="../popups_and_bars/awful.titlebar.html#">awful.titlebar</a>).</p>
+
 <p> Some signal names are starting with a dot. These dots are artefacts from
  the documentation generation, you get the real signal name by
- removing the starting dot.
+ removing the starting dot.</p>
+
 <p> Accessing client objects can be done in multiple ways depending on the
  context.
- To get the currently focused client:
-<p>    local c = client.focus
-    if c then
-        -- do something
-    end
-<p> To get a list of all clients, use <a href="../core_components/client.html#get">client:get</a>:
-<p>    for _, c in ipairs(client.get()) do
-        -- do something
-    end
-<p> To execute a callback when a new client is added, use the <a href="../core_components/client.html#manage">manage</a> signal:
-<p>    client.connect_signal("request::manage", function(c)
-        -- do something
-    end)
-<p> To be notified when a property of a client changed:
-<p>    client.connect_signal("property::name", function(c)
-        -- do something
-    end)
-<p> To be notified when a property of a specific client <code>c</code> changed:
-<p>    c:connect_signal("property::name", function()
-        -- do something
-    end)
-<p> To get all the clients for a screen use either <a href="../core_components/screen.html#clients">screen.clients</a> or
- <a href="../core_components/screen.html#tiled_clients">screen.tiled_clients</a>.
-<p>
+ To get the currently focused client:</p>
 
- <object class="img-object" data="../images/AUTOGEN_uml_nav_tables_client.svg" alt="Usage example" type="image/svg+xml"></object>
- Core components relationship
- ===
- <div class="components-relationship"><div class="components-relationship--diagrams">
+
+<pre>
+<span class="keyword">local</span> c = client.focus
+<span class="keyword">if</span> c <span class="keyword">then</span>
+    <span class="comment">-- do something
+</span><span class="keyword">end</span>
+</pre>
+
+<p> To get a list of all clients, use <a href="../core_components/client.html#get">client:get</a>:</p>
+
+
+<pre>
+<span class="keyword">for</span> _, c <span class="keyword">in</span> <span class="global">ipairs</span>(client.get()) <span class="keyword">do</span>
+    <span class="comment">-- do something
+</span><span class="keyword">end</span>
+</pre>
+
+<p> To execute a callback when a new client is added, use the <a href="../core_components/client.html#manage">manage</a> signal:</p>
+
+
+<pre>
+client.connect_signal(<span class="string">"request::manage"</span>, <span class="keyword">function</span>(c)
+    <span class="comment">-- do something
+</span><span class="keyword">end</span>)
+</pre>
+
+<p> To be notified when a property of a client changed:</p>
+
+
+<pre>
+client.connect_signal(<span class="string">"property::name"</span>, <span class="keyword">function</span>(c)
+    <span class="comment">-- do something
+</span><span class="keyword">end</span>)
+</pre>
+
+<p> To be notified when a property of a specific client <code>c</code> changed:</p>
+
+
+<pre>
+c:connect_signal(<span class="string">"property::name"</span>, <span class="keyword">function</span>()
+    <span class="comment">-- do something
+</span><span class="keyword">end</span>)
+</pre>
+
+<p> To get all the clients for a screen use either <a href="../core_components/screen.html#clients">screen.clients</a> or
+ <a href="../core_components/screen.html#tiled_clients">screen.tiled_clients</a>.</p>
+
+
+
+<p> <object class="img-object" data="../images/AUTOGEN_uml_nav_tables_client.svg" alt="Usage example" type="image/svg+xml"></object></p>
+<h1> Core components relationship</h1>
+<p> <div class="components-relationship"><div class="components-relationship--diagrams">
  <div class="components-relationship--diagram"><table class='widget_list' border=1><colgroup span="3"></colgroup><tr><th align='center' colspan=3 scope=colgroup>Acquire other objects from a client</th></tr><tr style='font-weight: bold;'><th align='center'>Class</th><th align='center'></th><th align='center'>Property</th></tr>
  <tr><td>tag</td><td><img src="../images/AUTOGEN_uml_nav_tables_client1.svg"></td><td>c.tags</td></tr>
  <tr><td>screen</td><td><img src="../images/AUTOGEN_uml_nav_tables_client2.svg"></td><td>c.screen</td></tr>
@@ -289,10 +318,9 @@
  <tr><td>screen</td><td><img src="../images/AUTOGEN_uml_nav_tables_client8.svg"></td><td>s.tiled_clients</td></tr>
  <tr><td>mouse</td><td><img src="../images/AUTOGEN_uml_nav_tables_client9.svg"></td><td>mouse.current_client</td></tr>
  </table></div>
- </div><div class="components-relationship--legend"><b>Legend:</b> <i>c</i>: a client object, <i>t</i>: a tag object, <i>s</i>: a screen object, <i>k</i>: an awful.key object, <i>b</i>: a awful.button object,<i>n</i>: a naughty.notification object</div></div> <!-- .components-relationship -->
+ </div><div class="components-relationship--legend"><b>Legend:</b> <i>c</i>: a client object, <i>t</i>: a tag object, <i>s</i>: a screen object, <i>k</i>: an awful.key object, <i>b</i>: a awful.button object,<i>n</i>: a naughty.notification object</div></div> <!-- .components-relationship --></p>
 
-
-</p>
+<p> </p>
     <div class="extra-header">
 
 
@@ -3010,7 +3038,6 @@
     Get a client by its relative index to another client.
  If no client is passed, the focused client will be used.
 
-
     <h3>Parameters:</h3>
     <table class="see_also">
          <tr class="param_header">
@@ -3083,21 +3110,28 @@
     </span>
     </dt>
     <dd>
-    Swap a client with another client in the given direction.
+
+<p>Swap a client with another client in the given direction. </p>
+
 <p> This will not cross the screen boundary. If you want this behavior, use
- <a href="../core_components/client.html#awful.client.swap.global_bydirection">awful.client.swap.global_bydirection</a>.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_swap_bydirection1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
+ <a href="../core_components/client.html#awful.client.swap.global_bydirection">awful.client.swap.global_bydirection</a>.</p>
 
-    -- It will go up in the same column.
-    awful.client.swap.bydirection("up", client.focus)
 
-    -- Nothing happens because it cannot change screen.
-    awful.client.swap.bydirection("right", client.focus)
 
-    -- Moves to the first column.
-    awful.client.swap.bydirection("left", client.focus)
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_swap_bydirection1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre><code>-- It will go up in the same column.
+awful.client.swap.bydirection("up", client.focus)
+
+-- Nothing happens because it cannot change screen.
+awful.client.swap.bydirection("right", client.focus)
+
+-- Moves to the first column.
+awful.client.swap.bydirection("left", client.focus)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -3188,20 +3222,27 @@
     </span>
     </dt>
     <dd>
-    Swap a client with another client in the given direction.
-<p> Swaps across screens.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_swap_bydirection2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
-    -- It will go up in the same column.
-    awful.client.swap.global_bydirection("up", client.focus)
+<p>Swap a client with another client in the given direction. </p>
 
-    -- It will cross to screen[2].
-    awful.client.swap.global_bydirection("right", client.focus)
+<p> Swaps across screens.</p>
 
-    -- Moves to the first column.
-    awful.client.swap.global_bydirection("left", client.focus)
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_swap_bydirection2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre><code>-- It will go up in the same column.
+awful.client.swap.global_bydirection("up", client.focus)
+
+-- It will cross to screen[2].
+awful.client.swap.global_bydirection("right", client.focus)
+
+-- Moves to the first column.
+awful.client.swap.global_bydirection("left", client.focus)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -3302,38 +3343,47 @@
     </span>
     </dt>
     <dd>
-    Swap a client by its relative index.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_swap_byidx1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>**Usage example output**:
-<p>    c1:1, c2:2, c3:3, c4:4,
-    Call swap.byidx
-    c4:1, c2:2, c3:3, c1:4,
-    Call swap.byidx
-    c4:1, c1:2, c3:3, c2:4,
- **Usage example:**
-<p>
 
-    -- Print at which index each client is now at.
-    local function print_indices()
-        local output = ""
+<p>Swap a client by its relative index. </p>
 
-        for idx, c in ipairs(client.get()) do
-             output = output .. c.name .. ":" .. idx .. ", "
-        end
 
-        print(output)
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_swap_byidx1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>c1:1, c2:2, c3:3, c4:4,
+Call swap.byidx
+c4:1, c2:2, c3:3, c1:4,
+Call swap.byidx
+c4:1, c1:2, c3:3, c2:4,
+</code></pre>
+<p> <strong>Usage example:</strong></p>
+
+
+
+<pre><code>-- Print at which index each client is now at.
+local function print_indices()
+    local output = ""
+
+    for idx, c in ipairs(client.get()) do
+         output = output .. c.name .. ":" .. idx .. ", "
     end
 
-    print_indices()
+    print(output)
+end
 
-    print("Call swap.byidx")
-    awful.client.swap.byidx(3, client.get()[1])
-    print_indices()
+print_indices()
 
-    print("Call swap.byidx")
-    awful.client.swap.byidx(2, client.get()[4])
-    print_indices()
+print("Call swap.byidx")
+awful.client.swap.byidx(3, client.get()[1])
+print_indices()
+
+print("Call swap.byidx")
+awful.client.swap.byidx(2, client.get()[4])
+print_indices()
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -3423,15 +3473,22 @@
     </span>
     </dt>
     <dd>
-    Cycle through the clients to change the focus.
-<p> This will swap the client from one position to the next
- in the layout.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_cycle1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
-    awful.client.cycle(true, awful.screen.focused(), true)
-    awful.client.cycle(true, awful.screen.focused(), true)
+<p>Cycle through the clients to change the focus. </p>
+
+<p> This will swap the client from one position to the next
+ in the layout.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_cycle1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre><code>awful.client.cycle(true, awful.screen.focused(), true)
+awful.client.cycle(true, awful.screen.focused(), true)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -3521,20 +3578,26 @@
     </span>
     </dt>
     <dd>
-    Restore (=unminimize) a random client.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_restore1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    for i = 1, 5 do
-        awful.spawn("c"..i)
-    end
-    -- Minimize everything.
-    for _, c in ipairs(client.get()) do
-        c.minimized = true
-    end
 
-    -- Restore a random client.
-    awful.client.restore()
+<p>Restore (=unminimize) a random client. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_restore1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for i = 1, 5 do
+    awful.spawn("c"..i)
+end
+-- Minimize everything.
+for _, c in ipairs(client.get()) do
+    c.minimized = true
+end
+
+-- Restore a random client.
+awful.client.restore()
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -3618,10 +3681,10 @@
     </span>
     </dt>
     <dd>
-    Returns an iterator to cycle through clients.
+    Returns an iterator to cycle through clients. </p>
+
 <p> Starting from the client in focus or the given index, all clients that match
  a given criteria.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -3690,11 +3753,17 @@
     </span>
     </dt>
     <dd>
-    Jump to the client that received the urgent hint first.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_jump_to_urgent1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.client.urgent.jumpto(false)
+
+<p>Jump to the client that received the urgent hint first. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_jump_to_urgent1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>awful.client.urgent.jumpto(false)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -3738,11 +3807,11 @@
     </span>
     </dt>
     <dd>
-    The X window id.
+    The X window id. </p>
+
 <p> This is rarely useful, but some DBus protocols will
  have this ID in their API, so it can be useful when
  writing AwesomeWM bindings for them.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3798,10 +3867,10 @@
     </span>
     </dt>
     <dd>
-    The client title.
+    The client title. </p>
+
 <p> This is the text which will be shown in <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a>
  and <code>awful.titlebar.widget.titlewidget</code>.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3866,21 +3935,27 @@
     </span>
     </dt>
     <dd>
-    True if the client does not want to be in taskbar.
+
+<p>True if the client does not want to be in taskbar. </p>
+
 <p> Some clients, like docked bars or some <a href="../core_components/client.html#sticky">sticky</a> clients
  such as wallpaper sensors like Conky have no value in
- the <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a> and should not be shown there.
+ the <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a> and should not be shown there.</p>
+
 <p> The default value of this property reflects the value of the
  <code>_NET_WM_STATE_SKIP_TASKBAR</code> X11 protocol xproperty. Clients can modify this
- state through this property.
-<p>
-
- <object class="img-object" data="../images/AUTOGEN_awful_client_skip_tasklist1.svg" alt="Usage example" type="image/svg+xml"></object>
+ state through this property.</p>
 
 
-    c1.skip_taskbar = false
-    c2.skip_taskbar = true
-    c3.skip_taskbar = false
+
+<p> <object class="img-object" data="../images/AUTOGEN_awful_client_skip_tasklist1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>c1.skip_taskbar = false
+c2.skip_taskbar = true
+c3.skip_taskbar = false
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -3962,14 +4037,17 @@
     </span>
     </dt>
     <dd>
-    The window type.
+    The window type. </p>
+
 <p> This is useful in, among other places, the <a href="../declarative_rules/ruled.client.html#">ruled.client</a> rules to apply
  different properties depending on the client types. It is also used
  throughout the API to alter the client (and <a href="../popups_and_bars/wibox.html#">wibox</a>) behavior depending on
  the <a href="../core_components/client.html#type">type</a>. For example, clients with the <code>dock</code> type are placed on the side
  of the screen while other like <code>combo</code> are totally ignored and never
- considered <a href="../core_components/client.html#">client</a>s in the first place.
-<p> Valid types are:
+ considered <a href="../core_components/client.html#">client</a>s in the first place.</p>
+
+<p> Valid types are:</p>
+
 <p> <table class='widget_list' border=1>
  <tr style='font-weight: bold;'>
   <th align='center'>Name</th>
@@ -3988,9 +4066,9 @@
  <tr><td><b>combo</b></td><td>A combobox list menu.</td></tr>
  <tr><td><b>dnd</b></td><td>A drag and drop indicator.</td></tr>
  <tr><td><b>normal</b></td><td>A normal application main window.</td></tr>
- </table>
-<p> More information can be found [here](https://specifications.freedesktop.org/wm-spec/wm-spec-latest.html#idm140200472629520)
+ </table></p>
 
+<p> More information can be found <a href="https://specifications.freedesktop.org/wm-spec/wm-spec-latest.html#idm140200472629520">here</a>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4049,22 +4127,27 @@
     </span>
     </dt>
     <dd>
-    The client class.
+    The client class. </p>
+
 <p> A class usually maps to the application name. It is useful in, among other
  places, the rules to apply different properties to different clients. It
  is also useful, along with <a href="../core_components/client.html#instance">instance</a>, to implement "windows counter"
- used in many popular docks and Alt-Tab like popups.
-<p> To get a client class from the command line, use the command:
-<p>    xprop WM_CLASS
-<p> The class will be the second string.
-<p> This *should* never change after the client is created, but some
+ used in many popular docks and Alt-Tab like popups.</p>
+
+<p> To get a client class from the command line, use the command:</p>
+
+<pre><code>xprop WM_CLASS
+</code></pre>
+
+<p> The class will be the second string.</p>
+
+<p> This <em>should</em> never change after the client is created, but some
  buggy application like the Spotify desktop client are known to
- violate the specification and do it anyway. There *is* a signal for
+ violate the specification and do it anyway. There <em>is</em> a signal for
  this property, but it should hopefully never be useful. If your
  applications change their classes, please report a bug to them
  and point to ICCCM §4.1.2.5.
  It tends to break <a href="../declarative_rules/ruled.client.html#">ruled.client</a> and other AwesomeWM APIs.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4130,19 +4213,24 @@
     </span>
     </dt>
     <dd>
-    The client instance.
+    The client instance. </p>
+
 <p> The <a href="../core_components/client.html#instance">instance</a> is a subtype of the <a href="../core_components/client.html#class">class</a>. Each <a href="../core_components/client.html#class">class</a> can have
  multiple instances. This is useful in the <a href="../declarative_rules/ruled.client.html#">ruled.client</a> rules to
- filter clients and apply different properties to them.
-<p> To get a client instance from the command line, use the command:
-<p>     xprop WM_CLASS
-<p> The instance will be the first string.
-<p> This *should* never change after the client is created. There
- *is* a signal for * this property, but it should hopefully never
+ filter clients and apply different properties to them.</p>
+
+<p> To get a client instance from the command line, use the command:</p>
+
+<pre><code> xprop WM_CLASS
+</code></pre>
+
+<p> The instance will be the first string.</p>
+
+<p> This <em>should</em> never change after the client is created. There
+ <em>is</em> a signal for * this property, but it should hopefully never
  be useful. If your applications change their classes, please
  report a bug to them and point to ICCCM §4.1.2.5.
  It tends to break <a href="../declarative_rules/ruled.client.html#">ruled.client</a> and other AwesomeWM APIs.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4208,9 +4296,9 @@
     </span>
     </dt>
     <dd>
-    The client PID, if available.
-<p> This will never change.
+    The client PID, if available. </p>
 
+<p> This will never change.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4333,16 +4421,17 @@
     </span>
     </dt>
     <dd>
-    The machine the client is running on.
+    The machine the client is running on. </p>
+
 <p> X11 windows can "live" in one computer but be shown
  in another one. This is called "network transparency"
  and is either used directly by allowing remote windows
  using the <code>xhosts</code> command or using proxies such as
- <code>ssh -X</code> or <code>ssh -Y</code>.
+ <code>ssh -X</code> or <code>ssh -Y</code>.</p>
+
 <p> According to EWMH, this property contains the value
  returned by <code>gethostname()</code> on the computer that the
  client is running on.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4440,25 +4529,31 @@
     </span>
     </dt>
     <dd>
-    The client icon as a surface.
+    The client icon as a surface. </p>
+
 <p> This property holds the client icon closest to the size configured via
- <a href="../core_components/awesome.html#set_preferred_icon_size">awesome.set_preferred_icon_size</a>.
-<p> It is not a path or a "real" file. Rather, it is already a bitmap surface.
+ <a href="../core_components/awesome.html#set_preferred_icon_size">awesome.set_preferred_icon_size</a>.</p>
+
+<p> It is not a path or a "real" file. Rather, it is already a bitmap surface.</p>
+
 <p> Typically you would want to use <a href="../widgets/awful.widget.clienticon.html#">awful.widget.clienticon</a> to get this as a
- widget.
+ widget.</p>
+
 <p> Working with icons is tricky because their surfaces do not use reference
  counting correctly. If <code>gears.surface(c.icon)</code> is called multiple time on
  the same icon, it will cause a double-free error and Awesome will crash. To
- get a copy of the icon, you can use:
-<p>    local s = gears.surface(c.icon)
-    local img = cairo.ImageSurface.create(cairo.Format.ARGB32, s:get_width(), s:get_height())
-    local cr  = cairo.Context(img)
-    cr:set_source_surface(s, 0, 0)
-    cr:paint()
+ get a copy of the icon, you can use:</p>
+
+<pre><code>local s = gears.surface(c.icon)
+local img = cairo.ImageSurface.create(cairo.Format.ARGB32, s:get_width(), s:get_height())
+local cr  = cairo.Context(img)
+cr:set_source_surface(s, 0, 0)
+cr:paint()
+</code></pre>
+
 <p> (Note that <a href="../core_components/awesome.html#set_preferred_icon_size">awesome.set_preferred_icon_size</a> defaults to <code>0</code> if it wasn't
  set. It means that, by default, the preferred icon provided will be the
  smallest available)
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -4568,14 +4663,19 @@
     </span>
     </dt>
     <dd>
-    The available sizes of client icons.  This is a table where each entry
- contains the width and height of an icon.
-<p> Example:
-<p>    {
-      { 24, 24 },
-      { 32, 32 },
-      { 64, 64 },
-    }
+
+<p>The available sizes of client icons.  This is a table where each entry
+ contains the width and height of an icon.</p>
+
+<p> Example:</p>
+
+<pre><code>{
+  { 24, 24 },
+  { 32, 32 },
+  { 64, 64 },
+}
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -4667,26 +4767,32 @@
     </span>
     </dt>
     <dd>
-    Client screen.
-<p> The <a href="../core_components/screen.html#">screen</a> corresponds to the top-left corner of the window.
+
+<p>Client screen. </p>
+
+<p> The <a href="../core_components/screen.html#">screen</a> corresponds to the top-left corner of the window.</p>
+
 <p> Please note that clients can only be on one screen at once. X11
  does not natively allow clients to be in multiple locations at
  once. Changing the screen directly will affect the tags and may
  cause several other changes to the state in order to ensure that
- a client's position and its screen are consistent.
-<p>
-
- <object class="img-object" data="../images/AUTOGEN_sequences_client_screen.svg" alt="Usage example" type="image/svg+xml"></object>
+ a client's position and its screen are consistent.</p>
 
 
 
-      -- Move the mouse to screen 3
-      mouse.coords {x = 1800, y = 100 }
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_screen.svg" alt="Usage example" type="image/svg+xml"></object></p>
 
-      -- Spawn a client on screen #3
-      awful.spawn("firefox")
 
-      client.get()[1].screen = screen[2]
+
+<pre><code>  -- Move the mouse to screen 3
+  mouse.coords {x = 1800, y = 100 }
+
+  -- Spawn a client on screen #3
+  awful.spawn("firefox")
+
+  client.get()[1].screen = screen[2]
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -4857,27 +4963,34 @@
     </span>
     </dt>
     <dd>
-    Define if the client must be iconified (Only visible in taskbar).
+
+<p>Define if the client must be iconified (Only visible in taskbar). </p>
+
 <p> Minimized clients are still part of tags and screens, but
  they are not displayed. You can unminimize using <code>c.minimized = false</code>,
- but if you also want to set the focus, it is better to use:
-<p>    c:activate { context = "unminimized", raise = true }
-<p>
+ but if you also want to set the focus, it is better to use:</p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_client_minimize1.svg" alt="Usage example" type="image/svg+xml"></object>
+<pre><code>c:activate { context = "unminimized", raise = true }
+</code></pre>
 
 
-      for _ = 1, 3 do
-          awful.spawn("")
-      end
 
-     client.get()[1].minimized = true
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_minimize1.svg" alt="Usage example" type="image/svg+xml"></object></p>
 
-     -- That's the best way to unminimize if you also want to set the focus.
-     client.get()[1]:activate {
-         context = "unminimize",
-         raise   = true,
-     }
+
+<pre><code>  for _ = 1, 3 do
+      awful.spawn("")
+  end
+
+ client.get()[1].minimized = true
+
+ -- That's the best way to unminimize if you also want to set the focus.
+ client.get()[1]:activate {
+     context = "unminimize",
+     raise   = true,
+ }
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -4958,12 +5071,13 @@
     </span>
     </dt>
     <dd>
-    Honor size hints, e.g.  respect size ratio.
+    Honor size hints, e.g.  respect size ratio.</p>
+
 <p> For example, a terminal such as <code>xterm</code> require the client size to be a
  multiple of the character size. Honoring size hints will cause the terminal
- window to have a small gap at the bottom.
-<p> This is enabled by default. To disable it by default, see <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.
+ window to have a small gap at the bottom.</p>
 
+<p> This is enabled by default. To disable it by default, see <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -5030,20 +5144,26 @@
     </span>
     </dt>
     <dd>
-    The client border width.
+
+<p>The client border width. </p>
+
 <p> When manually set (for example, in <a href="../declarative_rules/ruled.client.html#">ruled.client</a> rules), this value
- will be static. Otherwise, it is controlled by many <a href="../theme_related_libraries/beautiful.html#">beautiful</a> variables.
-<p> Be careful, the borders are **around** the geometry, not part of it. If
+ will be static. Otherwise, it is controlled by many <a href="../theme_related_libraries/beautiful.html#">beautiful</a> variables.</p>
+
+<p> Be careful, the borders are <strong>around</strong> the geometry, not part of it. If
  you want more fancy border, use the <a href="../popups_and_bars/awful.titlebar.html#">awful.titlebar</a> API to create
- titlebars on each side of the client.
-<p>
-
- <object class="img-object" data="../images/AUTOGEN_awful_client_border_width.svg" alt="Usage example" type="image/svg+xml"></object>
+ titlebars on each side of the client.</p>
 
 
-    c1.border_width = 0
-    c2.border_width = 2
-    c3.border_width = 10
+
+<p> <object class="img-object" data="../images/AUTOGEN_awful_client_border_width.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>c1.border_width = 0
+c2.border_width = 2
+c3.border_width = 10
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -5197,19 +5317,22 @@
     </span>
     </dt>
     <dd>
-    The client border color.
-<p>
-
- <object class="img-object" data="../images/AUTOGEN_awful_client_border_color.svg" alt="Usage example" type="image/svg+xml"></object>
+    The client border color. </p>
 
 
-      c.border_color = "#ff00ff"
+
+<p> <object class="img-object" data="../images/AUTOGEN_awful_client_border_color.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>  c.border_color = "#ff00ff"
+</code></pre>
+
 <p> Note that setting this directly will override and disable all related theme
- variables.
+ variables.</p>
+
 <p> Setting a transparent color (e.g. to implement dynamic borders without size
  changes) is supported, but requires the color to be set to <code>#00000000</code>
  specifically. Other RGB colors with an alpha of <code>0</code> won't work.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -5259,7 +5382,7 @@
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
+        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -5267,7 +5390,7 @@
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
+        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -5275,7 +5398,7 @@
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
+        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
        <tr/>
      </table>
     </span>
@@ -5392,40 +5515,49 @@
     </span>
     </dt>
     <dd>
-    Set to <code>true</code> when the client ask for attention.
+
+<p>Set to <code>true</code> when the client ask for attention. </p>
+
 <p> The urgent state is the visual equivalent of the "bell" noise from
  old computer. It is set by the client when their state changed and
  they need attention. For example, a chat client will set it when
  a new message arrive. Some terminals, like <code>rxvt-unicode</code>, will also
- set it when calling the <code>bell</code> command.
-<p> There is many ways an urgent client can become for visible:
-<p>  * Highlight in the <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a> and <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a>
-  * Highlight in the <a href="../popups_and_bars/awful.titlebar.html#">awful.titlebar</a>
-  * Highlight of the client border color (or width).
-  * Accessible using <code>Mod4+u</code> in the default config.
-  * Emit the <code>property::urgent</code> signal.
-<p>
+ set it when calling the <code>bell</code> command.</p>
 
- <object class="img-object" data="../images/AUTOGEN_awful_client_urgent1.svg" alt="Usage example" type="image/svg+xml"></object>
+<p> There is many ways an urgent client can become for visible:</p>
+
+<ul>
+    <li>Highlight in the <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a> and <a href="../widgets/awful.widget.tasklist.html#">awful.widget.tasklist</a></li>
+    <li>Highlight in the <a href="../popups_and_bars/awful.titlebar.html#">awful.titlebar</a></li>
+    <li>Highlight of the client border color (or width).</li>
+    <li>Accessible using <code>Mod4+u</code> in the default config.</li>
+    <li>Emit the <code>property::urgent</code> signal.</li>
+</ul>
 
 
-    -- Affects mostly the taglist and tasklist..
-    beautiful.fg_urgent = "#ffffff"
-    beautiful.bg_urgent = "#ff0000"
 
-    -- Set the client border to be orange and large.
-    beautiful.border_color_urgent = "#ffaa00"
-    beautiful.border_width_urgent = 6
+<p> <object class="img-object" data="../images/AUTOGEN_awful_client_urgent1.svg" alt="Usage example" type="image/svg+xml"></object></p>
 
-    -- Set the titlebar green.
-    beautiful.titlebar_bg_urgent = "#00ff00"
-    beautiful.titlebar_fg_urgent = "#000000"
 
-    -- This client is in the current tag.
-    c2.urgent = true
+<pre><code>-- Affects mostly the taglist and tasklist..
+beautiful.fg_urgent = "#ffffff"
+beautiful.bg_urgent = "#ff0000"
 
-    -- This client is in a deselected tag.
-    c4.urgent = true
+-- Set the client border to be orange and large.
+beautiful.border_color_urgent = "#ffaa00"
+beautiful.border_width_urgent = 6
+
+-- Set the titlebar green.
+beautiful.titlebar_bg_urgent = "#00ff00"
+beautiful.titlebar_fg_urgent = "#000000"
+
+-- This client is in the current tag.
+c2.urgent = true
+
+-- This client is in a deselected tag.
+c4.urgent = true
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -5548,22 +5680,30 @@
     </span>
     </dt>
     <dd>
-    A cairo surface for the client window content.
-<p> To get the screenshot, use:
-<p>    gears.surface(c.content)
-<p> To save it, use:
-<p>    gears.surface(c.content):write_to_png(path)
+    A cairo surface for the client window content. </p>
+
+<p> To get the screenshot, use:</p>
+
+<pre><code>gears.surface(c.content)
+</code></pre>
+
+<p> To save it, use:</p>
+
+<pre><code>gears.surface(c.content):write_to_png(path)
+</code></pre>
+
 <p> Please note that this only creates a new cairo surface
  referring to the client's content. This means that
  changes to the client's content may or may not become
  visible in the returned surface. If you want to take a
  screenshot, a copy of the surface's content needs to
  be taken. Note that the content of parts of a window
- that are currently not visible are undefined.
-<p> The only way to get an animated client screenshot widget is to poll this
- property multiple time per seconds. This is obviously a bad idea.
-<p> This property has no signals when the content changes.
+ that are currently not visible are undefined.</p>
 
+<p> The only way to get an animated client screenshot widget is to poll this
+ property multiple time per seconds. This is obviously a bad idea.</p>
+
+<p> This property has no signals when the content changes.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -5608,18 +5748,23 @@
     </span>
     </dt>
     <dd>
-    The client opacity.
+
+<p>The client opacity. </p>
+
 <p> The opacity only works when a compositing manager, such as
- [picom](https://github.com/yshui/picom/), is used. Otherwise,
- the clients will remain opaque.
-<p>
-
- <object class="img-object" data="../images/AUTOGEN_awful_client_opacity1.svg" alt="Usage example" type="image/svg+xml"></object>
+ <a href="https://github.com/yshui/picom/">picom</a>, is used. Otherwise,
+ the clients will remain opaque.</p>
 
 
-    c1.opacity = 1
-    c2.opacity = 0.5
-    c3.opacity = 0.1
+
+<p> <object class="img-object" data="../images/AUTOGEN_awful_client_opacity1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>c1.opacity = 1
+c2.opacity = 0.5
+c3.opacity = 0.1
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -5921,16 +6066,20 @@
     </span>
     </dt>
     <dd>
-    The client is fullscreen or not.
-<p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_client_fullscreen.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>The client is fullscreen or not. </p>
 
 
-      screen[1].clients[1].maximized            = true
-      screen[2].clients[1].maximized_vertical   = true
-      screen[3].clients[1].maximized_horizontal = true
-      screen[4].clients[1].fullscreen           = true
+
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_fullscreen.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>  screen[1].clients[1].maximized            = true
+  screen[2].clients[1].maximized_vertical   = true
+  screen[3].clients[1].maximized_horizontal = true
+  screen[4].clients[1].fullscreen           = true
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -6038,16 +6187,20 @@
     </span>
     </dt>
     <dd>
-    The client is maximized (horizontally and vertically) or not.
-<p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_client_maximized.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>The client is maximized (horizontally and vertically) or not. </p>
 
 
-      screen[1].clients[1].maximized            = true
-      screen[2].clients[1].maximized_vertical   = true
-      screen[3].clients[1].maximized_horizontal = true
-      screen[4].clients[1].fullscreen           = true
+
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_maximized.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>  screen[1].clients[1].maximized            = true
+  screen[2].clients[1].maximized_vertical   = true
+  screen[3].clients[1].maximized_horizontal = true
+  screen[4].clients[1].fullscreen           = true
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -6162,16 +6315,20 @@
     </span>
     </dt>
     <dd>
-    The client is maximized horizontally or not.
-<p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_client_maximized_horizontal.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>The client is maximized horizontally or not. </p>
 
 
-      screen[1].clients[1].maximized            = true
-      screen[2].clients[1].maximized_vertical   = true
-      screen[3].clients[1].maximized_horizontal = true
-      screen[4].clients[1].fullscreen           = true
+
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_maximized_horizontal.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>  screen[1].clients[1].maximized            = true
+  screen[2].clients[1].maximized_vertical   = true
+  screen[3].clients[1].maximized_horizontal = true
+  screen[4].clients[1].fullscreen           = true
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -6279,16 +6436,20 @@
     </span>
     </dt>
     <dd>
-    The client is maximized vertically or not.
-<p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_client_maximized_vertical.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>The client is maximized vertically or not. </p>
 
 
-      screen[1].clients[1].maximized            = true
-      screen[2].clients[1].maximized_vertical   = true
-      screen[3].clients[1].maximized_horizontal = true
-      screen[4].clients[1].fullscreen           = true
+
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_maximized_vertical.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>  screen[1].clients[1].maximized            = true
+  screen[2].clients[1].maximized_vertical   = true
+  screen[3].clients[1].maximized_horizontal = true
+  screen[4].clients[1].fullscreen           = true
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -6396,17 +6557,18 @@
     </span>
     </dt>
     <dd>
-    The client the window is transient for.
+    The client the window is transient for. </p>
+
 <p> A transient window is a client that "belongs" to another
  client. If the client is also <a href="../core_components/client.html#modal">modal</a>, then  the parent client
  cannot be focused while the child client exists.
  This is common for "Save as" dialogs or other dialogs where it
  is not possible to modify the content of the "parent" client
- while the dialog is open.
+ while the dialog is open.</p>
+
 <p> However, <a href="../core_components/client.html#modal">modal</a> is not a requirement for using the <a href="../core_components/client.html#transient_for">transient_for</a>
  concept. "Tools" such as popup palette in canvas-and-palettes
  applications can belong to each other without being modal.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -6486,11 +6648,11 @@
     </span>
     </dt>
     <dd>
-    Window identification unique to a group of windows.
+    Window identification unique to a group of windows. </p>
+
 <p> This is the ID of the group window, not a client object.
  The group window is most likely not a visible client, but
  only an invisible and internal window.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -6557,9 +6719,9 @@
     </span>
     </dt>
     <dd>
-    Identification unique to windows spawned by the same command.
-<p> This is the ID of the group window, not a client object.
+    Identification unique to windows spawned by the same command. </p>
 
+<p> This is the ID of the group window, not a client object.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -6640,14 +6802,16 @@
     </span>
     </dt>
     <dd>
-    A table with size hints of the client.
+    A table with size hints of the client. </p>
+
 <p> For details on the meaning of the fields, refer to ICCCM § 4.1.2.3
- <code>WM_NORMAL_HINTS</code>.
-<p> Please note that most fields are optional and may or may not be set.
+ <code>WM_NORMAL_HINTS</code>.</p>
+
+<p> Please note that most fields are optional and may or may not be set.</p>
+
 <p> When the client is tiled, the <a href="../core_components/client.html#size_hints">size_hints</a> usually get in the way and
  cause the layouts to behave incorrectly. To mitigate this, it is often
  advised to set <a href="../core_components/client.html#size_hints_honor">size_hints_honor</a> to <code>false</code> in the <a href="../declarative_rules/ruled.client.html#">ruled.client</a> rules.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -6882,7 +7046,8 @@
     </span>
     </dt>
     <dd>
-    The motif WM hints of the client.
+    The motif WM hints of the client. </p>
+
 <p> This is nil if the client has no motif hints. Otherwise, this is a table that
  contains the present properties. Note that awesome provides these properties
  as-is and does not interpret them for you. For example, if the function table
@@ -6890,7 +7055,6 @@
  resizable, but asks for the other functions not to be able. If however both
  "resize" and "all" are set, this means that all but the resize function
  should be enabled.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -7068,20 +7232,25 @@
     </span>
     </dt>
     <dd>
-    Set the client sticky (Available on all tags).
+
+<p>Set the client sticky (Available on all tags). </p>
+
 <p> Please note that AwesomeWM implements <a href="../core_components/client.html#sticky">sticky</a> clients
  per screens rather than globally like some other
- implementations.
-<p>
-
- <object class="img-object" data="../images/AUTOGEN_sequences_client_sticky.svg" alt="Usage example" type="image/svg+xml"></object>
+ implementations.</p>
 
 
-      -- Add a client.
-      awful.spawn("xterm")
 
-      -- Set sticky = true
-      screen[1].clients[1].sticky = true
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_sticky.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>  -- Add a client.
+  awful.spawn("xterm")
+
+  -- Set sticky = true
+  screen[1].clients[1].sticky = true
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -7148,18 +7317,19 @@
     </span>
     </dt>
     <dd>
-    Indicate if the client is modal.
+    Indicate if the client is modal. </p>
+
 <p> A transient window is a client that "belongs" to another
  client. If the client is also <a href="../core_components/client.html#modal">modal</a>, then it always has
- to be on top of the other window *and* the parent client
+ to be on top of the other window <em>and</em> the parent client
  cannot be focused while the child client exists.
  This is common for "Save as" dialogs or other dialogs where
  is not possible to modify the content of the "parent" client
- while the dialog is open.
+ while the dialog is open.</p>
+
 <p> However, <a href="../core_components/client.html#modal">modal</a> is not a requirement for using the <a href="../core_components/client.html#transient_for">transient_for</a>
  concept. "Tools" such as popup palette in canvas-and-palettes
  applications can belong to each other without being modal.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -7225,10 +7395,10 @@
     </span>
     </dt>
     <dd>
-    True if the client can receive the input focus.
+    True if the client can receive the input focus. </p>
+
 <p> The client will not get focused even when the user
  click on it.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -7315,14 +7485,15 @@
     </span>
     </dt>
     <dd>
-    The client's bounding shape as set by awesome as a (native) cairo surface.
+    The client's bounding shape as set by awesome as a (native) cairo surface. </p>
+
 <p> The bounding shape is the outer shape of the client. It is outside of the
- border.
+ border.</p>
+
 <p> Do not use this directly unless you want total control over the shape (such
  as shape with holes). Even then, it is usually recommended to use transparency
  in the titlebars and a compositing manager. For the vast majority of use
  cases, use the <a href="../core_components/client.html#shape">shape</a> property.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -7476,10 +7647,10 @@
     </span>
     </dt>
     <dd>
-    The client's clip shape as set by awesome as a (native) cairo surface.
-<p> The shape_clip is the shape of the client *content*. It is *inside* the
- border.
+    The client's clip shape as set by awesome as a (native) cairo surface. </p>
 
+<p> The shape_clip is the shape of the client <em>content</em>. It is <em>inside</em> the
+ border.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -7633,10 +7804,10 @@
     </span>
     </dt>
     <dd>
-    The client's input shape as set by awesome as a (native) cairo surface.
+    The client's input shape as set by awesome as a (native) cairo surface. </p>
+
 <p> The input shape is the shape where mouse input will be passed to the
  client rather than propagated below it.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -8100,45 +8271,61 @@
     </span>
     </dt>
     <dd>
-    The FreeDesktop StartId.
+
+<p>The FreeDesktop StartId. </p>
+
 <p> When a client is spawned (like using a terminal or <a href="../libraries/awful.spawn.html#">awful.spawn</a>, a startup
  notification identifier is created. When the client is created, this
  identifier remain the same. This allow to match a spawn event to an actual
- client.
+ client.</p>
+
 <p> This is used to display a different mouse cursor when the application is
  loading and also to attach some properties to the newly created client (like
- a <a href="../core_components/tag.html#">tag</a> or <a href="../core_components/client.html#floating">floating</a> state).
+ a <a href="../core_components/tag.html#">tag</a> or <a href="../core_components/client.html#floating">floating</a> state).</p>
+
 <p> Some applications, like <code>xterm</code>, don't support startup notification. While
  not perfect, the addition the following code to <a href="../sample files/rc.lua.html#">rc.lua</a> will mitigate the
- issue. Please note that this code is Linux specific.
-<p>    local blacklisted_snid = setmetatable({}, {__mode = "v" })
-<p>    --- Make startup notification work for some clients like XTerm. This is ugly
-    -- but works often enough to be useful.
-    local function fix_startup_id(c)
-        -- Prevent "broken" sub processes created by <code>c</code> to inherit its SNID
-        if c.startup_id then
-            blacklisted_snid[c.startup_id] = blacklisted_snid[c.startup_id] or c
-            return
-        end
-<p>        if not c.pid then return end
-<p>        -- Read the process environment variables
-        local f = io.open("/proc/"..c.pid.."/environ", "rb")
-<p>        -- It will only work on Linux, that's already 99% of the userbase.
-        if not f then return end
-<p>        local value = _VERSION <= "Lua 5.1" and "([^\z]*)\0" or "([^\0]*)\0"
-        local snid = f:read("*all"):match("STARTUP_ID=" .. value)
-        f:close()
-<p>        -- If there is already a client using this SNID, it means it's either a
-        -- subprocess or another window for the same process. While it makes sense
-        -- in some case to apply the same rules, it is not always the case, so
-        -- better doing nothing rather than something stupid.
-        if blacklisted_snid[snid] then return end
-<p>        c.startup_id = snid
-<p>        blacklisted_snid[snid] = c
+ issue. Please note that this code is Linux specific.</p>
+
+<pre><code>local blacklisted_snid = setmetatable({}, {__mode = "v" })
+
+--- Make startup notification work for some clients like XTerm. This is ugly
+-- but works often enough to be useful.
+local function fix_startup_id(c)
+    -- Prevent "broken" sub processes created by &lt;code&gt;c&lt;/code&gt; to inherit its SNID
+    if c.startup_id then
+        blacklisted_snid[c.startup_id] = blacklisted_snid[c.startup_id] or c
+        return
     end
-<p>    ruled.client.add_rule_source(
-        "snid", fix_startup_id, {}, {"awful.spawn", "ruled.client"}
-    )
+
+    if not c.pid then return end
+
+    -- Read the process environment variables
+    local f = io.open("/proc/"..c.pid.."/environ", "rb")
+
+    -- It will only work on Linux, that's already 99% of the userbase.
+    if not f then return end
+
+    local value = _VERSION &lt;= "Lua 5.1" and "([^\z]*)\0" or "([^\0]*)\0"
+    local snid = f:read("*all"):match("STARTUP_ID=" .. value)
+    f:close()
+
+    -- If there is already a client using this SNID, it means it's either a
+    -- subprocess or another window for the same process. While it makes sense
+    -- in some case to apply the same rules, it is not always the case, so
+    -- better doing nothing rather than something stupid.
+    if blacklisted_snid[snid] then return end
+
+    c.startup_id = snid
+
+    blacklisted_snid[snid] = c
+end
+
+ruled.client.add_rule_source(
+    "snid", fix_startup_id, {}, {"awful.spawn", "ruled.client"}
+)
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -8198,9 +8385,14 @@
     </span>
     </dt>
     <dd>
-    If the client that this object refers to is still managed by awesome.
-<p> To avoid errors, use:
-<p>    local is_valid = pcall(function() return c.valid end) and c.valid
+
+<p>If the client that this object refers to is still managed by awesome. </p>
+
+<p> To avoid errors, use:</p>
+
+<pre><code>local is_valid = pcall(function() return c.valid end) and c.valid
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -8268,11 +8460,11 @@
     </span>
     </dt>
     <dd>
-    The first tag of the client.
+    The first tag of the client. </p>
+
 <p> Optimized form of <code>c:tags()[1]</code>. Not every workflow uses the
  ability to set multiple tags to a client. It is often enough
  to only get the first tag and ignore everything else.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -8564,9 +8756,9 @@
     </span>
     </dt>
     <dd>
-    Return if a client has a fixed size or not.
-<p> Fixed size means it cannot be resized.
+    Return if a client has a fixed size or not. </p>
 
+<p> Fixed size means it cannot be resized.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -8639,10 +8831,10 @@
     </span>
     </dt>
     <dd>
-    Is the client immobilized horizontally?
+    Is the client immobilized horizontally? </p>
+
 <p> Does the client have a fixed horizontal position and width, i.e. is it
  <a href="../core_components/client.html#fullscreen">fullscreen</a>, <a href="../core_components/client.html#maximized">maximized</a>, or <a href="../core_components/client.html#maximized_horizontal">maximized_horizontal</a>?
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -8708,10 +8900,10 @@
     </span>
     </dt>
     <dd>
-    Is the client immobilized vertically?
+    Is the client immobilized vertically? </p>
+
 <p> Does the client have a fixed vertical position and width, i.e. is it
  fullscreen, maximized, or vertically maximized?
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -8778,20 +8970,28 @@
     </span>
     </dt>
     <dd>
-    The client floating state.
-<p> If the client is part of the tiled layout or free floating.
+
+<p>The client floating state. </p>
+
+<p> If the client is part of the tiled layout or free floating.</p>
+
 <p> Note that some windows might be floating even if you
  did not set them manually. For example, windows with a type different than
- normal.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_floating1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     for i = 1, 5 do
-         awful.spawn("Client #"..i)
-     end
+ normal.</p>
 
-    client.get()[1].floating = true
-    client.get()[1]:raise()
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_floating1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> for i = 1, 5 do
+     awful.spawn("Client #"..i)
+ end
+
+client.get()[1].floating = true
+client.get()[1]:raise()
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -8864,15 +9064,22 @@
     </span>
     </dt>
     <dd>
-    The x coordinates.
-<p> <a href="../core_components/client.html#x">x</a> (usually) originate from the top left. <a href="../core_components/client.html#x">x</a> does *not* include
- the outer client border, but rather where the content and/or titlebar
- starts.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_x1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
-    client.focus.x = 100
+<p>The x coordinates. </p>
+
+<p> <a href="../core_components/client.html#x">x</a> (usually) originate from the top left. <a href="../core_components/client.html#x">x</a> does <em>not</em> include
+ the outer client border, but rather where the content and/or titlebar
+ starts.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_x1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre><code>client.focus.x = 100
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -8950,15 +9157,22 @@
     </span>
     </dt>
     <dd>
-    The y coordinates.
-<p> <a href="../core_components/client.html#y">y</a> (usually) originate from the top left. <a href="../core_components/client.html#y">y</a> does *not* include
- the outer client border, but rather where the content and/or titlebar
- starts.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_y1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
-    client.focus.y = 50
+<p>The y coordinates. </p>
+
+<p> <a href="../core_components/client.html#y">y</a> (usually) originate from the top left. <a href="../core_components/client.html#y">y</a> does <em>not</em> include
+ the outer client border, but rather where the content and/or titlebar
+ starts.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_y1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre><code>client.focus.y = 50
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -9036,12 +9250,18 @@
     </span>
     </dt>
     <dd>
-    The width of the client.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_width1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
-    client.focus.width = 100
+<p>The width of the client. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_width1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre><code>client.focus.width = 100
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -9119,12 +9339,18 @@
     </span>
     </dt>
     <dd>
-    The height of the client.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_height1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
-    client.focus.height = 100
+<p>The height of the client. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_height1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre><code>client.focus.height = 100
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -9202,12 +9428,13 @@
     </span>
     </dt>
     <dd>
-    If the client is dockable.
+    If the client is dockable. </p>
+
 <p> A dockable client is an application confined to the edge of the screen. The
- space it occupies is subtracted from the <a href="../core_components/screen.html#workarea">screen.workarea</a>.
+ space it occupies is subtracted from the <a href="../core_components/screen.html#workarea">screen.workarea</a>.</p>
+
 <p> Clients with a type of "utility", "toolbar" or "dock" are dockable by
  default.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -9273,11 +9500,11 @@
     </span>
     </dt>
     <dd>
-    If the client requests not to be decorated with a titlebar.
+    If the client requests not to be decorated with a titlebar. </p>
+
 <p> The motif wm hints allow a client to request not to be decorated by the WM in
  various ways. This property uses the motif <code>MWM_DECOR_TITLE</code> hint and
  interprets it as the client (not) wanting a titlebar.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -9334,13 +9561,19 @@
     </span>
     </dt>
     <dd>
-    Set the client shape.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_client_shape1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     c1.shape = gears.shape.rectangle
-     c2.shape = gears.shape.rounded_rect
-     c3.shape = gears.shape.octogon
+
+<p>Set the client shape. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_client_shape1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> c1.shape = gears.shape.rectangle
+ c2.shape = gears.shape.rounded_rect
+ c3.shape = gears.shape.octogon
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -9398,7 +9631,7 @@
          </i>
           <span class="inline_types"> (cairo.context)</span>
         </td>
-        <td>: A [Cairo context](https://cairographics.org/manual/cairo-cairo-t.html)</td>
+        <td>: A <a href="https://cairographics.org/manual/cairo-cairo-t.html">Cairo context</a></td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:60px;">
@@ -9481,45 +9714,58 @@
     </span>
     </dt>
     <dd>
-    Return true if the client is active (has focus).
-<p> This property is **READ ONLY**. Use <code>c:activate { context = &quot;myreason&quot; }</code>
- to change the focus.
+
+<p>Return true if the client is active (has focus). </p>
+
+<p> This property is <strong>READ ONLY</strong>. Use <code>c:activate { context = &quot;myreason&quot; }</code>
+ to change the focus.</p>
+
 <p> The reason for this is that directly setting the focus
  (which can also be done using <code>client.focus = c</code>) will bypass the focus
  stealing filters. This is easy at first, but as this gets called from more
  and more places, it quickly become unmanageable. This coding style is
- recommended for maintainable code:
-<p>    -- Check if a client has focus:
-    if c.active then
-        -- do something
-    end
-<p>    -- Check if there is a active (focused) client:
-    if client.focus ~= nil then
-        -- do something
-    end
-<p>    -- Get the active (focused) client:
-    local c = client.focus
-<p>    -- Set the focus:
-    c:activate {
-        context       = "myreason",
-        switch_to_tag = true,
-    }
-<p>    -- Get notified when a client gets or loses the focus:
-    c:connect_signal("property::active", function(c, is_active)
-        -- do something
-    end)
-<p>    -- Get notified when any client gets or loses the focus:
-    client.connect_signal("property::active", function(c, is_active)
-        -- do something
-    end)
-<p>    -- Get notified when any client gets the focus:
-    client.connect_signal("focus", function(c)
-        -- do something
-    end)
-<p>    -- Get notified when any client loses the focus:
-    client.connect_signal("unfocus", function(c)
-        -- do something
-    end)
+ recommended for maintainable code:</p>
+
+<pre><code>-- Check if a client has focus:
+if c.active then
+    -- do something
+end
+
+-- Check if there is a active (focused) client:
+if client.focus ~= nil then
+    -- do something
+end
+
+-- Get the active (focused) client:
+local c = client.focus
+
+-- Set the focus:
+c:activate {
+    context       = "myreason",
+    switch_to_tag = true,
+}
+
+-- Get notified when a client gets or loses the focus:
+c:connect_signal("property::active", function(c, is_active)
+    -- do something
+end)
+
+-- Get notified when any client gets or loses the focus:
+client.connect_signal("property::active", function(c, is_active)
+    -- do something
+end)
+
+-- Get notified when any client gets the focus:
+client.connect_signal("focus", function(c)
+    -- do something
+end)
+
+-- Get notified when any client loses the focus:
+client.connect_signal("unfocus", function(c)
+    -- do something
+end)
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -9609,39 +9855,49 @@
     </span>
     </dt>
     <dd>
-    Return client struts (reserved space at the edge of the screen).
+
+<p>Return client struts (reserved space at the edge of the screen). </p>
+
 <p> The struts area is a table with a <code>left</code>, <code>right</code>, <code>top</code> and <code>bottom</code>
  keys to define how much space of the screen <code>workarea</code> this client
- should reserve for itself.
-<p> This corresponds to EWMH's <code>_NET_WM_STRUT</code> and <code>_NET_WM_STRUT_PARTIAL</code>.
-<p> In the example below, 2 object affect the workarea (using their struts):
-<p> * The top wibar add a <code>top=24</code>
- * The bottom-left client add <code>bottom=100, left=100</code>
-<p>
+ should reserve for itself.</p>
 
- <object class="img-object" data="../images/AUTOGEN_screen_struts.svg" alt="Usage example" type="image/svg+xml"></object>
+<p> This corresponds to EWMH's <code>_NET_WM_STRUT</code> and <code>_NET_WM_STRUT_PARTIAL</code>.</p>
+
+<p> In the example below, 2 object affect the workarea (using their struts):</p>
+
+<ul>
+    <li>The top wibar add a <code>top=24</code></li>
+    <li>The bottom-left client add <code>bottom=100, left=100</code></li>
+</ul>
 
 
-      -- Wibars and docked clients are the main users of the struts.
-      local wibar = awful.wibar {
-          position = "top",
-          height   = 24, -- this will set the wibar won :struts() to top=24
-      }
-      -- This is the client in the bottom left.
-      c.name     = "w. struts"
-      c.floating = true
 
-      c:geometry {
-          x      = 0,
-          y      = 380,
-          height = 100,
-          width  = 100,
-      }
+<p> <object class="img-object" data="../images/AUTOGEN_screen_struts.svg" alt="Usage example" type="image/svg+xml"></object></p>
 
-      c:struts {
-          left   = 100,
-          bottom = 100
-      }
+
+<pre><code>  -- Wibars and docked clients are the main users of the struts.
+  local wibar = awful.wibar {
+      position = "top",
+      height   = 24, -- this will set the wibar won :struts() to top=24
+  }
+  -- This is the client in the bottom left.
+  c.name     = "w. struts"
+  c.floating = true
+
+  c:geometry {
+      x      = 0,
+      y      = 380,
+      height = 100,
+      width  = 100,
+  }
+
+  c:struts {
+      left   = 100,
+      bottom = 100
+  }
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -9664,28 +9920,36 @@
            <td><span class="parameter">left</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>0</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">right</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>0</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">top</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>0</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bottom</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>0</code></span></td>
          </tr>
         </table>
@@ -9763,27 +10027,32 @@
     </span>
     </dt>
     <dd>
-    Kill a client.
-<p> This method can be used to close (kill) a **client** using the
- X11 protocol. To use the POSIX way to kill a **process**, use
- <a href="../core_components/awesome.html#kill">awesome.kill</a> (using the client <a href="../core_components/client.html#pid">pid</a> property).
-<p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_client_kill1.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>Kill a client. </p>
+
+<p> This method can be used to close (kill) a <strong>client</strong> using the
+ X11 protocol. To use the POSIX way to kill a <strong>process</strong>, use
+ <a href="../core_components/awesome.html#kill">awesome.kill</a> (using the client <a href="../core_components/client.html#pid">pid</a> property).</p>
 
 
-      -- Spawn a client on screen #3
-      for i=1, 5 do
-          awful.spawn("Client #"..i)
-      end
 
-      client.get()[5]:activate {}
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_kill1.svg" alt="Usage example" type="image/svg+xml"></object></p>
 
-      local c4, c5 =  client.get()[4], client.get()[5]
 
-      -- Kill the clients.
-      c4:kill()
-      c5:kill()
+<pre><code>  -- Spawn a client on screen #3
+  for i=1, 5 do
+      awful.spawn("Client #"..i)
+  end
+
+  client.get()[5]:activate {}
+
+  local c4, c5 =  client.get()[4], client.get()[5]
+
+  -- Kill the clients.
+  c4:kill()
+  c5:kill()
+</code></pre>
+
 
 
 
@@ -9815,10 +10084,11 @@
     </span>
     </dt>
     <dd>
-    Swap a client with another one in global client list.
-<p>
+    Swap a client with another one in global client list. </p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_client_swap1.svg" alt="Usage example" type="image/svg+xml"></object>
+
+
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_swap1.svg" alt="Usage example" type="image/svg+xml"></object>
 
 
     <h3>Parameters:</h3>
@@ -9903,7 +10173,7 @@ client.get()[<span class="number">2</span>]:swap(client.get()[<span class="numbe
           <li><span class="parameter"><a href="../core_components/client.html#swapped">swapped</a></span>  </li>
            <ul>
              <li><span class="parameter"><code>other</code></span> <span class="types"><a href="../core_components/client.html#">client</a></span> The other client.</li>
-             <li><span class="parameter"><code>is_origin</code></span> <span class="types"><code>boolean</code></span> <code>true</code> when <code>:swap()</code> was called on *self* rather than the other client. <code>false</code> when <code>:swap()</code> was called on the other client.</li>
+             <li><span class="parameter"><code>is_origin</code></span> <span class="types"><code>boolean</code></span> <code>true</code> when <code>:swap()</code> was called on <em>self</em> rather than the other client. <code>false</code> when <code>:swap()</code> was called on the other client.</li>
            </ul>
 
           <li><span class="parameter"><a href="../core_components/client.html#list">list</a></span>  </li>
@@ -9921,35 +10191,41 @@ client.get()[<span class="number">2</span>]:swap(client.get()[<span class="numbe
     </span>
     </dt>
     <dd>
-    Access or set the client tags.
-<p> Use the <a href="../core_components/client.html#first_tag">first_tag</a> field to access the first tag of a client directly.
-<p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_client_tags1.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>Access or set the client tags. </p>
 
- **Usage example output**:
-
-     Tag:	2	two
-     Tag:	3	three
-  **Usage example:**
+<p> Use the <a href="../core_components/client.html#first_tag">first_tag</a> field to access the first tag of a client directly.</p>
 
 
 
-     for tag_idx = 1, 3 do
-         for _ = 1, 3 do
-             awful.spawn("", {tags = {screen[1].tags[tag_idx]}})
-         end
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_tags1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+<p> <strong>Usage example output</strong>:</p>
+
+<pre><code> Tag:   2   two
+ Tag:   3   three
+</code></pre>
+<p>  <strong>Usage example:</strong></p>
+
+
+
+<pre><code> for tag_idx = 1, 3 do
+     for _ = 1, 3 do
+         awful.spawn("", {tags = {screen[1].tags[tag_idx]}})
      end
+ end
 
-     client.get()[1]:tags {
-         screen[1].tags[2],
-         screen[1].tags[3]
-     }
+ client.get()[1]:tags {
+     screen[1].tags[2],
+     screen[1].tags[3]
+ }
 
-     -- It also works to get the tags.
-     for _, t in ipairs(client.get()[1]:tags()) do
-          print("Tag:", t.index, t.name)
-     end
+ -- It also works to get the tags.
+ for _, t in ipairs(client.get()[1]:tags()) do
+      print("Tag:", t.index, t.name)
+ end
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -10166,32 +10442,37 @@ client.get()[<span class="number">2</span>]:swap(client.get()[<span class="numbe
     </span>
     </dt>
     <dd>
-    Return or set client geometry.
-<p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_client_geometry1.svg" alt="Usage example" type="image/svg+xml"></object>
-
- **Usage example output**:
-
-     Client geometry:	200	200	300	240
-  **Usage example:**
+<p>Return or set client geometry. </p>
 
 
 
-      awful.spawn("")
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_client_geometry1.svg" alt="Usage example" type="image/svg+xml"></object></p>
 
-      client.get()[1].floating = true
+<p> <strong>Usage example output</strong>:</p>
 
-      client.get()[1]:geometry {
-          x      = 200,
-          y      = 200,
-          width  = 300,
-          height = 240
-      }
+<pre><code> Client geometry:   200 200 300 240
+</code></pre>
+<p>  <strong>Usage example:</strong></p>
 
-      -- It can also read the geometry.
-      local geo = client.get()[1]:geometry()
-      print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
+
+
+<pre><code>  awful.spawn("")
+
+  client.get()[1].floating = true
+
+  client.get()[1]:geometry {
+      x      = 200,
+      y      = 200,
+      width  = 300,
+      height = 240
+  }
+
+  -- It can also read the geometry.
+  local geo = client.get()[1]:geometry()
+  print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -10295,13 +10576,13 @@ client.get()[<span class="number">2</span>]:swap(client.get()[<span class="numbe
     </span>
     </dt>
     <dd>
-    Apply size hints to a size.
+    Apply size hints to a size. </p>
+
 <p> This method applies the client size hints. The client
  will be resized according to the size hints as long
  as <a href="../core_components/client.html#size_hints_honor">size_hints_honor</a> is true. Regardless of the
  status of <a href="../core_components/client.html#size_hints_honor">size_hints_honor</a>, this method will
  return the size with the size hints applied.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -10368,17 +10649,20 @@ client.get()[<span class="number">2</span>]:swap(client.get()[<span class="numbe
     </span>
     </dt>
     <dd>
-    Get the client's n-th icon.
-<p> The icon index can be deternined by inspecting the <a href="../core_components/client.html#icon_sizes">icon_sizes</a> property first.
+    Get the client's n-th icon. </p>
+
+<p> The icon index can be deternined by inspecting the <a href="../core_components/client.html#icon_sizes">icon_sizes</a> property first.</p>
+
 <p> The user has the responsibility to test the value returned by this function
- to ensure an icon have been returned.
+ to ensure an icon have been returned.</p>
+
 <p> It is recommended to use the <a href="../widgets/awful.widget.clienticon.html#">awful.widget.clienticon</a> widget when the
- client icon is used in a widget structure.
+ client icon is used in a widget structure.</p>
+
 <p> Note that this function tests the provided index and raise an "invalid icon
  index" error if the provided index doesn't exist in the client's icons list
  (by raising an error, the function will be stopped and nothing will be
  returned to the caller).
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -10438,20 +10722,27 @@ client.get()[<span class="number">2</span>]:swap(client.get()[<span class="numbe
     </span>
     </dt>
     <dd>
-    Jump to the given client.
-<p> Takes care of focussing the screen, the right tag, etc.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_jump_to1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    for tag_idx = 1, 3 do
-        for _ = 1, 3 do
-            awful.spawn("", {tags = {screen[1].tags[tag_idx]}})
-        end
+
+<p>Jump to the given client. </p>
+
+<p> Takes care of focussing the screen, the right tag, etc.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_jump_to1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for tag_idx = 1, 3 do
+    for _ = 1, 3 do
+        awful.spawn("", {tags = {screen[1].tags[tag_idx]}})
     end
+end
 
-    client.get()[6]:jump_to()
+client.get()[6]:jump_to()
 
-    client.get()[7]:jump_to(true)
+client.get()[7]:jump_to(true)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -10689,12 +10980,14 @@ client.get()[<span class="number">2</span>]:swap(client.get()[<span class="numbe
     </span>
     </dt>
     <dd>
-    Move the client to the most significant layout position.
-<p> This only affects tiled clients. It will shift all other
- client to fill the gap caused to by the move.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_to_primary.svg" alt="Usage example" type="image/svg+xml"></object>
+    Move the client to the most significant layout position. </p>
 
+<p> This only affects tiled clients. It will shift all other
+ client to fill the gap caused to by the move.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_to_primary.svg" alt="Usage example" type="image/svg+xml"></object>
 
 
 
@@ -10742,12 +11035,14 @@ client.get()[<span class="number">5</span>]:to_primary_section()</pre>
     </span>
     </dt>
     <dd>
-    Move the client to the least significant layout position.
-<p> This only affects tiled clients. It will shift all other
- client to fill the gap caused to by the move.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_to_secondary.svg" alt="Usage example" type="image/svg+xml"></object>
+    Move the client to the least significant layout position. </p>
 
+<p> This only affects tiled clients. It will shift all other
+ client to fill the gap caused to by the move.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_to_secondary.svg" alt="Usage example" type="image/svg+xml"></object>
 
 
 
@@ -10795,32 +11090,41 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Move/resize a client relative to current coordinates.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_relative_move1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>**Usage example output**:
-<p>    Client geometry:	4	10	60	50
-    Client geometry:	104	110	60	50
-    Client geometry:	104	110	160	150
- **Usage example:**
-<p>
 
-     awful.spawn("")
+<p>Move/resize a client relative to current coordinates. </p>
 
-     client.get()[1].floating = true
 
-     geo = client.get()[1]:geometry()
-     print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
 
-     client.get()[1]:relative_move(100, 100)
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_relative_move1.svg" alt="Usage example" type="image/svg+xml"></object></p>
 
-     geo = client.get()[1]:geometry()
-     print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
+<p><strong>Usage example output</strong>:</p>
 
-     client.get()[1]:relative_move(nil, nil, 100, 100)
+<pre><code>Client geometry:    4   10  60  50
+Client geometry:    104 110 60  50
+Client geometry:    104 110 160 150
+</code></pre>
+<p> <strong>Usage example:</strong></p>
 
-     geo = client.get()[1]:geometry()
-     print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
+
+
+<pre><code> awful.spawn("")
+
+ client.get()[1].floating = true
+
+ geo = client.get()[1]:geometry()
+ print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
+
+ client.get()[1]:relative_move(100, 100)
+
+ geo = client.get()[1]:geometry()
+ print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
+
+ client.get()[1]:relative_move(nil, nil, 100, 100)
+
+ geo = client.get()[1]:geometry()
+ print("Client geometry:", geo.x, geo.y, geo.width, geo.height)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -10925,17 +11229,23 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Move a client to a tag.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_move_to_tag1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    for tag_idx = 1, 3 do
-        for _ = 1, 3 do
-            awful.spawn("", {tags = {screen[1].tags[tag_idx]}})
-        end
-    end
 
-    client.get()[1]:move_to_tag(screen[1].tags[2])
+<p>Move a client to a tag. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_move_to_tag1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for tag_idx = 1, 3 do
+    for _ = 1, 3 do
+        awful.spawn("", {tags = {screen[1].tags[tag_idx]}})
+    end
+end
+
+client.get()[1]:move_to_tag(screen[1].tags[2])
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -10999,17 +11309,23 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Toggle a tag on a client.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_toggle_tag1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    for tag_idx = 1, 3 do
-        for _ = 1, 3 do
-            awful.spawn("", {tags = {screen[1].tags[tag_idx]}})
-        end
-    end
 
-    client.get()[1]:toggle_tag(screen[1].tags[2])
+<p>Toggle a tag on a client. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_toggle_tag1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for tag_idx = 1, 3 do
+    for _ = 1, 3 do
+        awful.spawn("", {tags = {screen[1].tags[tag_idx]}})
+    end
+end
+
+client.get()[1]:toggle_tag(screen[1].tags[2])
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -11056,21 +11372,27 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Move a client to a screen.  Default is next screen, cycling.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_move_to_screen1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
-     -- Move the mouse to screen 3
-     mouse.coords {x = 100, y = 100 }
+<p>Move a client to a screen.  Default is next screen, cycling.</p>
 
-     -- Spawn a client on screen #3
-     awful.spawn("firefox")
 
-     client.get()[1]:move_to_screen(screen[2])
 
-     -- This will default to the next screen (by index).
-     client.get()[1]:move_to_screen()
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_move_to_screen1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre><code> -- Move the mouse to screen 3
+ mouse.coords {x = 100, y = 100 }
+
+ -- Spawn a client on screen #3
+ awful.spawn("firefox")
+
+ client.get()[1]:move_to_screen(screen[2])
+
+ -- This will default to the next screen (by index).
+ client.get()[1]:move_to_screen()
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -11143,33 +11465,47 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Find suitable tags for newly created clients.
+
+<p>Find suitable tags for newly created clients. </p>
+
 <p> In most cases, the functionality you're actually looking for as a user will
- either be
-<p>    c:tags(c.screen.selected_tags)
-<p> or
-<p>    local s = awful.screen.focused()
-    c:move_to_screen(s)
-    c:tags(s.selected_tags)
+ either be</p>
+
+<pre><code>c:tags(c.screen.selected_tags)
+</code></pre>
+
+<p> or</p>
+
+<pre><code>local s = awful.screen.focused()
+c:move_to_screen(s)
+c:tags(s.selected_tags)
+</code></pre>
+
 <p> Despite its naming, this is primarily used to tag newly created clients.
  As such, this method has no effect when applied to a client that already has
- tags assigned (except for emitting <code>property::tag</code>).
+ tags assigned (except for emitting <code>property::tag</code>).</p>
+
 <p> Additionally, while it is a rare case, if the client's screen has no selected
  tags at the point of calling this method, it will fall back to the screen's
- full set of tags.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_to_selected_tags1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.spawn("Client")
+ full set of tags.</p>
 
-    screen[1].tags[1].selected = false
-    screen[1].tags[2].selected = true
-    screen[1].tags[3].selected = true
 
-    -- Deselect all tags, otherwise it will do nothing.
-    client.get()[1]:tags{}
 
-    client.get()[1]:to_selected_tags()
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_to_selected_tags1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>awful.spawn("Client")
+
+screen[1].tags[1].selected = false
+screen[1].tags[2].selected = true
+screen[1].tags[3].selected = true
+
+-- Deselect all tags, otherwise it will do nothing.
+client.get()[1]:tags{}
+
+client.get()[1]:to_selected_tags()
+</code></pre>
+
 
 
 
@@ -11266,13 +11602,14 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Is a client transient for another one?
+    Is a client transient for another one? </p>
+
 <p> This will traverse the chain formed by the <a href="../core_components/client.html#transient_for">transient_for</a> property of <code>self</code>
  until a client <code>c</code> with <code>c.transient_for == c2</code> is found. The found client
- <code>c</code> is returned. If no client is found, <code>nil</code> is returned.
+ <code>c</code> is returned. If no client is found, <code>nil</code> is returned.</p>
+
 <p> While <a href="../core_components/client.html#transient_for">transient_for</a> chains are technically possible, they are unlikely, so
  the most likely return values are <code>self</code> and <code>nil</code>.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -11338,37 +11675,51 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Activate (focus) a client.
+
+<p>Activate (focus) a client. </p>
+
 <p> This method is the correct way to focus a client. While
  <code>client.focus = my_client</code> works and is commonly used in older code, it has
  some drawbacks. The most obvious one is that it bypasses the activate
  filters. It also doesn't handle minimized clients well and requires a lot
- of boilerplate code to make work properly.
-<p> The valid <code>args.actions</code> are:
-<p> * **mouse_move**: Move the client when the mouse cursor moves until the
-  mouse buttons are release.
- * **mouse_resize**: Resize the client when the mouse cursor moves until the
-  mouse buttons are release.
- * **mouse_center**: Move the mouse cursor to the center of the client if it
-  isn't already within its geometry,
- * **toggle_minimization**: If the client is already active, minimize it.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_activate1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>**Usage example output**:
-<p>    Confirm:	true	true
- **Usage example:**
-<p>
+ of boilerplate code to make work properly.</p>
 
-    client.get()[8]:activate {
-         switch_to_tag = true,
-         raise         = true,
-         context       = "somet_reason",
-    }
+<p> The valid <code>args.actions</code> are:</p>
 
-    -- Since this isnt denied by any permission, it will be true.
-    print(
-        "Confirm:", client.get()[8].active, client.focus == client.get()[8]
-    )
+<ul>
+    <li><strong>mouse_move</strong>: Move the client when the mouse cursor moves until the
+    mouse buttons are release.</li>
+    <li><strong>mouse_resize</strong>: Resize the client when the mouse cursor moves until the
+    mouse buttons are release.</li>
+    <li><strong>mouse_center</strong>: Move the mouse cursor to the center of the client if it
+    isn't already within its geometry,</li>
+    <li><strong>toggle_minimization</strong>: If the client is already active, minimize it.</li>
+</ul>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_activate1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>Confirm:    true    true
+</code></pre>
+<p> <strong>Usage example:</strong></p>
+
+
+
+<pre><code>client.get()[8]:activate {
+     switch_to_tag = true,
+     raise         = true,
+     context       = "somet_reason",
+}
+
+-- Since this isnt denied by any permission, it will be true.
+print(
+    "Confirm:", client.get()[8].active, client.focus == client.get()[8]
+)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -11392,7 +11743,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description"> </td>
+           <td class="see_also_description">
+
+ </td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -11422,14 +11775,18 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
            <td><span class="parameter">switch_to_tags</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>false</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">switch_to_tag</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>false</code></span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -11443,7 +11800,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
            <td><span class="parameter">toggle_minimization</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>false</code></span></td>
          </tr>
         </table>
@@ -11703,10 +12062,12 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.
+    Connect to a signal weakly. </p>
+
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.
-<p> **Warning:**
+ automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -11753,10 +12114,10 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Emitted when AwesomeWM is about to scan for existing clients.
+    Emitted when AwesomeWM is about to scan for existing clients. </p>
+
 <p> Connect to this signal when code needs to be executed after screens are
  initialized, but before clients are added.
-
 
 
 
@@ -11776,9 +12137,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Emitted when AwesomeWM is done scanning for clients.
-<p> This is emitted before the <code>startup</code> signal and after the <a href="../core_components/client.html#scanning">scanning</a> signal.
+    Emitted when AwesomeWM is done scanning for clients. </p>
 
+<p> This is emitted before the <code>startup</code> signal and after the <a href="../core_components/client.html#scanning">scanning</a> signal.
 
 
 
@@ -11880,13 +12241,13 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Emitted when a new client appears and gets managed by Awesome.
+    Emitted when a new client appears and gets managed by Awesome. </p>
+
 <p> This request should be implemented by code which track the client. It isn't
  recommended to use this to initialize the client content. This use case is
  a better fit for <a href="../declarative_rules/ruled.client.html#">ruled.client</a>, which has built-in dependency management.
  Using this request to mutate the client state will likely conflict with
  <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.
-
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -11953,14 +12314,21 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Emitted when a client is going away.
+
+<p>Emitted when a client is going away. </p>
+
 <p> Each places which store <a href="../core_components/client.html#">client</a> objects in non-weak table or whose state
- depend on the current client should answer this request.
-<p> The contexts are:
-<p> * **user**: <code>c:unmanage()</code> was called.
- * **reparented**: The window was reparented to another window. It is no
-   longer a stand alone client.
- * **destroyed**: The window was closed.
+ depend on the current client should answer this request.</p>
+
+<p> The contexts are:</p>
+
+<ul>
+    <li><strong>user</strong>: <code>c:unmanage()</code> was called.</li>
+    <li><strong>reparented</strong>: The window was reparented to another window. It is no
+    longer a stand alone client.</li>
+    <li><strong>destroyed</strong>: The window was closed.</li>
+</ul>
+
 
 
     <h3>Arguments:</h3>
@@ -12105,32 +12473,37 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Emitted when a client should get activated (focused and/or raised).
-<p> **Contexts are:**
-<p> * *ewmh*: When a client asks for focus (from <code>X11</code> events).
- * *autofocus.check_focus*: When autofocus is enabled (from
-   <code>awful.autofocus</code>).
- * *autofocus.check_focus_tag*: When autofocus is enabled
-   (from <code>awful.autofocus</code>).
- * *client.jumpto*: When a custom lua extension asks a client to be focused
-   (from <a href="../core_components/client.html#jump_to">client.jump_to</a>).
- * *client.swap.global_bydirection*: When client swapping requires a focus
-   change (from <a href="../core_components/client.html#awful.client.swap.bydirection">awful.client.swap.bydirection</a>).
- * *client.movetotag*: When a client is moved to a new tag
-   (from <a href="../core_components/client.html#move_to_tag">client.move_to_tag</a>).
- * *client.movetoscreen*: When the client is moved to a new screen
-   (from <a href="../core_components/client.html#move_to_screen">client.move_to_screen</a>).
- * *client.focus.byidx*: When selecting a client using its index
-   (from <a href="../core_components/client.html#awful.client.focus.byidx">awful.client.focus.byidx</a>).
- * *client.focus.history.previous*: When cycling through history
-   (from <a href="../core_components/client.html#awful.client.focus.history.previous">awful.client.focus.history.previous</a>).
- * *menu.clients*: When using the builtin client menu
-   (from <a href="../popups_and_bars/awful.menu.html#clients">awful.menu.clients</a>).
- * *rules*: When a new client is focused from a rule (from <a href="../declarative_rules/ruled.client.html#">ruled.client</a>).
- * *screen.focus*: When a screen is focused (from <code>awful.screen.focus</code>).
-<p> Default implementation: <code>awful.ewmh.activate</code>.
-<p> To implement focus stealing filters see <code>awful.ewmh.add_activate_filter</code>.
+    Emitted when a client should get activated (focused and/or raised). </p>
 
+<p> <strong>Contexts are:</strong></p>
+
+<ul>
+    <li><em>ewmh</em>: When a client asks for focus (from <code>X11</code> events).</li>
+    <li>*autofocus.check_focus*: When autofocus is enabled (from
+    <code>awful.autofocus</code>).</li>
+    <li>*autofocus.check<em>focus</em>tag*: When autofocus is enabled
+    (from <code>awful.autofocus</code>).</li>
+    <li><em>client.jumpto</em>: When a custom lua extension asks a client to be focused
+    (from <a href="../core_components/client.html#jump_to">client.jump_to</a>).</li>
+    <li>*client.swap.global_bydirection*: When client swapping requires a focus
+    change (from <a href="../core_components/client.html#awful.client.swap.bydirection">awful.client.swap.bydirection</a>).</li>
+    <li><em>client.movetotag</em>: When a client is moved to a new tag
+    (from <a href="../core_components/client.html#move_to_tag">client.move_to_tag</a>).</li>
+    <li><em>client.movetoscreen</em>: When the client is moved to a new screen
+    (from <a href="../core_components/client.html#move_to_screen">client.move_to_screen</a>).</li>
+    <li><em>client.focus.byidx</em>: When selecting a client using its index
+    (from <a href="../core_components/client.html#awful.client.focus.byidx">awful.client.focus.byidx</a>).</li>
+    <li><em>client.focus.history.previous</em>: When cycling through history
+    (from <a href="../core_components/client.html#awful.client.focus.history.previous">awful.client.focus.history.previous</a>).</li>
+    <li><em>menu.clients</em>: When using the builtin client menu
+    (from <a href="../popups_and_bars/awful.menu.html#clients">awful.menu.clients</a>).</li>
+    <li><em>rules</em>: When a new client is focused from a rule (from <a href="../declarative_rules/ruled.client.html#">ruled.client</a>).</li>
+    <li><em>screen.focus</em>: When a screen is focused (from <code>awful.screen.focus</code>).</li>
+</ul>
+
+<p> Default implementation: <code>awful.ewmh.activate</code>.</p>
+
+<p> To implement focus stealing filters see <code>awful.ewmh.add_activate_filter</code>.
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -12211,17 +12584,18 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Emitted when an event could lead to the client being activated.
+    Emitted when an event could lead to the client being activated. </p>
+
 <p> This is an layer "on top" of <a href="../core_components/client.html#request::activate">request::activate</a> for event which are not
  actual request for activation/focus, but where "it would be nice" if the
  client got the focus. This includes the focus-follow-mouse model and focusing
- previous clients when the selected tag changes.
+ previous clients when the selected tag changes.</p>
+
 <p> This idea is that <a href="../core_components/client.html#request::autoactivate">request::autoactivate</a> will emit <a href="../core_components/client.html#request::activate">request::activate</a>.
  However it is much easier to replace the handler for <a href="../core_components/client.html#request::autoactivate">request::autoactivate</a>
  than it is to replace the handler for <a href="../core_components/client.html#request::activate">request::activate</a>. Thus it provides
  a nice abstraction to simplify handling the focus when switching tags or
  moving the mouse.
-
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -12390,19 +12764,25 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
            <td><span class="parameter">hints</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description"> </td>
+           <td class="see_also_description">
+
+ </td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">reason</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">screen</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="../core_components/client.html#screen">screen</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
         </table>
 
@@ -12434,17 +12814,22 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Emitted when any client's <a href="../core_components/client.html#urgent">urgent</a> property changes.
+
+<p>Emitted when any client's <a href="../core_components/client.html#urgent">urgent</a> property changes. </p>
+
 <p> Emitted both when <code>urgent = true</code> and <code>urgent = false</code>, so you will likely
- want to check <code>c.urgent</code> within the signal callback.
-<p>    client.connect_signal("property::urgent", function(c)
-        if c.urgent then
-            naughty.notify {
-                title = "Urgent client",
-                message = c.name,
-            }
-        end
-    end)
+ want to check <code>c.urgent</code> within the signal callback.</p>
+
+<pre><code>client.connect_signal("property::urgent", function(c)
+    if c.urgent then
+        naughty.notify {
+            title = "Urgent client",
+            message = c.name,
+        }
+    end
+end)
+</code></pre>
+
 
 
     <h3>Arguments:</h3>
@@ -12492,12 +12877,12 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </dt>
     <dd>
     Emitted once to request default client mousebindings during the initial
- startup sequence.
+ startup sequence. </p>
+
 <p> This signal gives all modules a chance to register their default client
  mousebindings.
  They will then be added to all new clients, unless rules overwrite them via
  the <a href="../core_components/client.html#buttons">buttons</a> property.
-
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -12535,12 +12920,12 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </dt>
     <dd>
     Emitted once to request default client keybindings during the initial
- startup sequence.
+ startup sequence. </p>
+
 <p> This signal gives all modules a chance to register their default client
  keybindings.
  They will then be added to all new clients, unless rules overwrite them via
  the <a href="../core_components/client.html#keys">keys</a> property.
-
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -12912,15 +13297,21 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Emitted when the border client might need to be update.
-<p> The context are:
-<p> * **added**: When a new client is created.
- * **active**: When client gains the focus (or stop being urgent/floating
-   but is active).
- * **inactive**: When client loses the focus (or stop being urgent/floating
-   and is not active.
- * **urgent**: When a client becomes urgent.
- * **floating**: When the floating or maximization state changes.
+
+<p>Emitted when the border client might need to be update. </p>
+
+<p> The context are:</p>
+
+<ul>
+    <li><strong>added</strong>: When a new client is created.</li>
+    <li><strong>active</strong>: When client gains the focus (or stop being urgent/floating
+    but is active).</li>
+    <li><strong>inactive</strong>: When client loses the focus (or stop being urgent/floating
+    and is not active.</li>
+    <li><strong>urgent</strong>: When a client becomes urgent.</li>
+    <li><strong>floating</strong>: When the floating or maximization state changes.</li>
+</ul>
+
 
 
     <h3>Arguments:</h3>
@@ -14984,10 +15375,10 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client border width for the fullscreen clients.
+    The client border width for the fullscreen clients. </p>
+
 <p> This is the fallback if the more stateful version, like
  <a href="../core_components/client.html#beautiful.border_width_fullscreen_urgent">beautiful.border_width_fullscreen_urgent</a> isn't set.
-
 
 
 
@@ -15058,9 +15449,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the normal clients.
-<p> A number between 0 and 1.
+    The client opacity for the normal clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15101,9 +15492,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the active client.
-<p> A number between 0 and 1.
+    The client opacity for the active client. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15144,9 +15535,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the urgent clients.
-<p> A number between 0 and 1.
+    The client opacity for the urgent clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15187,9 +15578,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the new clients.
-<p> A number between 0 and 1.
+    The client opacity for the new clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15230,9 +15621,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the normal floating clients.
-<p> A number between 0 and 1.
+    The client opacity for the normal floating clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15263,9 +15654,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the active floating client.
-<p> A number between 0 and 1.
+    The client opacity for the active floating client. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15306,9 +15697,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the urgent floating clients.
-<p> A number between 0 and 1.
+    The client opacity for the urgent floating clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15349,9 +15740,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the new floating clients.
-<p> A number between 0 and 1.
+    The client opacity for the new floating clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15392,10 +15783,10 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the floating clients.
+    The client opacity for the floating clients. </p>
+
 <p> A number between 0 and 1. This is the fallback if the more stateful
  variables, like <a href="../core_components/client.html#beautiful.opacity_floating_new">beautiful.opacity_floating_new</a> are not set.
-
 
 
 
@@ -15464,9 +15855,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the normal maximized clients.
-<p> A number between 0 and 1.
+    The client opacity for the normal maximized clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15497,9 +15888,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the active maximized client.
-<p> A number between 0 and 1.
+    The client opacity for the active maximized client. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15540,9 +15931,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the urgent maximized clients.
-<p> A number between 0 and 1.
+    The client opacity for the urgent maximized clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15583,9 +15974,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the new maximized clients.
-<p> A number between 0 and 1.
+    The client opacity for the new maximized clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15626,10 +16017,10 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the maximized clients.
+    The client opacity for the maximized clients. </p>
+
 <p> A number between 0 and 1. This is the fallback if a more stateful
  variable, like <a href="../core_components/client.html#beautiful.opacity_maximized_urgent">beautiful.opacity_maximized_urgent</a>, isn't set.
-
 
 
 
@@ -15698,9 +16089,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the normal fullscreen clients.
-<p> A number between 0 and 1.
+    The client opacity for the normal fullscreen clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15731,9 +16122,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the active fullscreen client.
-<p> A number between 0 and 1.
+    The client opacity for the active fullscreen client. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15774,9 +16165,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the urgent fullscreen clients.
-<p> A number between 0 and 1.
+    The client opacity for the urgent fullscreen clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15817,9 +16208,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the new fullscreen clients.
-<p> A number between 0 and 1.
+    The client opacity for the new fullscreen clients. </p>
 
+<p> A number between 0 and 1.
 
 
 
@@ -15860,11 +16251,11 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client opacity for the fullscreen clients.
+    The client opacity for the fullscreen clients. </p>
+
 <p> A number between 0 and 1. This is the fallback if the variables
  for more stateful versions, like <a href="../core_components/client.html#beautiful.opacity_fullscreen_urgent">beautiful.opacity_fullscreen_urgent</a>,
  are not set.
-
 
 
 
@@ -15938,7 +16329,6 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     <dd>
     Jump to the given client.
  Takes care of focussing the screen, the right tag, etc.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -16839,6 +17229,8 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
 
            <span class="types"><span class="type">bool</span></span>
 
+
+
     </ol>
 
 
@@ -16856,10 +17248,10 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Set a client's dockable state, overriding auto-detection.
+    Set a client's dockable state, overriding auto-detection. </p>
+
 <p> With this enabled you can dock windows by moving them from the center
  to the edge of the workarea.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -16899,9 +17291,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Get a client property.
-<p> This method is deprecated. It is now possible to use <code>c.value</code> directly.
+    Get a client property. </p>
 
+<p> This method is deprecated. It is now possible to use <code>c.value</code> directly.
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -16946,10 +17338,10 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Set a client property.
+    Set a client property. </p>
+
 <p> This method is deprecated. It is now possible to use <code>c.value = value</code>
  directly.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -16998,7 +17390,6 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     Switch to a client matching the given condition if running, else spawn it.
  If multiple clients match the given condition then the next one is
  focused.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -17197,23 +17588,32 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Calculate a client's column number, index in that column, and
- number of visible clients in this column.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_screen_wfact4.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>**Usage example output**:
-<p>    Client #1:	0	1	2
-    Client #2:	0	2	2
-    Client #3:	1	1	3
-    Client #4:	1	2	3
-    Client #5:	1	3	3
- **Usage example:**
-<p>
 
-    for i, c in ipairs(client.get()) do
-        local data = awful.client.idx(c)
-        print("Client #"..i..":", data.col, data.idx, data.num)
-    end
+<p>Calculate a client's column number, index in that column, and
+ number of visible clients in this column. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_screen_wfact4.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>Client #1:  0   1   2
+Client #2:  0   2   2
+Client #3:  1   1   3
+Client #4:  1   2   3
+Client #5:  1   3   3
+</code></pre>
+<p> <strong>Usage example:</strong></p>
+
+
+
+<pre><code>for i, c in ipairs(client.get()) do
+    local data = awful.client.idx(c)
+    print("Client #"..i..":", data.col, data.idx, data.num)
+end
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -17264,21 +17664,29 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Define how tall a client should be in the tile layout.
+
+<p>Define how tall a client should be in the tile layout. </p>
+
 <p> One valid use case for calling this is restoring serialized layouts.
  This function is rather fragile and the behavior may not remain the
- same across AwesomeWM versions.
+ same across AwesomeWM versions.</p>
+
 <p> When setting a value, make sure the sum remains 1. Otherwise, the
- clients will just go offscreen or get negative size.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_screen_wfact3.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.client.setwfact(2/3, client.get()[1])
-    awful.client.setwfact(1/3, client.get()[2])
-    awful.client.setwfact(4/8, client.get()[3])
-    awful.client.setwfact(2/8, client.get()[4])
-    awful.client.setwfact(1/8, client.get()[5])
-    awful.client.setwfact(1/8, client.get()[6])
+ clients will just go offscreen or get negative size.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_screen_wfact3.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>awful.client.setwfact(2/3, client.get()[1])
+awful.client.setwfact(1/3, client.get()[2])
+awful.client.setwfact(4/8, client.get()[3])
+awful.client.setwfact(2/8, client.get()[4])
+awful.client.setwfact(1/8, client.get()[5])
+awful.client.setwfact(1/8, client.get()[6])
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -17341,18 +17749,28 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Change window factor of a client.
+
+<p>Change window factor of a client. </p>
+
 <p> This will emit <code>property::windowfact</code> on the specific tag object
- <code>c.screen.selected_tag</code>.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_screen_wfact1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- Changing the gap will make some clients taller:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_screen_wfact2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    awful.client.incwfact(2, client.get()[4])
-    awful.client.incwfact(3, client.get()[2])
+ <code>c.screen.selected_tag</code>.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_screen_wfact1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> Changing the gap will make some clients taller:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_screen_wfact2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>awful.client.incwfact(2, client.get()[4])
+awful.client.incwfact(3, client.get()[2])
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -17414,24 +17832,33 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client default placement on the screen.
-<p> The default config uses:
-<p>    awful.placement.no_overlap+awful.placement.no_offscreen
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_placement.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    ruled.client.append_rule {
-        rule = { class = "mplayer" },
-        properties = {
-            floating  = true,
-            placement = awful.placement.centered,
-            width     = 640,
-            height    = 480,
-        },
-    }
 
-    -- Spawn mplayer
-    awful.spawn("mplayer")
+<p>The client default placement on the screen. </p>
+
+<p> The default config uses:</p>
+
+<pre><code>awful.placement.no_overlap+awful.placement.no_offscreen
+</code></pre>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_placement.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>ruled.client.append_rule {
+    rule = { class = "mplayer" },
+    properties = {
+        floating  = true,
+        placement = awful.placement.centered,
+        width     = 640,
+        height    = 480,
+    },
+}
+
+-- Spawn mplayer
+awful.spawn("mplayer")
+</code></pre>
+
 
 
 
@@ -17492,9 +17919,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    When applying the placement, honor the screen work area.
-<p> The workarea is the part of the screen that excludes the bars and docks.
+    When applying the placement, honor the screen work area. </p>
 
+<p> The workarea is the part of the screen that excludes the bars and docks.
 
 
 
@@ -17524,33 +17951,39 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client default tag.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_tags.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    -- Select tag by object reference:
-    ruled.client.append_rule {
-        rule_any    = {
-            class = {"firefox"}
-        },
-        properties = {
-            tag = screen[1].tags[3],
-        },
-    }
 
-    -- Select tag by name:
-    ruled.client.append_rule {
-        rule_any    = {
-            class = {"thunderbird"}
-        },
-        properties = {
-            tag = "five",
-        },
-    }
+<p>The client default tag. </p>
 
-    -- Spawn firefox and thunderbird
-    awful.spawn("firefox")
-    awful.spawn("thunderbird")
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_tags.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>-- Select tag by object reference:
+ruled.client.append_rule {
+    rule_any    = {
+        class = {"firefox"}
+    },
+    properties = {
+        tag = screen[1].tags[3],
+    },
+}
+
+-- Select tag by name:
+ruled.client.append_rule {
+    rule_any    = {
+        class = {"thunderbird"}
+    },
+    properties = {
+        tag = "five",
+    },
+}
+
+-- Spawn firefox and thunderbird
+awful.spawn("firefox")
+awful.spawn("thunderbird")
+</code></pre>
+
 
 
 
@@ -17602,10 +18035,10 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The client default tags.
+    The client default tags. </p>
+
 <p> Avoid using the tag and tags properties at the same time, it will cause
  issues.
-
 
 
 
@@ -17656,49 +18089,57 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Create a new tag for this client.
+
+<p>Create a new tag for this client. </p>
+
 <p> If the value is <code>true</code>, the new tag will be named after the client <a href="../core_components/client.html#class">class</a>.
- If it is a string, it will be the tag name.
+ If it is a string, it will be the tag name.</p>
+
 <p> If a table is used, all of its properties will be passed to the tag
- constructor:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_new_tag.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    -- Create a new tags with some properties:
-    ruled.client.append_rule {
-        rule = { class = "firefox" },
-        properties = {
-            switch_to_tags = true,
-            new_tag        = {
-                name     = "My_new_tag!", -- The tag name.
-                layout   = awful.layout.suit.max, -- Set the tag layout.
-                volatile = true, -- Remove the tag when the client is closed.
-            }
+ constructor:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_new_tag.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>-- Create a new tags with some properties:
+ruled.client.append_rule {
+    rule = { class = "firefox" },
+    properties = {
+        switch_to_tags = true,
+        new_tag        = {
+            name     = "My_new_tag!", -- The tag name.
+            layout   = awful.layout.suit.max, -- Set the tag layout.
+            volatile = true, -- Remove the tag when the client is closed.
         }
     }
+}
 
-    -- Create a new tag with just a name:
-    ruled.client.append_rule {
-        rule = { class = "thunderbird" },
-        properties = {
-            switch_to_tags = true,
-            new_tag        = "JUST_A_NAME!",
-        }
+-- Create a new tag with just a name:
+ruled.client.append_rule {
+    rule = { class = "thunderbird" },
+    properties = {
+        switch_to_tags = true,
+        new_tag        = "JUST_A_NAME!",
     }
+}
 
-    -- Create a new tag using the client metadata:
-    ruled.client.append_rule {
-        rule = { class = "xterm" },
-        properties = {
-            switch_to_tags = true,
-            new_tag        = true,
-        }
+-- Create a new tag using the client metadata:
+ruled.client.append_rule {
+    rule = { class = "xterm" },
+    properties = {
+        switch_to_tags = true,
+        new_tag        = true,
     }
+}
 
-    -- Spawn firefox
-    awful.spawn("firefox")
-    awful.spawn("thunderbird")
-    awful.spawn("xterm")
+-- Spawn firefox
+awful.spawn("firefox")
+awful.spawn("thunderbird")
+awful.spawn("xterm")
+</code></pre>
+
 
 
 
@@ -17743,22 +18184,28 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Unselect the current tags and select this client tags.
- Note that this property was called <code>switchtotag</code> in previous Awesome versions.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_switch_to_tags.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Select tag by object reference:
-     ruled.client.append_rule {
-         rule = { class = "firefox" },
-         properties = {
-             tag            = screen[1].tags[4],
-             switch_to_tags = true
-         }
-     }
 
-     -- Spawn firefox
-     awful.spawn("firefox")
+<p>Unselect the current tags and select this client tags.
+ Note that this property was called <code>switchtotag</code> in previous Awesome versions.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_rules_switch_to_tags.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Select tag by object reference:
+ ruled.client.append_rule {
+     rule = { class = "firefox" },
+     properties = {
+         tag            = screen[1].tags[4],
+         switch_to_tags = true
+     }
+ }
+
+ -- Spawn firefox
+ awful.spawn("firefox")
+</code></pre>
+
 
 
 
@@ -17789,9 +18236,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Define if the client should grab focus by default.
-<p> The <a href="../core_components/client.html#request::activate">request::activate</a> context for this call is <code>rules</code>.
+    Define if the client should grab focus by default. </p>
 
+<p> The <a href="../core_components/client.html#request::activate">request::activate</a> context for this call is <code>rules</code>.
 
 
 
@@ -17841,9 +18288,9 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    A function to call when this client is ready.
-<p> It can be useful to set extra properties or perform actions.
+    A function to call when this client is ready. </p>
 
+<p> It can be useful to set extra properties or perform actions.
 
 
 
@@ -17876,24 +18323,29 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Client class.
+    Client class. </p>
+
 <p> This table allow to add more dynamic properties to the clients. For example,
- doing:
-<p>     function awful.client.object.set_my_cool_property(c, value)
-         -- Some logic code
-         c._my_secret_my_cool_property = value
-         c:emit_signal("property::my_cool_property)
-     end
-<p>     function awful.client.object.get_my_cool_property()
-         return c._my_secret_my_cool_property
-     end
-<p> Will add a new "my_cool_property" dyanmic property to all client. These
+ doing:</p>
+
+<pre><code> function awful.client.object.set_my_cool_property(c, value)
+     -- Some logic code
+     c._my_secret_my_cool_property = value
+     c:emit_signal("property::my_cool_property)
+ end
+
+ function awful.client.object.get_my_cool_property()
+     return c._my_secret_my_cool_property
+ end
+</code></pre>
+
+<p> Will add a new "my<em>cool</em>property" dyanmic property to all client. These
  methods will be called when an user does <code>c.my_cool_property = &quot;something&quot;</code>
- or set them in <code>awdul.rules</code>.
+ or set them in <code>awdul.rules</code>.</p>
+
 <p> Note that doing this isn't required to set random properties to the client,
  it is only useful when setting or getting these properties require code to
  executed.
-
 
 
 
@@ -17917,25 +18369,34 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    The focused <a href="../core_components/client.html#">client</a> or nil (in case there is none).
+
+<p>The focused <a href="../core_components/client.html#">client</a> or nil (in case there is none). </p>
+
 <p> It is not recommended to set the focused client using
  this property. Please use <a href="../core_components/client.html#activate">client.activate</a> instead of
  <code>client.focus = c</code>. Setting the focus directly bypasses
  all the filters and emits fewer signals, which tend to
  cause unwanted side effects and make it harder to alter
- the code behavior in the future. It usually takes *more*
+ the code behavior in the future. It usually takes <em>more</em>
  code to use this rather than <a href="../core_components/client.html#activate">client.activate</a> because all
  the boilerplate code (such as <code>c:raise()</code>) needs to be
- added everywhere.
-<p> The main use case for this field is to check *when* there
- is an active client.
-<p>     if client.focus ~= nil then
-         -- do something
-     end
-<p> If you want to check if a client is active, use:
-<p>     if c.active then
-         -- do something
-     end
+ added everywhere.</p>
+
+<p> The main use case for this field is to check <em>when</em> there
+ is an active client.</p>
+
+<pre><code> if client.focus ~= nil then
+     -- do something
+ end
+</code></pre>
+
+<p> If you want to check if a client is active, use:</p>
+
+<pre><code> if c.active then
+     -- do something
+ end
+</code></pre>
+
 
 
 
@@ -18018,39 +18479,48 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Focus a client by its relative index.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_focus_byidx1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>**Usage example output**:
-<p>    c1:1, c2:2, c3:3, c4:4,
-    Call focus.byidx
-    c1:1, c2:2, c3:3, c4:4,
-    Call focus.byidx
-    c1:1, c2:2, c3:3, c4:4,
- **Usage example:**
-<p>
 
-    -- Print at which index each client is now at.
-    local function print_indices()
-        color_focus()
-        local output = ""
+<p>Focus a client by its relative index. </p>
 
-        for idx, c in ipairs(client.get()) do
-             output = output .. c.name .. ":" .. idx .. ", "
-        end
 
-        print(output)
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_focus_byidx1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>c1:1, c2:2, c3:3, c4:4,
+Call focus.byidx
+c1:1, c2:2, c3:3, c4:4,
+Call focus.byidx
+c1:1, c2:2, c3:3, c4:4,
+</code></pre>
+<p> <strong>Usage example:</strong></p>
+
+
+
+<pre><code>-- Print at which index each client is now at.
+local function print_indices()
+    color_focus()
+    local output = ""
+
+    for idx, c in ipairs(client.get()) do
+         output = output .. c.name .. ":" .. idx .. ", "
     end
 
-    print_indices()
+    print(output)
+end
 
-    print("Call focus.byidx")
-    awful.client.focus.byidx(3, client.get()[1])
-    print_indices()
+print_indices()
 
-    print("Call focus.byidx")
-    awful.client.focus.byidx(2, client.get()[4])
-    print_indices()
+print("Call focus.byidx")
+awful.client.focus.byidx(3, client.get()[1])
+print_indices()
+
+print("Call focus.byidx")
+awful.client.focus.byidx(2, client.get()[4])
+print_indices()
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -18112,7 +18582,6 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     Filter out window that we do not want handled by focus.
  This usually means that desktop, dock and splash windows are
  not registered and cannot get focus.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -18279,19 +18748,25 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Focus a client by the given direction.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_focus_bydirection1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
-    -- It will go up in the same column.
-    awful.client.focus.bydirection("up", client.focus)
+<p>Focus a client by the given direction. </p>
 
-    -- Nothing happens because it cannot change screen.
-    awful.client.focus.bydirection("right", client.focus)
 
-    -- Moves to the first column.
-    awful.client.focus.bydirection("left", client.focus)
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_focus_bydirection1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre><code>-- It will go up in the same column.
+awful.client.focus.bydirection("up", client.focus)
+
+-- Nothing happens because it cannot change screen.
+awful.client.focus.bydirection("right", client.focus)
+
+-- Moves to the first column.
+awful.client.focus.bydirection("left", client.focus)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -18362,19 +18837,25 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Focus a client by the given direction.  Moves across screens.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_client_focus_bydirection2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
-    -- It will go up in the same column.
-    awful.client.focus.global_bydirection("up", client.focus)
+<p>Focus a client by the given direction.  Moves across screens.</p>
 
-    -- It will cross to screen[2].
-    awful.client.focus.global_bydirection("right", client.focus)
 
-    -- Moves to the first column.
-    awful.client.focus.global_bydirection("left", client.focus)
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_client_focus_bydirection2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre><code>-- It will go up in the same column.
+awful.client.focus.global_bydirection("up", client.focus)
+
+-- It will cross to screen[2].
+awful.client.focus.global_bydirection("right", client.focus)
+
+-- Moves to the first column.
+awful.client.focus.global_bydirection("left", client.focus)
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -18471,7 +18952,8 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Enable history tracking.
+    Enable history tracking. </p>
+
 <p> This is the default, but can be disabled
  through <a href="../core_components/client.html#awful.client.focus.history.disable_tracking">awful.client.focus.history.disable_tracking</a>.
 
@@ -18498,7 +18980,8 @@ client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
     </span>
     </dt>
     <dd>
-    Disable history tracking.
+    Disable history tracking. </p>
+
 <p> See <a href="../core_components/client.html#awful.client.focus.history.enable_tracking">awful.client.focus.history.enable_tracking</a> to enable it again.
 
 

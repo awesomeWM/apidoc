@@ -220,29 +220,31 @@
 
 <h1>Module: <code>awful.layout</code></h1>
 <p>Deterministically lay the clients in a screen workarea.</p>
-<p>
 <p> The <a href="../libraries/awful.layout.html#">awful.layout</a> module contains many sub-modules. Each of them contain
  one or more layout. <a href="../libraries/awful.layout.html#">awful.layout</a> offers static layouts rather than
  tree based like other WMs. The layout have a small number of configuration
- variables:
-<p> * <code>master_width_factor</code>: The ratio between the main (master) section of the
-  layout and a sub-section. For example, in the <code>tile.left</code> layout, the main
-  (master) part contains <code>master_count</code> clients and the secondary part contains
-  all other clients.
- * <code>master_count</code>: The number of clients which belong to the main (master) area.
- * <code>column_count</code>: The number of columns to store the clients in the secondary
-   area.
- * <code>master_fill_policy</code>: When the number of clients is below <code>master_count</code>,
-  how is the remaining space used.
- * <code>gaps</code>: The empty space between the clients.
- * <code>gap_single_client</code>: Same as gap, but when there is a single client. Gaps
-  are often useful as a visual cue to know where a client starts and ends.
-  This makes no sense when there is only one.
+ variables:</p>
+
+<ul>
+    <li><code>master_width_factor</code>: The ratio between the main (master) section of the
+    layout and a sub-section. For example, in the <code>tile.left</code> layout, the main
+    (master) part contains <code>master_count</code> clients and the secondary part contains
+    all other clients.</li>
+    <li><code>master_count</code>: The number of clients which belong to the main (master) area.</li>
+    <li><code>column_count</code>: The number of columns to store the clients in the secondary
+    area.</li>
+    <li><code>master_fill_policy</code>: When the number of clients is below <code>master_count</code>,
+    how is the remaining space used.</li>
+    <li><code>gaps</code>: The empty space between the clients.</li>
+    <li><code>gap_single_client</code>: Same as gap, but when there is a single client. Gaps
+    are often useful as a visual cue to know where a client starts and ends.
+    This makes no sense when there is only one.</li>
+</ul>
+
 <p> Not all layouts make use of all variables. Having such an overloaded meaning
  to a small set of variable is useful to attach those values to keybindings
  without having special logic for each layouts. AwesomeWM keybindings are not
- modal, so such "limitation" actually improves usability.
-</p>
+ modal, so such "limitation" actually improves usability.</p>
     <div class="extra-header">
 
 
@@ -316,7 +318,8 @@
         <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;table</span></span>
       </td>
       <td class="summary">
-        Get the layout parameters used for the screen
+        Get the layout parameters used for the screen</p>
+
 <p> This should give the same result as "arrange", but without the "geometries"
  parameter, as this is computed during arranging.
       </td>
@@ -749,10 +752,10 @@
     </span>
     </dt>
     <dd>
-    Return the tag layout index (from <a href="../libraries/awful.layout.html#awful.layout.layouts">awful.layout.layouts</a>).
+    Return the tag layout index (from <a href="../libraries/awful.layout.html#awful.layout.layouts">awful.layout.layouts</a>). </p>
+
 <p> If the layout isn't part of <a href="../libraries/awful.layout.html#awful.layout.layouts">awful.layout.layouts</a>, this function returns
  nil.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -928,12 +931,13 @@
     </span>
     </dt>
     <dd>
-    Get the layout parameters used for the screen
+    Get the layout parameters used for the screen</p>
+
 <p> This should give the same result as "arrange", but without the "geometries"
- parameter, as this is computed during arranging.
+ parameter, as this is computed during arranging. </p>
+
 <p> If <code>t</code> is given, <a href="../core_components/screen.html#">screen</a> is ignored, if none are given, the mouse screen is
  used.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1062,16 +1066,23 @@
     </span>
     </dt>
     <dd>
-    Remove a layout from the list of default layouts.
-<p>
-<p>
-**Usage example output**:
-<p>    Before:	floating
-    Before:	tile
-    Before:	max
-    After:	floating
-    After:	max
-<p>
+
+<p>Remove a layout from the list of default layouts. </p>
+
+
+
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>Before: floating
+Before: tile
+Before: max
+After:  floating
+After:  max
+</code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2573,24 +2584,29 @@ awful.layout.remove_default_layout(awful.layout.suit.tile)
     </span>
     </dt>
     <dd>
-    The default list of layouts.
-<p> The default value is:
-<p>    awful.layout.suit.floating,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
-    awful.layout.suit.corner.ne,
-    awful.layout.suit.corner.sw,
-    awful.layout.suit.corner.se,
+
+<p>The default list of layouts. </p>
+
+<p> The default value is:</p>
+
+<pre><code>awful.layout.suit.floating,
+awful.layout.suit.tile,
+awful.layout.suit.tile.left,
+awful.layout.suit.tile.bottom,
+awful.layout.suit.tile.top,
+awful.layout.suit.fair,
+awful.layout.suit.fair.horizontal,
+awful.layout.suit.spiral,
+awful.layout.suit.spiral.dwindle,
+awful.layout.suit.max,
+awful.layout.suit.max.fullscreen,
+awful.layout.suit.magnifier,
+awful.layout.suit.corner.nw,
+awful.layout.suit.corner.ne,
+awful.layout.suit.corner.sw,
+awful.layout.suit.corner.se,
+</code></pre>
+
 
 
 

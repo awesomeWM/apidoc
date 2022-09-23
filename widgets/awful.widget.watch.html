@@ -220,30 +220,46 @@
 <h1>Module: <code>awful.widget.watch</code></h1>
 <p>Execute a command at a set interval and display its output.</p>
 <p>
+
+
 <p> Here is an example of simple temperature widget which will update each 15
  seconds implemented in two different ways.
  The first, simpler one, will just display the return command output
  (so output is stripped by shell commands).
  In the other example <code>sensors</code> returns to the widget its full output
- and it's trimmed in the widget callback function:
-<p>    -- one way to do that:
-    local w = awful.widget.watch('bash -c "sensors | grep temp1"', 15)
-<p>    -- another way:
-    local w = awful.widget.watch('sensors', 15, function(widget, stdout)
-        for line in stdout:gmatch("[^\r\n]+") do
-            if line:match("temp1") then
-                widget:set_text(line)
-                return
-            end
-        end
-    end)
-<p> ![Example screenshot](../images/awful_widget_watch.png)
-<p> Here is the most basic usage:
-<p>
-DOC_HIDE --DOC_GEN_IMAGE
-<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_defaults_watch.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     awful.widget.watch('bash -c "echo Hello world! | grep Hello"', 15)
+ and it's trimmed in the widget callback function:</p>
+
+
+<pre>
+<span class="comment">-- one way to do that:
+</span><span class="keyword">local</span> w = awful.widget.watch(<span class="string">'bash -c "sensors | grep temp1"'</span>, <span class="number">15</span>)
+
+<span class="comment">-- another way:
+</span><span class="keyword">local</span> w = awful.widget.watch(<span class="string">'sensors'</span>, <span class="number">15</span>, <span class="keyword">function</span>(widget, stdout)
+    <span class="keyword">for</span> line <span class="keyword">in</span> stdout:gmatch(<span class="string">"[^\r\n]+"</span>) <span class="keyword">do</span>
+        <span class="keyword">if</span> line:match(<span class="string">"temp1"</span>) <span class="keyword">then</span>
+            widget:set_text(line)
+            <span class="keyword">return</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>)
+</pre>
+
+<p> <img src="../images/awful_widget_watch.png" alt="Example screenshot"/></p>
+
+<p> Here is the most basic usage:</p>
+
+
+<p>DOC<em>HIDE --DOC</em>GEN_IMAGE</p>
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_defaults_watch.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+awful.widget.watch(<span class="string">'bash -c "echo Hello world! | grep Hello"'</span>, <span class="number">15</span>)
+</pre>
+
 </p>
     <div class="extra-header">
   <div class="extra-header__section">
@@ -573,20 +589,22 @@ DOC_HIDE --DOC_GEN_IMAGE
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">integer</span></span></td>
            <td class="see_also_description"> The time interval at which the textbox
- will be updated.
-</td>
+ will be updated.</td>
            <td><span class="default_value"><code>5</code></span></td>
          </tr>
         <tr>
            <td><span class="parameter">callback</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description"> The function that will be called after
+           <td class="see_also_description">
+<p> The function that will be called after
  the command output will be received. it is shown in the textbox.
- Defaults to:
-     function(widget, stdout, stderr, exitreason, exitcode)
-         widget:set_text(stdout)
-     end </td>
+ Defaults to:</p>
+<pre><code> function(widget, stdout, stderr, exitreason, exitcode)
+     widget:set_text(stdout)
+ end
+</code></pre>
+ </td>
            <td><span class="not_applicable">Undefined</span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -624,8 +642,7 @@ DOC_HIDE --DOC_GEN_IMAGE
            <td><span class="types"><span class="type">integer</span></span></td>
            <td class="see_also_description"> Exit code.
  For "exit" reason it's the exit code.
- For "signal" reason — the signal causing process termination.
-</td>
+ For "signal" reason — the signal causing process termination.</td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr>
@@ -752,10 +769,12 @@ DOC_HIDE --DOC_GEN_IMAGE
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.
+    Connect to a signal weakly. </p>
+
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.
-<p> **Warning:**
+ automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -835,19 +854,26 @@ DOC_HIDE --DOC_GEN_IMAGE
     </span>
     </dt>
     <dd>
-    Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal.
+
+<p>Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal. </p>
+
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.
-<p> Note that this function has some flaws:
-<p> 1. The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.</p>
+
+<p> Note that this function has some flaws:</p>
+
+<ol>
+    <li>The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.
- 2. In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.</li>
+    <li>In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).
- 3. If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.
+    tree path).</li>
+    <li>If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.</li>
+</ol>
+
 
 
     <h3>Parameters:</h3>
@@ -862,7 +888,9 @@ DOC_HIDE --DOC_GEN_IMAGE
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>
@@ -1392,7 +1420,8 @@ DOC_HIDE --DOC_GEN_IMAGE
     </span>
     </dt>
     <dd>
-    The widget buttons.
+    The widget buttons. </p>
+
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>

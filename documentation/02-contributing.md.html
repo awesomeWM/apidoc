@@ -217,85 +217,132 @@
 
 <div id="content">
 
-    # Contributing
-<p>## Bugs
-<p>Please look at [GitHub Issues](https://github.com/awesomeWM/awesome/issues).
-<p>## Triage Issues [![Open Source Helpers](https://www.codetriage.com/AwesomeWM/awesome/badges/users.svg)](https://www.codetriage.com/AwesomeWM/awesome)
-<p>You can triage issues which may include reproducing bug reports or asking for vital information, such as version numbers or reproduction instructions. If you would like to start triaging issues, one easy way to get started is to [subscribe to AwesomeWM on CodeTriage](https://www.codetriage.com/AwesomeWM/awesome).
-<p>## Style
+
+<h1>Contributing</h1>
+
+<p><a name="Bugs"></a></p>
+<h2>Bugs</h2>
+
+<p>Please look at <a href="https://github.com/awesomeWM/awesome/issues">GitHub Issues</a>.</p>
+
+<p><a name="Triage_Issues____Open_Source_Helpers__https___www_codetriage_com_AwesomeWM_awesome_badges_users_svg___https___www_codetriage_com_AwesomeWM_awesome_"></a></p>
+<h2>Triage Issues <a href="https://www.codetriage.com/AwesomeWM/awesome"><img src="https://www.codetriage.com/AwesomeWM/awesome/badges/users.svg" alt="Open Source Helpers"/></a></h2>
+
+<p>You can triage issues which may include reproducing bug reports or asking for vital information, such as version numbers or reproduction instructions. If you would like to start triaging issues, one easy way to get started is to <a href="https://www.codetriage.com/AwesomeWM/awesome">subscribe to AwesomeWM on CodeTriage</a>.</p>
+
+<p><a name="Style"></a></p>
+<h2>Style</h2>
+
 <p>If you intend to patch and contribute to Awesome, please respect the
-following guidelines.
-<p>Imitate the existing code style. For concrete rules:
-<p> - Use 4 spaces indentation, do not use tabulator characters;
-<p> - Place braces alone on new lines, and do not place braces for single
-   line statement where it is not needed, i.e.:
-<p>        if(foo)
-            x = 1;
-<p>        if(foo)
-        {
-            x = 1;
-            bar();
-        }
-<p> - Do not put a space after if, for, while or function call statements;
-<p> - The preferred maximum line length is 80 characters;
-<p> - Use <code>/* */</code> for comments;
-<p> - Use the API: there is a list of <code>a_*()</code> functions you should use instead
-   of the standard libc ones. There is also a common API for linked lists,
-   tabulars, etc.;
-<p> - Be *clear* in what you do;
-<p> - Prefix your function names with the module they are enhancing,
-   i.e. if you add a function to manipulate a tag, prefix it with <code>tag_</code>;
-<p> - Write documentation for any new functions, options, whatever.
-<p>A vim modeline is set in each file to respect this.
-<p>### Documentation of Lua files
+following guidelines.</p>
+
+<p>Imitate the existing code style. For concrete rules:</p>
+
+<ul>
+    <li><p>Use 4 spaces indentation, do not use tabulator characters;</p></li>
+    <li><p>Place braces alone on new lines, and do not place braces for single
+    line statement where it is not needed, i.e.:</p></li>
+</ul>
+
+
+<pre>
+<span class="keyword">if</span>(foo)
+    x = <span class="number">1</span>;
+
+<span class="keyword">if</span>(foo)
+{
+    x = <span class="number">1</span>;
+    bar();
+}
+</pre>
+
+<p> - Do not put a space after if, for, while or function call statements;</p>
+
+<ul>
+    <li><p>The preferred maximum line length is 80 characters;</p></li>
+    <li><p>Use <code>/* */</code> for comments;</p></li>
+    <li><p>Use the API: there is a list of <code>a_*()</code> functions you should use instead
+    of the standard libc ones. There is also a common API for linked lists,
+    tabulars, etc.;</p></li>
+    <li><p>Be <em>clear</em> in what you do;</p></li>
+    <li><p>Prefix your function names with the module they are enhancing,
+    i.e. if you add a function to manipulate a tag, prefix it with <code>tag_</code>;</p></li>
+    <li><p>Write documentation for any new functions, options, whatever.</p></li>
+</ul>
+
+<p>A vim modeline is set in each file to respect this.</p>
+
+<h3>Documentation of Lua files</h3>
+
 <p>For documentation purposes LDoc---see
-[here](https://stevedonovan.github.io/ldoc/manual/doc.md.html) for its
+<a href="https://stevedonovan.github.io/ldoc/manual/doc.md.html">here</a> for its
 documentation---is used. Comments that shall be parsed by LDoc have the
-following format:
-<p>    --- summary.
-    -- Description; this can extend over
-    -- several lines
-<p>    -----------------
-    -- This will also do.
-<p>    --[[--
-     Summary. A description
-     ...;
-    ]]
+following format:</p>
+
+
+<pre>
+<span class="comment">--- summary.
+</span><span class="comment">-- Description; this can extend over
+</span><span class="comment">-- several lines
+</span>
+<span class="comment">-----------------
+</span><span class="comment">-- This will also do.
+</span>
+<span class="comment">--[[--
+ Summary. A description
+ ...;
+]]</span>
+</pre>
+
 <p>You can use the full power of
-[Markdown](http://daringfireball.net/projects/markdown) with the extensions of
-[Discount](http://www.pell.portland.or.us/~orc/Code/discount/) for markup in
-the comments.
+<a href="http://daringfireball.net/projects/markdown">Markdown</a> with the extensions of
+<a href="http://www.pell.portland.or.us/~orc/Code/discount/">Discount</a> for markup in
+the comments.</p>
+
 <p>Every module and class should have a short description at its beginning which
 should include <code>@author author</code>, <code>@copyright year author</code> and
-<code>@module module-name</code> or <code>@classmod class-name</code>.
+<code>@module module-name</code> or <code>@classmod class-name</code>.</p>
+
 <p>Parameters of functions should be documented using
 <code>@tparam &lt;type&gt; &lt;parmname&gt; &lt;description&gt;</code>, and return values via
-<code>@treturn &lt;type&gt; &lt;description&gt;</code>.
-<p>For a more comprehensive description of the available tags see the [LDoc
-documentation](https://stevedonovan.github.io/ldoc/manual/doc.md.html).
-<p>## Patches
-<p>If you plan to submit patches, you should follow the following guidelines.
-<p>### Commits
-<p>- make commits of logical units;
-- do not modify piece of code not related to your commit;
-- do not try to fix style of code you are not writing,
-  it's just adding noise for no gain;
-- check for unnecessary whitespace with <code>git diff --check</code> before committing;
-- do not check in commented out code or unneeded files;
-- provide a meaningful commit message;
-- the first line of the commit message should be a short;
-  description and should skip the full stop;
-- if you want your work included, add a
-  <code>Signed-off-by: Your Name &lt;you@example.com&gt;</code> line to the
-  commit message (or just use the option <code>-s</code> when committing);
-- make sure that you have tests for the bug you are fixing;
-- if possible, add a unit test to the test suite under spec/.
-<p>### Patches
+<code>@treturn &lt;type&gt; &lt;description&gt;</code>.</p>
+
+<p>For a more comprehensive description of the available tags see the <a href="https://stevedonovan.github.io/ldoc/manual/doc.md.html">LDoc
+documentation</a>.</p>
+
+<p><a name="Patches"></a></p>
+<h2>Patches</h2>
+
+<p>If you plan to submit patches, you should follow the following guidelines.</p>
+
+<h3>Commits</h3>
+
+<ul>
+    <li>make commits of logical units;</li>
+    <li>do not modify piece of code not related to your commit;</li>
+    <li>do not try to fix style of code you are not writing,
+    it's just adding noise for no gain;</li>
+    <li>check for unnecessary whitespace with <code>git diff --check</code> before committing;</li>
+    <li>do not check in commented out code or unneeded files;</li>
+    <li>provide a meaningful commit message;</li>
+    <li>the first line of the commit message should be a short;
+    description and should skip the full stop;</li>
+    <li>if you want your work included, add a
+    <code>Signed-off-by: Your Name &lt;you@example.com&gt;</code> line to the
+    commit message (or just use the option <code>-s</code> when committing);</li>
+    <li>make sure that you have tests for the bug you are fixing;</li>
+    <li>if possible, add a unit test to the test suite under spec/.</li>
+</ul>
+
+<h3>Patches</h3>
+
 <p>Submitting patches via pull requests on the GitHub project is the preferred
-method.
-<p>#### Pull request
-- create a [pull request](https://github.com/awesomeWM/awesome/pulls)
-<p>
+method.</p>
+
+<h4>Pull request</h4>
+<p>- create a <a href="https://github.com/awesomeWM/awesome/pulls">pull request</a></p>
+
+
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->

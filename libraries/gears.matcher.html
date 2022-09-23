@@ -220,187 +220,206 @@
 <h1>Module: <code>gears.matcher</code></h1>
 <p>A module to build a set of properties based on a graph of rules.</p>
 <p>
-<p> Sources
- =======
+
+
+<h1> Sources</h1>
+
 <p> This module holds the business logic used by <a href="../declarative_rules/ruled.client.html#">ruled.client</a>. It provides an
  object on which one can add sets of rules or, alternatively, functions.
- In this module, the sets of rules or custom functions are called sources.
+ In this module, the sets of rules or custom functions are called sources.</p>
+
 <p> The sources are used to build a property table. Once all sources are
  evaluated, the <code>:apply()</code> method will set the properties on the target
- object.
+ object.</p>
+
 <p> Sources can have dependencies between them and the property table can only
- be built if the sources graph can be resolved.
-<p> Rules
- =====
+ be built if the sources graph can be resolved.</p>
+
+<h1> Rules</h1>
+
 <p> The <code>rules</code> sources themselves are composed, as the name imply, of a set of
- rule. A rule is a table with a <a href="../libraries/gears.matcher.html#properties">properties</a> *or* <code>callbacks</code> attribute along
+ rule. A rule is a table with a <a href="../libraries/gears.matcher.html#properties">properties</a> <em>or</em> <code>callbacks</code> attribute along
  with either <a href="../libraries/gears.matcher.html#rule">rule</a> or <a href="../libraries/gears.matcher.html#rule_any">rule_any</a>. It is also possible to add an <a href="../libraries/gears.matcher.html#except">except</a> or
  <a href="../libraries/gears.matcher.html#except_any">except_any</a> attribute to narrow the scope in which the rule is applied.
- Here's a basic example of a minimal <a href="../libraries/gears.matcher.html#">gears.matcher</a>.
-<p>
-<p>
-**Usage example output**:
-<p> **Usage example:**
-<p>
+ Here's a basic example of a minimal <a href="../libraries/gears.matcher.html#">gears.matcher</a>.</p>
 
-     local o = {
-         foo    = "bar",
-         answer = 42,
-     }
 
-     -- This rule will match
-     local rule1 = {
-         rule = {
-             answer     = 42,
-             everything = true,
-         },
-         properties = {
-             name = "baz",
-         },
-     }
 
-     -- This rule will **not** match
-     local rule2 = {
-         -- When the rule properties are strings, the Lua
-         --pattern matching is used.
-         rule = {
-             foo = "[f]+",
-         },
-         properties = {
-             name = "foobar",
-         },
-     }
 
-     local rules = {
-         rule1,
-         rule2,
-     }
+<p><strong>Usage example output</strong>:</p>
 
-     local matcher = gears.matcher()
+<p> <strong>Usage example:</strong></p>
 
-     local function first_source(self, object, props, callbacks) --luacheck: no unused args
-         -- In this callback, you can add new elements to the props and
-         -- callbacks tables. It is not recommended the modify <a href="../utility_libraries/gears.object.html">object</a> in
-         -- this callback.
-         if object.answer == 42 then
-             props.is_everything = true
-         end
-     end
 
-     -- This will add a custom function to add properties to the rules.
-     matcher:add_matching_function("first", first_source, {}, {})
 
-     -- This will add the <code>rules</code> to this matcher.
-     matcher:add_matching_rules("second", rules, {"first"}, {})
 
-     -- Some properties cannot be checked with the <code>==</code> operator (like those
-     -- with multiple possible types). In that case, it is possible to define
-     -- special comparator function.
-     matcher:add_property_matcher("everything", function(obj, value)
-         return value and obj.answer == 42
-     end)
+<pre>
+<span class="keyword">local</span> o = {
+    foo    = <span class="string">"bar"</span>,
+    answer = <span class="number">42</span>,
+}
 
-     -- The same can be done for the property section.
-     matcher:add_property_setter("multiply_by", function(obj, value)
-         obj.answer = (obj.answer or 1) * value
-     end)
+<span class="comment">-- This rule will match
+</span><span class="keyword">local</span> rule1 = {
+    rule = {
+        answer     = <span class="number">42</span>,
+        everything = <span class="keyword">true</span>,
+    },
+    properties = {
+        name = <span class="string">"baz"</span>,
+    },
+}
 
-     -- It is possible to append rules to existing (or new) sources.
-     matcher:append_rule( "second", {
-         id   = "rule_with_id",
-         rule = {
-             has_elite = true,
-         },
-         properties = {
-             multiply_by = "1337",
-         },
-     })
+<span class="comment">-- This rule will **not** match
+</span><span class="keyword">local</span> rule2 = {
+    <span class="comment">-- When the rule properties are strings, the Lua
+</span>    <span class="comment">--pattern matching is used.
+</span>    rule = {
+        foo = <span class="string">"[f]+"</span>,
+    },
+    properties = {
+        name = <span class="string">"foobar"</span>,
+    },
+}
 
-     -- Or remove them.
-     matcher:remove_rule("second", "rule_with_id")
+<span class="keyword">local</span> rules = {
+    rule1,
+    rule2,
+}
 
-     -- Apply the properties to <code>o</code>
-     matcher:apply(o)
-<p> This example shows the different matching sections:
-<p>
-<p>
+<span class="keyword">local</span> matcher = gears.matcher()
 
-     local matcher = gears.matcher()
+<span class="keyword">local</span> <span class="keyword">function</span> first_source(self, object, props, callbacks) <span class="comment">--luacheck: no unused args
+</span>    <span class="comment">-- In this callback, you can add new elements to the props and
+</span>    <span class="comment">-- callbacks tables. It is not recommended the modify <a href="../utility_libraries/gears.object.html">object</a> in
+</span>    <span class="comment">-- this callback.
+</span>    <span class="keyword">if</span> object.answer == <span class="number">42</span> <span class="keyword">then</span>
+        props.is_everything = <span class="keyword">true</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
 
-     matcher:append_rule( "my.source", {
-         rule = {
-             my_any_rule = true,
-         },
-         rule_every = {
-             every1 = {1, 42},
-             every2 = {2, 42},
-             every3 = {3, 42},
-         },
-         except = {
-             except1 = 1,
-         },
-         properties = {
-             was_a_match = true,
-         },
-     })
+<span class="comment">-- This will add a custom function to add properties to the rules.
+</span>matcher:add_matching_function(<span class="string">"first"</span>, first_source, {}, {})
 
-     local candidate1 = {
-         my_any_rule = true,
-         every1      = 1,
-         every2      = 2,
-         every3      = 3,
-         was_a_match = false,
-     }
+<span class="comment">-- This will add the <code>rules</code> to this matcher.
+</span>matcher:add_matching_rules(<span class="string">"second"</span>, rules, {<span class="string">"first"</span>}, {})
 
-     local candidate2 = {
-         every2      = 2,
-         was_a_match = false,
-     }
+<span class="comment">-- Some properties cannot be checked with the <code>==</code> operator (like those
+</span><span class="comment">-- with multiple possible types). In that case, it is possible to define
+</span><span class="comment">-- special comparator function.
+</span>matcher:add_property_matcher(<span class="string">"everything"</span>, <span class="keyword">function</span>(obj, value)
+    <span class="keyword">return</span> value <span class="keyword">and</span> obj.answer == <span class="number">42</span>
+<span class="keyword">end</span>)
 
-     local candidate3 = {
-         my_any_rule = true,
-         was_a_match = false,
-         every1      = 1,
-         every2      = 2,
-         every3      = 3,
-         except1     = 1,
-     }
+<span class="comment">-- The same can be done for the property section.
+</span>matcher:add_property_setter(<span class="string">"multiply_by"</span>, <span class="keyword">function</span>(obj, value)
+    obj.answer = (obj.answer <span class="keyword">or</span> <span class="number">1</span>) * value
+<span class="keyword">end</span>)
 
-     matcher:apply(candidate1)
-     matcher:apply(candidate2)
-     matcher:apply(candidate3)
+<span class="comment">-- It is possible to append rules to existing (or new) sources.
+</span>matcher:append_rule( <span class="string">"second"</span>, {
+    id   = <span class="string">"rule_with_id"</span>,
+    rule = {
+        has_elite = <span class="keyword">true</span>,
+    },
+    properties = {
+        multiply_by = <span class="string">"1337"</span>,
+    },
+})
 
-     -- Only candidate1 fits all criteria.
-     assert(candidate1.was_a_match == true )
-     assert(candidate2.was_a_match == false)
-     assert(candidate3.was_a_match == false)
+<span class="comment">-- Or remove them.
+</span>matcher:remove_rule(<span class="string">"second"</span>, <span class="string">"rule_with_id"</span>)
 
-     -- It is also possible to match number property by range.
-     matcher:append_rule( "my.source", {
-         rule_greater = {
-             value = 50,
-         },
-         rule_lesser = {
-             value = 100,
-         },
-         properties = {
-             was_a_match = true,
-         },
-     })
+<span class="comment">-- Apply the properties to <code>o</code>
+</span>matcher:apply(o)
+</pre>
 
-     local candidate4 = { value = 40 , was_a_match = false }
-     local candidate5 = { value = 75 , was_a_match = false }
-     local candidate6 = { value = 101, was_a_match = false }
+<p> This example shows the different matching sections:</p>
 
-     matcher:apply(candidate4)
-     matcher:apply(candidate5)
-     matcher:apply(candidate6)
 
-     -- Only candidate5 fits all criteria.
-     assert(candidate4.was_a_match == false)
-     assert(candidate5.was_a_match == true )
-     assert(candidate6.was_a_match == false)
-<p> More examples are available in <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.
+
+
+
+
+<pre>
+<span class="keyword">local</span> matcher = gears.matcher()
+
+matcher:append_rule( <span class="string">"my.source"</span>, {
+    rule = {
+        my_any_rule = <span class="keyword">true</span>,
+    },
+    rule_every = {
+        every1 = {<span class="number">1</span>, <span class="number">42</span>},
+        every2 = {<span class="number">2</span>, <span class="number">42</span>},
+        every3 = {<span class="number">3</span>, <span class="number">42</span>},
+    },
+    except = {
+        except1 = <span class="number">1</span>,
+    },
+    properties = {
+        was_a_match = <span class="keyword">true</span>,
+    },
+})
+
+<span class="keyword">local</span> candidate1 = {
+    my_any_rule = <span class="keyword">true</span>,
+    every1      = <span class="number">1</span>,
+    every2      = <span class="number">2</span>,
+    every3      = <span class="number">3</span>,
+    was_a_match = <span class="keyword">false</span>,
+}
+
+<span class="keyword">local</span> candidate2 = {
+    every2      = <span class="number">2</span>,
+    was_a_match = <span class="keyword">false</span>,
+}
+
+<span class="keyword">local</span> candidate3 = {
+    my_any_rule = <span class="keyword">true</span>,
+    was_a_match = <span class="keyword">false</span>,
+    every1      = <span class="number">1</span>,
+    every2      = <span class="number">2</span>,
+    every3      = <span class="number">3</span>,
+    except1     = <span class="number">1</span>,
+}
+
+matcher:apply(candidate1)
+matcher:apply(candidate2)
+matcher:apply(candidate3)
+
+<span class="comment">-- Only candidate1 fits all criteria.
+</span><span class="global">assert</span>(candidate1.was_a_match == <span class="keyword">true</span> )
+<span class="global">assert</span>(candidate2.was_a_match == <span class="keyword">false</span>)
+<span class="global">assert</span>(candidate3.was_a_match == <span class="keyword">false</span>)
+
+<span class="comment">-- It is also possible to match number property by range.
+</span>matcher:append_rule( <span class="string">"my.source"</span>, {
+    rule_greater = {
+        value = <span class="number">50</span>,
+    },
+    rule_lesser = {
+        value = <span class="number">100</span>,
+    },
+    properties = {
+        was_a_match = <span class="keyword">true</span>,
+    },
+})
+
+<span class="keyword">local</span> candidate4 = { value = <span class="number">40</span> , was_a_match = <span class="keyword">false</span> }
+<span class="keyword">local</span> candidate5 = { value = <span class="number">75</span> , was_a_match = <span class="keyword">false</span> }
+<span class="keyword">local</span> candidate6 = { value = <span class="number">101</span>, was_a_match = <span class="keyword">false</span> }
+
+matcher:apply(candidate4)
+matcher:apply(candidate5)
+matcher:apply(candidate6)
+
+<span class="comment">-- Only candidate5 fits all criteria.
+</span><span class="global">assert</span>(candidate4.was_a_match == <span class="keyword">false</span>)
+<span class="global">assert</span>(candidate5.was_a_match == <span class="keyword">true</span> )
+<span class="global">assert</span>(candidate6.was_a_match == <span class="keyword">false</span>)
+</pre>
+
+<p> More examples are available in <a href="../declarative_rules/ruled.client.html#">ruled.client</a>.</p>
 </p>
     <div class="extra-header">
 
@@ -681,7 +700,7 @@
       <td class="shortname" ><a href="#callback">callback</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>function</span></td>
       <td class="summary">
-        A callback function to call *before* the <a href="../libraries/gears.matcher.html#properties">properties</a> have been applied.
+        A callback function to call <em>before</em> the <a href="../libraries/gears.matcher.html#properties">properties</a> have been applied.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -851,10 +870,10 @@
     </span>
     </dt>
     <dd>
-    Get list of matching rules for an object.
+    Get list of matching rules for an object. </p>
+
 <p> If the <code>rules</code> argument is not provided, the rules added with
  <a href="../libraries/gears.matcher.html#add_matching_rules">add_matching_rules</a> will be used.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -876,8 +895,8 @@
            <td><span class="parameter">rules</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
-           <td class="see_also_description"> The rules to check. List with "rule", "rule_any",
-  "except" and "except_any" keys. If no rules are provided, all rules
+           <td class="see_also_description"> The rules to check. List with "rule", "rule<em>any",
+  "except" and "except</em>any" keys. If no rules are provided, all rules
   registered with a source will be matched.</td>
            <td><span class="default_value"><code>nil</code></span></td>
          </tr>
@@ -954,20 +973,26 @@
     </span>
     </dt>
     <dd>
-    Assign a function to match an object property against a value.
+    Assign a function to match an object property against a value. </p>
+
 <p> The default matcher uses the <code>==</code> operator for all types. It also uses the
  <code>:match()</code> method for string and allows pattern matching. If the value is a
  function, then that function is called with the object and the current
  properties to be applied. If the function returns true, the match is
- accepted.
-<p> Custom property matcher are useful when objects are compared. This avoids
- having to implement custom metatable for everything.
-<p> The <code>f</code> function receives 3 arguments:
-<p> * The object to match against (anything)
- * The value to compare
- * The property/field name.
-<p> It should return <code>true</code> if it matches and <code>false</code> otherwise.
+ accepted.</p>
 
+<p> Custom property matcher are useful when objects are compared. This avoids
+ having to implement custom metatable for everything.</p>
+
+<p> The <code>f</code> function receives 3 arguments:</p>
+
+<ul>
+    <li>The object to match against (anything)</li>
+    <li>The value to compare</li>
+    <li>The property/field name.</li>
+</ul>
+
+<p> It should return <code>true</code> if it matches and <code>false</code> otherwise.
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1019,10 +1044,10 @@
     </span>
     </dt>
     <dd>
-    Add a special setter for a property.
+    Add a special setter for a property. </p>
+
 <p> This is useful to add more properties to object which only make sense within
  the context of a rule.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1094,7 +1119,7 @@
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
            <td class="see_also_description"> A list of names of sources this source
-  depends on (sources that must be executed *before* <code>name</code>).</td>
+  depends on (sources that must be executed <em>before</em> <code>name</code>).</td>
            <td><span class="default_value"><code>{}</code></span></td>
          </tr>
          <tr>
@@ -1190,7 +1215,7 @@
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
            <td class="see_also_description"> A list of names of sources this source depends on
-  (sources that must be executed *before* <code>name</code>).</td>
+  (sources that must be executed <em>before</em> <code>name</code>).</td>
            <td><span class="default_value"><code>{}</code></span></td>
          </tr>
          <tr>
@@ -1226,10 +1251,10 @@
     </span>
     </dt>
     <dd>
-    Remove a source.
+    Remove a source. </p>
+
 <p> This removes sources added with <a href="../libraries/gears.matcher.html#add_matching_function">add_matching_function</a> or
  <a href="../libraries/gears.matcher.html#add_matching_rules">add_matching_rules</a>.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1270,10 +1295,10 @@
     </span>
     </dt>
     <dd>
-    Apply ruled.client.rules to an object.
+    Apply ruled.client.rules to an object. </p>
+
 <p> Calling this will apply all properties provided by the matching functions
  and rules.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -1524,10 +1549,12 @@
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.
+    Connect to a signal weakly. </p>
+
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.
-<p> **Warning:**
+ automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -1823,7 +1850,7 @@
     <table class="see_also">
      <tr>
          <td><a href="../libraries/gears.matcher.html#callback" title="In the gears.matcher module.">callback</a></td>
-         <td>A callback function to call *before* the <a href="../libraries/gears.matcher.html#properties">properties</a> have been applied. </td>
+         <td>A callback function to call <em>before</em> the <a href="../libraries/gears.matcher.html#properties">properties</a> have been applied. </td>
          <td>
              <span class="chips">rule components</span>
          </td>
@@ -1844,9 +1871,9 @@
     </span>
     </dt>
     <dd>
-    A callback function to call *before* the <a href="../libraries/gears.matcher.html#properties">properties</a> have been applied.
-<p> The callback is called with the current client as first argument.
+    A callback function to call <em>before</em> the <a href="../libraries/gears.matcher.html#properties">properties</a> have been applied. </p>
 
+<p> The callback is called with the current client as first argument.
 
 
 
@@ -1904,7 +1931,6 @@
     </dt>
     <dd>
     Similar to <a href="../libraries/gears.matcher.html#rule">rule</a>, but each entry is a table with multiple values.
-<p>
 
 
 
@@ -2052,9 +2078,9 @@
     </span>
     </dt>
     <dd>
-    A table whose content will be compared to the target object current properties.
-<p> The comparison will be made using the lesser (<code>&lt;</code>) operator.
+    A table whose content will be compared to the target object current properties. </p>
 
+<p> The comparison will be made using the lesser (<code>&lt;</code>) operator.
 
 
 
@@ -2091,9 +2117,9 @@
     </span>
     </dt>
     <dd>
-    A table whose content will be compared to the target object current properties.
-<p> The comparison will be made using the greater (<code>&gt;</code>) operator.
+    A table whose content will be compared to the target object current properties. </p>
 
+<p> The comparison will be made using the greater (<code>&gt;</code>) operator.
 
 
 
@@ -2130,13 +2156,14 @@
     </span>
     </dt>
     <dd>
-    An identifier for this rule.
+    An identifier for this rule. </p>
+
 <p> It can be anything. It will be compared with the <code>==</code> operator. Strings are
- highly recommended.
+ highly recommended.</p>
+
 <p> Setting an <a href="../libraries/gears.matcher.html#id">id</a> is useful to be able to remove the rule by using its id
  instead of a table reference. Modules can also listen to <a href="../libraries/gears.matcher.html#rule::appended">rule::appended</a> and
  modify or disable a rule.
-
 
 
 

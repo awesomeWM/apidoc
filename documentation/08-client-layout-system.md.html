@@ -215,31 +215,48 @@
 
 <div id="content">
 
-    # The AwesomeWM client layout system
-<p>This document explains how to use clients layouts and how awesome manage them.
-<p>**Client layout**  refers to the mechanism awesome uses to place client on the screen. The layout definition can be a basic system where clients are all *floating* like in a normal *DE* (eg GNOME, KDE, ...) or tiled on the screen like in *tilled window manager* (eg i3, BSPWM, ...). It is also possible to define complex client layout mixing both concepts and even implementing a *[stateful](https://en.wikipedia.org/wiki/State_(computer_science)) placement strategy*.
-<p>Awesome WM manages client layouts per tag. It means each tag has its own layout selection and uses them independently from other tags. When multiple tags are selected at once, Awesome uses only client layouts from the first selected tag and apply it to all current clients.
-<p>## Layouts configuration
-<p>Layout can be configured by setting properties from the tag instance.
-<p>Example of creating a new tag with client layout parameters:
-``<code>lua
-awful.tag.add(&quot;My Tag&quot;, {
+
+<h1>The AwesomeWM client layout system</h1>
+
+<p>This document explains how to use clients layouts and how awesome manage them.</p>
+
+<p><strong>Client layout</strong>  refers to the mechanism awesome uses to place client on the screen. The layout definition can be a basic system where clients are all <em>floating</em> like in a normal <em>DE</em> (eg GNOME, KDE, ...) or tiled on the screen like in <em>tilled window manager</em> (eg i3, BSPWM, ...). It is also possible to define complex client layout mixing both concepts and even implementing a <em><a href="https://en.wikipedia.org/wiki/State_(computer_science">stateful</a> placement strategy</em>.</p>
+
+<p>Awesome WM manages client layouts per tag. It means each tag has its own layout selection and uses them independently from other tags. When multiple tags are selected at once, Awesome uses only client layouts from the first selected tag and apply it to all current clients.</p>
+
+<p><a name="Layouts_configuration"></a></p>
+<h2>Layouts configuration</h2>
+
+<p>Layout can be configured by setting properties from the tag instance.</p>
+
+<p>Example of creating a new tag with client layout parameters:</p>
+
+<pre>
+awful.tag.add(<span class="string">"My Tag"</span>, {
     screen = screen.primary,
     layout = awful.layout.suit.tile,
-    master_fill_policy = &quot;master_width_factor&quot;,
-    gap_single_client = false,
-    gap = 15
+    master_fill_policy = <span class="string">"master_width_factor"</span>,
+    gap_single_client = <span class="keyword">false</span>,
+    gap = <span class="number">15</span>
 })
-</code>`<code>
-&lt;p&gt;Example of changing client layout parameters on an existing tag:
-</code>`<code>lua
--- Change the gap for the tag </code>my_tag<code>:
-my_tag.useless_gap = 10
-&lt;p&gt;-- Change the master_width_factor for the tag </code>my_tag<code>:
-my_tag.master_width_factor = 0.5
-</code>``
-<p>Here is a list of common properties used to configure tags:
-<p><table class='widget_list' border=1>
+</pre>
+
+
+<p>Example of changing client layout parameters on an existing tag:</p>
+
+<pre>
+<span class="comment">-- Change the gap for the tag <code>my_tag</code>:
+</span>my_tag.useless_gap = <span class="number">10</span>
+
+<span class="comment">-- Change the master_width_factor for the tag <code>my_tag</code>:
+</span>my_tag.master_width_factor = <span class="number">0.5</span>
+</pre>
+
+
+<p>Here is a list of common properties used to configure tags:</p>
+
+
+<table class='widget_list' border=1>
 <tr>
 <th align='center'>Property</th>
 <th align='center'>Type</th>
@@ -252,11 +269,17 @@ my_tag.master_width_factor = 0.5
 <tr><td>icon</td><td>path or surface</td><td>Set the tag icon.</td></tr>
 <tr><td>column_count</td><td>integer</td><td>Set the number of columns.</td></tr>
 </table>
-<p>
-## Creating new client layouts
-<p>* arrange function (params definition)
-* needs a name property
-* mouse_resize_handler function
+
+
+
+<p><a name="Creating_new_client_layouts"></a></p>
+<h2>Creating new client layouts</h2>
+
+<ul>
+    <li>arrange function (params definition)</li>
+    <li>needs a name property</li>
+    <li>mouse<em>resize</em>handler function</li>
+</ul>
 
 
 </div> <!-- id="content" -->

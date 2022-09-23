@@ -224,100 +224,177 @@
 
 <div id="content">
 
-    # Readme
-<p>## About Awesome
-<p>Awesome is a highly configurable, next generation framework window manager for X.
-<p>## Building and installation
-<p>After extracting the dist tarball or cloning the repository, run:
-<p>``<code>sh
+
+<h1>Readme</h1>
+
+<p><a name="About_Awesome"></a></p>
+<h2>About Awesome</h2>
+
+<p>Awesome is a highly configurable, next generation framework window manager for X.</p>
+
+<p><a name="Building_and_installation"></a></p>
+<h2>Building and installation</h2>
+
+<p>After extracting the dist tarball or cloning the repository, run:</p>
+
+
+<pre>
 make
 sudo make install
-</code>`<code>
-&lt;p&gt;This will
-&lt;p&gt;1. create a build directory at </code>./build<code>,
-2. run </code>cmake<code>,
-3. build Awesome and
-4. install it to the default prefix path </code>/usr/local<code>.
-&lt;p&gt;Alternatively to the above, you can generate a </code>.deb<code> or </code>.rpm<code> package, for easy installation management:
-&lt;p&gt;</code>`<code>sh
-make package
-&lt;p&gt;sudo dpkg -i awesome-x.y.z.deb
-# or
+</pre>
+
+
+<p>This will</p>
+
+<ol>
+    <li>create a build directory at <code>./build</code>,</li>
+    <li>run <code>cmake</code>,</li>
+    <li>build Awesome and</li>
+    <li>install it to the default prefix path <code>/usr/local</code>.</li>
+</ol>
+
+<p>Alternatively to the above, you can generate a <code>.deb</code> or <code>.rpm</code> package, for easy installation management:</p>
+
+
+<pre>
+make <span class="global">package</span>
+
+sudo dpkg -i awesome-x.y.z.deb
+# <span class="keyword">or</span>
 sudo rpm -Uvh awesome-x.y.z.rpm
-</code>`<code>
-&lt;p&gt;### Advanced options and testing
-&lt;p&gt;A full list of dependencies, more advanced build options, as well as instructions on how to use the test suite can be found [here](https://awesomewm.org/apidoc/documentation/10-building-and-testing.md.html).
-&lt;p&gt;### Installing current git master as a package receipts
-&lt;p&gt;#### Arch Linux AUR
-&lt;p&gt;</code>`<code>sh
-sudo pacman -S --needed base-devel git
-git clone https://aur.archlinux.org/awesome-git.git
+</pre>
+
+
+<h3>Advanced options and testing</h3>
+
+<p>A full list of dependencies, more advanced build options, as well as instructions on how to use the test suite can be found <a href="https://awesomewm.org/apidoc/documentation/10-building-and-testing.md.html">here</a>.</p>
+
+<h3>Installing current git master as a package receipts</h3>
+
+<h4>Arch Linux AUR</h4>
+
+
+<pre>
+sudo pacman -S <span class="comment">--needed base-devel git
+</span>git clone https://aur.archlinux.org/awesome-git.git
 cd awesome-git
 makepkg -fsri
-</code>`<code>
-&lt;p&gt;#### Debian-based
-&lt;p&gt;</code>`<code>sh
+</pre>
+
+
+<h4>Debian-based</h4>
+
+
+<pre>
 sudo apt build-dep awesome
 git clone https://github.com/awesomewm/awesome
 cd awesome
-make package
+make <span class="global">package</span>
 cd build
 sudo apt install ./*.deb
-</code>`<code>
-&lt;p&gt;## Running Awesome
-&lt;p&gt;You can directly select Awesome from your display manager. If not, you can
-add the following line to your </code>.xinitrc<code> to start Awesome using </code>startx<code>
-or to </code>.xsession<code> to start Awesome using your display manager:
-&lt;p&gt;</code>`<code>sh
+</pre>
+
+
+<p><a name="Running_Awesome"></a></p>
+<h2>Running Awesome</h2>
+
+<p>You can directly select Awesome from your display manager. If not, you can
+add the following line to your <code>.xinitrc</code> to start Awesome using <code>startx</code>
+or to <code>.xsession</code> to start Awesome using your display manager:</p>
+
+
+<pre>
 exec awesome
-</code>`<code>
-&lt;p&gt;In order to connect Awesome to a specific display, make sure that
-the </code>DISPLAY<code> environment variable is set correctly, e.g.:
-&lt;p&gt;</code>`<code>sh
-DISPLAY=foo.bar:1 exec awesome
-</code>`<code>
-&lt;p&gt;(This will start Awesome on display </code>:1<code> of the host foo.bar.)
-&lt;p&gt;## Configuration
-&lt;p&gt;The configuration of Awesome is done by creating a
-</code>$XDG_CONFIG_HOME/awesome/rc.lua<code> file, typically </code>~/.config/awesome/rc.lua<code>.
-&lt;p&gt;An example configuration named </code>awesomerc.lua<code> is provided in the source.
-&lt;p&gt;## Troubleshooting
-&lt;p&gt;On most systems any message printed by Awesome (including warnings and errors)
-is written to </code>~/.xsession-errors<code>.
-&lt;p&gt;If Awesome does not start or the configuration file is not producing the
+</pre>
+
+
+<p>In order to connect Awesome to a specific display, make sure that
+the <code>DISPLAY</code> environment variable is set correctly, e.g.:</p>
+
+
+<pre>
+DISPLAY=foo.bar:<span class="number">1</span> exec awesome
+</pre>
+
+
+<p>(This will start Awesome on display <code>:1</code> of the host foo.bar.)</p>
+
+<p><a name="Configuration"></a></p>
+<h2>Configuration</h2>
+
+<p>The configuration of Awesome is done by creating a
+<code>$XDG_CONFIG_HOME/awesome/rc.lua</code> file, typically <code>~/.config/awesome/rc.lua</code>.</p>
+
+<p>An example configuration named <code>awesomerc.lua</code> is provided in the source.</p>
+
+<p><a name="Troubleshooting"></a></p>
+<h2>Troubleshooting</h2>
+
+<p>On most systems any message printed by Awesome (including warnings and errors)
+is written to <code>~/.xsession-errors</code>.</p>
+
+<p>If Awesome does not start or the configuration file is not producing the
 desired results the user should examine this file to gain insight into the
-problem.
-&lt;p&gt;### Debugging tips
-&lt;p&gt;You can call </code>awesome<code> with </code>gdb<code> like this:
-&lt;p&gt;</code>`<code>sh
-DISPLAY=:2 gdb awesome
-</code>`<code>
-&lt;p&gt;Then in </code>gdb<code> set any arguments and run it:
-&lt;p&gt;</code>`<code>
-(gdb) set args --replace
-(gdb) run
-</code>`<code>
-&lt;p&gt;## Asking questions
-&lt;p&gt;#### IRC
-&lt;p&gt;You can join us in the </code>#awesome` channel on the [OFTC](http://www.oftc.net/) IRC network.
-<p>[IRC Webchat](https://webchat.oftc.net/?channels=awesome)
-<p>#### Stack Overflow
-You can ask questions on [Stack Overflow](http://stackoverflow.com/questions/tagged/awesome-wm).
-<p>#### Reddit
-We also have an [awesome subreddit](https://www.reddit.com/r/awesomewm/) where you can share your work and ask questions.
-<p>## Reporting issues
-<p>Please report any issues you may find on [our bugtracker](https://github.com/awesomeWM/awesome/issues).
-<p>## Contributing code
-<p>You can submit pull requests on the [GitHub repository](https://github.com/awesomeWM/awesome).
-Please read the [contributing guide](https://github.com/awesomeWM/awesome/blob/master/docs/02-contributing.md) for any coding, documentation or patch guidelines.
-<p>## Status
-[![Build Status](https://travis-ci.com/awesomeWM/awesome.svg?branch=master)](https://travis-ci.com/awesomeWM/awesome)
-<p>## Documentation
-<p>Online documentation is available [here](https://awesomewm.org/apidoc/).
-<p>## License
+problem.</p>
+
+<h3>Debugging tips</h3>
+
+<p>You can call <a href="../core_components/awesome.html#">awesome</a> with <code>gdb</code> like this:</p>
+
+
+<pre>
+DISPLAY=:<span class="number">2</span> gdb awesome
+</pre>
+
+
+<p>Then in <code>gdb</code> set any arguments and run it:</p>
+
+<pre><code> (gdb) set args --replace
+ (gdb) run
+</code></pre>
+
+
+<p><a name="Asking_questions"></a></p>
+<h2>Asking questions</h2>
+
+<h4>IRC</h4>
+
+<p>You can join us in the <code>#awesome</code> channel on the <a href="http://www.oftc.net/">OFTC</a> IRC network.</p>
+
+<p><a href="https://webchat.oftc.net/?channels=awesome">IRC Webchat</a></p>
+
+<h4>Stack Overflow</h4>
+<p>You can ask questions on <a href="http://stackoverflow.com/questions/tagged/awesome-wm">Stack Overflow</a>.</p>
+
+<h4>Reddit</h4>
+<p>We also have an <a href="https://www.reddit.com/r/awesomewm/">awesome subreddit</a> where you can share your work and ask questions.</p>
+
+<p><a name="Reporting_issues"></a></p>
+<h2>Reporting issues</h2>
+
+<p>Please report any issues you may find on <a href="https://github.com/awesomeWM/awesome/issues">our bugtracker</a>.</p>
+
+<p><a name="Contributing_code"></a></p>
+<h2>Contributing code</h2>
+
+<p>You can submit pull requests on the <a href="https://github.com/awesomeWM/awesome">GitHub repository</a>.
+Please read the <a href="https://github.com/awesomeWM/awesome/blob/master/docs/02-contributing.md">contributing guide</a> for any coding, documentation or patch guidelines.</p>
+
+<p><a name="Status"></a></p>
+<h2>Status</h2>
+<p><a href="https://travis-ci.com/awesomeWM/awesome"><img src="https://travis-ci.com/awesomeWM/awesome.svg?branch=master" alt="Build Status"/></a></p>
+
+<p><a name="Documentation"></a></p>
+<h2>Documentation</h2>
+
+<p>Online documentation is available <a href="https://awesomewm.org/apidoc/">here</a>.</p>
+
+<p><a name="License"></a></p>
+<h2>License</h2>
+
 <p>The project is licensed under GNU General Public License v2 or later.
-You can read it online at ([v2](http://www.gnu.org/licenses/gpl-2.0.html)
-or [v3](http://www.gnu.org/licenses/gpl.html)).
+You can read it online at (<a href="http://www.gnu.org/licenses/gpl-2.0.html">v2</a>
+or <a href="http://www.gnu.org/licenses/gpl.html">v3</a>).</p>
 
 
 </div> <!-- id="content" -->

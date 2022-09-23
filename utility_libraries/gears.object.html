@@ -221,9 +221,7 @@
 <h1>Module: <code>gears.object</code></h1>
 <p>The object oriented programming base class used by various Awesome
  widgets and components.</p>
-<p>
-<p> It provide basic observer pattern, signaling and dynamic properties.
-</p>
+<p> It provide basic observer pattern, signaling and dynamic properties.</p>
     <div class="extra-header">
 
 
@@ -370,23 +368,31 @@
     </span>
     </dt>
     <dd>
-    Returns a new object.  You can call <code>:emit_signal()</code>, <code>:disconnect_signal()</code>
-  and <code>:connect_signal()</code> on the resulting object.
+
+<p>Returns a new object.  You can call <code>:emit_signal()</code>, <code>:disconnect_signal()</code>
+  and <code>:connect_signal()</code> on the resulting object.</p>
+
 <p> Note that <code>args.enable_auto_signals</code> is only supported when
- <code>args.enable_properties</code> is true.
-<p>
-<p>
-**Usage example output**:
-<p>    In get foo	bar
-    bar
-    In set foo	42
-    In get foo	42
-    42
-    In a method	1	2	3
-    nil
-    In the connection handler!	a cow
-    a cow
-<p>
+ <code>args.enable_properties</code> is true.</p>
+
+
+
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>In get foo  bar
+bar
+In set foo  42
+In get foo  42
+42
+In a method 1   2   3
+nil
+In the connection handler!  a cow
+a cow
+</code></pre>
+
+
+
 
     <h3>Parameters:</h3>
         <div class="important_box">
@@ -431,7 +437,9 @@
            <td><span class="parameter">class</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>nil</code></span></td>
          </tr>
         </table>
@@ -648,13 +656,20 @@ mt.__tostring = <span class="keyword">function</span>(o)
     </span>
     </dt>
     <dd>
-    Connect to a signal.
-<p>
-<p>
-**Usage example output**:
-<p>    In slot	[obj]	nil	nil	nil
-    In slot	[obj]	foo	bar	42
-<p>
+
+<p>Connect to a signal. </p>
+
+
+
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>In slot [obj]   nil nil nil
+In slot [obj]   foo bar 42
+</code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -714,13 +729,13 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.
+    Connect to a signal weakly. </p>
+
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
- **Warning:**
+ <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
  are doing.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -848,18 +863,23 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
     </span>
     </dt>
     <dd>
-    Add the missing properties handler to a CAPI object such as client/tag/screen.
- Valid args:
-<p> * **getter**: A smart getter (handle property getter itself)
- * **getter_fallback**: A dumb getter method (don't handle individual property getter)
- * **getter_class**: A module with individual property getter/setter
- * **getter_prefix**: A special getter prefix (like "get" or "get_" (default))
- * **setter**: A smart setter (handle property setter itself)
- * **setter_fallback**: A dumb setter method (don't handle individual property setter)
- * **setter_class**: A module with individual property getter/setter
- * **setter_prefix**: A special setter prefix (like "set" or "set_" (default))
- * **auto_emit**: Emit "property::___" automatically (default: false). This is
-     ignored when setter_fallback is set or a setter is found
+
+<p>Add the missing properties handler to a CAPI object such as client/tag/screen.
+ Valid args:</p>
+
+<ul>
+    <li><strong>getter</strong>: A smart getter (handle property getter itself)</li>
+    <li><strong>getter_fallback</strong>: A dumb getter method (don't handle individual property getter)</li>
+    <li><strong>getter_class</strong>: A module with individual property getter/setter</li>
+    <li><strong>getter_prefix</strong>: A special getter prefix (like "get" or "get_" (default))</li>
+    <li><strong>setter</strong>: A smart setter (handle property setter itself)</li>
+    <li><strong>setter_fallback</strong>: A dumb setter method (don't handle individual property setter)</li>
+    <li><strong>setter_class</strong>: A module with individual property getter/setter</li>
+    <li><strong>setter_prefix</strong>: A special setter prefix (like "set" or "set_" (default))</li>
+    <li><strong>auto_emit</strong>: Emit "property::__<em>" automatically (default: false). This is
+     ignored when setter</em>fallback is set or a setter is found</li>
+</ul>
+
 
 
     <h3>Parameters:</h3>

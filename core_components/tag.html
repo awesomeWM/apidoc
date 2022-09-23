@@ -224,132 +224,221 @@
 <h1>Module: <code>tag</code></h1>
 <p>Labelled container where <a href="../core_components/client.html#">client</a> objects can be stored.</p>
 <p>
-<p> What is a tag?
- ==============
+
+
+<h1> What is a tag?</h1>
+
 <p> In AwesomeWM, a <a href="../core_components/tag.html#">tag</a> is a group of clients. It can either be used as labels
- or as more classical workspaces depending on how they are configured.
-<p> ![Client geometry](../images/tag_props.svg)
-<p>  * A **tag** can be attached to **multiple clients**
-  * A **client** can be attached to **multiple tags**
-  * A **tag** can only be in 1 screen *any given time*, but can be moved
-  * All **clients** attached to a tag **must be in the same screen as the tag**
-<p> Creating tags
- =============
-<p> The default config initializes tags like this:
-<p>    awful.tag(
-      { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
-      s,
-      awful.layout.layouts[1]
-    )
+ or as more classical workspaces depending on how they are configured.</p>
+
+<p> <img src="../images/tag_props.svg" alt="Client geometry"/></p>
+
+<ul>
+    <li>A <strong>tag</strong> can be attached to <strong>multiple clients</strong></li>
+    <li>A <strong>client</strong> can be attached to <strong>multiple tags</strong></li>
+    <li>A <strong>tag</strong> can only be in 1 screen <em>any given time</em>, but can be moved</li>
+    <li>All <strong>clients</strong> attached to a tag <strong>must be in the same screen as the tag</strong></li>
+</ul>
+
+<h1> Creating tags</h1>
+
+<p> The default config initializes tags like this:</p>
+
+
+<pre>
+awful.tag(
+  { <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> },
+  s,
+  awful.layout.layouts[<span class="number">1</span>]
+)
+</pre>
+
 <p> If you wish to have tags with different properties, then <a href="../core_components/tag.html#awful.tag.add">awful.tag.add</a> is
- a better choice:
-<p>    awful.tag.add("First tag", {
-        icon               = "/path/to/icon1.png",
-        layout             = awful.layout.suit.tile,
-        master_fill_policy = "master_width_factor",
-        gap_single_client  = true,
-        gap                = 15,
-        screen             = s,
-        selected           = true,
-    })
-<p>    awful.tag.add("Second tag", {
-        icon = "/path/to/icon2.png",
-        layout = awful.layout.suit.max,
-        screen = s,
-    })
+ a better choice:</p>
+
+
+<pre>
+awful.tag.add(<span class="string">"First tag"</span>, {
+    icon               = <span class="string">"/path/to/icon1.png"</span>,
+    layout             = awful.layout.suit.tile,
+    master_fill_policy = <span class="string">"master_width_factor"</span>,
+    gap_single_client  = <span class="keyword">true</span>,
+    gap                = <span class="number">15</span>,
+    screen             = s,
+    selected           = <span class="keyword">true</span>,
+})
+
+awful.tag.add(<span class="string">"Second tag"</span>, {
+    icon = <span class="string">"/path/to/icon2.png"</span>,
+    layout = awful.layout.suit.max,
+    screen = s,
+})
+</pre>
+
 <p> Note: the example above sets "First tag" to be selected explicitly,
- because otherwise you will find yourself without any selected tag.
-<p> Accessing tags
- ==============
-<p> To access the "current tags", use
-<p>    local tags = awful.screen.focused().selected_tags
-<p> See: <code>awful.screen.focused</code>
-<p> See: <a href="../core_components/screen.html#selected_tags">screen.selected_tags</a>
-<p> To ignore the corner case where multiple tags are selected:
-<p>    local t = awful.screen.focused().selected_tag
-<p> See: <a href="../core_components/screen.html#selected_tag">screen.selected_tag</a>
-<p> To get all tags for the focused screen:
-<p>    local tags = awful.screen.focused().tags
-<p> See: <a href="../core_components/screen.html#tags">screen.tags</a>
-<p> To get all tags:
-<p>    local tags = root.tags()
-<p> To get the current tag of the focused client:
-<p>    local t = client.focus and client.focus.first_tag or nil
+ because otherwise you will find yourself without any selected tag.</p>
+
+<h1> Accessing tags</h1>
+
+<p> To access the "current tags", use</p>
+
+
+<pre>
+<span class="keyword">local</span> tags = awful.screen.focused().selected_tags
+</pre>
+
+<p> See: <code>awful.screen.focused</code></p>
+
+<p> See: <a href="../core_components/screen.html#selected_tags">screen.selected_tags</a></p>
+
+<p> To ignore the corner case where multiple tags are selected:</p>
+
+
+<pre>
+<span class="keyword">local</span> t = awful.screen.focused().selected_tag
+</pre>
+
+<p> See: <a href="../core_components/screen.html#selected_tag">screen.selected_tag</a></p>
+
+<p> To get all tags for the focused screen:</p>
+
+
+<pre>
+<span class="keyword">local</span> tags = awful.screen.focused().tags
+</pre>
+
+<p> See: <a href="../core_components/screen.html#tags">screen.tags</a></p>
+
+<p> To get all tags:</p>
+
+
+<pre>
+<span class="keyword">local</span> tags = root.tags()
+</pre>
+
+<p> To get the current tag of the focused client:</p>
+
+
+<pre>
+<span class="keyword">local</span> t = client.focus <span class="keyword">and</span> client.focus.first_tag <span class="keyword">or</span> <span class="keyword">nil</span>
+</pre>
+
 <p> See: <a href="../core_components/client.html#focus">client.focus</a>
- See: <a href="../core_components/client.html#first_tag">client.first_tag</a>
-<p> To get a tag from its name:
-<p>    local t = awful.tag.find_by_name(awful.screen.focused(), "name")
-<p> Common keybindings code
- =======================
+ See: <a href="../core_components/client.html#first_tag">client.first_tag</a></p>
+
+<p> To get a tag from its name:</p>
+
+
+<pre>
+<span class="keyword">local</span> t = awful.tag.find_by_name(awful.screen.focused(), <span class="string">"name"</span>)
+</pre>
+
+<h1> Common keybindings code</h1>
+
 <p> Here is a few useful shortcuts not part of the default <a href="../sample files/rc.lua.html#">rc.lua</a>. Add these
- functions above <code>-- {{{ Key bindings</code>:
-<p> Delete the current tag
-<p>    local function delete_tag()
-        local t = awful.screen.focused().selected_tag
-        if not t then return end
-        t:delete()
-    end
-<p> Create a new tag at the end of the list
-<p>    local function add_tag()
-        awful.tag.add("NewTag", {
-            screen = awful.screen.focused(),
-            layout = awful.layout.suit.floating }):view_only()
-    end
-<p> Rename the current tag
-<p>    local function rename_tag()
-        awful.prompt.run {
-            prompt       = "New tag name: ",
-            textbox      = awful.screen.focused().mypromptbox.widget,
-            exe_callback = function(new_name)
-                if not new_name or #new_name == 0 then return end
-<p>                local t = awful.screen.focused().selected_tag
-                if t then
-                    t.name = new_name
-                end
-            end
-        }
-    end
-<p> Move the focused client to a new tag
-<p>    local function move_to_new_tag()
-        local c = client.focus
-        if not c then return end
-<p>        local t = awful.tag.add(c.class,{screen= c.screen })
-        c:tags({t})
-        t:view_only()
-    end
-<p> Copy the current tag at the end of the list
-<p>    local function copy_tag()
-        local t = awful.screen.focused().selected_tag
-        if not t then return end
-<p>        local clients = t:clients()
-        local t2 = awful.tag.add(t.name, awful.tag.getdata(t))
-        t2:clients(clients)
-        t2:view_only()
-    end
-<p> And, in the <code>globalkeys</code> table:
-<p>    awful.key({ modkey,           }, "a", add_tag,
-              {description = "add a tag", group = "tag"}),
-    awful.key({ modkey, "Shift"   }, "a", delete_tag,
-              {description = "delete the current tag", group = "tag"}),
-    awful.key({ modkey, "Control"   }, "a", move_to_new_tag,
-              {description = "add a tag with the focused client", group = "tag"}),
-    awful.key({ modkey, "Mod1"   }, "a", copy_tag,
-              {description = "create a copy of the current tag", group = "tag"}),
-    awful.key({ modkey, "Shift"   }, "r", rename_tag,
-              {description = "rename the current tag", group = "tag"}),
+ functions above <code>-- {{{ Key bindings</code>:</p>
+
+<p> Delete the current tag</p>
+
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> delete_tag()
+    <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+    <span class="keyword">if</span> <span class="keyword">not</span> t <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
+    t:delete()
+<span class="keyword">end</span>
+</pre>
+
+<p> Create a new tag at the end of the list</p>
+
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> add_tag()
+    awful.tag.add(<span class="string">"NewTag"</span>, {
+        screen = awful.screen.focused(),
+        layout = awful.layout.suit.floating }):view_only()
+<span class="keyword">end</span>
+</pre>
+
+<p> Rename the current tag</p>
+
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> rename_tag()
+    awful.prompt.run {
+        prompt       = <span class="string">"New tag name: "</span>,
+        textbox      = awful.screen.focused().mypromptbox.widget,
+        exe_callback = <span class="keyword">function</span>(new_name)
+            <span class="keyword">if</span> <span class="keyword">not</span> new_name <span class="keyword">or</span> #new_name == <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
+
+            <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+            <span class="keyword">if</span> t <span class="keyword">then</span>
+                t.name = new_name
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    }
+<span class="keyword">end</span>
+</pre>
+
+<p> Move the focused client to a new tag</p>
+
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> move_to_new_tag()
+    <span class="keyword">local</span> c = client.focus
+    <span class="keyword">if</span> <span class="keyword">not</span> c <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
+
+    <span class="keyword">local</span> t = awful.tag.add(c.class,{screen= c.screen })
+    c:tags({t})
+    t:view_only()
+<span class="keyword">end</span>
+</pre>
+
+<p> Copy the current tag at the end of the list</p>
+
+
+<pre>
+<span class="keyword">local</span> <span class="keyword">function</span> copy_tag()
+    <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+    <span class="keyword">if</span> <span class="keyword">not</span> t <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
+
+    <span class="keyword">local</span> clients = t:clients()
+    <span class="keyword">local</span> t2 = awful.tag.add(t.name, awful.tag.getdata(t))
+    t2:clients(clients)
+    t2:view_only()
+<span class="keyword">end</span>
+</pre>
+
+<p> And, in the <code>globalkeys</code> table:</p>
+
+
+<pre>
+awful.key({ modkey,           }, <span class="string">"a"</span>, add_tag,
+          {description = <span class="string">"add a tag"</span>, group = <span class="string">"tag"</span>}),
+awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"a"</span>, delete_tag,
+          {description = <span class="string">"delete the current tag"</span>, group = <span class="string">"tag"</span>}),
+awful.key({ modkey, <span class="string">"Control"</span>   }, <span class="string">"a"</span>, move_to_new_tag,
+          {description = <span class="string">"add a tag with the focused client"</span>, group = <span class="string">"tag"</span>}),
+awful.key({ modkey, <span class="string">"Mod1"</span>   }, <span class="string">"a"</span>, copy_tag,
+          {description = <span class="string">"create a copy of the current tag"</span>, group = <span class="string">"tag"</span>}),
+awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"r"</span>, rename_tag,
+          {description = <span class="string">"rename the current tag"</span>, group = <span class="string">"tag"</span>}),
+</pre>
+
 <p> See the
  <a href="../documentation/05-awesomerc.md.html#global_keybindings">
    global keybindings
- </a> for more information about the keybindings.
+ </a> for more information about the keybindings.</p>
+
 <p> Some signal names are starting with a dot. These dots are artefacts from
  the documentation generation, you get the real signal name by
- removing the starting dot.
-<p>
+ removing the starting dot.</p>
 
- <object class="img-object" data="../images/AUTOGEN_uml_nav_tables_tag.svg" alt="Usage example" type="image/svg+xml"></object>
- Core components relationship
- ===
- <div class="components-relationship"><div class="components-relationship--diagrams">
+
+
+<p> <object class="img-object" data="../images/AUTOGEN_uml_nav_tables_tag.svg" alt="Usage example" type="image/svg+xml"></object></p>
+<h1> Core components relationship</h1>
+<p> <div class="components-relationship"><div class="components-relationship--diagrams">
  <div class="components-relationship--diagram"><table class='widget_list' border=1><colgroup span="3"></colgroup><tr><th align='center' colspan=3 scope=colgroup>Acquire other objects from a tag</th></tr><tr style='font-weight: bold;'><th align='center'>Class</th><th align='center'></th><th align='center'>Property</th></tr>
  <tr><td>client</td><td><img src="../images/AUTOGEN_uml_nav_tables_tag1.svg"></td><td>t:clients()</td></tr>
  <tr><td>screen</td><td><img src="../images/AUTOGEN_uml_nav_tables_tag2.svg"></td><td>t.screen</td></tr>
@@ -360,9 +449,9 @@
  <tr><td>screen</td><td><img src="../images/AUTOGEN_uml_nav_tables_tag5.svg"></td><td>s.selected_tag</td></tr>
  <tr><td>screen</td><td><img src="../images/AUTOGEN_uml_nav_tables_tag6.svg"></td><td>s.selected_tags</td></tr>
  </table></div>
- </div><div class="components-relationship--legend"><b>Legend:</b> <i>c</i>: a client object, <i>t</i>: a tag object, <i>s</i>: a screen object, <i>k</i>: an awful.key object, <i>b</i>: a awful.button object,<i>n</i>: a naughty.notification object</div></div> <!-- .components-relationship -->
+ </div><div class="components-relationship--legend"><b>Legend:</b> <i>c</i>: a client object, <i>t</i>: a tag object, <i>s</i>: a screen object, <i>k</i>: an awful.key object, <i>b</i>: a awful.button object,<i>n</i>: a naughty.notification object</div></div> <!-- .components-relationship --></p>
 
-
+<p> </p>
 </p>
     <div class="extra-header">
 
@@ -1384,12 +1473,17 @@
     </span>
     </dt>
     <dd>
-    Add a tag.
-<p> This function allow to create tags from a set of properties:
-<p>    local t = awful.tag.add("my new tag", {
-        screen = screen.primary,
-        layout = awful.layout.suit.max,
-    })
+
+<p>Add a tag. </p>
+
+<p> This function allow to create tags from a set of properties:</p>
+
+<pre><code>local t = awful.tag.add("my new tag", {
+    screen = screen.primary,
+    layout = awful.layout.suit.max,
+})
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -1605,34 +1699,46 @@
     </span>
     </dt>
     <dd>
-    Create a set of tags and attach it to a screen.
-<p> This is what's performed by the default config:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_default_config.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Calling awful.tag.new
-     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, screen[1], awful.layout.layouts[1])
-<p> It is also possible to set multiple layouts:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_new_with_layouts.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     local some_layouts = {
-         awful.layout.suit.fair,
-         awful.layout.suit.spiral,
-         awful.layout.suit.spiral.dwindle,
-         awful.layout.suit.magnifier,
-         awful.layout.suit.corner.nw,
-     }
 
-     -- Calling awful.tag.new
-     awful.tag({ "one", "two", "three", "four", "five" }, screen[1], some_layouts)
+<p>Create a set of tags and attach it to a screen. </p>
 
-     -- Add some clients
-     for _, t in ipairs(screen[1].tags) do
-         for _ = 1, 5 do
-             awful.spawn("xterm", {tag = t})
-         end
+<p> This is what's performed by the default config:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_default_config.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, screen[1], awful.layout.layouts[1])
+</code></pre>
+
+<p> It is also possible to set multiple layouts:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_new_with_layouts.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> local some_layouts = {
+     awful.layout.suit.fair,
+     awful.layout.suit.spiral,
+     awful.layout.suit.spiral.dwindle,
+     awful.layout.suit.magnifier,
+     awful.layout.suit.corner.nw,
+ }
+
+ -- Calling awful.tag.new
+ awful.tag({ "one", "two", "three", "four", "five" }, screen[1], some_layouts)
+
+ -- Add some clients
+ for _, t in ipairs(screen[1].tags) do
+     for _ = 1, 5 do
+         awful.spawn("xterm", {tag = t})
      end
+ end
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -2153,19 +2259,25 @@
     </span>
     </dt>
     <dd>
-    View no tag.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_viewnone.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Calling awful.tag.new
-     awful.tag({ "one", "two", "three", "four" }, screen[1])
 
-     -- Manually select some tags (tag 1 was auto selected).
-     screen[1].tags[3].selected = true
-     screen[1].tags[4].selected = true
+<p>View no tag. </p>
 
-     -- Deselect all tags.
-     awful.tag.viewnone()
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_viewnone.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ "one", "two", "three", "four" }, screen[1])
+
+ -- Manually select some tags (tag 1 was auto selected).
+ screen[1].tags[3].selected = true
+ screen[1].tags[4].selected = true
+
+ -- Deselect all tags.
+ awful.tag.viewnone()
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -2201,21 +2313,27 @@
     </span>
     </dt>
     <dd>
-    Select a tag relative to the currently selected one.
-<p> Note that this doesn't work well with multiple selection.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_viewidx.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Calling awful.tag.new
-     awful.tag({ "one", "two", "three", "four" }, screen[1])
+    Select a tag relative to the currently selected one. </p>
 
-     screen[1].tags[2]:view_only()
+<p> Note that this doesn't work well with multiple selection.</p>
 
-     -- Select the tag relative to idx 2.
-     awful.tag.viewidx(2)
 
-     -- Select the tag relative to idx -2.
-     awful.tag.viewidx(-2)
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_viewidx.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ "one", "two", "three", "four" }, screen[1])
+
+ screen[1].tags[2]:view_only()
+
+ -- Select the tag relative to idx 2.
+ awful.tag.viewidx(2)
+
+ -- Select the tag relative to idx -2.
+ awful.tag.viewidx(-2)
+</code></pre>
+
 <p> This is equivalent to <code>screen.tags[i]:view_only()</code>
 
     <h3>Parameters:</h3>
@@ -2230,7 +2348,7 @@
            <td><span class="parameter">i</span></td>
            <td></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description"> The **relative** index to see.</td>
+           <td class="see_also_description"> The <strong>relative</strong> index to see.</td>
          </tr>
          <tr>
            <td><span class="parameter">screen</span></td>
@@ -2281,21 +2399,28 @@
     </span>
     </dt>
     <dd>
-    View next tag.  This is the same as <code>tag.viewidx(1)</code>.
-<p> Note that this doesn't work well with multiple selection.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_viewnext.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Calling awful.tag.new
-     awful.tag({ "one", "two", "three", "four" }, screen[1])
 
-     screen[1].tags[3]:view_only()
+<p>View next tag.  This is the same as <code>tag.viewidx(1)</code>.</p>
 
-     -- Select the next tag.
-     awful.tag.viewnext()
+<p> Note that this doesn't work well with multiple selection.</p>
 
-     -- Select the next tag (again).
-     awful.tag.viewnext()
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_viewnext.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ "one", "two", "three", "four" }, screen[1])
+
+ screen[1].tags[3]:view_only()
+
+ -- Select the next tag.
+ awful.tag.viewnext()
+
+ -- Select the next tag (again).
+ awful.tag.viewnext()
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -2348,21 +2473,28 @@
     </span>
     </dt>
     <dd>
-    View previous tag.  This is the same a <code>tag.viewidx(-1)</code>.
-<p> Note that this doesn't work well with multiple selection.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_viewprev.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Calling awful.tag.new
-     awful.tag({ "one", "two", "three", "four" }, screen[1])
 
-     screen[1].tags[2]:view_only()
+<p>View previous tag.  This is the same a <code>tag.viewidx(-1)</code>.</p>
 
-     -- Select the previous tag.
-     awful.tag.viewprev()
+<p> Note that this doesn't work well with multiple selection.</p>
 
-     -- Select the previous tag (again).
-     awful.tag.viewprev()
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_viewprev.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ "one", "two", "three", "four" }, screen[1])
+
+ screen[1].tags[2]:view_only()
+
+ -- Select the previous tag.
+ awful.tag.viewprev()
+
+ -- Select the previous tag (again).
+ awful.tag.viewprev()
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -2415,11 +2547,11 @@
     </span>
     </dt>
     <dd>
-    View only a set of tags.
+    View only a set of tags. </p>
+
 <p> If <code>maximum</code> is set, there will be a limit on the number of new tag being
  selected. The tags already selected do not count. To do nothing if one or
  more of the tags are already selected, set <code>maximum</code> to zero.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2518,7 +2650,6 @@
     Add a signal to all attached tags and all tags that will be attached in the
  future.  When a tag is detached from the screen, its signal is removed.
 
-
     <h3>Parameters:</h3>
     <table class="see_also">
          <tr class="param_header">
@@ -2543,7 +2674,9 @@
            <td><span class="parameter">callback</span></td>
            <td></td>
            <td><span class="types"><span class="type">function</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
         </table>
 
@@ -2569,19 +2702,23 @@
     </span>
     </dt>
     <dd>
-    Tag name.
-<p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_tag_name.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>Tag name. </p>
 
 
-      -- Calling awful.tag.new
-      awful.tag({ "one", "two", "three", "four" }, screen[1])
 
-      screen[1].tags[2]:view_only()
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_tag_name.svg" alt="Usage example" type="image/svg+xml"></object></p>
 
-      -- Change the name to New*tag*name.
-      screen[1].tags[2].name = "New*tag*name"
+
+<pre><code>  -- Calling awful.tag.new
+  awful.tag({ "one", "two", "three", "four" }, screen[1])
+
+  screen[1].tags[2]:view_only()
+
+  -- Change the name to New*tag*name.
+  screen[1].tags[2].name = "New*tag*name"
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -2630,19 +2767,23 @@
     </span>
     </dt>
     <dd>
-    True if the tag is selected to be viewed.
-<p>
 
- <object class="img-object" data="../images/AUTOGEN_sequences_tag_selected.svg" alt="Usage example" type="image/svg+xml"></object>
+<p>True if the tag is selected to be viewed. </p>
 
 
-      -- Calling awful.tag.new
-      awful.tag({ "one", "two", "three", "four" }, screen[1])
 
-      -- Change the selection.
-      screen[1].tags[1].selected = not screen[1].tags[1].selected
-      screen[1].tags[2].selected = true
-      screen[1].tags[3].selected = true
+<p> <object class="img-object" data="../images/AUTOGEN_sequences_tag_selected.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>  -- Calling awful.tag.new
+  awful.tag({ "one", "two", "three", "four" }, screen[1])
+
+  -- Change the selection.
+  screen[1].tags[1].selected = not screen[1].tags[1].selected
+  screen[1].tags[2].selected = true
+  screen[1].tags[3].selected = true
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -2755,20 +2896,24 @@
     </span>
     </dt>
     <dd>
-    The tag index.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_index.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Calling awful.tag.new
-     awful.tag({ "one", "two", "three", "four" }, screen[1])
+    The tag index. </p>
 
-     -- Send the first tag to index 3.
-     screen[1].tags[1].index = 3
 
-     -- Send the first tag to index 3.
-     screen[1].tags[4].index = 1
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_index.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ "one", "two", "three", "four" }, screen[1])
+
+ -- Send the first tag to index 3.
+ screen[1].tags[1].index = 3
+
+ -- Send the first tag to index 3.
+ screen[1].tags[4].index = 1
+</code></pre>
+
 <p> The index is the position as shown in the <a href="../widgets/awful.widget.taglist.html#">awful.widget.taglist</a>.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2913,19 +3058,25 @@
     </span>
     </dt>
     <dd>
-    The tag master width factor.
+    The tag master width factor. </p>
+
 <p> The master width factor is one of the 5 main properties used to configure
- the <a href="../core_components/tag.html#layout">layout</a>. Each layout interpret (or ignore) this property differently.
+ the <a href="../core_components/tag.html#layout">layout</a>. Each layout interpret (or ignore) this property differently.</p>
+
 <p> See the layout suit documentation for information about how the master width
- factor is used.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_screen_mwfact.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- When multiple columns are used, the master width remains the same, but
- the other columns split the remaining space among them:
-<p>
+ factor is used.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_screen_mwfact.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> When multiple columns are used, the master width remains the same, but
+ the other columns split the remaining space among them:</p>
+
+
+
 <p><object class="img-object" data="../images/AUTOGEN_screen_mwfact2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3035,22 +3186,31 @@
     </span>
     </dt>
     <dd>
-    The tag client layout.
+    The tag client layout. </p>
+
 <p> This property holds the layout. A layout can be either stateless or stateful.
  Stateless layouts are used by default by Awesome. They tile clients without
  any other overhead. They take an ordered list of clients and place them on
  the screen. Stateful layouts create an object instance for each tags and
  can store variables and metadata. Because of this, they are able to change
- over time and be serialized (saved).
-<p> Both types of layouts have valid usage scenarios.
-<p> **Stateless layouts:**
+ over time and be serialized (saved).</p>
+
+<p> Both types of layouts have valid usage scenarios.</p>
+
+<p> <strong>Stateless layouts:</strong></p>
+
 <p> These layouts are stored in <code>awful.layout.suit</code>. They expose a table with 2
- fields:
-<p> * **name** (*string*): The layout name. This should be unique.
- * **arrange** (*function*): The function called when the clients need to be
+ fields:</p>
+
+<ul>
+    <li><strong>name</strong> (<em>string</em>): The layout name. This should be unique.</li>
+    <li><strong>arrange</strong> (<em>function</em>): The function called when the clients need to be
      placed. The only parameter is a table or arguments returned by
-     <a href="../libraries/awful.layout.html#awful.layout.parameters">awful.layout.parameters</a>
-<p> The parameter table contains:
+     <a href="../libraries/awful.layout.html#awful.layout.parameters">awful.layout.parameters</a></li>
+</ul>
+
+<p> The parameter table contains:</p>
+
 <p> <table class='widget_list' border=1>
   <tr style='font-weight: bold;'>
    <th align='center'>Parameter </th>
@@ -3075,19 +3235,23 @@
    Empty. Place the client as key and preferred geometry<br/>
    as value. Do not call <code>:geometry()</code> directly.
   </td></tr>
- </table>
-<p> **Stateful layouts:**
+ </table></p>
+
+<p> <strong>Stateful layouts:</strong></p>
+
 <p> The stateful layouts API is the same as stateless, but they are a function
  returining a layout instead of a layout itself. They also should have an
  <code>is_dynamic = true</code> property. If they don't, <code>awful.tag</code> will create a new
  instance every time the layout is set. If they do, the instance will be
- cached and re-used.
-<p>
- The client organized by the layout will fill the screen <code>tiling_area</code>
- section:
-<p>
+ cached and re-used.</p>
+
+
+<p> The client organized by the layout will fill the screen <code>tiling_area</code>
+ section:</p>
+
+
+
 <p><object class="img-object" data="../images/AUTOGEN_screen_taglayout.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3156,7 +3320,8 @@
      <tr>
      <tr>
          <td><a href="../libraries/awful.layout.html#awful.layout.parameters" title="In the awful.layout module.">awful.layout.parameters</a></td>
-         <td>Get the layout parameters used for the screen
+         <td>Get the layout parameters used for the screen</p>
+
 <p> This should give the same result as "arrange", but without the "geometries"
  parameter, as this is computed during arranging. (awful.layout)</td>
          <td>
@@ -3194,15 +3359,16 @@
     </span>
     </dt>
     <dd>
-    The (proposed) list of available layouts for this tag.
+    The (proposed) list of available layouts for this tag. </p>
+
 <p> This property allows to define a subset (or superset) of layouts available
  in the "rotation table". In the default configuration file, <code>Mod4+Space</code>
  and <code>Mod4+Shift+Space</code> are used to switch between tags. The
- <a href="../widgets/awful.widget.layoutlist.html#">awful.widget.layoutlist</a> also uses this as its default layout filter.
+ <a href="../widgets/awful.widget.layoutlist.html#">awful.widget.layoutlist</a> also uses this as its default layout filter.</p>
+
 <p> By default, it will be the same as <a href="../libraries/awful.layout.html#awful.layout.layouts">awful.layout.layouts</a> unless there the
  a layout not present is used. If that's the case they will be added at the
  front of the list.
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3300,53 +3466,66 @@
     </span>
     </dt>
     <dd>
-    Define if the tag must be deleted when the last client is untagged.
+    Define if the tag must be deleted when the last client is untagged. </p>
+
 <p> This is useful to create "throw-away" tags for operation like 50/50
- (Windows "Aero Snap) side-by-side views. This keybinding code for this is:
-<p>    local function aero_tag()
-        local c = client.focus
-<p>        if not c then return end
-<p>        local c2 = awful.client.focus.history.list[2]
-<p>        if (not c2) or c2 == c then return end
-<p>        local t = awful.tag.add("Aero", {
-            screen              = c.screen,
-            volatile            = true,
-            layout              = awful.layout.suit.tile,
-            master_width_factor = 0.5
-        })
-<p>        t:clients({c, c2})
-<p>        t:view_only()
-    end
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_volatile.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Create a non-volatile and a volatile tag.
-     awful.tag.add("Non-Volatile", {
-         screen   = screen[1],
-         layout   = awful.layout.suit.corner.nw,
-         volatile = false,
-     })
+ (Windows "Aero Snap) side-by-side views. This keybinding code for this is:</p>
 
-     awful.tag.add("Volatile", {
-         screen   = screen[1],
-         layout   = awful.layout.suit.corner.nw,
-         volatile = true,
-     })
+<pre><code>local function aero_tag()
+    local c = client.focus
 
-     -- Add some clients.
-     for _, t in ipairs(screen[1].tags) do
-         for _ = 1, 5 do
-             awful.spawn("xterm", {tag = t})
-         end
+    if not c then return end
+
+    local c2 = awful.client.focus.history.list[2]
+
+    if (not c2) or c2 == c then return end
+
+    local t = awful.tag.add("Aero", {
+        screen              = c.screen,
+        volatile            = true,
+        layout              = awful.layout.suit.tile,
+        master_width_factor = 0.5
+    })
+
+    t:clients({c, c2})
+
+    t:view_only()
+end
+</code></pre>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_volatile.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Create a non-volatile and a volatile tag.
+ awful.tag.add("Non-Volatile", {
+     screen   = screen[1],
+     layout   = awful.layout.suit.corner.nw,
+     volatile = false,
+ })
+
+ awful.tag.add("Volatile", {
+     screen   = screen[1],
+     layout   = awful.layout.suit.corner.nw,
+     volatile = true,
+ })
+
+ -- Add some clients.
+ for _, t in ipairs(screen[1].tags) do
+     for _ = 1, 5 do
+         awful.spawn("xterm", {tag = t})
      end
+ end
 
-     -- Kill all clients.
-     while #client.get() ~= 0 do
-         client.get()[1]:kill()
-     end
+ -- Kill all clients.
+ while #client.get() ~= 0 do
+     client.get()[1]:kill()
+ end
+</code></pre>
+
 <p> As you can see, the "Volatile" tag has been automatically discarded while
  the "Non-volatile" tag is still there (but with zero clients).
-
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3412,17 +3591,23 @@
     </span>
     </dt>
     <dd>
-    The gap (spacing, also called <a href="../core_components/tag.html#beautiful.useless_gap">useless_gap</a>) between clients.
+    The gap (spacing, also called <a href="../core_components/tag.html#beautiful.useless_gap">useless_gap</a>) between clients. </p>
+
 <p> This property allows to waste space on the screen in the name of style,
- unicorns and readability.
-<p> In this example, the value of <a href="../core_components/tag.html#gap">gap</a> is set to 20:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_screen_gaps.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- Compared to setting to the (very high) value of 50:
-<p>
+ unicorns and readability.</p>
+
+<p> In this example, the value of <a href="../core_components/tag.html#gap">gap</a> is set to 20:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_screen_gaps.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> Compared to setting to the (very high) value of 50:</p>
+
+
+
 <p><object class="img-object" data="../images/AUTOGEN_screen_gaps2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3517,19 +3702,25 @@
     </span>
     </dt>
     <dd>
-    Enable gaps for a single client.
+    Enable gaps for a single client. </p>
+
 <p> If the gaps are used purely for readability when multiple
  clients are tiled, then it may make sense to disable it
  when there is only a single client (to recover that space).
- In that case, set <a href="../core_components/tag.html#gap_single_client">gap_single_client</a> to <code>false</code>.
-<p> Default (with a 20px gap):
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_screen_gap_single_client_true.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- when set to false:
-<p>
+ In that case, set <a href="../core_components/tag.html#gap_single_client">gap_single_client</a> to <code>false</code>.</p>
+
+<p> Default (with a 20px gap):</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_screen_gap_single_client_true.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> when set to false:</p>
+
+
+
 <p><object class="img-object" data="../images/AUTOGEN_screen_gap_single_client_false.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3604,20 +3795,27 @@
     </span>
     </dt>
     <dd>
-    Set size fill policy for the master client(s).
-<p> Some multi-column layouts can be configured so that the space is
- redistributed when there is not enough clients to fill all columns.
-<p> This is the default behavior of the <code>tile.left</code> layout (*expand*):
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_screen_mfpol2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- This is what happends when set to <a href="../core_components/tag.html#master_width_factor">master_width_factor</a>:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_screen_mfpol.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
- The remaining space that would have been used for the second column is
- redistributed on both side.
+    Set size fill policy for the master client(s). </p>
 
+<p> Some multi-column layouts can be configured so that the space is
+ redistributed when there is not enough clients to fill all columns.</p>
+
+<p> This is the default behavior of the <code>tile.left</code> layout (<em>expand</em>):</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_screen_mfpol2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> This is what happends when set to <a href="../core_components/tag.html#master_width_factor">master_width_factor</a>:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_screen_mfpol.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> The remaining space that would have been used for the second column is
+ redistributed on both side.
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3708,29 +3906,35 @@
     </span>
     </dt>
     <dd>
-    Set the number of master windows.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_master_count.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Create a tag with master count of 1 and tag with count of 2
-     awful.tag.add("Master 1", {
-         screen   = screen[1],
-         layout   = awful.layout.suit.tile,
-         master_count = 1,
-     })
 
-     awful.tag.add("Master 2", {
-         screen   = screen[1],
-         layout   = awful.layout.suit.tile,
-         master_count = 2,
-     })
+<p>Set the number of master windows. </p>
 
-     -- Add some clients.
-     for _, t in ipairs(screen[1].tags) do
-         for _ = 1, 5 do
-             awful.spawn("xterm", {tag = t})
-         end
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_master_count.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Create a tag with master count of 1 and tag with count of 2
+ awful.tag.add("Master 1", {
+     screen   = screen[1],
+     layout   = awful.layout.suit.tile,
+     master_count = 1,
+ })
+
+ awful.tag.add("Master 2", {
+     screen   = screen[1],
+     layout   = awful.layout.suit.tile,
+     master_count = 2,
+ })
+
+ -- Add some clients.
+ for _, t in ipairs(screen[1].tags) do
+     for _ = 1, 5 do
+         awful.spawn("xterm", {tag = t})
      end
+ end
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -3813,17 +4017,23 @@
     </span>
     </dt>
     <dd>
-    Set the tag icon.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_taglist_icon.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     awful.tag.add("one", {})
 
-     awful.tag.add("two", {
-         icon = beautiful.awesome_icon
-     })
+<p>Set the tag icon. </p>
 
-     awful.tag.add("three", {})
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_awidget_taglist_icon.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> awful.tag.add("one", {})
+
+ awful.tag.add("two", {
+     icon = beautiful.awesome_icon
+ })
+
+ awful.tag.add("three", {})
+</code></pre>
+
 
 
 
@@ -3937,35 +4147,41 @@
     </span>
     </dt>
     <dd>
-    Set the number of columns.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_column_count.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Create a tag with column count of 1 and tag with count of 2
-     awful.tag.add("1 column", {
-         screen   = screen[1],
-         layout   = awful.layout.suit.tile,
-         column_count = 1,
-     })
 
-     awful.tag.add("2 columns", {
-         screen   = screen[1],
-         layout   = awful.layout.suit.tile,
-         column_count = 2,
-     })
+<p>Set the number of columns. </p>
 
-     awful.tag.add("3 columns", {
-         screen   = screen[1],
-         layout   = awful.layout.suit.tile,
-         column_count = 3,
-     })
 
-     -- Add some clients.
-     for _, t in ipairs(screen[1].tags) do
-         for _ = 1, 6 do
-             awful.spawn("xterm", {tag = t})
-         end
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_column_count.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Create a tag with column count of 1 and tag with count of 2
+ awful.tag.add("1 column", {
+     screen   = screen[1],
+     layout   = awful.layout.suit.tile,
+     column_count = 1,
+ })
+
+ awful.tag.add("2 columns", {
+     screen   = screen[1],
+     layout   = awful.layout.suit.tile,
+     column_count = 2,
+ })
+
+ awful.tag.add("3 columns", {
+     screen   = screen[1],
+     layout   = awful.layout.suit.tile,
+     column_count = 3,
+ })
+
+ -- Add some clients.
+ for _, t in ipairs(screen[1].tags) do
+     for _ = 1, 6 do
+         awful.spawn("xterm", {tag = t})
      end
+ end
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -4095,17 +4311,23 @@
     </span>
     </dt>
     <dd>
-    Swap 2 tags.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_swap.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Calling awful.tag.new
-     awful.tag({ "one", "two", "three", "four" }, screen[1])
 
-     screen[1].tags[2]:view_only()
+<p>Swap 2 tags. </p>
 
-     -- Swap tag 2 with tag 4.
-     screen[1].tags[2]:swap(screen[1].tags[4])
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_swap.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ "one", "two", "three", "four" }, screen[1])
+
+ screen[1].tags[2]:view_only()
+
+ -- Swap tag 2 with tag 4.
+ screen[1].tags[2]:swap(screen[1].tags[4])
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -4152,15 +4374,21 @@
     </span>
     </dt>
     <dd>
-    Remove all tagged clients.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_clear.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Calling awful.tag.new
-     awful.tag({ "one", "two" }, screen[1], some_layouts)
 
-     -- Call :clear() on the first tag.
-     screen[1].tags[1]:clear{}
+<p>Remove all tagged clients. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_clear.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ "one", "two" }, screen[1], some_layouts)
+
+ -- Call :clear() on the first tag.
+ screen[1].tags[1]:clear{}
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -4236,18 +4464,25 @@
     </span>
     </dt>
     <dd>
-    Delete a tag.
-<p> To delete the current tag:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_delete.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Calling awful.tag.new
-     awful.tag({ "one", "two", "three", "four" }, screen[1])
 
-     screen[1].tags[2]:view_only()
+<p>Delete a tag. </p>
 
-     -- Delete the selected tag.
-     mouse.screen.selected_tag:delete()
+<p> To delete the current tag:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_delete.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ "one", "two", "three", "four" }, screen[1])
+
+ screen[1].tags[2]:view_only()
+
+ -- Delete the selected tag.
+ mouse.screen.selected_tag:delete()
+</code></pre>
+
 
 
     <h3>Parameters:</h3>
@@ -4321,19 +4556,25 @@
     </span>
     </dt>
     <dd>
-    View only a tag.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_view_only.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Calling awful.tag.new
-     awful.tag({ "one", "two", "three", "four" }, screen[1])
 
-     -- Manually select some tags (tag 1 was auto selected).
-     screen[1].tags[3].selected = true
-     screen[1].tags[4].selected = true
+<p>View only a tag. </p>
 
-     -- Call :view_only() on the second tag.
-     screen[1].tags[2]:view_only()
+
+
+<p><object class="img-object" data="../images/AUTOGEN_sequences_tag_view_only.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code> -- Calling awful.tag.new
+ awful.tag({ "one", "two", "three", "four" }, screen[1])
+
+ -- Manually select some tags (tag 1 was auto selected).
+ screen[1].tags[3].selected = true
+ screen[1].tags[4].selected = true
+
+ -- Call :view_only() on the second tag.
+ screen[1].tags[2]:view_only()
+</code></pre>
+
 
 
 
@@ -4451,10 +4692,12 @@
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.
+    Connect to a signal weakly. </p>
+
 <p> This allows the callback function to be garbage collected and
- automatically disconnects the signal when that happens.
-<p> **Warning:**
+ automatically disconnects the signal when that happens.</p>
+
+<p> <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
  are doing.
 
@@ -4555,42 +4798,50 @@
     </span>
     </dt>
     <dd>
-    This signal is emitted to request the list of default layouts.
+
+<p>This signal is emitted to request the list of default layouts. </p>
+
 <p> It is emitted on the global <a href="../core_components/tag.html#">tag</a> class rather than individual tag objects.
- This default handler is part of <a href="../sample files/rc.lua.html#">rc.lua</a>:
-<p>
+ This default handler is part of <a href="../sample files/rc.lua.html#">rc.lua</a>:</p>
 
 
 
-      tag.connect_signal("request::default_layouts", function()
-          awful.layout.append_default_layouts({
-              awful.layout.suit.floating,
-              awful.layout.suit.tile,
-              awful.layout.suit.tile.left,
-              awful.layout.suit.tile.bottom,
-              awful.layout.suit.tile.top,
-              awful.layout.suit.fair,
-              awful.layout.suit.fair.horizontal,
-              awful.layout.suit.spiral,
-              awful.layout.suit.spiral.dwindle,
-              awful.layout.suit.max,
-              awful.layout.suit.max.fullscreen,
-              awful.layout.suit.magnifier,
-              awful.layout.suit.corner.nw,
-          })
-      end)
+
+
+<pre><code>  tag.connect_signal("request::default_layouts", function()
+      awful.layout.append_default_layouts({
+          awful.layout.suit.floating,
+          awful.layout.suit.tile,
+          awful.layout.suit.tile.left,
+          awful.layout.suit.tile.bottom,
+          awful.layout.suit.tile.top,
+          awful.layout.suit.fair,
+          awful.layout.suit.fair.horizontal,
+          awful.layout.suit.spiral,
+          awful.layout.suit.spiral.dwindle,
+          awful.layout.suit.max,
+          awful.layout.suit.max.fullscreen,
+          awful.layout.suit.magnifier,
+          awful.layout.suit.corner.nw,
+      })
+  end)
+</code></pre>
+
 <p> External modules can also use this signal to dynamically add additional
- default layouts.
-<p>
+ default layouts.</p>
 
 
 
-      tag.connect_signal("request::default_layouts", function()
-          awful.layout.append_default_layouts({
-              custom_module.layout_1,
-              custom_module.layout_2,
-          })
-      end)
+
+
+<pre><code>  tag.connect_signal("request::default_layouts", function()
+      awful.layout.append_default_layouts({
+          custom_module.layout_1,
+          custom_module.layout_2,
+      })
+  end)
+</code></pre>
+
 
 
     <h3>Arguments:</h3>
@@ -4667,10 +4918,10 @@
     </span>
     </dt>
     <dd>
-    This signals is emitted when a tag needs layouts for the first time.
+    This signals is emitted when a tag needs layouts for the first time. </p>
+
 <p> If no handler implement it, it will fallback to the content added by
  <a href="../core_components/tag.html#request::default_layouts">request::default_layouts</a>
-
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -4895,13 +5146,14 @@
     </span>
     </dt>
     <dd>
-    Emitted when a screen is removed.
+    Emitted when a screen is removed. </p>
+
 <p> This can be used to salvage existing tags by moving them to a new
- screen (or creating a virtual screen).
+ screen (or creating a virtual screen).</p>
+
 <p> By default, there is no handler for this request and the tags will be deleted.
  To prevent this, an handler for this request must simply set a new screen
  for the tag.
-
 
     <h3>Arguments:</h3>
     <table class="see_also">
@@ -5112,11 +5364,17 @@
     </span>
     </dt>
     <dd>
-    The default fill policy.
-<p> ** Possible values**:
-<p> * *expand*: Take all the space
- * *master_width_factor*: Only take the ratio defined by the
-   <a href="../core_components/tag.html#master_width_factor">master_width_factor</a>
+
+<p>The default fill policy. </p>
+
+<p> <em>* Possible values</em>*:</p>
+
+<ul>
+    <li><em>expand</em>: Take all the space</li>
+    <li>*master<em>width</em>factor*: Only take the ratio defined by the
+    <a href="../core_components/tag.html#master_width_factor">master_width_factor</a></li>
+</ul>
+
 
 
 
@@ -6121,7 +6379,7 @@
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
          Possible values are
  "expand" (fill all the available workarea, default one) or
- "master_width_factor" (fill only an area inside the master width factor)
+ "master<em>width</em>factor" (fill only an area inside the master width factor)
     </ol>
 
 
@@ -6528,9 +6786,9 @@
     </span>
     </dt>
     <dd>
-    Get tag data table.
-<p> Do not use.
+    Get tag data table. </p>
 
+<p> Do not use.
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -6570,9 +6828,9 @@
     </span>
     </dt>
     <dd>
-    Get a tag property.
-<p> Use <code>_tag.prop</code> directly.
+    Get a tag property. </p>
 
+<p> Use <code>_tag.prop</code> directly.
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -6619,9 +6877,9 @@
     <dd>
     Set a tag property.
  This properties are internal to awful. Some are used to draw taglist, or to
- handle layout, etc.
-<p> Use <code>t.prop = value</code>
+ handle layout, etc.</p>
 
+<p> Use <code>t.prop = value</code>
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -6726,29 +6984,33 @@
     </span>
     </dt>
     <dd>
-    An ordered list of layouts.
+
+<p>An ordered list of layouts.
  <code>awful.tag.layout</code> Is usually defined in <a href="../sample files/rc.lua.html#">rc.lua</a>. It store the list of
  layouts used when selecting the previous and next layouts. This is the
- default:
-<p>     -- Table of layouts to cover with awful.layout.inc, order matters.
-     awful.layout.layouts = {
-         awful.layout.suit.floating,
-         awful.layout.suit.tile,
-         awful.layout.suit.tile.left,
-         awful.layout.suit.tile.bottom,
-         awful.layout.suit.tile.top,
-         awful.layout.suit.fair,
-         awful.layout.suit.fair.horizontal,
-         awful.layout.suit.spiral,
-         awful.layout.suit.spiral.dwindle,
-         awful.layout.suit.max,
-         awful.layout.suit.max.fullscreen,
-         awful.layout.suit.magnifier,
-         awful.layout.suit.corner.nw,
-         -- awful.layout.suit.corner.ne,
-         -- awful.layout.suit.corner.sw,
-         -- awful.layout.suit.corner.se,
-     }
+ default:</p>
+
+<pre><code> -- Table of layouts to cover with awful.layout.inc, order matters.
+ awful.layout.layouts = {
+     awful.layout.suit.floating,
+     awful.layout.suit.tile,
+     awful.layout.suit.tile.left,
+     awful.layout.suit.tile.bottom,
+     awful.layout.suit.tile.top,
+     awful.layout.suit.fair,
+     awful.layout.suit.fair.horizontal,
+     awful.layout.suit.spiral,
+     awful.layout.suit.spiral.dwindle,
+     awful.layout.suit.max,
+     awful.layout.suit.max.fullscreen,
+     awful.layout.suit.magnifier,
+     awful.layout.suit.corner.nw,
+     -- awful.layout.suit.corner.ne,
+     -- awful.layout.suit.corner.sw,
+     -- awful.layout.suit.corner.se,
+ }
+</code></pre>
+
 
 
 

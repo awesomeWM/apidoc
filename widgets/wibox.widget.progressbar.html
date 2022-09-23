@@ -221,110 +221,137 @@
 
 <h1>Module: <code>wibox.widget.progressbar</code></h1>
 <p>A progressbar widget.</p>
-<p>
-<p> ![Components](../images/progressbar.svg)
-<p> Common usage examples
- =====================
-<p> To add text on top of the progressbar, a <a href="../widget_layouts/wibox.layout.stack.html#">wibox.layout.stack</a> can be used:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_text.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     wibox.widget {
-         {
-             max_value     = 1,
-             value         = 0.5,
-             forced_height = 20,
-             forced_width  = 100,
-             paddings      = 1,
-             border_width  = 1,
-             border_color  = beautiful.border_color,
-             widget        = wibox.widget.progressbar,
-         },
-         {
-             text   = "50%",
-             valign = "center",
-             halign = "center",
-             widget = wibox.widget.textbox,
-         },
-         layout = wibox.layout.stack
-     }
-<p> To display the progressbar vertically, use a <a href="../widget_containers/wibox.container.rotate.html#">wibox.container.rotate</a> widget:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_vertical.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     wibox.widget {
-         {
-             max_value     = 1,
-             value         = 0.33,
-             widget        = wibox.widget.progressbar,
-         },
-         forced_height = 100,
-         forced_width  = 20,
-         direction     = "east",
-         layout        = wibox.container.rotate,
-     }
+<p> <img src="../images/progressbar.svg" alt="Components"/></p>
+
+<h1> Common usage examples</h1>
+
+<p> To add text on top of the progressbar, a <a href="../widget_layouts/wibox.layout.stack.html#">wibox.layout.stack</a> can be used:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_text.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+wibox.widget {
+    {
+        max_value     = <span class="number">1</span>,
+        value         = <span class="number">0.5</span>,
+        forced_height = <span class="number">20</span>,
+        forced_width  = <span class="number">100</span>,
+        paddings      = <span class="number">1</span>,
+        border_width  = <span class="number">1</span>,
+        border_color  = beautiful.border_color,
+        widget        = wibox.widget.progressbar,
+    },
+    {
+        text   = <span class="string">"50%"</span>,
+        valign = <span class="string">"center"</span>,
+        halign = <span class="string">"center"</span>,
+        widget = wibox.widget.textbox,
+    },
+    layout = wibox.layout.stack
+}
+</pre>
+
+<p> To display the progressbar vertically, use a <a href="../widget_containers/wibox.container.rotate.html#">wibox.container.rotate</a> widget:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_vertical.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+wibox.widget {
+    {
+        max_value     = <span class="number">1</span>,
+        value         = <span class="number">0.33</span>,
+        widget        = wibox.widget.progressbar,
+    },
+    forced_height = <span class="number">100</span>,
+    forced_width  = <span class="number">20</span>,
+    direction     = <span class="string">"east"</span>,
+    layout        = wibox.container.rotate,
+}
+</pre>
+
 <p> By default, this widget will take all the available size. To prevent this,
  a <a href="../widget_containers/wibox.container.constraint.html#">wibox.container.constraint</a> widget or the <code>forced_width</code>/<code>forced_height</code>
- properties have to be used.
+ properties have to be used.</p>
+
 <p> To have a gradient between 2 colors when the bar reaches a threshold, use
- the <a href="../theme_related_libraries/gears.color.html#">gears.color</a> gradients:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_grad1.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     wibox.widget {
-         color = {
-             type  = "linear",
-             from  = { 0  , 0 },
-             to    = { 100, 0 },
-             stops = {
-                 { 0  , "#0000ff" },
-                 { 0.8, "#0000ff" },
-                 { 1  , "#ff0000" }
-             }
-         },
-         max_value     = 1,
-         value         = 1,
-         forced_height = 20,
-         forced_width  = 100,
-         paddings      = 1,
-         border_width  = 1,
-         border_color  = beautiful.border_color,
-         widget        = wibox.widget.progressbar,
-     }
-<p> The same goes for multiple solid colors:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_grad2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     for _, value in ipairs { 0.3, 0.5, 0.7, 1 } do
-         wibox.widget {
-             color = {
-                 type  = "linear",
-                 from  = { 0  , 0 },
-                 to    = { 100, 0 },
-                 stops = {
-                     { 0  , "#00ff00" },
-                     { 0.5, "#00ff00" },
-                     { 0.5, "#ffff00" },
-                     { 0.7, "#ffff00" },
-                     { 0.7, "#ffaa00" },
-                     { 0.8, "#ffaa00" },
-                     { 0.8, "#ff0000" },
-                     { 1  , "#ff0000" }
-                 }
-             },
-             max_value     = 1,
-             value         = value,
-             forced_height = 20,
-             forced_width  = 100,
-             paddings      = 1,
-             border_width  = 1,
-             border_color  = beautiful.border_color,
-             widget        = wibox.widget.progressbar,
-         }
-     end
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_defaults_progressbar.svg" alt="Usage example" type="image/svg+xml"></object>
-</p>
+ the <a href="../theme_related_libraries/gears.color.html#">gears.color</a> gradients:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_grad1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+wibox.widget {
+    color = {
+        <span class="global">type</span>  = <span class="string">"linear"</span>,
+        from  = { <span class="number">0</span>  , <span class="number">0</span> },
+        to    = { <span class="number">100</span>, <span class="number">0</span> },
+        stops = {
+            { <span class="number">0</span>  , <span class="string">"#0000ff"</span> },
+            { <span class="number">0.8</span>, <span class="string">"#0000ff"</span> },
+            { <span class="number">1</span>  , <span class="string">"#ff0000"</span> }
+        }
+    },
+    max_value     = <span class="number">1</span>,
+    value         = <span class="number">1</span>,
+    forced_height = <span class="number">20</span>,
+    forced_width  = <span class="number">100</span>,
+    paddings      = <span class="number">1</span>,
+    border_width  = <span class="number">1</span>,
+    border_color  = beautiful.border_color,
+    widget        = wibox.widget.progressbar,
+}
+</pre>
+
+<p> The same goes for multiple solid colors:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_grad2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="keyword">for</span> _, value <span class="keyword">in</span> <span class="global">ipairs</span> { <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.7</span>, <span class="number">1</span> } <span class="keyword">do</span>
+    wibox.widget {
+        color = {
+            <span class="global">type</span>  = <span class="string">"linear"</span>,
+            from  = { <span class="number">0</span>  , <span class="number">0</span> },
+            to    = { <span class="number">100</span>, <span class="number">0</span> },
+            stops = {
+                { <span class="number">0</span>  , <span class="string">"#00ff00"</span> },
+                { <span class="number">0.5</span>, <span class="string">"#00ff00"</span> },
+                { <span class="number">0.5</span>, <span class="string">"#ffff00"</span> },
+                { <span class="number">0.7</span>, <span class="string">"#ffff00"</span> },
+                { <span class="number">0.7</span>, <span class="string">"#ffaa00"</span> },
+                { <span class="number">0.8</span>, <span class="string">"#ffaa00"</span> },
+                { <span class="number">0.8</span>, <span class="string">"#ff0000"</span> },
+                { <span class="number">1</span>  , <span class="string">"#ff0000"</span> }
+            }
+        },
+        max_value     = <span class="number">1</span>,
+        value         = value,
+        forced_height = <span class="number">20</span>,
+        forced_width  = <span class="number">100</span>,
+        paddings      = <span class="number">1</span>,
+        border_width  = <span class="number">1</span>,
+        border_color  = beautiful.border_color,
+        widget        = wibox.widget.progressbar,
+    }
+<span class="keyword">end</span>
+</pre>
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_defaults_progressbar.svg" alt="Usage example" type="image/svg+xml"></object></p>
     <h3>Usage:</h3>
     <ul>
         <pre class="example">wibox.widget {
@@ -1079,11 +1106,13 @@
     </span>
     </dt>
     <dd>
-    The progressbar border color.
-<p> If the value is nil, no border will be drawn.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_border_color.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar border color. </p>
 
+<p> If the value is nil, no border will be drawn.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_border_color.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1125,7 +1154,7 @@
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
+        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1133,7 +1162,7 @@
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
+        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1141,7 +1170,7 @@
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
+        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1226,10 +1255,11 @@
     </span>
     </dt>
     <dd>
-    The progressbar border width.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_border_width.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar border width. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_border_width.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1340,11 +1370,13 @@
     </span>
     </dt>
     <dd>
-    The progressbar inner border color.
-<p> If the value is nil, no border will be drawn.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_bar_border_color.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar inner border color. </p>
 
+<p> If the value is nil, no border will be drawn.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_bar_border_color.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1386,7 +1418,7 @@
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
+        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1394,7 +1426,7 @@
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
+        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1402,7 +1434,7 @@
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
+        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1488,10 +1520,11 @@
     </span>
     </dt>
     <dd>
-    The progressbar inner border width.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_bar_border_width.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar inner border width. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_bar_border_width.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1601,10 +1634,11 @@
     </span>
     </dt>
     <dd>
-    The progressbar foreground color.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_color.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar foreground color. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_color.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1654,7 +1688,7 @@
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
+        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1662,7 +1696,7 @@
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
+        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1670,7 +1704,7 @@
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
+        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
        <tr/>
        <tr class="">
         <td style="padding-left:0px;">
@@ -1746,10 +1780,11 @@
     </span>
     </dt>
     <dd>
-    The progressbar background color.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_background_color.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar background color. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_background_color.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1799,7 +1834,7 @@
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A [gradient table](../theme_related_libraries/gears.color.html).</td>
+        <td>: A <a href="../theme_related_libraries/gears.color.html">gradient table</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1807,7 +1842,7 @@
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: Any valid [Cairo pattern](https://cairographics.org/manual/cairo-cairo-pattern-t.html).</td>
+        <td>: Any valid <a href="https://cairographics.org/manual/cairo-cairo-pattern-t.html">Cairo pattern</a>.</td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:15px;">
@@ -1815,7 +1850,7 @@
           <span class='summary_type'>cairo.pattern</span>
          </i>
         </td>
-        <td>: A texture build from an image by [gears.color.create\_png\_pattern](../theme_related_libraries/gears.color.html#create_png_pattern)</td>
+        <td>: A texture build from an image by <a href="../theme_related_libraries/gears.color.html#create_png_pattern">gears.color.create_png_pattern</a></td>
        <tr/>
        <tr class="">
         <td style="padding-left:0px;">
@@ -1891,10 +1926,11 @@
     </span>
     </dt>
     <dd>
-    The progressbar inner shape.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_bar_shape.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar inner shape. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_bar_shape.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1951,7 +1987,7 @@
          </i>
           <span class="inline_types"> (cairo.context)</span>
         </td>
-        <td>: A [Cairo context](https://cairographics.org/manual/cairo-cairo-t.html)</td>
+        <td>: A <a href="https://cairographics.org/manual/cairo-cairo-t.html">Cairo context</a></td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:60px;">
@@ -2058,10 +2094,11 @@
     </span>
     </dt>
     <dd>
-    The progressbar shape.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_shape.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar shape. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_shape.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2118,7 +2155,7 @@
          </i>
           <span class="inline_types"> (cairo.context)</span>
         </td>
-        <td>: A [Cairo context](https://cairographics.org/manual/cairo-cairo-t.html)</td>
+        <td>: A <a href="https://cairographics.org/manual/cairo-cairo-t.html">Cairo context</a></td>
        <tr/>
        <tr class="see_also_sublist">
         <td style="padding-left:60px;">
@@ -2221,10 +2258,11 @@
     </span>
     </dt>
     <dd>
-    Force the inner part (the bar) to fit in the background shape.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_clip.svg" alt="Usage example" type="image/svg+xml"></object>
+    Force the inner part (the bar) to fit in the background shape. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_clip.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2302,11 +2340,13 @@
     </span>
     </dt>
     <dd>
-    The progressbar to draw ticks.
-<p> The add a little bar in between the values.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_ticks.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar to draw ticks. </p>
 
+<p> The add a little bar in between the values.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_ticks.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2391,10 +2431,11 @@
     </span>
     </dt>
     <dd>
-    The progressbar ticks gap.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_ticks_gap.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar ticks gap. </p>
 
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_ticks_gap.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2488,72 +2529,83 @@
     </span>
     </dt>
     <dd>
-    The progressbar ticks size.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_ticks_size.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    for _, size in ipairs { 0, 2, 4, 6 } do
-        wibox.widget {
-            value        = 0.33,
-            border_width = 2,
-            ticks        = true,
-            ticks_size   = size,
-            widget       = wibox.widget.progressbar,
-        }
-    end
-<p> It is also possible to mix this feature with the <a href="../widgets/wibox.widget.progressbar.html#bar_shape">bar_shape</a> property:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_ticks_size2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    for _, size in ipairs { 0, 2, 4, 6 } do
-        -- Plane shapes.
-        wibox.widget {
-            value        = 1,
-            border_width = 2,
-            ticks        = true,
-            ticks_size   = size,
-            ticks_gap    = 3,
-            paddings     = 2,
-            bar_shape    = gears.shape.rounded_bar,
-            widget       = wibox.widget.progressbar,
-        }
 
-        -- With a border for each shape.
-        wibox.widget {
-            value            = 1,
-            border_width     = 2,
-            ticks            = true,
-            ticks_size       = size,
-            ticks_gap        = 3,
-            paddings         = 2,
-            bar_shape        = gears.shape.rounded_bar,
-            bor_border_width = 2,
-            bar_border_color = beautiful.border_color,
-            widget           = wibox.widget.progressbar,
-        }
+<p>The progressbar ticks size. </p>
 
-        -- With a gradient.
-        wibox.widget {
-            color = {
-                type  = "linear",
-                from  = { 0 , 0 },
-                to    = { 65, 0 },
-                stops = {
-                    { 0   , "#0000ff" },
-                    { 0.75, "#0000ff" },
-                    { 1   , "#ff0000" }
-                }
-            },
-            paddings     = 2,
-            value        = 1,
-            border_width = 2,
-            ticks        = true,
-            ticks_size   = size,
-            ticks_gap    = 3,
-            bar_shape    = gears.shape.rounded_bar,
-            widget       = wibox.widget.progressbar,
-        }
-    end
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_ticks_size.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for _, size in ipairs { 0, 2, 4, 6 } do
+    wibox.widget {
+        value        = 0.33,
+        border_width = 2,
+        ticks        = true,
+        ticks_size   = size,
+        widget       = wibox.widget.progressbar,
+    }
+end
+</code></pre>
+
+<p> It is also possible to mix this feature with the <a href="../widgets/wibox.widget.progressbar.html#bar_shape">bar_shape</a> property:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_ticks_size2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for _, size in ipairs { 0, 2, 4, 6 } do
+    -- Plane shapes.
+    wibox.widget {
+        value        = 1,
+        border_width = 2,
+        ticks        = true,
+        ticks_size   = size,
+        ticks_gap    = 3,
+        paddings     = 2,
+        bar_shape    = gears.shape.rounded_bar,
+        widget       = wibox.widget.progressbar,
+    }
+
+    -- With a border for each shape.
+    wibox.widget {
+        value            = 1,
+        border_width     = 2,
+        ticks            = true,
+        ticks_size       = size,
+        ticks_gap        = 3,
+        paddings         = 2,
+        bar_shape        = gears.shape.rounded_bar,
+        bor_border_width = 2,
+        bar_border_color = beautiful.border_color,
+        widget           = wibox.widget.progressbar,
+    }
+
+    -- With a gradient.
+    wibox.widget {
+        color = {
+            type  = "linear",
+            from  = { 0 , 0 },
+            to    = { 65, 0 },
+            stops = {
+                { 0   , "#0000ff" },
+                { 0.75, "#0000ff" },
+                { 1   , "#ff0000" }
+            }
+        },
+        paddings     = 2,
+        value        = 1,
+        border_width = 2,
+        ticks        = true,
+        ticks_size   = size,
+        ticks_gap    = 3,
+        bar_shape    = gears.shape.rounded_bar,
+        widget       = wibox.widget.progressbar,
+    }
+end
+</code></pre>
+
 
 
     <h3>Constraints:</h3>
@@ -2636,12 +2688,14 @@
     </span>
     </dt>
     <dd>
-    The maximum value the progressbar should handle.
-<p> By default, the value is 1. So the content of <a href="../widgets/wibox.widget.progressbar.html#value">value</a> is
- a percentage.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_max_value.svg" alt="Usage example" type="image/svg+xml"></object>
+    The maximum value the progressbar should handle. </p>
 
+<p> By default, the value is 1. So the content of <a href="../widgets/wibox.widget.progressbar.html#value">value</a> is
+ a percentage.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_max_value.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2719,37 +2773,45 @@
     </span>
     </dt>
     <dd>
-    The progressbar margins.
-<p> The margins are around the progressbar. If you want to add space between the
- bar and the border, use <a href="../widgets/wibox.widget.progressbar.html#paddings">paddings</a>.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_margins2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    wibox.widget {
-        {
-            margins = {
-                top    = 4,
-                bottom = 2,
-                right  = 10,
-                left   = 5
-            },
-            value        = 0.33,
-            border_width = 2,
-            border_color = "#00ff00",
-            background   = "#0000ff",
-            widget       = wibox.widget.progressbar,
-        },
-        forced_width = 75, --DOC_hIDE
-        bg     = "#ff0000",
-        widget = wibox.container.background
-    }
-<p> Note that if the <a href="../widgets/wibox.widget.progressbar.html#clip">clip</a> is disabled, this allows the background to be smaller
- than the bar.
-<p> It is also possible to specify a single number instead of a border for each
- direction;
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_margins1.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar margins. </p>
 
+<p> The margins are around the progressbar. If you want to add space between the
+ bar and the border, use <a href="../widgets/wibox.widget.progressbar.html#paddings">paddings</a>.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_margins2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>wibox.widget {
+    {
+        margins = {
+            top    = 4,
+            bottom = 2,
+            right  = 10,
+            left   = 5
+        },
+        value        = 0.33,
+        border_width = 2,
+        border_color = "#00ff00",
+        background   = "#0000ff",
+        widget       = wibox.widget.progressbar,
+    },
+    forced_width = 75, --DOC_hIDE
+    bg     = "#ff0000",
+    widget = wibox.container.background
+}
+</code></pre>
+
+<p> Note that if the <a href="../widgets/wibox.widget.progressbar.html#clip">clip</a> is disabled, this allows the background to be smaller
+ than the bar.</p>
+
+<p> It is also possible to specify a single number instead of a border for each
+ direction;</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_margins1.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -2928,33 +2990,41 @@
     </span>
     </dt>
     <dd>
-    The progressbar padding.
-<p> This is the space between the inner bar and the progressbar outer border.
-<p> Note that if the <a href="../widgets/wibox.widget.progressbar.html#clip">clip</a> is disabled, this allows the bar to be taller
- than the background.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_paddings2.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    wibox.widget {
-        paddings = {
-            top    = 4,
-            bottom = 2,
-            right  = 10,
-            left   = 5
-        },
-        value            = 1,
-        border_width     = 2,
-        border_color     = "#00ff00",
-        bar_border_wisth = 2,
-        bar_border_color = "#ffff00",
-        bor_color        = "#ff00ff",
-        background       = "#0000ff",
-        widget           = wibox.widget.progressbar,
-    }
-<p> The paddings can also be a single numeric value:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_paddings1.svg" alt="Usage example" type="image/svg+xml"></object>
+    The progressbar padding. </p>
 
+<p> This is the space between the inner bar and the progressbar outer border.</p>
+
+<p> Note that if the <a href="../widgets/wibox.widget.progressbar.html#clip">clip</a> is disabled, this allows the bar to be taller
+ than the background.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_paddings2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>wibox.widget {
+    paddings = {
+        top    = 4,
+        bottom = 2,
+        right  = 10,
+        left   = 5
+    },
+    value            = 1,
+    border_width     = 2,
+    border_color     = "#00ff00",
+    bar_border_wisth = 2,
+    bar_border_color = "#ffff00",
+    bor_color        = "#ff00ff",
+    background       = "#0000ff",
+    widget           = wibox.widget.progressbar,
+}
+</code></pre>
+
+<p> The paddings can also be a single numeric value:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_paddings1.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3125,12 +3195,14 @@
     </span>
     </dt>
     <dd>
-    Set the progressbar value.
-<p> By default, unless <a href="../widgets/wibox.widget.progressbar.html#max_value">max_value</a> is set, it is number between
- zero and one.
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_value.svg" alt="Usage example" type="image/svg+xml"></object>
+    Set the progressbar value. </p>
 
+<p> By default, unless <a href="../widgets/wibox.widget.progressbar.html#max_value">max_value</a> is set, it is number between
+ zero and one.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_widget_progressbar_value.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -3600,7 +3672,8 @@
     </span>
     </dt>
     <dd>
-    The widget buttons.
+    The widget buttons. </p>
+
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>
@@ -3928,7 +4001,8 @@
     </span>
     </dt>
     <dd>
-    The progressbar margins.
+    The progressbar margins. </p>
+
 <p> Note that if the <a href="../widgets/wibox.widget.progressbar.html#clip">clip</a> is disabled, this allows the background to be smaller
  than the bar.
 
@@ -3952,28 +4026,36 @@
            <td><span class="parameter">top</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>0</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">bottom</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>0</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">left</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>0</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">right</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>0</code></span></td>
          </tr>
         </table>
@@ -4030,7 +4112,8 @@
     </span>
     </dt>
     <dd>
-    The progressbar padding.
+    The progressbar padding. </p>
+
 <p> Note that if the <a href="../widgets/wibox.widget.progressbar.html#clip">clip</a> is disabled, this allows the bar to be taller
  than the background.
 
@@ -4100,9 +4183,9 @@
     </span>
     </dt>
     <dd>
-    Set the progressbar to draw vertically.
-<p> This doesn't do anything anymore, use a <a href="../widget_containers/wibox.container.rotate.html#">wibox.container.rotate</a> widget.
+    Set the progressbar to draw vertically. </p>
 
+<p> This doesn't do anything anymore, use a <a href="../widget_containers/wibox.container.rotate.html#">wibox.container.rotate</a> widget.
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -4116,7 +4199,9 @@
            <td><span class="parameter">vertical</span></td>
            <td></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
         </table>
 
@@ -4136,10 +4221,10 @@
     </span>
     </dt>
     <dd>
-    Set the progressbar height.
+    Set the progressbar height. </p>
+
 <p> This method is deprecated.  Use a <a href="../widget_containers/wibox.container.constraint.html#">wibox.container.constraint</a> widget or
  <code>forced_height</code>.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -4173,10 +4258,10 @@
     </span>
     </dt>
     <dd>
-    Set the progressbar width.
+    Set the progressbar width. </p>
+
 <p> This method is deprecated.  Use a <a href="../widget_containers/wibox.container.constraint.html#">wibox.container.constraint</a> widget or
  <code>forced_width</code>.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -4252,19 +4337,26 @@
     </span>
     </dt>
     <dd>
-    Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal.
+
+<p>Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal. </p>
+
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.
-<p> Note that this function has some flaws:
-<p> 1. The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.</p>
+
+<p> Note that this function has some flaws:</p>
+
+<ol>
+    <li>The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.
- 2. In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.</li>
+    <li>In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).
- 3. If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.
+    tree path).</li>
+    <li>If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.</li>
+</ol>
+
 
 
     <h3>Parameters:</h3>
@@ -4279,7 +4371,9 @@
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>
@@ -4369,13 +4463,20 @@
     </span>
     </dt>
     <dd>
-    Connect to a signal.
-<p>
-<p>
-**Usage example output**:
-<p>    In slot	[obj]	nil	nil	nil
-    In slot	[obj]	foo	bar	42
-<p>
+
+<p>Connect to a signal. </p>
+
+
+
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>In slot [obj]   nil nil nil
+In slot [obj]   foo bar 42
+</code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -4436,13 +4537,13 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.
+    Connect to a signal weakly. </p>
+
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
- **Warning:**
+ <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
  are doing.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">

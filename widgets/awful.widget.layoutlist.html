@@ -222,159 +222,189 @@
 <h1>Module: <code>awful.widget.layoutlist</code></h1>
 <p>Display the available client layouts for a screen.</p>
 <p>
-<p> This is what the layoutlist looks like by default with a vertical layout:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_widget_layoutlist_default.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     awful.popup {
-         widget = awful.widget.layoutlist {
-             screen      = 1,
-             base_layout = wibox.layout.flex.vertical
-         },
-         maximum_height = #awful.layout.layouts * 24,
-         minimum_height = #awful.layout.layouts * 24,
-         placement      = awful.placement.centered,
-     }
+
+
+<p> This is what the layoutlist looks like by default with a vertical layout:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_widget_layoutlist_default.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+awful.popup {
+    widget = awful.widget.layoutlist {
+        screen      = <span class="number">1</span>,
+        base_layout = wibox.layout.flex.vertical
+    },
+    maximum_height = #awful.layout.layouts * <span class="number">24</span>,
+    minimum_height = #awful.layout.layouts * <span class="number">24</span>,
+    placement      = awful.placement.centered,
+}
+</pre>
+
 <p> In the second example, it is shown how to create a popup in the center of
- the screen:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_widget_layoutlist_popup.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     local ll = awful.widget.layoutlist {
-         base_layout = wibox.widget {
-             spacing         = 5,
-             forced_num_cols = 5,
-             layout          = wibox.layout.grid.vertical,
-         },
-         widget_template = {
-             {
-                 {
-                     id            = 'icon_role',
-                     forced_height = 22,
-                     forced_width  = 22,
-                     widget        = wibox.widget.imagebox,
-                 },
-                 margins = 4,
-                 widget  = wibox.container.margin,
-             },
-             id              = 'background_role',
-             forced_width    = 24,
-             forced_height   = 24,
-             shape           = gears.shape.rounded_rect,
-             widget          = wibox.container.background,
-         },
-     }
+ the screen:</p>
 
-     local layout_popup = awful.popup {
-         widget = wibox.widget {
-             ll,
-             margins = 4,
-             widget  = wibox.container.margin,
-         },
-         border_color = beautiful.border_color,
-         border_width = beautiful.border_width,
-         placement    = awful.placement.centered,
-         ontop        = true,
-         visible      = false,
-         shape        = gears.shape.rounded_rect
-     }
 
-     -- Make sure you remove the default <code>Mod4+Space</code> and <code>Mod4+Shift+Space</code>
-     -- keybindings before adding this.
-     awful.keygrabber {
-         start_callback = function() layout_popup.visible = true  end,
-         stop_callback  = function() layout_popup.visible = false end,
-         export_keybindings = true,
-         stop_event = "release",
-         stop_key = {"Escape", "Super_L", "Super_R"},
-         keybindings = {
-             {{ modkey          } , " " , function()
-                 awful.layout.set((gears.table.cycle_value(ll.layouts, ll.current_layout, 1)))
-             end},
-             {{ modkey, "Shift" } , " " , function()
-                 awful.layout.set((gears.table.cycle_value(ll.layouts, ll.current_layout, -1)), nil)
-             end},
-         }
-     }
-<p> This example extends <a href="../widgets/awful.widget.layoutbox.html#">awful.widget.layoutbox</a> to show a layout list popup:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_widget_layoutlist_bar.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-     -- Normally you would use your existing bars, but for this example, we add one
-     local lb = awful.widget.layoutbox(screen[1])
-     local l = wibox.layout.align.horizontal(nil, lb, nil)
-     l.expand = "outside"
-     awful.wibar { widget = l }
 
-     local p = awful.popup {
-         widget = wibox.widget {
-             awful.widget.layoutlist {
-                 source      = awful.widget.layoutlist.source.default_layouts,
-                 screen      = 1,
-                 base_layout = wibox.widget {
-                     spacing         = 5,
-                     forced_num_cols = 3,
-                     layout          = wibox.layout.grid.vertical,
-                 },
-                 widget_template = {
-                     {
-                         {
-                             id            = 'icon_role',
-                             forced_height = 22,
-                             forced_width  = 22,
-                             widget        = wibox.widget.imagebox,
-                         },
-                         margins = 4,
-                         widget  = wibox.container.margin,
-                     },
-                     id              = 'background_role',
-                     forced_width    = 24,
-                     forced_height   = 24,
-                     shape           = gears.shape.rounded_rect,
-                     widget          = wibox.container.background,
-                 },
-             },
-             margins = 4,
-             widget  = wibox.container.margin,
-         },
-         preferred_anchors = "middle",
-         border_color      = beautiful.border_color,
-         border_width      = beautiful.border_width,
-         shape             = gears.shape.infobubble,
-     }
-     p:bind_to_widget(lb)
-<p> This example shows how to add a layout subset to the default wibar:
-<p>
-<p><object class="img-object" data="../images/AUTOGEN_awful_widget_layoutlist_wibar.svg" alt="Usage example" type="image/svg+xml"></object>
-<p>
-    wb:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            mytaglist,
-            awful.widget.layoutlist {
-                screen = 1,
-                style = {
-                    disable_name = true,
-                    spacing      = 3,
-                },
-                source = function() return {
-                    awful.layout.suit.floating,
-                    awful.layout.suit.tile,
-                    awful.layout.suit.tile.left,
-                    awful.layout.suit.tile.bottom,
-                    awful.layout.suit.tile.top,
-                } end
+<p><object class="img-object" data="../images/AUTOGEN_awful_widget_layoutlist_popup.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="keyword">local</span> ll = awful.widget.layoutlist {
+    base_layout = wibox.widget {
+        spacing         = <span class="number">5</span>,
+        forced_num_cols = <span class="number">5</span>,
+        layout          = wibox.layout.grid.vertical,
+    },
+    widget_template = {
+        {
+            {
+                id            = <span class="string">'icon_role'</span>,
+                forced_height = <span class="number">22</span>,
+                forced_width  = <span class="number">22</span>,
+                widget        = wibox.widget.imagebox,
             },
-            layout = wibox.layout.fixed.horizontal,
+            margins = <span class="number">4</span>,
+            widget  = wibox.container.margin,
         },
-        mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            mytextclock,
-            mylayoutbox,
-        },
+        id              = <span class="string">'background_role'</span>,
+        forced_width    = <span class="number">24</span>,
+        forced_height   = <span class="number">24</span>,
+        shape           = gears.shape.rounded_rect,
+        widget          = wibox.container.background,
+    },
+}
+
+<span class="keyword">local</span> layout_popup = awful.popup {
+    widget = wibox.widget {
+        ll,
+        margins = <span class="number">4</span>,
+        widget  = wibox.container.margin,
+    },
+    border_color = beautiful.border_color,
+    border_width = beautiful.border_width,
+    placement    = awful.placement.centered,
+    ontop        = <span class="keyword">true</span>,
+    visible      = <span class="keyword">false</span>,
+    shape        = gears.shape.rounded_rect
+}
+
+<span class="comment">-- Make sure you remove the default <code>Mod4+Space</code> and <code>Mod4+Shift+Space</code>
+</span><span class="comment">-- keybindings before adding this.
+</span>awful.keygrabber {
+    start_callback = <span class="keyword">function</span>() layout_popup.visible = <span class="keyword">true</span>  <span class="keyword">end</span>,
+    stop_callback  = <span class="keyword">function</span>() layout_popup.visible = <span class="keyword">false</span> <span class="keyword">end</span>,
+    export_keybindings = <span class="keyword">true</span>,
+    stop_event = <span class="string">"release"</span>,
+    stop_key = {<span class="string">"Escape"</span>, <span class="string">"Super_L"</span>, <span class="string">"Super_R"</span>},
+    keybindings = {
+        {{ modkey          } , <span class="string">" "</span> , <span class="keyword">function</span>()
+            awful.layout.set((gears.<span class="global">table</span>.cycle_value(ll.layouts, ll.current_layout, <span class="number">1</span>)))
+        <span class="keyword">end</span>},
+        {{ modkey, <span class="string">"Shift"</span> } , <span class="string">" "</span> , <span class="keyword">function</span>()
+            awful.layout.set((gears.<span class="global">table</span>.cycle_value(ll.layouts, ll.current_layout, -<span class="number">1</span>)), <span class="keyword">nil</span>)
+        <span class="keyword">end</span>},
     }
+}
+</pre>
+
+<p> This example extends <a href="../widgets/awful.widget.layoutbox.html#">awful.widget.layoutbox</a> to show a layout list popup:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_widget_layoutlist_bar.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="comment">-- Normally you would use your existing bars, but for this example, we add one
+</span><span class="keyword">local</span> lb = awful.widget.layoutbox(screen[<span class="number">1</span>])
+<span class="keyword">local</span> l = wibox.layout.align.horizontal(<span class="keyword">nil</span>, lb, <span class="keyword">nil</span>)
+l.expand = <span class="string">"outside"</span>
+awful.wibar { widget = l }
+
+<span class="keyword">local</span> p = awful.popup {
+    widget = wibox.widget {
+        awful.widget.layoutlist {
+            source      = awful.widget.layoutlist.source.default_layouts,
+            screen      = <span class="number">1</span>,
+            base_layout = wibox.widget {
+                spacing         = <span class="number">5</span>,
+                forced_num_cols = <span class="number">3</span>,
+                layout          = wibox.layout.grid.vertical,
+            },
+            widget_template = {
+                {
+                    {
+                        id            = <span class="string">'icon_role'</span>,
+                        forced_height = <span class="number">22</span>,
+                        forced_width  = <span class="number">22</span>,
+                        widget        = wibox.widget.imagebox,
+                    },
+                    margins = <span class="number">4</span>,
+                    widget  = wibox.container.margin,
+                },
+                id              = <span class="string">'background_role'</span>,
+                forced_width    = <span class="number">24</span>,
+                forced_height   = <span class="number">24</span>,
+                shape           = gears.shape.rounded_rect,
+                widget          = wibox.container.background,
+            },
+        },
+        margins = <span class="number">4</span>,
+        widget  = wibox.container.margin,
+    },
+    preferred_anchors = <span class="string">"middle"</span>,
+    border_color      = beautiful.border_color,
+    border_width      = beautiful.border_width,
+    shape             = gears.shape.infobubble,
+}
+p:bind_to_widget(lb)
+</pre>
+
+<p> This example shows how to add a layout subset to the default wibar:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_awful_widget_layoutlist_wibar.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+wb:setup {
+    layout = wibox.layout.align.horizontal,
+    { <span class="comment">-- Left widgets
+</span>        mytaglist,
+        awful.widget.layoutlist {
+            screen = <span class="number">1</span>,
+            style = {
+                disable_name = <span class="keyword">true</span>,
+                spacing      = <span class="number">3</span>,
+            },
+            source = <span class="keyword">function</span>() <span class="keyword">return</span> {
+                awful.layout.suit.floating,
+                awful.layout.suit.tile,
+                awful.layout.suit.tile.left,
+                awful.layout.suit.tile.bottom,
+                awful.layout.suit.tile.top,
+            } <span class="keyword">end</span>
+        },
+        layout = wibox.layout.fixed.horizontal,
+    },
+    mytasklist, <span class="comment">-- Middle widget
+</span>    { <span class="comment">-- Right widgets
+</span>        layout = wibox.layout.fixed.horizontal,
+        mykeyboardlayout,
+        mytextclock,
+        mylayoutbox,
+    },
+}
+</pre>
+
 </p>
     <div class="extra-header">
   <div class="extra-header__section">
@@ -947,7 +977,9 @@
            <td><span class="parameter">args</span></td>
            <td></td>
            <td><span class="types"><span class="type">table</span></span></td>
-           <td class="see_also_description"> </td>
+           <td class="see_also_description">
+
+ </td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr class="see_also_sublist">
@@ -998,112 +1030,142 @@
            <td><span class="parameter">style.disable_icon</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_disable_icon</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.disable_name</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_disable_name</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.fg_normal</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_fg_normal</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_normal</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_bg_normal</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.fg_selected</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_fg_selected</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.bg_selected</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_bg_selected</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.font</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_font</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.font_selected</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_font_selected</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.align</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> *left*, *right* or *center*</td>
+           <td class="see_also_description"> <em>left</em>, <em>right</em> or <em>center</em></td>
            <td><span class="default_value"><code>beautiful.layoutlist_align</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.spacing</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_spacing</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">gears.shape</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_shape</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_shape_border_width</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_color</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_shape_border_color</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_selected</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><span class="type">gears.shape</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_shape_selected</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_width_selected</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_shape_border_width_selected</code></span></td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">style.shape_border_color_selected</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <span class="type">pattern</span></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
            <td><span class="default_value"><code>beautiful.layoutlist_shape_border_color_selected</code></span></td>
          </tr>
         </table>
@@ -1181,7 +1243,8 @@
     </span>
     </dt>
     <dd>
-    The layoutlist default widget layout.
+    The layoutlist default widget layout. </p>
+
 <p> If no layout is specified, a <a href="../widget_layouts/wibox.layout.fixed.html#vertical">wibox.layout.fixed.vertical</a> will be created
  automatically.
 
@@ -1275,7 +1338,7 @@
           <span class='summary_type'>table</span>
          </i>
         </td>
-        <td>: A table containing a widget tree definition. WARNING: This is really a table and **NOT** a widget object. Use the <code>widget = come.class.here</code> to define the topmost class rather than construct an instance.</td>
+        <td>: A table containing a widget tree definition. WARNING: This is really a table and <strong>NOT</strong> a widget object. Use the <code>widget = come.class.here</code> to define the topmost class rather than construct an instance.</td>
        <tr/>
      </table>
     </span>
@@ -1986,7 +2049,8 @@
     </span>
     </dt>
     <dd>
-    The widget buttons.
+    The widget buttons. </p>
+
 <p> The table contains a list of <a href="../input_handling/awful.button.html#">awful.button</a> objects.
 
     <h3>Constraints:</h3>
@@ -2328,7 +2392,7 @@
            <td><span class="parameter">align</span></td>
            <td><span class="chips">Optional</span></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"> *left*, *right* or *center*</td>
+           <td class="see_also_description"> <em>left</em>, <em>right</em> or <em>center</em></td>
            <td><span class="default_value"><code>"left"</code></span></td>
          </tr>
         </table>
@@ -2790,19 +2854,26 @@
     </span>
     </dt>
     <dd>
-    Emit a signal and ensure all parent widgets in the hierarchies also
- forward the signal.
+
+<p>Emit a signal and ensure all parent widgets in the hierarchies also
+ forward the signal. </p>
+
 <p> This is useful to track signals when there is a dynamic set of containers
-   and layouts wrapping the widget.
-<p> Note that this function has some flaws:
-<p> 1. The signal is only forwarded once the widget tree has been built. This
+   and layouts wrapping the widget.</p>
+
+<p> Note that this function has some flaws:</p>
+
+<ol>
+    <li>The signal is only forwarded once the widget tree has been built. This
     happens after all currently scheduled functions have been executed.
-    Therefore, it will not start to work right away.
- 2. In case the widget is present multiple times in a single widget tree,
+    Therefore, it will not start to work right away.</li>
+    <li>In case the widget is present multiple times in a single widget tree,
     this function will also forward the signal multiple times (once per upward
-    tree path).
- 3. If the widget is removed from the widget tree, the signal is still
-    forwarded for some time, similar to the first case.
+    tree path).</li>
+    <li>If the widget is removed from the widget tree, the signal is still
+    forwarded for some time, similar to the first case.</li>
+</ol>
+
 
 
     <h3>Parameters:</h3>
@@ -2817,7 +2888,9 @@
            <td><span class="parameter">signal_name</span></td>
            <td></td>
            <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
-           <td class="see_also_description"></td>
+           <td class="see_also_description">
+
+</td>
          </tr>
          <tr>
            <td><span class="parameter">...</span></td>
@@ -2907,13 +2980,20 @@
     </span>
     </dt>
     <dd>
-    Connect to a signal.
-<p>
-<p>
-**Usage example output**:
-<p>    In slot	[obj]	nil	nil	nil
-    In slot	[obj]	foo	bar	42
-<p>
+
+<p>Connect to a signal. </p>
+
+
+
+
+<p><strong>Usage example output</strong>:</p>
+
+<pre><code>In slot [obj]   nil nil nil
+In slot [obj]   foo bar 42
+</code></pre>
+
+
+
 
     <h3>Parameters:</h3>
     <table class="see_also">
@@ -2974,13 +3054,13 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
     </span>
     </dt>
     <dd>
-    Connect to a signal weakly.
+    Connect to a signal weakly. </p>
+
 <p> This allows the callback function to be garbage collected and
  automatically disconnects the signal when that happens.
- **Warning:**
+ <strong>Warning:</strong>
  Only use this function if you really, really, really know what you
  are doing.
-
 
     <h3>Parameters:</h3>
     <table class="see_also">

@@ -213,154 +213,173 @@
 <h1>Module: <code>theme.lua</code></h1>
 <p>The default theme file.</p>
 <p>
+
+
 <p> If you wish to create a custom theme, copy this file to
  <code>~/.config/awesome/mytheme.lua</code>
- and replace:
-<p>    beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-<p> with
-<p>    beautiful.init(gears.filesystem.get_configuration_dir() .. "mytheme.lua")
-<p> in your <a href="../sample files/rc.lua.html#">rc.lua</a>.
-<p> Here is the default theme content:
-<p>
-    ---------------------------
-    -- Default awesome theme --
-    ---------------------------
+ and replace:</p>
 
-    local theme_assets = require("<code>beautiful.theme</code>_assets")
-    local xresources = require("<code>beautiful.xresources</code>")
-    local rnotification = require("ruled.notification")
-    local dpi = xresources.apply_dpi
 
-    local gfs = require("<a href="../utility_libraries/gears.filesystem.html#">gears.filesystem</a>")
-    local themes_path = gfs.get_themes_dir()
+<pre>
+beautiful.init(gears.filesystem.get_themes_dir() .. <span class="string">"default/theme.lua"</span>)
+</pre>
 
-    local theme = {}
+<p> with</p>
 
-    theme.font          = "sans 8"
 
-    theme.bg_normal     = "#222222"
-    theme.bg_focus      = "#535d6c"
-    theme.bg_urgent     = "#ff0000"
-    theme.bg_minimize   = "#444444"
-    theme.bg_systray    = theme.bg_normal
+<pre>
+beautiful.init(gears.filesystem.get_configuration_dir() .. <span class="string">"mytheme.lua"</span>)
+</pre>
 
-    theme.fg_normal     = "#aaaaaa"
-    theme.fg_focus      = "#ffffff"
-    theme.fg_urgent     = "#ffffff"
-    theme.fg_minimize   = "#ffffff"
+<p> in your <a href="../sample files/rc.lua.html#">rc.lua</a>.</p>
 
-    theme.useless_gap         = dpi(0)
-    theme.border_width        = dpi(1)
-    theme.border_color_normal = "#000000"
-    theme.border_color_active = "#535d6c"
-    theme.border_color_marked = "#91231c"
+<p> Here is the default theme content:</p>
 
-    -- There are other variable sets
-    -- overriding the default one when
-    -- defined, the sets are:
-    -- taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
-    -- tasklist_[bg|fg]_[focus|urgent]
-    -- titlebar_[bg|fg]_[normal|focus]
-    -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
-    -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
-    -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
-    -- Example:
-    --theme.taglist_bg_focus = "#ff0000"
 
-    -- Generate taglist squares:
-    local taglist_square_size = dpi(4)
-    theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-        taglist_square_size, theme.fg_normal
-    )
-    theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-        taglist_square_size, theme.fg_normal
-    )
 
-    -- Variables set for theming notifications:
-    -- notification_font
-    -- notification_[bg|fg]
-    -- notification_[width|height|margin]
-    -- notification_[border_color|border_width|shape|opacity]
+<pre>
+<span class="comment">---------------------------
+</span><span class="comment">-- Default awesome theme --
+</span><span class="comment">---------------------------
+</span>
+<span class="keyword">local</span> theme_assets = <span class="global">require</span>(<span class="string">"<code>beautiful.theme</code>_assets"</span>)
+<span class="keyword">local</span> xresources = <span class="global">require</span>(<span class="string">"<code>beautiful.xresources</code>"</span>)
+<span class="keyword">local</span> rnotification = <span class="global">require</span>(<span class="string">"ruled.notification"</span>)
+<span class="keyword">local</span> dpi = xresources.apply_dpi
 
-    -- Variables set for theming the menu:
-    -- menu_[bg|fg]_[normal|focus]
-    -- menu_[border_color|border_width]
-    theme.menu_submenu_icon = themes_path.."default/submenu.png"
-    theme.menu_height = dpi(15)
-    theme.menu_width  = dpi(100)
+<span class="keyword">local</span> gfs = <span class="global">require</span>(<span class="string">"<a href="../utility_libraries/gears.filesystem.html#">gears.filesystem</a>"</span>)
+<span class="keyword">local</span> themes_path = gfs.get_themes_dir()
 
-    -- You can add as many variables as
-    -- you wish and access them by using
-    -- <code>beautiful.variable</code> in your rc.lua
-    --theme.bg_widget = "#cc0000"
+<span class="keyword">local</span> theme = {}
 
-    -- Define the image to load
-    theme.titlebar_close_button_normal = themes_path.."default/titlebar/close_normal.png"
-    theme.titlebar_close_button_focus  = themes_path.."default/titlebar/close_focus.png"
+theme.font          = <span class="string">"sans 8"</span>
 
-    theme.titlebar_minimize_button_normal = themes_path.."default/titlebar/minimize_normal.png"
-    theme.titlebar_minimize_button_focus  = themes_path.."default/titlebar/minimize_focus.png"
+theme.bg_normal     = <span class="string">"#222222"</span>
+theme.bg_focus      = <span class="string">"#535d6c"</span>
+theme.bg_urgent     = <span class="string">"#ff0000"</span>
+theme.bg_minimize   = <span class="string">"#444444"</span>
+theme.bg_systray    = theme.bg_normal
 
-    theme.titlebar_ontop_button_normal_inactive = themes_path.."default/titlebar/ontop_normal_inactive.png"
-    theme.titlebar_ontop_button_focus_inactive  = themes_path.."default/titlebar/ontop_focus_inactive.png"
-    theme.titlebar_ontop_button_normal_active = themes_path.."default/titlebar/ontop_normal_active.png"
-    theme.titlebar_ontop_button_focus_active  = themes_path.."default/titlebar/ontop_focus_active.png"
+theme.fg_normal     = <span class="string">"#aaaaaa"</span>
+theme.fg_focus      = <span class="string">"#ffffff"</span>
+theme.fg_urgent     = <span class="string">"#ffffff"</span>
+theme.fg_minimize   = <span class="string">"#ffffff"</span>
 
-    theme.titlebar_sticky_button_normal_inactive = themes_path.."default/titlebar/sticky_normal_inactive.png"
-    theme.titlebar_sticky_button_focus_inactive  = themes_path.."default/titlebar/sticky_focus_inactive.png"
-    theme.titlebar_sticky_button_normal_active = themes_path.."default/titlebar/sticky_normal_active.png"
-    theme.titlebar_sticky_button_focus_active  = themes_path.."default/titlebar/sticky_focus_active.png"
+theme.useless_gap         = dpi(<span class="number">0</span>)
+theme.border_width        = dpi(<span class="number">1</span>)
+theme.border_color_normal = <span class="string">"#000000"</span>
+theme.border_color_active = <span class="string">"#535d6c"</span>
+theme.border_color_marked = <span class="string">"#91231c"</span>
 
-    theme.titlebar_floating_button_normal_inactive = themes_path.."default/titlebar/floating_normal_inactive.png"
-    theme.titlebar_floating_button_focus_inactive  = themes_path.."default/titlebar/floating_focus_inactive.png"
-    theme.titlebar_floating_button_normal_active = themes_path.."default/titlebar/floating_normal_active.png"
-    theme.titlebar_floating_button_focus_active  = themes_path.."default/titlebar/floating_focus_active.png"
+<span class="comment">-- There are other variable sets
+</span><span class="comment">-- overriding the default one when
+</span><span class="comment">-- defined, the sets are:
+</span><span class="comment">-- taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
+</span><span class="comment">-- tasklist_[bg|fg]_[focus|urgent]
+</span><span class="comment">-- titlebar_[bg|fg]_[normal|focus]
+</span><span class="comment">-- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
+</span><span class="comment">-- prompt_[fg|bg|fg_cursor|bg_cursor|font]
+</span><span class="comment">-- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
+</span><span class="comment">-- Example:
+</span><span class="comment">--theme.taglist_bg_focus = "#ff0000"
+</span>
+<span class="comment">-- Generate taglist squares:
+</span><span class="keyword">local</span> taglist_square_size = dpi(<span class="number">4</span>)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+    taglist_square_size, theme.fg_normal
+)
+theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+    taglist_square_size, theme.fg_normal
+)
 
-    theme.titlebar_maximized_button_normal_inactive = themes_path.."default/titlebar/maximized_normal_inactive.png"
-    theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar/maximized_focus_inactive.png"
-    theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
-    theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
+<span class="comment">-- Variables set for theming notifications:
+</span><span class="comment">-- notification_font
+</span><span class="comment">-- notification_[bg|fg]
+</span><span class="comment">-- notification_[width|height|margin]
+</span><span class="comment">-- notification_[border_color|border_width|shape|opacity]
+</span>
+<span class="comment">-- Variables set for theming the menu:
+</span><span class="comment">-- menu_[bg|fg]_[normal|focus]
+</span><span class="comment">-- menu_[border_color|border_width]
+</span>theme.menu_submenu_icon = themes_path..<span class="string">"default/submenu.png"</span>
+theme.menu_height = dpi(<span class="number">15</span>)
+theme.menu_width  = dpi(<span class="number">100</span>)
 
-    theme.wallpaper = themes_path.."default/background.png"
+<span class="comment">-- You can add as many variables as
+</span><span class="comment">-- you wish and access them by using
+</span><span class="comment">-- <code>beautiful.variable</code> in your rc.lua
+</span><span class="comment">--theme.bg_widget = "#cc0000"
+</span>
+<span class="comment">-- Define the image to load
+</span>theme.titlebar_close_button_normal = themes_path..<span class="string">"default/titlebar/close_normal.png"</span>
+theme.titlebar_close_button_focus  = themes_path..<span class="string">"default/titlebar/close_focus.png"</span>
 
-    -- You can use your own layout icons like this:
-    theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
-    theme.layout_fairv = themes_path.."default/layouts/fairvw.png"
-    theme.layout_floating  = themes_path.."default/layouts/floatingw.png"
-    theme.layout_magnifier = themes_path.."default/layouts/magnifierw.png"
-    theme.layout_max = themes_path.."default/layouts/maxw.png"
-    theme.layout_fullscreen = themes_path.."default/layouts/fullscreenw.png"
-    theme.layout_tilebottom = themes_path.."default/layouts/tilebottomw.png"
-    theme.layout_tileleft   = themes_path.."default/layouts/tileleftw.png"
-    theme.layout_tile = themes_path.."default/layouts/tilew.png"
-    theme.layout_tiletop = themes_path.."default/layouts/tiletopw.png"
-    theme.layout_spiral  = themes_path.."default/layouts/spiralw.png"
-    theme.layout_dwindle = themes_path.."default/layouts/dwindlew.png"
-    theme.layout_cornernw = themes_path.."default/layouts/cornernww.png"
-    theme.layout_cornerne = themes_path.."default/layouts/cornernew.png"
-    theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
-    theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
+theme.titlebar_minimize_button_normal = themes_path..<span class="string">"default/titlebar/minimize_normal.png"</span>
+theme.titlebar_minimize_button_focus  = themes_path..<span class="string">"default/titlebar/minimize_focus.png"</span>
 
-    -- Generate Awesome icon:
-    theme.awesome_icon = theme_assets.awesome_icon(
-        theme.menu_height, theme.bg_focus, theme.fg_focus
-    )
+theme.titlebar_ontop_button_normal_inactive = themes_path..<span class="string">"default/titlebar/ontop_normal_inactive.png"</span>
+theme.titlebar_ontop_button_focus_inactive  = themes_path..<span class="string">"default/titlebar/ontop_focus_inactive.png"</span>
+theme.titlebar_ontop_button_normal_active = themes_path..<span class="string">"default/titlebar/ontop_normal_active.png"</span>
+theme.titlebar_ontop_button_focus_active  = themes_path..<span class="string">"default/titlebar/ontop_focus_active.png"</span>
 
-    -- Define the icon theme for application icons. If not set then the icons
-    -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-    theme.icon_theme = nil
+theme.titlebar_sticky_button_normal_inactive = themes_path..<span class="string">"default/titlebar/sticky_normal_inactive.png"</span>
+theme.titlebar_sticky_button_focus_inactive  = themes_path..<span class="string">"default/titlebar/sticky_focus_inactive.png"</span>
+theme.titlebar_sticky_button_normal_active = themes_path..<span class="string">"default/titlebar/sticky_normal_active.png"</span>
+theme.titlebar_sticky_button_focus_active  = themes_path..<span class="string">"default/titlebar/sticky_focus_active.png"</span>
 
-    -- Set different colors for urgent notifications.
-    rnotification.connect_signal('request::rules', function()
-        rnotification.append_rule {
-            rule       = { urgency = 'critical' },
-            properties = { bg = '#ff0000', fg = '#ffffff' }
-        }
-    end)
+theme.titlebar_floating_button_normal_inactive = themes_path..<span class="string">"default/titlebar/floating_normal_inactive.png"</span>
+theme.titlebar_floating_button_focus_inactive  = themes_path..<span class="string">"default/titlebar/floating_focus_inactive.png"</span>
+theme.titlebar_floating_button_normal_active = themes_path..<span class="string">"default/titlebar/floating_normal_active.png"</span>
+theme.titlebar_floating_button_focus_active  = themes_path..<span class="string">"default/titlebar/floating_focus_active.png"</span>
 
-    return theme
+theme.titlebar_maximized_button_normal_inactive = themes_path..<span class="string">"default/titlebar/maximized_normal_inactive.png"</span>
+theme.titlebar_maximized_button_focus_inactive  = themes_path..<span class="string">"default/titlebar/maximized_focus_inactive.png"</span>
+theme.titlebar_maximized_button_normal_active = themes_path..<span class="string">"default/titlebar/maximized_normal_active.png"</span>
+theme.titlebar_maximized_button_focus_active  = themes_path..<span class="string">"default/titlebar/maximized_focus_active.png"</span>
 
-    -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80</p>
+theme.wallpaper = themes_path..<span class="string">"default/background.png"</span>
+
+<span class="comment">-- You can use your own layout icons like this:
+</span>theme.layout_fairh = themes_path..<span class="string">"default/layouts/fairhw.png"</span>
+theme.layout_fairv = themes_path..<span class="string">"default/layouts/fairvw.png"</span>
+theme.layout_floating  = themes_path..<span class="string">"default/layouts/floatingw.png"</span>
+theme.layout_magnifier = themes_path..<span class="string">"default/layouts/magnifierw.png"</span>
+theme.layout_max = themes_path..<span class="string">"default/layouts/maxw.png"</span>
+theme.layout_fullscreen = themes_path..<span class="string">"default/layouts/fullscreenw.png"</span>
+theme.layout_tilebottom = themes_path..<span class="string">"default/layouts/tilebottomw.png"</span>
+theme.layout_tileleft   = themes_path..<span class="string">"default/layouts/tileleftw.png"</span>
+theme.layout_tile = themes_path..<span class="string">"default/layouts/tilew.png"</span>
+theme.layout_tiletop = themes_path..<span class="string">"default/layouts/tiletopw.png"</span>
+theme.layout_spiral  = themes_path..<span class="string">"default/layouts/spiralw.png"</span>
+theme.layout_dwindle = themes_path..<span class="string">"default/layouts/dwindlew.png"</span>
+theme.layout_cornernw = themes_path..<span class="string">"default/layouts/cornernww.png"</span>
+theme.layout_cornerne = themes_path..<span class="string">"default/layouts/cornernew.png"</span>
+theme.layout_cornersw = themes_path..<span class="string">"default/layouts/cornersww.png"</span>
+theme.layout_cornerse = themes_path..<span class="string">"default/layouts/cornersew.png"</span>
+
+<span class="comment">-- Generate Awesome icon:
+</span>theme.awesome_icon = theme_assets.awesome_icon(
+    theme.menu_height, theme.bg_focus, theme.fg_focus
+)
+
+<span class="comment">-- Define the icon theme for application icons. If not set then the icons
+</span><span class="comment">-- from /usr/share/icons and /usr/share/icons/hicolor will be used.
+</span>theme.icon_theme = <span class="keyword">nil</span>
+
+<span class="comment">-- Set different colors for urgent notifications.
+</span>rnotification.connect_signal(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
+    rnotification.append_rule {
+        rule       = { urgency = <span class="string">'critical'</span> },
+        properties = { bg = <span class="string">'#ff0000'</span>, fg = <span class="string">'#ffffff'</span> }
+    }
+<span class="keyword">end</span>)
+
+<span class="keyword">return</span> theme
+
+<span class="comment">-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80</span>
+</pre>
+
+</p>
     <div class="extra-header">
 
 
