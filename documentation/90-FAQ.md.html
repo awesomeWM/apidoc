@@ -316,7 +316,7 @@ loop in the <a href="../sample files/rc.lua.html#">rc.lua</a>:</p>
 
 <pre>
 <span class="comment">-- Each screen has its own tag table.
-</span>awful.tag({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, awful.layout.layouts[<span class="number">1</span>])
+</span>awful.<span class="function-name">tag</span>({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, awful.layout.layouts[<span class="number">1</span>])
 </pre>
 
 <p>Notice that all tags will use the 1st layout from your layouts table, which is
@@ -344,7 +344,7 @@ tags = {
 
 
 <pre>
-tags[s] = awful.tag(tags.names, s, tags.layout)
+tags[s] = awful.<span class="function-name">tag</span>(tags.names, s, tags.layout)
 </pre>
 
 <h4>How to setup different tags and layouts per screen?</h4>
@@ -370,7 +370,7 @@ tags = {
 
 
 <pre>
-tags[s] = awful.tag(tags.settings[s.index].names, s, tags.settings[s.index].layout)
+tags[s] = awful.<span class="function-name">tag</span>(tags.settings[s.index].names, s, tags.settings[s.index].layout)
 </pre>
 
 <h4>How to show only non-empty tags?</h4>
@@ -389,7 +389,7 @@ tags[s] = awful.tag(tags.settings[s.index].names, s, tags.settings[s.index].layo
 
 
 <pre>
-mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.noempty, mytaglist.buttons)
+mytaglist[s] = awful.widget.<span class="function-name">taglist</span>(s, awful.widget.taglist.filter.noempty, mytaglist.buttons)
 </pre>
 
 <h3>How to autostart applications?</h3>
@@ -404,7 +404,7 @@ mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.noempty, myta
 
 
 <pre>
-awful.key({ modkey }, <span class="string">"F12"</span>, <span class="keyword">function</span> () awful.spawn{ <span class="string">"xlock"</span> } <span class="keyword">end</span>)
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"F12"</span>, <span class="keyword">function</span> () awful.<span class="function-name">spawn</span>{ <span class="string">"xlock"</span> } <span class="keyword">end</span>)
 </pre>
 
 <h3>How to execute a shell command?</h3>
@@ -415,7 +415,7 @@ redirection, pipes and so on, do not use the <a href="../libraries/awful.spawn.h
 
 
 <pre>
-awful.key({ modkey }, <span class="string">"F10"</span>, <span class="keyword">function</span> () awful.spawn.with_shell(<span class="string">"cal -m | xmessage -timeout 10 -file -"</span>) <span class="keyword">end</span>)
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"F10"</span>, <span class="keyword">function</span> () awful.spawn.<span class="function-name">with_shell</span>(<span class="string">"cal -m | xmessage -timeout 10 -file -"</span>) <span class="keyword">end</span>)
 </pre>
 
 <p>On zsh, any changes to $PATH you do in <code>~/.zshrc</code> will not be picked up (because
@@ -443,10 +443,10 @@ your <code>globalkeys</code>:</p>
 
 
 <pre>
-awful.key({ <span class="string">"Mod1"</span> }, <span class="string">"Escape"</span>, <span class="keyword">function</span> ()
+awful.<span class="function-name">key</span>({ <span class="string">"Mod1"</span> }, <span class="string">"Escape"</span>, <span class="keyword">function</span> ()
     <span class="comment">-- If you want to always position the menu on the same place set coordinates
 </span>    awful.menu.menu_keys.down = { <span class="string">"Down"</span>, <span class="string">"Alt_L"</span> }
-    awful.menu.clients({theme = { width = <span class="number">250</span> }}, { keygrabber=<span class="keyword">true</span>, coords={x=<span class="number">525</span>, y=<span class="number">330</span>} })
+    awful.menu.<span class="function-name">clients</span>({theme = { width = <span class="number">250</span> }}, { keygrabber=<span class="keyword">true</span>, coords={x=<span class="number">525</span>, y=<span class="number">330</span>} })
 <span class="keyword">end</span>),
 </pre>
 
@@ -463,7 +463,7 @@ clients.</p>
 
 
 <pre>
-awful.key({ modkey, <span class="string">"Shift"</span> }, <span class="string">"t"</span>, awful.titlebar.toggle),
+awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span> }, <span class="string">"t"</span>, awful.titlebar.toggle),
 </pre>
 
 <h3>How to toggle wibox visibility?</h3>
@@ -472,7 +472,7 @@ awful.key({ modkey, <span class="string">"Shift"</span> }, <span class="string">
 
 
 <pre>
-awful.key({ modkey }, <span class="string">"b"</span>, <span class="keyword">function</span> ()
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"b"</span>, <span class="keyword">function</span> ()
     mouse.screen.mywibox.visible = <span class="keyword">not</span> mouse.screen.mywibox.visible
 <span class="keyword">end</span>),
 </pre>
@@ -485,7 +485,7 @@ Shift + f".</p>
 
 
 <pre>
-awful.key({ modkey, <span class="string">"Shift"</span> }, <span class="string">"f"</span>,  awful.client.floating.toggle ),
+awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span> }, <span class="string">"f"</span>,  awful.client.floating.toggle ),
 </pre>
 
 <h4>Why some floating clients can not be tiled?</h4>
@@ -517,12 +517,12 @@ PgUP/DN" keys:</p>
 
 
 <pre>
-awful.key({ modkey }, <span class="string">"Next"</span>,  <span class="keyword">function</span> (c) c:relative_move( <span class="number">20</span>,  <span class="number">20</span>, -<span class="number">40</span>, -<span class="number">40</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"Prior"</span>, <span class="keyword">function</span> (c) c:relative_move(-<span class="number">20</span>, -<span class="number">20</span>,  <span class="number">40</span>,  <span class="number">40</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"Down"</span>,  <span class="keyword">function</span> (c) c:relative_move(  <span class="number">0</span>,  <span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"Up"</span>,    <span class="keyword">function</span> (c) c:relative_move(  <span class="number">0</span>, -<span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"Left"</span>,  <span class="keyword">function</span> (c) c:relative_move(-<span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"Right"</span>, <span class="keyword">function</span> (c) c:relative_move( <span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"Next"</span>,  <span class="keyword">function</span> (c) c:<span class="function-name">relative_move</span>( <span class="number">20</span>,  <span class="number">20</span>, -<span class="number">40</span>, -<span class="number">40</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"Prior"</span>, <span class="keyword">function</span> (c) c:<span class="function-name">relative_move</span>(-<span class="number">20</span>, -<span class="number">20</span>,  <span class="number">40</span>,  <span class="number">40</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"Down"</span>,  <span class="keyword">function</span> (c) c:<span class="function-name">relative_move</span>(  <span class="number">0</span>,  <span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"Up"</span>,    <span class="keyword">function</span> (c) c:<span class="function-name">relative_move</span>(  <span class="number">0</span>, -<span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"Left"</span>,  <span class="keyword">function</span> (c) c:<span class="function-name">relative_move</span>(-<span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"Right"</span>, <span class="keyword">function</span> (c) c:<span class="function-name">relative_move</span>( <span class="number">20</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>) <span class="keyword">end</span>),
 </pre>
 
 <h4>How to resize tiled clients?</h4>
@@ -533,10 +533,10 @@ awful.key({ modkey }, <span class="string">"Right"</span>, <span class="keyword"
 
 
 <pre>
-awful.key({ modkey }, <span class="string">"l"</span>,          <span class="keyword">function</span> () awful.tag.incmwfact( <span class="number">0.05</span>) <span class="keyword">end</span>),
-awful.key({ modkey }, <span class="string">"h"</span>,          <span class="keyword">function</span> () awful.tag.incmwfact(-<span class="number">0.05</span>) <span class="keyword">end</span>),
-awful.key({ modkey, <span class="string">"Shift"</span> }, <span class="string">"l"</span>, <span class="keyword">function</span> () awful.client.incwfact(-<span class="number">0.05</span>) <span class="keyword">end</span>),
-awful.key({ modkey, <span class="string">"Shift"</span> }, <span class="string">"h"</span>, <span class="keyword">function</span> () awful.client.incwfact( <span class="number">0.05</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"l"</span>,          <span class="keyword">function</span> () awful.tag.<span class="function-name">incmwfact</span>( <span class="number">0.05</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"h"</span>,          <span class="keyword">function</span> () awful.tag.<span class="function-name">incmwfact</span>(-<span class="number">0.05</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span> }, <span class="string">"l"</span>, <span class="keyword">function</span> () awful.client.<span class="function-name">incwfact</span>(-<span class="number">0.05</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span> }, <span class="string">"h"</span>, <span class="keyword">function</span> () awful.client.<span class="function-name">incwfact</span>( <span class="number">0.05</span>) <span class="keyword">end</span>),
 </pre>
 
 <h3>How to change Awesome configuration while it's running?</h3>
@@ -556,13 +556,13 @@ terminal output you can use the following to match clients in Awesome:</p>
 
 
 <pre>
-WM_CLASS(STRING) = <span class="string">"smplayer"</span>, <span class="string">"Smplayer"</span>
+<span class="function-name">WM_CLASS</span>(STRING) = <span class="string">"smplayer"</span>, <span class="string">"Smplayer"</span>
                     |           |
                     |           |<span class="comment">--- class
 </span>                    |
                     |<span class="comment">--- instance
 </span>
-WM_NAME(STRING) = <span class="string">"SMPlayer"</span>
+<span class="function-name">WM_NAME</span>(STRING) = <span class="string">"SMPlayer"</span>
                    |
                    |<span class="comment">--- name</span>
 </pre>
@@ -596,7 +596,7 @@ present (but it could be):</p>
 
 
 <pre>
-awful.key({}, <span class="string">"#160"</span>, <span class="keyword">function</span> () awful.spawn(<span class="string">"kscreenlocker --forcelock"</span>) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({}, <span class="string">"#160"</span>, <span class="keyword">function</span> () awful.<span class="function-name">spawn</span>(<span class="string">"kscreenlocker --forcelock"</span>) <span class="keyword">end</span>),
 </pre>
 
 <h3>How to add a keyboard layout switcher?</h3>
@@ -626,7 +626,7 @@ placement = awful.placement.under_mouse+awful.placement.no_overlap+awful.placeme
 
 
 <pre>
-awful.key({ modkey }, <span class="string">"q"</span>, <span class="keyword">function</span> () awful.layout.set(awful.layout.suit.tile) <span class="keyword">end</span>),
+awful.<span class="function-name">key</span>({ modkey }, <span class="string">"q"</span>, <span class="keyword">function</span> () awful.layout.<span class="function-name">set</span>(awful.layout.suit.tile) <span class="keyword">end</span>),
 </pre>
 
 <h3>Why are new clients urgent by default?</h3>
@@ -636,14 +636,14 @@ you don't want new clients to be urgent by default put this in your rc.lua:</p>
 
 
 <pre>
-client.disconnect_signal(<span class="string">"request::activate"</span>, awful.permissions.activate)
-<span class="keyword">function</span> awful.permissions.activate(c)
-    <span class="keyword">if</span> c:isvisible() <span class="keyword">then</span>
+client.<span class="function-name">disconnect_signal</span>(<span class="string">"request::activate"</span>, awful.permissions.activate)
+<span class="keyword">function</span> awful.permissions.<span class="function-name">activate</span>(c)
+    <span class="keyword">if</span> c:<span class="function-name">isvisible</span>() <span class="keyword">then</span>
         client.focus = c
-        c:raise()
+        c:<span class="function-name">raise</span>()
     <span class="keyword">end</span>
 <span class="keyword">end</span>
-client.connect_signal(<span class="string">"request::activate"</span>, awful.permissions.activate)
+client.<span class="function-name">connect_signal</span>(<span class="string">"request::activate"</span>, awful.permissions.activate)
 </pre>
 
 <p><a name="Usage"></a></p>
@@ -672,7 +672,7 @@ You could call <a href="../core_components/awesome.html#restart">awesome.restart
 
 
 <pre>
-$ awesome-client <span class="string">'awesome.restart()'</span>
+$ awesome-<span class="function-name">client</span> <span class="string">'awesome.restart()'</span>
 </pre>
 
 <p>You can also send the <code>SIGHUP</code> signal to the Awesome process. Find the PID using
@@ -686,7 +686,7 @@ or by passing it to <code>awesome-client</code>.</p>
 
 
 <pre>
-$ echo <span class="string">'awesome.quit()'</span> | awesome-client
+$ <span class="function-name">echo</span> <span class="string">'awesome.quit()'</span> | awesome-client
 </pre>
 
 <p>You can also send the <code>SIGINT</code> signal to the Awesome process. Find the PID using <code>ps</code>, <code>pgrep</code> or use <code>pkill</code>:</p>
@@ -742,12 +742,12 @@ xkb keyboard description xkb</em>symbols line.</p>
 <pre>
 #!/bin/bash
 xkbcomp - $DISPLAY&lt;&lt;EOF
-xkb_keymap {
-xkb_keycodes  { include <span class="string">"evdev+aliases(qwertz)"</span>};
-xkb_types     { include <span class="string">"complete"</span>};
-xkb_compat    { include <span class="string">"complete"</span>};
-xkb_symbols   { include <span class="string">"pc+de(nodeadkeys)+inet(evdev)+group(alt_shift_toggle)+level3(ralt_switch)+altwin(left_meta_win)+capslock(escape)"</span>    };
-xkb_geometry  { include <span class="string">"pc(pc104)"</span>};
+<span class="function-name">xkb_keymap</span> {
+<span class="function-name">xkb_keycodes</span>  { <span class="function-name">include</span> <span class="string">"evdev+aliases(qwertz)"</span>};
+<span class="function-name">xkb_types</span>     { <span class="function-name">include</span> <span class="string">"complete"</span>};
+<span class="function-name">xkb_compat</span>    { <span class="function-name">include</span> <span class="string">"complete"</span>};
+<span class="function-name">xkb_symbols</span>   { <span class="function-name">include</span> <span class="string">"pc+de(nodeadkeys)+inet(evdev)+group(alt_shift_toggle)+level3(ralt_switch)+altwin(left_meta_win)+capslock(escape)"</span>    };
+<span class="function-name">xkb_geometry</span>  { <span class="function-name">include</span> <span class="string">"pc(pc104)"</span>};
 };
 EOF
 </pre>
@@ -808,7 +808,7 @@ for any coding, documentation or patch guidelines.</p>
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

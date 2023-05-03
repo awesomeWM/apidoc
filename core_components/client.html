@@ -276,7 +276,7 @@
 
 
 <pre>
-<span class="keyword">for</span> _, c <span class="keyword">in</span> <span class="global">ipairs</span>(client.get()) <span class="keyword">do</span>
+<span class="keyword">for</span> _, c <span class="keyword">in</span> <span class="global">ipairs</span>(client.<span class="function-name">get</span>()) <span class="keyword">do</span>
     <span class="comment">-- do something
 </span><span class="keyword">end</span>
 </pre>
@@ -285,7 +285,7 @@
 
 
 <pre>
-client.connect_signal(<span class="string">"request::manage"</span>, <span class="keyword">function</span>(c)
+client.<span class="function-name">connect_signal</span>(<span class="string">"request::manage"</span>, <span class="keyword">function</span>(c)
     <span class="comment">-- do something
 </span><span class="keyword">end</span>)
 </pre>
@@ -294,7 +294,7 @@ client.connect_signal(<span class="string">"request::manage"</span>, <span class
 
 
 <pre>
-client.connect_signal(<span class="string">"property::name"</span>, <span class="keyword">function</span>(c)
+client.<span class="function-name">connect_signal</span>(<span class="string">"property::name"</span>, <span class="keyword">function</span>(c)
     <span class="comment">-- do something
 </span><span class="keyword">end</span>)
 </pre>
@@ -303,7 +303,7 @@ client.connect_signal(<span class="string">"property::name"</span>, <span class=
 
 
 <pre>
-c:connect_signal(<span class="string">"property::name"</span>, <span class="keyword">function</span>()
+c:<span class="function-name">connect_signal</span>(<span class="string">"property::name"</span>, <span class="keyword">function</span>()
     <span class="comment">-- do something
 </span><span class="keyword">end</span>)
 </pre>
@@ -2903,7 +2903,7 @@ c:connect_signal(<span class="string">"property::name"</span>, <span class="keyw
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">for</span> _, c <span class="keyword">in</span> <span class="global">ipairs</span>(client.get()) <span class="keyword">do</span>
+        <pre class="example"><span class="keyword">for</span> _, c <span class="keyword">in</span> <span class="global">ipairs</span>(client.<span class="function-name">get</span>()) <span class="keyword">do</span>
     <span class="comment">-- do something
 </span><span class="keyword">end</span></pre>
     </ul>
@@ -3743,10 +3743,10 @@ awful.client.restore()
     <ul>
         <pre class="example"><span class="comment">-- un-minimize all urxvt instances
 </span><span class="keyword">local</span> urxvt = <span class="keyword">function</span> (c)
-  <span class="keyword">return</span> ruled.client.match(c, {class = <span class="string">"URxvt"</span>})
+  <span class="keyword">return</span> ruled.client.<span class="function-name">match</span>(c, {class = <span class="string">"URxvt"</span>})
 <span class="keyword">end</span>
 
-<span class="keyword">for</span> c <span class="keyword">in</span> awful.client.iterate(urxvt) <span class="keyword">do</span>
+<span class="keyword">for</span> c <span class="keyword">in</span> awful.client.<span class="function-name">iterate</span>(urxvt) <span class="keyword">do</span>
   c.minimized = <span class="keyword">false</span>
 <span class="keyword">end</span></pre>
     </ul>
@@ -4642,7 +4642,7 @@ cr:paint()
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> ib = wibox.widget.imagebox(c.icon)</pre>
+        <pre class="example"><span class="keyword">local</span> ib = wibox.widget.<span class="function-name">imagebox</span>(c.icon)</pre>
     </ul>
 
      <br />
@@ -10163,12 +10163,12 @@ end)
     <ul>
         <pre class="example"><span class="comment">-- Spawn 5 clients.
 </span><span class="keyword">for</span> i=<span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
-    awful.spawn(<span class="string">"Client #"</span>..i)
+    awful.<span class="function-name">spawn</span>(<span class="string">"Client #"</span>..i)
 <span class="keyword">end</span>
 
-client.get()[<span class="number">2</span>]:activate {}
+client.<span class="function-name">get</span>()[<span class="number">2</span>]:<span class="function-name">activate</span> {}
 
-client.get()[<span class="number">2</span>]:swap(client.get()[<span class="number">4</span>])</pre>
+client.<span class="function-name">get</span>()[<span class="number">2</span>]:<span class="function-name">swap</span>(client.<span class="function-name">get</span>()[<span class="number">4</span>])</pre>
     </ul>
 
      <br />
@@ -11025,12 +11025,12 @@ client.get()[7]:jump_to(true)
     <ul>
         <pre class="example"><span class="comment">-- Spawn a client on screen #3
 </span><span class="keyword">for</span> i=<span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
-    awful.spawn(<span class="string">"Client #"</span>..i)
+    awful.<span class="function-name">spawn</span>(<span class="string">"Client #"</span>..i)
 <span class="keyword">end</span>
 
-client.get()[<span class="number">5</span>]:activate {}
+client.<span class="function-name">get</span>()[<span class="number">5</span>]:<span class="function-name">activate</span> {}
 
-client.get()[<span class="number">5</span>]:to_primary_section()</pre>
+client.<span class="function-name">get</span>()[<span class="number">5</span>]:<span class="function-name">to_primary_section</span>()</pre>
     </ul>
 
 
@@ -11080,12 +11080,12 @@ client.get()[<span class="number">5</span>]:to_primary_section()</pre>
     <ul>
         <pre class="example"><span class="comment">-- Spawn a client on screen #3
 </span><span class="keyword">for</span> i=<span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
-    awful.spawn(<span class="string">"Client #"</span>..i)
+    awful.<span class="function-name">spawn</span>(<span class="string">"Client #"</span>..i)
 <span class="keyword">end</span>
 
-client.get()[<span class="number">1</span>]:activate {}
+client.<span class="function-name">get</span>()[<span class="number">1</span>]:<span class="function-name">activate</span> {}
 
-client.get()[<span class="number">1</span>]:to_secondary_section()</pre>
+client.<span class="function-name">get</span>()[<span class="number">1</span>]:<span class="function-name">to_secondary_section</span>()</pre>
     </ul>
 
 
@@ -17462,11 +17462,11 @@ end)
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="comment">-- run or raise urxvt (perhaps, with tabs) on modkey + semicolon
-</span>awful.key({ modkey, }, <span class="string">'semicolon'</span>, <span class="keyword">function</span> ()
+</span>awful.<span class="function-name">key</span>({ modkey, }, <span class="string">'semicolon'</span>, <span class="keyword">function</span> ()
     <span class="keyword">local</span> matcher = <span class="keyword">function</span> (c)
-        <span class="keyword">return</span> ruled.client.match(c, {class = <span class="string">'URxvt'</span>})
+        <span class="keyword">return</span> ruled.client.<span class="function-name">match</span>(c, {class = <span class="string">'URxvt'</span>})
     <span class="keyword">end</span>
-    awful.client.run_or_raise(<span class="string">'urxvt'</span>, matcher)
+    awful.client.<span class="function-name">run_or_raise</span>(<span class="string">'urxvt'</span>, matcher)
 <span class="keyword">end</span>);</pre>
     </ul>
 
@@ -19018,7 +19018,7 @@ awful.client.focus.global_bydirection("left", client.focus)
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

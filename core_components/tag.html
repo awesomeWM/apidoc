@@ -257,7 +257,7 @@
 
 
 <pre>
-awful.tag(
+awful.<span class="function-name">tag</span>(
   { <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> },
   s,
   awful.layout.layouts[<span class="number">1</span>]
@@ -269,7 +269,7 @@ awful.tag(
 
 
 <pre>
-awful.tag.add(<span class="string">"First tag"</span>, {
+awful.tag.<span class="function-name">add</span>(<span class="string">"First tag"</span>, {
     icon               = <span class="string">"/path/to/icon1.png"</span>,
     layout             = awful.layout.suit.tile,
     master_fill_policy = <span class="string">"master_width_factor"</span>,
@@ -279,7 +279,7 @@ awful.tag.add(<span class="string">"First tag"</span>, {
     selected           = <span class="keyword">true</span>,
 })
 
-awful.tag.add(<span class="string">"Second tag"</span>, {
+awful.tag.<span class="function-name">add</span>(<span class="string">"Second tag"</span>, {
     icon = <span class="string">"/path/to/icon2.png"</span>,
     layout = awful.layout.suit.max,
     screen = s,
@@ -295,7 +295,7 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-<span class="keyword">local</span> tags = awful.screen.focused().selected_tags
+<span class="keyword">local</span> tags = awful.screen.<span class="function-name">focused</span>().selected_tags
 </pre>
 
 <p> See: <code>awful.screen.focused</code></p>
@@ -306,7 +306,7 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-<span class="keyword">local</span> t = awful.screen.focused().selected_tag
+<span class="keyword">local</span> t = awful.screen.<span class="function-name">focused</span>().selected_tag
 </pre>
 
 <p> See: <a href="../core_components/screen.html#selected_tag">screen.selected_tag</a></p>
@@ -315,7 +315,7 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-<span class="keyword">local</span> tags = awful.screen.focused().tags
+<span class="keyword">local</span> tags = awful.screen.<span class="function-name">focused</span>().tags
 </pre>
 
 <p> See: <a href="../core_components/screen.html#tags">screen.tags</a></p>
@@ -324,7 +324,7 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-<span class="keyword">local</span> tags = root.tags()
+<span class="keyword">local</span> tags = root.<span class="function-name">tags</span>()
 </pre>
 
 <p> To get the current tag of the focused client:</p>
@@ -341,7 +341,7 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-<span class="keyword">local</span> t = awful.tag.find_by_name(awful.screen.focused(), <span class="string">"name"</span>)
+<span class="keyword">local</span> t = awful.tag.<span class="function-name">find_by_name</span>(awful.screen.<span class="function-name">focused</span>(), <span class="string">"name"</span>)
 </pre>
 
 <h1> Common keybindings code</h1>
@@ -353,10 +353,10 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-<span class="keyword">local</span> <span class="keyword">function</span> delete_tag()
-    <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">delete_tag</span>()
+    <span class="keyword">local</span> t = awful.screen.<span class="function-name">focused</span>().selected_tag
     <span class="keyword">if</span> <span class="keyword">not</span> t <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
-    t:delete()
+    t:<span class="function-name">delete</span>()
 <span class="keyword">end</span>
 </pre>
 
@@ -364,10 +364,10 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-<span class="keyword">local</span> <span class="keyword">function</span> add_tag()
-    awful.tag.add(<span class="string">"NewTag"</span>, {
-        screen = awful.screen.focused(),
-        layout = awful.layout.suit.floating }):view_only()
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">add_tag</span>()
+    awful.tag.<span class="function-name">add</span>(<span class="string">"NewTag"</span>, {
+        screen = awful.screen.<span class="function-name">focused</span>(),
+        layout = awful.layout.suit.floating }):<span class="function-name">view_only</span>()
 <span class="keyword">end</span>
 </pre>
 
@@ -375,14 +375,14 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-<span class="keyword">local</span> <span class="keyword">function</span> rename_tag()
-    awful.prompt.run {
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">rename_tag</span>()
+    awful.prompt.<span class="function-name">run</span> {
         prompt       = <span class="string">"New tag name: "</span>,
-        textbox      = awful.screen.focused().mypromptbox.widget,
+        textbox      = awful.screen.<span class="function-name">focused</span>().mypromptbox.widget,
         exe_callback = <span class="keyword">function</span>(new_name)
             <span class="keyword">if</span> <span class="keyword">not</span> new_name <span class="keyword">or</span> #new_name == <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
 
-            <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+            <span class="keyword">local</span> t = awful.screen.<span class="function-name">focused</span>().selected_tag
             <span class="keyword">if</span> t <span class="keyword">then</span>
                 t.name = new_name
             <span class="keyword">end</span>
@@ -395,13 +395,13 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-<span class="keyword">local</span> <span class="keyword">function</span> move_to_new_tag()
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">move_to_new_tag</span>()
     <span class="keyword">local</span> c = client.focus
     <span class="keyword">if</span> <span class="keyword">not</span> c <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
 
-    <span class="keyword">local</span> t = awful.tag.add(c.class,{screen= c.screen })
-    c:tags({t})
-    t:view_only()
+    <span class="keyword">local</span> t = awful.tag.<span class="function-name">add</span>(c.class,{screen= c.screen })
+    c:<span class="function-name">tags</span>({t})
+    t:<span class="function-name">view_only</span>()
 <span class="keyword">end</span>
 </pre>
 
@@ -409,14 +409,14 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-<span class="keyword">local</span> <span class="keyword">function</span> copy_tag()
-    <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">copy_tag</span>()
+    <span class="keyword">local</span> t = awful.screen.<span class="function-name">focused</span>().selected_tag
     <span class="keyword">if</span> <span class="keyword">not</span> t <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
 
-    <span class="keyword">local</span> clients = t:clients()
-    <span class="keyword">local</span> t2 = awful.tag.add(t.name, awful.tag.getdata(t))
-    t2:clients(clients)
-    t2:view_only()
+    <span class="keyword">local</span> clients = t:<span class="function-name">clients</span>()
+    <span class="keyword">local</span> t2 = awful.tag.<span class="function-name">add</span>(t.name, awful.tag.<span class="function-name">getdata</span>(t))
+    t2:<span class="function-name">clients</span>(clients)
+    t2:<span class="function-name">view_only</span>()
 <span class="keyword">end</span>
 </pre>
 
@@ -424,15 +424,15 @@ awful.tag.add(<span class="string">"Second tag"</span>, {
 
 
 <pre>
-awful.key({ modkey,           }, <span class="string">"a"</span>, add_tag,
+awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"a"</span>, add_tag,
           {description = <span class="string">"add a tag"</span>, group = <span class="string">"tag"</span>}),
-awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"a"</span>, delete_tag,
+awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"a"</span>, delete_tag,
           {description = <span class="string">"delete the current tag"</span>, group = <span class="string">"tag"</span>}),
-awful.key({ modkey, <span class="string">"Control"</span>   }, <span class="string">"a"</span>, move_to_new_tag,
+awful.<span class="function-name">key</span>({ modkey, <span class="string">"Control"</span>   }, <span class="string">"a"</span>, move_to_new_tag,
           {description = <span class="string">"add a tag with the focused client"</span>, group = <span class="string">"tag"</span>}),
-awful.key({ modkey, <span class="string">"Mod1"</span>   }, <span class="string">"a"</span>, copy_tag,
+awful.<span class="function-name">key</span>({ modkey, <span class="string">"Mod1"</span>   }, <span class="string">"a"</span>, copy_tag,
           {description = <span class="string">"create a copy of the current tag"</span>, group = <span class="string">"tag"</span>}),
-awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"r"</span>, rename_tag,
+awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"r"</span>, rename_tag,
           {description = <span class="string">"rename the current tag"</span>, group = <span class="string">"tag"</span>}),
 </pre>
 
@@ -1971,13 +1971,13 @@ awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="comment">-- For the current screen
-</span><span class="keyword">local</span> t = awful.tag.find_by_name(awful.screen.focused(), <span class="string">"name"</span>)
+</span><span class="keyword">local</span> t = awful.tag.<span class="function-name">find_by_name</span>(awful.screen.<span class="function-name">focused</span>(), <span class="string">"name"</span>)
 
 <span class="comment">-- For a screen index
-</span><span class="keyword">local</span> t = awful.tag.find_by_name(screen[<span class="number">1</span>], <span class="string">"name"</span>)
+</span><span class="keyword">local</span> t = awful.tag.<span class="function-name">find_by_name</span>(screen[<span class="number">1</span>], <span class="string">"name"</span>)
 
 <span class="comment">-- For all screens
-</span><span class="keyword">local</span> t = awful.tag.find_by_name(<span class="keyword">nil</span>, <span class="string">"name"</span>)</pre>
+</span><span class="keyword">local</span> t = awful.tag.<span class="function-name">find_by_name</span>(<span class="keyword">nil</span>, <span class="string">"name"</span>)</pre>
     </ul>
 
 
@@ -7071,7 +7071,7 @@ end
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

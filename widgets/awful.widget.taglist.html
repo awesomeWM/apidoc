@@ -251,7 +251,7 @@
 
 
 <pre>
-s.mytaglist = awful.widget.taglist {
+s.mytaglist = awful.widget.<span class="function-name">taglist</span> {
     screen  = s,
     filter  = awful.widget.taglist.filter.all,
     style   = {
@@ -304,20 +304,20 @@ s.mytaglist = awful.widget.taglist {
         widget = wibox.container.background,
         <span class="comment">-- Add support for hover colors and an index label
 </span>        create_callback = <span class="keyword">function</span>(self, c3, index, objects) <span class="comment">--luacheck: no unused args
-</span>            self:get_children_by_id(<span class="string">"index_role"</span>)[<span class="number">1</span>].markup = <span class="string">"&lt;b&gt; "</span>..c3.index..<span class="string">" &lt;/b&gt;"</span>
-            self:connect_signal(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>()
+</span>            self:<span class="function-name">get_children_by_id</span>(<span class="string">"index_role"</span>)[<span class="number">1</span>].markup = <span class="string">"&lt;b&gt; "</span>..c3.index..<span class="string">" &lt;/b&gt;"</span>
+            self:<span class="function-name">connect_signal</span>(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>()
                 <span class="keyword">if</span> self.bg ~= <span class="string">"#ff0000"</span> <span class="keyword">then</span>
                     self.backup     = self.bg
                     self.has_backup = <span class="keyword">true</span>
                 <span class="keyword">end</span>
                 self.bg = <span class="string">"#ff0000"</span>
             <span class="keyword">end</span>)
-            self:connect_signal(<span class="string">"mouse::leave"</span>, <span class="keyword">function</span>()
+            self:<span class="function-name">connect_signal</span>(<span class="string">"mouse::leave"</span>, <span class="keyword">function</span>()
                 <span class="keyword">if</span> self.has_backup <span class="keyword">then</span> self.bg = self.backup <span class="keyword">end</span>
             <span class="keyword">end</span>)
         <span class="keyword">end</span>,
         update_callback = <span class="keyword">function</span>(self, c3, index, objects) <span class="comment">--luacheck: no unused args
-</span>            self:get_children_by_id(<span class="string">"index_role"</span>)[<span class="number">1</span>].markup = <span class="string">"&lt;b&gt; "</span>..c3.index..<span class="string">" &lt;/b&gt;"</span>
+</span>            self:<span class="function-name">get_children_by_id</span>(<span class="string">"index_role"</span>)[<span class="number">1</span>].markup = <span class="string">"&lt;b&gt; "</span>..c3.index..<span class="string">" &lt;/b&gt;"</span>
         <span class="keyword">end</span>,
     },
     buttons = taglist_buttons
@@ -2183,7 +2183,7 @@ s.mytaglist = awful.widget.taglist {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.all_children" title="In the wibox.widget.base module.">all_children</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.all_children" title="In the wibox.widget.base module.">wibox.widget.base.all_children</a></td>
          <td>Get all direct and indirect children widgets. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2239,7 +2239,7 @@ s.mytaglist = awful.widget.taglist {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.children" title="In the wibox.widget.base module.">children</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.children" title="In the wibox.widget.base module.">wibox.widget.base.children</a></td>
          <td>Get or set the children elements. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2322,7 +2322,7 @@ s.mytaglist = awful.widget.taglist {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.forced_width" title="In the wibox.widget.base module.">forced_width</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.forced_width" title="In the wibox.widget.base module.">wibox.widget.base.forced_width</a></td>
          <td>Force a widget width. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2405,7 +2405,7 @@ s.mytaglist = awful.widget.taglist {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.forced_height" title="In the wibox.widget.base module.">forced_height</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.forced_height" title="In the wibox.widget.base module.">wibox.widget.base.forced_height</a></td>
          <td>Force a widget height. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2473,7 +2473,7 @@ s.mytaglist = awful.widget.taglist {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.visible" title="In the wibox.widget.base module.">visible</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.visible" title="In the wibox.widget.base module.">wibox.widget.base.visible</a></td>
          <td>The widget visibility. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2525,7 +2525,7 @@ s.mytaglist = awful.widget.taglist {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.opacity" title="In the wibox.widget.base module.">opacity</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.opacity" title="In the wibox.widget.base module.">wibox.widget.base.opacity</a></td>
          <td>The widget opacity (transparency). </td>
          <td>
              <span class="chips">object properties</span>
@@ -5079,7 +5079,7 @@ s.mytaglist = awful.widget.taglist {
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

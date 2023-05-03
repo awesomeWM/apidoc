@@ -257,7 +257,7 @@
 
 
 <pre>
-awful.wallpaper {
+awful.<span class="function-name">wallpaper</span> {
     screen = s,
     widget = {
         {
@@ -283,7 +283,7 @@ awful.wallpaper {
 
 
 <pre>
-awful.wallpaper {
+awful.<span class="function-name">wallpaper</span> {
     screen = s,
     bg     = <span class="string">"#0000ff"</span>,
     widget = {
@@ -309,7 +309,7 @@ awful.wallpaper {
 
 
 <pre>
-awful.wallpaper {
+awful.<span class="function-name">wallpaper</span> {
     screen = s,
     widget = {
          horizontal_fit_policy = <span class="string">"fit"</span>,
@@ -330,7 +330,7 @@ awful.wallpaper {
 
 
 <pre>
-awful.wallpaper {
+awful.<span class="function-name">wallpaper</span> {
     screen = s,
     bg     = <span class="string">"#000000"</span>,
     widget = {
@@ -360,7 +360,7 @@ awful.wallpaper {
 
 
 <pre>
-awful.wallpaper {
+awful.<span class="function-name">wallpaper</span> {
     screen = s,
     bg     = <span class="string">"#0000ff"</span>,
     widget = {
@@ -388,7 +388,7 @@ awful.wallpaper {
 
 
 <pre>
-awful.wallpaper {
+awful.<span class="function-name">wallpaper</span> {
     screen = s,
     bg     = <span class="string">"#0000ff"</span>,
     widget = {
@@ -425,7 +425,7 @@ awful.wallpaper {
 
 
 <pre>
-awful.wallpaper {
+awful.<span class="function-name">wallpaper</span> {
     screen = s,
     bg     = {
         <span class="global">type</span>  = <span class="string">"linear"</span> ,
@@ -444,7 +444,7 @@ awful.wallpaper {
 
 
 <pre>
-awful.wallpaper {
+awful.<span class="function-name">wallpaper</span> {
     screen = s,
     bg     = {
         <span class="global">type</span> = <span class="string">"radial"</span>,
@@ -473,21 +473,21 @@ awful.wallpaper {
 
 
 <pre>
-<span class="keyword">local</span> <span class="keyword">function</span> binary()
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">binary</span>()
     <span class="keyword">local</span> ret = {}
     <span class="keyword">for</span> _=<span class="number">1</span>, <span class="number">15</span> <span class="keyword">do</span>
         <span class="keyword">for</span> _=<span class="number">1</span>, <span class="number">57</span> <span class="keyword">do</span>
-            <span class="global">table</span>.insert(ret, <span class="global">math</span>.random() &gt; <span class="number">0.5</span> <span class="keyword">and</span> <span class="number">1</span> <span class="keyword">or</span> <span class="number">0</span>)
+            <span class="global">table</span>.<span class="function-name">insert</span>(ret, <span class="global">math</span>.<span class="function-name">random</span>() &gt; <span class="number">0.5</span> <span class="keyword">and</span> <span class="number">1</span> <span class="keyword">or</span> <span class="number">0</span>)
         <span class="keyword">end</span>
-        <span class="global">table</span>.insert(ret, <span class="string">"\n"</span>)
+        <span class="global">table</span>.<span class="function-name">insert</span>(ret, <span class="string">"\n"</span>)
     <span class="keyword">end</span>
-    <span class="keyword">return</span> <span class="global">table</span>.concat(ret)
+    <span class="keyword">return</span> <span class="global">table</span>.<span class="function-name">concat</span>(ret)
 <span class="keyword">end</span>
 
-awful.wallpaper {
+awful.<span class="function-name">wallpaper</span> {
     bg     = <span class="string">"#000000"</span>,
     fg     = <span class="string">"#55ff5577"</span>,
-    widget = wibox.widget {
+    widget = wibox.<span class="function-name">widget</span> {
         {
             {
                 markup = <span class="string">"&lt;tt&gt;&lt;b&gt;[SYSTEM FAILURE]&lt;/b&gt;&lt;/tt&gt;"</span>,
@@ -500,7 +500,7 @@ awful.wallpaper {
         },
         {
             wrap   = <span class="string">"word"</span>,
-            text   = binary(),
+            text   = <span class="function-name">binary</span>(),
             widget = wibox.widget.textbox,
         },
         widget = wibox.layout.stack
@@ -520,14 +520,14 @@ awful.wallpaper {
 
 
 <pre>
-awful.wallpaper {
+awful.<span class="function-name">wallpaper</span> {
     screen = s,
-    widget = wibox.widget {
+    widget = wibox.<span class="function-name">widget</span> {
          fit = <span class="keyword">function</span>(_, width, height)
              <span class="keyword">return</span> width, height
          <span class="keyword">end</span>,
          draw = <span class="keyword">function</span>(_, _, cr, width, height)
-             cr:set_source(gears.color {
+             cr:<span class="function-name">set_source</span>(gears.<span class="function-name">color</span> {
                  <span class="global">type</span>  = <span class="string">'linear'</span>,
                  from  = { <span class="number">0</span>, <span class="number">0</span>      },
                  to    = { <span class="number">0</span>, height },
@@ -538,18 +538,18 @@ awful.wallpaper {
                      { <span class="number">1</span>   , <span class="string">'#222222'</span> }
                  }
              })
-             cr:paint()
+             cr:<span class="function-name">paint</span>()
              <span class="comment">-- Clip the first 33% of the screen
-</span>             cr:rectangle(<span class="number">0</span>,<span class="number">0</span>, width, height/<span class="number">3</span>)
+</span>             cr:<span class="function-name">rectangle</span>(<span class="number">0</span>,<span class="number">0</span>, width, height/<span class="number">3</span>)
 
              <span class="comment">-- Clip-out some increasingly large sections of add the sun "bars"
 </span>             <span class="keyword">for</span> i=<span class="number">0</span>, <span class="number">6</span> <span class="keyword">do</span>
-                 cr:rectangle(<span class="number">0</span>, height*.<span class="number">28</span> + i*(height*.<span class="number">055</span> + i/<span class="number">2</span>), width, height*.<span class="number">055</span>)
+                 cr:<span class="function-name">rectangle</span>(<span class="number">0</span>, height*.<span class="number">28</span> + i*(height*.<span class="number">055</span> + i/<span class="number">2</span>), width, height*.<span class="number">055</span>)
              <span class="keyword">end</span>
-             cr:clip()
+             cr:<span class="function-name">clip</span>()
 
              <span class="comment">-- Draw the sun
-</span>             cr:set_source(gears.color {
+</span>             cr:<span class="function-name">set_source</span>(gears.<span class="function-name">color</span> {
                  <span class="global">type</span>  = <span class="string">'linear'</span> ,
                  from  = { <span class="number">0</span>, <span class="number">0</span>      },
                  to    = { <span class="number">0</span>, height },
@@ -558,25 +558,25 @@ awful.wallpaper {
                      { <span class="number">1</span>, <span class="string">'#e484c6'</span> }
                  }
              })
-             cr:arc(width/<span class="number">2</span>, height/<span class="number">2</span>, height*.<span class="number">35</span>, <span class="number">0</span>, <span class="global">math</span>.pi*<span class="number">2</span>)
-             cr:fill()
+             cr:<span class="function-name">arc</span>(width/<span class="number">2</span>, height/<span class="number">2</span>, height*.<span class="number">35</span>, <span class="number">0</span>, <span class="global">math</span>.pi*<span class="number">2</span>)
+             cr:<span class="function-name">fill</span>()
 
              <span class="comment">-- Draw the grid
 </span>             <span class="keyword">local</span> lines = width/<span class="number">8</span>
-             cr:reset_clip()
-             cr:set_line_width(<span class="number">0.5</span>)
-             cr:set_source(gears.color(<span class="string">"#8922a3"</span>))
+             cr:<span class="function-name">reset_clip</span>()
+             cr:<span class="function-name">set_line_width</span>(<span class="number">0.5</span>)
+             cr:<span class="function-name">set_source</span>(gears.<span class="function-name">color</span>(<span class="string">"#8922a3"</span>))
 
              <span class="keyword">for</span> i=<span class="number">1</span>, lines <span class="keyword">do</span>
-                 cr:move_to((-width) + i* <span class="global">math</span>.sin(i * (<span class="global">math</span>.pi/(lines*<span class="number">2</span>)))*<span class="number">30</span>, height)
-                 cr:line_to(width/<span class="number">4</span> + i*((width/<span class="number">2</span>)/lines), height*<span class="number">0.75</span> + <span class="number">2</span>)
-                 cr:stroke()
+                 cr:<span class="function-name">move_to</span>((-width) + i* <span class="global">math</span>.<span class="function-name">sin</span>(i * (<span class="global">math</span>.pi/(lines*<span class="number">2</span>)))*<span class="number">30</span>, height)
+                 cr:<span class="function-name">line_to</span>(width/<span class="number">4</span> + i*((width/<span class="number">2</span>)/lines), height*<span class="number">0.75</span> + <span class="number">2</span>)
+                 cr:<span class="function-name">stroke</span>()
              <span class="keyword">end</span>
 
              <span class="keyword">for</span> i=<span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
-                 cr:move_to(<span class="number">0</span>, height*<span class="number">0.75</span> + i*<span class="number">10</span> + i*<span class="number">2</span>)
-                 cr:line_to(width, height*<span class="number">0.75</span> + i*<span class="number">10</span> + i*<span class="number">2</span>)
-                 cr:stroke()
+                 cr:<span class="function-name">move_to</span>(<span class="number">0</span>, height*<span class="number">0.75</span> + i*<span class="number">10</span> + i*<span class="number">2</span>)
+                 cr:<span class="function-name">line_to</span>(width, height*<span class="number">0.75</span> + i*<span class="number">10</span> + i*<span class="number">2</span>)
+                 cr:<span class="function-name">stroke</span>()
              <span class="keyword">end</span>
          <span class="keyword">end</span>,
     }
@@ -613,8 +613,8 @@ awful.wallpaper {
      <span class="string">".my_class { fill: #00ff00; } "</span>..
      <span class="string">"#my_id { fill: #0000ff; }"</span>
 
-awful.wallpaper {
-    widget = wibox.widget {
+awful.<span class="function-name">wallpaper</span> {
+    widget = wibox.<span class="function-name">widget</span> {
         stylesheet = stylesheet,
         image      = image,
         widget     = wibox.widget.imagebox
@@ -643,11 +643,11 @@ awful.wallpaper {
 
 
 <pre>
-<span class="keyword">local</span> global_wallpaper = awful.wallpaper {
+<span class="keyword">local</span> global_wallpaper = awful.<span class="function-name">wallpaper</span> {
     <span class="comment">-- [...] your content
 </span>}
 
-screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>()
+screen.<span class="function-name">connect_signal</span>(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>()
     <span class="comment">-- <a href="../core_components/screen.html#">screen</a> is the global screen module. It is also a list of all screens.
 </span>    global_wallpaper.screens = screen
 <span class="keyword">end</span>)
@@ -668,13 +668,13 @@ screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span cl
 <pre>
 <span class="comment">-- The "request::wallpaper" section is already in the default
 </span><span class="comment">-- <a href="../sample files/rc.lua.html#">rc.lua</a>, replace it with this.
-</span>screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
-    awful.wallpaper {
+</span>screen.<span class="function-name">connect_signal</span>(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
+    awful.<span class="function-name">wallpaper</span> {
         screen = s,
         bg     = <span class="string">"#0000ff"</span>,
         widget = {
             {
-                image  = gears.filesystem.get_random_file_from_dir(
+                image  = gears.filesystem.<span class="function-name">get_random_file_from_dir</span>(
                     <span class="string">"path/to/dir"</span>,
                     {<span class="string">".jpg"</span>, <span class="string">".png"</span>, <span class="string">".svg"</span>},
                     <span class="keyword">true</span>
@@ -691,12 +691,12 @@ screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span cl
 <span class="keyword">end</span>)
 
 <span class="comment">-- **Somewhere else** in the code, **not** in the <code>request::wallpaper</code> handler.
-</span>gears.timer {
+</span>gears.<span class="function-name">timer</span> {
     timeout   = <span class="number">1800</span>,
     autostart = <span class="keyword">true</span>,
     callback  = <span class="keyword">function</span>()
         <span class="keyword">for</span> s <span class="keyword">in</span> screen <span class="keyword">do</span>
-            s:emit_signal(<span class="string">"request::wallpaper"</span>)
+            s:<span class="function-name">emit_signal</span>(<span class="string">"request::wallpaper"</span>)
         <span class="keyword">end</span>
     <span class="keyword">end</span>,
 }
@@ -1168,10 +1168,10 @@ screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span cl
         <pre class="example"><span class="keyword">for</span> s <span class="keyword">in</span> screen <span class="keyword">do</span>
     <span class="keyword">local</span> dpi = s.index * <span class="number">100</span>
 
-    awful.wallpaper {
+    awful.<span class="function-name">wallpaper</span> {
         screen = s,
         dpi    = dpi,
-        widget = wibox.widget {
+        widget = wibox.<span class="function-name">widget</span> {
             text   = <span class="string">"DPI: "</span> .. dpi,
             valign = <span class="string">"center"</span>,
             halign = <span class="string">"center"</span>,
@@ -1349,32 +1349,32 @@ screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span cl
     <h3>Usage:</h3>
     <ul>
         <pre class="example">   <span class="comment">-- There is 3 screens. This will add the wallpaper to the last 2.
-</span>   awful.wallpaper {
+</span>   awful.<span class="function-name">wallpaper</span> {
        screens = {
            screen[<span class="number">2</span>],
            screen[<span class="number">3</span>],
        },
        bg      = <span class="string">"#222222"</span>,
-       widget  = wibox.widget {
+       widget  = wibox.<span class="function-name">widget</span> {
            {
                fit = <span class="keyword">function</span>(_, width, height)
                    <span class="keyword">return</span> width, height
                <span class="keyword">end</span>,
                draw = <span class="keyword">function</span>(_, _, cr, width, height)
-                   cr:set_source(gears.color(<span class="string">"#0000ff"</span>))
-                   cr:line_to(width, height)
-                   cr:line_to(width, <span class="number">0</span>)
-                   cr:line_to(<span class="number">0</span>, <span class="number">0</span>)
-                   cr:close_path()
-                   cr:fill()
-                   cr:set_source(gears.color(<span class="string">"#ff00ff"</span>))
-                   cr:move_to(<span class="number">0</span>, <span class="number">0</span>)
-                   cr:line_to(<span class="number">0</span>, height)
-                   cr:line_to(width, height)
-                   cr:close_path()
-                   cr:fill()
+                   cr:<span class="function-name">set_source</span>(gears.<span class="function-name">color</span>(<span class="string">"#0000ff"</span>))
+                   cr:<span class="function-name">line_to</span>(width, height)
+                   cr:<span class="function-name">line_to</span>(width, <span class="number">0</span>)
+                   cr:<span class="function-name">line_to</span>(<span class="number">0</span>, <span class="number">0</span>)
+                   cr:<span class="function-name">close_path</span>()
+                   cr:<span class="function-name">fill</span>()
+                   cr:<span class="function-name">set_source</span>(gears.<span class="function-name">color</span>(<span class="string">"#ff00ff"</span>))
+                   cr:<span class="function-name">move_to</span>(<span class="number">0</span>, <span class="number">0</span>)
+                   cr:<span class="function-name">line_to</span>(<span class="number">0</span>, height)
+                   cr:<span class="function-name">line_to</span>(width, height)
+                   cr:<span class="function-name">close_path</span>()
+                   cr:<span class="function-name">fill</span>()
                <span class="keyword">end</span>,
-               widget = wibox.widget.base.make_widget()
+               widget = wibox.widget.base.<span class="function-name">make_widget</span>()
            },
            {
                text   = <span class="string">"Center"</span>,
@@ -1762,20 +1762,20 @@ Uncovered area: 310 0   10  196
     right = <span class="number">10</span>,
 }
 
-<span class="keyword">local</span> wall = awful.wallpaper {
+<span class="keyword">local</span> wall = awful.<span class="function-name">wallpaper</span> {
     screen                = screen[<span class="number">1</span>],
     honor_workarea        = <span class="keyword">true</span>,
     honor_padding         = <span class="keyword">true</span>,
     bg                    = <span class="string">"#222222"</span>,
     uncovered_areas_color = <span class="string">"#ff0000"</span>,
-    widget =  wibox.widget {
+    widget =  wibox.<span class="function-name">widget</span> {
         fit = <span class="keyword">function</span>(_, width, height)
             <span class="keyword">return</span> width, height
         <span class="keyword">end</span>,
         draw = <span class="keyword">function</span>(_, _, cr, width, height)
-            <span class="keyword">local</span> radius = <span class="global">math</span>.min(width, height)/<span class="number">2</span>
-            cr:arc(width/<span class="number">2</span>, height/<span class="number">2</span>, radius, <span class="number">0</span>, <span class="number">2</span> * <span class="global">math</span>.pi)
-            cr:set_source(gears.color {
+            <span class="keyword">local</span> radius = <span class="global">math</span>.<span class="function-name">min</span>(width, height)/<span class="number">2</span>
+            cr:<span class="function-name">arc</span>(width/<span class="number">2</span>, height/<span class="number">2</span>, radius, <span class="number">0</span>, <span class="number">2</span> * <span class="global">math</span>.pi)
+            cr:<span class="function-name">set_source</span>(gears.<span class="function-name">color</span> {
                 <span class="global">type</span> = <span class="string">"radial"</span>,
                 from  = { width/<span class="number">2</span>, radius, <span class="number">20</span>  },
                 to    = { width/<span class="number">2</span>, radius, <span class="number">120</span> },
@@ -1785,9 +1785,9 @@ Uncovered area: 310 0   10  196
                     { <span class="number">1</span>, <span class="string">"#000000"</span> },
                 }
             })
-            cr:fill()
+            cr:<span class="function-name">fill</span>()
         <span class="keyword">end</span>,
-        widget = wibox.widget.base.make_widget()
+        widget = wibox.widget.base.<span class="function-name">make_widget</span>()
     }
 }
 
@@ -2561,7 +2561,7 @@ end
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

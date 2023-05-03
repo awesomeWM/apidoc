@@ -298,9 +298,9 @@
     rule2,
 }
 
-<span class="keyword">local</span> matcher = gears.matcher()
+<span class="keyword">local</span> matcher = gears.<span class="function-name">matcher</span>()
 
-<span class="keyword">local</span> <span class="keyword">function</span> first_source(self, object, props, callbacks) <span class="comment">--luacheck: no unused args
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">first_source</span>(self, object, props, callbacks) <span class="comment">--luacheck: no unused args
 </span>    <span class="comment">-- In this callback, you can add new elements to the props and
 </span>    <span class="comment">-- callbacks tables. It is not recommended the modify <a href="../utility_libraries/gears.object.html">object</a> in
 </span>    <span class="comment">-- this callback.
@@ -310,25 +310,25 @@
 <span class="keyword">end</span>
 
 <span class="comment">-- This will add a custom function to add properties to the rules.
-</span>matcher:add_matching_function(<span class="string">"first"</span>, first_source, {}, {})
+</span>matcher:<span class="function-name">add_matching_function</span>(<span class="string">"first"</span>, first_source, {}, {})
 
 <span class="comment">-- This will add the <code>rules</code> to this matcher.
-</span>matcher:add_matching_rules(<span class="string">"second"</span>, rules, {<span class="string">"first"</span>}, {})
+</span>matcher:<span class="function-name">add_matching_rules</span>(<span class="string">"second"</span>, rules, {<span class="string">"first"</span>}, {})
 
 <span class="comment">-- Some properties cannot be checked with the <code>==</code> operator (like those
 </span><span class="comment">-- with multiple possible types). In that case, it is possible to define
 </span><span class="comment">-- special comparator function.
-</span>matcher:add_property_matcher(<span class="string">"everything"</span>, <span class="keyword">function</span>(obj, value)
+</span>matcher:<span class="function-name">add_property_matcher</span>(<span class="string">"everything"</span>, <span class="keyword">function</span>(obj, value)
     <span class="keyword">return</span> value <span class="keyword">and</span> obj.answer == <span class="number">42</span>
 <span class="keyword">end</span>)
 
 <span class="comment">-- The same can be done for the property section.
-</span>matcher:add_property_setter(<span class="string">"multiply_by"</span>, <span class="keyword">function</span>(obj, value)
+</span>matcher:<span class="function-name">add_property_setter</span>(<span class="string">"multiply_by"</span>, <span class="keyword">function</span>(obj, value)
     obj.answer = (obj.answer <span class="keyword">or</span> <span class="number">1</span>) * value
 <span class="keyword">end</span>)
 
 <span class="comment">-- It is possible to append rules to existing (or new) sources.
-</span>matcher:append_rule( <span class="string">"second"</span>, {
+</span>matcher:<span class="function-name">append_rule</span>( <span class="string">"second"</span>, {
     id   = <span class="string">"rule_with_id"</span>,
     rule = {
         has_elite = <span class="keyword">true</span>,
@@ -339,10 +339,10 @@
 })
 
 <span class="comment">-- Or remove them.
-</span>matcher:remove_rule(<span class="string">"second"</span>, <span class="string">"rule_with_id"</span>)
+</span>matcher:<span class="function-name">remove_rule</span>(<span class="string">"second"</span>, <span class="string">"rule_with_id"</span>)
 
 <span class="comment">-- Apply the properties to <code>o</code>
-</span>matcher:apply(o)
+</span>matcher:<span class="function-name">apply</span>(o)
 </pre>
 
 <p> This example shows the different matching sections:</p>
@@ -353,9 +353,9 @@
 
 
 <pre>
-<span class="keyword">local</span> matcher = gears.matcher()
+<span class="keyword">local</span> matcher = gears.<span class="function-name">matcher</span>()
 
-matcher:append_rule( <span class="string">"my.source"</span>, {
+matcher:<span class="function-name">append_rule</span>( <span class="string">"my.source"</span>, {
     rule = {
         my_any_rule = <span class="keyword">true</span>,
     },
@@ -394,9 +394,9 @@ matcher:append_rule( <span class="string">"my.source"</span>, {
     except1     = <span class="number">1</span>,
 }
 
-matcher:apply(candidate1)
-matcher:apply(candidate2)
-matcher:apply(candidate3)
+matcher:<span class="function-name">apply</span>(candidate1)
+matcher:<span class="function-name">apply</span>(candidate2)
+matcher:<span class="function-name">apply</span>(candidate3)
 
 <span class="comment">-- Only candidate1 fits all criteria.
 </span><span class="global">assert</span>(candidate1.was_a_match == <span class="keyword">true</span> )
@@ -404,7 +404,7 @@ matcher:apply(candidate3)
 <span class="global">assert</span>(candidate3.was_a_match == <span class="keyword">false</span>)
 
 <span class="comment">-- It is also possible to match number property by range.
-</span>matcher:append_rule( <span class="string">"my.source"</span>, {
+</span>matcher:<span class="function-name">append_rule</span>( <span class="string">"my.source"</span>, {
     rule_greater = {
         value = <span class="number">50</span>,
     },
@@ -420,9 +420,9 @@ matcher:apply(candidate3)
 <span class="keyword">local</span> candidate5 = { value = <span class="number">75</span> , was_a_match = <span class="keyword">false</span> }
 <span class="keyword">local</span> candidate6 = { value = <span class="number">101</span>, was_a_match = <span class="keyword">false</span> }
 
-matcher:apply(candidate4)
-matcher:apply(candidate5)
-matcher:apply(candidate6)
+matcher:<span class="function-name">apply</span>(candidate4)
+matcher:<span class="function-name">apply</span>(candidate5)
+matcher:<span class="function-name">apply</span>(candidate6)
 
 <span class="comment">-- Only candidate5 fits all criteria.
 </span><span class="global">assert</span>(candidate4.was_a_match == <span class="keyword">false</span>)
@@ -1033,7 +1033,7 @@ matcher:apply(candidate6)
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="comment">-- Manually match the screen in various ways.
-</span>matcher:add_property_matcher(<span class="string">"screen"</span>, <span class="keyword">function</span>(c, value)
+</span>matcher:<span class="function-name">add_property_matcher</span>(<span class="string">"screen"</span>, <span class="keyword">function</span>(c, value)
    <span class="keyword">return</span> c.screen == value
        <span class="keyword">or</span> screen[c.screen] == value
        <span class="keyword">or</span> c.screen.outputs[value] ~= <span class="keyword">nil</span>
@@ -2192,7 +2192,7 @@ matcher:apply(candidate6)
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

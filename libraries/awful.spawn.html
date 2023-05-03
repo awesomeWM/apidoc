@@ -256,7 +256,7 @@
 
 
 <pre>
-awful.spawn(terminal..<span class="string">" -e my_command"</span>)
+awful.<span class="function-name">spawn</span>(terminal..<span class="string">" -e my_command"</span>)
 </pre>
 
 <p> Note that some terminals, such as rxvt-unicode (urxvt) support full commands
@@ -300,8 +300,8 @@ awful.spawn(terminal..<span class="string">" -e my_command"</span>)
 
 <pre>
 <span class="comment">-- **NEVER, EVER, DO THIS**: your computer will freeze
-</span><span class="global">os</span>.execute(<span class="string">"sleep 1; echo foo &gt; /tmp/foo.txt"</span>)
-mylabel.text = <span class="global">io</span>.popen(<span class="string">"cat /tmp/foo.txt"</span>):read(<span class="string">"*all"</span>)
+</span><span class="global">os</span>.<span class="function-name">execute</span>(<span class="string">"sleep 1; echo foo &gt; /tmp/foo.txt"</span>)
+mylabel.text = <span class="global">io</span>.<span class="function-name">popen</span>(<span class="string">"cat /tmp/foo.txt"</span>):<span class="function-name">read</span>(<span class="string">"*all"</span>)
 </pre>
 
 <p> The label will display <code>foo</code>. But If we do:</p>
@@ -310,8 +310,8 @@ mylabel.text = <span class="global">io</span>.popen(<span class="string">"cat /t
 <pre>
 <span class="comment">-- Don't do this, it won't work.
 </span><span class="comment">-- Assumes /tmp/foo.txt does not exist
-</span>awful.spawn.with_shell(<span class="string">"sleep 1; echo foo &gt; /tmp/foo.txt"</span>)
-mylabel.text = <span class="global">io</span>.popen(<span class="string">"cat /tmp/foo.txt"</span>):read(<span class="string">"*all"</span>)
+</span>awful.spawn.<span class="function-name">with_shell</span>(<span class="string">"sleep 1; echo foo &gt; /tmp/foo.txt"</span>)
+mylabel.text = <span class="global">io</span>.<span class="function-name">popen</span>(<span class="string">"cat /tmp/foo.txt"</span>):<span class="function-name">read</span>(<span class="string">"*all"</span>)
 </pre>
 
 <p> Then the label will be <strong>empty</strong>. <a href="../libraries/awful.spawn.html#">awful.spawn</a> and <a href="../libraries/awful.spawn.html#awful.spawn.with_shell">awful.spawn.with_shell</a>
@@ -327,8 +327,8 @@ mylabel.text = <span class="global">io</span>.popen(<span class="string">"cat /t
 <span class="comment">-- This is the correct way
 </span><span class="keyword">local</span> command = <span class="string">"sleep 1; echo foo &gt; /tmp/foo.txt"</span>
 
-awful.spawn.easy_async_with_shell(command, <span class="keyword">function</span>()
-    awful.spawn.easy_async_with_shell(<span class="string">"cat /tmp/foo.txt"</span>, <span class="keyword">function</span>(out)
+awful.spawn.<span class="function-name">easy_async_with_shell</span>(command, <span class="keyword">function</span>()
+    awful.spawn.<span class="function-name">easy_async_with_shell</span>(<span class="string">"cat /tmp/foo.txt"</span>, <span class="keyword">function</span>(out)
         mylabel.text = out
     <span class="keyword">end</span>)
 <span class="keyword">end</span>)
@@ -375,12 +375,12 @@ awful.spawn.easy_async_with_shell(command, <span class="keyword">function</span>
 
 
 <pre>
-awful.spawn.with_line_callback(noisy, {
+awful.spawn.<span class="function-name">with_line_callback</span>(noisy, {
     stdout = <span class="keyword">function</span>(line)
-        naughty.notification { message = <span class="string">"LINE:"</span>..line }
+        naughty.<span class="function-name">notification</span> { message = <span class="string">"LINE:"</span>..line }
     <span class="keyword">end</span>,
     stderr = <span class="keyword">function</span>(line)
-        naughty.notification { message = <span class="string">"ERR:"</span>..line}
+        naughty.<span class="function-name">notification</span> { message = <span class="string">"ERR:"</span>..line}
     <span class="keyword">end</span>,
 })
 </pre>
@@ -389,8 +389,8 @@ awful.spawn.with_line_callback(noisy, {
 
 
 <pre>
-awful.spawn.easy_async(noisy, <span class="keyword">function</span>(stdout, stderr, reason, exit_code)
-    naughty.notification { message = stdout }
+awful.spawn.<span class="function-name">easy_async</span>(noisy, <span class="keyword">function</span>(stdout, stderr, reason, exit_code)
+    naughty.<span class="function-name">notification</span> { message = stdout }
 <span class="keyword">end</span>)
 </pre>
 
@@ -404,7 +404,7 @@ awful.spawn.easy_async(noisy, <span class="keyword">function</span>(stdout, stde
 
 
 <pre>
-awful.spawn({<span class="string">"xdg-open"</span>, <span class="string">"/path/to/file"</span>})
+awful.<span class="function-name">spawn</span>({<span class="string">"xdg-open"</span>, <span class="string">"/path/to/file"</span>})
 </pre>
 
 <p> Awesome <strong>does not</strong> manage, modify or otherwise influence the database
@@ -446,7 +446,7 @@ DESKTOP_STARTUP_ID=<span class="string">"something_TIME$(date '+%s')"</span> my_
 
 
 <pre>
-awful.spawn(<span class="string">"urxvt -e maxima -name CALCULATOR"</span>, {
+awful.<span class="function-name">spawn</span>(<span class="string">"urxvt -e maxima -name CALCULATOR"</span>, {
     floating  = <span class="keyword">true</span>,
     tag       = mouse.screen.selected_tag,
     placement = awful.placement.bottom_right,
@@ -457,7 +457,7 @@ awful.spawn(<span class="string">"urxvt -e maxima -name CALCULATOR"</span>, {
 
 
 <pre>
-awesome-client <span class="string">'awful=require("awful");
+awesome-<span class="function-name">client</span> <span class="string">'awful=require("awful");
   awful.spawn("urxvt -e maxima -name CALCULATOR", {
     floating  = true,
     tag       = mouse.screen.selected_tag,
@@ -1400,7 +1400,7 @@ awesome-client <span class="string">'awful=require("awful");
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

@@ -709,20 +709,20 @@ lifecycle.</p>
 
 
 <pre>
-<span class="keyword">local</span> bg = wibox.container.background()
-bg:set_bg(<span class="string">"#ff0000"</span>)
+<span class="keyword">local</span> bg = wibox.container.<span class="function-name">background</span>()
+bg:<span class="function-name">set_bg</span>(<span class="string">"#ff0000"</span>)
 
-<span class="keyword">local</span> tb1 = wibox.widget.textbox()
-<span class="keyword">local</span> tb2 = wibox.widget.textbox(<span class="string">"bar"</span>)
+<span class="keyword">local</span> tb1 = wibox.widget.<span class="function-name">textbox</span>()
+<span class="keyword">local</span> tb2 = wibox.widget.<span class="function-name">textbox</span>(<span class="string">"bar"</span>)
 
-tb1:set_text(<span class="string">"foo"</span>)
-tb2:set_text(<span class="string">"bar"</span>)
+tb1:<span class="function-name">set_text</span>(<span class="string">"foo"</span>)
+tb2:<span class="function-name">set_text</span>(<span class="string">"bar"</span>)
 
-<span class="keyword">local</span> l = wibox.layout.fixed.vertical()
-l:add(tb1)
-l:add(tb2)
+<span class="keyword">local</span> l = wibox.layout.fixed.<span class="function-name">vertical</span>()
+l:<span class="function-name">add</span>(tb1)
+l:<span class="function-name">add</span>(tb2)
 
-bg:set_widget(l)
+bg:<span class="function-name">set_widget</span>(l)
 </pre>
 
 <p><strong>Imperative with properties</strong></p>
@@ -731,18 +731,18 @@ bg:set_widget(l)
 
 
 <pre>
-<span class="keyword">local</span> bg = wibox.container.background()
+<span class="keyword">local</span> bg = wibox.container.<span class="function-name">background</span>()
 bg.bg = <span class="string">"#ff0000"</span>
 
-<span class="keyword">local</span> tb1 = wibox.widget.textbox(<span class="string">"foo"</span>)
-<span class="keyword">local</span> tb2 = wibox.widget.textbox(<span class="string">"bar"</span>)
+<span class="keyword">local</span> tb1 = wibox.widget.<span class="function-name">textbox</span>(<span class="string">"foo"</span>)
+<span class="keyword">local</span> tb2 = wibox.widget.<span class="function-name">textbox</span>(<span class="string">"bar"</span>)
 
 tb1.text = <span class="string">"foo"</span>
 tb2.text = <span class="string">"bar"</span>
 
-<span class="keyword">local</span> l = wibox.layout.fixed.vertical()
-l:add(tb1)
-l:add(tb2)
+<span class="keyword">local</span> l = wibox.layout.fixed.<span class="function-name">vertical</span>()
+l:<span class="function-name">add</span>(tb1)
+l:<span class="function-name">add</span>(tb2)
 
 bg.widget = l
 </pre>
@@ -753,7 +753,7 @@ bg.widget = l
 
 
 <pre>
-<span class="keyword">local</span> bg = wibox.widget {
+<span class="keyword">local</span> bg = wibox.<span class="function-name">widget</span> {
     {
         {
             text = <span class="string">"foo"</span>,
@@ -794,7 +794,7 @@ documentation should be enough for most.</p>
 
 
 <pre>
-s.mywibox : setup {
+s.mywibox : <span class="function-name">setup</span> {
     {
         layout = awful.widget.only_on_screen,
         screen = <span class="string">"primary"</span>, <span class="comment">-- Only display on primary screen
@@ -828,7 +828,7 @@ widgets only on some screens.</p>
 
 <pre>
 <span class="comment">-- The progressbars will be on top of each other
-</span> <span class="keyword">local</span> mycpubar1 = wibox.widget {
+</span> <span class="keyword">local</span> mycpubar1 = wibox.<span class="function-name">widget</span> {
     { value  = <span class="number">0.2</span>, color = grad1,
         widget = wibox.widget.progressbar },
     { value  = <span class="number">0.4</span>, color = grad2,
@@ -840,7 +840,7 @@ widgets only on some screens.</p>
 <span class="comment">-- Now, add a rotate container, the height will become the width.
 </span><span class="comment">-- It act as if the <a href="../widget_layouts/wibox.layout.flex.html#vertical">wibox.layout.flex.vertical</a> was
 </span><span class="comment">-- <a href="../widget_layouts/wibox.layout.flex.html#horizontal">wibox.layout.flex.horizontal</a>
-</span> <span class="keyword">local</span> mycpubar2 = wibox.widget {
+</span> <span class="keyword">local</span> mycpubar2 = wibox.<span class="function-name">widget</span> {
     {
         { value  = <span class="number">0.2</span>, color = grad1,
             widget = wibox.widget.progressbar },
@@ -868,7 +868,7 @@ widgets only on some screens.</p>
 
 
 <pre>
-s.mywibox : setup {
+s.mywibox : <span class="function-name">setup</span> {
     {
         <span class="comment">-- Force the textbox to always be 300 pixel long
 </span>        {
@@ -917,7 +917,7 @@ and <code>right</code> can be defined.</p>
 
 
 <pre>
-s.mywibox : setup {
+s.mywibox : <span class="function-name">setup</span> {
     my_textbox1, <span class="comment">-- Left
 </span>    <span class="keyword">nil</span>,         <span class="comment">-- Nothing in the middle
 </span>    my_textbox2, <span class="comment">-- Right
@@ -934,14 +934,14 @@ is a simple circle widget:</p>
 
 
 <pre>
-s.mywibox : setup {
+s.mywibox : <span class="function-name">setup</span> {
     fit    = <span class="keyword">function</span>(self, context, width, height)
         <span class="keyword">return</span> height, height <span class="comment">-- A square taking the full height
 </span>    <span class="keyword">end</span>,
     draw   = <span class="keyword">function</span>(self, context, cr, width, height)
-        cr:set_source_rgb(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>) <span class="comment">-- Red
-</span>        cr:arc(height/<span class="number">2</span>, height/<span class="number">2</span>, height/<span class="number">2</span>, <span class="number">0</span>, <span class="global">math</span>.pi*<span class="number">2</span>)
-        cr:fill()
+        cr:<span class="function-name">set_source_rgb</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>) <span class="comment">-- Red
+</span>        cr:<span class="function-name">arc</span>(height/<span class="number">2</span>, height/<span class="number">2</span>, height/<span class="number">2</span>, <span class="number">0</span>, <span class="global">math</span>.pi*<span class="number">2</span>)
+        cr:<span class="function-name">fill</span>()
     <span class="keyword">end</span>,
     layout = wibox.widget.base.make_widget,
 }
@@ -971,11 +971,11 @@ requires complex manipulations which would make the declaration unreadable.</p>
 
 
 <pre>
-<span class="keyword">local</span> tb = wibox.widget.textbox()
-tb:set_markup(<span class="string">"Hello world! "</span>)
+<span class="keyword">local</span> tb = wibox.widget.<span class="function-name">textbox</span>()
+tb:<span class="function-name">set_markup</span>(<span class="string">"Hello world! "</span>)
 
 <span class="comment">-- Repeat "tb" 3 times
-</span>s.mywibox : setup {
+</span>s.mywibox : <span class="function-name">setup</span> {
     tb,
     tb,
     tb,
@@ -1011,7 +1011,7 @@ underscore characters and non-numeric first character).</p>
 
 
 <pre>
-s.mywibox : setup {
+s.mywibox : <span class="function-name">setup</span> {
     {
         id     = <span class="string">"second"</span>,
         widget = wibox.widget.textbox
@@ -1024,8 +1024,8 @@ s.mywibox : setup {
     layout = wibox.layout.fixed.horizontal,
 }
 
-s.mywibox.first.second:set_markup(<span class="string">"changed!"</span>)
-s.mywibox:get_children_by_id(<span class="string">"third"</span>)[<span class="number">1</span>]:set_markup(<span class="string">"Also changed!"</span>)
+s.mywibox.first.second:<span class="function-name">set_markup</span>(<span class="string">"changed!"</span>)
+s.mywibox:<span class="function-name">get_children_by_id</span>(<span class="string">"third"</span>)[<span class="number">1</span>]:<span class="function-name">set_markup</span>(<span class="string">"Also changed!"</span>)
 </pre>
 
 <h3>Extending the system</h3>
@@ -1046,13 +1046,13 @@ caught by a Lua <code>metatable</code> (operator overload).</p>
 </span><span class="keyword">for</span> _, wdg <span class="keyword">in</span> <span class="global">ipairs</span> {
     wibox.widget.textbox , wibox.widget.progressbar, wibox.widget.graph
 } <span class="keyword">do</span>
-    <span class="keyword">function</span> wdg:vicious(args)
+    <span class="keyword">function</span> wdg:<span class="function-name">vicious</span>(args)
         <span class="keyword">local</span> f = unpack <span class="keyword">or</span> <span class="global">table</span>.unpack <span class="comment">-- Lua 5.1 compat
-</span>        vicious.register(self, f(args))
+</span>        vicious.<span class="function-name">register</span>(self, <span class="function-name">f</span>(args))
     <span class="keyword">end</span>
 <span class="keyword">end</span>
 
-s.mywibox : setup {
+s.mywibox : <span class="function-name">setup</span> {
     {
         vicious = {vicious.widgets.cpu, <span class="string">"CPU: $1%"</span>, <span class="number">3</span>},
         widget  = wibox.widget.textbox
@@ -1082,18 +1082,18 @@ example:</p>
         <span class="keyword">return</span> height, height <span class="comment">-- A square taking the full height
 </span>    <span class="keyword">end</span>,
     draw   = <span class="keyword">function</span>(self, context, cr, width, height)
-        cr:set_source_rgb(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>) <span class="comment">-- Red
-</span>        cr:arc(height/<span class="number">2</span>, height/<span class="number">2</span>, height/<span class="number">2</span>, <span class="number">0</span>, <span class="global">math</span>.pi*<span class="number">2</span>)
-        cr:fill()
+        cr:<span class="function-name">set_source_rgb</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>) <span class="comment">-- Red
+</span>        cr:<span class="function-name">arc</span>(height/<span class="number">2</span>, height/<span class="number">2</span>, height/<span class="number">2</span>, <span class="number">0</span>, <span class="global">math</span>.pi*<span class="number">2</span>)
+        cr:<span class="function-name">fill</span>()
     <span class="keyword">end</span>,
     layout = wibox.widget.base.make_widget,
 }
 
 <span class="comment">-- Define a layout with the imperative syntax
-</span><span class="keyword">local</span> l = wibox.widget.align()
+</span><span class="keyword">local</span> l = wibox.widget.<span class="function-name">align</span>()
 
 <span class="comment">-- 3 circle
-</span>s.mywibox : setup {
+</span>s.mywibox : <span class="function-name">setup</span> {
     circle,
     circle,
     circle,
@@ -1104,10 +1104,10 @@ example:</p>
 <span class="comment">-- This can be done instead
 </span><span class="keyword">local</span> three_circle = {layout = wibox.layout.align.horizontal}
 <span class="keyword">for</span> i=<span class="number">1</span>, <span class="number">3</span> <span class="keyword">do</span>
-    <span class="global">table</span>.insert(three_circle, circle)
+    <span class="global">table</span>.<span class="function-name">insert</span>(three_circle, circle)
 <span class="keyword">end</span>
 
-s.mywibox : setup (three_circle)
+s.mywibox : <span class="function-name">setup</span> (three_circle)
 </pre>
 
 <h3>Instantiation rules</h3>
@@ -1141,7 +1141,7 @@ necessary for three reasons:</p>
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

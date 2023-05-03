@@ -256,14 +256,14 @@
 
 
 <pre>
-awful.keygrabber {
+awful.<span class="function-name">keygrabber</span> {
     keybindings = {
-        awful.key {
+        awful.<span class="function-name">key</span> {
             modifiers = {<span class="string">"Mod1"</span>},
             key       = <span class="string">"Tab"</span>,
             on_press  = awful.client.focus.history.select_previous
         },
-        awful.key {
+        awful.<span class="function-name">key</span> {
             modifiers = {<span class="string">"Mod1"</span>, <span class="string">"Shift"</span>},
             key       = <span class="string">"Tab"</span>,
             on_press  = awful.client.focus.history.select_next
@@ -309,17 +309,17 @@ awful.keygrabber {
     nouns      = { c = <span class="string">"client"</span>, t = <span class="string">"tag"</span>  , s = <span class="string">"screen"</span>, y = <span class="string">"layout"</span>, },
 }, {}
 
-<span class="keyword">function</span> actions.client(action, adj) <span class="global">print</span>(<span class="string">"IN CLIENT!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
-</span><span class="keyword">function</span> actions.tag   (action, adj) <span class="global">print</span>(<span class="string">"IN TAG!"</span>   ) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
-</span><span class="keyword">function</span> actions.screen(action, adj) <span class="global">print</span>(<span class="string">"IN SCREEN!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
-</span><span class="keyword">function</span> actions.layout(action, adj) <span class="global">print</span>(<span class="string">"IN LAYOUT!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
+<span class="keyword">function</span> actions.<span class="function-name">client</span>(action, adj) <span class="global">print</span>(<span class="string">"IN CLIENT!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
+</span><span class="keyword">function</span> actions.<span class="function-name">tag</span>   (action, adj) <span class="global">print</span>(<span class="string">"IN TAG!"</span>   ) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
+</span><span class="keyword">function</span> actions.<span class="function-name">screen</span>(action, adj) <span class="global">print</span>(<span class="string">"IN SCREEN!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
+</span><span class="keyword">function</span> actions.<span class="function-name">layout</span>(action, adj) <span class="global">print</span>(<span class="string">"IN LAYOUT!"</span>) <span class="keyword">end</span> <span class="comment">--luacheck: no unused args
 </span>
-<span class="keyword">local</span> <span class="keyword">function</span> parse(_, stop_key, _, sequence)
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">parse</span>(_, stop_key, _, sequence)
     <span class="keyword">local</span> parsed, count = { verbs = <span class="string">""</span>, adjectives = <span class="string">""</span>, nouns = <span class="string">""</span>, }, <span class="string">""</span>
     sequence = sequence..stop_key
 
     <span class="keyword">for</span> i=<span class="number">1</span>, #sequence <span class="keyword">do</span>
-        <span class="keyword">local</span> char = sequence:sub(i,i)
+        <span class="keyword">local</span> char = sequence:<span class="function-name">sub</span>(i,i)
         <span class="keyword">if</span> char &gt;= <span class="string">"0"</span> <span class="keyword">and</span> char &lt;= <span class="string">"9"</span> <span class="keyword">then</span>
             count = count .. char
         <span class="keyword">else</span>
@@ -335,11 +335,11 @@ awful.keygrabber {
     <span class="keyword">end</span>
 <span class="keyword">end</span>
 
-awful.keygrabber {
+awful.<span class="function-name">keygrabber</span> {
     stop_callback = parse,
-    stop_key   = gears.<span class="global">table</span>.keys(map.verbs),
+    stop_key   = gears.<span class="global">table</span>.<span class="function-name">keys</span>(map.verbs),
     root_keybindings = {
-        awful.key({<span class="string">"Mod4"</span>}, <span class="string">"v"</span>)
+        awful.<span class="function-name">key</span>({<span class="string">"Mod4"</span>}, <span class="string">"v"</span>)
     },
 }
 </pre>
@@ -352,7 +352,7 @@ awful.keygrabber {
 
 
 <pre>
-mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span class="keyword">function</span>(self, modifiers, modset)
+mykeygrabber:<span class="function-name">connect_signal</span>(<span class="string">"Escape::pressed"</span>, <span class="keyword">function</span>(self, modifiers, modset)
     <span class="global">print</span>(<span class="string">"Escape called!"</span>)
 <span class="keyword">end</span>)
 </pre>
@@ -1144,7 +1144,7 @@ mykeygrabber:connect_signal(<span class="string">"Escape::pressed"</span>, <span
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">awful.keygrabber {
+        <pre class="example">awful.<span class="function-name">keygrabber</span> {
     autostart      = <span class="keyword">true</span>,
     timeout        = <span class="number">1</span>, <span class="comment">-- second
 </span>    timeout_callback  = <span class="keyword">function</span>()
@@ -1543,10 +1543,10 @@ Called again!
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">awful.keygrabber {
+        <pre class="example">awful.<span class="function-name">keygrabber</span> {
     mask_modkeys = <span class="keyword">true</span>,
     root_keybindings = {
-        awful.key {
+        awful.<span class="function-name">key</span> {
             modifiers = {<span class="string">"Mod4"</span>},
             key       = <span class="string">"i"</span>,
             on_press  = <span class="keyword">function</span>(self)
@@ -1555,12 +1555,12 @@ Called again!
         },
     },
     keybindings = {
-        awful.key {
+        awful.<span class="function-name">key</span> {
             modifiers = {<span class="string">"Mod4"</span>, <span class="string">"Shift"</span>},
             key       = <span class="string">"i"</span>,
             on_press  = <span class="keyword">function</span>(self)
                 <span class="global">print</span>(<span class="string">"Called again!"</span>)
-                self:stop()
+                self:<span class="function-name">stop</span>()
             <span class="keyword">end</span>
         },
     },
@@ -1571,23 +1571,23 @@ Called again!
 
 <span class="comment">-- The following will **NOT** trigger the keygrabbing because it isn't exported
 </span><span class="comment">-- to the root (global) keys. Adding <a href="../core_components/awful.keygrabber.html#export_keybindings">export_keybindings</a> would solve that
-</span>root._execute_keybinding({<span class="string">"Mod4"</span>, <span class="string">"Shift"</span>}, <span class="string">"i"</span>)
+</span>root.<span class="function-name">_execute_keybinding</span>({<span class="string">"Mod4"</span>, <span class="string">"Shift"</span>}, <span class="string">"i"</span>)
 <span class="global">assert</span>(#keybinding_works == <span class="number">0</span>)
 
 <span class="comment">-- But this will start the keygrabber because it is part of the root_keybindings
-</span>root._execute_keybinding({<span class="string">"Mod4"</span>}, <span class="string">"i"</span>)
+</span>root.<span class="function-name">_execute_keybinding</span>({<span class="string">"Mod4"</span>}, <span class="string">"i"</span>)
 
 <span class="comment">-- Note that that keygrabber is running, all callbacks should work:
-</span>root.fake_input(<span class="string">"key_press"</span>  , <span class="string">"a"</span>)
-root.fake_input(<span class="string">"key_release"</span>  , <span class="string">"a"</span>)
+</span>root.<span class="function-name">fake_input</span>(<span class="string">"key_press"</span>  , <span class="string">"a"</span>)
+root.<span class="function-name">fake_input</span>(<span class="string">"key_release"</span>  , <span class="string">"a"</span>)
 
 <span class="comment">-- Calling the root keybindings now wont work because they are not part of
 </span><span class="comment">-- the keygrabber internal (own) keybindings, so <a href="../core_components/awful.keygrabber.html#keypressed_callback">keypressed_callback</a> will
 </span><span class="comment">-- be called.
-</span>root._execute_keybinding({<span class="string">"Mod4"</span>}, <span class="string">"i"</span>)
+</span>root.<span class="function-name">_execute_keybinding</span>({<span class="string">"Mod4"</span>}, <span class="string">"i"</span>)
 
 <span class="comment">-- Now the keygrabber own keybindings will work
-</span>root._execute_keybinding({<span class="string">"Mod4"</span>, <span class="string">"Shift"</span>}, <span class="string">"i"</span>)</pre>
+</span>root.<span class="function-name">_execute_keybinding</span>({<span class="string">"Mod4"</span>, <span class="string">"Shift"</span>}, <span class="string">"i"</span>)</pre>
     </ul>
 
 
@@ -1729,7 +1729,7 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">awful.keygrabber {
+        <pre class="example">awful.<span class="function-name">keygrabber</span> {
     autostart      = <span class="keyword">true</span>,
     allowed_keys   = {<span class="string">"a"</span>, <span class="string">"w"</span>, <span class="string">"e"</span>, <span class="string">"s"</span>, <span class="string">"o"</span>, <span class="string">"m"</span>, <span class="string">"e"</span>},
 }</pre>
@@ -1775,11 +1775,11 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">awful.keygrabber {
+        <pre class="example">awful.<span class="function-name">keygrabber</span> {
     autostart      = <span class="keyword">true</span>,
     stop_key       = <span class="string">"Return"</span>,
     stop_callback  = <span class="keyword">function</span>(_, _, _, sequence)
-        naughty.notification {message=<span class="string">"The keys were:"</span>..sequence}
+        naughty.<span class="function-name">notification</span> {message=<span class="string">"The keys were:"</span>..sequence}
     <span class="keyword">end</span>,
 }</pre>
     </ul>
@@ -2337,16 +2337,16 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
         <pre class="example"><span class="comment">-- The following function can be bound to a key, and be used to resize a
 </span><span class="comment">-- client using the keyboard.
 </span>
-<span class="keyword">function</span> resize(c)
+<span class="keyword">function</span> <span class="function-name">resize</span>(c)
   <span class="keyword">local</span> grabber
-  grabber = awful.keygrabber.run(<span class="keyword">function</span>(mod, key, event)
+  grabber = awful.keygrabber.<span class="function-name">run</span>(<span class="keyword">function</span>(mod, key, event)
     <span class="keyword">if</span> event == <span class="string">"release"</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
 
-    <span class="keyword">if</span>     key == <span class="string">'Up'</span>    <span class="keyword">then</span> c:relative_move(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">5</span>)
-    <span class="keyword">elseif</span> key == <span class="string">'Down'</span>  <span class="keyword">then</span> c:relative_move(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, -<span class="number">5</span>)
-    <span class="keyword">elseif</span> key == <span class="string">'Right'</span> <span class="keyword">then</span> c:relative_move(<span class="number">0</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>)
-    <span class="keyword">elseif</span> key == <span class="string">'Left'</span>  <span class="keyword">then</span> c:relative_move(<span class="number">0</span>, <span class="number">0</span>, -<span class="number">5</span>, <span class="number">0</span>)
-    <span class="keyword">else</span>   awful.keygrabber.stop(grabber)
+    <span class="keyword">if</span>     key == <span class="string">'Up'</span>    <span class="keyword">then</span> c:<span class="function-name">relative_move</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">5</span>)
+    <span class="keyword">elseif</span> key == <span class="string">'Down'</span>  <span class="keyword">then</span> c:<span class="function-name">relative_move</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, -<span class="number">5</span>)
+    <span class="keyword">elseif</span> key == <span class="string">'Right'</span> <span class="keyword">then</span> c:<span class="function-name">relative_move</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>)
+    <span class="keyword">elseif</span> key == <span class="string">'Left'</span>  <span class="keyword">then</span> c:<span class="function-name">relative_move</span>(<span class="number">0</span>, <span class="number">0</span>, -<span class="number">5</span>, <span class="number">0</span>)
+    <span class="keyword">else</span>   awful.keygrabber.<span class="function-name">stop</span>(grabber)
     <span class="keyword">end</span>
   <span class="keyword">end</span>)
 <span class="keyword">end</span></pre>
@@ -2460,7 +2460,7 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_done_cb(self, stop_key, stop_mods, sequence)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_done_cb</span>(self, stop_key, stop_mods, sequence)
    <span class="comment">-- do something
 </span><span class="keyword">end</span></pre>
     </ul>
@@ -2550,7 +2550,7 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_keypressed_cb(self, mod, key, command)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_keypressed_cb</span>(self, mod, key, command)
    <span class="comment">-- do something
 </span><span class="keyword">end</span></pre>
     </ul>
@@ -2609,7 +2609,7 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_keyreleased_cb(self, mod, key, command)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_keyreleased_cb</span>(self, mod, key, command)
    <span class="comment">-- do something
 </span><span class="keyword">end</span></pre>
     </ul>
@@ -2686,7 +2686,7 @@ root.fake_input(<span class="string">"key_release"</span>  , <span class="string
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

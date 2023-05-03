@@ -232,14 +232,14 @@
 
 
 <pre>
-beautiful.init(gears.filesystem.get_themes_dir() .. <span class="string">"default/theme.lua"</span>)
+beautiful.<span class="function-name">init</span>(gears.filesystem.<span class="function-name">get_themes_dir</span>() .. <span class="string">"default/theme.lua"</span>)
 </pre>
 
 <p> with</p>
 
 
 <pre>
-beautiful.init(gears.filesystem.get_configuration_dir() .. <span class="string">"mytheme.lua"</span>)
+beautiful.<span class="function-name">init</span>(gears.filesystem.<span class="function-name">get_configuration_dir</span>() .. <span class="string">"mytheme.lua"</span>)
 </pre>
 
 <p> in your <a href="../sample files/rc.lua.html#">rc.lua</a>.</p>
@@ -259,7 +259,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. <span class="string">
 <span class="keyword">local</span> dpi = xresources.apply_dpi
 
 <span class="keyword">local</span> gfs = <span class="global">require</span>(<span class="string">"<a href="../utility_libraries/gears.filesystem.html#">gears.filesystem</a>"</span>)
-<span class="keyword">local</span> themes_path = gfs.get_themes_dir()
+<span class="keyword">local</span> themes_path = gfs.<span class="function-name">get_themes_dir</span>()
 
 <span class="keyword">local</span> theme = {}
 
@@ -276,8 +276,8 @@ theme.fg_focus      = <span class="string">"#ffffff"</span>
 theme.fg_urgent     = <span class="string">"#ffffff"</span>
 theme.fg_minimize   = <span class="string">"#ffffff"</span>
 
-theme.useless_gap         = dpi(<span class="number">0</span>)
-theme.border_width        = dpi(<span class="number">1</span>)
+theme.useless_gap         = <span class="function-name">dpi</span>(<span class="number">0</span>)
+theme.border_width        = <span class="function-name">dpi</span>(<span class="number">1</span>)
 theme.border_color_normal = <span class="string">"#000000"</span>
 theme.border_color_active = <span class="string">"#535d6c"</span>
 theme.border_color_marked = <span class="string">"#91231c"</span>
@@ -295,11 +295,11 @@ theme.border_color_marked = <span class="string">"#91231c"</span>
 </span><span class="comment">--theme.taglist_bg_focus = "#ff0000"
 </span>
 <span class="comment">-- Generate taglist squares:
-</span><span class="keyword">local</span> taglist_square_size = dpi(<span class="number">4</span>)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+</span><span class="keyword">local</span> taglist_square_size = <span class="function-name">dpi</span>(<span class="number">4</span>)
+theme.taglist_squares_sel = theme_assets.<span class="function-name">taglist_squares_sel</span>(
     taglist_square_size, theme.fg_normal
 )
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+theme.taglist_squares_unsel = theme_assets.<span class="function-name">taglist_squares_unsel</span>(
     taglist_square_size, theme.fg_normal
 )
 
@@ -313,8 +313,8 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 </span><span class="comment">-- menu_[bg|fg]_[normal|focus]
 </span><span class="comment">-- menu_[border_color|border_width]
 </span>theme.menu_submenu_icon = themes_path..<span class="string">"default/submenu.png"</span>
-theme.menu_height = dpi(<span class="number">15</span>)
-theme.menu_width  = dpi(<span class="number">100</span>)
+theme.menu_height = <span class="function-name">dpi</span>(<span class="number">15</span>)
+theme.menu_width  = <span class="function-name">dpi</span>(<span class="number">100</span>)
 
 <span class="comment">-- You can add as many variables as
 </span><span class="comment">-- you wish and access them by using
@@ -369,7 +369,7 @@ theme.layout_cornersw = themes_path..<span class="string">"default/layouts/corne
 theme.layout_cornerse = themes_path..<span class="string">"default/layouts/cornersew.png"</span>
 
 <span class="comment">-- Generate Awesome icon:
-</span>theme.awesome_icon = theme_assets.awesome_icon(
+</span>theme.awesome_icon = theme_assets.<span class="function-name">awesome_icon</span>(
     theme.menu_height, theme.bg_focus, theme.fg_focus
 )
 
@@ -378,8 +378,8 @@ theme.layout_cornerse = themes_path..<span class="string">"default/layouts/corne
 </span>theme.icon_theme = <span class="keyword">nil</span>
 
 <span class="comment">-- Set different colors for urgent notifications.
-</span>rnotification.connect_signal(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
-    rnotification.append_rule {
+</span>rnotification.<span class="function-name">connect_signal</span>(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
+    rnotification.<span class="function-name">append_rule</span> {
         rule       = { urgency = <span class="string">'critical'</span> },
         properties = { bg = <span class="string">'#ff0000'</span>, fg = <span class="string">'#ffffff'</span> }
     }
@@ -410,7 +410,7 @@ theme.layout_cornerse = themes_path..<span class="string">"default/layouts/corne
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

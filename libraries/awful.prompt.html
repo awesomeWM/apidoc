@@ -286,10 +286,10 @@
 
 
 <pre>
-<span class="keyword">local</span> atextbox = wibox.widget.textbox()
+<span class="keyword">local</span> atextbox = wibox.widget.<span class="function-name">textbox</span>()
 <span class="comment">-- Create a shortcut function
-</span><span class="keyword">local</span> <span class="keyword">function</span> echo_test()
-    awful.prompt.run {
+</span><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">echo_test</span>()
+    awful.prompt.<span class="function-name">run</span> {
         prompt       = <span class="string">"&lt;b&gt;Echo: &lt;/b&gt;"</span>,
         text         = <span class="string">"default command"</span>,
         bg_cursor    = <span class="string">"#ff0000"</span>,
@@ -298,13 +298,13 @@
 </span>        textbox      = atextbox,
         exe_callback = <span class="keyword">function</span>(input)
             <span class="keyword">if</span> <span class="keyword">not</span> input <span class="keyword">or</span> #input == <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="keyword">end</span>
-            naughty.notification { message = <span class="string">"The input was: "</span>..input }
+            naughty.<span class="function-name">notification</span> { message = <span class="string">"The input was: "</span>..input }
         <span class="keyword">end</span>
     }
 <span class="keyword">end</span>
 
 <span class="comment">-- Then **IN THE globalkeys TABLE** add a new shortcut
-</span>awful.key({ modkey }, <span class="string">"e"</span>, echo_test,
+</span>awful.<span class="function-name">key</span>({ modkey }, <span class="string">"e"</span>, echo_test,
     {description = <span class="string">"Echo a string"</span>, group = <span class="string">"custom"</span>}),
 </pre>
 
@@ -326,11 +326,11 @@
 
 
 <pre>
-<span class="keyword">local</span> atextbox = wibox.widget.textbox()
+<span class="keyword">local</span> atextbox = wibox.widget.<span class="function-name">textbox</span>()
 <span class="comment">-- Custom handler for the return value. This implementation does nothing,
 </span><span class="comment">-- but you might want be notified of the failure, so it is part of this
 </span><span class="comment">-- example.
-</span><span class="keyword">local</span> <span class="keyword">function</span> clear(result)
+</span><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">clear</span>(result)
     atextbox.widget.text =
         <span class="global">type</span>(result) == <span class="string">"string"</span> <span class="keyword">and</span> result <span class="keyword">or</span> <span class="string">""</span>
 <span class="keyword">end</span>
@@ -339,13 +339,13 @@
 </span>    {{         }, <span class="string">"Return"</span>, awful.spawn},
     <span class="comment">-- Spawn method to spawn in the current tag
 </span>    {{<span class="string">"Mod1"</span>   }, <span class="string">"Return"</span>, <span class="keyword">function</span>(command)
-        clear(awful.spawn(command,{
+        <span class="function-name">clear</span>(awful.<span class="function-name">spawn</span>(command,{
             tag       = mouse.screen.selected_tag
         }))
     <span class="keyword">end</span>},
     <span class="comment">-- Spawn in the current tag as floating and on top
 </span>    {{<span class="string">"Shift"</span>  }, <span class="string">"Return"</span>, <span class="keyword">function</span>(command)
-        clear(awful.spawn(command,{
+        <span class="function-name">clear</span>(awful.<span class="function-name">spawn</span>(command,{
             ontop     = <span class="keyword">true</span>,
             floating  = <span class="keyword">true</span>,
             tag       = mouse.screen.selected_tag
@@ -353,20 +353,20 @@
     <span class="keyword">end</span>},
     <span class="comment">-- Spawn in a new tag
 </span>    {{<span class="string">"Control"</span>}, <span class="string">"Return"</span>, <span class="keyword">function</span>(command)
-        clear(awful.spawn(command,{
+        <span class="function-name">clear</span>(awful.<span class="function-name">spawn</span>(command,{
             new_tag = <span class="keyword">true</span>
         }))
     <span class="keyword">end</span>},
     <span class="comment">-- Cancel
 </span>    {{         }, <span class="string">"Escape"</span>, <span class="keyword">function</span>(_)
-        clear()
+        <span class="function-name">clear</span>()
     <span class="keyword">end</span>},
 }
-awful.prompt.run {
+awful.prompt.<span class="function-name">run</span> {
     prompt        = <span class="string">"&lt;b&gt;Run: &lt;/b&gt;"</span>,
     hooks         = hooks,
     textbox       = atextbox,
-    history_path  = gfs.get_cache_dir() .. <span class="string">"/history"</span>,
+    history_path  = gfs.<span class="function-name">get_cache_dir</span>() .. <span class="string">"/history"</span>,
     done_callback = clear,
 }
 </pre>
@@ -383,7 +383,7 @@ awful.prompt.run {
 
 
 <pre>
-<span class="keyword">local</span> atextbox = wibox.widget.textbox()
+<span class="keyword">local</span> atextbox = wibox.widget.<span class="function-name">textbox</span>()
 <span class="comment">-- Store a list of verbs characters in a hash
 </span><span class="keyword">local</span> verbs = {
     <span class="comment">-- Spawn in a terminal
@@ -391,34 +391,34 @@ awful.prompt.run {
 </span>    <span class="comment">-- Spawn with a shell
 </span>    s = <span class="keyword">function</span>(adjs, count, cmd) <span class="keyword">return</span> {awful.util.shell, <span class="string">'-c'</span>, cmd} <span class="keyword">end</span>, <span class="comment">--luacheck: no unused args
 </span>}
-<span class="keyword">local</span> <span class="keyword">function</span> vi_parse(action, command)
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">vi_parse</span>(action, command)
     <span class="keyword">local</span> req, ret = {count={}, adjectives={}}
     <span class="comment">-- Quite dumb, don't do something like &lt;num&gt;+&lt;adj&gt;+&lt;num&gt;+&lt;verb&gt;
-</span>    <span class="keyword">for</span> char <span class="keyword">in</span> action:gmatch(<span class="string">'(.)'</span>) <span class="keyword">do</span>
-        <span class="keyword">if</span>     <span class="global">tonumber</span>(char)  <span class="keyword">then</span> <span class="global">table</span>.insert(req.count, char)
+</span>    <span class="keyword">for</span> char <span class="keyword">in</span> action:<span class="function-name">gmatch</span>(<span class="string">'(.)'</span>) <span class="keyword">do</span>
+        <span class="keyword">if</span>     <span class="global">tonumber</span>(char)  <span class="keyword">then</span> <span class="global">table</span>.<span class="function-name">insert</span>(req.count, char)
         <span class="keyword">elseif</span> verbs[char]     <span class="keyword">then</span> req.verb = char
-        <span class="keyword">else</span>   <span class="global">table</span>.insert(ret.adjectives, char) <span class="keyword">end</span>
+        <span class="keyword">else</span>   <span class="global">table</span>.<span class="function-name">insert</span>(ret.adjectives, char) <span class="keyword">end</span>
         <span class="keyword">if</span> req.verb <span class="keyword">then</span>
-            req.count = <span class="global">tonumber</span>(<span class="global">table</span>.concat(req.count)) <span class="keyword">or</span> <span class="number">1</span>
+            req.count = <span class="global">tonumber</span>(<span class="global">table</span>.<span class="function-name">concat</span>(req.count)) <span class="keyword">or</span> <span class="number">1</span>
             ret = ret <span class="keyword">or</span> verbs[req.verb](req.adjectives, req.count, command)
             req = {count={}, adjectives={}}
         <span class="keyword">end</span>
     <span class="keyword">end</span>
     <span class="keyword">return</span> ret
 <span class="keyword">end</span>
-awful.prompt.run {
+awful.prompt.<span class="function-name">run</span> {
     prompt       = <span class="string">'&lt;b&gt;Run: &lt;/b&gt;'</span>,
     hooks        = {
         {{},<span class="string">'Return'</span>, <span class="keyword">function</span>(cmd)
-            <span class="keyword">if</span> (<span class="keyword">not</span> cmd) <span class="keyword">or</span> cmd:sub(<span class="number">1</span>,<span class="number">1</span>) ~= <span class="string">':'</span> <span class="keyword">then</span> <span class="keyword">return</span> cmd <span class="keyword">end</span>
-            <span class="keyword">local</span> act, cmd2 = cmd:gmatch(<span class="string">':([a-zA-Z1-9]+)[ ]+(.*)'</span>)()
+            <span class="keyword">if</span> (<span class="keyword">not</span> cmd) <span class="keyword">or</span> cmd:<span class="function-name">sub</span>(<span class="number">1</span>,<span class="number">1</span>) ~= <span class="string">':'</span> <span class="keyword">then</span> <span class="keyword">return</span> cmd <span class="keyword">end</span>
+            <span class="keyword">local</span> act, cmd2 = cmd:<span class="function-name">gmatch</span>(<span class="string">':([a-zA-Z1-9]+)[ ]+(.*)'</span>)()
             <span class="keyword">if</span> <span class="keyword">not</span> act <span class="keyword">then</span> <span class="keyword">return</span> cmd <span class="keyword">end</span>
-            <span class="keyword">return</span> vi_parse(act, cmd2)
+            <span class="keyword">return</span> <span class="function-name">vi_parse</span>(act, cmd2)
         <span class="keyword">end</span>},
     },
     textbox      = atextbox,
-    history_path = gfs.get_cache_dir() .. <span class="string">'/history'</span>,
-    exe_callback = <span class="keyword">function</span>(cmd) awful.spawn(cmd) <span class="keyword">end</span>
+    history_path = gfs.<span class="function-name">get_cache_dir</span>() .. <span class="string">'/history'</span>,
+    exe_callback = <span class="keyword">function</span>(cmd) awful.<span class="function-name">spawn</span>(cmd) <span class="keyword">end</span>
 }
 </pre>
 
@@ -440,23 +440,23 @@ awful.prompt.run {
 
 
 <pre>
-<span class="keyword">local</span> atextbox = wibox.widget.textbox()
+<span class="keyword">local</span> atextbox = wibox.widget.<span class="function-name">textbox</span>()
 <span class="keyword">local</span> notif = <span class="keyword">nil</span>
-awful.prompt.run {
+awful.prompt.<span class="function-name">run</span> {
     prompt               = <span class="string">"&lt;b&gt;Run: &lt;/b&gt;"</span>,
     keypressed_callback  = <span class="keyword">function</span>(mod, key, cmd) <span class="comment">--luacheck: no unused args
 </span>        <span class="keyword">if</span> key == <span class="string">"Shift_L"</span> <span class="keyword">then</span>
-            notif = naughty.notification { message = <span class="string">"Shift pressed"</span> }
+            notif = naughty.<span class="function-name">notification</span> { message = <span class="string">"Shift pressed"</span> }
         <span class="keyword">end</span>
     <span class="keyword">end</span>,
     keyreleased_callback = <span class="keyword">function</span>(mod, key, cmd) <span class="comment">--luacheck: no unused args
 </span>        <span class="keyword">if</span> notif <span class="keyword">then</span>
-            naughty.destroy(notif)
+            naughty.<span class="function-name">destroy</span>(notif)
             notif = <span class="keyword">nil</span>
         <span class="keyword">end</span>
     <span class="keyword">end</span>,
     textbox              = atextbox,
-    history_path         = gfs.get_cache_dir() .. <span class="string">"/history"</span>,
+    history_path         = gfs.<span class="function-name">get_cache_dir</span>() .. <span class="string">"/history"</span>,
 }
 </pre>
 
@@ -471,12 +471,12 @@ awful.prompt.run {
 
 
 <pre>
-<span class="keyword">local</span> amp = <span class="string">"&amp;amp"</span>..<span class="global">string</span>.char(<span class="number">0x3B</span>)
-<span class="keyword">local</span> quot = <span class="string">"&amp;quot"</span>..<span class="global">string</span>.char(<span class="number">0x3B</span>)
-<span class="keyword">local</span> atextbox = wibox.widget.textbox()
+<span class="keyword">local</span> amp = <span class="string">"&amp;amp"</span>..<span class="global">string</span>.<span class="function-name">char</span>(<span class="number">0x3B</span>)
+<span class="keyword">local</span> quot = <span class="string">"&amp;quot"</span>..<span class="global">string</span>.<span class="function-name">char</span>(<span class="number">0x3B</span>)
+<span class="keyword">local</span> atextbox = wibox.widget.<span class="function-name">textbox</span>()
 <span class="comment">-- Create a shortcut function
-</span><span class="keyword">local</span> <span class="keyword">function</span> echo_test()
-    awful.prompt.run {
+</span><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">echo_test</span>()
+    awful.prompt.<span class="function-name">run</span> {
         prompt       = <span class="string">"&lt;b&gt;Echo: &lt;/b&gt;"</span>,
         bg_cursor    = <span class="string">"#ff0000"</span>,
         <span class="comment">-- To use the default <a href="../sample files/rc.lua.html#">rc.lua</a> prompt:
@@ -487,31 +487,31 @@ awful.prompt.run {
 </span>            <span class="keyword">local</span> cmd = b..<span class="string">"ZZZCURSORZZZ"</span>..a
             <span class="comment">-- Find shell variables
 </span>            <span class="keyword">local</span> sub = <span class="string">"&lt;span foreground='#CFBA5D'&gt;%1&lt;/span&gt;"</span>
-            cmd = cmd:gsub(<span class="string">"($[A-Za-z][a-zA-Z0-9]*)"</span>, sub)
+            cmd = cmd:<span class="function-name">gsub</span>(<span class="string">"($[A-Za-z][a-zA-Z0-9]*)"</span>, sub)
             <span class="comment">-- Highlight " &amp;&amp; "
 </span>            sub = <span class="string">"&lt;span foreground='#159040'&gt;%1&lt;/span&gt;"</span>
-            cmd = cmd:gsub(<span class="string">"( "</span>..amp..amp..<span class="string">")"</span>, sub)
+            cmd = cmd:<span class="function-name">gsub</span>(<span class="string">"( "</span>..amp..amp..<span class="string">")"</span>, sub)
             <span class="comment">-- Highlight double quotes
-</span>            <span class="keyword">local</span> quote_pos = cmd:find(<span class="string">"[^\\]"</span>..quot)
+</span>            <span class="keyword">local</span> quote_pos = cmd:<span class="function-name">find</span>(<span class="string">"[^\\]"</span>..quot)
             <span class="keyword">while</span> quote_pos <span class="keyword">do</span>
                 <span class="keyword">local</span> old_pos = quote_pos
-                quote_pos = cmd:find(<span class="string">"[^\\]"</span>..quot, old_pos+<span class="number">2</span>)
+                quote_pos = cmd:<span class="function-name">find</span>(<span class="string">"[^\\]"</span>..quot, old_pos+<span class="number">2</span>)
                 <span class="keyword">if</span> quote_pos <span class="keyword">then</span>
-                    <span class="keyword">local</span> content = cmd:sub(old_pos+<span class="number">1</span>, quote_pos+<span class="number">6</span>)
-                    cmd = <span class="global">table</span>.concat({
-                            cmd:sub(<span class="number">1</span>, old_pos),
+                    <span class="keyword">local</span> content = cmd:<span class="function-name">sub</span>(old_pos+<span class="number">1</span>, quote_pos+<span class="number">6</span>)
+                    cmd = <span class="global">table</span>.<span class="function-name">concat</span>({
+                            cmd:<span class="function-name">sub</span>(<span class="number">1</span>, old_pos),
                             <span class="string">"&lt;span foreground='#2977CF'&gt;"</span>,
                             content,
                             <span class="string">"&lt;/span&gt;"</span>,
-                            cmd:sub(quote_pos+<span class="number">7</span>, #cmd)
+                            cmd:<span class="function-name">sub</span>(quote_pos+<span class="number">7</span>, #cmd)
                     }, <span class="string">""</span>)
-                    quote_pos = cmd:find(<span class="string">"[^\\]"</span>..quot, old_pos+<span class="number">38</span>)
+                    quote_pos = cmd:<span class="function-name">find</span>(<span class="string">"[^\\]"</span>..quot, old_pos+<span class="number">38</span>)
                 <span class="keyword">end</span>
             <span class="keyword">end</span>
             <span class="comment">-- Split the string back to the original content
 </span>            <span class="comment">-- (ignore the recursive and escaped ones)
-</span>            <span class="keyword">local</span> pos = cmd:find(<span class="string">"ZZZCURSORZZZ"</span>)
-            b,a = cmd:sub(<span class="number">1</span>, pos-<span class="number">1</span>), cmd:sub(pos+<span class="number">12</span>, #cmd)
+</span>            <span class="keyword">local</span> pos = cmd:<span class="function-name">find</span>(<span class="string">"ZZZCURSORZZZ"</span>)
+            b,a = cmd:<span class="function-name">sub</span>(<span class="number">1</span>, pos-<span class="number">1</span>), cmd:<span class="function-name">sub</span>(pos+<span class="number">12</span>, #cmd)
             <span class="keyword">return</span> b,a
         <span class="keyword">end</span>,
     }
@@ -1108,7 +1108,7 @@ awful.prompt.run {
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_exe_cb(command)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_exe_cb</span>(command)
    <span class="comment">-- do something
 </span><span class="keyword">end</span></pre>
     </ul>
@@ -1160,7 +1160,7 @@ awful.prompt.run {
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_completion_cb(command_before_comp, cur_pos_before_comp, ncomp)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_completion_cb</span>(command_before_comp, cur_pos_before_comp, ncomp)
    <span class="keyword">return</span> command_before_comp..<span class="string">"foo"</span>, cur_pos_before_comp+<span class="number">3</span>, <span class="number">1</span>
 <span class="keyword">end</span></pre>
     </ul>
@@ -1186,7 +1186,7 @@ awful.prompt.run {
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_done_cb()
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_done_cb</span>()
    <span class="comment">-- do something
 </span><span class="keyword">end</span></pre>
     </ul>
@@ -1227,7 +1227,7 @@ awful.prompt.run {
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_changed_cb(command)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_changed_cb</span>(command)
    <span class="comment">-- do something
 </span><span class="keyword">end</span></pre>
     </ul>
@@ -1280,7 +1280,7 @@ awful.prompt.run {
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_keypressed_cb(mod, key, command)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_keypressed_cb</span>(mod, key, command)
    <span class="comment">-- do something
 </span><span class="keyword">end</span></pre>
     </ul>
@@ -1333,7 +1333,7 @@ awful.prompt.run {
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_keyreleased_cb(mod, key, command)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_keyreleased_cb</span>(mod, key, command)
    <span class="comment">-- do something
 </span><span class="keyword">end</span></pre>
     </ul>
@@ -1383,7 +1383,7 @@ awful.prompt.run {
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_highlighter(before_cursor, after_cursor)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_highlighter</span>(before_cursor, after_cursor)
    <span class="comment">-- do something
 </span>   <span class="keyword">return</span> before_cursor, after_cursor
 <span class="keyword">end</span></pre>
@@ -1435,7 +1435,7 @@ awful.prompt.run {
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> my_hook(command)
+        <pre class="example"><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">my_hook</span>(command)
    <span class="keyword">return</span> command..<span class="string">"foo"</span>, <span class="keyword">false</span>
 <span class="keyword">end</span></pre>
     </ul>
@@ -1451,7 +1451,7 @@ awful.prompt.run {
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 
