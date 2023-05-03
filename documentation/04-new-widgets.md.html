@@ -245,9 +245,9 @@ different sizes than the one requested.</p>
 
 
 <pre>
-<span class="keyword">function</span> widget:fit(context, width, height)
+<span class="keyword">function</span> widget:<span class="function-name">fit</span>(context, width, height)
     <span class="comment">-- Find the maximum square available
-</span>    <span class="keyword">local</span> m = <span class="global">math</span>.min(width, height)
+</span>    <span class="keyword">local</span> m = <span class="global">math</span>.<span class="function-name">min</span>(width, height)
     <span class="keyword">return</span> m, m
 <span class="keyword">end</span>
 </pre>
@@ -265,12 +265,12 @@ redraws will not be handled correctly in this case.</p>
 
 
 <pre>
-<span class="keyword">function</span> widget:draw(context, cr, width, height)
-    cr:move_to(<span class="number">0</span>, <span class="number">0</span>)
-    cr:line_to(width, height)
-    cr:move_to(<span class="number">0</span>, height)
-    cr:line_to(width, <span class="number">0</span>)
-    cr:stroke()
+<span class="keyword">function</span> widget:<span class="function-name">draw</span>(context, cr, width, height)
+    cr:<span class="function-name">move_to</span>(<span class="number">0</span>, <span class="number">0</span>)
+    cr:<span class="function-name">line_to</span>(width, height)
+    cr:<span class="function-name">move_to</span>(<span class="number">0</span>, height)
+    cr:<span class="function-name">line_to</span>(width, <span class="number">0</span>)
+    cr:<span class="function-name">stroke</span>()
 <span class="keyword">end</span>
 </pre>
 
@@ -300,9 +300,9 @@ like this:</p>
 <pre>
 <span class="comment">-- For readability
 </span><span class="keyword">local</span> base = wibox.widget.base
-<span class="keyword">function</span> widget:layout(width, height)
+<span class="keyword">function</span> widget:<span class="function-name">layout</span>(width, height)
     <span class="keyword">local</span> result = {}
-    <span class="global">table</span>.insert(result, base.place_widget_at(child, width/<span class="number">2</span>, <span class="number">0</span>, width/<span class="number">2</span>, height)
+    <span class="global">table</span>.<span class="function-name">insert</span>(result, base.<span class="function-name">place_widget_at</span>(child, width/<span class="number">2</span>, <span class="number">0</span>, width/<span class="number">2</span>, height)
     <span class="keyword">return</span> result
 <span class="keyword">end</span>
 </pre>
@@ -312,10 +312,10 @@ callbacks available that all get similar arguments:</p>
 
 
 <pre>
-<span class="keyword">function</span> widget:before_draw_children(context, cr, width, height)
-<span class="keyword">function</span> widget:after_draw_children(context, cr, width, height)
-<span class="keyword">function</span> widget:before_draw_child(context, index, child, cr, width, height)
-<span class="keyword">function</span> widget:after_draw_child(context, index, child, cr, width, height)
+<span class="keyword">function</span> widget:<span class="function-name">before_draw_children</span>(context, cr, width, height)
+<span class="keyword">function</span> widget:<span class="function-name">after_draw_children</span>(context, cr, width, height)
+<span class="keyword">function</span> widget:<span class="function-name">before_draw_child</span>(context, index, child, cr, width, height)
+<span class="keyword">function</span> widget:<span class="function-name">after_draw_child</span>(context, index, child, cr, width, height)
 </pre>
 
 <p>All of these are called with the same arguments as the <code>:draw()</code> method. Please
@@ -327,12 +327,12 @@ translucently:</p>
 
 
 <pre>
-<span class="keyword">function</span> widget:before_draw_children(context, cr, width, height)
-    cr:push_group()
+<span class="keyword">function</span> widget:<span class="function-name">before_draw_children</span>(context, cr, width, height)
+    cr:<span class="function-name">push_group</span>()
 <span class="keyword">end</span>
-<span class="keyword">function</span> widget:after_draw_children(context, cr, width, height)
-    cr:pop_group_to_source()
-    cr:paint_with_alpha(<span class="number">0.5</span>)
+<span class="keyword">function</span> widget:<span class="function-name">after_draw_children</span>(context, cr, width, height)
+    cr:<span class="function-name">pop_group_to_source</span>()
+    cr:<span class="function-name">paint_with_alpha</span>(<span class="number">0.5</span>)
 <span class="keyword">end</span>
 </pre>
 
@@ -341,17 +341,17 @@ looks like this:</p>
 
 
 <pre>
-widget:draw(context, cr, width, height)
-widget:before_draw_children(context, cr, width, height)
+widget:<span class="function-name">draw</span>(context, cr, width, height)
+widget:<span class="function-name">before_draw_children</span>(context, cr, width, height)
 <span class="keyword">for</span> child <span class="keyword">do</span>
-    widget:before_draw_child(context, cr, child_index, child, width, height)
-    cr:save()
+    widget:<span class="function-name">before_draw_child</span>(context, cr, child_index, child, width, height)
+    cr:<span class="function-name">save</span>()
     <span class="comment">-- Draw child and all of its children recursively, taking into account the
 </span>    <span class="comment">-- position and size given to base.place_widget_at() in :layout().
-</span>    cr:restore()
-    widget:after_draw_child(context, cr, child_index, child, width, height)
+</span>    cr:<span class="function-name">restore</span>()
+    widget:<span class="function-name">after_draw_child</span>(context, cr, child_index, child, width, height)
 <span class="keyword">end</span>
-widget:after_draw_children(context, cr, width, height)
+widget:<span class="function-name">after_draw_children</span>(context, cr, width, height)
 </pre>
 
 <p>The <code>:set_children()</code> method gets called recursively when setting a widget with
@@ -363,7 +363,7 @@ overridden to do nothing.</p>
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

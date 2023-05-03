@@ -260,8 +260,8 @@
 <span class="comment">-- {{{ Error handling
 </span><span class="comment">-- Check if awesome encountered an error during startup and fell back to
 </span><span class="comment">-- another config (This code will only ever execute for the fallback config)
-</span>naughty.connect_signal(<span class="string">"request::display_error"</span>, <span class="keyword">function</span>(message, startup)
-    naughty.notification {
+</span>naughty.<span class="function-name">connect_signal</span>(<span class="string">"request::display_error"</span>, <span class="keyword">function</span>(message, startup)
+    naughty.<span class="function-name">notification</span> {
         urgency = <span class="string">"critical"</span>,
         title   = <span class="string">"Oops, an error happened"</span>..(startup <span class="keyword">and</span> <span class="string">" during startup!"</span> <span class="keyword">or</span> <span class="string">"!"</span>),
         message = message
@@ -271,11 +271,11 @@
 </span>
 <span class="comment">-- {{{ Variable definitions
 </span><span class="comment">-- Themes define colours, icons, font and wallpapers.
-</span>beautiful.init(gears.filesystem.get_themes_dir() .. <span class="string">"default/theme.lua"</span>)
+</span>beautiful.<span class="function-name">init</span>(gears.filesystem.<span class="function-name">get_themes_dir</span>() .. <span class="string">"default/theme.lua"</span>)
 
 <span class="comment">-- This is used later as the default terminal and editor to run.
 </span>terminal = <span class="string">"xterm"</span>
-editor = <span class="global">os</span>.getenv(<span class="string">"EDITOR"</span>) <span class="keyword">or</span> <span class="string">"nano"</span>
+editor = <span class="global">os</span>.<span class="function-name">getenv</span>(<span class="string">"EDITOR"</span>) <span class="keyword">or</span> <span class="string">"nano"</span>
 editor_cmd = terminal .. <span class="string">" -e "</span> .. editor
 
 <span class="comment">-- Default modkey.
@@ -289,19 +289,19 @@ editor_cmd = terminal .. <span class="string">" -e "</span> .. editor
 <span class="comment">-- {{{ Menu
 </span><span class="comment">-- Create a launcher widget and a main menu
 </span>myawesomemenu = {
-   { <span class="string">"hotkeys"</span>, <span class="keyword">function</span>() hotkeys_popup.show_help(<span class="keyword">nil</span>, awful.screen.focused()) <span class="keyword">end</span> },
+   { <span class="string">"hotkeys"</span>, <span class="keyword">function</span>() hotkeys_popup.<span class="function-name">show_help</span>(<span class="keyword">nil</span>, awful.screen.<span class="function-name">focused</span>()) <span class="keyword">end</span> },
    { <span class="string">"manual"</span>, terminal .. <span class="string">" -e man awesome"</span> },
    { <span class="string">"edit config"</span>, editor_cmd .. <span class="string">" "</span> .. awesome.conffile },
    { <span class="string">"restart"</span>, awesome.restart },
-   { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.quit() <span class="keyword">end</span> },
+   { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.<span class="function-name">quit</span>() <span class="keyword">end</span> },
 }
 
-mymainmenu = awful.menu({ items = { { <span class="string">"awesome"</span>, myawesomemenu, beautiful.awesome_icon },
+mymainmenu = awful.<span class="function-name">menu</span>({ items = { { <span class="string">"awesome"</span>, myawesomemenu, beautiful.awesome_icon },
                                     { <span class="string">"open terminal"</span>, terminal }
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+mylauncher = awful.widget.<span class="function-name">launcher</span>({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 <span class="comment">-- Menubar configuration
@@ -310,8 +310,8 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 </span>
 <span class="comment">-- {{{ Tag layout
 </span><span class="comment">-- Table of layouts to cover with awful.layout.inc, order matters.
-</span>tag.connect_signal(<span class="string">"request::default_layouts"</span>, <span class="keyword">function</span>()
-    awful.layout.append_default_layouts({
+</span>tag.<span class="function-name">connect_signal</span>(<span class="string">"request::default_layouts"</span>, <span class="keyword">function</span>()
+    awful.layout.<span class="function-name">append_default_layouts</span>({
         awful.layout.suit.floating,
         awful.layout.suit.tile,
         awful.layout.suit.tile.left,
@@ -330,8 +330,8 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 <span class="comment">-- }}}
 </span>
 <span class="comment">-- {{{ Wallpaper
-</span>screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
-    awful.wallpaper {
+</span>screen.<span class="function-name">connect_signal</span>(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
+    awful.<span class="function-name">wallpaper</span> {
         screen = s,
         widget = {
             {
@@ -352,68 +352,68 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 <span class="comment">-- {{{ Wibar
 </span>
 <span class="comment">-- Keyboard map indicator and switcher
-</span>mykeyboardlayout = awful.widget.keyboardlayout()
+</span>mykeyboardlayout = awful.widget.<span class="function-name">keyboardlayout</span>()
 
 <span class="comment">-- Create a textclock widget
-</span>mytextclock = wibox.widget.textclock()
+</span>mytextclock = wibox.widget.<span class="function-name">textclock</span>()
 
-screen.connect_signal(<span class="string">"request::desktop_decoration"</span>, <span class="keyword">function</span>(s)
+screen.<span class="function-name">connect_signal</span>(<span class="string">"request::desktop_decoration"</span>, <span class="keyword">function</span>(s)
     <span class="comment">-- Each screen has its own tag table.
-</span>    awful.tag({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, awful.layout.layouts[<span class="number">1</span>])
+</span>    awful.<span class="function-name">tag</span>({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, awful.layout.layouts[<span class="number">1</span>])
 
     <span class="comment">-- Create a promptbox for each screen
-</span>    s.mypromptbox = awful.widget.prompt()
+</span>    s.mypromptbox = awful.widget.<span class="function-name">prompt</span>()
 
     <span class="comment">-- Create an imagebox widget which will contain an icon indicating which layout we're using.
 </span>    <span class="comment">-- We need one layoutbox per screen.
-</span>    s.mylayoutbox = awful.widget.layoutbox {
+</span>    s.mylayoutbox = awful.widget.<span class="function-name">layoutbox</span> {
         screen  = s,
         buttons = {
-            awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> () awful.layout.inc( <span class="number">1</span>) <span class="keyword">end</span>),
-            awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span> () awful.layout.inc(-<span class="number">1</span>) <span class="keyword">end</span>),
-            awful.button({ }, <span class="number">4</span>, <span class="keyword">function</span> () awful.layout.inc(-<span class="number">1</span>) <span class="keyword">end</span>),
-            awful.button({ }, <span class="number">5</span>, <span class="keyword">function</span> () awful.layout.inc( <span class="number">1</span>) <span class="keyword">end</span>),
+            awful.<span class="function-name">button</span>({ }, <span class="number">1</span>, <span class="keyword">function</span> () awful.layout.<span class="function-name">inc</span>( <span class="number">1</span>) <span class="keyword">end</span>),
+            awful.<span class="function-name">button</span>({ }, <span class="number">3</span>, <span class="keyword">function</span> () awful.layout.<span class="function-name">inc</span>(-<span class="number">1</span>) <span class="keyword">end</span>),
+            awful.<span class="function-name">button</span>({ }, <span class="number">4</span>, <span class="keyword">function</span> () awful.layout.<span class="function-name">inc</span>(-<span class="number">1</span>) <span class="keyword">end</span>),
+            awful.<span class="function-name">button</span>({ }, <span class="number">5</span>, <span class="keyword">function</span> () awful.layout.<span class="function-name">inc</span>( <span class="number">1</span>) <span class="keyword">end</span>),
         }
     }
 
     <span class="comment">-- Create a taglist widget
-</span>    s.mytaglist = awful.widget.taglist {
+</span>    s.mytaglist = awful.widget.<span class="function-name">taglist</span> {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         buttons = {
-            awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:view_only() <span class="keyword">end</span>),
-            awful.button({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
+            awful.<span class="function-name">button</span>({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:<span class="function-name">view_only</span>() <span class="keyword">end</span>),
+            awful.<span class="function-name">button</span>({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
                                             <span class="keyword">if</span> client.focus <span class="keyword">then</span>
-                                                client.focus:move_to_tag(t)
+                                                client.focus:<span class="function-name">move_to_tag</span>(t)
                                             <span class="keyword">end</span>
                                         <span class="keyword">end</span>),
-            awful.button({ }, <span class="number">3</span>, awful.tag.viewtoggle),
-            awful.button({ modkey }, <span class="number">3</span>, <span class="keyword">function</span>(t)
+            awful.<span class="function-name">button</span>({ }, <span class="number">3</span>, awful.tag.viewtoggle),
+            awful.<span class="function-name">button</span>({ modkey }, <span class="number">3</span>, <span class="keyword">function</span>(t)
                                             <span class="keyword">if</span> client.focus <span class="keyword">then</span>
-                                                client.focus:toggle_tag(t)
+                                                client.focus:<span class="function-name">toggle_tag</span>(t)
                                             <span class="keyword">end</span>
                                         <span class="keyword">end</span>),
-            awful.button({ }, <span class="number">4</span>, <span class="keyword">function</span>(t) awful.tag.viewprev(t.screen) <span class="keyword">end</span>),
-            awful.button({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) awful.tag.viewnext(t.screen) <span class="keyword">end</span>),
+            awful.<span class="function-name">button</span>({ }, <span class="number">4</span>, <span class="keyword">function</span>(t) awful.tag.<span class="function-name">viewprev</span>(t.screen) <span class="keyword">end</span>),
+            awful.<span class="function-name">button</span>({ }, <span class="number">5</span>, <span class="keyword">function</span>(t) awful.tag.<span class="function-name">viewnext</span>(t.screen) <span class="keyword">end</span>),
         }
     }
 
     <span class="comment">-- Create a tasklist widget
-</span>    s.mytasklist = awful.widget.tasklist {
+</span>    s.mytasklist = awful.widget.<span class="function-name">tasklist</span> {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = {
-            awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-                c:activate { context = <span class="string">"tasklist"</span>, action = <span class="string">"toggle_minimization"</span> }
+            awful.<span class="function-name">button</span>({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
+                c:<span class="function-name">activate</span> { context = <span class="string">"tasklist"</span>, action = <span class="string">"toggle_minimization"</span> }
             <span class="keyword">end</span>),
-            awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span>() awful.menu.client_list { theme = { width = <span class="number">250</span> } } <span class="keyword">end</span>),
-            awful.button({ }, <span class="number">4</span>, <span class="keyword">function</span>() awful.client.focus.byidx(-<span class="number">1</span>) <span class="keyword">end</span>),
-            awful.button({ }, <span class="number">5</span>, <span class="keyword">function</span>() awful.client.focus.byidx( <span class="number">1</span>) <span class="keyword">end</span>),
+            awful.<span class="function-name">button</span>({ }, <span class="number">3</span>, <span class="keyword">function</span>() awful.menu.<span class="function-name">client_list</span> { theme = { width = <span class="number">250</span> } } <span class="keyword">end</span>),
+            awful.<span class="function-name">button</span>({ }, <span class="number">4</span>, <span class="keyword">function</span>() awful.client.focus.<span class="function-name">byidx</span>(-<span class="number">1</span>) <span class="keyword">end</span>),
+            awful.<span class="function-name">button</span>({ }, <span class="number">5</span>, <span class="keyword">function</span>() awful.client.focus.<span class="function-name">byidx</span>( <span class="number">1</span>) <span class="keyword">end</span>),
         }
     }
 
     <span class="comment">-- Create the wibox
-</span>    s.mywibox = awful.wibar {
+</span>    s.mywibox = awful.<span class="function-name">wibar</span> {
         position = <span class="string">"top"</span>,
         screen   = s,
         widget   = {
@@ -428,7 +428,7 @@ screen.connect_signal(<span class="string">"request::desktop_decoration"</span>,
 </span>            { <span class="comment">-- Right widgets
 </span>                layout = wibox.layout.fixed.horizontal,
                 mykeyboardlayout,
-                wibox.widget.systray(),
+                wibox.widget.<span class="function-name">systray</span>(),
                 mytextclock,
                 s.mylayoutbox,
             },
@@ -439,145 +439,145 @@ screen.connect_signal(<span class="string">"request::desktop_decoration"</span>,
 <span class="comment">-- }}}
 </span>
 <span class="comment">-- {{{ Mouse bindings
-</span>awful.mouse.append_global_mousebindings({
-    awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span> () mymainmenu:toggle() <span class="keyword">end</span>),
-    awful.button({ }, <span class="number">4</span>, awful.tag.viewprev),
-    awful.button({ }, <span class="number">5</span>, awful.tag.viewnext),
+</span>awful.mouse.<span class="function-name">append_global_mousebindings</span>({
+    awful.<span class="function-name">button</span>({ }, <span class="number">3</span>, <span class="keyword">function</span> () mymainmenu:<span class="function-name">toggle</span>() <span class="keyword">end</span>),
+    awful.<span class="function-name">button</span>({ }, <span class="number">4</span>, awful.tag.viewprev),
+    awful.<span class="function-name">button</span>({ }, <span class="number">5</span>, awful.tag.viewnext),
 })
 <span class="comment">-- }}}
 </span>
 <span class="comment">-- {{{ Key bindings
 </span>
 <span class="comment">-- General Awesome keys
-</span>awful.keyboard.append_global_keybindings({
-    awful.key({ modkey,           }, <span class="string">"s"</span>,      hotkeys_popup.show_help,
+</span>awful.keyboard.<span class="function-name">append_global_keybindings</span>({
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"s"</span>,      hotkeys_popup.show_help,
               {description=<span class="string">"show help"</span>, group=<span class="string">"awesome"</span>}),
-    awful.key({ modkey,           }, <span class="string">"w"</span>, <span class="keyword">function</span> () mymainmenu:show() <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"w"</span>, <span class="keyword">function</span> () mymainmenu:<span class="function-name">show</span>() <span class="keyword">end</span>,
               {description = <span class="string">"show main menu"</span>, group = <span class="string">"awesome"</span>}),
-    awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"r"</span>, awesome.restart,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"r"</span>, awesome.restart,
               {description = <span class="string">"reload awesome"</span>, group = <span class="string">"awesome"</span>}),
-    awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"q"</span>, awesome.quit,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"q"</span>, awesome.quit,
               {description = <span class="string">"quit awesome"</span>, group = <span class="string">"awesome"</span>}),
-    awful.key({ modkey }, <span class="string">"x"</span>,
+    awful.<span class="function-name">key</span>({ modkey }, <span class="string">"x"</span>,
               <span class="keyword">function</span> ()
-                  awful.prompt.run {
+                  awful.prompt.<span class="function-name">run</span> {
                     prompt       = <span class="string">"Run Lua code: "</span>,
-                    textbox      = awful.screen.focused().mypromptbox.widget,
+                    textbox      = awful.screen.<span class="function-name">focused</span>().mypromptbox.widget,
                     exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. <span class="string">"/history_eval"</span>
+                    history_path = awful.util.<span class="function-name">get_cache_dir</span>() .. <span class="string">"/history_eval"</span>
                   }
               <span class="keyword">end</span>,
               {description = <span class="string">"lua execute prompt"</span>, group = <span class="string">"awesome"</span>}),
-    awful.key({ modkey,           }, <span class="string">"Return"</span>, <span class="keyword">function</span> () awful.spawn(terminal) <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"Return"</span>, <span class="keyword">function</span> () awful.<span class="function-name">spawn</span>(terminal) <span class="keyword">end</span>,
               {description = <span class="string">"open a terminal"</span>, group = <span class="string">"launcher"</span>}),
-    awful.key({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () awful.screen.focused().mypromptbox:run() <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () awful.screen.<span class="function-name">focused</span>().mypromptbox:<span class="function-name">run</span>() <span class="keyword">end</span>,
               {description = <span class="string">"run prompt"</span>, group = <span class="string">"launcher"</span>}),
-    awful.key({ modkey }, <span class="string">"p"</span>, <span class="keyword">function</span>() menubar.show() <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey }, <span class="string">"p"</span>, <span class="keyword">function</span>() menubar.<span class="function-name">show</span>() <span class="keyword">end</span>,
               {description = <span class="string">"show the menubar"</span>, group = <span class="string">"launcher"</span>}),
 })
 
 <span class="comment">-- Tags related keybindings
-</span>awful.keyboard.append_global_keybindings({
-    awful.key({ modkey,           }, <span class="string">"Left"</span>,   awful.tag.viewprev,
+</span>awful.keyboard.<span class="function-name">append_global_keybindings</span>({
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"Left"</span>,   awful.tag.viewprev,
               {description = <span class="string">"view previous"</span>, group = <span class="string">"tag"</span>}),
-    awful.key({ modkey,           }, <span class="string">"Right"</span>,  awful.tag.viewnext,
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"Right"</span>,  awful.tag.viewnext,
               {description = <span class="string">"view next"</span>, group = <span class="string">"tag"</span>}),
-    awful.key({ modkey,           }, <span class="string">"Escape"</span>, awful.tag.history.restore,
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"Escape"</span>, awful.tag.history.restore,
               {description = <span class="string">"go back"</span>, group = <span class="string">"tag"</span>}),
 })
 
 <span class="comment">-- Focus related keybindings
-</span>awful.keyboard.append_global_keybindings({
-    awful.key({ modkey,           }, <span class="string">"j"</span>,
+</span>awful.keyboard.<span class="function-name">append_global_keybindings</span>({
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"j"</span>,
         <span class="keyword">function</span> ()
-            awful.client.focus.byidx( <span class="number">1</span>)
+            awful.client.focus.<span class="function-name">byidx</span>( <span class="number">1</span>)
         <span class="keyword">end</span>,
         {description = <span class="string">"focus next by index"</span>, group = <span class="string">"client"</span>}
     ),
-    awful.key({ modkey,           }, <span class="string">"k"</span>,
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"k"</span>,
         <span class="keyword">function</span> ()
-            awful.client.focus.byidx(-<span class="number">1</span>)
+            awful.client.focus.<span class="function-name">byidx</span>(-<span class="number">1</span>)
         <span class="keyword">end</span>,
         {description = <span class="string">"focus previous by index"</span>, group = <span class="string">"client"</span>}
     ),
-    awful.key({ modkey,           }, <span class="string">"Tab"</span>,
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"Tab"</span>,
         <span class="keyword">function</span> ()
-            awful.client.focus.history.previous()
+            awful.client.focus.history.<span class="function-name">previous</span>()
             <span class="keyword">if</span> client.focus <span class="keyword">then</span>
-                client.focus:raise()
+                client.focus:<span class="function-name">raise</span>()
             <span class="keyword">end</span>
         <span class="keyword">end</span>,
         {description = <span class="string">"go back"</span>, group = <span class="string">"client"</span>}),
-    awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"j"</span>, <span class="keyword">function</span> () awful.screen.focus_relative( <span class="number">1</span>) <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"j"</span>, <span class="keyword">function</span> () awful.screen.<span class="function-name">focus_relative</span>( <span class="number">1</span>) <span class="keyword">end</span>,
               {description = <span class="string">"focus the next screen"</span>, group = <span class="string">"screen"</span>}),
-    awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"k"</span>, <span class="keyword">function</span> () awful.screen.focus_relative(-<span class="number">1</span>) <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"k"</span>, <span class="keyword">function</span> () awful.screen.<span class="function-name">focus_relative</span>(-<span class="number">1</span>) <span class="keyword">end</span>,
               {description = <span class="string">"focus the previous screen"</span>, group = <span class="string">"screen"</span>}),
-    awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"n"</span>,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"n"</span>,
               <span class="keyword">function</span> ()
-                  <span class="keyword">local</span> c = awful.client.restore()
+                  <span class="keyword">local</span> c = awful.client.<span class="function-name">restore</span>()
                   <span class="comment">-- Focus restored client
 </span>                  <span class="keyword">if</span> c <span class="keyword">then</span>
-                    c:activate { raise = <span class="keyword">true</span>, context = <span class="string">"key.unminimize"</span> }
+                    c:<span class="function-name">activate</span> { raise = <span class="keyword">true</span>, context = <span class="string">"key.unminimize"</span> }
                   <span class="keyword">end</span>
               <span class="keyword">end</span>,
               {description = <span class="string">"restore minimized"</span>, group = <span class="string">"client"</span>}),
 })
 
 <span class="comment">-- Layout related keybindings
-</span>awful.keyboard.append_global_keybindings({
-    awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"j"</span>, <span class="keyword">function</span> () awful.client.swap.byidx(  <span class="number">1</span>)    <span class="keyword">end</span>,
+</span>awful.keyboard.<span class="function-name">append_global_keybindings</span>({
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"j"</span>, <span class="keyword">function</span> () awful.client.swap.<span class="function-name">byidx</span>(  <span class="number">1</span>)    <span class="keyword">end</span>,
               {description = <span class="string">"swap with next client by index"</span>, group = <span class="string">"client"</span>}),
-    awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"k"</span>, <span class="keyword">function</span> () awful.client.swap.byidx( -<span class="number">1</span>)    <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"k"</span>, <span class="keyword">function</span> () awful.client.swap.<span class="function-name">byidx</span>( -<span class="number">1</span>)    <span class="keyword">end</span>,
               {description = <span class="string">"swap with previous client by index"</span>, group = <span class="string">"client"</span>}),
-    awful.key({ modkey,           }, <span class="string">"u"</span>, awful.client.urgent.jumpto,
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"u"</span>, awful.client.urgent.jumpto,
               {description = <span class="string">"jump to urgent client"</span>, group = <span class="string">"client"</span>}),
-    awful.key({ modkey,           }, <span class="string">"l"</span>,     <span class="keyword">function</span> () awful.tag.incmwfact( <span class="number">0.05</span>)          <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"l"</span>,     <span class="keyword">function</span> () awful.tag.<span class="function-name">incmwfact</span>( <span class="number">0.05</span>)          <span class="keyword">end</span>,
               {description = <span class="string">"increase master width factor"</span>, group = <span class="string">"layout"</span>}),
-    awful.key({ modkey,           }, <span class="string">"h"</span>,     <span class="keyword">function</span> () awful.tag.incmwfact(-<span class="number">0.05</span>)          <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"h"</span>,     <span class="keyword">function</span> () awful.tag.<span class="function-name">incmwfact</span>(-<span class="number">0.05</span>)          <span class="keyword">end</span>,
               {description = <span class="string">"decrease master width factor"</span>, group = <span class="string">"layout"</span>}),
-    awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"h"</span>,     <span class="keyword">function</span> () awful.tag.incnmaster( <span class="number">1</span>, <span class="keyword">nil</span>, <span class="keyword">true</span>) <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"h"</span>,     <span class="keyword">function</span> () awful.tag.<span class="function-name">incnmaster</span>( <span class="number">1</span>, <span class="keyword">nil</span>, <span class="keyword">true</span>) <span class="keyword">end</span>,
               {description = <span class="string">"increase the number of master clients"</span>, group = <span class="string">"layout"</span>}),
-    awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"l"</span>,     <span class="keyword">function</span> () awful.tag.incnmaster(-<span class="number">1</span>, <span class="keyword">nil</span>, <span class="keyword">true</span>) <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"l"</span>,     <span class="keyword">function</span> () awful.tag.<span class="function-name">incnmaster</span>(-<span class="number">1</span>, <span class="keyword">nil</span>, <span class="keyword">true</span>) <span class="keyword">end</span>,
               {description = <span class="string">"decrease the number of master clients"</span>, group = <span class="string">"layout"</span>}),
-    awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"h"</span>,     <span class="keyword">function</span> () awful.tag.incncol( <span class="number">1</span>, <span class="keyword">nil</span>, <span class="keyword">true</span>)    <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"h"</span>,     <span class="keyword">function</span> () awful.tag.<span class="function-name">incncol</span>( <span class="number">1</span>, <span class="keyword">nil</span>, <span class="keyword">true</span>)    <span class="keyword">end</span>,
               {description = <span class="string">"increase the number of columns"</span>, group = <span class="string">"layout"</span>}),
-    awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"l"</span>,     <span class="keyword">function</span> () awful.tag.incncol(-<span class="number">1</span>, <span class="keyword">nil</span>, <span class="keyword">true</span>)    <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"l"</span>,     <span class="keyword">function</span> () awful.tag.<span class="function-name">incncol</span>(-<span class="number">1</span>, <span class="keyword">nil</span>, <span class="keyword">true</span>)    <span class="keyword">end</span>,
               {description = <span class="string">"decrease the number of columns"</span>, group = <span class="string">"layout"</span>}),
-    awful.key({ modkey,           }, <span class="string">"space"</span>, <span class="keyword">function</span> () awful.layout.inc( <span class="number">1</span>)                <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"space"</span>, <span class="keyword">function</span> () awful.layout.<span class="function-name">inc</span>( <span class="number">1</span>)                <span class="keyword">end</span>,
               {description = <span class="string">"select next"</span>, group = <span class="string">"layout"</span>}),
-    awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"space"</span>, <span class="keyword">function</span> () awful.layout.inc(-<span class="number">1</span>)                <span class="keyword">end</span>,
+    awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"space"</span>, <span class="keyword">function</span> () awful.layout.<span class="function-name">inc</span>(-<span class="number">1</span>)                <span class="keyword">end</span>,
               {description = <span class="string">"select previous"</span>, group = <span class="string">"layout"</span>}),
 })
 
 
-awful.keyboard.append_global_keybindings({
-    awful.key {
+awful.keyboard.<span class="function-name">append_global_keybindings</span>({
+    awful.<span class="function-name">key</span> {
         modifiers   = { modkey },
         keygroup    = <span class="string">"numrow"</span>,
         description = <span class="string">"only view tag"</span>,
         group       = <span class="string">"tag"</span>,
         on_press    = <span class="keyword">function</span> (index)
-            <span class="keyword">local</span> screen = awful.screen.focused()
+            <span class="keyword">local</span> screen = awful.screen.<span class="function-name">focused</span>()
             <span class="keyword">local</span> tag = screen.tags[index]
             <span class="keyword">if</span> tag <span class="keyword">then</span>
-                tag:view_only()
+                tag:<span class="function-name">view_only</span>()
             <span class="keyword">end</span>
         <span class="keyword">end</span>,
     },
-    awful.key {
+    awful.<span class="function-name">key</span> {
         modifiers   = { modkey, <span class="string">"Control"</span> },
         keygroup    = <span class="string">"numrow"</span>,
         description = <span class="string">"toggle tag"</span>,
         group       = <span class="string">"tag"</span>,
         on_press    = <span class="keyword">function</span> (index)
-            <span class="keyword">local</span> screen = awful.screen.focused()
+            <span class="keyword">local</span> screen = awful.screen.<span class="function-name">focused</span>()
             <span class="keyword">local</span> tag = screen.tags[index]
             <span class="keyword">if</span> tag <span class="keyword">then</span>
-                awful.tag.viewtoggle(tag)
+                awful.tag.<span class="function-name">viewtoggle</span>(tag)
             <span class="keyword">end</span>
         <span class="keyword">end</span>,
     },
-    awful.key {
+    awful.<span class="function-name">key</span> {
         modifiers = { modkey, <span class="string">"Shift"</span> },
         keygroup    = <span class="string">"numrow"</span>,
         description = <span class="string">"move focused client to tag"</span>,
@@ -586,12 +586,12 @@ awful.keyboard.append_global_keybindings({
             <span class="keyword">if</span> client.focus <span class="keyword">then</span>
                 <span class="keyword">local</span> tag = client.focus.screen.tags[index]
                 <span class="keyword">if</span> tag <span class="keyword">then</span>
-                    client.focus:move_to_tag(tag)
+                    client.focus:<span class="function-name">move_to_tag</span>(tag)
                 <span class="keyword">end</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>,
     },
-    awful.key {
+    awful.<span class="function-name">key</span> {
         modifiers   = { modkey, <span class="string">"Control"</span>, <span class="string">"Shift"</span> },
         keygroup    = <span class="string">"numrow"</span>,
         description = <span class="string">"toggle focused client on tag"</span>,
@@ -600,18 +600,18 @@ awful.keyboard.append_global_keybindings({
             <span class="keyword">if</span> client.focus <span class="keyword">then</span>
                 <span class="keyword">local</span> tag = client.focus.screen.tags[index]
                 <span class="keyword">if</span> tag <span class="keyword">then</span>
-                    client.focus:toggle_tag(tag)
+                    client.focus:<span class="function-name">toggle_tag</span>(tag)
                 <span class="keyword">end</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>,
     },
-    awful.key {
+    awful.<span class="function-name">key</span> {
         modifiers   = { modkey },
         keygroup    = <span class="string">"numpad"</span>,
         description = <span class="string">"select layout directly"</span>,
         group       = <span class="string">"layout"</span>,
         on_press    = <span class="keyword">function</span> (index)
-            <span class="keyword">local</span> t = awful.screen.focused().selected_tag
+            <span class="keyword">local</span> t = awful.screen.<span class="function-name">focused</span>().selected_tag
             <span class="keyword">if</span> t <span class="keyword">then</span>
                 t.layout = t.layouts[index] <span class="keyword">or</span> t.layout
             <span class="keyword">end</span>
@@ -619,61 +619,61 @@ awful.keyboard.append_global_keybindings({
     }
 })
 
-client.connect_signal(<span class="string">"request::default_mousebindings"</span>, <span class="keyword">function</span>()
-    awful.mouse.append_client_mousebindings({
-        awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-            c:activate { context = <span class="string">"mouse_click"</span> }
+client.<span class="function-name">connect_signal</span>(<span class="string">"request::default_mousebindings"</span>, <span class="keyword">function</span>()
+    awful.mouse.<span class="function-name">append_client_mousebindings</span>({
+        awful.<span class="function-name">button</span>({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
+            c:<span class="function-name">activate</span> { context = <span class="string">"mouse_click"</span> }
         <span class="keyword">end</span>),
-        awful.button({ modkey }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-            c:activate { context = <span class="string">"mouse_click"</span>, action = <span class="string">"mouse_move"</span>  }
+        awful.<span class="function-name">button</span>({ modkey }, <span class="number">1</span>, <span class="keyword">function</span> (c)
+            c:<span class="function-name">activate</span> { context = <span class="string">"mouse_click"</span>, action = <span class="string">"mouse_move"</span>  }
         <span class="keyword">end</span>),
-        awful.button({ modkey }, <span class="number">3</span>, <span class="keyword">function</span> (c)
-            c:activate { context = <span class="string">"mouse_click"</span>, action = <span class="string">"mouse_resize"</span>}
+        awful.<span class="function-name">button</span>({ modkey }, <span class="number">3</span>, <span class="keyword">function</span> (c)
+            c:<span class="function-name">activate</span> { context = <span class="string">"mouse_click"</span>, action = <span class="string">"mouse_resize"</span>}
         <span class="keyword">end</span>),
     })
 <span class="keyword">end</span>)
 
-client.connect_signal(<span class="string">"request::default_keybindings"</span>, <span class="keyword">function</span>()
-    awful.keyboard.append_client_keybindings({
-        awful.key({ modkey,           }, <span class="string">"f"</span>,
+client.<span class="function-name">connect_signal</span>(<span class="string">"request::default_keybindings"</span>, <span class="keyword">function</span>()
+    awful.keyboard.<span class="function-name">append_client_keybindings</span>({
+        awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"f"</span>,
             <span class="keyword">function</span> (c)
                 c.fullscreen = <span class="keyword">not</span> c.fullscreen
-                c:raise()
+                c:<span class="function-name">raise</span>()
             <span class="keyword">end</span>,
             {description = <span class="string">"toggle fullscreen"</span>, group = <span class="string">"client"</span>}),
-        awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"c"</span>,      <span class="keyword">function</span> (c) c:kill()                         <span class="keyword">end</span>,
+        awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"c"</span>,      <span class="keyword">function</span> (c) c:<span class="function-name">kill</span>()                         <span class="keyword">end</span>,
                 {description = <span class="string">"close"</span>, group = <span class="string">"client"</span>}),
-        awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"space"</span>,  awful.client.floating.toggle                     ,
+        awful.<span class="function-name">key</span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"space"</span>,  awful.client.floating.toggle                     ,
                 {description = <span class="string">"toggle floating"</span>, group = <span class="string">"client"</span>}),
-        awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"Return"</span>, <span class="keyword">function</span> (c) c:swap(awful.client.getmaster()) <span class="keyword">end</span>,
+        awful.<span class="function-name">key</span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"Return"</span>, <span class="keyword">function</span> (c) c:<span class="function-name">swap</span>(awful.client.<span class="function-name">getmaster</span>()) <span class="keyword">end</span>,
                 {description = <span class="string">"move to master"</span>, group = <span class="string">"client"</span>}),
-        awful.key({ modkey,           }, <span class="string">"o"</span>,      <span class="keyword">function</span> (c) c:move_to_screen()               <span class="keyword">end</span>,
+        awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"o"</span>,      <span class="keyword">function</span> (c) c:<span class="function-name">move_to_screen</span>()               <span class="keyword">end</span>,
                 {description = <span class="string">"move to screen"</span>, group = <span class="string">"client"</span>}),
-        awful.key({ modkey,           }, <span class="string">"t"</span>,      <span class="keyword">function</span> (c) c.ontop = <span class="keyword">not</span> c.ontop            <span class="keyword">end</span>,
+        awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"t"</span>,      <span class="keyword">function</span> (c) c.ontop = <span class="keyword">not</span> c.ontop            <span class="keyword">end</span>,
                 {description = <span class="string">"toggle keep on top"</span>, group = <span class="string">"client"</span>}),
-        awful.key({ modkey,           }, <span class="string">"n"</span>,
+        awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"n"</span>,
             <span class="keyword">function</span> (c)
                 <span class="comment">-- The client currently has the input focus, so it cannot be
 </span>                <span class="comment">-- minimized, since minimized clients can't have the focus.
 </span>                c.minimized = <span class="keyword">true</span>
             <span class="keyword">end</span> ,
             {description = <span class="string">"minimize"</span>, group = <span class="string">"client"</span>}),
-        awful.key({ modkey,           }, <span class="string">"m"</span>,
+        awful.<span class="function-name">key</span>({ modkey,           }, <span class="string">"m"</span>,
             <span class="keyword">function</span> (c)
                 c.maximized = <span class="keyword">not</span> c.maximized
-                c:raise()
+                c:<span class="function-name">raise</span>()
             <span class="keyword">end</span> ,
             {description = <span class="string">"(un)maximize"</span>, group = <span class="string">"client"</span>}),
-        awful.key({ modkey, <span class="string">"Control"</span> }, <span class="string">"m"</span>,
+        awful.<span class="function-name">key</span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"m"</span>,
             <span class="keyword">function</span> (c)
                 c.maximized_vertical = <span class="keyword">not</span> c.maximized_vertical
-                c:raise()
+                c:<span class="function-name">raise</span>()
             <span class="keyword">end</span> ,
             {description = <span class="string">"(un)maximize vertically"</span>, group = <span class="string">"client"</span>}),
-        awful.key({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"m"</span>,
+        awful.<span class="function-name">key</span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"m"</span>,
             <span class="keyword">function</span> (c)
                 c.maximized_horizontal = <span class="keyword">not</span> c.maximized_horizontal
-                c:raise()
+                c:<span class="function-name">raise</span>()
             <span class="keyword">end</span> ,
             {description = <span class="string">"(un)maximize horizontally"</span>, group = <span class="string">"client"</span>}),
     })
@@ -683,9 +683,9 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
 </span>
 <span class="comment">-- {{{ Rules
 </span><span class="comment">-- Rules to apply to new clients.
-</span>ruled.client.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
+</span>ruled.client.<span class="function-name">connect_signal</span>(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
     <span class="comment">-- All clients will match this rule.
-</span>    ruled.client.append_rule {
+</span>    ruled.client.<span class="function-name">append_rule</span> {
         id         = <span class="string">"global"</span>,
         rule       = { },
         properties = {
@@ -697,7 +697,7 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
     }
 
     <span class="comment">-- Floating clients.
-</span>    ruled.client.append_rule {
+</span>    ruled.client.<span class="function-name">append_rule</span> {
         id       = <span class="string">"floating"</span>,
         rule_any = {
             instance = { <span class="string">"copyq"</span>, <span class="string">"pinentry"</span> },
@@ -720,7 +720,7 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
     }
 
     <span class="comment">-- Add titlebars to normal clients and dialogs
-</span>    ruled.client.append_rule {
+</span>    ruled.client.<span class="function-name">append_rule</span> {
         id         = <span class="string">"titlebars"</span>,
         rule_any   = { <span class="global">type</span> = { <span class="string">"normal"</span>, <span class="string">"dialog"</span> } },
         properties = { titlebars_enabled = <span class="keyword">true</span>      }
@@ -736,38 +736,38 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
 </span>
 <span class="comment">-- {{{ Titlebars
 </span><span class="comment">-- Add a titlebar if titlebars_enabled is set to true in the rules.
-</span>client.connect_signal(<span class="string">"request::titlebars"</span>, <span class="keyword">function</span>(c)
+</span>client.<span class="function-name">connect_signal</span>(<span class="string">"request::titlebars"</span>, <span class="keyword">function</span>(c)
     <span class="comment">-- buttons for the titlebar
 </span>    <span class="keyword">local</span> buttons = {
-        awful.button({ }, <span class="number">1</span>, <span class="keyword">function</span>()
-            c:activate { context = <span class="string">"titlebar"</span>, action = <span class="string">"mouse_move"</span>  }
+        awful.<span class="function-name">button</span>({ }, <span class="number">1</span>, <span class="keyword">function</span>()
+            c:<span class="function-name">activate</span> { context = <span class="string">"titlebar"</span>, action = <span class="string">"mouse_move"</span>  }
         <span class="keyword">end</span>),
-        awful.button({ }, <span class="number">3</span>, <span class="keyword">function</span>()
-            c:activate { context = <span class="string">"titlebar"</span>, action = <span class="string">"mouse_resize"</span>}
+        awful.<span class="function-name">button</span>({ }, <span class="number">3</span>, <span class="keyword">function</span>()
+            c:<span class="function-name">activate</span> { context = <span class="string">"titlebar"</span>, action = <span class="string">"mouse_resize"</span>}
         <span class="keyword">end</span>),
     }
 
-    awful.titlebar(c).widget = {
+    awful.<span class="function-name">titlebar</span>(c).widget = {
         { <span class="comment">-- Left
-</span>            awful.titlebar.widget.iconwidget(c),
+</span>            awful.titlebar.widget.<span class="function-name">iconwidget</span>(c),
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
         },
         { <span class="comment">-- Middle
 </span>            { <span class="comment">-- Title
 </span>                halign = <span class="string">"center"</span>,
-                widget = awful.titlebar.widget.titlewidget(c)
+                widget = awful.titlebar.widget.<span class="function-name">titlewidget</span>(c)
             },
             buttons = buttons,
             layout  = wibox.layout.flex.horizontal
         },
         { <span class="comment">-- Right
-</span>            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
+</span>            awful.titlebar.widget.<span class="function-name">floatingbutton</span> (c),
+            awful.titlebar.widget.<span class="function-name">maximizedbutton</span>(c),
+            awful.titlebar.widget.<span class="function-name">stickybutton</span>   (c),
+            awful.titlebar.widget.<span class="function-name">ontopbutton</span>    (c),
+            awful.titlebar.widget.<span class="function-name">closebutton</span>    (c),
+            layout = wibox.layout.fixed.<span class="function-name">horizontal</span>()
         },
         layout = wibox.layout.align.horizontal
     }
@@ -776,9 +776,9 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
 </span>
 <span class="comment">-- {{{ Notifications
 </span>
-ruled.notification.connect_signal(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
+ruled.notification.<span class="function-name">connect_signal</span>(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
     <span class="comment">-- All notifications will match this rule.
-</span>    ruled.notification.append_rule {
+</span>    ruled.notification.<span class="function-name">append_rule</span> {
         rule       = { },
         properties = {
             screen           = awful.screen.preferred,
@@ -787,15 +787,15 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     }
 <span class="keyword">end</span>)
 
-naughty.connect_signal(<span class="string">"request::display"</span>, <span class="keyword">function</span>(n)
-    naughty.layout.box { notification = n }
+naughty.<span class="function-name">connect_signal</span>(<span class="string">"request::display"</span>, <span class="keyword">function</span>(n)
+    naughty.layout.<span class="function-name">box</span> { notification = n }
 <span class="keyword">end</span>)
 
 <span class="comment">-- }}}
 </span>
 <span class="comment">-- Enable sloppy focus, so that focus follows mouse.
-</span>client.connect_signal(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>(c)
-    c:activate { context = <span class="string">"mouse_enter"</span>, raise = <span class="keyword">false</span> }
+</span>client.<span class="function-name">connect_signal</span>(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>(c)
+    c:<span class="function-name">activate</span> { context = <span class="string">"mouse_enter"</span>, raise = <span class="keyword">false</span> }
 <span class="keyword">end</span>)
 </pre>
 
@@ -819,7 +819,7 @@ naughty.connect_signal(<span class="string">"request::display"</span>, <span cla
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

@@ -247,11 +247,11 @@
 
 
 <pre>
-<span class="keyword">local</span> <span class="keyword">function</span> saved_screenshot(args)
-    <span class="keyword">local</span> ss = awful.screenshot(args)
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">saved_screenshot</span>(args)
+    <span class="keyword">local</span> ss = awful.<span class="function-name">screenshot</span>(args)
 
-    <span class="keyword">local</span> <span class="keyword">function</span> notify(self)
-        naughty.notification {
+    <span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">notify</span>(self)
+        naughty.<span class="function-name">notification</span> {
             title     = self.file_name,
             message   = <span class="string">"Screenshot saved"</span>,
             icon      = self.surface,
@@ -260,61 +260,61 @@
     <span class="keyword">end</span>
 
     <span class="keyword">if</span> args.auto_save_delay &gt; <span class="number">0</span> <span class="keyword">then</span>
-        ss:connect_signal(<span class="string">"file::saved"</span>, notify)
+        ss:<span class="function-name">connect_signal</span>(<span class="string">"file::saved"</span>, notify)
     <span class="keyword">else</span>
-        notify(ss)
+        <span class="function-name">notify</span>(ss)
     <span class="keyword">end</span>
 
     <span class="keyword">return</span> ss
 <span class="keyword">end</span>
 
-<span class="keyword">local</span> <span class="keyword">function</span> delayed_screenshot(args)
-    <span class="keyword">local</span> ss = saved_screenshot(args)
-    <span class="keyword">local</span> notif = naughty.notification {
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">delayed_screenshot</span>(args)
+    <span class="keyword">local</span> ss = <span class="function-name">saved_screenshot</span>(args)
+    <span class="keyword">local</span> notif = naughty.<span class="function-name">notification</span> {
         title   = <span class="string">"Screenshot in:"</span>,
         message = <span class="global">tostring</span>(args.auto_save_delay) .. <span class="string">" seconds"</span>
     }
 
-    ss:connect_signal(<span class="string">"timer::tick"</span>, <span class="keyword">function</span>(_, remain)
+    ss:<span class="function-name">connect_signal</span>(<span class="string">"timer::tick"</span>, <span class="keyword">function</span>(_, remain)
         notif.message = <span class="global">tostring</span>(remain) .. <span class="string">" seconds"</span>
     <span class="keyword">end</span>)
 
-    ss:connect_signal(<span class="string">"timer::timeout"</span>, <span class="keyword">function</span>()
-        <span class="keyword">if</span> notif <span class="keyword">then</span> notif:destroy() <span class="keyword">end</span>
+    ss:<span class="function-name">connect_signal</span>(<span class="string">"timer::timeout"</span>, <span class="keyword">function</span>()
+        <span class="keyword">if</span> notif <span class="keyword">then</span> notif:<span class="function-name">destroy</span>() <span class="keyword">end</span>
     <span class="keyword">end</span>)
 
     <span class="keyword">return</span> ss
 <span class="keyword">end</span>
 
-client.connect_signal(<span class="string">"request::default_keybindings"</span>, <span class="keyword">function</span>()
-    awful.keyboard.append_client_keybindings({
-        awful.key({modkey}, <span class="string">"Print"</span>,
-            <span class="keyword">function</span> (c) saved_screenshot { auto_save_delay = <span class="number">0</span>, client = c } <span class="keyword">end</span> ,
+client.<span class="function-name">connect_signal</span>(<span class="string">"request::default_keybindings"</span>, <span class="keyword">function</span>()
+    awful.keyboard.<span class="function-name">append_client_keybindings</span>({
+        awful.<span class="function-name">key</span>({modkey}, <span class="string">"Print"</span>,
+            <span class="keyword">function</span> (c) <span class="function-name">saved_screenshot</span> { auto_save_delay = <span class="number">0</span>, client = c } <span class="keyword">end</span> ,
             {description = <span class="string">"take client screenshot"</span>, group = <span class="string">"client"</span>}),
-        awful.key({modkey, <span class="string">"Shift"</span>}, <span class="string">"Print"</span>,
-            <span class="keyword">function</span> (c) saved_screenshot { auto_save_delay = <span class="number">0</span>, interactive = <span class="keyword">true</span>, client = c } <span class="keyword">end</span> ,
+        awful.<span class="function-name">key</span>({modkey, <span class="string">"Shift"</span>}, <span class="string">"Print"</span>,
+            <span class="keyword">function</span> (c) <span class="function-name">saved_screenshot</span> { auto_save_delay = <span class="number">0</span>, interactive = <span class="keyword">true</span>, client = c } <span class="keyword">end</span> ,
             {description = <span class="string">"take interactive client screenshot"</span>, group = <span class="string">"client"</span>}),
-        awful.key({modkey, <span class="string">"Control"</span>}, <span class="string">"Print"</span>,
-            <span class="keyword">function</span> (c) delayed_screenshot { auto_save_delay = <span class="number">5</span>, client = c } <span class="keyword">end</span> ,
+        awful.<span class="function-name">key</span>({modkey, <span class="string">"Control"</span>}, <span class="string">"Print"</span>,
+            <span class="keyword">function</span> (c) <span class="function-name">delayed_screenshot</span> { auto_save_delay = <span class="number">5</span>, client = c } <span class="keyword">end</span> ,
             {description = <span class="string">"take screenshot in 5 seconds"</span>, group = <span class="string">"client"</span>}),
-        awful.key({modkey, <span class="string">"Shift"</span>, <span class="string">"Control"</span>}, <span class="string">"Print"</span>,
-            <span class="keyword">function</span> (c) delayed_screenshot { auto_save_delay = <span class="number">5</span>, interactive = <span class="keyword">true</span>, client = c } <span class="keyword">end</span> ,
+        awful.<span class="function-name">key</span>({modkey, <span class="string">"Shift"</span>, <span class="string">"Control"</span>}, <span class="string">"Print"</span>,
+            <span class="keyword">function</span> (c) <span class="function-name">delayed_screenshot</span> { auto_save_delay = <span class="number">5</span>, interactive = <span class="keyword">true</span>, client = c } <span class="keyword">end</span> ,
             {description = <span class="string">"take interactive screenshot in 5 seconds"</span>, group = <span class="string">"client"</span>}),
     })
 <span class="keyword">end</span>)
 
-awful.keyboard.append_global_keybindings({
-    awful.key({}, <span class="string">"Print"</span>,
-        <span class="keyword">function</span> () saved_screenshot { auto_save_delay = <span class="number">0</span> } <span class="keyword">end</span> ,
+awful.keyboard.<span class="function-name">append_global_keybindings</span>({
+    awful.<span class="function-name">key</span>({}, <span class="string">"Print"</span>,
+        <span class="keyword">function</span> () <span class="function-name">saved_screenshot</span> { auto_save_delay = <span class="number">0</span> } <span class="keyword">end</span> ,
         {description = <span class="string">"take screenshot"</span>, group = <span class="string">"client"</span>}),
-    awful.key({<span class="string">"Shift"</span>}, <span class="string">"Print"</span>,
-        <span class="keyword">function</span> () saved_screenshot { auto_save_delay = <span class="number">0</span>, interactive = <span class="keyword">true</span> } <span class="keyword">end</span> ,
+    awful.<span class="function-name">key</span>({<span class="string">"Shift"</span>}, <span class="string">"Print"</span>,
+        <span class="keyword">function</span> () <span class="function-name">saved_screenshot</span> { auto_save_delay = <span class="number">0</span>, interactive = <span class="keyword">true</span> } <span class="keyword">end</span> ,
         {description = <span class="string">"take interactive screenshot"</span>, group = <span class="string">"client"</span>}),
-    awful.key({<span class="string">"Control"</span>}, <span class="string">"Print"</span>,
-        <span class="keyword">function</span> () delayed_screenshot { auto_save_delay = <span class="number">5</span> } <span class="keyword">end</span> ,
+    awful.<span class="function-name">key</span>({<span class="string">"Control"</span>}, <span class="string">"Print"</span>,
+        <span class="keyword">function</span> () <span class="function-name">delayed_screenshot</span> { auto_save_delay = <span class="number">5</span> } <span class="keyword">end</span> ,
         {description = <span class="string">"take screenshot in 5 seconds"</span>, group = <span class="string">"client"</span>}),
-    awful.key({<span class="string">"Shift"</span>, <span class="string">"Control"</span>}, <span class="string">"Print"</span>,
-        <span class="keyword">function</span> () delayed_screenshot { auto_save_delay = <span class="number">5</span>, interactive = <span class="keyword">true</span> } <span class="keyword">end</span> ,
+    awful.<span class="function-name">key</span>({<span class="string">"Shift"</span>, <span class="string">"Control"</span>}, <span class="string">"Print"</span>,
+        <span class="keyword">function</span> () <span class="function-name">delayed_screenshot</span> { auto_save_delay = <span class="number">5</span>, interactive = <span class="keyword">true</span> } <span class="keyword">end</span> ,
         {description = <span class="string">"take interactive screenshot in 5 seconds"</span>, group = <span class="string">"client"</span>}),
 })
 </pre>
@@ -332,8 +332,8 @@ awful.keyboard.append_global_keybindings({
 
 
 <pre>
-awful.popup {
-    widget = awful.widget.tasklist {
+awful.<span class="function-name">popup</span> {
+    widget = awful.widget.<span class="function-name">tasklist</span> {
         screen   = screen[<span class="number">1</span>],
         filter   = awful.widget.tasklist.filter.allscreen,
         buttons  = tasklist_buttons,
@@ -366,14 +366,14 @@ awful.popup {
             id              = <span class="string">"background_role"</span>,
             widget          = wibox.container.background,
             create_callback = <span class="keyword">function</span>(self, c) <span class="comment">--luacheck: no unused
-</span>                <span class="keyword">local</span> ss = awful.screenshot {
+</span>                <span class="keyword">local</span> ss = awful.<span class="function-name">screenshot</span> {
                     client = c,
                 }
-                ss:refresh()
+                ss:<span class="function-name">refresh</span>()
                 <span class="keyword">local</span> ib = ss.content_widget
                 ib.valign = <span class="string">"center"</span>
                 ib.halign = <span class="string">"center"</span>
-                self:get_children_by_id(<span class="string">"screenshot"</span>)[<span class="number">1</span>].widget = ib
+                self:<span class="function-name">get_children_by_id</span>(<span class="string">"screenshot"</span>)[<span class="number">1</span>].widget = ib
             <span class="keyword">end</span>,
         },
     },
@@ -836,7 +836,7 @@ awful.popup {
          <tr class="see_also_sublist">
            <td><span class="parameter">screen</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><a class="type" href="../classes/awful.screenshot.html#awful.screenshot.screen">screen</a></span></td>
+           <td><span class="types"><a class="type" href="../classes/awful.screenshot.html#awful.screenshot.screen">awful.screenshot.screen</a></span></td>
            <td class="see_also_description"> Get screenshot screen.</td>
          </tr>
          <tr class="see_also_sublist">
@@ -861,7 +861,7 @@ awful.popup {
          <tr class="see_also_sublist">
            <td><span class="parameter">client</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><a class="type" href="../classes/awful.screenshot.html#awful.screenshot.client">client</a></span></td>
+           <td><span class="types"><a class="type" href="../classes/awful.screenshot.html#awful.screenshot.client">awful.screenshot.client</a></span></td>
            <td class="see_also_description"> Get screenshot client.</td>
          </tr>
          <tr class="see_also_sublist">
@@ -1019,7 +1019,7 @@ awful.popup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/awful.screenshot.html#awful.screenshot.file_name" title="In the awful.screenshot module.">file_name</a></td>
+         <td><a href="../classes/awful.screenshot.html#awful.screenshot.file_name" title="In the awful.screenshot module.">awful.screenshot.file_name</a></td>
          <td>Get screenshot file name. </td>
          <td>
              <span class="chips">object properties</span>
@@ -1078,7 +1078,7 @@ awful.popup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/awful.screenshot.html#awful.screenshot.file_path" title="In the awful.screenshot module.">file_path</a></td>
+         <td><a href="../classes/awful.screenshot.html#awful.screenshot.file_path" title="In the awful.screenshot module.">awful.screenshot.file_path</a></td>
          <td>Get screenshot file path. </td>
          <td>
              <span class="chips">object properties</span>
@@ -1549,7 +1549,7 @@ awful.popup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/awful.screenshot.html#awful.screenshot.surfaces" title="In the awful.screenshot module.">surfaces</a></td>
+         <td><a href="../classes/awful.screenshot.html#awful.screenshot.surfaces" title="In the awful.screenshot module.">awful.screenshot.surfaces</a></td>
          <td>Get screenshot surfaces. </td>
          <td>
              <span class="chips">object properties</span>
@@ -1600,7 +1600,7 @@ awful.popup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/awful.screenshot.html#awful.screenshot.surface" title="In the awful.screenshot module.">surface</a></td>
+         <td><a href="../classes/awful.screenshot.html#awful.screenshot.surface" title="In the awful.screenshot module.">awful.screenshot.surface</a></td>
          <td>Get screenshot surface. </td>
          <td>
              <span class="chips">object properties</span>
@@ -1996,7 +1996,7 @@ awful.popup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/awful.screenshot.html#awful.screenshot.accept_buttons" title="In the awful.screenshot module.">accept_buttons</a></td>
+         <td><a href="../classes/awful.screenshot.html#awful.screenshot.accept_buttons" title="In the awful.screenshot module.">awful.screenshot.accept_buttons</a></td>
          <td>Mouse buttons used to save the screenshot when using the interactive snipping mode. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2063,7 +2063,7 @@ awful.popup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/awful.screenshot.html#awful.screenshot.reject_buttons" title="In the awful.screenshot module.">reject_buttons</a></td>
+         <td><a href="../classes/awful.screenshot.html#awful.screenshot.reject_buttons" title="In the awful.screenshot module.">awful.screenshot.reject_buttons</a></td>
          <td>Define which mouse button exit the interactive snipping mode. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2382,7 +2382,7 @@ awful.popup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/awful.screenshot.html#awful.screenshot.save" title="In the awful.screenshot module.">save</a></td>
+         <td><a href="../classes/awful.screenshot.html#awful.screenshot.save" title="In the awful.screenshot module.">awful.screenshot.save</a></td>
          <td>Save screenshot. </td>
          <td>
              <span class="chips">object methods </span>
@@ -2430,7 +2430,7 @@ awful.popup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/awful.screenshot.html#awful.screenshot.refresh" title="In the awful.screenshot module.">refresh</a></td>
+         <td><a href="../classes/awful.screenshot.html#awful.screenshot.refresh" title="In the awful.screenshot module.">awful.screenshot.refresh</a></td>
          <td>Take new screenshot(s) now. </td>
          <td>
              <span class="chips">object methods </span>
@@ -2883,7 +2883,7 @@ awful.popup {
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

@@ -586,8 +586,8 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> cal = wibox.widget {
-    date         = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+        <pre class="example"><span class="keyword">local</span> cal = wibox.<span class="function-name">widget</span> {
+    date         = <span class="global">os</span>.<span class="function-name">date</span>(<span class="string">"*t"</span>),
     font         = <span class="string">"Monospace 8"</span>,
     spacing      = <span class="number">2</span>,
     week_numbers = <span class="keyword">false</span>,
@@ -756,8 +756,8 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> cal = wibox.widget.calendar.month(
-    <span class="global">os</span>.date(<span class="string">"*t"</span>), <span class="string">"sans 12"</span>)</pre>
+        <pre class="example"><span class="keyword">local</span> cal = wibox.widget.calendar.<span class="function-name">month</span>(
+    <span class="global">os</span>.<span class="function-name">date</span>(<span class="string">"*t"</span>), <span class="string">"sans 12"</span>)</pre>
     </ul>
 
      <br />
@@ -898,8 +898,8 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> cal = wibox.widget {
-    date         = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+        <pre class="example"><span class="keyword">local</span> cal = wibox.<span class="function-name">widget</span> {
+    date         = <span class="global">os</span>.<span class="function-name">date</span>(<span class="string">"*t"</span>),
     font         = <span class="string">"Monospace 10"</span>,
     week_numbers = <span class="keyword">true</span>,
     widget       = wibox.widget.calendar.month
@@ -968,8 +968,8 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> cal = wibox.widget {
-    date         = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+        <pre class="example"><span class="keyword">local</span> cal = wibox.<span class="function-name">widget</span> {
+    date         = <span class="global">os</span>.<span class="function-name">date</span>(<span class="string">"*t"</span>),
     font         = <span class="string">"Monospace 10"</span>,
     start_sunday = <span class="keyword">true</span>,
     widget       = wibox.widget.calendar.month
@@ -1036,8 +1036,8 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> cal = wibox.widget {
-    date          = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+        <pre class="example"><span class="keyword">local</span> cal = wibox.<span class="function-name">widget</span> {
+    date          = <span class="global">os</span>.<span class="function-name">date</span>(<span class="string">"*t"</span>),
     font          = <span class="string">"Monospace 10"</span>,
     long_weekdays = <span class="keyword">true</span>,
     widget        = wibox.widget.calendar.month
@@ -1177,50 +1177,50 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">local</span> styles = {}
-<span class="keyword">local</span> <span class="keyword">function</span> rounded_shape(size, partial)
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">rounded_shape</span>(size, partial)
     <span class="keyword">if</span> partial <span class="keyword">then</span>
         <span class="keyword">return</span> <span class="keyword">function</span>(cr, width, height)
-                   gears.shape.partially_rounded_rect(cr, width, height,
+                   gears.shape.<span class="function-name">partially_rounded_rect</span>(cr, width, height,
                         <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="number">5</span>)
                <span class="keyword">end</span>
     <span class="keyword">else</span>
         <span class="keyword">return</span> <span class="keyword">function</span>(cr, width, height)
-                   gears.shape.rounded_rect(cr, width, height, size)
+                   gears.shape.<span class="function-name">rounded_rect</span>(cr, width, height, size)
                <span class="keyword">end</span>
     <span class="keyword">end</span>
 <span class="keyword">end</span>
 styles.month   = { padding      = <span class="number">5</span>,
                    bg_color     = <span class="string">"#555555"</span>,
                    border_width = <span class="number">2</span>,
-                   shape        = rounded_shape(<span class="number">10</span>)
+                   shape        = <span class="function-name">rounded_shape</span>(<span class="number">10</span>)
 }
-styles.normal  = { shape    = rounded_shape(<span class="number">5</span>) }
+styles.normal  = { shape    = <span class="function-name">rounded_shape</span>(<span class="number">5</span>) }
 styles.focus   = { fg_color = <span class="string">"#000000"</span>,
                    bg_color = <span class="string">"#ff9800"</span>,
                    markup   = <span class="keyword">function</span>(t) <span class="keyword">return</span> <span class="string">'&lt;b&gt;'</span> .. t .. <span class="string">'&lt;/b&gt;'</span> <span class="keyword">end</span>,
-                   shape    = rounded_shape(<span class="number">5</span>, <span class="keyword">true</span>)
+                   shape    = <span class="function-name">rounded_shape</span>(<span class="number">5</span>, <span class="keyword">true</span>)
 }
 styles.header  = { fg_color = <span class="string">"#de5e1e"</span>,
                    markup   = <span class="keyword">function</span>(t) <span class="keyword">return</span> <span class="string">'&lt;b&gt;'</span> .. t .. <span class="string">'&lt;/b&gt;'</span> <span class="keyword">end</span>,
-                   shape    = rounded_shape(<span class="number">10</span>)
+                   shape    = <span class="function-name">rounded_shape</span>(<span class="number">10</span>)
 }
 styles.weekday = { fg_color = <span class="string">"#7788af"</span>,
                    markup   = <span class="keyword">function</span>(t) <span class="keyword">return</span> <span class="string">'&lt;b&gt;'</span> .. t .. <span class="string">'&lt;/b&gt;'</span> <span class="keyword">end</span>,
-                   shape    = rounded_shape(<span class="number">5</span>)
+                   shape    = <span class="function-name">rounded_shape</span>(<span class="number">5</span>)
 }
-<span class="keyword">local</span> <span class="keyword">function</span> decorate_cell(widget, flag, date)
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">decorate_cell</span>(widget, flag, date)
     <span class="keyword">if</span> flag==<span class="string">"monthheader"</span> <span class="keyword">and</span> <span class="keyword">not</span> styles.monthheader <span class="keyword">then</span>
         flag = <span class="string">"header"</span>
     <span class="keyword">end</span>
     <span class="keyword">local</span> props = styles[flag] <span class="keyword">or</span> {}
     <span class="keyword">if</span> props.markup <span class="keyword">and</span> widget.get_text <span class="keyword">and</span> widget.set_markup <span class="keyword">then</span>
-        widget:set_markup(props.markup(widget:get_text()))
+        widget:<span class="function-name">set_markup</span>(props.<span class="function-name">markup</span>(widget:<span class="function-name">get_text</span>()))
     <span class="keyword">end</span>
     <span class="comment">-- Change bg color for weekends
 </span>    <span class="keyword">local</span> d = {year=date.year, month=(date.month <span class="keyword">or</span> <span class="number">1</span>), day=(date.day <span class="keyword">or</span> <span class="number">1</span>)}
-    <span class="keyword">local</span> weekday = <span class="global">tonumber</span>(<span class="global">os</span>.date(<span class="string">"%w"</span>, <span class="global">os</span>.time(d)))
+    <span class="keyword">local</span> weekday = <span class="global">tonumber</span>(<span class="global">os</span>.<span class="function-name">date</span>(<span class="string">"%w"</span>, <span class="global">os</span>.<span class="function-name">time</span>(d)))
     <span class="keyword">local</span> default_bg = (weekday==<span class="number">0</span> <span class="keyword">or</span> weekday==<span class="number">6</span>) <span class="keyword">and</span> <span class="string">"#232323"</span> <span class="keyword">or</span> <span class="string">"#383838"</span>
-    <span class="keyword">local</span> ret = wibox.widget {
+    <span class="keyword">local</span> ret = wibox.<span class="function-name">widget</span> {
         {
             widget,
             margins = (props.padding <span class="keyword">or</span> <span class="number">2</span>) + (props.border_width <span class="keyword">or</span> <span class="number">0</span>),
@@ -1235,8 +1235,8 @@ styles.weekday = { fg_color = <span class="string">"#7788af"</span>,
     }
     <span class="keyword">return</span> ret
 <span class="keyword">end</span>
-<span class="keyword">local</span> cal = wibox.widget {
-    date     = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+<span class="keyword">local</span> cal = wibox.<span class="function-name">widget</span> {
+    date     = <span class="global">os</span>.<span class="function-name">date</span>(<span class="string">"*t"</span>),
     fn_embed = decorate_cell,
     widget   = wibox.widget.calendar.month
 }</pre>
@@ -1287,8 +1287,8 @@ styles.weekday = { fg_color = <span class="string">"#7788af"</span>,
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> cal = wibox.widget {
-    date        = <span class="global">os</span>.date(<span class="string">"*t"</span>),
+        <pre class="example"><span class="keyword">local</span> cal = wibox.<span class="function-name">widget</span> {
+    date        = <span class="global">os</span>.<span class="function-name">date</span>(<span class="string">"*t"</span>),
     font        = <span class="string">"Monospace 10"</span>,
     flex_height = <span class="keyword">true</span>,
     widget      = wibox.widget.calendar.month
@@ -1602,7 +1602,7 @@ styles.weekday = { fg_color = <span class="string">"#7788af"</span>,
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

@@ -240,22 +240,22 @@
 
 
 <pre>
-ruled.notification.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
+ruled.notification.<span class="function-name">connect_signal</span>(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
     <span class="comment">-- Add a red background for urgent notifications.
-</span>    ruled.notification.append_rule {
+</span>    ruled.notification.<span class="function-name">append_rule</span> {
         rule       = { urgency = <span class="string">"critical"</span> },
         properties = { bg = <span class="string">"#ff0000"</span>, fg = <span class="string">"#ffffff"</span>, timeout = <span class="number">0</span> }
     }
 
     <span class="comment">-- Or green background for normal ones.
-</span>    ruled.notification.append_rule {
+</span>    ruled.notification.<span class="function-name">append_rule</span> {
         rule       = { urgency = <span class="string">"normal"</span> },
         properties = { bg      = <span class="string">"#00ff00"</span>, fg = <span class="string">"#000000"</span>}
     }
 <span class="keyword">end</span>)
 
 <span class="comment">-- Create a normal notification.
-</span>naughty.notification {
+</span>naughty.<span class="function-name">notification</span> {
     title   = <span class="string">"A notification 1"</span>,
     message = <span class="string">"This is very informative"</span>,
     icon    = beautiful.awesome_icon,
@@ -263,7 +263,7 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
 }
 
 <span class="comment">-- Create a normal notification.
-</span>naughty.notification {
+</span>naughty.<span class="function-name">notification</span> {
     title   = <span class="string">"A notification 2"</span>,
     message = <span class="string">"This is very informative"</span>,
     icon    = beautiful.awesome_icon,
@@ -281,9 +281,9 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
 
 
 <pre>
-ruled.notification.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
+ruled.notification.<span class="function-name">connect_signal</span>(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
     <span class="comment">-- Add a red background for urgent notifications.
-</span>    ruled.notification.append_rule {
+</span>    ruled.notification.<span class="function-name">append_rule</span> {
         rule       = { app_name = <span class="string">"mdp"</span> },
         properties = {
             widget_template = {
@@ -313,9 +313,9 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
                             {
                                 <span class="keyword">nil</span>,
                                 {
-                                    wibox.widget.textbox <span class="string">"⏪"</span>,
-                                    wibox.widget.textbox <span class="string">"⏸"</span>,
-                                    wibox.widget.textbox <span class="string">"⏩"</span>,
+                                    wibox.widget.<span class="function-name">textbox</span> <span class="string">"⏪"</span>,
+                                    wibox.widget.<span class="function-name">textbox</span> <span class="string">"⏸"</span>,
+                                    wibox.widget.<span class="function-name">textbox</span> <span class="string">"⏩"</span>,
                                     spacing = <span class="number">20</span>,
                                     layout  = wibox.layout.fixed.horizontal,
                                 },
@@ -339,8 +339,8 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
         }
     }
 <span class="keyword">end</span>)
-naughty.connect_signal(<span class="string">"request::display"</span>, <span class="keyword">function</span>(n)
-    naughty.layout.box { notification = n }
+naughty.<span class="function-name">connect_signal</span>(<span class="string">"request::display"</span>, <span class="keyword">function</span>(n)
+    naughty.layout.<span class="function-name">box</span> { notification = n }
 <span class="keyword">end</span>)
     icon      = beautiful.awesome_icon,
 </pre>
@@ -355,19 +355,19 @@ naughty.connect_signal(<span class="string">"request::display"</span>, <span cla
 
 
 <pre>
-ruled.notification.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
+ruled.notification.<span class="function-name">connect_signal</span>(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
     <span class="comment">-- Add a red background for urgent notifications.
-</span>    ruled.notification.append_rule {
+</span>    ruled.notification.<span class="function-name">append_rule</span> {
         rule       = { }, <span class="comment">-- Match everything.
 </span>        properties = {
             append_actions = {
-               naughty.action {
+               naughty.<span class="function-name">action</span> {
                    name = <span class="string">"Snooze (5m)"</span>,
                },
-               naughty.action {
+               naughty.<span class="function-name">action</span> {
                    name = <span class="string">"Snooze (15m)"</span>,
                },
-               naughty.action {
+               naughty.<span class="function-name">action</span> {
                    name = <span class="string">"Snooze (1h)"</span>,
                },
             },
@@ -376,13 +376,13 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
 <span class="keyword">end</span>)
 
 <span class="comment">-- Create a normal notification.
-</span>naughty.notification {
+</span>naughty.<span class="function-name">notification</span> {
     title   = <span class="string">"A notification"</span>,
     message = <span class="string">"This is very informative"</span>,
     icon    = beautiful.awesome_icon,
     actions = {
-        naughty.action { name = <span class="string">"Existing 1"</span> },
-        naughty.action { name = <span class="string">"Existing 2"</span> },
+        naughty.<span class="function-name">action</span> { name = <span class="string">"Existing 1"</span> },
+        naughty.<span class="function-name">action</span> { name = <span class="string">"Existing 2"</span> },
     }
 }
 </pre>
@@ -1412,7 +1412,7 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="comment">-- Note that the the message is matched as a pattern.
-</span>ruled.notification.append_rule {
+</span>ruled.notification.<span class="function-name">append_rule</span> {
     rule       = { message = <span class="string">"I am SPAM"</span>, has_focus = <span class="keyword">true</span> },
     properties = { ignore  = <span class="keyword">true</span>}
 }</pre>
@@ -1449,11 +1449,11 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">ruled.notification.append_rule {
+        <pre class="example">ruled.notification.<span class="function-name">append_rule</span> {
     rule       = { has_class = <span class="string">"amarok"</span> },
     properties = {
         widget_template = my_music_widget_template,
-        actions         = get_mpris_actions(),
+        actions         = <span class="function-name">get_mpris_actions</span>(),
     }
 }</pre>
     </ul>
@@ -1489,11 +1489,11 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">ruled.notification.append_rule {
+        <pre class="example">ruled.notification.<span class="function-name">append_rule</span> {
     rule       = { has_instance = <span class="string">"amarok"</span> },
     properties = {
         widget_template = my_music_widget_template,
-        actions         = get_mpris_actions(),
+        actions         = <span class="function-name">get_mpris_actions</span>(),
     }
 }</pre>
     </ul>
@@ -1509,7 +1509,7 @@ ruled.notification.connect_signal(<span class="string">"request::rules"</span>, 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

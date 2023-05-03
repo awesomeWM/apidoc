@@ -351,7 +351,7 @@ non-exhaustive list of possible errors:</p>
 
 
 <pre>
-<span class="backtick"><code>naughty.connect</code></span>_signal(<span class="string">"request::display_error"</span>, <span class="keyword">function</span>(message, startup)
+<span class="backtick"><code>naughty.connect</code></span><span class="function-name">_signal</span>(<span class="string">"request::display_error"</span>, <span class="keyword">function</span>(message, startup)
     <span class="backtick"><a href="../core_components/naughty.notification.html#">naughty.notification</a></span> {
         urgency = <span class="string">"critical"</span>,
         title   = <span class="string">"Oops, an error happened"</span>..(startup <span class="keyword">and</span> <span class="string">" during startup!"</span> <span class="keyword">or</span> <span class="string">"!"</span>),
@@ -372,7 +372,7 @@ the <a href="../documentation/06-appearance.md.html">appearance guide</a>.
 
 
 <pre>
-<span class="backtick"><a href="../theme_related_libraries/beautiful.html#init">beautiful.init</a></span>(<span class="backtick"><code>gears.filesystem.get</code></span>_themes_dir() .. <span class="string">"default/theme.lua"</span>)
+<span class="backtick"><a href="../theme_related_libraries/beautiful.html#init">beautiful.init</a></span>(<span class="backtick"><code>gears.filesystem.get</code></span><span class="function-name">_themes_dir</span>() .. <span class="string">"default/theme.lua"</span>)
 </pre>
 
 <p> &nbsp;
@@ -381,7 +381,7 @@ the <a href="../documentation/06-appearance.md.html">appearance guide</a>.
 
 <pre>
 terminal = <span class="string">"xterm"</span>
-editor = <span class="global">os</span>.getenv(<span class="string">"EDITOR"</span>) <span class="keyword">or</span> <span class="string">"nano"</span>
+editor = <span class="global">os</span>.<span class="function-name">getenv</span>(<span class="string">"EDITOR"</span>) <span class="keyword">or</span> <span class="string">"nano"</span>
 editor_cmd = terminal .. <span class="string">" -e "</span> .. editor
 </pre>
 
@@ -404,11 +404,11 @@ modkey = <span class="string">"Mod4"</span>
 
 <pre>
 myawesomemenu = {
-   { <span class="string">"hotkeys"</span>, <span class="keyword">function</span>() hotkeys_popup.show_help(<span class="keyword">nil</span>, <span class="backtick"><code>awful.screen.focused</code></span>()) <span class="keyword">end</span> },
+   { <span class="string">"hotkeys"</span>, <span class="keyword">function</span>() hotkeys_popup.<span class="function-name">show_help</span>(<span class="keyword">nil</span>, <span class="backtick"><code>awful.screen.focused</code></span>()) <span class="keyword">end</span> },
    { <span class="string">"manual"</span>, terminal .. <span class="string">" -e man awesome"</span> },
    { <span class="string">"edit config"</span>, editor_cmd .. <span class="string">" "</span> .. awesome.conffile },
    { <span class="string">"restart"</span>, awesome.restart },
-   { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.quit() <span class="keyword">end</span> },
+   { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.<span class="function-name">quit</span>() <span class="keyword">end</span> },
 }
 
 mymainmenu = <span class="backtick"><a href="../popups_and_bars/awful.menu.html#">awful.menu</a></span>({ items = { { <span class="string">"awesome"</span>, myawesomemenu, <span class="backtick"><code>beautiful.awesome</code></span>_icon },
@@ -434,8 +434,8 @@ mylauncher = <span class="backtick"><a href="../widgets/awful.widget.launcher.ht
 
 
 <pre>
-tag.connect_signal(<span class="string">"request::default_layouts"</span>, <span class="keyword">function</span>()
-    <span class="backtick"><code>awful.layout.append</code></span>_default_layouts({
+tag.<span class="function-name">connect_signal</span>(<span class="string">"request::default_layouts"</span>, <span class="keyword">function</span>()
+    <span class="backtick"><code>awful.layout.append</code></span><span class="function-name">_default_layouts</span>({
         <span class="backtick"><code>awful.layout.suit.floating</code></span>,
         <span class="backtick"><code>awful.layout.suit.tile</code></span>,
         <span class="backtick"><code>awful.layout.suit.tile.left</code></span>,
@@ -467,7 +467,7 @@ examples.</p>
 
 
 <pre>
-screen.connect_signal(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
+screen.<span class="function-name">connect_signal</span>(<span class="string">"request::wallpaper"</span>, <span class="keyword">function</span>(s)
     <span class="backtick"><a href="../popups_and_bars/awful.wallpaper.html#">awful.wallpaper</a></span> {
         screen = s,
         widget = {
@@ -508,7 +508,7 @@ mytextclock = <span class="backtick"><a href="../widgets/wibox.widget.textclock.
 
 
 <pre>
-screen.connect_signal(<span class="string">"request::desktop_decoration"</span>, <span class="keyword">function</span>(s)
+screen.<span class="function-name">connect_signal</span>(<span class="string">"request::desktop_decoration"</span>, <span class="keyword">function</span>(s)
     <span class="comment">-- Each screen has its own tag table.
 </span>    <span class="backtick"><code>awful.tag</code></span>({ <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>, <span class="string">"6"</span>, <span class="string">"7"</span>, <span class="string">"8"</span>, <span class="string">"9"</span> }, s, <span class="backtick"><a href="../libraries/awful.layout.html#awful.layout.layouts">awful.layout.layouts</a></span>[<span class="number">1</span>])
 
@@ -532,16 +532,16 @@ screen.connect_signal(<span class="string">"request::desktop_decoration"</span>,
         screen  = s,
         filter  = <span class="backtick"><code>awful.widget.taglist.filter.all</code></span>,
         buttons = {
-            <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:view_only() <span class="keyword">end</span>),
+            <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span>(t) t:<span class="function-name">view_only</span>() <span class="keyword">end</span>),
             <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">1</span>, <span class="keyword">function</span>(t)
                                             <span class="keyword">if</span> client.focus <span class="keyword">then</span>
-                                                client.focus:move_to_tag(t)
+                                                client.focus:<span class="function-name">move_to_tag</span>(t)
                                             <span class="keyword">end</span>
                                         <span class="keyword">end</span>),
             <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="backtick"><code>awful.tag.viewtoggle</code></span>),
             <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="keyword">function</span>(t)
                                             <span class="keyword">if</span> client.focus <span class="keyword">then</span>
-                                                client.focus:toggle_tag(t)
+                                                client.focus:<span class="function-name">toggle_tag</span>(t)
                                             <span class="keyword">end</span>
                                         <span class="keyword">end</span>),
             <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>(t) <span class="backtick"><code>awful.tag.viewprev</code></span>(t.screen) <span class="keyword">end</span>),
@@ -560,9 +560,9 @@ screen.connect_signal(<span class="string">"request::desktop_decoration"</span>,
     filter  = <span class="backtick"><code>awful.widget.tasklist.filter.currenttags</code></span>,
     buttons = {
         <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-            c:activate { context = <span class="string">"tasklist"</span>, action = <span class="string">"toggle_minimization"</span> }
+            c:<span class="function-name">activate</span> { context = <span class="string">"tasklist"</span>, action = <span class="string">"toggle_minimization"</span> }
         <span class="keyword">end</span>),
-        <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span>() <span class="backtick"><code>awful.menu.client</code></span>_list { theme = { width = <span class="number">250</span> } } <span class="keyword">end</span>),
+        <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span>() <span class="backtick"><code>awful.menu.client</code></span><span class="function-name">_list</span> { theme = { width = <span class="number">250</span> } } <span class="keyword">end</span>),
         <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="keyword">function</span>() <span class="backtick"><code>awful.client.focus.byidx</code></span>(-<span class="number">1</span>) <span class="keyword">end</span>),
         <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="keyword">function</span>() <span class="backtick"><code>awful.client.focus.byidx</code></span>( <span class="number">1</span>) <span class="keyword">end</span>),
     }
@@ -608,8 +608,8 @@ widget   = {
 
 
 <pre>
-<span class="backtick"><code>awful.mouse.append</code></span>_global_mousebindings({
-    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span> () mymainmenu:toggle() <span class="keyword">end</span>),
+<span class="backtick"><code>awful.mouse.append</code></span><span class="function-name">_global_mousebindings</span>({
+    <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span> () mymainmenu:<span class="function-name">toggle</span>() <span class="keyword">end</span>),
     <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">4</span>, <span class="backtick"><code>awful.tag.viewprev</code></span>),
     <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">5</span>, <span class="backtick"><code>awful.tag.viewnext</code></span>),
 })
@@ -676,10 +676,10 @@ widget   = {
 
 
 <pre>
-<span class="backtick"><code>awful.keyboard.append</code></span>_global_keybindings({
+<span class="backtick"><code>awful.keyboard.append</code></span><span class="function-name">_global_keybindings</span>({
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"s"</span>,      hotkeys_popup.show_help,
               {description=<span class="string">"show help"</span>, group=<span class="string">"awesome"</span>}),
-    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"w"</span>, <span class="keyword">function</span> () mymainmenu:show() <span class="keyword">end</span>,
+    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"w"</span>, <span class="keyword">function</span> () mymainmenu:<span class="function-name">show</span>() <span class="keyword">end</span>,
               {description = <span class="string">"show main menu"</span>, group = <span class="string">"awesome"</span>}),
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"r"</span>, awesome.restart,
               {description = <span class="string">"reload awesome"</span>, group = <span class="string">"awesome"</span>}),
@@ -691,13 +691,13 @@ widget   = {
                     prompt       = <span class="string">"Run Lua code: "</span>,
                     textbox      = <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox.widget,
                     exe_callback = <span class="backtick"><a href="../libraries/awful.util.html#awful.util.eval">awful.util.eval</a></span>,
-                    history_path = <span class="backtick"><code>awful.util.get</code></span>_cache_dir() .. <span class="string">"/history_eval"</span>
+                    history_path = <span class="backtick"><code>awful.util.get</code></span><span class="function-name">_cache_dir</span>() .. <span class="string">"/history_eval"</span>
                   }
               <span class="keyword">end</span>,
               {description = <span class="string">"lua execute prompt"</span>, group = <span class="string">"awesome"</span>}),
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"Return"</span>, <span class="keyword">function</span> () <span class="backtick"><a href="../libraries/awful.spawn.html#">awful.spawn</a></span>(terminal) <span class="keyword">end</span>,
               {description = <span class="string">"open a terminal"</span>, group = <span class="string">"launcher"</span>}),
-    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox:run() <span class="keyword">end</span>,
+    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey },            <span class="string">"r"</span>,     <span class="keyword">function</span> () <span class="backtick"><code>awful.screen.focused</code></span>().mypromptbox:<span class="function-name">run</span>() <span class="keyword">end</span>,
               {description = <span class="string">"run prompt"</span>, group = <span class="string">"launcher"</span>}),
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey }, <span class="string">"p"</span>, <span class="keyword">function</span>() <span class="backtick"><a href="../popups_and_bars/menubar.html#show">menubar.show</a></span>() <span class="keyword">end</span>,
               {description = <span class="string">"show the menubar"</span>, group = <span class="string">"launcher"</span>}),
@@ -708,7 +708,7 @@ widget   = {
 
 
 <pre>
-<span class="backtick"><code>awful.keyboard.append</code></span>_global_keybindings({
+<span class="backtick"><code>awful.keyboard.append</code></span><span class="function-name">_global_keybindings</span>({
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"Left"</span>,   <span class="backtick"><code>awful.tag.viewprev</code></span>,
               {description = <span class="string">"view previous"</span>, group = <span class="string">"tag"</span>}),
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"Right"</span>,  <span class="backtick"><code>awful.tag.viewnext</code></span>,
@@ -722,7 +722,7 @@ widget   = {
 
 
 <pre>
-<span class="backtick"><code>awful.keyboard.append</code></span>_global_keybindings({
+<span class="backtick"><code>awful.keyboard.append</code></span><span class="function-name">_global_keybindings</span>({
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"j"</span>,
         <span class="keyword">function</span> ()
             <span class="backtick"><code>awful.client.focus.byidx</code></span>( <span class="number">1</span>)
@@ -739,20 +739,20 @@ widget   = {
         <span class="keyword">function</span> ()
             <span class="backtick"><code>awful.client.focus.history.previous</code></span>()
             <span class="keyword">if</span> client.focus <span class="keyword">then</span>
-                client.focus:raise()
+                client.focus:<span class="function-name">raise</span>()
             <span class="keyword">end</span>
         <span class="keyword">end</span>,
         {description = <span class="string">"go back"</span>, group = <span class="string">"client"</span>}),
-    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"j"</span>, <span class="keyword">function</span> () <span class="backtick"><code>awful.screen.focus</code></span>_relative( <span class="number">1</span>) <span class="keyword">end</span>,
+    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"j"</span>, <span class="keyword">function</span> () <span class="backtick"><code>awful.screen.focus</code></span><span class="function-name">_relative</span>( <span class="number">1</span>) <span class="keyword">end</span>,
               {description = <span class="string">"focus the next screen"</span>, group = <span class="string">"screen"</span>}),
-    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"k"</span>, <span class="keyword">function</span> () <span class="backtick"><code>awful.screen.focus</code></span>_relative(-<span class="number">1</span>) <span class="keyword">end</span>,
+    <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"k"</span>, <span class="keyword">function</span> () <span class="backtick"><code>awful.screen.focus</code></span><span class="function-name">_relative</span>(-<span class="number">1</span>) <span class="keyword">end</span>,
               {description = <span class="string">"focus the previous screen"</span>, group = <span class="string">"screen"</span>}),
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"n"</span>,
               <span class="keyword">function</span> ()
                   <span class="keyword">local</span> c = <span class="backtick"><code>awful.client.restore</code></span>()
                   <span class="comment">-- Focus restored client
 </span>                  <span class="keyword">if</span> c <span class="keyword">then</span>
-                    c:activate { raise = <span class="keyword">true</span>, context = <span class="string">"key.unminimize"</span> }
+                    c:<span class="function-name">activate</span> { raise = <span class="keyword">true</span>, context = <span class="string">"key.unminimize"</span> }
                   <span class="keyword">end</span>
               <span class="keyword">end</span>,
               {description = <span class="string">"restore minimized"</span>, group = <span class="string">"client"</span>}),
@@ -763,7 +763,7 @@ widget   = {
 
 
 <pre>
-<span class="backtick"><code>awful.keyboard.append</code></span>_global_keybindings({
+<span class="backtick"><code>awful.keyboard.append</code></span><span class="function-name">_global_keybindings</span>({
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"j"</span>, <span class="keyword">function</span> () <span class="backtick"><code>awful.client.swap.byidx</code></span>(  <span class="number">1</span>)    <span class="keyword">end</span>,
               {description = <span class="string">"swap with next client by index"</span>, group = <span class="string">"client"</span>}),
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"k"</span>, <span class="keyword">function</span> () <span class="backtick"><code>awful.client.swap.byidx</code></span>( -<span class="number">1</span>)    <span class="keyword">end</span>,
@@ -794,7 +794,7 @@ widget   = {
 
 <pre>
 
-<span class="backtick"><code>awful.keyboard.append</code></span>_global_keybindings({
+<span class="backtick"><code>awful.keyboard.append</code></span><span class="function-name">_global_keybindings</span>({
     <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span> {
         modifiers   = { modkey },
         keygroup    = <span class="string">"numrow"</span>,
@@ -804,7 +804,7 @@ widget   = {
             <span class="keyword">local</span> screen = <span class="backtick"><code>awful.screen.focused</code></span>()
             <span class="keyword">local</span> tag = screen.tags[index]
             <span class="keyword">if</span> tag <span class="keyword">then</span>
-                tag:view_only()
+                tag:<span class="function-name">view_only</span>()
             <span class="keyword">end</span>
         <span class="keyword">end</span>,
     },
@@ -830,7 +830,7 @@ widget   = {
             <span class="keyword">if</span> client.focus <span class="keyword">then</span>
                 <span class="keyword">local</span> tag = client.focus.screen.tags[index]
                 <span class="keyword">if</span> tag <span class="keyword">then</span>
-                    client.focus:move_to_tag(tag)
+                    client.focus:<span class="function-name">move_to_tag</span>(tag)
                 <span class="keyword">end</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>,
@@ -844,7 +844,7 @@ widget   = {
             <span class="keyword">if</span> client.focus <span class="keyword">then</span>
                 <span class="keyword">local</span> tag = client.focus.screen.tags[index]
                 <span class="keyword">if</span> tag <span class="keyword">then</span>
-                    client.focus:toggle_tag(tag)
+                    client.focus:<span class="function-name">toggle_tag</span>(tag)
                 <span class="keyword">end</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>,
@@ -868,16 +868,16 @@ widget   = {
 
 
 <pre>
-client.connect_signal(<span class="string">"request::default_mousebindings"</span>, <span class="keyword">function</span>()
-    <span class="backtick"><code>awful.mouse.append</code></span>_client_mousebindings({
+client.<span class="function-name">connect_signal</span>(<span class="string">"request::default_mousebindings"</span>, <span class="keyword">function</span>()
+    <span class="backtick"><code>awful.mouse.append</code></span><span class="function-name">_client_mousebindings</span>({
         <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-            c:activate { context = <span class="string">"mouse_click"</span> }
+            c:<span class="function-name">activate</span> { context = <span class="string">"mouse_click"</span> }
         <span class="keyword">end</span>),
         <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">1</span>, <span class="keyword">function</span> (c)
-            c:activate { context = <span class="string">"mouse_click"</span>, action = <span class="string">"mouse_move"</span>  }
+            c:<span class="function-name">activate</span> { context = <span class="string">"mouse_click"</span>, action = <span class="string">"mouse_move"</span>  }
         <span class="keyword">end</span>),
         <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ modkey }, <span class="number">3</span>, <span class="keyword">function</span> (c)
-            c:activate { context = <span class="string">"mouse_click"</span>, action = <span class="string">"mouse_resize"</span>}
+            c:<span class="function-name">activate</span> { context = <span class="string">"mouse_click"</span>, action = <span class="string">"mouse_resize"</span>}
         <span class="keyword">end</span>),
     })
 <span class="keyword">end</span>)
@@ -893,21 +893,21 @@ client.connect_signal(<span class="string">"request::default_mousebindings"</spa
 
 
 <pre>
-client.connect_signal(<span class="string">"request::default_keybindings"</span>, <span class="keyword">function</span>()
-    <span class="backtick"><code>awful.keyboard.append</code></span>_client_keybindings({
+client.<span class="function-name">connect_signal</span>(<span class="string">"request::default_keybindings"</span>, <span class="keyword">function</span>()
+    <span class="backtick"><code>awful.keyboard.append</code></span><span class="function-name">_client_keybindings</span>({
         <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"f"</span>,
             <span class="keyword">function</span> (c)
                 c.fullscreen = <span class="keyword">not</span> c.fullscreen
-                c:raise()
+                c:<span class="function-name">raise</span>()
             <span class="keyword">end</span>,
             {description = <span class="string">"toggle fullscreen"</span>, group = <span class="string">"client"</span>}),
-        <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"c"</span>,      <span class="keyword">function</span> (c) c:kill()                         <span class="keyword">end</span>,
+        <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"c"</span>,      <span class="keyword">function</span> (c) c:<span class="function-name">kill</span>()                         <span class="keyword">end</span>,
                 {description = <span class="string">"close"</span>, group = <span class="string">"client"</span>}),
         <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"space"</span>,  <span class="backtick"><code>awful.client.floating.toggle</code></span>                     ,
                 {description = <span class="string">"toggle floating"</span>, group = <span class="string">"client"</span>}),
-        <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"Return"</span>, <span class="keyword">function</span> (c) c:swap(<span class="backtick"><code>awful.client.getmaster</code></span>()) <span class="keyword">end</span>,
+        <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"Return"</span>, <span class="keyword">function</span> (c) c:<span class="function-name">swap</span>(<span class="backtick"><code>awful.client.getmaster</code></span>()) <span class="keyword">end</span>,
                 {description = <span class="string">"move to master"</span>, group = <span class="string">"client"</span>}),
-        <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"o"</span>,      <span class="keyword">function</span> (c) c:move_to_screen()               <span class="keyword">end</span>,
+        <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"o"</span>,      <span class="keyword">function</span> (c) c:<span class="function-name">move_to_screen</span>()               <span class="keyword">end</span>,
                 {description = <span class="string">"move to screen"</span>, group = <span class="string">"client"</span>}),
         <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"t"</span>,      <span class="keyword">function</span> (c) c.ontop = <span class="keyword">not</span> c.ontop            <span class="keyword">end</span>,
                 {description = <span class="string">"toggle keep on top"</span>, group = <span class="string">"client"</span>}),
@@ -921,19 +921,19 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
         <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey,           }, <span class="string">"m"</span>,
             <span class="keyword">function</span> (c)
                 c.maximized = <span class="keyword">not</span> c.maximized
-                c:raise()
+                c:<span class="function-name">raise</span>()
             <span class="keyword">end</span> ,
             {description = <span class="string">"(un)maximize"</span>, group = <span class="string">"client"</span>}),
         <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Control"</span> }, <span class="string">"m"</span>,
             <span class="keyword">function</span> (c)
                 c.maximized_vertical = <span class="keyword">not</span> c.maximized_vertical
-                c:raise()
+                c:<span class="function-name">raise</span>()
             <span class="keyword">end</span> ,
             {description = <span class="string">"(un)maximize vertically"</span>, group = <span class="string">"client"</span>}),
         <span class="backtick"><a href="../input_handling/awful.key.html#">awful.key</a></span>({ modkey, <span class="string">"Shift"</span>   }, <span class="string">"m"</span>,
             <span class="keyword">function</span> (c)
                 c.maximized_horizontal = <span class="keyword">not</span> c.maximized_horizontal
-                c:raise()
+                c:<span class="function-name">raise</span>()
             <span class="keyword">end</span> ,
             {description = <span class="string">"(un)maximize horizontally"</span>, group = <span class="string">"client"</span>}),
     })
@@ -947,7 +947,7 @@ client.connect_signal(<span class="string">"request::default_keybindings"</span>
 
 
 <pre>
-ruled.client.connect_signal(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
+ruled.client.<span class="function-name">connect_signal</span>(<span class="string">"request::rules"</span>, <span class="keyword">function</span>()
 </pre>
 
 <p> &nbsp;</p>
@@ -955,7 +955,7 @@ ruled.client.connect_signal(<span class="string">"request::rules"</span>, <span 
 
 <pre>
 <span class="comment">-- All clients will match this rule.
-</span>ruled.client.append_rule {
+</span>ruled.client.<span class="function-name">append_rule</span> {
     id         = <span class="string">"global"</span>,
     rule       = { },
     properties = {
@@ -972,7 +972,7 @@ ruled.client.connect_signal(<span class="string">"request::rules"</span>, <span 
 
 <pre>
 <span class="comment">-- Floating clients.
-</span>ruled.client.append_rule {
+</span>ruled.client.<span class="function-name">append_rule</span> {
     id       = <span class="string">"floating"</span>,
     rule_any = {
         instance = { <span class="string">"copyq"</span>, <span class="string">"pinentry"</span> },
@@ -1000,7 +1000,7 @@ ruled.client.connect_signal(<span class="string">"request::rules"</span>, <span 
 
 <pre>
 <span class="comment">-- Add titlebars to normal clients and dialogs
-</span>ruled.client.append_rule {
+</span>ruled.client.<span class="function-name">append_rule</span> {
 </pre>
 
 <p> For client side decorations, clients might request no titlebars via
@@ -1016,8 +1016,8 @@ rule_any   = { <span class="global">type</span> = { <span class="string">"normal
 properties = { titlebars_enabled = <span class="keyword">true</span>      }
 
 
-et Firefox to always map on the tag named <span class="string">"2"</span> on screen <span class="number">1.</span>
-uled.client.append_rule {
+et Firefox to always map on the tag <span class="function-name">named</span> <span class="string">"2"</span> on screen <span class="number">1.</span>
+uled.client.<span class="function-name">append_rule</span> {
    rule       = { class = <span class="string">"Firefox"</span>     },
    properties = { screen = <span class="number">1</span>, tag = <span class="string">"2"</span> }
 </pre>
@@ -1029,14 +1029,14 @@ uled.client.append_rule {
 
 
 <pre>
-client.connect_signal(<span class="string">"request::titlebars"</span>, <span class="keyword">function</span>(c)
+client.<span class="function-name">connect_signal</span>(<span class="string">"request::titlebars"</span>, <span class="keyword">function</span>(c)
     <span class="comment">-- buttons for the titlebar
 </span>    <span class="keyword">local</span> buttons = {
         <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">1</span>, <span class="keyword">function</span>()
-            c:activate { context = <span class="string">"titlebar"</span>, action = <span class="string">"mouse_move"</span>  }
+            c:<span class="function-name">activate</span> { context = <span class="string">"titlebar"</span>, action = <span class="string">"mouse_move"</span>  }
         <span class="keyword">end</span>),
         <span class="backtick"><a href="../input_handling/awful.button.html#">awful.button</a></span>({ }, <span class="number">3</span>, <span class="keyword">function</span>()
-            c:activate { context = <span class="string">"titlebar"</span>, action = <span class="string">"mouse_resize"</span>}
+            c:<span class="function-name">activate</span> { context = <span class="string">"titlebar"</span>, action = <span class="string">"mouse_resize"</span>}
         <span class="keyword">end</span>),
     }
 
@@ -1073,9 +1073,9 @@ client.connect_signal(<span class="string">"request::titlebars"</span>, <span cl
 
 <pre>
 
-ruled.notification.connect_signal(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
+ruled.notification.<span class="function-name">connect_signal</span>(<span class="string">'request::rules'</span>, <span class="keyword">function</span>()
     <span class="comment">-- All notifications will match this rule.
-</span>    ruled.notification.append_rule {
+</span>    ruled.notification.<span class="function-name">append_rule</span> {
         rule       = { },
         properties = {
             screen           = <span class="backtick"><code>awful.screen.preferred</code></span>,
@@ -1084,7 +1084,7 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
     }
 <span class="keyword">end</span>)
 
-<span class="backtick"><code>naughty.connect</code></span>_signal(<span class="string">"request::display"</span>, <span class="keyword">function</span>(n)
+<span class="backtick"><code>naughty.connect</code></span><span class="function-name">_signal</span>(<span class="string">"request::display"</span>, <span class="keyword">function</span>(n)
     <span class="backtick"><a href="../popups_and_bars/naughty.layout.box.html#">naughty.layout.box</a></span> { notification = n }
 <span class="keyword">end</span>)
 </pre>
@@ -1093,8 +1093,8 @@ ruled.notification.connect_signal(<span class="string">'request::rules'</span>, 
 
 
 <pre>
-client.connect_signal(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>(c)
-    c:activate { context = <span class="string">"mouse_enter"</span>, raise = <span class="keyword">false</span> }
+client.<span class="function-name">connect_signal</span>(<span class="string">"mouse::enter"</span>, <span class="keyword">function</span>(c)
+    c:<span class="function-name">activate</span> { context = <span class="string">"mouse_enter"</span>, raise = <span class="keyword">false</span> }
 <span class="keyword">end</span>)
 </pre>
 
@@ -1103,7 +1103,7 @@ client.connect_signal(<span class="string">"mouse::enter"</span>, <span class="k
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 

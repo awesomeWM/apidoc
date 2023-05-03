@@ -246,21 +246,21 @@
 
 <pre>
 myawesomemenu = {
-   { <span class="string">"hotkeys"</span>, <span class="keyword">function</span>() hotkeys_popup.show_help(<span class="keyword">nil</span>, awful.screen.focused()) <span class="keyword">end</span> },
+   { <span class="string">"hotkeys"</span>, <span class="keyword">function</span>() hotkeys_popup.<span class="function-name">show_help</span>(<span class="keyword">nil</span>, awful.screen.<span class="function-name">focused</span>()) <span class="keyword">end</span> },
    { <span class="string">"manual"</span>, <span class="string">"xterm"</span> .. <span class="string">" -e man awesome"</span> },
    { <span class="string">"restart"</span>, awesome.restart },
-   { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.quit() <span class="keyword">end</span> }
+   { <span class="string">"quit"</span>, <span class="keyword">function</span>() awesome.<span class="function-name">quit</span>() <span class="keyword">end</span> }
 }
 
-mymainmenu = awful.menu({ items = { { <span class="string">"awesome"</span>, myawesomemenu, beautiful.awesome_icon },
+mymainmenu = awful.<span class="function-name">menu</span>({ items = { { <span class="string">"awesome"</span>, myawesomemenu, beautiful.awesome_icon },
                                     { <span class="string">"open terminal"</span>, <span class="string">"xterm"</span>}
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+mylauncher = awful.widget.<span class="function-name">launcher</span>({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
-wb:setup {
+wb:<span class="function-name">setup</span> {
     layout = wibox.layout.align.horizontal,
     { <span class="comment">-- Left widgets
 </span>        mylauncher,
@@ -1046,7 +1046,7 @@ wb:setup {
     <ul>
         <pre class="example"><span class="keyword">for</span> _, resize <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="keyword">true</span>, <span class="keyword">false</span>} <span class="keyword">do</span>
     <span class="keyword">for</span> idx, shape <span class="keyword">in</span> <span class="global">ipairs</span> {gears.shape.circle, gears.shape.squircle, gears.shape.rounded_rect} <span class="keyword">do</span>
-        <span class="keyword">local</span> w = wibox.widget {
+        <span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
             {
                 {
                     image         = beautiful.awesome_icon,
@@ -1337,7 +1337,7 @@ wb:setup {
      <span class="string">".my_class { fill: #00ff00; } "</span>..
      <span class="string">"#my_id { fill: #0000ff; }"</span>
 
-<span class="keyword">local</span> w = wibox.widget {
+<span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
     stylesheet = stylesheet,
     image      = image,
     widget     = wibox.widget.imagebox
@@ -1432,7 +1432,7 @@ wb:setup {
     <span class="string">'&lt;/svg&gt;'</span>
 
  <span class="keyword">for</span> _, dpi <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span>} <span class="keyword">do</span>
-     <span class="keyword">local</span> w = wibox.widget {
+     <span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
         image         = image,
         dpi           = dpi,
         resize        = <span class="keyword">false</span>,
@@ -1827,7 +1827,7 @@ wb:setup {
     <ul>
         <pre class="example"><span class="keyword">for</span> _, resize <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="keyword">true</span>, <span class="keyword">false</span>} <span class="keyword">do</span>
     <span class="keyword">for</span> _, valign <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">"top"</span>, <span class="string">"center"</span>, <span class="string">"bottom"</span>} <span class="keyword">do</span>
-        <span class="keyword">local</span> w = wibox.widget {
+        <span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
             {
                 {
                     image         = beautiful.awesome_icon,
@@ -1948,7 +1948,7 @@ wb:setup {
     <ul>
         <pre class="example"><span class="keyword">for</span> _, resize <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="keyword">true</span>, <span class="keyword">false</span>} <span class="keyword">do</span>
     <span class="keyword">for</span> _, halign <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">"left"</span>, <span class="string">"center"</span>, <span class="string">"right"</span>} <span class="keyword">do</span>
-        <span class="keyword">local</span> w = wibox.widget {
+        <span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
             {
                 {
                     image         = beautiful.awesome_icon,
@@ -2225,7 +2225,7 @@ wb:setup {
     <h3>Usage:</h3>
     <ul>
         <pre class="example"><span class="keyword">for</span> _, quality <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="string">"fast"</span>, <span class="string">"good"</span>, <span class="string">"best"</span>, <span class="string">"nearest"</span>, <span class="string">"bilinear"</span>} <span class="keyword">do</span>
-   <span class="keyword">local</span> w = wibox.widget {
+   <span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
        {
            {
                image           = img,
@@ -2299,7 +2299,7 @@ wb:setup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.all_children" title="In the wibox.widget.base module.">all_children</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.all_children" title="In the wibox.widget.base module.">wibox.widget.base.all_children</a></td>
          <td>Get all direct and indirect children widgets. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2355,7 +2355,7 @@ wb:setup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.children" title="In the wibox.widget.base module.">children</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.children" title="In the wibox.widget.base module.">wibox.widget.base.children</a></td>
          <td>Get or set the children elements. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2438,7 +2438,7 @@ wb:setup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.forced_width" title="In the wibox.widget.base module.">forced_width</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.forced_width" title="In the wibox.widget.base module.">wibox.widget.base.forced_width</a></td>
          <td>Force a widget width. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2521,7 +2521,7 @@ wb:setup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.forced_height" title="In the wibox.widget.base module.">forced_height</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.forced_height" title="In the wibox.widget.base module.">wibox.widget.base.forced_height</a></td>
          <td>Force a widget height. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2589,7 +2589,7 @@ wb:setup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.visible" title="In the wibox.widget.base module.">visible</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.visible" title="In the wibox.widget.base module.">wibox.widget.base.visible</a></td>
          <td>The widget visibility. </td>
          <td>
              <span class="chips">object properties</span>
@@ -2641,7 +2641,7 @@ wb:setup {
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.opacity" title="In the wibox.widget.base module.">opacity</a></td>
+         <td><a href="../classes/wibox.widget.base.html#wibox.widget.base.opacity" title="In the wibox.widget.base module.">wibox.widget.base.opacity</a></td>
          <td>The widget opacity (transparency). </td>
          <td>
              <span class="chips">object properties</span>
@@ -2926,22 +2926,22 @@ In slot [obj]   foo bar 42
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example"><span class="keyword">local</span> o = gears.object{}
+        <pre class="example"><span class="keyword">local</span> o = gears.<span class="function-name">object</span>{}
 <span class="comment">-- Function can be attached to signals
-</span><span class="keyword">local</span> <span class="keyword">function</span> slot(obj, a, b, c)
+</span><span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">slot</span>(obj, a, b, c)
     <span class="global">print</span>(<span class="string">"In slot"</span>, obj, a, b, c)
 <span class="keyword">end</span>
-o:connect_signal(<span class="string">"my_signal"</span>, slot)
+o:<span class="function-name">connect_signal</span>(<span class="string">"my_signal"</span>, slot)
 <span class="comment">-- Emitting can be done without arguments. In that case, the object will be
 </span><span class="comment">-- implicitly added as an argument.
-</span>o:emit_signal <span class="string">"my_signal"</span>
+</span>o:<span class="function-name">emit_signal</span> <span class="string">"my_signal"</span>
 <span class="comment">-- It is also possible to add as many random arguments are required.
-</span>o:emit_signal(<span class="string">"my_signal"</span>, <span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="number">42</span>)
+</span>o:<span class="function-name">emit_signal</span>(<span class="string">"my_signal"</span>, <span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="number">42</span>)
 <span class="comment">-- Finally, to allow the object to be garbage collected (the memory freed), it
 </span><span class="comment">-- is necessary to disconnect the signal or use <code>weak_connect_signal</code>
-</span>o:disconnect_signal(<span class="string">"my_signal"</span>, slot)
+</span>o:<span class="function-name">disconnect_signal</span>(<span class="string">"my_signal"</span>, slot)
 <span class="comment">-- This time, the <code>slot</code> wont be called as it is no longer connected.
-</span>o:emit_signal <span class="string">"my_signal"</span></pre>
+</span>o:<span class="function-name">emit_signal</span> <span class="string">"my_signal"</span></pre>
     </ul>
 
 
@@ -3667,7 +3667,7 @@ o:connect_signal(<span class="string">"my_signal"</span>, slot)
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.5.0</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 
