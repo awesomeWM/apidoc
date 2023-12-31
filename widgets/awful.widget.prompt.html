@@ -117,6 +117,7 @@
   <li><a href="../widget_containers/naughty.widget.background.html">naughty.widget.background</a></li>
   <li><a href="../widget_containers/wibox.container.arcchart.html">wibox.container.arcchart</a></li>
   <li><a href="../widget_containers/wibox.container.background.html">wibox.container.background</a></li>
+  <li><a href="../widget_containers/wibox.container.border.html">wibox.container.border</a></li>
   <li><a href="../widget_containers/wibox.container.constraint.html">wibox.container.constraint</a></li>
   <li><a href="../widget_containers/wibox.container.margin.html">wibox.container.margin</a></li>
   <li><a href="../widget_containers/wibox.container.mirror.html">wibox.container.mirror</a></li>
@@ -336,6 +337,26 @@ myprompt:<span class="function-name">run</span>()
       </td>
     </tr>
     <tr class="summary_row">
+      <td class="shortname" ><a href="#stretch_horizontally">stretch_horizontally</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summary">
+        Stretch the background gradient horizontally.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Inherited from wibox.container.background</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#stretch_vertically">stretch_vertically</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summary">
+        Stretch the background gradient vertically.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Inherited from wibox.container.background</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
       <td class="shortname" ><a href="#bg">bg</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
       <td class="summary">
@@ -390,16 +411,6 @@ myprompt:<span class="function-name">run</span>()
       <td class="summarytype" nowrap><span class='summary_type'>string</span></td>
       <td class="summary">
         How the border width affects the contained widget.
-      </td>
-      <td class="baseclass" nowrap>
-        <span class="chips">Inherited from wibox.container.background</span>
-      </td>
-    </tr>
-    <tr class="summary_row">
-      <td class="shortname" ><a href="#bgimage">bgimage</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>image <i>or</i> nil</span></td>
-      <td class="summary">
-        The background image to use.
       </td>
       <td class="baseclass" nowrap>
         <span class="chips">Inherited from wibox.container.background</span>
@@ -515,6 +526,17 @@ myprompt:<span class="function-name">run</span>()
       <td class="summarytype" nowrap><span class='summary_type'>color</span></td>
       <td class="summary">
         When a <code>shape</code> is set, also draw a border.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+        <span class="chips">Inherited from wibox.container.background</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#bgimage">bgimage</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>string <i>or</i> surface <i>or</i> function</span></td>
+      <td class="summary">
+        The background image to use.
       </td>
       <td class="baseclass" nowrap>
         <span class="chips">Deprecated</span>
@@ -1032,6 +1054,284 @@ myprompt:<span class="function-name">run</span>()
 
 </dd>
     <dt>
+    <a class="copy-link js-copy-link" name="stretch_horizontally" href="#stretch_horizontally">&#128279;</a>
+    <strong>stretch_horizontally</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.container.background
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Stretch the background gradient horizontally. </p>
+
+<p> This only works for linear or radial gradients. It does nothing
+ for solid colors, <code>bgimage</code> or raster patterns.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_container_background_stretch_horizontally.svg" alt="Usage example" type="image/svg+xml"></object>
+
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: <code>false</code></td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Valid values
+         </i>
+        </td>
+        <td>: <code>true</code> or <code>false</code>.</td>
+       <tr/>
+     </table>
+    </span>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_containers/wibox.container.background.html#stretch_vertically" title="In the wibox.container.background module.">stretch_vertically</a></td>
+         <td>Stretch the background gradient vertically. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_containers/wibox.container.background.html#bg" title="In the wibox.container.background module.">bg</a></td>
+         <td>The background color/pattern/gradient to use. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../theme_related_libraries/gears.color.html#" title="In the gears.color module.">gears.color</a></td>
+         <td>This module simplifies the creation of cairo pattern objects. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+    </table>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> gradients = {
+    gears.<span class="function-name">color</span> {
+        <span class="global">type</span>  = <span class="string">"linear"</span>,
+        from  = { <span class="number">0</span>  , <span class="number">0</span> },
+        to    = { <span class="number">100</span>, <span class="number">0</span> },
+        stops = {
+            { <span class="number">0</span>  , <span class="string">"#0000ff"</span> },
+            { <span class="number">0.8</span>, <span class="string">"#0000ff"</span> },
+            { <span class="number">1</span>  , <span class="string">"#ff0000"</span> }
+        }
+    },
+    gears.<span class="function-name">color</span> {
+        <span class="global">type</span> = <span class="string">"radial"</span>,
+        from  = { <span class="number">30</span>, <span class="number">98</span>, <span class="number">20</span>  },
+        to    = { <span class="number">30</span>, <span class="number">98</span>, <span class="number">120</span> },
+        stops = {
+            { <span class="number">0</span>  , <span class="string">"#ff0000"</span> },
+            { <span class="number">0.5</span>, <span class="string">"#00ff00"</span> },
+            { <span class="number">1</span>  , <span class="string">"#0000ff"</span> },
+        }
+    }
+}
+
+<span class="keyword">for</span> k, stretch <span class="keyword">in</span> <span class="global">ipairs</span> { <span class="keyword">false</span>, <span class="keyword">true</span> } <span class="keyword">do</span>
+    <span class="keyword">for</span> __, grad <span class="keyword">in</span> <span class="global">ipairs</span>(gradients) <span class="keyword">do</span>
+        <span class="keyword">for</span> idx, width <span class="keyword">in</span> <span class="global">ipairs</span> { <span class="number">50</span>, <span class="number">100</span>, <span class="number">150</span>, <span class="number">200</span> } <span class="keyword">do</span>
+            <span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
+                {
+                    {
+                        text   = <span class="string">"  Width: "</span> .. width .. <span class="string">"  "</span>,
+                        valign = <span class="string">"center"</span>,
+                        align  = <span class="string">"center"</span>,
+                        widget = wibox.widget.textbox
+                    },
+                    bg                   = grad,
+                    stretch_horizontally = stretch,
+                    forced_width         = width,
+                    fg                   = <span class="string">"#ffffff"</span>,
+                    shape                = gears.shape.rounded_rect,
+                    widget               = wibox.container.background
+                },
+                forced_width  = <span class="number">200</span>,
+                widget        = wibox.container.place
+            }
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span></pre>
+    </ul>
+
+     <br />
+     <center id=button1846>
+     <a class="show_more_button" onclick="show_extra('1846')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1846 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::stretch_horizontally</code></span>  When the <code>stretch_horizontally</code> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>stretch_horizontally</code></span> The new value affected to the property.</li>
+           </ul>
+
+     </ul>
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="stretch_vertically" href="#stretch_vertically">&#128279;</a>
+    <strong>stretch_vertically</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.container.background
+         &middot 1 signal
+    </span>
+    </dt>
+    <dd>
+    Stretch the background gradient vertically. </p>
+
+<p> This only works for linear or radial gradients. It does nothing
+ for solid colors, <code>bgimage</code> or raster patterns.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_container_background_stretch_vertically.svg" alt="Usage example" type="image/svg+xml"></object>
+
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: <code>false</code></td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Valid values
+         </i>
+        </td>
+        <td>: <code>true</code> or <code>false</code>.</td>
+       <tr/>
+     </table>
+    </span>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_containers/wibox.container.background.html#stretch_horizontally" title="In the wibox.container.background module.">stretch_horizontally</a></td>
+         <td>Stretch the background gradient horizontally. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_containers/wibox.container.background.html#bg" title="In the wibox.container.background module.">bg</a></td>
+         <td>The background color/pattern/gradient to use. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../theme_related_libraries/gears.color.html#" title="In the gears.color module.">gears.color</a></td>
+         <td>This module simplifies the creation of cairo pattern objects. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+    </table>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> gradients = {
+    gears.<span class="function-name">color</span> {
+        <span class="global">type</span>  = <span class="string">"linear"</span>,
+        from  = { <span class="number">0</span>, <span class="number">0</span>   },
+        to    = { <span class="number">0</span>, <span class="number">100</span> },
+        stops = {
+            { <span class="number">0</span>  , <span class="string">"#0000ff"</span> },
+            { <span class="number">0.8</span>, <span class="string">"#0000ff"</span> },
+            { <span class="number">1</span>  , <span class="string">"#ff0000"</span> }
+        }
+    },
+    gears.<span class="function-name">color</span> {
+        <span class="global">type</span> = <span class="string">"radial"</span>,
+        from  = { <span class="number">30</span>, <span class="number">98</span>, <span class="number">20</span>  },
+        to    = { <span class="number">30</span>, <span class="number">98</span>, <span class="number">120</span> },
+        stops = {
+            { <span class="number">0</span>  , <span class="string">"#ff0000"</span> },
+            { <span class="number">0.5</span>, <span class="string">"#00ff00"</span> },
+            { <span class="number">1</span>  , <span class="string">"#0000ff"</span> },
+        }
+    }
+}
+
+<span class="keyword">for</span> k, stretch <span class="keyword">in</span> <span class="global">ipairs</span> { <span class="keyword">false</span>, <span class="keyword">true</span> } <span class="keyword">do</span>
+    <span class="keyword">for</span> _, gradient <span class="keyword">in</span> <span class="global">ipairs</span>(gradients) <span class="keyword">do</span>
+        <span class="keyword">for</span> idx, height <span class="keyword">in</span> <span class="global">ipairs</span> { <span class="number">10</span>, <span class="number">50</span>, <span class="number">100</span>, <span class="number">150</span> } <span class="keyword">do</span>
+            <span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
+                {
+                    {
+                        text   = <span class="string">"  Height: "</span> .. height .. <span class="string">"  "</span>,
+                        valign = <span class="string">"center"</span>,
+                        align  = <span class="string">"center"</span>,
+                        widget = wibox.widget.textbox
+                    },
+                    bg                 = gradient,
+                    stretch_vertically = stretch,
+                    forced_height      = height,
+                    fg                 = <span class="string">"#ffffff"</span>,
+                    shape              = gears.shape.rounded_rect,
+                    widget             = wibox.container.background
+                },
+                forced_height = <span class="number">150</span>,
+                widget        = wibox.container.place
+            }
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span></pre>
+    </ul>
+
+     <br />
+     <center id=button1847>
+     <a class="show_more_button" onclick="show_extra('1847')">
+      Click to display more
+     </a>
+     </center>
+
+    <span id=item1847 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::stretch_vertically</code></span>  When the <code>stretch_vertically</code> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>stretch_vertically</code></span> The new value affected to the property.</li>
+           </ul>
+
+     </ul>
+    </span>
+
+</dd>
+    <dt>
     <a class="copy-link js-copy-link" name="bg" href="#bg">&#128279;</a>
     <strong>bg</strong>
     <span class="proptype"><span class='summary_type'>color</span></span>
@@ -1150,13 +1450,13 @@ parent : <span class="function-name">setup</span> {
     </ul>
 
      <br />
-     <center id=button1846>
-     <a class="show_more_button" onclick="show_extra('1846')">
+     <center id=button1848>
+     <a class="show_more_button" onclick="show_extra('1848')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1846 class="hide_extra">
+    <span id=item1848 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::bg</code></span>  When the <code>bg</code> value changes.</li>
@@ -1296,13 +1596,13 @@ parent : <span class="function-name">setup</span> {
     </ul>
 
      <br />
-     <center id=button1847>
-     <a class="show_more_button" onclick="show_extra('1847')">
+     <center id=button1849>
+     <a class="show_more_button" onclick="show_extra('1849')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1847 class="hide_extra">
+    <span id=item1849 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::fg</code></span>  When the <code>fg</code> value changes.</li>
@@ -1478,7 +1778,7 @@ parent : <span class="function-name">setup</span> {
     </ul>
 
 
-    <span id=item1848 class="hide_extra">
+    <span id=item1850 class="hide_extra">
     </span>
 
 </dd>
@@ -1496,7 +1796,9 @@ parent : <span class="function-name">setup</span> {
 
 <p> If the shape is set, the border will also be shaped.</p>
 
-<p> See <a href="../widget_containers/wibox.container.background.html#shape">wibox.container.background.shape</a> for an usage example.
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_container_background_border_width.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1541,15 +1843,36 @@ parent : <span class="function-name">setup</span> {
      <tr>
     </table>
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> _, width <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">10</span> } <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
+        {
+            {
+                text          = <span class="string">"  Content  "</span>,
+                valign        = <span class="string">"center"</span>,
+                align         = <span class="string">"center"</span>,
+                widget        = wibox.widget.textbox
+            },
+            margins = <span class="number">10</span>,
+            widget  = wibox.container.margin
+        },
+        border_color = beautiful.bg_normal,
+        border_width = width,
+        shape        = gears.shape.rounded_rect,
+        widget       = wibox.container.background
+    }
+<span class="keyword">end</span></pre>
+    </ul>
 
      <br />
-     <center id=button1849>
-     <a class="show_more_button" onclick="show_extra('1849')">
+     <center id=button1851>
+     <a class="show_more_button" onclick="show_extra('1851')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1849 class="hide_extra">
+    <span id=item1851 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::border_width</code></span>  When the <code>border_width</code> value changes.</li>
@@ -1575,7 +1898,9 @@ parent : <span class="function-name">setup</span> {
     <dd>
     Set the color for the border. </p>
 
-<p> See <a href="../widget_containers/wibox.container.background.html#shape">wibox.container.background.shape</a> for an usage example.
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_container_background_border_color.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1658,15 +1983,54 @@ parent : <span class="function-name">setup</span> {
      <tr>
     </table>
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> colors = {
+    beautiful.bg_normal,
+    <span class="string">"#00ff00"</span>,
+    gears.<span class="function-name">color</span> {
+        <span class="global">type</span>  = <span class="string">"linear"</span>,
+        from  = { <span class="number">0</span> , <span class="number">20</span> },
+        to    = { <span class="number">20</span>, <span class="number">0</span>  },
+        stops = {
+            { <span class="number">0</span>, <span class="string">"#0000ff"</span> },
+            { <span class="number">1</span>, <span class="string">"#ff0000"</span> }
+        },
+    },
+}
+
+<span class="keyword">for</span> _, color <span class="keyword">in</span> <span class="global">ipairs</span>(colors) <span class="keyword">do</span>
+    <span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
+        {
+            {
+                text          = <span class="string">"  Content  "</span>,
+                valign        = <span class="string">"center"</span>,
+                align         = <span class="string">"center"</span>,
+                widget        = wibox.widget.textbox
+            },
+            margins = <span class="number">10</span>,
+            widget  = wibox.container.margin
+        },
+        border_color         = color,
+        border_width         = <span class="number">3</span>,
+        stretch_vertically   = <span class="keyword">true</span>,
+        stretch_horizontally = <span class="keyword">true</span>,
+        shape                = gears.shape.rounded_rect,
+        widget               = wibox.container.background
+    }
+<span class="keyword">end</span>
+
+See <span class="backtick"><a href="../widget_containers/wibox.container.background.html#shape">wibox.container.background.shape</a></span> <span class="keyword">for</span> an usage example.</pre>
+    </ul>
 
      <br />
-     <center id=button1850>
-     <a class="show_more_button" onclick="show_extra('1850')">
+     <center id=button1852>
+     <a class="show_more_button" onclick="show_extra('1852')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1850 class="hide_extra">
+    <span id=item1852 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::border_color</code></span>  When the <code>border_color</code> value changes.</li>
@@ -1694,10 +2058,15 @@ parent : <span class="function-name">setup</span> {
     <span class="proptype"><span class='summary_type'>string</span></span>
     <span class="baseclass" >
     &middot;&nbsp;Inherited from wibox.container.background
+         &middot 1 signal
     </span>
     </dt>
     <dd>
-    How the border width affects the contained widget.
+    How the border width affects the contained widget. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_container_background_border_strategy.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1739,103 +2108,47 @@ parent : <span class="function-name">setup</span> {
 
 
 
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">for</span> k, strategy <span class="keyword">in</span> <span class="global">ipairs</span> { <span class="string">"none"</span>, <span class="string">"inner"</span> } <span class="keyword">do</span>
+    <span class="keyword">for</span> idx, width <span class="keyword">in</span> <span class="global">ipairs</span> {<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">10</span> } <span class="keyword">do</span>
+        <span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
+            {
+                {
+                    text          = <span class="string">"border_width = "</span>..width,
+                    valign        = <span class="string">"center"</span>,
+                    align         = <span class="string">"center"</span>,
+                    widget        = wibox.widget.textbox
+                },
+                border_color    = beautiful.bg_normal,
+                border_width    = width,
+                border_strategy = strategy,
+                shape           = gears.shape.rounded_rect,
+                widget          = wibox.container.background
+            },
+            widget = wibox.container.place
+        }
+    <span class="keyword">end</span>
+<span class="keyword">end</span></pre>
+    </ul>
 
+     <br />
+     <center id=button1853>
+     <a class="show_more_button" onclick="show_extra('1853')">
+      Click to display more
+     </a>
+     </center>
 
-    <span id=item1851 class="hide_extra">
-    </span>
+    <span id=item1853 class="hide_extra">
+     <h3>Emit signals:</h3>
+     <ul>
+          <li><span class="parameter"><code>property::border_strategy</code></span>  When the <code>border_strategy</code> value changes.</li>
+           <ul>
+             <li><span class="parameter"><code>self</code></span> <span class="types"><a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a></span> The object which changed (useful when connecting many object to the same callback).</li>
+             <li><span class="parameter"><code>new_value</code></span> <span class="types"><code>border_strategy</code></span> The new value affected to the property.</li>
+           </ul>
 
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="bgimage" href="#bgimage">&#128279;</a>
-    <strong>bgimage</strong>
-    <span class="proptype"><span class='summary_type'>image <i>or</i> nil</span></span>
-    <span class="baseclass" >
-    &middot;&nbsp;Inherited from wibox.container.background
-    </span>
-    </dt>
-    <dd>
-    The background image to use. </p>
-
-<p> If <code>image</code> is a function, it will be called with <code>(context, cr, width, height)</code>
- as arguments. Any other arguments passed to this method will be appended.
-
-    <h3>Constraints:</h3>
-    <span class="property_type">
-      <table class="see_also">
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Default value
-         </i>
-        </td>
-        <td>: <code>nil</code></td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Type description:
-         </i>
-        </td>
-       <tr/>
-       <tr class="see_also_sublist">
-        <td style="padding-left:15px;">
-         <i>
-          <span class='summary_type'>string</span>
-         </i>
-        </td>
-        <td>: Interpreted as a path to an image file.</td>
-       <tr/>
-       <tr class="see_also_sublist">
-        <td style="padding-left:15px;">
-         <i>
-          <span class='summary_type'>string</span>
-         </i>
-        </td>
-        <td>: A valid SVG content.</td>
-       <tr/>
-       <tr class="see_also_sublist">
-        <td style="padding-left:15px;">
-         <i>
-          <span class='summary_type'>cairo</span>
-         </i>
-        </td>
-        <td>: A cairo image surface: Directly used as-is.</td>
-       <tr/>
-       <tr class="see_also_sublist">
-        <td style="padding-left:15px;">
-         <i>
-          <span class='summary_type'>librsvg</span>
-         </i>
-        </td>
-        <td>: A librsvg handle object: Directly used as-is.</td>
-       <tr/>
-       <tr class="see_also_sublist">
-        <td style="padding-left:15px;">
-         <i>
-          <span class='summary_type'>nil</span>
-         </i>
-        </td>
-        <td>: Unset the image.</td>
-       <tr/>
-     </table>
-    </span>
-
-
-
-    <h3>See also:</h3>
-    <table class="see_also">
-     <tr>
-         <td><a href="../libraries/gears.surface.html#" title="In the gears.surface module.">gears.surface</a></td>
-         <td>Utilities to integrate and manipulate Cairo drawing surfaces. </td>
-         <td>
-             <span class="chips">module</span>
-         </td>
-     <tr>
-    </table>
-
-
-
-    <span id=item1852 class="hide_extra">
+     </ul>
     </span>
 
 </dd>
@@ -1887,7 +2200,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item2089 class="hide_extra">
+    <span id=item2109 class="hide_extra">
     </span>
 
 </dd>
@@ -1943,7 +2256,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item2090 class="hide_extra">
+    <span id=item2110 class="hide_extra">
     </span>
 
 </dd>
@@ -2026,7 +2339,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item2091 class="hide_extra">
+    <span id=item2111 class="hide_extra">
     </span>
 
 </dd>
@@ -2109,7 +2422,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item2092 class="hide_extra">
+    <span id=item2112 class="hide_extra">
     </span>
 
 </dd>
@@ -2177,7 +2490,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item2093 class="hide_extra">
+    <span id=item2113 class="hide_extra">
     </span>
 
 </dd>
@@ -2229,7 +2542,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item2094 class="hide_extra">
+    <span id=item2114 class="hide_extra">
     </span>
 
 </dd>
@@ -2283,7 +2596,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item2095 class="hide_extra">
+    <span id=item2115 class="hide_extra">
     </span>
 
 </dd>
@@ -2429,7 +2742,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item1853 class="hide_extra">
+    <span id=item1854 class="hide_extra">
     </span>
 
 </dd>
@@ -2485,13 +2798,13 @@ parent : <span class="function-name">setup</span> {
 
 
      <br />
-     <center id=button1854>
-     <a class="show_more_button" onclick="show_extra('1854')">
+     <center id=button1855>
+     <a class="show_more_button" onclick="show_extra('1855')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1854 class="hide_extra">
+    <span id=item1855 class="hide_extra">
      <h3>Consumed theme variables:</h3>
      <table class='widget_list' border=1>
          <tr style='font-weight: bold;'>
@@ -2501,6 +2814,85 @@ parent : <span class="function-name">setup</span> {
           <tr><td><a href="../theme_related_libraries/beautiful.html#beautiful.fg_normal">beautiful.fg_normal</a></td><td>Fallback when 'fg' and <code>border_color</code> aren't set.</td></tr>
 
      </table>
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="bgimage" href="#bgimage">&#128279;</a>
+    <strong>bgimage</strong>
+    <span class="proptype"><span class='summary_type'>string <i>or</i> surface <i>or</i> function</span></span>
+    <span class="baseclass" >
+    &middot;&nbsp;Inherited from wibox.container.background
+    </span>
+    </dt>
+    <dd>
+    The background image to use. </p>
+
+<p> This property is deprecated. The <a href="../widget_containers/wibox.container.border.html#">wibox.container.border</a> provides a much
+ more fine-grained support for background images. It is now out of the
+ <a href="../widget_containers/wibox.container.background.html#">wibox.container.background</a> scope. <a href="../widget_layouts/wibox.layout.stack.html#">wibox.layout.stack</a> can also be used
+ to overlay a widget on top of a <a href="../widgets/wibox.widget.imagebox.html#">wibox.widget.imagebox</a>. This solution
+ exposes all availible imagebox properties. Finally, if you wish to use the
+ <code>function</code> callback support, implement the <code>before_draw_children</code> method
+ on any widget. This gives you the same level of control without all the
+ <code>bgimage</code> corner cases.</p>
+
+<p> If <code>image</code> is a function, it will be called with <code>(context, cr, width, height)</code>
+ as arguments. Any other arguments passed to this method will be appended.
+
+    <h3>Type constraints:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">bgimage</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a>, <span class="type">surface</span> or <span class="type">function</span></span></td>
+           <td class="see_also_description"> A background image or a function.</td>
+         </tr>
+        </table>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../libraries/gears.surface.html#" title="In the gears.surface module.">gears.surface</a></td>
+         <td>Utilities to integrate and manipulate Cairo drawing surfaces. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_containers/wibox.container.border.html#" title="In the wibox.container.border module.">wibox.container.border</a></td>
+         <td>Place widgets or images on the sides, corner and back of another widget. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widgets/wibox.widget.imagebox.html#" title="In the wibox.widget.imagebox module.">wibox.widget.imagebox</a></td>
+         <td>A widget to display an image. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.stack.html#" title="In the wibox.layout.stack module.">wibox.layout.stack</a></td>
+         <td>Place multiple widgets on top of each other. </td>
+         <td>
+             <span class="chips">module</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item1856 class="hide_extra">
     </span>
 
 </dd>
@@ -2560,13 +2952,13 @@ parent : <span class="function-name">setup</span> {
 
 
      <br />
-     <center id=button1855>
-     <a class="show_more_button" onclick="show_extra('1855')">
+     <center id=button1857>
+     <a class="show_more_button" onclick="show_extra('1857')">
       Click to display more
      </a>
      </center>
 
-    <span id=item1855 class="hide_extra">
+    <span id=item1857 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>property::set_shape</code></span>  When the <code>set_shape</code> value changes.</li>
@@ -2611,7 +3003,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item2097 class="hide_extra">
+    <span id=item2117 class="hide_extra">
     </span>
 
 </dd>
@@ -2675,7 +3067,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item2108 class="hide_extra">
+    <span id=item2128 class="hide_extra">
     </span>
 
 </dd>
@@ -2737,7 +3129,7 @@ parent : <span class="function-name">setup</span> {
 
 
 
-    <span id=item2109 class="hide_extra">
+    <span id=item2129 class="hide_extra">
     </span>
 
 </dd>
@@ -2982,7 +3374,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2111 class="hide_extra">
+    <span id=item2131 class="hide_extra">
     </span>
 
 </dd>
@@ -3015,7 +3407,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2112 class="hide_extra">
+    <span id=item2132 class="hide_extra">
     </span>
 
 </dd>
@@ -3155,7 +3547,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2113 class="hide_extra">
+    <span id=item2133 class="hide_extra">
     </span>
 
 </dd>
@@ -3295,7 +3687,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2114 class="hide_extra">
+    <span id=item2134 class="hide_extra">
     </span>
 
 </dd>
@@ -3409,7 +3801,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2115 class="hide_extra">
+    <span id=item2135 class="hide_extra">
     </span>
 
 </dd>
@@ -3523,7 +3915,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2116 class="hide_extra">
+    <span id=item2136 class="hide_extra">
     </span>
 
 </dd>
