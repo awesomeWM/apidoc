@@ -49,6 +49,8 @@
 <ul>
 <li><a href="#Constructors">Constructors</a></li>
 <li><a href="#Object_properties">Object properties</a></li>
+<li><a href="#Deprecated_object_properties">Deprecated object properties</a></li>
+<li><a href="#Deprecated_object_methods">Deprecated object methods</a></li>
 <li><a href="#Object_methods">Object methods </a></li>
 <li><a href="#Signals">Signals</a></li>
 <li><a href="#Tables">Tables</a></li>
@@ -244,11 +246,11 @@
 
 <pre>
 <span class="keyword">local</span> l = wibox.<span class="function-name">widget</span> {
-    homogeneous   = <span class="keyword">true</span>,
-    spacing       = <span class="number">5</span>,
-    min_cols_size = <span class="number">10</span>,
-    min_rows_size = <span class="number">10</span>,
-    layout        = wibox.layout.grid,
+    homogeneous          = <span class="keyword">true</span>,
+    spacing              = <span class="number">5</span>,
+    minimum_column_width = <span class="number">10</span>,
+    minimum_row_height   = <span class="number">10</span>,
+    layout               = wibox.layout.grid,
 }
 l:<span class="function-name">add_widget_at</span>(first , <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)
 l:<span class="function-name">add_widget_at</span>(second, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)
@@ -259,10 +261,93 @@ l:<span class="function-name">insert_row</span>(<span class="number">1</span>)
 l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>)
 </pre>
 
-<p> Using the declarative system, widgets are automatically added next to each
- other spanning only one cell.</p>
+<p> The same can be done using the declarative syntax:</p>
 
 
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_declarative1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="keyword">local</span> lorem  = <span class="string">"Lorem ipsum dolor sit amet, consectetur adipiscing "</span> ..
+    <span class="string">"elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</span>
+
+<span class="keyword">local</span> l = wibox.<span class="function-name">widget</span> {
+    {
+        text      = lorem,
+        row_index = <span class="number">1</span>,
+        col_index = <span class="number">1</span>,
+        col_span  = <span class="number">3</span>,
+        widget    = generic_widget
+    },
+    {
+        text      = <span class="string">"first"</span>,
+        col_span = <span class="number">2</span>,
+        row_index = <span class="number">2</span>,
+        col_index = <span class="number">1</span>,
+        widget    = generic_widget
+    },
+    {
+        text      = <span class="string">"third"</span>,
+        row_index = <span class="number">2</span>,
+        col_index = <span class="number">3</span>,
+        row_span  = <span class="number">2</span>,
+        widget    = generic_widget
+    },
+    {
+        text      = <span class="string">"second"</span>,
+        row_index = <span class="number">3</span>,
+        col_index = <span class="number">1</span>,
+        col_span  = <span class="number">2</span>,
+        widget    = generic_widget
+    },
+    {
+        text      = <span class="string">"fourth"</span>,
+        row_index = <span class="number">4</span>,
+        col_index = <span class="number">1</span>,
+        widget    = generic_widget
+    },
+    {
+        text      = <span class="string">"fifth"</span>,
+        row_index = <span class="number">4</span>,
+        col_index = <span class="number">2</span>,
+        col_span  = <span class="number">2</span>,
+        widget    = generic_widget
+    },
+    homogeneous          = <span class="keyword">true</span>,
+    spacing              = <span class="number">5</span>,
+    border_width         = <span class="number">1</span>,
+    border_color         = beautiful.border_color,
+    minimum_column_width = <span class="number">10</span>,
+    minimum_row_height   = <span class="number">10</span>,
+    layout               = wibox.layout.grid,
+}
+</pre>
+
+<p> When <code>col_index</code> and <code>row_index</code> are not provided, the widgets are
+ automatically added next to each other spanning only one cell:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_declarative2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+
+<pre>
+<span class="keyword">local</span> l = wibox.<span class="function-name">widget</span> {
+    <span class="function-name">generic_widget</span>(<span class="string">"first"</span>),
+    <span class="function-name">generic_widget</span>(<span class="string">"second"</span>),
+    <span class="function-name">generic_widget</span>(<span class="string">"third"</span>),
+    <span class="function-name">generic_widget</span>(<span class="string">"fourth"</span>),
+    <span class="function-name">generic_widget</span>(<span class="string">"fifth"</span>),
+    column_count         = <span class="number">2</span>,
+    spacing              = <span class="number">5</span>,
+    minimum_column_width = <span class="number">10</span>,
+    minimum_row_height   = <span class="number">10</span>,
+    layout               = wibox.layout.grid,
+}
+</pre>
 
 <p><object class="img-object" data="../images/AUTOGEN_wibox_layout_defaults_grid.svg" alt="Usage example" type="image/svg+xml"></object></p>
     <h3>Usage:</h3>
@@ -272,11 +357,11 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
     generic_widget( &quot;second&quot; ),
     generic_widget( &quot;third&quot;  ),
     generic_widget( &quot;fourth&quot; ),
-    forced_num_cols = 2,
-    forced_num_rows = 2,
-    homogeneous     = true,
-    expand          = true,
-    layout = wibox.layout.grid
+    column_count = 2,
+    row_count    = 2,
+    homogeneous  = true,
+    expand       = true,
+    layout       = wibox.layout.grid
 }
 </pre>
     </ul>
@@ -379,25 +464,7 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
       </td>
     </tr>
     <tr class="summary_row">
-      <td class="shortname" ><a href="#forced_num_rows">forced_num_rows</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">
-        Force the number of rows of the layout.
-      </td>
-      <td class="baseclass" nowrap>
-      </td>
-    </tr>
-    <tr class="summary_row">
-      <td class="shortname" ><a href="#forced_num_cols">forced_num_cols</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
-      <td class="summary">
-        Force the number of columns of the layout.
-      </td>
-      <td class="baseclass" nowrap>
-      </td>
-    </tr>
-    <tr class="summary_row">
-      <td class="shortname" ><a href="#min_cols_size">min_cols_size</a></td>
+      <td class="shortname" ><a href="#minimum_column_width">minimum_column_width</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
       <td class="summary">
         Set the minimum size for the columns.
@@ -406,7 +473,7 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
       </td>
     </tr>
     <tr class="summary_row">
-      <td class="shortname" ><a href="#min_rows_size">min_rows_size</a></td>
+      <td class="shortname" ><a href="#minimum_row_height">minimum_row_height</a></td>
       <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
       <td class="summary">
         Set the minimum size for the rows.
@@ -415,26 +482,8 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
       </td>
     </tr>
     <tr class="summary_row">
-      <td class="shortname" ><a href="#horizontal_spacing">horizontal_spacing</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">
-        The spacing between columns.
-      </td>
-      <td class="baseclass" nowrap>
-      </td>
-    </tr>
-    <tr class="summary_row">
-      <td class="shortname" ><a href="#vertical_spacing">vertical_spacing</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
-      <td class="summary">
-        The spacing between rows.
-      </td>
-      <td class="baseclass" nowrap>
-      </td>
-    </tr>
-    <tr class="summary_row">
       <td class="shortname" ><a href="#spacing">spacing</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> table</span></td>
       <td class="summary">
         The spacing between rows and columns.
       </td>
@@ -442,26 +491,8 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
       </td>
     </tr>
     <tr class="summary_row">
-      <td class="shortname" ><a href="#horizontal_expand">horizontal_expand</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">
-        Controls if the columns are expanded to use all the available width.
-      </td>
-      <td class="baseclass" nowrap>
-      </td>
-    </tr>
-    <tr class="summary_row">
-      <td class="shortname" ><a href="#vertical_expand">vertical_expand</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">
-        Controls if the rows are expanded to use all the available height.
-      </td>
-      <td class="baseclass" nowrap>
-      </td>
-    </tr>
-    <tr class="summary_row">
       <td class="shortname" ><a href="#expand">expand</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean <i>or</i> table</span></td>
       <td class="summary">
         Controls if the columns/rows are expanded to use all the available space.
       </td>
@@ -469,31 +500,47 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
       </td>
     </tr>
     <tr class="summary_row">
-      <td class="shortname" ><a href="#horizontal_homogeneous">horizontal_homogeneous</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">
-        Controls if the columns all have the same width or if the width of each
- column depends on the content.
-      </td>
-      <td class="baseclass" nowrap>
-      </td>
-    </tr>
-    <tr class="summary_row">
-      <td class="shortname" ><a href="#vertical_homogeneous">vertical_homogeneous</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
-      <td class="summary">
-        Controls if the rows all have the same height or if the height of each row
- depends on the content.
-      </td>
-      <td class="baseclass" nowrap>
-      </td>
-    </tr>
-    <tr class="summary_row">
       <td class="shortname" ><a href="#homogeneous">homogeneous</a></td>
-      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean <i>or</i> table</span></td>
       <td class="summary">
         Controls if the columns/rows all have the same size or if the size depends
  on the content.
+      </td>
+      <td class="baseclass" nowrap>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#row_count">row_count</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td class="summary">
+        The number of rows.
+      </td>
+      <td class="baseclass" nowrap>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#column_count">column_count</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer</span></td>
+      <td class="summary">
+        The number of columns.
+      </td>
+      <td class="baseclass" nowrap>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#border_width">border_width</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>integer <i>or</i> table</span></td>
+      <td class="summary">
+        The border width.
+      </td>
+      <td class="baseclass" nowrap>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#border_color">border_color</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>color <i>or</i> table</span></td>
+      <td class="summary">
+        The border color for the table outer border.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -569,7 +616,112 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
       </td>
     </tr>
 </table>
-<h2><a href="#Object_methods">Object methods </a></h2>
+<h2><a href="#Deprecated_object_properties">Deprecated object properties</a></h2>
+<table class="function_list">
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#forced_num_rows">forced_num_rows</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
+      <td class="summary">
+        Force the number of rows of the layout.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#forced_num_cols">forced_num_cols</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number <i>or</i> nil</span></td>
+      <td class="summary">
+        Force the number of columns of the layout.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#min_cols_size">min_cols_size</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">
+        Set the minimum size for the columns.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#min_rows_size">min_rows_size</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">
+        Set the minimum size for the rows.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#horizontal_spacing">horizontal_spacing</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">
+        The spacing between columns.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#vertical_spacing">vertical_spacing</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>number</span></td>
+      <td class="summary">
+        The spacing between rows.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#horizontal_expand">horizontal_expand</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summary">
+        Controls if the columns are expanded to use all the available width.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#vertical_expand">vertical_expand</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summary">
+        Controls if the rows are expanded to use all the available height.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#horizontal_homogeneous">horizontal_homogeneous</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summary">
+        Controls if the columns all have the same width or if the width of each
+ column depends on the content.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="shortname" ><a href="#vertical_homogeneous">vertical_homogeneous</a></td>
+      <td class="summarytype" nowrap><span class='summary_type'>boolean</span></td>
+      <td class="summary">
+        Controls if the rows all have the same height or if the height of each row
+ depends on the content.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+</table>
+<h2><a href="#Deprecated_object_methods">Deprecated object methods</a></h2>
 <table class="function_list">
     <tr class="summary_row">
       <td class="name" >
@@ -580,8 +732,24 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
         Get the number of rows and columns occupied by the widgets in the grid.
       </td>
       <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
       </td>
     </tr>
+    <tr class="summary_row">
+      <td class="name" >
+        <a href="#add_widget_at">:add_widget_at <span class='function_args'> <b>(</b>child, row, col, <span class="optional_param">row_span</span>, <span class="optional_param">col_span</span><b>)</b></span></a>
+        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;boolean</span></span>
+      </td>
+      <td class="summary">
+        Add a widget to the grid layout at specific coordinate.
+      </td>
+      <td class="baseclass" nowrap>
+        <span class="chips">Deprecated</span>
+      </td>
+    </tr>
+</table>
+<h2><a href="#Object_methods">Object methods </a></h2>
+<table class="function_list">
     <tr class="summary_row">
       <td class="name" >
         <a href="#get_next_empty">:get_next_empty <span class='function_args'> <b>(</b><span class="optional_param">hint_row</span>, <span class="optional_param">hint_column</span><b>)</b></span></a>
@@ -600,17 +768,6 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
       </td>
       <td class="summary">
         Add some widgets to the given grid layout.
-      </td>
-      <td class="baseclass" nowrap>
-      </td>
-    </tr>
-    <tr class="summary_row">
-      <td class="name" >
-        <a href="#add_widget_at">:add_widget_at <span class='function_args'> <b>(</b>child, row, col, <span class="optional_param">row_span</span>, <span class="optional_param">col_span</span><b>)</b></span></a>
-        <span class="summarytype"><span class='summary_type'> -&gt;&nbsp;boolean</span></span>
-      </td>
-      <td class="summary">
-        Add a widget to the grid layout at specific coordinate.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -732,6 +889,28 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
       </td>
       <td class="summary">
         Remove row at index.
+      </td>
+      <td class="baseclass" nowrap>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="name" >
+        <a href="#add_row_border">:add_row_border <span class='function_args'> <b>(</b>index, <span class="optional_param">height</span>, <span class="optional_param">args</span><b>)</b></span></a>
+        <span class="summarytype"></span>
+      </td>
+      <td class="summary">
+        Add row border.
+      </td>
+      <td class="baseclass" nowrap>
+      </td>
+    </tr>
+    <tr class="summary_row">
+      <td class="name" >
+        <a href="#add_column_border">:add_column_border <span class='function_args'> <b>(</b>index, <span class="optional_param">height</span>, <span class="optional_param">args</span><b>)</b></span></a>
+        <span class="summarytype"></span>
+      </td>
+      <td class="summary">
+        Add column border.
       </td>
       <td class="baseclass" nowrap>
       </td>
@@ -1124,29 +1303,13 @@ l:<span class="function-name">add_widget_at</span>(lorem, <span class="number">1
     </span>
     </dt>
     <dd>
-
-<p>Set the preferred orientation of the grid layout. </p>
+    Set the preferred orientation of the grid layout. </p>
 
 <p> When calling <a href="../widget_layouts/wibox.layout.grid.html#get_next_empty">get_next_empty</a>, empty cells are browsed differently.</p>
 
 
 
-<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_orientation.svg" alt="Usage example" type="image/svg+xml"></object></p>
-
-<p><strong>Usage example output</strong>:</p>
-
-<pre><code>l = wibox.layout {
-    forced_num_cols = 2,
-    forced_num_rows = 2,
-    homogeneous     = true,
-    layout = wibox.layout.grid
-}
-l:set_orientation("vertical") -- change to "horizontal"
-l:add(...)
-</code></pre>
-
-
-
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_orientation.svg" alt="Usage example" type="image/svg+xml"></object>
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1243,156 +1406,8 @@ l:add(...)
 
 </dd>
     <dt>
-    <a class="copy-link js-copy-link" name="forced_num_rows" href="#forced_num_rows">&#128279;</a>
-    <strong>forced_num_rows</strong>
-    <span class="proptype"><span class='summary_type'>number <i>or</i> nil</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Force the number of rows of the layout.
-
-    <h3>Constraints:</h3>
-    <span class="property_type">
-      <table class="see_also">
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Default value
-         </i>
-        </td>
-        <td>: <code>nil</code></td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Type description:
-         </i>
-        </td>
-       <tr/>
-       <tr class="see_also_sublist">
-        <td style="padding-left:15px;">
-         <i>
-          <span class='summary_type'>nil</span>
-         </i>
-        </td>
-        <td>: Automatically determine the number of rows.</td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Unit
-         </i>
-        </td>
-        <td>: rows</td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Negative allowed
-         </i>
-        </td>
-        <td>: false</td>
-       <tr/>
-     </table>
-    </span>
-
-
-
-    <h3>See also:</h3>
-    <table class="see_also">
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#forced_num_cols" title="In the wibox.layout.grid module.">forced_num_cols</a></td>
-         <td>Force the number of columns of the layout. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-    </table>
-
-
-
-    <span id=item2008 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="forced_num_cols" href="#forced_num_cols">&#128279;</a>
-    <strong>forced_num_cols</strong>
-    <span class="proptype"><span class='summary_type'>number <i>or</i> nil</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Force the number of columns of the layout.
-
-    <h3>Constraints:</h3>
-    <span class="property_type">
-      <table class="see_also">
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Default value
-         </i>
-        </td>
-        <td>: <code>nil</code></td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Type description:
-         </i>
-        </td>
-       <tr/>
-       <tr class="see_also_sublist">
-        <td style="padding-left:15px;">
-         <i>
-          <span class='summary_type'>nil</span>
-         </i>
-        </td>
-        <td>: Automatically determine the number of columns.'</td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Unit
-         </i>
-        </td>
-        <td>: columns</td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Negative allowed
-         </i>
-        </td>
-        <td>: false</td>
-       <tr/>
-     </table>
-    </span>
-
-
-
-    <h3>See also:</h3>
-    <table class="see_also">
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#forced_num_rows" title="In the wibox.layout.grid module.">forced_num_rows</a></td>
-         <td>Force the number of rows of the layout. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-    </table>
-
-
-
-    <span id=item2009 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="min_cols_size" href="#min_cols_size">&#128279;</a>
-    <strong>min_cols_size</strong>
+    <a class="copy-link js-copy-link" name="minimum_column_width" href="#minimum_column_width">&#128279;</a>
+    <strong>minimum_column_width</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
@@ -1447,7 +1462,7 @@ l:add(...)
     <h3>See also:</h3>
     <table class="see_also">
      <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#min_rows_size" title="In the wibox.layout.grid module.">min_rows_size</a></td>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#minimum_row_height" title="In the wibox.layout.grid module.">minimum_row_height</a></td>
          <td>Set the minimum size for the rows. </td>
          <td>
              <span class="chips">object properties</span>
@@ -1457,13 +1472,13 @@ l:add(...)
 
 
 
-    <span id=item2010 class="hide_extra">
+    <span id=item2008 class="hide_extra">
     </span>
 
 </dd>
     <dt>
-    <a class="copy-link js-copy-link" name="min_rows_size" href="#min_rows_size">&#128279;</a>
-    <strong>min_rows_size</strong>
+    <a class="copy-link js-copy-link" name="minimum_row_height" href="#minimum_row_height">&#128279;</a>
+    <strong>minimum_row_height</strong>
     <span class="proptype"><span class='summary_type'>number</span></span>
     <span class="baseclass" >
     </span>
@@ -1517,165 +1532,62 @@ l:add(...)
          <td><a href="../widget_layouts/wibox.layout.grid.html#min_cols_size" title="In the wibox.layout.grid module.">min_cols_size</a></td>
          <td>Set the minimum size for the columns. </td>
          <td>
-             <span class="chips">object properties</span>
+             <span class="chips">deprecated object properties</span>
          </td>
      <tr>
     </table>
 
 
 
-    <span id=item2011 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="horizontal_spacing" href="#horizontal_spacing">&#128279;</a>
-    <strong>horizontal_spacing</strong>
-    <span class="proptype"><span class='summary_type'>number</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The spacing between columns.
-
-    <h3>Constraints:</h3>
-    <span class="property_type">
-      <table class="see_also">
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Default value
-         </i>
-        </td>
-        <td>: <code>0</code></td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Unit
-         </i>
-        </td>
-        <td>: pixel</td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Negative allowed
-         </i>
-        </td>
-        <td>: false</td>
-       <tr/>
-     </table>
-    </span>
-
-
-
-    <h3>See also:</h3>
-    <table class="see_also">
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#spacing" title="In the wibox.layout.grid module.">spacing</a></td>
-         <td>The spacing between rows and columns. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#vertical_spacing" title="In the wibox.layout.grid module.">vertical_spacing</a></td>
-         <td>The spacing between rows. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-    </table>
-
-
-
-    <span id=item2012 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="vertical_spacing" href="#vertical_spacing">&#128279;</a>
-    <strong>vertical_spacing</strong>
-    <span class="proptype"><span class='summary_type'>number</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    The spacing between rows.
-
-    <h3>Constraints:</h3>
-    <span class="property_type">
-      <table class="see_also">
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Default value
-         </i>
-        </td>
-        <td>: <code>0</code></td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Unit
-         </i>
-        </td>
-        <td>: pixel</td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Negative allowed
-         </i>
-        </td>
-        <td>: false</td>
-       <tr/>
-     </table>
-    </span>
-
-
-
-    <h3>See also:</h3>
-    <table class="see_also">
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#spacing" title="In the wibox.layout.grid module.">spacing</a></td>
-         <td>The spacing between rows and columns. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#horizontal_spacing" title="In the wibox.layout.grid module.">horizontal_spacing</a></td>
-         <td>The spacing between columns. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-    </table>
-
-
-
-    <span id=item2013 class="hide_extra">
+    <span id=item2009 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a class="copy-link js-copy-link" name="spacing" href="#spacing">&#128279;</a>
     <strong>spacing</strong>
-    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="proptype"><span class='summary_type'>number <i>or</i> table</span></span>
     <span class="baseclass" >
     </span>
     </dt>
     <dd>
-    The spacing between rows and columns. </p>
+
+<p>The spacing between rows and columns. </p>
 
 <p> Get the value <a href="../widget_layouts/wibox.layout.grid.html#horizontal_spacing">horizontal_spacing</a> or <a href="../widget_layouts/wibox.layout.grid.html#vertical_spacing">vertical_spacing</a> defined by the
  preferred <a href="../widget_layouts/wibox.layout.grid.html#orientation">orientation</a>.</p>
 
 
 
-<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_spacing.svg" alt="Usage example" type="image/svg+xml"></object>
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_spacing.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<p> When a border is present, the spacing is applied on both side of the border,
+ thus is twice as large:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_border_width3.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for _, width in ipairs { 0, 1, 2, 4, 10 } do
+    local w = wibox.widget {
+        generic_widget( "first"  ),
+        generic_widget( "second" ),
+        generic_widget( "third"  ),
+        generic_widget( "fourth" ),
+        column_count = 2,
+        row_count    = 2,
+        homogeneous  = true,
+        spacing      = width,
+        border_width = 1,
+        border_color = "red",
+        layout       = wibox.layout.grid,
+    }
+end
+</code></pre>
+
+
 
     <h3>Constraints:</h3>
     <span class="property_type">
@@ -1687,6 +1599,55 @@ l:add(...)
          </i>
         </td>
         <td>: <code>0</code></td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Type description:
+         </i>
+        </td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>number</span>
+         </i>
+        </td>
+        <td>: The same value for the <code>&quot;vertical&quot;</code> and <code>&quot;horizontal&quot;</code> aspects.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>table</span>:
+         </i>
+        </td>
+        <td>: Different values for the <code>&quot;vertical&quot;</code> and <code>&quot;horizontal&quot;</code> aspects.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:30px;">
+         <i>
+          vertical
+         </i>
+          <span class="inline_types"> (number)</span>
+        </td>
+        <td>:  The vertical spacing.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:30px;">
+         <i>
+          horizontal
+         </i>
+          <span class="inline_types"> (number)</span>
+        </td>
+        <td>:  The horizontal spacing.</td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Unit
+         </i>
+        </td>
+        <td>: pixel</td>
        <tr/>
        <tr class="">
         <td style="padding-left:0px;">
@@ -1707,144 +1668,28 @@ l:add(...)
          <td><a href="../widget_layouts/wibox.layout.grid.html#vertical_spacing" title="In the wibox.layout.grid module.">vertical_spacing</a></td>
          <td>The spacing between rows. </td>
          <td>
-             <span class="chips">object properties</span>
+             <span class="chips">deprecated object properties</span>
          </td>
      <tr>
      <tr>
          <td><a href="../widget_layouts/wibox.layout.grid.html#horizontal_spacing" title="In the wibox.layout.grid module.">horizontal_spacing</a></td>
          <td>The spacing between columns. </td>
          <td>
-             <span class="chips">object properties</span>
+             <span class="chips">deprecated object properties</span>
          </td>
      <tr>
     </table>
 
 
 
-    <span id=item2014 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="horizontal_expand" href="#horizontal_expand">&#128279;</a>
-    <strong>horizontal_expand</strong>
-    <span class="proptype"><span class='summary_type'>boolean</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Controls if the columns are expanded to use all the available width.
-
-    <h3>Constraints:</h3>
-    <span class="property_type">
-      <table class="see_also">
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Default value
-         </i>
-        </td>
-        <td>: <code>false</code></td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Valid values
-         </i>
-        </td>
-        <td>:  Expand the grid into the available space</td>
-       <tr/>
-     </table>
-    </span>
-
-
-
-    <h3>See also:</h3>
-    <table class="see_also">
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#expand" title="In the wibox.layout.grid module.">expand</a></td>
-         <td>Controls if the columns/rows are expanded to use all the available space. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#vertical_expand" title="In the wibox.layout.grid module.">vertical_expand</a></td>
-         <td>Controls if the rows are expanded to use all the available height. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-    </table>
-
-
-
-    <span id=item2015 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="vertical_expand" href="#vertical_expand">&#128279;</a>
-    <strong>vertical_expand</strong>
-    <span class="proptype"><span class='summary_type'>boolean</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Controls if the rows are expanded to use all the available height.
-
-    <h3>Constraints:</h3>
-    <span class="property_type">
-      <table class="see_also">
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Default value
-         </i>
-        </td>
-        <td>: <code>false</code></td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Valid values
-         </i>
-        </td>
-        <td>:  Expand the grid into the available space</td>
-       <tr/>
-     </table>
-    </span>
-
-
-
-    <h3>See also:</h3>
-    <table class="see_also">
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#expand" title="In the wibox.layout.grid module.">expand</a></td>
-         <td>Controls if the columns/rows are expanded to use all the available space. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#horizontal_expand" title="In the wibox.layout.grid module.">horizontal_expand</a></td>
-         <td>Controls if the columns are expanded to use all the available width. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-    </table>
-
-
-
-    <span id=item2016 class="hide_extra">
+    <span id=item2010 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a class="copy-link js-copy-link" name="expand" href="#expand">&#128279;</a>
     <strong>expand</strong>
-    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="proptype"><span class='summary_type'>boolean <i>or</i> table</span></span>
     <span class="baseclass" >
     </span>
     </dt>
@@ -1872,6 +1717,47 @@ l:add(...)
        <tr class="">
         <td style="padding-left:0px;">
          <i>
+          Type description:
+         </i>
+        </td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>number</span>
+         </i>
+        </td>
+        <td>: The same value for the <code>&quot;vertical&quot;</code> and <code>&quot;horizontal&quot;</code> aspects.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>table</span>:
+         </i>
+        </td>
+        <td>: Different values for the <code>&quot;vertical&quot;</code> and <code>&quot;horizontal&quot;</code> aspects.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:30px;">
+         <i>
+          vertical
+         </i>
+          <span class="inline_types"> (boolean)</span>
+        </td>
+        <td>:  The vertical expand.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:30px;">
+         <i>
+          horizontal
+         </i>
+          <span class="inline_types"> (boolean)</span>
+        </td>
+        <td>:  The horizontal expand.</td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
           Valid values
          </i>
         </td>
@@ -1888,154 +1774,28 @@ l:add(...)
          <td><a href="../widget_layouts/wibox.layout.grid.html#horizontal_expand" title="In the wibox.layout.grid module.">horizontal_expand</a></td>
          <td>Controls if the columns are expanded to use all the available width. </td>
          <td>
-             <span class="chips">object properties</span>
+             <span class="chips">deprecated object properties</span>
          </td>
      <tr>
      <tr>
          <td><a href="../widget_layouts/wibox.layout.grid.html#vertical_expand" title="In the wibox.layout.grid module.">vertical_expand</a></td>
          <td>Controls if the rows are expanded to use all the available height. </td>
          <td>
-             <span class="chips">object properties</span>
+             <span class="chips">deprecated object properties</span>
          </td>
      <tr>
     </table>
 
 
 
-    <span id=item2017 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="horizontal_homogeneous" href="#horizontal_homogeneous">&#128279;</a>
-    <strong>horizontal_homogeneous</strong>
-    <span class="proptype"><span class='summary_type'>boolean</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Controls if the columns all have the same width or if the width of each
- column depends on the content. </p>
-
-<p> see <a href="../widget_layouts/wibox.layout.grid.html#homogeneous">homogeneous</a>
-
-    <h3>Constraints:</h3>
-    <span class="property_type">
-      <table class="see_also">
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Default value
-         </i>
-        </td>
-        <td>: <code>true</code></td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Valid values
-         </i>
-        </td>
-        <td>:  All the columns have the same width.</td>
-       <tr/>
-     </table>
-    </span>
-
-
-
-    <h3>See also:</h3>
-    <table class="see_also">
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#vertical_homogeneous" title="In the wibox.layout.grid module.">vertical_homogeneous</a></td>
-         <td>Controls if the rows all have the same height or if the height of each row
- depends on the content. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#homogeneous" title="In the wibox.layout.grid module.">homogeneous</a></td>
-         <td>Controls if the columns/rows all have the same size or if the size depends
- on the content. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-    </table>
-
-
-
-    <span id=item2018 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="vertical_homogeneous" href="#vertical_homogeneous">&#128279;</a>
-    <strong>vertical_homogeneous</strong>
-    <span class="proptype"><span class='summary_type'>boolean</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Controls if the rows all have the same height or if the height of each row
- depends on the content. </p>
-
-<p> see <a href="../widget_layouts/wibox.layout.grid.html#homogeneous">homogeneous</a>
-
-    <h3>Constraints:</h3>
-    <span class="property_type">
-      <table class="see_also">
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Default value
-         </i>
-        </td>
-        <td>: <code>true</code></td>
-       <tr/>
-       <tr class="">
-        <td style="padding-left:0px;">
-         <i>
-          Valid values
-         </i>
-        </td>
-        <td>:  All the rows have the same height.</td>
-       <tr/>
-     </table>
-    </span>
-
-
-
-    <h3>See also:</h3>
-    <table class="see_also">
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#homogeneous" title="In the wibox.layout.grid module.">homogeneous</a></td>
-         <td>Controls if the columns/rows all have the same size or if the size depends
- on the content. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-     <tr>
-         <td><a href="../widget_layouts/wibox.layout.grid.html#horizontal_homogeneous" title="In the wibox.layout.grid module.">horizontal_homogeneous</a></td>
-         <td>Controls if the columns all have the same width or if the width of each
- column depends on the content. </td>
-         <td>
-             <span class="chips">object properties</span>
-         </td>
-     <tr>
-    </table>
-
-
-
-    <span id=item2019 class="hide_extra">
+    <span id=item2011 class="hide_extra">
     </span>
 
 </dd>
     <dt>
     <a class="copy-link js-copy-link" name="homogeneous" href="#homogeneous">&#128279;</a>
     <strong>homogeneous</strong>
-    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="proptype"><span class='summary_type'>boolean <i>or</i> table</span></span>
     <span class="baseclass" >
     </span>
     </dt>
@@ -2064,6 +1824,47 @@ l:add(...)
        <tr class="">
         <td style="padding-left:0px;">
          <i>
+          Type description:
+         </i>
+        </td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>number</span>
+         </i>
+        </td>
+        <td>: The same value for the <code>&quot;vertical&quot;</code> and <code>&quot;horizontal&quot;</code> aspects.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>table</span>:
+         </i>
+        </td>
+        <td>: Different values for the <code>&quot;vertical&quot;</code> and <code>&quot;horizontal&quot;</code> aspects.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:30px;">
+         <i>
+          vertical
+         </i>
+          <span class="inline_types"> (boolean)</span>
+        </td>
+        <td>:  The vertical homogeneous value.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:30px;">
+         <i>
+          horizontal
+         </i>
+          <span class="inline_types"> (boolean)</span>
+        </td>
+        <td>:  The horizontal homogeneous value.</td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
           Valid values
          </i>
         </td>
@@ -2081,13 +1882,420 @@ l:add(...)
          <td>Controls if the rows all have the same height or if the height of each row
  depends on the content. </td>
          <td>
-             <span class="chips">object properties</span>
+             <span class="chips">deprecated object properties</span>
          </td>
      <tr>
      <tr>
          <td><a href="../widget_layouts/wibox.layout.grid.html#horizontal_homogeneous" title="In the wibox.layout.grid module.">horizontal_homogeneous</a></td>
          <td>Controls if the columns all have the same width or if the width of each
  column depends on the content. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2012 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="row_count" href="#row_count">&#128279;</a>
+    <strong>row_count</strong>
+    <span class="proptype"><span class='summary_type'>integer</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The number of rows. </p>
+
+<p> Unless manually set, the value will be automatically determined base on the
+ <a href="../widget_layouts/wibox.layout.grid.html#orientation">orientation</a>.
+
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: autogenerated</td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Negative allowed
+         </i>
+        </td>
+        <td>: false</td>
+       <tr/>
+     </table>
+    </span>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#forced_num_rows" title="In the wibox.layout.grid module.">forced_num_rows</a></td>
+         <td>Force the number of rows of the layout. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2013 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="column_count" href="#column_count">&#128279;</a>
+    <strong>column_count</strong>
+    <span class="proptype"><span class='summary_type'>integer</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The number of columns. </p>
+
+<p> Unless manually set, the value will be automatically determined base on the
+ <a href="../widget_layouts/wibox.layout.grid.html#orientation">orientation</a>.
+
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: autogenerated</td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Negative allowed
+         </i>
+        </td>
+        <td>: false</td>
+       <tr/>
+     </table>
+    </span>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#forced_num_cols" title="In the wibox.layout.grid module.">forced_num_cols</a></td>
+         <td>Force the number of columns of the layout. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2014 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="border_width" href="#border_width">&#128279;</a>
+    <strong>border_width</strong>
+    <span class="proptype"><span class='summary_type'>integer <i>or</i> table</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+
+<p>The border width. </p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_border_width1.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for _, expand in ipairs { true, false } do
+   for _, homogeneous in ipairs { true, false } do
+       for _, width in ipairs { 0, 1, 2, 4, 10 } do
+           local w = wibox.widget {
+               generic_widget( "first"  ),
+               generic_widget( "second" ),
+               generic_widget( "third"  ),
+               generic_widget( "fourth" ),
+               generic_widget( "fifth" ),
+               generic_widget( "sixth" ),
+               column_count = 2,
+               row_count    = 2,
+               homogeneous  = homogeneous,
+               spacing      = 10,
+               border_width = {
+                   inner = width,
+                   outer = 1.5 * width,
+               },
+               border_color    = "red",
+               expand          = expand,
+               forced_height   = expand and 200 or nil,
+               layout          = wibox.layout.grid,
+           }
+       end
+   end
+end
+</code></pre>
+
+<p> If <a href="../widget_layouts/wibox.layout.grid.html#add_row_border">add_row_border</a> or <a href="../widget_layouts/wibox.layout.grid.html#add_column_border">add_column_border</a> is used, it takes precedence and
+ is drawn on top of the <a href="../widget_layouts/wibox.layout.grid.html#border_color">border_color</a> mask. Using both <a href="../widget_layouts/wibox.layout.grid.html#border_width">border_width</a> and
+ <a href="../widget_layouts/wibox.layout.grid.html#add_row_border">add_row_border</a> at the same time makes little sense:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_border_width2.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>local w = wibox.widget {
+    homogeneous          = true,
+    spacing              = 0,
+    border_width         = 4,
+    border_color         = beautiful.border_color,
+    minimum_column_width = 10,
+    minimum_row_height   = 10,
+    layout               = wibox.layout.grid,
+}
+
+w:add_row_border(1, 40, { color = "red"   })
+w:add_row_border(2, 5 , { color = "green" , dashes = {5, 3, 10, 3}})
+w:add_row_border(3, 10, { color = "blue"  , dashes = {5, 3, 10, 3}, dash_offset = 5})
+w:add_row_border(4, 30, { color = "orange", dashes = {5, 40}, caps = "round"})
+w:add_row_border(5, 10, { color = "yellow"})
+
+w:add_column_border(1, 5, { color = "purple"})
+w:add_column_border(2, 10, { color = "cyan"})
+w:add_column_border(3, 5, { color = "magenta"})
+w:add_column_border(4, 5, { color = "black"})
+w:add_column_border(5, 10, { color = "grey"})
+</code></pre>
+
+<p> It is also possible to set the inner and outer borders separately:</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_border_width4.svg" alt="Usage example" type="image/svg+xml"></object></p>
+
+
+<pre><code>for _, width in ipairs { 0, 1, 2, 4, 10 } do
+    local w = wibox.widget {
+        generic_widget( "first"  ),
+        generic_widget( "second" ),
+        generic_widget( "third"  ),
+        generic_widget( "fourth" ),
+        column_count = 2,
+        row_count    = 2,
+        homogeneous  = true,
+        spacing      = 10,
+        border_width = {
+            inner = width,
+            outer = 10 - width,
+        },
+        border_color = {
+            inner = gears.color {
+                 type  = "linear",
+                 from  = { 0  , 0 },
+                 to    = { 100, 100 },
+                 stops = {
+                     { 0, "#ff0000" },
+                     { 1, "#ffff00" },
+                 }
+             },
+            outer = gears.color {
+                 type  = "linear",
+                 from  = { 0  , 0 },
+                 to    = { 100, 100 },
+                 stops = {
+                     { 0, "#0000ff" },
+                     { 1, "#ff0000" },
+                 }
+             },
+        },
+        layout      = wibox.layout.grid,
+    }
+</code></pre>
+
+
+
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: <code>0</code></td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Type description:
+         </i>
+        </td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>integer</span>
+         </i>
+        </td>
+        <td>: Use the same value for inner and outer borders.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>table</span>:
+         </i>
+        </td>
+        <td>: Specify a different value for the inner and outer borders.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:30px;">
+         <i>
+          inner
+         </i>
+          <span class="inline_types"> (integer)</span>
+        </td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:30px;">
+         <i>
+          outer
+         </i>
+          <span class="inline_types"> (integer)</span>
+        </td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Negative allowed
+         </i>
+        </td>
+        <td>: false</td>
+       <tr/>
+     </table>
+    </span>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#border_color" title="In the wibox.layout.grid module.">border_color</a></td>
+         <td>The border color for the table outer border. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#add_column_border" title="In the wibox.layout.grid module.">add_column_border</a></td>
+         <td>Add column border. </td>
+         <td>
+             <span class="chips">object methods </span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#add_row_border" title="In the wibox.layout.grid module.">add_row_border</a></td>
+         <td>Add row border. </td>
+         <td>
+             <span class="chips">object methods </span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2015 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="border_color" href="#border_color">&#128279;</a>
+    <strong>border_color</strong>
+    <span class="proptype"><span class='summary_type'>color <i>or</i> table</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The border color for the table outer border.
+
+    <h3>Constraints:</h3>
+    <span class="property_type">
+      <table class="see_also">
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Default value
+         </i>
+        </td>
+        <td>: <code>0</code></td>
+       <tr/>
+       <tr class="">
+        <td style="padding-left:0px;">
+         <i>
+          Type description:
+         </i>
+        </td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>color</span>
+         </i>
+        </td>
+        <td>: Use the same value for inner and outer borders.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:15px;">
+         <i>
+          <span class='summary_type'>table</span>:
+         </i>
+        </td>
+        <td>: Specify a different value for the inner and outer borders.</td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:30px;">
+         <i>
+          inner
+         </i>
+          <span class="inline_types"> (color)</span>
+        </td>
+       <tr/>
+       <tr class="see_also_sublist">
+        <td style="padding-left:30px;">
+         <i>
+          outer
+         </i>
+          <span class="inline_types"> (color)</span>
+        </td>
+       <tr/>
+     </table>
+    </span>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#border_width" title="In the wibox.layout.grid module.">border_width</a></td>
+         <td>The border width. </td>
          <td>
              <span class="chips">object properties</span>
          </td>
@@ -2096,7 +2304,7 @@ l:add(...)
 
 
 
-    <span id=item2020 class="hide_extra">
+    <span id=item2016 class="hide_extra">
     </span>
 
 </dd>
@@ -2147,7 +2355,7 @@ l:add(...)
 
 
 
-    <span id=item2109 class="hide_extra">
+    <span id=item2117 class="hide_extra">
     </span>
 
 </dd>
@@ -2202,7 +2410,7 @@ l:add(...)
 
 
 
-    <span id=item2110 class="hide_extra">
+    <span id=item2118 class="hide_extra">
     </span>
 
 </dd>
@@ -2284,7 +2492,7 @@ l:add(...)
 
 
 
-    <span id=item2111 class="hide_extra">
+    <span id=item2119 class="hide_extra">
     </span>
 
 </dd>
@@ -2366,7 +2574,7 @@ l:add(...)
 
 
 
-    <span id=item2112 class="hide_extra">
+    <span id=item2120 class="hide_extra">
     </span>
 
 </dd>
@@ -2433,7 +2641,7 @@ l:add(...)
 
 
 
-    <span id=item2113 class="hide_extra">
+    <span id=item2121 class="hide_extra">
     </span>
 
 </dd>
@@ -2484,7 +2692,7 @@ l:add(...)
 
 
 
-    <span id=item2114 class="hide_extra">
+    <span id=item2122 class="hide_extra">
     </span>
 
 </dd>
@@ -2538,12 +2746,504 @@ l:add(...)
 
 
 
-    <span id=item2115 class="hide_extra">
+    <span id=item2123 class="hide_extra">
     </span>
 
 </dd>
 </dl>
-    <h2 class="section-header "><a name="Object_methods"></a>Object methods </h2>
+    <h2 class="section-header "><a name="Deprecated_object_properties"></a>Deprecated object properties</h2>
+
+    <dl class="function">
+    <dt>
+    <a class="copy-link js-copy-link" name="forced_num_rows" href="#forced_num_rows">&#128279;</a>
+    <strong>forced_num_rows</strong>
+    <span class="proptype"><span class='summary_type'>number <i>or</i> nil</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Force the number of rows of the layout. </p>
+
+<p> Deprecated, use <a href="../widget_layouts/wibox.layout.grid.html#row_count">row_count</a>.
+
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#forced_num_cols" title="In the wibox.layout.grid module.">forced_num_cols</a></td>
+         <td>Force the number of columns of the layout. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#row_count" title="In the wibox.layout.grid module.">row_count</a></td>
+         <td>The number of rows. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2017 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="forced_num_cols" href="#forced_num_cols">&#128279;</a>
+    <strong>forced_num_cols</strong>
+    <span class="proptype"><span class='summary_type'>number <i>or</i> nil</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Force the number of columns of the layout. </p>
+
+<p> Deprecated, use <a href="../widget_layouts/wibox.layout.grid.html#column_count">column_count</a>.
+
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#forced_num_rows" title="In the wibox.layout.grid module.">forced_num_rows</a></td>
+         <td>Force the number of rows of the layout. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#column_count" title="In the wibox.layout.grid module.">column_count</a></td>
+         <td>The number of columns. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2018 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="min_cols_size" href="#min_cols_size">&#128279;</a>
+    <strong>min_cols_size</strong>
+    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Set the minimum size for the columns. </p>
+
+<p> Deprecated, use <a href="../widget_layouts/wibox.layout.grid.html#minimum_column_width">minimum_column_width</a>.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_min_size.svg" alt="Usage example" type="image/svg+xml"></object>
+
+    <h3>Type constraints:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">min_cols_size</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">number</span></span></td>
+           <td class="see_also_description"> Minimum size of the columns.</td>
+           <td><span class="default_value"><code>0</code></span></td>
+         </tr>
+        </table>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#minimum_row_height" title="In the wibox.layout.grid module.">minimum_row_height</a></td>
+         <td>Set the minimum size for the rows. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2019 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="min_rows_size" href="#min_rows_size">&#128279;</a>
+    <strong>min_rows_size</strong>
+    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Set the minimum size for the rows. </p>
+
+<p> Deprecated, use <a href="../widget_layouts/wibox.layout.grid.html#minimum_row_height">minimum_row_height</a>.
+
+    <h3>Type constraints:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">min_rows_size</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">number</span></span></td>
+           <td class="see_also_description"> Minimum size of the rows.</td>
+           <td><span class="default_value"><code>0</code></span></td>
+         </tr>
+        </table>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#min_cols_size" title="In the wibox.layout.grid module.">min_cols_size</a></td>
+         <td>Set the minimum size for the columns. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2020 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="horizontal_spacing" href="#horizontal_spacing">&#128279;</a>
+    <strong>horizontal_spacing</strong>
+    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The spacing between columns. </p>
+
+<p> Deprecated, use <a href="../widget_layouts/wibox.layout.grid.html#spacing">spacing</a>.
+
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#spacing" title="In the wibox.layout.grid module.">spacing</a></td>
+         <td>The spacing between rows and columns. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#vertical_spacing" title="In the wibox.layout.grid module.">vertical_spacing</a></td>
+         <td>The spacing between rows. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2021 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="vertical_spacing" href="#vertical_spacing">&#128279;</a>
+    <strong>vertical_spacing</strong>
+    <span class="proptype"><span class='summary_type'>number</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    The spacing between rows. </p>
+
+<p> Deprecated, use <a href="../widget_layouts/wibox.layout.grid.html#spacing">spacing</a>.
+
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#spacing" title="In the wibox.layout.grid module.">spacing</a></td>
+         <td>The spacing between rows and columns. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#horizontal_spacing" title="In the wibox.layout.grid module.">horizontal_spacing</a></td>
+         <td>The spacing between columns. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2022 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="horizontal_expand" href="#horizontal_expand">&#128279;</a>
+    <strong>horizontal_expand</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Controls if the columns are expanded to use all the available width. </p>
+
+<p> Deprecated, use <a href="../widget_layouts/wibox.layout.grid.html#expand">expand</a>.
+
+    <h3>Type constraints:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">horizontal_expand</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">boolean</span></span></td>
+           <td class="see_also_description"> Expand the grid into the available space</td>
+           <td><span class="default_value"><code>false</code></span></td>
+         </tr>
+        </table>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#expand" title="In the wibox.layout.grid module.">expand</a></td>
+         <td>Controls if the columns/rows are expanded to use all the available space. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#vertical_expand" title="In the wibox.layout.grid module.">vertical_expand</a></td>
+         <td>Controls if the rows are expanded to use all the available height. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2023 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="vertical_expand" href="#vertical_expand">&#128279;</a>
+    <strong>vertical_expand</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Controls if the rows are expanded to use all the available height. </p>
+
+<p> Deprecated, use <a href="../widget_layouts/wibox.layout.grid.html#expand">expand</a>.
+
+    <h3>Type constraints:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">vertical_expand</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">boolean</span></span></td>
+           <td class="see_also_description"> Expand the grid into the available space</td>
+           <td><span class="default_value"><code>false</code></span></td>
+         </tr>
+        </table>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#expand" title="In the wibox.layout.grid module.">expand</a></td>
+         <td>Controls if the columns/rows are expanded to use all the available space. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#horizontal_expand" title="In the wibox.layout.grid module.">horizontal_expand</a></td>
+         <td>Controls if the columns are expanded to use all the available width. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2024 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="horizontal_homogeneous" href="#horizontal_homogeneous">&#128279;</a>
+    <strong>horizontal_homogeneous</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Controls if the columns all have the same width or if the width of each
+ column depends on the content. </p>
+
+<p> Deprecated, use <a href="../widget_layouts/wibox.layout.grid.html#homogeneous">homogeneous</a>
+
+    <h3>Type constraints:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">horizontal_homogeneous</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">boolean</span></span></td>
+           <td class="see_also_description"> All the columns have the same width.</td>
+           <td><span class="default_value"><code>true</code></span></td>
+         </tr>
+        </table>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#vertical_homogeneous" title="In the wibox.layout.grid module.">vertical_homogeneous</a></td>
+         <td>Controls if the rows all have the same height or if the height of each row
+ depends on the content. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#homogeneous" title="In the wibox.layout.grid module.">homogeneous</a></td>
+         <td>Controls if the columns/rows all have the same size or if the size depends
+ on the content. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2025 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="vertical_homogeneous" href="#vertical_homogeneous">&#128279;</a>
+    <strong>vertical_homogeneous</strong>
+    <span class="proptype"><span class='summary_type'>boolean</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Controls if the rows all have the same height or if the height of each row
+ depends on the content. </p>
+
+<p> Deprecated, use <a href="../widget_layouts/wibox.layout.grid.html#homogeneous">homogeneous</a>
+
+    <h3>Type constraints:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">vertical_homogeneous</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">boolean</span></span></td>
+           <td class="see_also_description"> All the rows have the same height.</td>
+           <td><span class="default_value"><code>true</code></span></td>
+         </tr>
+        </table>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#homogeneous" title="In the wibox.layout.grid module.">homogeneous</a></td>
+         <td>Controls if the columns/rows all have the same size or if the size depends
+ on the content. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#horizontal_homogeneous" title="In the wibox.layout.grid module.">horizontal_homogeneous</a></td>
+         <td>Controls if the columns all have the same width or if the width of each
+ column depends on the content. </td>
+         <td>
+             <span class="chips">deprecated object properties</span>
+         </td>
+     <tr>
+    </table>
+
+
+
+    <span id=item2026 class="hide_extra">
+    </span>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Deprecated_object_methods"></a>Deprecated object methods</h2>
 
     <dl class="function">
     <dt>
@@ -2565,97 +3265,27 @@ l:add(...)
     </ol>
 
 
-
-
-
-    <span id=item2021 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="get_next_empty" href="#get_next_empty">&#128279;</a>
-    <strong>:get_next_empty <span class='function_args'> <b>(</b><span class="optional_param">hint_row</span>, <span class="optional_param">hint_column</span><b>)</b></span></strong>
-    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Find the next available cell to insert a widget.
- The grid is browsed according to the <a href="../widget_layouts/wibox.layout.grid.html#orientation">orientation</a>.
-
-    <h3>Parameters:</h3>
+    <h3>See also:</h3>
     <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-            <th>Default value</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">hint_row</span></td>
-           <td><span class="chips">Optional</span></td>
-           <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description"> The row coordinate of the last occupied cell.</td>
-           <td><span class="default_value"><code>1</code></span></td>
-         </tr>
-         <tr>
-           <td><span class="parameter">hint_column</span></td>
-           <td><span class="chips">Optional</span></td>
-           <td><span class="types"><span class="type">number</span></span></td>
-           <td class="see_also_description"> The column coordinate of the last occupied cell.</td>
-           <td><span class="default_value"><code>1</code></span></td>
-         </tr>
-        </table>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        number,number The row,column coordinate of the next empty cell
-    </ol>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#row_count" title="In the wibox.layout.grid module.">row_count</a></td>
+         <td>The number of rows. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#column_count" title="In the wibox.layout.grid module.">column_count</a></td>
+         <td>The number of columns. </td>
+         <td>
+             <span class="chips">object properties</span>
+         </td>
+     <tr>
+    </table>
 
 
 
-
-
-    <span id=item2022 class="hide_extra">
-    </span>
-
-</dd>
-    <dt>
-    <a class="copy-link js-copy-link" name="add" href="#add">&#128279;</a>
-    <strong>:add <span class='function_args'> <b>(</b>...<b>)</b></span></strong>
-    <span class="proptype"></span>
-    <span class="baseclass" >
-    </span>
-    </dt>
-    <dd>
-    Add some widgets to the given grid layout. </p>
-
-<p> The widgets are assumed to span one cell.
-
-    <h3>Parameters:</h3>
-    <table class="see_also">
-         <tr class="param_header">
-            <th>Name</th>
-            <th></th>
-            <th>Type(s)</th>
-            <th>Description</th>
-         </tr>
-         <tr>
-           <td><span class="parameter">...</span></td>
-           <td></td>
-           <td><span class="types"><a class="type" href="../popups_and_bars/wibox.html#widget">wibox.widget</a></span></td>
-           <td class="see_also_description"> Widgets that should be added (must at least be one)</td>
-         </tr>
-        </table>
-
-
-
-
-
-
-    <span id=item2023 class="hide_extra">
+    <span id=item2027 class="hide_extra">
     </span>
 
 </dd>
@@ -2669,6 +3299,8 @@ l:add(...)
     <dd>
 
 <p>Add a widget to the grid layout at specific coordinate. </p>
+
+<p> You can now use <code>:add {row_index = 1, col_index = 1}</code> instead of this method.</p>
 
 
 
@@ -2740,7 +3372,101 @@ l:add(...)
 
 
 
-    <span id=item2024 class="hide_extra">
+    <span id=item2028 class="hide_extra">
+    </span>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Object_methods"></a>Object methods </h2>
+
+    <dl class="function">
+    <dt>
+    <a class="copy-link js-copy-link" name="get_next_empty" href="#get_next_empty">&#128279;</a>
+    <strong>:get_next_empty <span class='function_args'> <b>(</b><span class="optional_param">hint_row</span>, <span class="optional_param">hint_column</span><b>)</b></span></strong>
+    <span class="proptype"><span class='summary_type'> -&gt;&nbsp;()</span></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Find the next available cell to insert a widget.
+ The grid is browsed according to the <a href="../widget_layouts/wibox.layout.grid.html#orientation">orientation</a>.
+
+    <h3>Parameters:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">hint_row</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">number</span></span></td>
+           <td class="see_also_description"> The row coordinate of the last occupied cell.</td>
+           <td><span class="default_value"><code>1</code></span></td>
+         </tr>
+         <tr>
+           <td><span class="parameter">hint_column</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">number</span></span></td>
+           <td class="see_also_description"> The column coordinate of the last occupied cell.</td>
+           <td><span class="default_value"><code>1</code></span></td>
+         </tr>
+        </table>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number,number The row,column coordinate of the next empty cell
+    </ol>
+
+
+
+
+
+    <span id=item2029 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="add" href="#add">&#128279;</a>
+    <strong>:add <span class='function_args'> <b>(</b>...<b>)</b></span></strong>
+    <span class="proptype"></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Add some widgets to the given grid layout. </p>
+
+<p> The widgets are assumed to span one cell.</p>
+
+<p> If the widgets have a <code>row_index</code>, <code>col_index</code>, <code>col_span</code>
+ or <code>row_span</code> property, it will be honored.
+
+    <h3>Parameters:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">...</span></td>
+           <td></td>
+           <td><span class="types"><a class="type" href="../popups_and_bars/wibox.html#widget">wibox.widget</a></span></td>
+           <td class="see_also_description"> Widgets that should be added (must at least be one)</td>
+         </tr>
+        </table>
+
+
+
+
+
+
+    <span id=item2030 class="hide_extra">
     </span>
 
 </dd>
@@ -2781,7 +3507,7 @@ l:add(...)
 
 
 
-    <span id=item2025 class="hide_extra">
+    <span id=item2031 class="hide_extra">
     </span>
 
 </dd>
@@ -2859,7 +3585,7 @@ l:add(...)
 
 
 
-    <span id=item2026 class="hide_extra">
+    <span id=item2032 class="hide_extra">
     </span>
 
 </dd>
@@ -2901,7 +3627,7 @@ l:add(...)
 
 
 
-    <span id=item2027 class="hide_extra">
+    <span id=item2033 class="hide_extra">
     </span>
 
 </dd>
@@ -2965,7 +3691,7 @@ l:add(...)
 
 
 
-    <span id=item2028 class="hide_extra">
+    <span id=item2034 class="hide_extra">
     </span>
 
 </dd>
@@ -3012,7 +3738,7 @@ l:add(...)
 
 
 
-    <span id=item2029 class="hide_extra">
+    <span id=item2035 class="hide_extra">
     </span>
 
 </dd>
@@ -3067,7 +3793,7 @@ l:add(...)
 
 
 
-    <span id=item2030 class="hide_extra">
+    <span id=item2036 class="hide_extra">
     </span>
 
 </dd>
@@ -3121,7 +3847,7 @@ l:add(...)
 
 
 
-    <span id=item2031 class="hide_extra">
+    <span id=item2037 class="hide_extra">
     </span>
 
 </dd>
@@ -3176,7 +3902,7 @@ l:add(...)
 
 
 
-    <span id=item2032 class="hide_extra">
+    <span id=item2038 class="hide_extra">
     </span>
 
 </dd>
@@ -3219,7 +3945,7 @@ l:add(...)
 
 
 
-    <span id=item2033 class="hide_extra">
+    <span id=item2039 class="hide_extra">
     </span>
 
 </dd>
@@ -3262,7 +3988,7 @@ l:add(...)
 
 
 
-    <span id=item2034 class="hide_extra">
+    <span id=item2040 class="hide_extra">
     </span>
 
 </dd>
@@ -3305,7 +4031,254 @@ l:add(...)
 
 
 
-    <span id=item2035 class="hide_extra">
+    <span id=item2041 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="add_row_border" href="#add_row_border">&#128279;</a>
+    <strong>:add_row_border <span class='function_args'> <b>(</b>index, <span class="optional_param">height</span>, <span class="optional_param">args</span><b>)</b></span></strong>
+    <span class="proptype"></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Add row border. </p>
+
+<p> This method allows to set the width/color or a specific row rather than use
+ the same values for all the rows.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_add_row_border1.svg" alt="Usage example" type="image/svg+xml"></object>
+
+    <h3>Parameters:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">index</span></td>
+           <td></td>
+           <td><span class="types"><span class="type">integer</span></span></td>
+           <td class="see_also_description"> The row index. <code>1</code> is the top border (outer) border.</td>
+           <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
+         </tr>
+         <tr>
+           <td><span class="parameter">height</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">integer</span> or <span class="type">nil</span></span></td>
+           <td class="see_also_description"> The border height. If <code>nil</code> is passed,
+  then the <code>border_width.outer</code> will be user for index <code>1</code> and
+ <code>row_count + 1</code>,  otherwise, <code>border_width.inner</code> will be used.</td>
+           <td><span class="default_value"><code>nil</code></span></td>
+         </tr>
+        <tr>
+           <td><span class="parameter">args</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">table</span></span></td>
+           <td class="see_also_description">
+
+ </td>
+          <td><span class="default_value"><code>{}</code></span></td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">color</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">color</span></span></td>
+           <td class="see_also_description"> The border color. If <code>nil</code> is passed,
+  then the <code>border_color.outer</code> will be user for index <code>1</code> and
+ <code>row_count + 1</code>,  otherwise, <code>border_color.inner</code> will be used.</td>
+           <td><span class="default_value"><code>nil</code></span></td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">dashes</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The dash pattern used for the line. By default,
+  it is a solid line.</td>
+           <td><span class="default_value"><code>{1}</code></span></td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">dash_offset</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">number</span></span></td>
+           <td class="see_also_description"> If the line has <code>dashes</code>, then this is the
+  initial offset. Note that line are draw left to right and top to bottom.</td>
+           <td><span class="default_value"><code>0</code></span></td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">caps</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> How the dashes ends are drawn. Either
+  <code>&quot;butt&quot;</code> (default), <code>&quot;round&quot;</code> or <code>&quot;square&quot;</code></td>
+           <td><span class="default_value"><code>"butt"</code></span></td>
+         </tr>
+        </table>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#add_column_border" title="In the wibox.layout.grid module.">add_column_border</a></td>
+         <td>Add column border. </td>
+         <td>
+             <span class="chips">object methods </span>
+         </td>
+     <tr>
+    </table>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
+    <span class="comment">-- [...] Some widgets here.
+</span>    homogeneous          = <span class="keyword">true</span>,
+    spacing              = <span class="number">0</span>,
+    border_width         = <span class="number">4</span>,
+    border_color         = beautiful.border_color,
+    minimum_column_width = <span class="number">10</span>,
+    minimum_row_height   = <span class="number">10</span>,
+    layout               = wibox.layout.grid,
+}
+
+w:<span class="function-name">add_row_border</span>(<span class="number">1</span>, <span class="number">40</span>, { color = <span class="string">"red"</span>   })
+w:<span class="function-name">add_row_border</span>(<span class="number">2</span>, <span class="number">5</span> , { color = <span class="string">"green"</span> , dashes = {<span class="number">5</span>, <span class="number">3</span>, <span class="number">10</span>, <span class="number">3</span>}})
+w:<span class="function-name">add_row_border</span>(<span class="number">3</span>, <span class="number">10</span>, { color = <span class="string">"blue"</span>  , dashes = {<span class="number">5</span>, <span class="number">3</span>, <span class="number">10</span>, <span class="number">3</span>}, dash_offset = <span class="number">5</span>})
+w:<span class="function-name">add_row_border</span>(<span class="number">4</span>, <span class="number">30</span>, { color = <span class="string">"orange"</span>, dashes = {<span class="number">5</span>, <span class="number">40</span>}, caps = <span class="string">"round"</span>})
+w:<span class="function-name">add_row_border</span>(<span class="number">5</span>, <span class="number">10</span>, { color = <span class="string">"yellow"</span>})</pre>
+    </ul>
+
+
+    <span id=item2042 class="hide_extra">
+    </span>
+
+</dd>
+    <dt>
+    <a class="copy-link js-copy-link" name="add_column_border" href="#add_column_border">&#128279;</a>
+    <strong>:add_column_border <span class='function_args'> <b>(</b>index, <span class="optional_param">height</span>, <span class="optional_param">args</span><b>)</b></span></strong>
+    <span class="proptype"></span>
+    <span class="baseclass" >
+    </span>
+    </dt>
+    <dd>
+    Add column border. </p>
+
+<p> This method allows to set the width/color or a specific column rather than use
+ the same values for all the columns.</p>
+
+
+
+<p><object class="img-object" data="../images/AUTOGEN_wibox_layout_grid_add_column_border1.svg" alt="Usage example" type="image/svg+xml"></object>
+
+    <h3>Parameters:</h3>
+    <table class="see_also">
+         <tr class="param_header">
+            <th>Name</th>
+            <th></th>
+            <th>Type(s)</th>
+            <th>Description</th>
+            <th>Default value</th>
+         </tr>
+         <tr>
+           <td><span class="parameter">index</span></td>
+           <td></td>
+           <td><span class="types"><span class="type">integer</span></span></td>
+           <td class="see_also_description"> The column index. <code>1</code> is the top border (outer) border.</td>
+           <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
+         </tr>
+         <tr>
+           <td><span class="parameter">height</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">integer</span> or <span class="type">nil</span></span></td>
+           <td class="see_also_description"> The border height. If <code>nil</code> is passed,
+  then the <code>border_width.outer</code> will be user for index <code>1</code> and
+ <code>column_count + 1</code>,  otherwise, <code>border_width.inner</code> will be used.</td>
+           <td><span class="default_value"><code>nil</code></span></td>
+         </tr>
+        <tr>
+           <td><span class="parameter">args</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">table</span></span></td>
+           <td class="see_also_description">
+
+ </td>
+          <td><span class="default_value"><code>{}</code></span></td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">color</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">color</span></span></td>
+           <td class="see_also_description"> The border color. If <code>nil</code> is passed,
+  then the <code>border_color.outer</code> will be user for index <code>1</code> and
+ <code>row_count + 1</code>,  otherwise, <code>border_color.inner</code> will be used.</td>
+           <td><span class="default_value"><code>nil</code></span></td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">dashes</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td class="see_also_description"> The dash pattern used for the line. By default,
+  it is a solid line.</td>
+           <td><span class="default_value"><code>{1}</code></span></td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">dash_offset</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><span class="type">number</span></span></td>
+           <td class="see_also_description"> If the line has <code>dashes</code>, then this is the
+  initial offset. Note that line are draw left to right and top to bottom.</td>
+           <td><span class="default_value"><code>0</code></span></td>
+         </tr>
+         <tr class="see_also_sublist">
+           <td><span class="parameter">caps</span></td>
+           <td><span class="chips">Optional</span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> How the dashes ends are drawn. Either
+  <code>&quot;butt&quot;</code> (default), <code>&quot;round&quot;</code> or <code>&quot;square&quot;</code></td>
+           <td><span class="default_value"><code>"butt"</code></span></td>
+         </tr>
+        </table>
+
+
+
+    <h3>See also:</h3>
+    <table class="see_also">
+     <tr>
+         <td><a href="../widget_layouts/wibox.layout.grid.html#add_column_border" title="In the wibox.layout.grid module.">add_column_border</a></td>
+         <td>Add column border. </td>
+         <td>
+             <span class="chips">object methods </span>
+         </td>
+     <tr>
+    </table>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> w = wibox.<span class="function-name">widget</span> {
+    homogeneous          = <span class="keyword">true</span>,
+    spacing              = <span class="number">0</span>,
+    border_width         = <span class="number">4</span>,
+    border_color         = beautiful.border_color,
+    minimum_column_width = <span class="number">10</span>,
+    minimum_row_height   = <span class="number">10</span>,
+    layout               = wibox.layout.grid,
+}
+
+w:<span class="function-name">add_column_border</span>(<span class="number">1</span>, <span class="number">5</span> , { color = <span class="string">"purple"</span> })
+w:<span class="function-name">add_column_border</span>(<span class="number">2</span>, <span class="number">10</span>, { color = <span class="string">"cyan"</span>   })
+w:<span class="function-name">add_column_border</span>(<span class="number">3</span>, <span class="number">5</span> , { color = <span class="string">"magenta"</span>})
+w:<span class="function-name">add_column_border</span>(<span class="number">4</span>, <span class="number">5</span> , { color = <span class="string">"black"</span>  })
+w:<span class="function-name">add_column_border</span>(<span class="number">5</span>, <span class="number">10</span>, { color = <span class="string">"grey"</span>   })</pre>
+    </ul>
+
+
+    <span id=item2043 class="hide_extra">
     </span>
 
 </dd>
@@ -3327,13 +4300,13 @@ l:add(...)
 
 
      <br />
-     <center id=button2036>
-     <a class="show_more_button" onclick="show_extra('2036')">
+     <center id=button2044>
+     <a class="show_more_button" onclick="show_extra('2044')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2036 class="hide_extra">
+    <span id=item2044 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../widget_layouts/wibox.layout.grid.html#reset">reset</a></span>  </li>
@@ -3387,13 +4360,13 @@ l:add(...)
 
 
      <br />
-     <center id=button2037>
-     <a class="show_more_button" onclick="show_extra('2037')">
+     <center id=button2045>
+     <a class="show_more_button" onclick="show_extra('2045')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2037 class="hide_extra">
+    <span id=item2045 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>widget::replaced</code></span>  </li>
@@ -3464,13 +4437,13 @@ l:add(...)
 
 
      <br />
-     <center id=button2038>
-     <a class="show_more_button" onclick="show_extra('2038')">
+     <center id=button2046>
+     <a class="show_more_button" onclick="show_extra('2046')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2038 class="hide_extra">
+    <span id=item2046 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>widget::replaced</code></span>  </li>
@@ -3530,13 +4503,13 @@ l:add(...)
 
 
      <br />
-     <center id=button2039>
-     <a class="show_more_button" onclick="show_extra('2039')">
+     <center id=button2047>
+     <a class="show_more_button" onclick="show_extra('2047')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2039 class="hide_extra">
+    <span id=item2047 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>widget::swapped</code></span>  </li>
@@ -3623,13 +4596,13 @@ l:add(...)
 
 
      <br />
-     <center id=button2040>
-     <a class="show_more_button" onclick="show_extra('2040')">
+     <center id=button2048>
+     <a class="show_more_button" onclick="show_extra('2048')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2040 class="hide_extra">
+    <span id=item2048 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><code>widget::swapped</code></span>  </li>
@@ -3662,13 +4635,13 @@ l:add(...)
 
 
      <br />
-     <center id=button2041>
-     <a class="show_more_button" onclick="show_extra('2041')">
+     <center id=button2049>
+     <a class="show_more_button" onclick="show_extra('2049')">
       Click to display more
      </a>
      </center>
 
-    <span id=item2041 class="hide_extra">
+    <span id=item2049 class="hide_extra">
      <h3>Emit signals:</h3>
      <ul>
           <li><span class="parameter"><a href="../widget_layouts/wibox.layout.grid.html#widget::reset">widget::reset</a></span>  </li>
@@ -3712,7 +4685,7 @@ l:add(...)
 
 
 
-    <span id=item2117 class="hide_extra">
+    <span id=item2125 class="hide_extra">
     </span>
 
 </dd>
@@ -3776,7 +4749,7 @@ l:add(...)
 
 
 
-    <span id=item2128 class="hide_extra">
+    <span id=item2136 class="hide_extra">
     </span>
 
 </dd>
@@ -3838,7 +4811,7 @@ l:add(...)
 
 
 
-    <span id=item2129 class="hide_extra">
+    <span id=item2137 class="hide_extra">
     </span>
 
 </dd>
@@ -4071,7 +5044,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2042 class="hide_extra">
+    <span id=item2050 class="hide_extra">
     </span>
 
 </dd>
@@ -4104,7 +5077,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2131 class="hide_extra">
+    <span id=item2139 class="hide_extra">
     </span>
 
 </dd>
@@ -4137,7 +5110,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2132 class="hide_extra">
+    <span id=item2140 class="hide_extra">
     </span>
 
 </dd>
@@ -4277,7 +5250,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2133 class="hide_extra">
+    <span id=item2141 class="hide_extra">
     </span>
 
 </dd>
@@ -4417,7 +5390,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2134 class="hide_extra">
+    <span id=item2142 class="hide_extra">
     </span>
 
 </dd>
@@ -4531,7 +5504,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2135 class="hide_extra">
+    <span id=item2143 class="hide_extra">
     </span>
 
 </dd>
@@ -4645,7 +5618,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2136 class="hide_extra">
+    <span id=item2144 class="hide_extra">
     </span>
 
 </dd>
@@ -4701,7 +5674,7 @@ o:<span class="function-name">connect_signal</span>(<span class="string">"my_sig
 
 
 
-    <span id=item2043 class="hide_extra">
+    <span id=item2051 class="hide_extra">
     </span>
 
 </dd>
