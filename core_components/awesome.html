@@ -1214,23 +1214,35 @@
          <tr>
            <td><span class="parameter">stdin</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description"> Return a fd for stdin?</td>
-           <td><span class="default_value"><code>false</code></span></td>
+           <td><span class="types"><span class="type">boolean</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> Pass <code>true</code> to return a fd for
+   stdin. Use <code>&quot;DEV_NULL&quot;</code> to redirect to /dev/null, or <code>&quot;INHERIT&quot;</code> to inherit
+   the parent's stdin. Implementation note: Pre-2.74 glib doesn't support
+   <em>explicit</em> <code>DEV_NULL</code>. When <code>DEV_NULL</code> is passed on glib &lt;2.74, Awesome will
+   use glib's default behaviour.</td>
+           <td><span class="default_value"><code>"DEV_NULL"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">stdout</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description"> Return a fd for stdout?</td>
-           <td><span class="default_value"><code>false</code></span></td>
+           <td><span class="types"><span class="type">boolean</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> Pass <code>true</code> to return a fd for
+   stdout. Use <code>&quot;DEV_NULL&quot;</code> to redirect to /dev/null, or <code>&quot;INHERIT&quot;</code> to
+   inherit the parent's stdout. Implementation note: Pre-2.74 glib doesn't
+   support <em>explicit</em> <code>INHERIT</code>. When <code>INHERIT</code> is passed on glib &lt;2.74,
+   Awesome will use glib's default behaviour.</td>
+           <td><span class="default_value"><code>"INHERIT"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">stderr</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><span class="type">boolean</span></span></td>
-           <td class="see_also_description"> Return a fd for stderr?</td>
-           <td><span class="default_value"><code>false</code></span></td>
+           <td><span class="types"><span class="type">boolean</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td class="see_also_description"> Pass <code>true</code> to return a fd for
+   stderr. Use <code>&quot;DEV_NULL&quot;</code> to redirect to /dev/null, or <code>&quot;INHERIT&quot;</code> to
+   inherit the parent's stderr. Implementation note: Pre-2.74 glib doesn't
+   support <em>explicit</em> <code>INHERIT</code>. When <code>INHERIT</code> is passed on glib &lt;2.74,
+   Awesome will use glib's default behaviour.</td>
+           <td><span class="default_value"><code>"INHERIT"</code></span></td>
          </tr>
          <tr>
            <td><span class="parameter">exit_callback</span></td>
