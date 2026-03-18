@@ -289,34 +289,36 @@
 
 client.<span class="function-name">connect_signal</span>(<span class="string">"request::default_keybindings"</span>, <span class="keyword">function</span>()
     awful.keyboard.<span class="function-name">append_client_keybindings</span>({
+           group = <span class="string">"client"</span>,
         awful.<span class="function-name">key</span>({modkey}, <span class="string">"Print"</span>,
             <span class="keyword">function</span> (c) <span class="function-name">saved_screenshot</span> { auto_save_delay = <span class="number">0</span>, client = c } <span class="keyword">end</span> ,
-            {description = <span class="string">"take client screenshot"</span>, group = <span class="string">"client"</span>}),
+            {description = <span class="string">"take client screenshot"</span>}),
         awful.<span class="function-name">key</span>({modkey, <span class="string">"Shift"</span>}, <span class="string">"Print"</span>,
             <span class="keyword">function</span> (c) <span class="function-name">saved_screenshot</span> { auto_save_delay = <span class="number">0</span>, interactive = <span class="keyword">true</span>, client = c } <span class="keyword">end</span> ,
-            {description = <span class="string">"take interactive client screenshot"</span>, group = <span class="string">"client"</span>}),
+            {description = <span class="string">"take interactive client screenshot"</span>}),
         awful.<span class="function-name">key</span>({modkey, <span class="string">"Control"</span>}, <span class="string">"Print"</span>,
             <span class="keyword">function</span> (c) <span class="function-name">delayed_screenshot</span> { auto_save_delay = <span class="number">5</span>, client = c } <span class="keyword">end</span> ,
-            {description = <span class="string">"take screenshot in 5 seconds"</span>, group = <span class="string">"client"</span>}),
+            {description = <span class="string">"take screenshot in 5 seconds"</span>}),
         awful.<span class="function-name">key</span>({modkey, <span class="string">"Shift"</span>, <span class="string">"Control"</span>}, <span class="string">"Print"</span>,
             <span class="keyword">function</span> (c) <span class="function-name">delayed_screenshot</span> { auto_save_delay = <span class="number">5</span>, interactive = <span class="keyword">true</span>, client = c } <span class="keyword">end</span> ,
-            {description = <span class="string">"take interactive screenshot in 5 seconds"</span>, group = <span class="string">"client"</span>}),
+            {description = <span class="string">"take interactive screenshot in 5 seconds"</span>}),
     })
 <span class="keyword">end</span>)
 
 awful.keyboard.<span class="function-name">append_global_keybindings</span>({
+       group = <span class="string">"client"</span>,
     awful.<span class="function-name">key</span>({}, <span class="string">"Print"</span>,
         <span class="keyword">function</span> () <span class="function-name">saved_screenshot</span> { auto_save_delay = <span class="number">0</span> } <span class="keyword">end</span> ,
-        {description = <span class="string">"take screenshot"</span>, group = <span class="string">"client"</span>}),
+        {description = <span class="string">"take screenshot"</span>}),
     awful.<span class="function-name">key</span>({<span class="string">"Shift"</span>}, <span class="string">"Print"</span>,
         <span class="keyword">function</span> () <span class="function-name">saved_screenshot</span> { auto_save_delay = <span class="number">0</span>, interactive = <span class="keyword">true</span> } <span class="keyword">end</span> ,
-        {description = <span class="string">"take interactive screenshot"</span>, group = <span class="string">"client"</span>}),
+        {description = <span class="string">"take interactive screenshot"</span>}),
     awful.<span class="function-name">key</span>({<span class="string">"Control"</span>}, <span class="string">"Print"</span>,
         <span class="keyword">function</span> () <span class="function-name">delayed_screenshot</span> { auto_save_delay = <span class="number">5</span> } <span class="keyword">end</span> ,
-        {description = <span class="string">"take screenshot in 5 seconds"</span>, group = <span class="string">"client"</span>}),
+        {description = <span class="string">"take screenshot in 5 seconds"</span>}),
     awful.<span class="function-name">key</span>({<span class="string">"Shift"</span>, <span class="string">"Control"</span>}, <span class="string">"Print"</span>,
         <span class="keyword">function</span> () <span class="function-name">delayed_screenshot</span> { auto_save_delay = <span class="number">5</span>, interactive = <span class="keyword">true</span> } <span class="keyword">end</span> ,
-        {description = <span class="string">"take interactive screenshot in 5 seconds"</span>, group = <span class="string">"client"</span>}),
+        {description = <span class="string">"take interactive screenshot in 5 seconds"</span>}),
 })
 </pre>
 
