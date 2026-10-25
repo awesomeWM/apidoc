@@ -252,7 +252,7 @@
  <code>bash</code>, <code>zsh</code>, <code>busybox sh</code> or <code>Debian ash</code>.</p>
 
 <p> If you wish to open a process in a terminal window, check that your terminal
- emulator supports the common <a href="../libraries/awful.spawn.html#awful.spawn.once">-e</a> option. If it does, then something like
+ emulator supports the common <a href="../libraries/awful.spawn.html#awful.spawn.single_instance">-e</a> option. If it does, then something like
  this should work:</p>
 
 
@@ -291,7 +291,7 @@ awful.<span class="function-name">spawn</span>(terminal..<span class="string">" 
 
 <p> If you want to update the text of a <a href="../widgets/wibox.widget.textbox.html#">wibox.widget.textbox</a> with the output
  of a shell command, you should use the <a href="../libraries/awful.spawn.html#awful.spawn.easy_async_with_shell">awful.spawn.easy_async_with_shell</a>
- command. It is strongly recommended not to use <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> is explained in the
+ command. It is strongly recommended not to use <a href="https://www.lua.org/manual/5.1/manual.html#pdf-io.popen">io.popen</a> is explained in the
  "Getting a command's output" section. Asynchronous execution is at first a
  bit tricky to understand if you never used that before. The example below
  should demonstrate how it works.</p>
@@ -316,7 +316,7 @@ mylabel.text = <span class="global">io</span>.<span class="function-name">popen<
 </pre>
 
 <p> Then the label will be <strong>empty</strong>. <a href="../libraries/awful.spawn.html#">awful.spawn</a> and <a href="../libraries/awful.spawn.html#awful.spawn.with_shell">awful.spawn.with_shell</a>
- will <strong>not</strong> block and thus the <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> will be executed before
+ will <strong>not</strong> block and thus the <a href="https://www.lua.org/manual/5.1/manual.html#pdf-io.popen">io.popen</a> will be executed before
  <code>sleep 1</code> finishes. This is why we have async functions to execute shell
  commands. There are many variants with difference characteristics and
  complexity. <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">awful.spawn.easy_async</a> is the most common as it is good enough
@@ -342,7 +342,7 @@ awful.spawn.<span class="function-name">easy_async_with_shell</span>(command, <s
 
 <p> <strong>Getting a command's output</strong>:</p>
 
-<p> First, do <strong>not</strong> use <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> <strong>ever</strong>. It is synchronous. Synchronous
+<p> First, do <strong>not</strong> use <a href="https://www.lua.org/manual/5.1/manual.html#pdf-io.popen">io.popen</a> <strong>ever</strong>. It is synchronous. Synchronous
  functions <strong>block everything</strong> until they are done. All visual applications
  lock (as Awesome no longer responds), you will probably lose some keyboard
  and mouse events and will have higher latency when playing games. This is
@@ -705,14 +705,14 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">cmd</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span></td>
            <td class="see_also_description"> The command.</td>
            <td><span class="not_applicable" title="This parameter is mandatory">Not applicable</span></td>
          </tr>
          <tr>
            <td><span class="parameter">sn_rules</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">boolean</span></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a> or <span class="type">boolean</span></span></td>
            <td class="see_also_description"> A table of properties to be applied
    after startup; <code>false</code> to disable startup notifications.</td>
            <td><span class="default_value"><code>true</code></span></td>
@@ -732,14 +732,14 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
            <span class="types"><span class="type">integer</span></span>
         The forked PID.</li>
         <li>
-           <span class="types">optional <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+           <span class="types">optional <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
         The startup notification ID, if <code>sn</code> is not false, or
    a <code>callback</code> is provided.</li>
     </ol>
      <h3>Or</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
         Error message.
     </ol>
 
@@ -773,7 +773,7 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">cmd</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> The command.</td>
          </tr>
         </table>
@@ -784,14 +784,14 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
            <span class="types"><span class="type">integer</span></span>
         The forked PID.</li>
         <li>
-           <span class="types">optional <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+           <span class="types">optional <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
         The startup notification ID, if <code>sn</code> is not false, or
    a <code>callback</code> is provided.</li>
     </ol>
      <h3>Or</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
         Error message.
     </ol>
 
@@ -824,7 +824,7 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">cmd</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span></td>
            <td class="see_also_description"> The command.</td>
          </tr>
         <tr>
@@ -878,7 +878,7 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
      <h3>Or</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
         Error message.
     </ol>
 
@@ -912,7 +912,7 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">cmd</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span></td>
            <td class="see_also_description"> The command.</td>
          </tr>
         <tr>
@@ -924,19 +924,19 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr class="see_also_sublist">
            <td><span class="parameter">stdout</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> Output on stdout.</td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">stderr</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> Output on stderr.</td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">exitreason</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> Exit reason ("exit" or "signal").</td>
          </tr>
          <tr class="see_also_sublist">
@@ -957,7 +957,7 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
      <h3>Or</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
         Error message.
     </ol>
 
@@ -1001,7 +1001,7 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">cmd</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> The command.</td>
          </tr>
         <tr>
@@ -1013,19 +1013,19 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr class="see_also_sublist">
            <td><span class="parameter">stdout</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> Output on stdout.</td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">stderr</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> Output on stderr.</td>
          </tr>
          <tr class="see_also_sublist">
            <td><span class="parameter">exitreason</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> Exit reason ("exit" or "signal").</td>
          </tr>
          <tr class="see_also_sublist">
@@ -1046,7 +1046,7 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
      <h3>Or</h3>
     <ol>
 
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
         Error message.
     </ol>
 
@@ -1162,13 +1162,13 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">cmd</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span></td>
            <td class="see_also_description"> The command.</td>
          </tr>
          <tr>
            <td><span class="parameter">rules</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span></td>
            <td class="see_also_description"> The properties that need to be applied to the client.</td>
          </tr>
          <tr>
@@ -1181,7 +1181,7 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">unique_id</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> A string to identify the client so it isn't executed
   multiple time.</td>
          </tr>
@@ -1245,13 +1245,13 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">cmd</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span></td>
            <td class="see_also_description"> The command.</td>
          </tr>
          <tr>
            <td><span class="parameter">rules</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span></td>
            <td class="see_also_description"> The properties that need to be applied to the client.</td>
          </tr>
          <tr>
@@ -1264,7 +1264,7 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">unique_id</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> A string to identify the client so it isn't executed
   multiple time.</td>
          </tr>
@@ -1321,13 +1321,13 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">cmd</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span></td>
            <td class="see_also_description"> The command.</td>
          </tr>
          <tr>
            <td><span class="parameter">rules</span></td>
            <td></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span></td>
            <td class="see_also_description"> The properties that need to be applied to the client.</td>
          </tr>
          <tr>
@@ -1340,7 +1340,7 @@ awesome-<span class="function-name">client</span> <span class="string">'awful=re
          <tr>
            <td><span class="parameter">unique_id</span></td>
            <td><span class="chips">Optional</span></td>
-           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span></td>
+           <td><span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span></td>
            <td class="see_also_description"> A string to identify the client so it isn't executed
   multiple time.</td>
          </tr>

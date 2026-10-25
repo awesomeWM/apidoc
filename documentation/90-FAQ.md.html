@@ -264,12 +264,12 @@ The solution to this problem is using a compositing manager such as
 <a href="https://github.com/chjj/compton">compton</a> or the older <code>xcompmgr</code>. This will
 move painting to another process and fully mitigate the issue.</p>
 
-<p>The second one is when using <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.popen">io.popen</a> or other blocking functions in <a href="../sample files/rc.lua.html#">rc.lua</a>
+<p>The second one is when using <a href="https://www.lua.org/manual/5.1/manual.html#pdf-io.popen">io.popen</a> or other blocking functions in <a href="../sample files/rc.lua.html#">rc.lua</a>
 and most commonly manifests itself as occasional freezes instead of a generic delay.
 Do <strong>not</strong> use such functions and prefer <a href="../libraries/awful.spawn.html#awful.spawn.easy_async">awful.spawn.easy_async</a>,
 <a href="../widgets/awful.widget.watch.html#">awful.widget.watch</a> or the GIO async API. Even if you <em>think</em> a command is
 fast enough and won't impact the main event loop iteration time, you are wrong.
-<em>Every</em> call to <a href="https://www.lua.org/manual/5.3/manual.html#pdf-io.open">io.open</a> is impacted by the system <code>iowait</code> queue and can
+<em>Every</em> call to <a href="https://www.lua.org/manual/5.1/manual.html#pdf-io.open">io.open</a> is impacted by the system <code>iowait</code> queue and can
 spend hundreds of milliseconds blocked <em>before</em> being executed. Note that
 some common widget or probe libraries do not follow this
 advice currently and are known to cause input lag on some systems (but not all).</p>
